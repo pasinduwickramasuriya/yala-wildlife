@@ -244,67 +244,73 @@ export default function AdminReviewsPage() {
   };
 
   return (
-    <AdminLayout>
-      <div className="min-h-screen bg-background p-6">
-        <h1 className="text-3xl font-bold text-foreground mb-8">
-          Manage Customer Reviews
-        </h1>
-        {loading ? (
-          <p className="text-muted-foreground">Loading...</p>
-        ) : reviews.length === 0 ? (
-          <p className="text-muted-foreground">No reviews found.</p>
-        ) : (
-          <div className="space-y-4">
-            {reviews.map((review) => (
-              <div
-                key={review.id}
-                className="p-4 bg-card rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
-              >
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  {review.imageUrl && (
-                    <Image
-                      src={review.imageUrl}
-                      alt={`${review.customerName}'s review`}
-                      width={100}
-                      height={100}
-                      className="rounded-md object-cover"
-                      onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")}
-                    />
-                  )}
-                  <div>
-                    <h2 className="text-xl font-semibold text-foreground">
-                      {review.customerName}
-                    </h2>
-                    <p className="text-muted-foreground">{review.description}</p>
-                    <p className="text-sm text-muted-foreground">
-                      Email: {review.customerEmail}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Status: {review.isApproved ? "Approved" : "Pending"}
-                    </p>
+    <div className="min-h-screen bg-background">
+      <AdminLayout>
+        <div className="min-h-screen bg-background p-6">
+          <h1 className="text-3xl font-bold text-foreground mb-8">
+            Manage Customer Reviews
+          </h1>
+          {loading ? (
+            <p className="text-muted-foreground">Loading...</p>
+          ) : reviews.length === 0 ? (
+            <p className="text-muted-foreground">No reviews found.</p>
+          ) : (
+            <div className="space-y-4">
+              {reviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="p-4 bg-card rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+                >
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    {review.imageUrl && (
+                      <Image
+                        src={review.imageUrl}
+                        alt={`${review.customerName}'s review`}
+                        width={100}
+                        height={100}
+                        className="rounded-md object-cover"
+                        onError={(e) =>
+                          (e.currentTarget.src = "/fallback-image.jpg")
+                        }
+                      />
+                    )}
+                    <div>
+                      <h2 className="text-xl font-semibold text-foreground">
+                        {review.customerName}
+                      </h2>
+                      <p className="text-muted-foreground">
+                        {review.description}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Email: {review.customerEmail}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Status: {review.isApproved ? "Approved" : "Pending"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    {!review.isApproved && (
+                      <Button
+                        onClick={() => handleApprove(review.id)}
+                        className="bg-green-600 hover:bg-green-700"
+                      >
+                        Approve
+                      </Button>
+                    )}
+                    <Button
+                      onClick={() => handleDelete(review.id)}
+                      variant="destructive"
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  {!review.isApproved && (
-                    <Button
-                      onClick={() => handleApprove(review.id)}
-                      className="bg-green-600 hover:bg-green-700"
-                    >
-                      Approve
-                    </Button>
-                  )}
-                  <Button
-                    onClick={() => handleDelete(review.id)}
-                    variant="destructive"
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </AdminLayout>
+              ))}
+            </div>
+          )}
+        </div>
+      </AdminLayout>
+    </div>
   );
 }
