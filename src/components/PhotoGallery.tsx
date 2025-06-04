@@ -56,7 +56,7 @@ export default function PhotoGallery() {
   return (
     <section className="w-full py-16 px-4 md:px-6 bg-background">
       <h2 className="text-3xl md:text-2xl font-extrabold text-center text-foreground mb-12 tracking-tight">
-        Yala Safari Photo Gallery
+        Yala Wildlife Photo Gallery
       </h2>
       <div className="container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-6">
         {/* Left Side: Two Square Images on Top, Three in Middle, One at Bottom */}

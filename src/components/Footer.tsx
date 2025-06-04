@@ -2,7 +2,14 @@
 
 // import { useState } from "react";
 import Link from "next/link";
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
 
 const companyLinks = [
   { name: "About Us", href: "/about" },
@@ -19,8 +26,16 @@ const safariLinks = [
 ];
 
 const socialLinks = [
-  { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/pasindu.sadanjana.98/" },
-  { name: "Instagram", icon: Instagram, href: "https://instagram.com/yala-safari" },
+  {
+    name: "Facebook",
+    icon: Facebook,
+    href: "https://www.facebook.com/pasindu.sadanjana.98/",
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    href: "https://instagram.com/yala-safari",
+  },
   { name: "Twitter", icon: Twitter, href: "https://twitter.com/yala-safari" },
 ];
 
@@ -46,10 +61,11 @@ export default function Footer() {
             href="/"
             className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors duration-300"
           >
-            Yala Safari
+            Yala Wildlife
           </Link>
           <p className="text-muted-foreground text-sm">
-            Your gateway to unforgettable safari adventures in Yala National Park.
+            Your gateway to unforgettable safari adventures in Yala National
+            Park.
           </p>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -74,9 +90,7 @@ export default function Footer() {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-lg font-semibold text-foreground">
-            Company
-          </h4>
+          <h4 className="text-lg font-semibold text-foreground">Company</h4>
           <ul className="space-y-3">
             {companyLinks.map(({ name, href }) => (
               <li key={name}>
@@ -92,9 +106,7 @@ export default function Footer() {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-lg font-semibold text-foreground">
-            Safari
-          </h4>
+          <h4 className="text-lg font-semibold text-foreground">Safari</h4>
           <ul className="space-y-3">
             {safariLinks.map(({ name, href }) => (
               <li key={name}>
@@ -143,7 +155,8 @@ export default function Footer() {
 
       <div className="mt-12 border-t border-border/50 py-6 text-center">
         <p className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()} Yala Safari Jeep Service. All rights reserved Made with ❤ love by Pasindu Wickramasuriya.
+          © {new Date().getFullYear()} Yala Wildlife Jeep Service. All rights
+          reserved Made with ❤ love by Pasindu Wickramasuriya.
         </p>
       </div>
     </footer>

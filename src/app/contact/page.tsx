@@ -23,7 +23,9 @@ export default function ContactPage() {
                     Contact Details
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    We’d love to hear from you! Whether you have questions about our safari packages or need assistance, feel free to reach out.
+                    We’d love to hear from you! Whether you have questions about
+                    our safari packages or need assistance, feel free to reach
+                    out.
                   </p>
                 </div>
                 <div className="space-y-6">
@@ -31,9 +33,14 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <Mail className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-medium text-foreground">Email Us</h3>
+                      <h3 className="text-lg font-medium text-foreground">
+                        Email Us
+                      </h3>
                       <p className="text-muted-foreground">
-                        <a href="mailto:support@yalasafari.com" className="hover:underline">
+                        <a
+                          href="mailto:support@yalasafari.com"
+                          className="hover:underline"
+                        >
                           support@yalasafari.com
                         </a>
                       </p>
@@ -43,19 +50,23 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <Phone className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-medium text-foreground">Call Us</h3>
-                      <p className="text-muted-foreground">+94 123 456 789</p>
+                      <h3 className="text-lg font-medium text-foreground">
+                        Call Us
+                      </h3>
+                      <p className="text-muted-foreground">+94 778 158 004</p>
                     </div>
                   </div>
                   {/* Address */}
                   <div className="flex items-start gap-4">
                     <MapPin className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-medium text-foreground">Visit Us</h3>
+                      <h3 className="text-lg font-medium text-foreground">
+                        Visit Us
+                      </h3>
                       <p className="text-muted-foreground">
-                        Yala Safari Office, <br />
-                        123 Safari Road, <br />
-                        Tissamaharama, Sri Lanka
+                        Yala Wildlife, <br />
+                        Wickrama Kasingama, <br />
+                        Tissamaharama, Sri Lanka.
                       </p>
                     </div>
                   </div>

@@ -9,7 +9,9 @@ export default function ReviewsPage() {
       <div className="min-h-screen bg-background">
         <div className="py-16 px-4 md:px-6">
           <ShowReviews />
-          <GetCustomerReviews />
+          <div className="flex justify-center mt-8">
+            <GetCustomerReviews />
+          </div>
         </div>
       </div>
     </>
