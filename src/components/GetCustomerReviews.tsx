@@ -220,6 +220,7 @@ export default function GetCustomerReviews() {
             <AlertDescription>{message}</AlertDescription>
           </Alert>
         )}
+      </DialogContent>
     </Dialog>
   );
 }
