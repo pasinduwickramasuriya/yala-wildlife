@@ -210,7 +210,7 @@ export async function POST(req: NextRequest) {
         customerName: customerName.trim(),
         customerEmail: customerEmail.trim(),
         description: description.trim(),
-        imageUrl,
+        imageUrl, 
         isApproved: false,
       },
     });
