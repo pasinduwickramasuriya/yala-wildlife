@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -22,10 +22,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, ControllerRenderProps } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// 1. Define form schema
+// Define form schema
 const ReviewSchema = z.object({
   customerName: z.string().min(2, "Name is required"),
   customerEmail: z.string().email("Invalid email"),
@@ -40,7 +40,7 @@ export default function GetCustomerReviews() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
-  // 2. Setup react-hook-form with zod validation
+  // Setup react-hook-form with zod validation
   const form = useForm<ReviewForm>({
     resolver: zodResolver(ReviewSchema),
     defaultValues: {
@@ -51,7 +51,7 @@ export default function GetCustomerReviews() {
     },
   });
 
-  // 3. Handle image preview and file input
+  // Handle image preview and file input
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     form.setValue("image", file);
@@ -62,7 +62,7 @@ export default function GetCustomerReviews() {
     }
   };
 
-  // 4. Form submit handler
+  // Form submit handler
   const onSubmit = async (values: ReviewForm) => {
     setMessage(null);
 
@@ -122,7 +122,11 @@ export default function GetCustomerReviews() {
             <FormField
               control={form.control}
               name="customerName"
-              render={({ field }) => (
+              render={({
+                field,
+              }: {
+                field: ControllerRenderProps<ReviewForm, "customerName">;
+              }) => (
                 <FormItem>
                   <FormLabel className="mb-2">Your Name</FormLabel>
                   <FormControl>
@@ -135,7 +139,11 @@ export default function GetCustomerReviews() {
             <FormField
               control={form.control}
               name="customerEmail"
-              render={({ field }) => (
+              render={({
+                field,
+              }: {
+                field: ControllerRenderProps<ReviewForm, "customerEmail">;
+              }) => (
                 <FormItem>
                   <FormLabel className="mb-2">Your Email</FormLabel>
                   <FormControl>
@@ -148,7 +156,11 @@ export default function GetCustomerReviews() {
             <FormField
               control={form.control}
               name="description"
-              render={({ field }) => (
+              render={({
+                field,
+              }: {
+                field: ControllerRenderProps<ReviewForm, "description">;
+              }) => (
                 <FormItem>
                   <FormLabel className="mb-2">Adventure Description</FormLabel>
                   <FormControl>
