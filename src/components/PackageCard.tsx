@@ -191,17 +191,17 @@ export default function PackageCard({ slug }: { slug: string }) {
   // Loading state
   if (loading) {
     return (
-      <Card className="w-full max-w-lg mx-auto overflow-hidden transition-all duration-300 hover:shadow-xl animate-pulse">
-        <div className="relative h-48 w-full bg-gray-200 rounded-t-lg" />
+      <Card className="w-full max-w-[20rem] sm:max-w-[24rem] md:max-w-[28rem] mx-auto overflow-hidden transition-all duration-300 hover:shadow-xl animate-pulse">
+        <div className="relative h-40 sm:h-48 md:h-56 w-full bg-gray-200 rounded-t-lg" />
         <CardHeader className="space-y-3">
-          <div className="h-7 bg-gray-200 rounded w-3/4" />
-          <div className="h-5 bg-gray-200 rounded w-full" />
+          <div className="h-6 sm:h-7 bg-gray-200 rounded w-3/4" />
+          <div className="h-4 sm:h-5 bg-gray-200 rounded w-full" />
         </CardHeader>
         <CardContent>
-          <div className="h-5 bg-gray-200 rounded w-5/6" />
+          <div className="h-4 sm:h-5 bg-gray-200 rounded w-5/6" />
         </CardContent>
         <CardFooter>
-          <div className="h-12 bg-black-200 rounded-md w-full" />
+          <div className="h-10 sm:h-12 bg-gray-200 rounded-md w-full" />
         </CardFooter>
       </Card>
     );
@@ -210,11 +210,13 @@ export default function PackageCard({ slug }: { slug: string }) {
   // Error or no package state
   if (error || !pkg) {
     return (
-      <Card className="w-full max-w-lg mx-auto overflow-hidden">
-        <div className="relative h-48 w-full bg-gray-100 rounded-t-lg" />
+      <Card className="w-full max-w-[20rem] sm:max-w-[24rem] md:max-w-[28rem] mx-auto overflow-hidden">
+        <div className="relative h-40 sm:h-48 md:h-56 w-full bg-gray-100 rounded-t-lg" />
         <CardHeader>
-          <CardTitle className="text-destructive text-2xl">Error</CardTitle>
-          <CardDescription className="text-base">
+          <CardTitle className="text-xl sm:text-2xl text-destructive">
+            Error
+          </CardTitle>
+          <CardDescription className="text-sm sm:text-base">
             {error || "Package not found"}
           </CardDescription>
         </CardHeader>
@@ -224,36 +226,36 @@ export default function PackageCard({ slug }: { slug: string }) {
 
   return (
     <Link href={`/safari-packages/${pkg.slug}`} className="block">
-      <Card className="shadow-none bg-transparent w-90 max-w-lg mx-auto overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer group border-none rounded-2xl">
-        <div className="relative h-58 w-full">
+      <Card className="shadow-none bg-transparent w-full max-w-[20rem] sm:max-w-[24rem] md:max-w-[28rem] mx-auto overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer group border-none rounded-2xl">
+        <div className="relative h-40 sm:h-48 md:h-56 w-full">
           <Image
             src={pkg.imageUrl || "/placeholder-image.jpg"}
             alt={pkg.name}
             fill
             className="object-cover rounded-t-lg transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 28rem"
             priority={slug === "hero-package"}
             onError={(e) => (e.currentTarget.src = "/placeholder-image.jpg")}
           />
           {pkg.price && (
             <Badge
               variant="secondary"
-              className="absolute top-3 right-3 bg-green-600 text-white text-sm px-3 py-1"
+              className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-600 text-white text-xs sm:text-sm px-2 sm:px-3 py-1"
             >
               ${pkg.price.toFixed(2)}
             </Badge>
           )}
         </div>
-        <CardHeader className="pb-3 space-y-2">
-          <CardTitle className="text-2xl font-semibold truncate">
+        <CardHeader className="pb-2 sm:pb-3 space-y-2">
+          <CardTitle className="text-xl sm:text-2xl font-semibold truncate">
             {pkg.name}
           </CardTitle>
-          <CardDescription className="text-base line-clamp-2">
+          <CardDescription className="text-sm sm:text-base line-clamp-2">
             {pkg.description || "No description available"}
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
-          <p className="text-base font-medium text-muted-foreground">
+          <p className="text-sm sm:text-base font-medium text-muted-foreground">
             Price:{" "}
             <span className="text-green-600 font-bold">
               $
@@ -265,7 +267,7 @@ export default function PackageCard({ slug }: { slug: string }) {
         </CardContent>
         <CardFooter>
           <Button
-            className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 text-base py-6"
+            className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 text-sm sm:text-base py-5 sm:py-6"
             aria-label={`View details for ${pkg.name}`}
           >
             View Details
