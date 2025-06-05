@@ -3,7 +3,7 @@ export default function WhyChooseUs() {
     <section className="bg-background py-20">
       <div className="container mx-auto px-4 md:px-6 text-center">
         <h2 className="text-3xl md:text-2xl font-extrabold text-foreground mb-12 tracking-tight animate-fadeIn">
-          Why Choose Yala Wildlife
+          Why Choose Yala Wildlife egshfdjl;s'fvfe
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Card 1: Expert Guides */}
