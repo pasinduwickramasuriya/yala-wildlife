@@ -223,14 +223,14 @@
 //   );
 // }
 
-
-
-
-
-
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useState, useEffect } from "react";
@@ -256,7 +256,10 @@ interface NavItemsProps {
 
 export default function Header() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const { scrollY } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [packages, setPackages] = useState<Package[]>([]);
@@ -315,7 +318,7 @@ export default function Header() {
     <motion.header
       ref={ref}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 w-full transition-all duration-300"
       )}
     >
       {/* Desktop Nav */}
@@ -324,7 +327,7 @@ export default function Header() {
           href="/"
           className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-bold text-green-400 hover:text-red-400"
         >
-          <span>Yala Safari</span>
+          <span>Yala Wildlife</span>
         </Link>
         <NavItems
           items={navItems}
@@ -338,7 +341,7 @@ export default function Header() {
             className={cn(
               "px-4 py-2 rounded-full bg-green-600 text-white text-sm font-bold hover:bg-green-700 transition duration-200",
               visible &&
-                "shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
+                "shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             )}
           >
             Book Now
@@ -353,7 +356,7 @@ export default function Header() {
             href="/"
             className="text-xl font-bold text-green-400 hover:text-green-400 transition-colors duration-300"
           >
-            Yala Safari
+            Yala Wildlife
           </Link>
           <button
             onClick={toggleMenu}
@@ -371,7 +374,7 @@ export default function Header() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className={cn(
-                "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start gap-4 rounded-lg bg-neutral-950/90 backdrop-blur-lg px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] mobile-menu",
+                "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start gap-4 rounded-lg bg-neutral-950/90 backdrop-blur-lg px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] mobile-menu"
               )}
             >
               {navItems.map((item) => (
@@ -421,7 +424,7 @@ export default function Header() {
       </MobileNav>
     </motion.header>
   );
-};
+}
 
 // Desktop NavBody component
 const NavBody = ({
@@ -442,7 +445,7 @@ const NavBody = ({
     transition={{ type: "spring", stiffness: 200, damping: 50 }}
     className={cn(
       "hidden lg:flex mx-auto w-full max-w-7xl items-center justify-between rounded-full bg-neutral-950/90 px-4 py-2 backdrop-blur-lg",
-      visible && "bg-neutral-950/90",
+      visible && "bg-neutral-950/90"
     )}
   >
     {children}
@@ -472,7 +475,7 @@ const MobileNav = ({
     transition={{ type: "spring", stiffness: 200, damping: 50 }}
     className={cn(
       "lg:hidden mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center bg-neutral-950/90 px-0 py-2 backdrop-blur-lg",
-      visible && "bg-neutral-950/90",
+      visible && "bg-neutral-950/90"
     )}
   >
     {children}
@@ -480,7 +483,12 @@ const MobileNav = ({
 );
 
 // NavItems component with packages dropdown
-const NavItems: React.FC<NavItemsProps> = ({ items, packages, className, onItemClick }) => {
+const NavItems: React.FC<NavItemsProps> = ({
+  items,
+  packages,
+  className,
+  onItemClick,
+}) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
@@ -488,7 +496,7 @@ const NavItems: React.FC<NavItemsProps> = ({ items, packages, className, onItemC
       onMouseLeave={() => setHovered(null)}
       className={cn(
         "flex flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-white transition duration-200",
-        className,
+        className
       )}
     >
       {items.map((item, idx) => (

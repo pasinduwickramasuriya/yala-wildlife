@@ -1,191 +1,9 @@
-// import Image from "next/image";
-
-// interface CustomerReview {
-//   id: string;
-//   customerName: string;
-//   customerEmail: string;
-//   description: string;
-//   imageUrl?: string | null;
-//   isApproved: boolean;
-//   createdAt: string;
-// }
-
-// async function fetchReviews(): Promise<CustomerReview[]> {
-//   try {
-//     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-//     if (!baseUrl) {
-//       throw new Error(
-//         "NEXT_PUBLIC_BASE_URL is not defined in the environment variables"
-//       );
-//     }
-
-//     const response = await fetch(`${baseUrl}/api/reviews`, {
-//       cache: "no-store",
-//     });
-
-//     if (!response.ok) {
-//       const errorText = await response.text();
-//       console.error(
-//         `Fetch failed with status: ${response.status}, Body: ${errorText}`
-//       );
-//       throw new Error(`Failed to fetch reviews: ${response.status}`);
-//     }
-
-//     const reviews: CustomerReview[] = await response.json();
-//     return reviews;
-//   } catch (error) {
-//     console.error("Error fetching reviews:", error);
-//     return [];
-//   }
-// }
-
-// export default async function ShowReviews() {
-//   const reviews = await fetchReviews();
-
-//   return (
-//     <section className="py-16 px-4 md:px-6 bg-background">
-//       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
-//         Customer Reviews
-//       </h2>
-//       {reviews.length === 0 ? (
-//         <p className="text-center text-muted-foreground">
-//           No approved reviews available yet.
-//         </p>
-//       ) : (
-//         <div className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-//           {reviews.map((review) => (
-//             <div
-//               key={review.id}
-//               className="p-6 rounded-full   flex flex-col items-center justify-center aspect-square max-w-md mx-auto"
-//             >
-//               {review.imageUrl && (
-//                 <div className="relative h-32 w-32 mb-4">
-//                   <Image
-//                     src={review.imageUrl}
-//                     alt={`${review.customerName}'s review`}
-//                     fill
-//                     className="object-cover rounded-full"
-//                     sizes="(max-width: 768px) 100vw, 50vw"
-//                     priority={false}
-//                   />
-//                 </div>
-//               )}
-//               <h3 className="text-xl font-semibold text-foreground text-center">
-//                 {review.customerName}
-//               </h3>
-//               <p className="text-muted-foreground mt-2 text-center">
-//                 {review.description}
-//               </p>
-//               <p className="text-sm text-muted-foreground/80 mt-2 text-center">
-//                 {new Date(review.createdAt).toLocaleDateString("en-US", {
-//                   year: "numeric",
-//                   month: "long",
-//                   day: "numeric",
-//                 })}
-//               </p>
-//               <p className="text-muted-foreground mt-2 text-center">
-//                 {review.customerEmail}
-//               </p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </section>
-//   );
-// }
-
-
-// import Image from "next/image";
-
-// interface CustomerReview {
-//   id: string;
-//   customerName: string;
-//   customerEmail: string;
-//   description: string;
-//   imageUrl?: string | null;
-//   isApproved: boolean;
-//   createdAt: string;
-// }
-
-// async function fetchReviews(): Promise<CustomerReview[]> {
-//   try {
-//     const response = await fetch("/api/reviews", {
-//       cache: "no-store",
-//     });
-
-//     if (!response.ok) {
-//       const errorText = await response.text();
-//       console.error(`Fetch failed with status: ${response.status}, Body: ${errorText}`);
-//       throw new Error(`Failed to fetch reviews: ${response.status}`);
-//     }
-
-//     const reviews: CustomerReview[] = await response.json();
-//     return reviews;
-//   } catch (error) {
-//     console.error("Error fetching reviews:", error);
-//     return []; // Return empty array on error for fallback UI
-//   }
-// }
-
-// export default async function ShowReviews() {
-//   const reviews = await fetchReviews();
-
-//   return (
-//     <section className="py-16 px-4 md:px-6 bg-background">
-//       <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
-//         Customer Reviews
-//       </h2>
-//       {reviews.length === 0 ? (
-//         <p className="text-center text-muted-foreground">
-//           No approved reviews available yet.
-//         </p>
-//       ) : (
-//         <div className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-//           {reviews.map((review) => (
-//             <div
-//               key={review.id}
-//               className="p-6 rounded-full bg-card shadow-md flex flex-col items-center justify-center aspect-square max-w-md mx-auto"
-//             >
-//               {review.imageUrl && (
-//                 <div className="relative h-32 w-32 mb-4">
-//                   <Image
-//                     src={review.imageUrl}
-//                     alt={`${review.customerName}'s review`}
-//                     fill
-//                     className="object-cover rounded-full"
-//                     sizes="(max-width: 768px) 100vw, 50vw"
-//                     priority={false}
-//                   />
-//                 </div>
-//               )}
-//               <h3 className="text-xl font-semibold text-foreground text-center">
-//                 {review.customerName}
-//               </h3>
-//               <p className="text-muted-foreground mt-2 text-center">
-//                 {review.description}
-//               </p>
-//               <p className="text-sm text-muted-foreground/80 mt-2 text-center">
-//                 {new Date(review.createdAt).toLocaleDateString("en-US", {
-//                   year: "numeric",
-//                   month: "long",
-//                   day: "numeric",
-//                 })}
-//               </p>
-//               <p className="text-muted-foreground mt-2 text-center">
-//                 {review.customerEmail}
-//               </p>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </section>
-//   );
-// }
-
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface CustomerReview {
   id: string;
@@ -205,91 +23,130 @@ export default function ShowReviews() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const response = await fetch("/api/reviews", {
-          cache: "no-store",
-        });
-
+        const response = await fetch("/api/reviews", { cache: "no-store" });
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`Failed to fetch reviews: ${response.status} - ${errorText}`);
+          throw new Error(
+            `Failed to fetch reviews: ${response.status} - ${errorText}`
+          );
         }
-
         const data: CustomerReview[] = await response.json();
         setReviews(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An unexpected error occurred");
+        setError(
+          err instanceof Error ? err.message : "An unexpected error occurred"
+        );
       } finally {
         setLoading(false);
       }
     }
-
     fetchReviews();
   }, []);
 
+  // Loading state
   if (loading) {
     return (
-      <section className="py-16 px-4 md:px-6 bg-background">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+      <section className="relative py-20 px-4 md:px-8 bg-background min-h-[60vh]">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 drop-shadow tracking-tight">
           Customer Reviews
         </h2>
-        <p className="text-center text-muted-foreground">Loading reviews...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-16 justify-center items-start">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-center gap-6 py-10 px-4"
+            >
+              <Skeleton className="h-20 w-20 rounded-full" />
+              <Skeleton className="h-6 w-32" />
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="h-4 w-56 mt-8" />
+              <Skeleton className="h-4 w-32 mt-3" />
+            </div>
+          ))}
+        </div>
       </section>
     );
   }
 
   return (
-    <section className="py-16 px-4 md:px-6 bg-background">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+    <section className="relative py-20 px-4 md:px-8 bg-background min-h-[60vh] overflow-x-clip">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 drop-shadow tracking-tight">
         Customer Reviews
       </h2>
       {error ? (
-        <p className="text-center text-destructive">
-          {error}. Please try again later.
-        </p>
+        <Alert variant="destructive" className="mb-8 max-w-lg mx-auto">
+          <AlertDescription>{error}. Please try again later.</AlertDescription>
+        </Alert>
       ) : reviews.length === 0 ? (
-        <p className="text-center text-muted-foreground">
-          No approved reviews available yet.
-        </p>
+        <Alert variant="default" className="mb-8 max-w-lg mx-auto">
+          <AlertDescription>
+            No approved reviews available yet.
+          </AlertDescription>
+        </Alert>
       ) : (
-        <div className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {reviews.map((review) => (
-            <div
-              key={review.id}
-              className="p-6 rounded-full flex flex-col items-center justify-center aspect-square max-w-md mx-auto"
-            >
-              {review.imageUrl && (
-                <div className="relative h-32 w-32 mb-4">
-                  <Image
-                    src={review.imageUrl}
-                    alt={`${review.customerName}'s review`}
-                    fill
-                    className="object-cover rounded-full"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority={false}
+        <div className="relative w-full max-w-7xl mx-auto min-h-[60vh]">
+          <div
+            className="
+              grid 
+              grid-cols-1 
+              sm:grid-cols-2 
+              md:grid-cols-3 
+              gap-x-12 gap-y-16 
+              relative 
+              z-10
+            "
+          >
+            {reviews.map((review) => (
+              <div
+                key={review.id}
+                className={`
+                  flex flex-col items-center text-center
+                  py-10 px-6
+                  transition-all
+                  hover:bg-accent/50
+                  rounded-2xl
+                  group
+                `}
+                // No bg, border, or shadow!
+              >
+                <Avatar className="h-20 w-20 ring-2 ring-accent shadow-md mb-4">
+                  <AvatarImage
+                    src={review.imageUrl || undefined}
+                    alt={review.customerName}
                     onError={(e) => {
-                      e.currentTarget.src = "/fallback-image.jpg";
+                      (e.currentTarget as HTMLImageElement).src =
+                        "/fallback-image.jpg";
                     }}
                   />
+                  <AvatarFallback>
+                    {review.customerName
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col items-center mb-2">
+                  <span className="text-xl font-semibold drop-shadow">
+                    {review.customerName}
+                  </span>
+                  <span className="text-muted-foreground text-base">
+                    {review.customerEmail}
+                  </span>
                 </div>
-              )}
-              <h3 className="text-xl font-semibold text-foreground text-center">
-                {review.customerName}
-              </h3>
-              <p className="text-muted-foreground mt-2 text-center">
-                {review.description}
-              </p>
-              <p className="text-sm text-muted-foreground/80 mt-2 text-center">
-                {new Date(review.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-              <p className="text-muted-foreground mt-2 text-center">
-                {review.customerEmail}
-              </p>
-            </div>
-          ))}
+                <p className="mb-4 text-base font-medium text-foreground/90 leading-relaxed">
+                  {review.description}
+                </p>
+                <p className="text-xs text-muted-foreground mt-auto">
+                  {new Date(review.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </section>

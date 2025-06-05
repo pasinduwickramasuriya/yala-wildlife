@@ -64,9 +64,9 @@ export default function ContactPage() {
                         Visit Us
                       </h3>
                       <p className="text-muted-foreground">
-                        Yala Safari Office, <br />
-                        123 Safari Road, <br />
-                        Tissamaharama, Sri Lanka
+                        Yala Wildlife, <br />
+                        Wickrama Kasingama, <br />
+                        Tissamaharama, Sri Lanka.
                       </p>
                     </div>
                   </div>
