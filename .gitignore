@@ -1,41 +1,85 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Next.js build output
+.next/
+out/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Node.js dependencies
+node_modules/
+package-lock.json
 
-# testing
-/coverage
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# next.js
-/.next/
-/out/
+# Cache and temporary files
+*.log
+.log.
+.cache
+*.tmp
+.tmp.
 
-# production
-/build
+# Build artifacts
+dist/
+build/
 
-# misc
+# TypeScript cache
+*.tsbuildinfo
+
+# Dependency directories
+/bower_components/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+.ntvs
+*.njsproj
+*.sln
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
+# Prisma generated files
+prisma/*.db
+prisma/migrations/
+
+# Public uploads folder
+public/uploads/
+
+# Qodo specific files
+.qodo/
+
+# Coverage reports
+coverage/
+
+# Debug files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Local development files
+*.local
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Next.js specific
+.next/static/cache/
+.next/static/chunks/
+.next/static/media/
+.next/server/
+.next/trace
+.next/build-manifest.json
+.next/app-build-manifest.json
+.next/server-reference-manifest.json
+.next/server-reference-manifest.js
+.next/fallback-build-manifest.json
+.next/next-font-manifest.json
+.next/next-font-manifest.js
+.next/pages-manifest.json
+.next/middleware-manifest.json
+.next/interception-route-rewrite-manifest.js
+.next/middleware-build-manifest.js
