@@ -22,7 +22,7 @@
 //           enableSystem
 //           disableTransitionOnChange
 //         >
-         
+
 //           {children}
 //           <Footer />
 //         </ThemeProvider>
@@ -31,27 +31,21 @@
 //   );
 // }
 
-
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Using Inter as a fallback; replace with Geist if preferred
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { defaultMetadata } from "@/lib/seo-config";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Add weights for flexibility
+  weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "Yala Adventure",
-  description: "Explore Yala National Park with us!",
-  icons: {
-    icon: "/favicon.ico", // Ensure favicon is set (relates to your previous favicon query)
-  },
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,

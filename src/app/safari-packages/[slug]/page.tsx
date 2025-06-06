@@ -3,6 +3,11 @@ import Header from "@/components/Header";
 import BookingForm from "@/components/BookingForm";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { Metadata } from "next";
+import { siteConfig } from "@/lib/seo-config";
+import { SafariPackageJsonLd } from "@/components/JsonLd";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -40,7 +45,41 @@ interface PackageDetailPageProps {
   searchParams?: Promise<Record<string, string | string[] | undefined>>; // Optional, mimics PageProps
 }
 
-export default async function PackageDetailPage({ params }: PackageDetailPageProps) {
+interface Props {
+  params: { slug: string };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const packageData = await prisma.package.findUnique({
+    where: { slug: params.slug },
+  });
+
+  if (!packageData) {
+    return {
+      title: "Package Not Found",
+      description: "The requested safari package could not be found.",
+    };
+  }
+
+  return {
+    title: `${packageData.name} - Yala Safari Tour Package`,
+    description: `${packageData.description.slice(0, 155)}...`,
+    openGraph: {
+      title: `${packageData.name} - Yala Safari Tour Package`,
+      description: packageData.description,
+      images: [{ url: packageData.imageUrl }],
+      type: "website",
+      url: `${siteConfig.url}/safari-packages/${packageData.slug}`,
+    },
+    alternates: {
+      canonical: `${siteConfig.url}/safari-packages/${packageData.slug}`,
+    },
+  };
+}
+
+export default async function PackageDetailPage({
+  params,
+}: PackageDetailPageProps) {
   const pkg = await getPackage((await params).slug); // No explicit await needed for params; Next.js resolves it
 
   // Split description into points (assuming sentences end with periods)
@@ -50,9 +89,24 @@ export default async function PackageDetailPage({ params }: PackageDetailPagePro
     .filter((point) => point.length > 0) // Remove empty strings
     .map((point) => (point.endsWith(".") ? point : `${point}.`)); // Ensure each point ends with a period
 
+  const breadcrumbItems = [
+    { name: "Home", item: "/" },
+    { name: "Safari Packages", item: "/safari-packages" },
+    { name: pkg.name, item: `/safari-packages/${pkg.slug}` },
+  ];
+
   return (
     <>
       <Header />
+      <SafariPackageJsonLd
+        name={pkg.name}
+        description={pkg.description}
+        price={pkg.price}
+        image={pkg.imageUrl}
+        slug={pkg.slug}
+      />
+      <BreadcrumbJsonLd items={breadcrumbItems} />
+      <FAQJsonLd faqs={defaultFAQs} />
       <main className="bg-background min-h-screen">
         {/* Hero Section */}
         <section className="relative h-[50vh] w-full">
