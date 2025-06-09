@@ -1,16 +1,4 @@
-interface Package {
-  id: string
-  name: string
-  description: string
-  imageUrl: string
-  price: number
-  slug: string
-}
-
-interface SafariPackageJsonLdProps {
-  package: Package
-}t { Package } from "@prisma/client";
-
+import { Package } from "@prisma/client";
 interface SafariPackageJsonLdProps {
   package: Package;
 }

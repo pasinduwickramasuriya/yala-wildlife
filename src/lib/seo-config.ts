@@ -55,9 +55,9 @@ export const defaultMetadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      maxVideoPreview: -1,
+      maxImagePreview: "large",
+      maxSnippet: -1,
     },
   },
   verification: {
@@ -66,4 +66,4 @@ export const defaultMetadata = {
   alternates: {
     canonical: "https://yalawildlife.com",
   }
-}
+};

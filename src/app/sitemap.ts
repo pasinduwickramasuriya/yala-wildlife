@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://yalawildlife.com'
-  const currentDate = new Date()
+  const currentDate = new Date().toISOString()
 
   // Get all safari packages
   const packages = await prisma.package.findMany({
@@ -17,65 +17,50 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogs = await prisma.blog.findMany({
     select: {
       slug: true,
-      updatedAt: true,
-    },
+      createdAt: true,
+    }
   })
 
   // Static routes
-  const staticRoutes = [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
+      lastModified: currentDate,
     },
     {
       url: `${baseUrl}/safari-packages`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.9,
+      lastModified: currentDate,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      lastModified: currentDate,
     },
     {
       url: `${baseUrl}/reviews`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.8,
+      lastModified: currentDate,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
+      lastModified: currentDate,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
+      lastModified: currentDate,
     },
   ]
 
   // Dynamic routes for packages
-  const packageRoutes = packages.map((pkg) => ({
+  const packageRoutes: MetadataRoute.Sitemap = packages.map((pkg) => ({
     url: `${baseUrl}/safari-packages/${pkg.slug}`,
-    lastModified: pkg.updatedAt,
-    changeFrequency: 'weekly',
-    priority: 0.8,
+    lastModified: currentDate,
   }))
 
   // Dynamic routes for blog posts
-  const blogRoutes = blogs.map((blog) => ({
+  const blogRoutes: MetadataRoute.Sitemap = blogs.map((blog) => ({
     url: `${baseUrl}/blog/${blog.slug}`,
-    lastModified: blog.updatedAt,
-    changeFrequency: 'monthly',
-    priority: 0.6,
+    lastModified: blog.createdAt,
   }))
 
+  // Combine all routes and return
   return [...staticRoutes, ...packageRoutes, ...blogRoutes]
 }

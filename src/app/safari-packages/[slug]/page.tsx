@@ -1,10 +1,11 @@
-import prisma from "@/lib/prisma";
-import Header from "@/components/Header";
-import BookingForm from "@/components/BookingForm";
+import { Metadata } from "next";
+import { Package } from "@prisma/client";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Metadata } from "next";
+import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/seo-config";
+import Header from "@/components/Header";
+import BookingForm from "@/components/BookingForm";
 import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
@@ -13,53 +14,27 @@ import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-// Define the Package interface based on your Prisma model
-interface Package {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  price: number;
-  slug: string;
-}
+type Props = {
+  params: Promise<{ slug: string }>; // Changed from { slug: string }
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 // Fetch package data server-side
 async function getPackage(slug: string): Promise<Package> {
-  try {
-    const pkg = await prisma.package.findUnique({
-      where: { slug },
-    });
-    if (!pkg) {
-      notFound();
-    }
-    return pkg; // Types align with Prisma model
-  } catch (error) {
-    console.error("Error fetching package:", error);
+  const pkg = await prisma.package.findUnique({
+    where: { slug },
+  });
+
+  if (!pkg) {
     notFound();
   }
-}
 
-// Custom props type to satisfy Next.js type checker without importing PageProps
-interface PackageDetailPageProps {
-  params: Promise<{ slug: string }>; // Wrap params in Promise to match PageProps
-  searchParams?: Promise<Record<string, string | string[] | undefined>>; // Optional, mimics PageProps
-}
-
-interface Props {
-  params: { slug: string };
+  return pkg;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const packageData = await prisma.package.findUnique({
-    where: { slug: params.slug },
-  });
-
-  if (!packageData) {
-    return {
-      title: "Package Not Found",
-      description: "The requested safari package could not be found.",
-    };
-  }
+  const resolvedParams = await params; // Await the params
+  const packageData = await getPackage(resolvedParams.slug);
 
   return {
     title: `${packageData.name} - Yala Safari Tour Package`,
@@ -77,10 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function PackageDetailPage({
-  params,
-}: PackageDetailPageProps) {
-  const pkg = await getPackage((await params).slug); // No explicit await needed for params; Next.js resolves it
+export default async function PackageDetailPage(props: Props) {
+  const params = await props.params; // Await the params
+  const pkg = await getPackage(params.slug);
 
   // Split description into points (assuming sentences end with periods)
   const descriptionPoints = pkg.description

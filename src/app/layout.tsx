@@ -1,36 +1,3 @@
-// import type { Metadata } from "next";
-// import "./globals.css";
-// import Footer from "@/components/Footer";
-// import { ThemeProvider } from "@/components/ThemeProvider";
-
-// export const metadata: Metadata = {
-//   title: "Yala Adventure",
-//   description: "Explore Yala National Park with us!",
-// };
-
-// export default function RootLayout({
-//   children,
-// }: Readonly<{
-//   children: React.ReactNode;
-// }>) {
-//   return (
-//     <html lang="en" suppressHydrationWarning>
-//       <body>
-//         <ThemeProvider
-//           attribute="class"
-//           defaultTheme="system"
-//           enableSystem
-//           disableTransitionOnChange
-//         >
-
-//           {children}
-//           <Footer />
-//         </ThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
