@@ -18,60 +18,28 @@ import { MetadataRoute } from 'next'
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Primary rule for Googlebot (most important)
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/admin/', '/api/', '/dashboard/', '/_next/'],
-      },
-      
-      // Rule for Bingbot
-      {
-        userAgent: 'Bingbot', 
-        allow: '/',
-        disallow: ['/admin/', '/api/', '/dashboard/', '/_next/'],
-      },
-
-      // General rule for all other bots
       {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/admin/',
-          '/api/', 
-          '/dashboard/',
-          '/_next/',
-          '/temp/',
-          '/private/',
-          '/test/',
+          '/admin/*',
+          '/api/*',
+          '*/private/*',
+          '/internal/*',
         ],
       },
-
-      // Block SEO crawlers that waste resources
       {
-        userAgent: 'AhrefsBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'SemrushBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'MJ12bot',
-        disallow: '/',
-      },
-
-      // Allow social media bots
-      {
-        userAgent: 'facebookexternalhit',
+        userAgent: 'Googlebot',
         allow: '/',
+        crawlDelay: 2,
       },
       {
-        userAgent: 'Twitterbot',
+        userAgent: 'Bingbot',
         allow: '/',
-      },
+        crawlDelay: 2,
+      }
     ],
     sitemap: 'https://yalawildlife.com/sitemap.xml',
-    host: 'https://yalawildlife.com',
+    host: 'https://yalawildlife.com'
   }
 }

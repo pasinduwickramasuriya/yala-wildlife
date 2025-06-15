@@ -9,13 +9,15 @@ import BookingForm from "@/components/BookingForm";
 import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 type Props = {
-  params: Promise<{ slug: string }>; // Changed from { slug: string }
+  params: Promise<{ slug: string }>;
+
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
@@ -33,18 +35,47 @@ async function getPackage(slug: string): Promise<Package> {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params; // Await the params
+  const resolvedParams = await params;
   const packageData = await getPackage(resolvedParams.slug);
 
+  const title = `${packageData.name} - Best Yala Safari Tour Package | Yala Wildlife Safari`;
+  const description = `Experience the ultimate ${packageData.name} in Yala National Park. Professional guides, guaranteed wildlife sightings, and comfortable vehicles. Book your adventure today!`;
+
   return {
-    title: `${packageData.name} - Yala Safari Tour Package`,
-    description: `${packageData.description.slice(0, 155)}...`,
+    title,
+    description,
+    keywords: [
+      `yala ${packageData.name.toLowerCase()}`,
+      "yala safari tour",
+      "yala wildlife tour",
+      "yala national park safari",
+      "sri lanka safari packages",
+      "best yala tours",
+      "leopard safari yala",
+      "elephant safari yala",
+      "safari booking yala",
+    ],
     openGraph: {
-      title: `${packageData.name} - Yala Safari Tour Package`,
-      description: packageData.description,
-      images: [{ url: packageData.imageUrl }],
+      title,
+      description,
+      images: [
+        {
+          url: packageData.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${packageData.name} - Yala Wildlife Safari Tour`,
+        },
+      ],
       type: "website",
       url: `${siteConfig.url}/safari-packages/${packageData.slug}`,
+      siteName: siteConfig.name,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [packageData.imageUrl],
+      creator: "@yalawildlife",
     },
     alternates: {
       canonical: `${siteConfig.url}/safari-packages/${packageData.slug}`,
@@ -81,6 +112,7 @@ export default async function PackageDetailPage(props: Props) {
       />
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <FAQJsonLd faqs={defaultFAQs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <main className="bg-background min-h-screen">
         {/* Hero Section */}
         <section className="relative h-[50vh] w-full">
