@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed:admin": "ts-node --transpile-only scripts/seed-admin.ts"
+    
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
