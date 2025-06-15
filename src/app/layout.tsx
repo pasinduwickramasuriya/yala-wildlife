@@ -5,6 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { defaultMetadata } from "@/lib/seo-config";
+import {
+  organizationSchema,
+  websiteSchema,
+  localBusinessSchema,
+} from "@/lib/schema";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,6 +26,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema),
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
       >
