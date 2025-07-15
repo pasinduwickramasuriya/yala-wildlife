@@ -53,7 +53,7 @@ export default async function BlogPage() {
   return (
     <>
       <Header />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <SEOContentBlock
           title="Yala Wildlife Blog"
           description="Discover expert insights, wildlife stories, and safari tips from Yala National Park. Our blog features photography guides, animal spotting tips, and the latest park updates."
