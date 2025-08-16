@@ -113,9 +113,13 @@ export default function HeroSlider() {
               />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <div className="container mx-auto px-4 text-center text-white">
-                  <h2 className="mb-5 text-xl font-bold tracking-tight md:text-2xl">
+                  {/* <h2 className="mb-5 text-xl font-bold tracking-tight md:text-2xl">
                     {hs.title}
-                  </h2>
+                  </h2> */}
+                  <h2 className="mb-5 text-xl font-bold tracking-tight md:text-2xl text-green-400">
+                {/* Changed: Set font color to dark mode green (text-green-400), no light mode variant */}
+                {hs.title}
+              </h2>
                   <p className="mb-8 text-lg md:text-xl">{hs.subtitle}</p>
                   <Link
                     href="/safari-packages"

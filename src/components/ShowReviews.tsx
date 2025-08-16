@@ -47,7 +47,7 @@ export default function ShowReviews() {
   if (loading) {
     return (
       <section className="relative py-20 px-4 md:px-8 bg-background min-h-[60vh]">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 drop-shadow tracking-tight">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 drop-shadow tracking-tight">
           Customer Reviews
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-16 justify-center items-start">
@@ -70,7 +70,7 @@ export default function ShowReviews() {
 
   return (
     <section className="relative py-20 px-4 md:px-8 bg-background min-h-[60vh] overflow-x-clip">
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 drop-shadow tracking-tight">
+      <h2 className="text-3xl md:text-3xl font-extrabold text-center mb-16  drop-shadow tracking-tight">
         Customer Reviews
       </h2>
       {error ? (

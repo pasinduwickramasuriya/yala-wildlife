@@ -85,10 +85,17 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="text-center mt-12">
-              <Link
+              {/* <Link
                 href="/safari-packages"
                 className="inline-block bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg transform hover:scale-105 transition-all duration-300"
               >
+                Explore Our Packages
+              </Link> */}
+              <Link
+                href="/safari-packages"
+                className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg transform hover:scale-105 transition-all duration-300"
+              >
+                {/* Changed: Set button background to solid green (bg-green-600, hover:bg-green-700), removed gradient for dark mode consistency */}
                 Explore Our Packages
               </Link>
             </div>

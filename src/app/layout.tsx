@@ -56,7 +56,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <main className="flex-grow">
             {children}
           </main>
           <Footer />
@@ -65,3 +65,74 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
+// import type { Metadata } from "next";
+// import { Inter } from "next/font/google";
+// import "./globals.css";
+// import Header from "@/components/Header";
+// import Footer from "@/components/Footer";
+// import { ThemeProvider } from "@/components/ThemeProvider";
+// import { defaultMetadata } from "@/lib/seo-config";
+// import {
+//   organizationSchema,
+//   websiteSchema,
+//   localBusinessSchema,
+// } from "@/lib/schema";
+
+// const inter = Inter({
+//   variable: "--font-inter",
+//   subsets: ["latin"],
+//   weight: ["400", "500", "600", "700"],
+// });
+
+// export const metadata: Metadata = defaultMetadata;
+
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <html lang="en" suppressHydrationWarning>
+//       <head>
+//         <script
+//           type="application/ld+json"
+//           dangerouslySetInnerHTML={{
+//             __html: JSON.stringify(organizationSchema),
+//           }}
+//         />
+//         <script
+//           type="application/ld+json"
+//           dangerouslySetInnerHTML={{
+//             __html: JSON.stringify(websiteSchema),
+//           }}
+//         />
+//         <script
+//           type="application/ld+json"
+//           dangerouslySetInnerHTML={{
+//             __html: JSON.stringify(localBusinessSchema),
+//           }}
+//         />
+//       </head>
+//       <body
+//         className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
+//       >
+//         <ThemeProvider
+//           attribute="class"
+//           defaultTheme="system"
+//           enableSystem
+//           disableTransitionOnChange
+//         >
+//           <Header />
+//           {/* Changed: Removed container and padding from main to allow full-screen HeroSlider */}
+//           <main className="flex-grow">
+//             {children}
+//           </main>
+//           <Footer />
+//         </ThemeProvider>
+//       </body>
+//     </html>
+//   );
+// }
