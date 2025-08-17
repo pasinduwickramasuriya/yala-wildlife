@@ -250,19 +250,19 @@ export default function PhotoGallery() {
     const interval = setInterval(() => {
       setDisplayPhotos((prevPhotos) => {
         if (!prevPhotos || prevPhotos.length < 2) return prevPhotos;
-        
+
         const newPhotos = [...prevPhotos];
         const index1 = Math.floor(Math.random() * newPhotos.length);
         let index2 = Math.floor(Math.random() * newPhotos.length);
-        
+
         while (index2 === index1 && newPhotos.length > 1) {
           index2 = Math.floor(Math.random() * newPhotos.length);
         }
-        
+
         if (newPhotos[index1] && newPhotos[index2]) {
           [newPhotos[index1], newPhotos[index2]] = [newPhotos[index2], newPhotos[index1]];
         }
-        
+
         return newPhotos;
       });
     }, 8000);
@@ -319,9 +319,9 @@ export default function PhotoGallery() {
   return (
     <section className="relative w-full py-20 px-4 md:px-6 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-xl"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-green-400/10 via-transparent to-green-600/10 animate-pulse"></div>
-      
+      <div className="absolute inset-0  backdrop-blur-xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-br  via-transparent animate-pulse"></div>
+
       <div className="absolute top-20 left-10 w-32 h-32 bg-green-400/5 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-20 right-20 w-48 h-48 bg-green-400/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
