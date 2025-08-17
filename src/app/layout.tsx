@@ -10,6 +10,7 @@ import {
   websiteSchema,
   localBusinessSchema,
 } from "@/lib/schema";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -61,6 +62,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+        <WhatsAppButton/>
       </body>
     </html>
   );

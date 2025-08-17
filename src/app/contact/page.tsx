@@ -11,7 +11,7 @@ export default function ContactPage() {
         {/* Contact Section */}
         <section className="py-16 px-4 md:px-6">
           <div className="container max-w-5xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-center text-foreground mb-12 tracking-tight">
+            <h1 className="text-2xl md:text-2xl font-extrabold text-center text-foreground mb-12 tracking-tight text-green-400">
               Get in Touch
             </h1>
 

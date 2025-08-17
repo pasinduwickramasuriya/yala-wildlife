@@ -128,7 +128,7 @@ export default async function PackageDetailPage(props: Props) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
           {/* Package Name */}
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 text-foreground">
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight max-w-3xl animate-fadeIn">
+            <h1 className="text-2xl md:text-2xl font-bold leading-tight max-w-3xl animate-fadeIn text-green-400">
               {pkg.name}
             </h1>
           </div>

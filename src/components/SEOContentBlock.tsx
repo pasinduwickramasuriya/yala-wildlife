@@ -21,7 +21,7 @@ const SEOContentBlock: FC<SEOContentBlockProps> = ({
 }) => {
   return (
     <div className="prose max-w-none mb-8">
-      <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+      <h1 className="text-2xl font-bold tracking-tight sm:text-2xl text-green-400">
         {title}
       </h1>
       <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">

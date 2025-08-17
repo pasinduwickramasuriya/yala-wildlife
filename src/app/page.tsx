@@ -33,11 +33,12 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url || "https://yalawildlife.com"),
 
   title:
-    "Best Yala Safari Tours & Jeep Service | #1 Wildlife Experience in Sri Lanka",
+    "Best Yala Safari Tours & Jeep Service | Yala National Park Safari | Best Yala Safari Jeep Service Sri Lanka | #1 Wildlife Experience in Sri Lanka",
 
   description:
     "Experience unforgettable Yala National Park safari tours with Sri Lanka's top-rated wildlife guides. Guaranteed leopard sightings, luxury 4x4 jeeps, and expert naturalists. Book your adventure today! Best rates for Yala safari packages.",
@@ -107,6 +108,7 @@ export default function Home() {
     <>
       <ClientHome />
 
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -136,6 +138,7 @@ export default function Home() {
           ]),
         }}
       />
+
     </>
   );
 }

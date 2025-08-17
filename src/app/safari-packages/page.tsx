@@ -10,5 +10,5 @@ export const metadata: Metadata = generateMetadata({
 });
 
 export default function SafariPackages() {
-  return <ClientSafariPackages />;
+  return<><ClientSafariPackages /></> 
 }
