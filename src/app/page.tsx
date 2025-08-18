@@ -351,7 +351,7 @@ export const metadata: Metadata = {
     title: "Yala Safari Tours | #1 Wildlife Experience Sri Lanka",
     description: "Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps. Book your adventure today!",
     url: siteConfig.url,
-    siteName: "Yala Wildlife Safari",
+    siteName: "Yala National Park | Official | Yala Sri Lanka | Yala Wildlife Safari",
     locale: "en_US",
     images: [
       {
