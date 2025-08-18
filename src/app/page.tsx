@@ -130,18 +130,18 @@ import {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url || "https://yalawildlife.com"),
-  
+
   // OPTIMIZED: Perfect 60-character title targeting primary keywords
   title: "Yala Safari Tours | #1 Wildlife Experience Sri Lanka",
-  
+
   // OPTIMIZED: Perfect 160-character description
   description: "Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps. Book Sri Lanka's top-rated wildlife experience!",
-  
+
   // MASSIVE KEYWORD EXPANSION: 200+ targeted keywords for complete Yala dominance
   keywords: [
     // PRIMARY YALA KEYWORDS (Highest Priority)
     "yala",
-    "yala sri lanka", 
+    "yala sri lanka",
     "yala national park",
     "yala safari",
     "yala wildlife",
@@ -150,7 +150,7 @@ export const metadata: Metadata = {
     "yala park",
     "yala tours",
     "yala jeep",
-    
+
     // YALA SAFARI VARIATIONS
     "yala safari tours",
     "yala safari booking",
@@ -168,7 +168,7 @@ export const metadata: Metadata = {
     "yala safari trip",
     "yala safari holiday",
     "yala safari vacation",
-    
+
     // YALA NATIONAL PARK KEYWORDS
     "yala national park sri lanka",
     "yala national park safari",
@@ -177,7 +177,7 @@ export const metadata: Metadata = {
     "yala national park jeep service",
     "yala national park wildlife",
     "yala national park leopard",
-    "yala national park elephant", 
+    "yala national park elephant",
     "yala national park entrance",
     "yala national park timings",
     "yala national park map",
@@ -185,7 +185,7 @@ export const metadata: Metadata = {
     "yala national park zone 2",
     "yala national park block 1",
     "yala national park gates",
-    
+
     // WILDLIFE SPECIFIC KEYWORDS
     "yala leopard safari",
     "yala leopard spotting",
@@ -201,7 +201,7 @@ export const metadata: Metadata = {
     "yala wildlife experience",
     "yala big game safari",
     "yala predator safari",
-    
+
     // JEEP SERVICE KEYWORDS  
     "yala jeep service",
     "yala 4x4 safari",
@@ -215,10 +215,10 @@ export const metadata: Metadata = {
     "yala luxury jeep",
     "yala open jeep",
     "yala safari car",
-    
+
     // LOCATION BASED KEYWORDS
     "tissamaharama yala safari",
-    "kataragama yala tours", 
+    "kataragama yala tours",
     "hambantota yala safari",
     "kirinda yala safari",
     "palatupana yala entrance",
@@ -227,10 +227,10 @@ export const metadata: Metadata = {
     "yala safari from ella",
     "yala safari from mirissa",
     "yala safari from galle",
-    
+
     // SERVICE TYPE KEYWORDS
     "half day yala safari",
-    "full day yala safari", 
+    "full day yala safari",
     "morning yala safari",
     "evening yala safari",
     "private yala safari",
@@ -241,18 +241,18 @@ export const metadata: Metadata = {
     "yala camping safari",
     "yala photography safari",
     "yala family safari",
-    
+
     // COMPARATIVE KEYWORDS
     "best yala safari",
     "top yala safari operator",
     "yala vs udawalawe",
-    "yala vs wilpattu", 
+    "yala vs wilpattu",
     "yala vs minneriya",
     "best time yala safari",
     "yala safari season",
     "yala park opening times",
     "yala safari weather",
-    
+
     // BOOKING RELATED KEYWORDS
     "book yala safari online",
     "yala safari advance booking",
@@ -264,7 +264,7 @@ export const metadata: Metadata = {
     "yala safari deals",
     "yala safari offers",
     "yala safari discount",
-    
+
     // LONG TAIL KEYWORDS
     "best yala safari operator sri lanka",
     "guaranteed leopard sighting yala",
@@ -276,7 +276,7 @@ export const metadata: Metadata = {
     "early morning yala safari",
     "yala safari jeep with driver",
     "yala park entrance fee included",
-    
+
     // GENERAL SRI LANKA SAFARI KEYWORDS
     "sri lanka safari",
     "sri lanka wildlife tours",
@@ -289,7 +289,7 @@ export const metadata: Metadata = {
     "sri lanka eco tourism",
     "sri lanka nature tours"
   ],
-  
+
   // ENHANCED: Comprehensive meta tags for maximum SEO
   other: {
     "geo.region": "LK-82",
@@ -309,7 +309,7 @@ export const metadata: Metadata = {
     "DC.language": "en",
     "DC.coverage": "Yala National Park, Southern Province, Sri Lanka",
     "DC.rights": "Copyright Yala Wildlife Safari",
-    
+
     // ADDITIONAL SEO META TAGS
     "rating": "general",
     "revisit-after": "3 days",
@@ -318,33 +318,33 @@ export const metadata: Metadata = {
     "googlebot": "index, follow, max-image-preview:large",
     "bingbot": "index, follow",
     "yandexbot": "index, follow",
-    
+
     // THEME AND BRANDING
     "theme-color": "#22c55e",
-    "msapplication-TileColor": "#22c55e", 
+    "msapplication-TileColor": "#22c55e",
     "msapplication-TileImage": "/mstile-144x144.png",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "apple-mobile-web-app-title": "Yala Safari",
-    
+
     // CONTACT AND BUSINESS INFO
     "format-detection": "telephone=yes",
     "skype_toolbar": "skype_toolbar_parser_compatible",
-    
+
     // CONTENT CLASSIFICATION
     "news_keywords": "yala safari, sri lanka wildlife, leopard spotting, elephant watching",
     "article:section": "Travel & Tourism",
     "article:tag": "Yala Safari, Wildlife Tours, Sri Lanka Tourism",
-    
+
     // PERFORMANCE HINTS
     "dns-prefetch": "//fonts.googleapis.com",
     "preconnect": "//images.unsplash.com",
-    
+
     // SOCIAL MEDIA
     "fb:app_id": "your-facebook-app-id",
     "fb:page_id": "your-facebook-page-id",
   },
-  
+
   // ENHANCED: Superior Open Graph metadata
   openGraph: {
     type: "website",
@@ -366,7 +366,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Leopard Spotting in Yala National Park",
-        type: "image/jpeg", 
+        type: "image/jpeg",
       },
       {
         url: `${siteConfig.url}/yala-elephant-og.jpg`,
@@ -377,7 +377,7 @@ export const metadata: Metadata = {
       }
     ],
   },
-  
+
   // ENHANCED: Complete Twitter metadata
   twitter: {
     card: "summary_large_image",
@@ -390,7 +390,7 @@ export const metadata: Metadata = {
       alt: "Yala Wildlife Safari - Premium Safari Experience",
     },
   },
-  
+
   // ENHANCED: Complete alternates
   alternates: {
     canonical: siteConfig.url,
@@ -401,23 +401,23 @@ export const metadata: Metadata = {
       "en-CA": siteConfig.url,
     },
     media: {
-      "only screen and (max-width: 600px)": `${siteConfig.url}/mobile`,
+      "only screen and (max-width: 600px)": `${siteConfig.url}`, ///mobile
     }
   },
-  
+
   applicationName: "Yala Wildlife Safari",
-  
+
   authors: [
     {
       name: "Yala Wildlife Safari",
       url: siteConfig.url,
     },
   ],
-  
+
   category: "Travel & Tourism",
   classification: "Safari Tours, Wildlife Tourism, Eco Tourism, Adventure Tourism",
   referrer: "origin-when-cross-origin",
-  
+
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -425,17 +425,17 @@ export const metadata: Metadata = {
     userScalable: true,
     viewportFit: "cover",
   },
-  
+
   verification: {
     google: "vobQq0klynTsOpNnRKtuAD0BDLjmwpS5e2OrmSjojzU",
-    yandex: "your-yandex-verification-code", 
+    yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
     other: {
       "msvalidate.01": "your-bing-verification-code",
       "p:domain_verify": "your-pinterest-verification-code",
     }
   },
-  
+
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -458,9 +458,9 @@ export const metadata: Metadata = {
       }
     ],
   },
-  
+
   manifest: "/site.webmanifest",
-  
+
   // ADDITIONAL METADATA
   generator: "Next.js",
   robots: {
@@ -480,7 +480,7 @@ export default function Home() {
   return (
     <>
       <ClientHome />
-      
+
       {/* ULTIMATE SCHEMA MARKUP FOR YALA DOMINANCE */}
       <script
         type="application/ld+json"
@@ -489,7 +489,7 @@ export default function Home() {
             organizationSchema,
             websiteSchema,
             localBusinessSchema,
-            
+
             // ENHANCED: Main Product Schema
             {
               "@context": "https://schema.org",
@@ -500,13 +500,13 @@ export default function Home() {
               brand: {
                 "@type": "Brand",
                 name: "Yala Wildlife Safari",
-                logo: `${siteConfig.url}/logo.png`
+                logo: `${siteConfig.url}` //logo.png
               },
               image: [
-                `${siteConfig.url}/safari-jeep.jpg`,
-                `${siteConfig.url}/leopard-sighting.jpg`,
-                `${siteConfig.url}/elephant-herd.jpg`,
-                `${siteConfig.url}/yala-landscape.jpg`
+                `${siteConfig.url}`,  ///safari-jeep.jpg
+                `${siteConfig.url}`,  //leopard-sighting.jpg
+                `${siteConfig.url}`,  //elephant-herd.jpg
+                `${siteConfig.url}`     //yala-landscape.jpg
               ],
               offers: {
                 "@type": "AggregateOffer",
@@ -542,13 +542,13 @@ export default function Home() {
                   description: "4-hour morning or evening safari experience"
                 },
                 {
-                  "@type": "ProductModel", 
+                  "@type": "ProductModel",
                   name: "Full Day Safari",
                   description: "8-hour comprehensive safari adventure"
                 }
               ]
             },
-            
+
             // ENHANCED: Tourist Destination Schema
             {
               "@context": "https://schema.org",
@@ -557,8 +557,8 @@ export default function Home() {
               alternateName: ["Yala", "Yala Wildlife Sanctuary", "Ruhuna National Park"],
               description: "Sri Lanka's premier national park famous for having the world's highest leopard density",
               image: [
-                `${siteConfig.url}/yala-park.jpg`,
-                `${siteConfig.url}/yala-wildlife.jpg`
+                `${siteConfig.url}`,
+                `${siteConfig.url}`
               ],
               url: siteConfig.url,
               sameAs: [
@@ -568,7 +568,7 @@ export default function Home() {
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Tissamaharama",
-                addressRegion: "Southern Province", 
+                addressRegion: "Southern Province",
                 addressCountry: "LK",
                 postalCode: "82600"
               },
@@ -586,7 +586,7 @@ export default function Home() {
                 },
                 {
                   "@type": "TouristAttraction",
-                  name: "Elephant Watching", 
+                  name: "Elephant Watching",
                   description: "Large herds of wild Asian elephants"
                 },
                 {
@@ -607,17 +607,17 @@ export default function Home() {
                   description: "Main safari area with highest wildlife density"
                 },
                 {
-                  "@type": "Place", 
+                  "@type": "Place",
                   name: "Yala Block 2",
                   description: "Less crowded area with excellent bird watching"
                 }
               ]
             },
-            
+
             // ENHANCED: Service Schema
             {
               "@context": "https://schema.org",
-              "@type": "Service", 
+              "@type": "Service",
               serviceType: "Safari Tours",
               name: "Yala Safari Jeep Service",
               description: "Professional safari guide services with luxury 4x4 vehicles in Yala National Park",
@@ -653,7 +653,7 @@ export default function Home() {
                     "@type": "Offer",
                     itemOffered: {
                       "@type": "Service",
-                      name: "Half Day Evening Safari", 
+                      name: "Half Day Evening Safari",
                       description: "2:00 PM - 6:00 PM golden hour experience"
                     },
                     price: "75",
@@ -682,7 +682,7 @@ export default function Home() {
                 ]
               }
             },
-            
+
             // ENHANCED: FAQ Schema for Featured Snippets
             {
               "@context": "https://schema.org",
@@ -730,7 +730,7 @@ export default function Home() {
                 }
               ]
             },
-            
+
             // ENHANCED: Event Schema for Safari Experiences
             {
               "@context": "https://schema.org",
@@ -745,7 +745,7 @@ export default function Home() {
                 byDay: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
               },
               location: {
-                "@type": "Place", 
+                "@type": "Place",
                 name: "Yala National Park",
                 address: {
                   "@type": "PostalAddress",
@@ -769,7 +769,7 @@ export default function Home() {
           ]),
         }}
       />
-      
+
       {/* ENHANCED: Breadcrumb Schema */}
       <script
         type="application/ld+json"
@@ -788,19 +788,19 @@ export default function Home() {
                 "@type": "ListItem",
                 position: 2,
                 name: "Yala Safari Tours",
-                item: `${siteConfig.url}/safari-packages`
+                item: `${siteConfig.url}`
               },
               {
                 "@type": "ListItem",
                 position: 3,
                 name: "Yala National Park",
-                item: `${siteConfig.url}/yala-national-park`
+                item: `${siteConfig.url}`
               }
             ]
           }),
         }}
       />
-      
+
       {/* ENHANCED: Website Navigation Schema */}
       <script
         type="application/ld+json"
@@ -810,7 +810,7 @@ export default function Home() {
             "@type": "SiteNavigationElement",
             name: [
               "Yala Safari Tours",
-              "Safari Packages", 
+              "Safari Packages",
               "Yala Wildlife",
               "Safari Booking",
               "Contact Us"
