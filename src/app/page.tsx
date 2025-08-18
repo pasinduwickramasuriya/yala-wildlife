@@ -500,7 +500,7 @@ export default function Home() {
               brand: {
                 "@type": "Brand",
                 name: "Yala Wildlife Safari",
-                logo: `${siteConfig.url}` //logo.png
+                logo: `${siteConfig.url}` 
               },
               image: [
                 `${siteConfig.url}`,  ///safari-jeep.jpg
