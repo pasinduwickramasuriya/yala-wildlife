@@ -5,8 +5,8 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
-        port: "", // Optional, leave empty for default
-        pathname: "/**", // Allow all paths under this domain
+        port: "",
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -21,6 +21,20 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/mobile',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/mobile/:path*',
+        destination: '/',
+        permanent: true,
+      },
+    ];
   },
 };
 
