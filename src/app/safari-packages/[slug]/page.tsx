@@ -177,7 +177,7 @@ export default async function PackageDetailPage(props: Props) {
                   ${pkg.price.toFixed(2)}
                 </span>
                 <span className="text-sm text-muted-foreground ml-2">
-                  per person
+                  per Jeep
                 </span>
               </div>
             </div>
