@@ -46,6 +46,10 @@ export const defaultMetadata = {
     address: true,
     telephone: true,
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
