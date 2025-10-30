@@ -87,91 +87,87 @@
 
 :root {
 
+
+
   --radius: 0.75rem;
 
-  /* Light Mode - Default */
 
-  --background: oklch(0.98 0.01 150); /* Very light, slightly green-tinted white */
-
-  --foreground: oklch(0.15 0.02 150); /* Very dark, slightly green-tinted black */
-
-  --card: oklch(1 0 0); /* Pure white for cards */
-
-  --card-foreground: oklch(0.15 0.02 150);
-
-  --popover: oklch(1 0 0);
-
-  --popover-foreground: oklch(0.15 0.02 150);
-
-  --primary: oklch(0.55 0.22 150); /* A strong, but not overly bright green */
-
-  --primary-foreground: oklch(0.98 0.01 150); /* Light text on primary color */
-
-  --secondary: oklch(0.94 0.02 150); /* Light gray with a hint of green */
-
-  --secondary-foreground: oklch(0.25 0.02 150);
-
-  --muted: oklch(0.94 0.02 150);
-
-  --muted-foreground: oklch(0.45 0.02 150);
-
-  --accent: oklch(0.94 0.02 150);
-
-  --accent-foreground: oklch(0.25 0.02 150);
-
-  --destructive: oklch(0.6 0.25 25); /* A modern, less jarring red */
-
-  --border: oklch(0.85 0.02 150);
-
-  --input: oklch(0.85 0.02 150);
-
-  --ring: oklch(0.55 0.22 150);
-
-}
-
-
-
-.dark {
-
-  --radius: 0.75rem;
 
   /* Dark Mode */
 
+
+
   --background: oklch(0.12 0.02 160); /* Deep, dark teal-black */
+
+
 
   --foreground: oklch(0.98 0.01 160); /* Soft, off-white */
 
+
+
   --card: oklch(0.15 0.03 160); /* Slightly lighter than background */
+
+
 
   --card-foreground: oklch(0.98 0.01 160);
 
+
+
   --popover: oklch(0.15 0.03 160);
+
+
 
   --popover-foreground: oklch(0.98 0.01 160);
 
+
+
   --primary: oklch(0.65 0.25 150); /* Vibrant, modern green */
+
+
 
   --primary-foreground: oklch(0.1 0.02 150); /* Dark text on primary color */
 
+
+
   --secondary: oklch(0.2 0.03 160); /* Darker mid-tone */
+
+
 
   --secondary-foreground: oklch(0.9 0.01 160);
 
+
+
   --muted: oklch(0.2 0.03 160);
+
+
 
   --muted-foreground: oklch(0.6 0.02 160);
 
+
+
   --accent: oklch(0.2 0.03 160);
+
+
 
   --accent-foreground: oklch(0.9 0.01 160);
 
+
+
   --destructive: oklch(0.7 0.2 25);
+
+
 
   --border: oklch(0.25 0.03 160);
 
+
+
   --input: oklch(0.25 0.03 160);
 
+
+
   --ring: oklch(0.65 0.25 150);
+
+
 
 }
 
@@ -230,3 +226,28 @@
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
