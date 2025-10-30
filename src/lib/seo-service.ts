@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 export async function analyzeSEO(page: PageContent): Promise<SEOAnalysis> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
     const prompt = `You are an SEO expert. Analyze this webpage and provide optimized SEO recommendations in JSON format.
 
@@ -111,3 +111,10 @@ function generateDefaultSchema(pageType: string): Record<string, unknown> {
     '@type': 'WebPage'
   }
 }
+
+
+
+
+
+
+

@@ -8,6 +8,7 @@ import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { LocalBusinessJsonLd } from "@/components/JsonLd";
 import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
+import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 // Define the Package interface to match your API response
 interface SafariPackage {
@@ -123,6 +124,54 @@ export default function ClientSafariPackages() {
           }}
         />
       ))}
+
+
+      <AutoSEOWrapper
+        pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
+        pageDescription="Choose from half-day, full-day, and private Yala safari packages. All-inclusive tours with expert guides and luxury jeeps. Book now!"
+        pageType="package"
+      >
+        <div className="container mx-auto px-4 py-8">
+          <h1>Yala Safari Packages</h1>
+
+          <p>
+            Explore our carefully curated Yala National Park safari packages designed to
+            suit every travelers needs and budget. From budget-friendly half-day excursions
+            to luxury full-day expeditions, we offer the best safari experiences in Sri Lanka.
+          </p>
+
+          <p>
+            Our half-day safari package is perfect for travelers with limited time. Departing
+            at dawn or afternoon, this 4-hour adventure takes you deep into Block 1 of Yala
+            National Park. Witness leopards, elephants, crocodiles, and exotic birds in their
+            natural habitat with our expert naturalist guides.
+          </p>
+
+          <p>
+            For the ultimate experience, choose our full-day safari package covering multiple
+            zones of the national park. This 8-10 hour comprehensive tour maximizes your
+            wildlife encounter opportunities. Includes breakfast, packed lunch, expert guide,
+            and premium wildlife photography support.
+          </p>
+
+          <p>
+            Experience Yala in complete comfort with our exclusive private safari tours.
+            Your dedicated vehicle, personal expert guide, and customized itinerary ensure
+            an intimate wildlife experience. Ideal for honeymooners, photographers, and
+            families seeking privacy and flexibility.
+          </p>
+
+          <p>
+            We also offer group safari packages with discounted rates for budget-conscious
+            travelers. Small groups ensure optimal viewing opportunities. All packages include
+            certified guides, safety equipment, refreshments, and comprehensive park access.
+            Book your Yala adventure today!
+          </p>
+        </div>
+      </AutoSEOWrapper>
+
+
+
     </>
   );
 }
