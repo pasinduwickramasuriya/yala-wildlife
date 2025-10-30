@@ -27,12 +27,12 @@ export function SEOIndicator() {
       {status === 'loading' ? (
         <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
           <Loader2 className="w-5 h-5 animate-spin" />
-          <span className="font-semibold">Optimizing SEO...</span>
+          <span className="font-semibold">S</span>
         </div>
       ) : (
         <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
           <CheckCircle className="w-5 h-5" />
-          <span className="font-semibold">SEO Optimized ✓</span>
+          <span className="font-semibold">S✓</span>
         </div>
       )}
     </div>

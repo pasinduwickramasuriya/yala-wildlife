@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { analyzeSEO } from '@/lib/seo-service'
 import { PageContent, SEOAnalysis } from '@/types/seo'
 
-export const maxDuration = 25
+export const maxDuration = 60
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     console.log('📤 Analyzing SEO:', pageContent.title)
 
     const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('API Timeout')), 20000)
+      setTimeout(() => reject(new Error('API Timeout')), 30000)
     })
 
     const analysisPromise: Promise<SEOAnalysis> = analyzeSEO(pageContent)
