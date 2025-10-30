@@ -10,6 +10,7 @@ import {
   websiteSchema,
   localBusinessSchema,
 } from "@/lib/schema";
+import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
@@ -531,6 +532,52 @@ export default async function BlogPage() {
           }),
         }}
       />
+
+      <AutoSEOWrapper
+        pageTitle="Yala Wildlife Blog | Safari Tips & Wildlife Guides"
+        pageDescription="Expert wildlife blog featuring Yala safari tips, leopard tracking guides, photography techniques, and Sri Lanka conservation news. Updated weekly!"
+        pageType="blog"
+      >
+        <div className="container mx-auto px-4 py-8">
+          <h1>Yala Wildlife Blog</h1>
+
+          <p>
+            Welcome to the Yala Wildlife Safari blog, your comprehensive resource for
+            expert safari advice, wildlife photography tips, conservation updates, and
+            fascinating stories from Sri Lankas premier national park.
+          </p>
+
+          <p>
+            Our experienced naturalist guides share insider knowledge about Yalas
+            incredible biodiversity, best wildlife viewing seasons, tracking techniques,
+            and sustainable tourism practices. Whether planning your first safari or are
+            a seasoned enthusiast, our blog provides valuable insights.
+          </p>
+
+          <p>
+            Discover essential safari planning tips covering best times to visit, what
+            to pack for tropical adventures, recommended camera equipment, suitable clothing,
+            and health precautions. Learn about park regulations, booking procedures, and
+            accommodation options near Yala National Park.
+          </p>
+
+          <p>
+            Explore in-depth articles about Yalas famous wildlife including Sri Lankan
+            leopards, Asian elephants, sloth bears, spotted deer, and over 215 bird species.
+            Learn to identify tracks, understand behavior patterns, and discover the best
+            locations for specific wildlife sightings throughout the year.
+          </p>
+
+          <p>
+            Master wildlife photography with detailed tutorials covering camera settings,
+            composition techniques, optimal lighting conditions, and ethical photography
+            practices. Stay informed about conservation initiatives protecting Yalas
+            wildlife and discover how you can support environmental preservation efforts.
+          </p>
+        </div>
+      </AutoSEOWrapper>
+
+
     </>
   );
 }

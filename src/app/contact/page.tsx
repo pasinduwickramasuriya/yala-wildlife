@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
@@ -350,6 +351,50 @@ export default function ContactPage() {
           }),
         }}
       />
+
+      <AutoSEOWrapper
+        pageTitle="Contact Yala Wildlife Safari | Book Your Tour +94 778 158 004"
+        pageDescription="Contact Yala Wildlife Safari for bookings and inquiries. Available 24/7 via phone, WhatsApp, and email. Based in Tissamaharama, Sri Lanka."
+        pageType="contact"
+      >
+        <div className="container mx-auto px-4 py-8">
+          <h1>Contact Yala Wildlife Safari</h1>
+
+          <p>
+            Ready to experience the thrill of Yala National Park? Contact our friendly
+            team to book your safari, ask questions, or request custom tour packages.
+            We are re available 24/7 to assist with all your safari needs.
+          </p>
+
+          <p>
+            Our office is conveniently located in Tissamaharama, just minutes from Yala
+            National Park entrance. Reach us via phone, WhatsApp, or email for instant
+            booking confirmations and personalized travel advice from our experienced team.
+          </p>
+
+          <p>
+            Booking your Yala safari is simple and hassle-free. Contact us with your
+            preferred date, group size, and package choice. Well confirm availability
+            instantly and send booking confirmation with payment details. We accept bank
+            transfers, credit cards, and cash payments.
+          </p>
+
+          <p>
+            Looking for a personalized safari experience? Contact us for custom tour packages
+            tailored to your interests - wildlife photography tours, bird watching expeditions,
+            multi-day safaris, or combined tours visiting multiple Sri Lankan national parks.
+          </p>
+
+          <p>
+            Yala National Park is located approximately 300 km from Colombo and 3 hours from
+            Galle. We can arrange transportation from major cities. Contact us for travel
+            advice, accommodation recommendations, and detailed directions to make your journey
+            smooth and enjoyable.
+          </p>
+        </div>
+      </AutoSEOWrapper>
+
+
     </>
   );
 }
