@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "seed:admin": "ts-node --transpile-only scripts/seed-admin.ts"
-    
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^5.0.1",
     "@prisma/client": "^6.5.0",
     "@radix-ui/react-avatar": "^1.1.10",
