@@ -70,17 +70,7 @@ export default function RootLayout({
           <Footer />
         </ThemeProvider>
         <WhatsAppButton />
-        {/* <SEOOptimizer 
-        pageTitle={"Yala Safari Tours | #1 Wildlife Experience Sri Lanka"} 
-        pageDescription={"Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."} 
-        pageContent={"Yala National Park is Sri Lanka's premier safari destination..."} 
-        pageUrl={"https://www.yalawildlife.com/"}/> */}
-
-        {/* <AutoSEOWrapper children={undefined} 
-        pageTitle={"Yala Safari Tours | #1 Wildlife Experience Sri Lanka"} 
-        pageDescription={"Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."} 
-        pageType={"home"}/> */}
-
+        
         {/* Visual indicator */}
         <SEOIndicator />
 
