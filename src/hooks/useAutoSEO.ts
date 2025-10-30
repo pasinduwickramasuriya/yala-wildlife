@@ -8,9 +8,9 @@ export function useAutoSEO(
   pageContent: string,
   pageUrl: string,
   pageType: string
-) {
+): void {
   useEffect(() => {
-    async function optimizeSEO() {
+    async function optimizeSEO(): Promise<void> {
       try {
         console.log('🔄 Starting Auto-SEO optimization...')
 
@@ -23,7 +23,7 @@ export function useAutoSEO(
           body: JSON.stringify({
             title: pageTitle,
             description: pageDescription,
-            content: pageContent.substring(0, 500),
+            content: pageContent.substring(0, 300),
             url: pageUrl,
             type: pageType
           }),
@@ -36,36 +36,61 @@ export function useAutoSEO(
           throw new Error(`HTTP ${response.status}`)
         }
 
-        const data = await response.json()
+        const data = await response.json() as Record<string, unknown>
 
-        if (data.success && data.data) {
-          document.title = data.data.title
-          updateMetaTag('description', data.data.description)
-          updateMetaTag('keywords', Array.isArray(data.data.keywords) ? data.data.keywords.join(', ') : '')
-          updateMetaTag('og:title', data.data.title, 'property')
-          updateMetaTag('og:description', data.data.description, 'property')
-          updateMetaTag('twitter:title', data.data.title, 'name')
-          updateMetaTag('twitter:description', data.data.description, 'name')
+        if (data.success === true && data.data) {
+          const seoData = data.data as Record<string, unknown>
+          
+          if (typeof seoData.title === 'string') {
+            document.title = seoData.title
+          }
 
-          if (data.data.schema) {
-            injectSchema(data.data.schema)
+          if (typeof seoData.description === 'string') {
+            updateMetaTag('description', seoData.description)
+          }
+
+          if (Array.isArray(seoData.keywords)) {
+            updateMetaTag('keywords', seoData.keywords.join(', '))
+          }
+
+          if (typeof seoData.title === 'string') {
+            updateMetaTag('og:title', seoData.title, 'property')
+          }
+
+          if (typeof seoData.description === 'string') {
+            updateMetaTag('og:description', seoData.description, 'property')
+          }
+
+          if (typeof seoData.title === 'string') {
+            updateMetaTag('twitter:title', seoData.title, 'name')
+          }
+
+          if (typeof seoData.description === 'string') {
+            updateMetaTag('twitter:description', seoData.description, 'name')
+          }
+
+          if (seoData.schema && typeof seoData.schema === 'object') {
+            injectSchema(seoData.schema as Record<string, unknown>)
           }
 
           console.log('✅ SEO Auto-Optimized!')
-          console.log('📊 Score:', data.data.score + '/100')
-          console.log('🎯 Title:', data.data.title)
-          console.log('📝 Description:', data.data.description)
-          console.log('🔑 Keywords:', data.data.keywords)
+          console.log('📊 Score:', seoData.score, '/100')
+          console.log('🎯 Title:', seoData.title)
+          console.log('📝 Description:', seoData.description)
+          console.log('🔑 Keywords:', seoData.keywords)
         } else {
-          console.error('❌ SEO optimization failed:', data.error)
+          console.warn('⚠️ SEO optimization incomplete:', data.error || 'No data')
+          applyFallbackSEO(pageTitle, pageDescription)
         }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        if (error.name === 'AbortError') {
-          console.error('⏰ Auto-SEO timeout')
-        } else {
+      } catch (error: unknown) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          console.error('⏰ Auto-SEO timeout (25s)')
+        } else if (error instanceof Error) {
           console.error('❌ Auto-SEO error:', error.message)
+        } else {
+          console.error('❌ Auto-SEO error:', error)
         }
+        applyFallbackSEO(pageTitle, pageDescription)
       }
     }
 
@@ -77,15 +102,21 @@ export function useAutoSEO(
   }, [pageTitle, pageDescription, pageContent, pageUrl, pageType])
 }
 
-function updateMetaTag(name: string, content: string, attribute: string = 'name'): void {
+function updateMetaTag(
+  name: string,
+  content: string,
+  attribute: string = 'name'
+): void {
+  if (!content) return
+
   let meta = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null
-  
+
   if (!meta) {
     meta = document.createElement('meta')
     meta.setAttribute(attribute, name)
     document.head.appendChild(meta)
   }
-  
+
   meta.setAttribute('content', content)
 }
 
@@ -100,4 +131,10 @@ function injectSchema(schema: Record<string, unknown>): void {
   script.type = 'application/ld+json'
   script.textContent = JSON.stringify(schema, null, 2)
   document.head.appendChild(script)
+}
+
+function applyFallbackSEO(title: string, description: string): void {
+  document.title = title
+  updateMetaTag('description', description)
+  console.log('📋 Applied fallback SEO')
 }

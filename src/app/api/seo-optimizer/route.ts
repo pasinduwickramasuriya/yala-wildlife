@@ -1,42 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { analyzeSEO } from '@/lib/seo-service'
-import { PageContent } from '@/types/seo'
+import { PageContent, SEOAnalysis } from '@/types/seo'
 
 export const maxDuration = 25
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    
+
+    const pageType = body.type as 'home' | 'blog' | 'package' | 'about' | 'contact' | 'other'
+    const validType = ['home', 'blog', 'package', 'about', 'contact', 'other'].includes(pageType) 
+      ? pageType 
+      : 'other'
+
     const pageContent: PageContent = {
-      title: body.title || 'Untitled Page',
-      description: body.description || '',
-      content: body.content || '',
-      url: body.url || '/',
-      type: body.type || 'other'
+      title: String(body.title || 'Untitled Page'),
+      description: String(body.description || ''),
+      content: String(body.content || '').substring(0, 300),
+      url: String(body.url || '/'),
+      type: validType
     }
 
-    const timeoutPromise = new Promise((_, reject) => {
+    console.log('📤 Analyzing SEO:', pageContent.title)
+
+    const timeoutPromise = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new Error('API Timeout')), 20000)
     })
 
-    const analysisPromise = analyzeSEO(pageContent)
+    const analysisPromise: Promise<SEOAnalysis> = analyzeSEO(pageContent)
 
-    const analysis = await Promise.race([analysisPromise, timeoutPromise])
+    const analysis = await Promise.race<SEOAnalysis>([
+      analysisPromise,
+      timeoutPromise
+    ])
+
+    console.log('✅ Analysis complete - Score:', analysis.score)
 
     return NextResponse.json({
       success: true,
       data: analysis
     })
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    console.error('SEO Optimizer API Error:', error.message)
+  } catch (error: unknown) {
+    let errorMessage = 'Failed to analyze SEO'
     
+    if (error instanceof Error) {
+      errorMessage = error.message
+    } else if (typeof error === 'string') {
+      errorMessage = error
+    }
+
+    console.error('❌ SEO Optimizer API Error:', errorMessage)
+
     return NextResponse.json(
       {
         success: false,
-        error: error.message || 'Failed to analyze SEO'
+        error: errorMessage
       },
       { status: 500 }
     )
