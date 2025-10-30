@@ -14,40 +14,42 @@ export function useAutoSEO(
       try {
         console.log('🔄 Starting Auto-SEO optimization...')
 
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 25000)
+
         const response = await fetch('/api/seo-optimizer', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             title: pageTitle,
             description: pageDescription,
-            content: pageContent,
+            content: pageContent.substring(0, 500),
             url: pageUrl,
             type: pageType
-          })
+          }),
+          signal: controller.signal
         })
+
+        clearTimeout(timeoutId)
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`)
+        }
 
         const data = await response.json()
 
-        if (data.success) {
-          // Update page title
+        if (data.success && data.data) {
           document.title = data.data.title
-
-          // Update meta description
           updateMetaTag('description', data.data.description)
-
-          // Update keywords
-          updateMetaTag('keywords', data.data.keywords.join(', '))
-
-          // Update Open Graph
+          updateMetaTag('keywords', Array.isArray(data.data.keywords) ? data.data.keywords.join(', ') : '')
           updateMetaTag('og:title', data.data.title, 'property')
           updateMetaTag('og:description', data.data.description, 'property')
-
-          // Update Twitter Card
           updateMetaTag('twitter:title', data.data.title, 'name')
           updateMetaTag('twitter:description', data.data.description, 'name')
 
-          // Inject Schema
-          injectSchema(data.data.schema)
+          if (data.data.schema) {
+            injectSchema(data.data.schema)
+          }
 
           console.log('✅ SEO Auto-Optimized!')
           console.log('📊 Score:', data.data.score + '/100')
@@ -57,22 +59,26 @@ export function useAutoSEO(
         } else {
           console.error('❌ SEO optimization failed:', data.error)
         }
-      } catch (error) {
-        console.error('❌ Auto-SEO error:', error)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.error('⏰ Auto-SEO timeout')
+        } else {
+          console.error('❌ Auto-SEO error:', error.message)
+        }
       }
     }
 
-    // Run automatically after short delay
     const timer = setTimeout(() => {
       optimizeSEO()
-    }, 2000)
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [pageTitle, pageDescription, pageContent, pageUrl, pageType])
 }
 
-function updateMetaTag(name: string, content: string, attribute = 'name') {
-  let meta = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement
+function updateMetaTag(name: string, content: string, attribute: string = 'name'): void {
+  let meta = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null
   
   if (!meta) {
     meta = document.createElement('meta')
@@ -83,9 +89,11 @@ function updateMetaTag(name: string, content: string, attribute = 'name') {
   meta.setAttribute('content', content)
 }
 
-function injectSchema(schema: Record<string, unknown>) {
+function injectSchema(schema: Record<string, unknown>): void {
   const existing = document.getElementById('auto-seo-schema')
-  if (existing) existing.remove()
+  if (existing) {
+    existing.remove()
+  }
 
   const script = document.createElement('script')
   script.id = 'auto-seo-schema'
