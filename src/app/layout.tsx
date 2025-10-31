@@ -14,6 +14,7 @@ import {
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 import { SEOIndicator } from "@/components/SEOIndicator";
+import DotsBackground from "@/components/DotsBackground";
 
 
 
@@ -76,6 +77,7 @@ export default function RootLayout({
 
         {/* Debug panel - remove in production */}
         {/* <SEODebug /> */}
+        <DotsBackground/>
       </body>
     </html>
   );
