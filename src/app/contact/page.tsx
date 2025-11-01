@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
+import DotsBackground from "@/components/DotsBackground";
 
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
@@ -394,7 +395,7 @@ export default function ContactPage() {
         </div>
       </AutoSEOWrapper>
 
-
+      <DotsBackground/>
     </>
   );
 }
