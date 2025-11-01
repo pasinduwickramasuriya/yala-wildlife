@@ -10,7 +10,6 @@ import {
   websiteSchema,
   localBusinessSchema,
 } from "@/lib/schema";
-import DotsBackground from "@/components/DotsBackground";
 
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
@@ -556,7 +555,6 @@ export default function AboutPage() {
           }),
         }}
       />
-      <DotsBackground/>
     </>
   );
 }

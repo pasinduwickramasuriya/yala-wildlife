@@ -2,7 +2,6 @@ import Header from "@/components/Header";
 import GetCustomerReviews from "@/components/GetCustomerReviews";
 import ShowReviews from "@/components/ShowReviews";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import DotsBackground from "@/components/DotsBackground";
 
 export default function ReviewsPage() {
   return (
@@ -63,7 +62,7 @@ export default function ReviewsPage() {
         </div>
       </AutoSEOWrapper>
 
-<DotsBackground/>
+
     </>
   );
 }

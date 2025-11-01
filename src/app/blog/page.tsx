@@ -11,7 +11,6 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import DotsBackground from "@/components/DotsBackground";
 
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
@@ -578,7 +577,7 @@ export default async function BlogPage() {
         </div>
       </AutoSEOWrapper>
 
-      <DotsBackground />
+
     </>
   );
 }

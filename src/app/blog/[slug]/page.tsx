@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import prisma from "@/lib/prisma"; // Import Prisma client
-import DotsBackground from "@/components/DotsBackground";
 
 // Define the Blog interface based on the Prisma schema
 interface Blog {
@@ -90,7 +89,6 @@ export default async function BlogPost({ params }: BlogPostProps) {
           </Link>
         </div>
       </div>
-      <DotsBackground/>
     </>
   );
 }

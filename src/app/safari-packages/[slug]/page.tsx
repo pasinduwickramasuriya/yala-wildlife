@@ -10,7 +10,6 @@ import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import DotsBackground from "@/components/DotsBackground";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -195,7 +194,6 @@ export default async function PackageDetailPage(props: Props) {
           </div>
         </section>
       </main>
-      <DotsBackground/>
     </>
   );
 }
