@@ -510,7 +510,7 @@ export default function Header() {
           <Link
             href="/safari-packages"
             className={cn(
-              "px-4 py-1.5 rounded-2xl bg-green-400 text-black text-xs font-bold hover:bg-green-900/20 transition-all duration-300",
+              "px-4 py-1.5 rounded-2xl bg-green-400   text-black text-xs font-bold hover:bg-green-900/20 transition-all duration-300",
               visible &&
               "shadow-[0_4px_12px_rgba(0,_0,_0,_0.15)]"
             )}
