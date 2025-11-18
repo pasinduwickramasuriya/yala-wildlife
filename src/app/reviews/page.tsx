@@ -4,6 +4,7 @@ import ShowReviews from "@/components/ShowReviews";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 import ElfsightReviews from "@/components/ElfsightReviews";
+import FeaturableReviews from "@/components/FeaturableReviews";
 
 export default function ReviewsPage() {
   return (
@@ -11,6 +12,7 @@ export default function ReviewsPage() {
       <Header />
       {/* <ReviewsSectio/> */}
       <ElfsightReviews/>
+      <FeaturableReviews/>
       <div className="min-h-screen bg-background">
         <div className="py-16 px-4 md:px-6">
 

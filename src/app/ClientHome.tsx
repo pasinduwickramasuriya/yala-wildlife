@@ -2,6 +2,7 @@
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import FeaturableReviews from "@/components/FeaturableReviews";
 import GallerySection from "@/components/GallerySection";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
@@ -53,6 +54,7 @@ export default function ClientHome() {
       <ReviewsSection />
       <WhyChooseUs />
       <GallerySection />
+      <FeaturableReviews/>
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
