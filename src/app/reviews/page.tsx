@@ -3,10 +3,14 @@ import GetCustomerReviews from "@/components/GetCustomerReviews";
 import ShowReviews from "@/components/ShowReviews";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
+import ElfsightReviews from "@/components/ElfsightReviews";
+
 export default function ReviewsPage() {
   return (
     <>
       <Header />
+      {/* <ReviewsSection/> */}
+      <ElfsightReviews/>
       <div className="min-h-screen bg-background">
         <div className="py-16 px-4 md:px-6">
 

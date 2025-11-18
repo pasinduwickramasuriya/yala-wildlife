@@ -1,6 +1,7 @@
 "use client";
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
+import ElfsightReviews from "@/components/ElfsightReviews";
 import GallerySection from "@/components/GallerySection";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
@@ -47,6 +48,7 @@ export default function ClientHome() {
           ))}
         </div>
       </div>
+      <ElfsightReviews />
       <PhotoGallery />
       <ReviewsSection />
       <WhyChooseUs />
