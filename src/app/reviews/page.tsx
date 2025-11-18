@@ -9,7 +9,7 @@ export default function ReviewsPage() {
   return (
     <>
       <Header />
-      {/* <ReviewsSection/> */}
+      {/* <ReviewsSectio/> */}
       <ElfsightReviews/>
       <div className="min-h-screen bg-background">
         <div className="py-16 px-4 md:px-6">
