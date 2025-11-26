@@ -26,8 +26,9 @@
 
 // seedAdmin();
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const prisma = require("../lib/prisma").default;
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
 
 async function seedAdmin() {
   try {

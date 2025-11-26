@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "@/components/Header";
 import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, Clock, ShieldCheck } from "lucide-react";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
 
-// ✅ SEO-ENHANCED: Contact page metadata
+// ✅ SEO-ENHANCED: Contact page metadata (UNTOUCHED)
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
@@ -23,6 +24,21 @@ export const metadata: Metadata = {
     "book yala safari",
     "yala safari contact number",
     "yala safari booking",
+    "yala safari phone number",
+    "yala safari email",
+    "yala safari tissamaharama contact",
+    "sri lanka safari booking",
+    "yala wildlife contact",
+    "safari tours contact sri lanka",
+    "yala national park booking",
+    "wildlife safari contact",
+    "yala safari reservation",
+    "contact yala tours",
+    "safari guide contact yala",
+    "yala jeep safari booking",
+    "private safari booking yala",
+    "luxury safari contact yala",
+    "yala safari customer service", "yala safari booking",
     "yala safari phone number",
     "yala safari email",
     "yala safari tissamaharama contact",
@@ -120,170 +136,120 @@ export default function ContactPage() {
     <>
       <Header />
 
-      {/* ✅ REMOVED: All borders and background colors */}
-      <main className="min-h-screen text-foreground" role="main" aria-labelledby="contact-title">
+      <main className="relative min-h-screen text-white bg-black selection:bg-green-500/50" role="main" aria-labelledby="contact-title">
 
-        {/* ✅ REMOVED: All borders from breadcrumb */}
-        {/* <nav aria-label="Breadcrumb" className="py-4 px-4 md:px-6">
-          <div className="container max-w-5xl mx-auto">
-            <ol className="flex items-center space-x-2 text-sm">
-              <li>
-                <Link href="/" className="text-green-600 hover:text-green-500 hover:underline transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li className="text-muted-foreground">/</li>
-              <li className="text-foreground font-medium">Contact</li>
-            </ol>
+        {/* =========================================
+            BACKGROUND IMAGE SECTION
+        ========================================= */}
+        <div className="fixed inset-0 z-0">
+          <Image
+            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
+            alt="Yala Leopard Emerging from Darkness"
+            fill
+            priority
+            className="object-cover opacity-80"
+            quality={90}
+          />
+          {/* Cinematic Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+          {/* Noise Texture for Modern Feel */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+        </div>
+
+        {/* Content Wrapper */}
+        <div className="relative z-10 pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+
+          {/* Header */}
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 backdrop-blur-md mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-xs font-mono uppercase tracking-widest text-green-400">Bookings Open 24/7</span>
+            </div>
+            <h1 id="contact-title" className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+              Begin Your <span className="text-green-500">Expedition</span>
+            </h1>
+            <p className="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto font-light">
+              Experience the raw intensity of Yala. Secure your private safari jeep and guaranteed leopard tracking expert today.
+            </p>
           </div>
-        </nav> */}
 
-        <section className="py-16 px-4 md:px-6">
-          <div className="container max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-            {/* ✅ REMOVED: All borders from header */}
-            <header className="text-center mb-12">
-              <h1
-                id="contact-title"
-                className="text-3xl md:text-4xl font-extrabold text-green-600 mb-6 tracking-tight"
-              >
-                Contact Yala Safari Tours - Book Your Wildlife Adventure
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Ready to experience the world&apos;s highest leopard density? Contact our expert guides for personalized Yala National Park safari tours with guaranteed wildlife sightings.
-              </p>
-            </header>
+            {/* LEFT COLUMN: Contact Cards & Info */}
+            <div className="lg:col-span-5 space-y-6">
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-              {/* ✅ REMOVED: All borders from contact section */}
-              <div className="space-y-8">
-
-                <div>
-                  <h2 className="text-2xl font-semibold text-foreground mb-6">
-                    Get In Touch - Book Your Yala Safari Experience
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-8">
-                    Have questions about our safari packages, pricing, or availability? Our experienced team is here to help you plan the perfect Yala National Park adventure with guaranteed leopard and elephant sightings.
-                  </p>
-                </div>
-
-                {/* ✅ REMOVED: All borders from contact cards */}
-                <address className="not-italic space-y-6">
-
-                  {/* Email Contact - No Borders */}
-                  <div className="flex items-start gap-4 p-6 rounded-lg hover:shadow-lg transition-shadow">
-                    <Mail className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" aria-hidden="true" />
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-1">Email Us for Safari Bookings</h3>
-                      <p className="text-muted-foreground mb-2">Get detailed information about our safari packages</p>
-                      <a
-                        href="mailto:pasindusadanjana17@gmail.com?subject=Yala Safari Booking Inquiry"
-                        className="text-green-600 hover:text-green-500 hover:underline font-medium transition-colors"
-                        aria-label="Send email to Yala Wildlife Safari"
-                      >
-                        pasindusadanjana17@gmail.com
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Phone Contact - No Borders */}
-                  <div className="flex items-start gap-4 p-6 rounded-lg hover:shadow-lg transition-shadow">
-                    <Phone className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" aria-hidden="true" />
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-1">Call for Immediate Booking</h3>
-                      <p className="text-muted-foreground mb-2">Speak directly with our safari experts</p>
-                      <a
-                        href="tel:+94778158004"
-                        className="text-green-600 hover:text-green-500 hover:underline font-medium text-xl transition-colors"
-                        aria-label="Call Yala Wildlife Safari"
-                      >
-                        +94 778 158 004
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Location Contact - No Borders */}
-                  <div className="flex items-start gap-4 p-6 rounded-lg hover:shadow-lg transition-shadow">
-                    <MapPin className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" aria-hidden="true" />
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-1">Visit Our Safari Base</h3>
-                      <p className="text-muted-foreground mb-2">Located near Yala National Park entrance</p>
-                      <address className="not-italic text-foreground leading-relaxed">
-                        Yala Wildlife Safari<br />
-                        Wickrama Kasingama<br />
-                        Tissamaharama<br />
-                        Southern Province, Sri Lanka
-                      </address>
-                    </div>
-                  </div>
-
-                </address>
-
-                {/* ✅ REMOVED: All borders from map section */}
-                <div className="mt-8">
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Find Us Near Yala National Park</h3>
-                  <div className="rounded-lg p-2">
-                    <LocationMap />
-                  </div>
+              {/* Glass Card 1: Direct Contact */}
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors duration-500 group">
+                <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                  <Phone className="text-green-500 w-5 h-5" /> Direct Lines
+                </h3>
+                <div className="space-y-4">
+                  <a href="tel:+94778158004" className="block">
+                    <div className="text-sm text-neutral-400 uppercase tracking-wider mb-1">Hotline (WhatsApp Available)</div>
+                    <div className="text-3xl font-mono text-white group-hover:text-green-400 transition-colors">+94 778 158 004</div>
+                  </a>
+                  <div className="w-full h-px bg-white/10" />
+                  <a href="mailto:pasindusadanjana17@gmail.com" className="block">
+                    <div className="text-sm text-neutral-400 uppercase tracking-wider mb-1">Email Reservations</div>
+                    <div className="text-lg text-white group-hover:text-green-400 transition-colors">pasindusadanjana17@gmail.com</div>
+                  </a>
                 </div>
               </div>
 
-              {/* ✅ REMOVED: All borders from contact form */}
-              <div className="p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <div className="mb-6">
-                  <h2 className="text-2xl font-semibold text-foreground mb-3">
-                    Book Your Yala Safari Adventure
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Fill out the form below and we&apos;ll get back to you within 2 hours with available dates and pricing for your preferred safari experience.
-                  </p>
+              {/* Glass Card 2: Location Map Wrapper */}
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-1 overflow-hidden h-[300px] relative">
+                <div className="absolute top-4 left-4 z-20 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-green-400 flex items-center gap-2">
+                  <MapPin size={12} /> BASE: YALA National Park
                 </div>
-                <ContactForm />
+                <div className="w-full h-full rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 opacity-80 hover:opacity-100">
+                  {/* The LocationMap component goes here. 
+                        We wrap it to control styling. */}
+                  <LocationMap />
+                </div>
+              </div>
+
+              {/* Glass Card 3: Quick Stats */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="backdrop-blur-md bg-green-900/20 border border-green-500/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                  <Clock className="mb-2 text-green-400" />
+                  <span className="text-2xl font-bold text-white">20 mins</span>
+                  <span className="text-xs text-neutral-400 uppercase">From Park Entrance</span>
+                </div>
+                <div className="backdrop-blur-md bg-green-900/20 border border-green-500/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                  <ShieldCheck className="mb-2 text-green-400" />
+                  <span className="text-2xl font-bold text-white">100%</span>
+                  <span className="text-xs text-neutral-400 uppercase">Verified Guides</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* RIGHT COLUMN: The Form */}
+            <div className="lg:col-span-7">
+              <div className="backdrop-blur-xl bg-black/40  rounded-3xl p-8 md:p-10 shadow-2xl ring-1 ring-white/5 relative overflow-hidden">
+
+                <div className="absolute -top-20 -right-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div className="relative z-10 mb-8">
+                  <h2 className="text-3xl font-bold text-white mb-2">Secure Your Safari</h2>
+                  <p className="text-neutral-400">Fill out the details below. Our team responds within 2 hours with a curated itinerary.</p>
+                </div>
+
+                <div className="contact-form-wrapper">
+                  <ContactForm />
+                </div>
               </div>
             </div>
 
-            {/* ✅ REMOVED: All borders from Why Choose Us section */}
-            <section className="mt-16 p-8 rounded-xl">
-              <h2 className="text-2xl font-bold text-center text-foreground mb-8">
-                Why Choose Yala Wildlife Safari?
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-green-600 mb-2">Expert Local Guides</h3>
-                  <p className="text-muted-foreground">Professional naturalists with 10+ years experience in Yala National Park</p>
-                </div>
-                <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-green-600 mb-2">Guaranteed Sightings</h3>
-                  <p className="text-muted-foreground">World&apos;s highest leopard density ensures amazing wildlife encounters</p>
-                </div>
-                <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-green-600 mb-2">Luxury Safari Vehicles</h3>
-                  <p className="text-muted-foreground">Modern 4x4 jeeps with safety equipment and premium comfort</p>
-                </div>
-              </div>
-            </section>
           </div>
-        </section>
+        </div>
       </main>
 
-      {/* ✅ SEO-ENHANCED: Structured Data for Contact Page */}
+      {/* ✅ SEO-ENHANCED: Structured Data for Contact Page (UNTOUCHED) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -327,7 +293,7 @@ export default function ContactPage() {
         }}
       />
 
-      {/* ✅ SEO-ENHANCED: Breadcrumb Schema */}
+      {/* ✅ SEO-ENHANCED: Breadcrumb Schema (UNTOUCHED) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -357,44 +323,53 @@ export default function ContactPage() {
         pageDescription="Contact Yala Wildlife Safari for bookings and inquiries. Available 24/7 via phone, WhatsApp, and email. Based in Tissamaharama, Sri Lanka."
         pageType="contact"
       >
+
         <div className="container mx-auto px-4 py-8">
-          <h1>Contact Yala Wildlife Safari</h1>
+          {/* Glass Container */}
+          <div className="backdrop-blur-xl bg-black/40  rounded-3xl p-8 md:p-12 shadow-2xl">
 
-          <p>
-            Ready to experience the thrill of Yala National Park? Contact our friendly
-            team to book your safari, ask questions, or request custom tour packages.
-            We are re available 24/7 to assist with all your safari needs.
-          </p>
 
-          <p>
-            Our office is conveniently located in Tissamaharama, just minutes from Yala
-            National Park entrance. Reach us via phone, WhatsApp, or email for instant
-            booking confirmations and personalized travel advice from our experienced team.
-          </p>
+            <h1 className="text-3xl md:text-2xl font-bold text-green-400 mb-6 tracking-tight text-center">
+              Contact Yala Wildlife Safari
+            </h1>
 
-          <p>
-            Booking your Yala safari is simple and hassle-free. Contact us with your
-            preferred date, group size, and package choice. Well confirm availability
-            instantly and send booking confirmation with payment details. We accept bank
-            transfers, credit cards, and cash payments.
-          </p>
+            <div className="space-y-6 text-neutral-200 text-lg leading-relaxed font-light">
+              <p>
+                Ready to experience the thrill of Yala National Park? Contact our friendly
+                team to book your safari, ask questions, or request custom tour packages.
+                We are available <span className="text-green-400 font-medium">24/7</span> to assist with all your safari needs.
+              </p>
 
-          <p>
-            Looking for a personalized safari experience? Contact us for custom tour packages
-            tailored to your interests - wildlife photography tours, bird watching expeditions,
-            multi-day safaris, or combined tours visiting multiple Sri Lankan national parks.
-          </p>
+              <p>
+                Our office is conveniently located in Tissamaharama, just minutes from Yala
+                National Park entrance. Reach us via <span className="text-white font-medium">Phone, WhatsApp, or Email</span> for instant
+                booking confirmations and personalized travel advice from our experienced team.
+              </p>
 
-          <p>
-            Yala National Park is located approximately 300 km from Colombo and 3 hours from
-            Galle. We can arrange transportation from major cities. Contact us for travel
-            advice, accommodation recommendations, and detailed directions to make your journey
-            smooth and enjoyable.
-          </p>
+              <p>
+                Booking your Yala safari is simple and hassle-free. Contact us with your
+                preferred date, group size, and package choice. Well confirm availability
+                instantly and send booking confirmation with payment details. We accept bank
+                transfers, credit cards, and cash payments.
+              </p>
+
+              <p>
+                Looking for a personalized safari experience? Contact us for custom tour packages
+                tailored to your interests — <span className="text-white font-medium">wildlife photography tours, bird watching expeditions</span>,
+                multi-day safaris, or combined tours visiting multiple Sri Lankan national parks.
+              </p>
+
+              <p>
+                Yala National Park is located approximately 300 km from Colombo and 3 hours from
+                Galle. We can arrange transportation from major cities. Contact us for travel
+                advice, accommodation recommendations, and detailed directions to make your journey
+                smooth and enjoyable.
+              </p>
+            </div>
+
+          </div>
         </div>
       </AutoSEOWrapper>
-
-
     </>
   );
 }

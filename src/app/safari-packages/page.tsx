@@ -424,7 +424,7 @@ export default function SafariPackages() {
                   },
                   {
                     "@type": "OfferCatalog",
-                    name: "Full Day Safaris", 
+                    name: "Full Day Safaris",
                     description: "Complete day wildlife experiences"
                   },
                   {
@@ -532,7 +532,7 @@ export default function SafariPackages() {
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Safari Base, Tissamaharama Road",
-              "addressLocality": "Tissamaharama", 
+              "addressLocality": "Tissamaharama",
               "addressRegion": "Southern Province",
               "postalCode": "82600",
               "addressCountry": "LK"

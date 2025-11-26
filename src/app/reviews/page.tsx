@@ -3,17 +3,21 @@ import GetCustomerReviews from "@/components/GetCustomerReviews";
 import ShowReviews from "@/components/ShowReviews";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
-import ElfsightReviews from "@/components/ElfsightReviews";
-import FeaturableReviews from "@/components/FeaturableReviews";
+// import ElfsightReviews from "@/components/ElfsightReviews";
+// import FeaturableReviews from "@/components/FeaturableReviews";
+import ModernReviews from "@/components/ModernReviews";
+import ReviewSlider from "@/components/ReviewSlider";
 
 export default function ReviewsPage() {
   return (
     <>
       <Header />
       {/* <ReviewsSectio/> */}
-      <ElfsightReviews/>
-      <FeaturableReviews/>
-      <div className="min-h-screen bg-background">
+      <ModernReviews/>
+      {/* <ElfsightReviews/> */}
+      {/* <FeaturableReviews/> */}
+      <ReviewSlider/>
+      <div className="min-h-screen bg-blur">
         <div className="py-16 px-4 md:px-6">
 
           <ShowReviews />

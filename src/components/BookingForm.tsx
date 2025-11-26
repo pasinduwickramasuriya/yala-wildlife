@@ -1,12 +1,22 @@
-
-
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { countries } from "countries-list";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import {
+  Calendar, Globe, Mail, MessageSquare, User, Ticket, Send,
+  Users, Utensils, Plus, Minus, CheckCircle2, Loader2, Package, ShieldCheck, ArrowRight
+} from "lucide-react";
 
+// --- CONFIGURATION ---
+const CONSTANTS = {
+  TICKET_PRICE: 43, // USD per person
+  MEAL_PRICE: 10,   // USD per person
+  DEFAULT_PHONE: "+94",
+  MAX_PASSENGERS: 7,
+};
+
+// --- TYPES ---
 interface BookingData {
   name: string;
   phoneCode: string;
@@ -14,323 +24,454 @@ interface BookingData {
   email: string;
   date: string;
   country: string;
-  tourPackage: string;
   message: string;
+  passengers: number;
+  includeMeals: boolean;
+  includeTickets: boolean;
+  startTime: string;
 }
 
-type Notification = {
-  type: "success" | "error";
-  message: string;
-} | null;
+interface PackageDetails {
+  name: string;
+  price: number;
+  slug: string;
+}
 
-const Emoji = ({ symbol, label }: { symbol: string; label: string }) => (
-  <span role="img" aria-label={label} className="inline-block mr-2">
-    {symbol}
-  </span>
-);
+export default function BookingForm({
+  tourPackageSlug
+}: {
+  tourPackageSlug: string;
+}) {
 
-export default function BookingForm({ tourPackage }: { tourPackage: string }) {
-  const [formData, setFormData] = useState<BookingData>({
+  // 1. DATA PREPARATION (Countries)
+  const countryList = useMemo(() => {
+    return Object.entries(countries)
+      .map(([code, data]) => ({
+        code,
+        name: data.name,
+        phoneCode: `+${data.phone}`
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, []);
+
+  // Define Initial State for Resetting
+  const initialFormState: BookingData = {
     name: "",
-    phoneCode: "+94",
+    phoneCode: CONSTANTS.DEFAULT_PHONE,
     phoneNumber: "",
     email: "",
     date: "",
     country: "",
-    tourPackage,
     message: "",
-  });
+    passengers: 2,
+    includeMeals: false,
+    includeTickets: false,
+    startTime: "06:00 AM",
+  };
 
-  const [loading, setLoading] = useState(false);
-  const [notification, setNotification] = useState<Notification>(null);
+  // 2. STATE
+  const [formData, setFormData] = useState<BookingData>(initialFormState);
+  const [packageDetails, setPackageDetails] = useState<PackageDetails | null>(null);
+  const [loadingPrice, setLoadingPrice] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<{ type: "success" | "error", message: string } | null>(null);
 
-  useEffect(() => {
-    console.log("BookingForm v7 loaded - iOS zoom fix applied");
-  }, []);
+  // ✅ NEW: Success State to toggle Full Screen Message
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  // Create country list
-  const countryList = Object.entries(countries)
-    .map(([code, data]) => ({
-      code,
-      name: data.name,
-      phoneCode: `+${data.phone}`,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  // Create unique phone code list
-  const phoneCodeList = Array.from(
-    new Map(countryList.map((country) => [country.phoneCode, country])).values()
-  );
-
-  // FIXED: Auto-update phone code when country changes
+  // 3. LOGIC: AUTO-UPDATE PHONE CODE
   useEffect(() => {
     if (formData.country) {
-      const selectedCountry = countryList.find(
-        (country) => country.name === formData.country
-      );
-      if (selectedCountry && selectedCountry.phoneCode !== formData.phoneCode) {
-        setFormData((prev) => ({
-          ...prev,
-          phoneCode: selectedCountry.phoneCode,
-        }));
+      const matchedCountry = countryList.find(c => c.name === formData.country);
+      if (matchedCountry) {
+        setFormData(prev => ({ ...prev, phoneCode: matchedCountry.phoneCode }));
       }
     }
-    // FIXED: Added formData.phoneCode to dependency array to resolve react-hooks/exhaustive-deps warning
-    // This prevents potential infinite loops and ensures the effect runs when phoneCode changes
-  }, [formData.country, formData.phoneCode, countryList]);
+  }, [formData.country, countryList]);
 
+  // 4. FETCH PACKAGE
+  useEffect(() => {
+    const fetchPrice = async () => {
+      setLoadingPrice(true);
+      try {
+        const res = await fetch(`/api/package?slug=${tourPackageSlug}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error("Failed to load package");
+        const data = await res.json();
+        setPackageDetails({ name: data.name, price: data.price, slug: data.slug });
+      } catch (error) {
+        console.error(error);
+        setNotification({ type: "error", message: "Could not load package pricing." });
+      } finally {
+        setLoadingPrice(false);
+      }
+    };
+
+    if (tourPackageSlug) fetchPrice();
+  }, [tourPackageSlug]);
+
+  // 5. CALCULATIONS
+  const totals = useMemo(() => {
+    const base = packageDetails?.price || 0;
+    const tickets = formData.includeTickets ? formData.passengers * CONSTANTS.TICKET_PRICE : 0;
+    const meals = formData.includeMeals ? formData.passengers * CONSTANTS.MEAL_PRICE : 0;
+    return { base, tickets, meals, grandTotal: base + tickets + meals };
+  }, [packageDetails, formData.passengers, formData.includeTickets, formData.includeMeals]);
+
+  // 6. SUBMIT
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setIsSubmitting(true);
     setNotification(null);
 
     const fullPhone = `${formData.phoneCode}${formData.phoneNumber}`;
-    const submissionData = { ...formData, phone: fullPhone };
+    const payload = {
+      ...formData,
+      phone: fullPhone,
+      tourPackage: packageDetails?.name || tourPackageSlug,
+      pricing: totals
+    };
 
     try {
       const res = await fetch("/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(submissionData),
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
-        setNotification({
-          type: "success",
-          message: "Booking submitted! Check your email for confirmation.",
-        });
-        setFormData({
-          name: "",
-          phoneCode: "+94",
-          phoneNumber: "",
-          email: "",
-          date: "",
-          country: "",
-          tourPackage,
-          message: "",
-        });
+        setNotification({ type: "success", message: "Booking Confirmed! Check your email." });
+
+        // ✅ ACTION: Show Success Screen & Clear Form
+        setIsSuccess(true);
+        setFormData(initialFormState);
       } else {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to submit booking");
+        throw new Error("Booking failed");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.error("Booking error:", error);
-      setNotification({
-        type: "error",
-        message: error instanceof Error ? error.message : "Failed to submit booking.",
-      });
+      setNotification({ type: "error", message: "Transmission failed. Please try again." });
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-  useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => setNotification(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [notification]);
+  // ✅ RENDER: FULL SCREEN SUCCESS MESSAGE
+  if (isSuccess) {
+    return (
+      <div className="relative w-full max-w-3xl mx-auto font-sans">
+        <div className="relative rounded-3xl border border-green-500/50 bg-black/60 backdrop-blur-2xl p-1 shadow-[0_0_50px_-10px_rgba(34,197,94,0.5)] ring-1 ring-white/10 transition-all min-h-[600px] flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-500">
+          <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(34,197,94,0.4)] animate-bounce">
+            <CheckCircle2 size={48} className="text-green-400" />
+          </div>
 
-  const today = new Date().toISOString().split("T")[0];
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Mission <span className="text-green-400">Confirmed</span>
+          </h2>
 
+          <p className="text-neutral-400 text-sm md:text-base max-w-md mb-10 leading-relaxed px-6">
+            Your expedition has been successfully secured. We have sent a confirmation signal to your email. Get ready for the wild.
+          </p>
+
+          <button
+            onClick={() => setIsSuccess(false)}
+            className="group bg-white/10 hover:bg-green-500/20 border border-white/10 hover:border-green-500/50 text-white font-bold py-4 px-10 rounded-xl transition-all flex items-center gap-2"
+          >
+            Book Another <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ✅ RENDER: FORM (Standard View)
   return (
-    <div className="w-full max-w-xs mx-auto p-4 bg-black/20 backdrop-blur-md rounded-3xl shadow-2xl
-                    sm:max-w-sm sm:p-6 
-                    md:max-w-md md:p-8
-                    lg:max-w-lg">
-      <h2 className="text-lg font-bold text-white mb-6 text-center flex items-center justify-center gap-2
-                     sm:text-xl sm:mb-8
-                     md:text-xl">
-        <Emoji symbol="🎯" label="target" />
-        Book Your Adventure
-      </h2>
+    <div className="relative w-full max-w-3xl mx-auto font-sans">
 
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        {/* Full Name */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="name" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="👤" label="person" />
-            Full Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            required
-            placeholder="Enter your full name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full rounded-full bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-base
-                     placeholder-green-400 outline-none border border-white/20
-                     focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                     hover:bg-white/15 transition-all duration-200"
-          />
-        </div>
+      {/* --- CONTAINER --- */}
+      <div className="relative rounded-3xl border border-green-500/50 bg-black/40 backdrop-blur-xl p-1 shadow-[0_0_40px_-15px_rgba(34,197,94,0.3)] ring-1 ring-white/10 transition-all">
 
-        {/* Country */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="country" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="🌍" label="globe" />
-            Country
-          </label>
-          <select
-            id="country"
-            value={formData.country}
-            onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-            className="w-full rounded-full bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-base
-                     outline-none border border-white/20 appearance-none cursor-pointer
-                     focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                     hover:bg-white/15 transition-all duration-200"
-          >
-            <option value="" disabled className="text-green-400 bg-black/80">
-              Select your country
-            </option>
-            {countryList.map((country) => (
-              <option key={country.code} value={country.name} className="bg-black/90 text-white">
-                {country.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <div className="rounded-[1.3rem] bg-black/20 p-5 sm:p-8 border border-white/5">
 
-        {/* Phone Number */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="phoneCode" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="📱" label="phone" />
-            Phone Number
-          </label>
-          <div className="flex gap-2 sm:gap-3">
-            <select
-              value={formData.phoneCode}
-              onChange={(e) => setFormData({ ...formData, phoneCode: e.target.value })}
-              className="w-1/3 rounded-full bg-white/10 backdrop-blur-sm text-white px-3 py-3 text-base
-                       outline-none border border-white/20 cursor-pointer appearance-none
-                       focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                       hover:bg-white/15 transition-all duration-200"
+          {/* HEADER */}
+          <div className="flex items-center justify-between mb-6 border-b border-white/5 pb-4">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]"></div>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-green-400">System Online</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-green-500/50">
+              <ShieldCheck size={12} />
+              <span className="text-[10px] font-bold uppercase hidden xs:inline-block">Secure Encrypted</span>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+
+            {/* 1. PERSONAL DETAILS */}
+            <div className="space-y-4">
+
+              {/* Name */}
+              <InputGroup icon={<User size={16} />} label="Ident / Full Name">
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Sarah Connor"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-500"
+                />
+              </InputGroup>
+
+              {/* Country & Phone */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <InputGroup icon={<Globe size={16} />} label="Origin">
+                  <select
+                    value={formData.country}
+                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                    className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none appearance-none cursor-pointer [&>option]:bg-neutral-900 truncate"
+                  >
+                    <option value="" disabled>Select Country</option>
+                    {countryList.map((c) => <option key={c.code} value={c.name}>{c.name}</option>)}
+                  </select>
+                </InputGroup>
+
+                <div className="group">
+                  <Label>Comms</Label>
+                  <div className="flex gap-2">
+                    {/* Phone Code Dropdown */}
+                    <div className="w-[90px] bg-black/40 backdrop-blur-xl rounded-xl border border-green-500/30 overflow-hidden relative">
+                      <select
+                        value={formData.phoneCode}
+                        onChange={(e) => setFormData({ ...formData, phoneCode: e.target.value })}
+                        className="w-full h-full bg-transparent text-white text-base sm:text-sm text-center outline-none appearance-none [&>option]:bg-neutral-900"
+                      >
+                        {/* Ensure unique values for dropdown options */}
+                        {Array.from(new Set(countryList.map(c => c.phoneCode))).map((code) => (
+                          <option key={code} value={code}>{code}</option>
+                        ))}
+                      </select>
+                    </div>
+                    {/* Phone Number Input */}
+                    <input
+                      type="tel"
+                      required
+                      placeholder="Mobile Num"
+                      value={formData.phoneNumber}
+                      onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value.replace(/\D/g, "") })}
+                      className="flex-1 bg-black/40 backdrop-blur-xl rounded-xl border border-green-500/30 text-white text-base sm:text-sm px-4 py-3.5 outline-none focus:border-green-500 transition-colors placeholder:text-neutral-500"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Email */}
+              <InputGroup icon={<Mail size={16} />} label="Email Address">
+                <input
+                  type="email"
+                  required
+                  placeholder="sarah@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-500"
+                />
+              </InputGroup>
+
+              {/* Date & Package Name */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <InputGroup icon={<Calendar size={16} />} label="Date">
+                  <input
+                    type="date"
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                    className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none [color-scheme:dark]"
+                  />
+                </InputGroup>
+
+                <div className="group">
+                  <Label>Expedition Package</Label>
+                  <div className="relative flex items-center bg-black/40 backdrop-blur-xl rounded-xl overflow-hidden border border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                    <div className="pl-4 text-green-500"><Package size={16} /></div>
+                    <input
+                      type="text"
+                      disabled
+                      value={packageDetails?.name || "Loading..."}
+                      className="w-full bg-transparent text-green-400 font-bold text-xs sm:text-sm px-4 py-3.5 outline-none truncate cursor-default"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-green-500/30 to-transparent my-8"></div>
+
+            {/* 2. PASSENGERS */}
+            <div>
+              <Label>Pax Count (Max {CONSTANTS.MAX_PASSENGERS})</Label>
+              <div className="flex items-center justify-between bg-black/40 backdrop-blur-xl rounded-xl border border-green-500/30 p-3">
+                <CounterBtn onClick={() => setFormData(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} icon={<Minus size={16} />} />
+                <div className="flex items-center gap-3">
+                  <Users size={18} className="text-green-500" />
+                  <span className="text-2xl font-black text-white font-mono">{formData.passengers}</span>
+                  <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Guests</span>
+                </div>
+                <CounterBtn onClick={() => setFormData(p => ({ ...p, passengers: Math.min(CONSTANTS.MAX_PASSENGERS, p.passengers + 1) }))} icon={<Plus size={16} />} />
+              </div>
+            </div>
+
+            {/* 3. ADD-ONS */}
+            <div className="space-y-3">
+              <Label>Tactical Add-ons</Label>
+              <div className="grid grid-cols-1 gap-3">
+                <AddOnCard
+                  active={formData.includeMeals}
+                  onClick={() => setFormData(p => ({ ...p, includeMeals: !p.includeMeals }))}
+                  icon={<Utensils size={18} />}
+                  title="Picnic Meals"
+                  desc="Breakfast/lunch packs included."
+                  price={CONSTANTS.MEAL_PRICE}
+                />
+                <AddOnCard
+                  active={formData.includeTickets}
+                  onClick={() => setFormData(p => ({ ...p, includeTickets: !p.includeTickets }))}
+                  icon={<Ticket size={18} />}
+                  title="Park Tickets"
+                  desc="Entrance tickets purchased for you."
+                  price={CONSTANTS.TICKET_PRICE}
+                />
+              </div>
+            </div>
+
+            {/* 4. PRICE BREAKDOWN */}
+            <div className="bg-black/60 backdrop-blur-2xl rounded-xl p-6 border border-green-500/20 font-mono text-sm relative overflow-hidden shadow-lg">
+              {loadingPrice && (
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-10">
+                  <Loader2 className="animate-spin text-green-500" />
+                </div>
+              )}
+
+              <h4 className="text-[10px] font-sans uppercase tracking-widest text-neutral-400 mb-4 border-b border-white/10 pb-2">Cost Analysis</h4>
+
+              <div className="space-y-3 mb-4 text-neutral-300 text-xs">
+                <PriceRow label="Jeep Base Price" amount={totals.base} highlight />
+
+                {formData.includeMeals && (
+                  <PriceRow
+                    label={`Meals (${formData.passengers} x $${CONSTANTS.MEAL_PRICE})`}
+                    amount={totals.meals}
+                    color="text-green-400/80"
+                  />
+                )}
+
+                {formData.includeTickets && (
+                  <PriceRow
+                    label={`Tickets (${formData.passengers} x $${CONSTANTS.TICKET_PRICE})`}
+                    amount={totals.tickets}
+                    color="text-green-400/80"
+                  />
+                )}
+              </div>
+
+              <div className="flex justify-between items-end border-t border-white/10 pt-4">
+                <span className="text-neutral-400 text-xs uppercase font-sans font-bold tracking-wider">Estimated Total</span>
+                <span className="text-2xl font-black text-white tracking-tighter">
+                  USD {totals.grandTotal.toFixed(2)}
+                </span>
+              </div>
+            </div>
+
+            {/* Message */}
+            <InputGroup icon={<MessageSquare size={16} />} label="Intel / Notes (Optional)">
+              <textarea
+                rows={2}
+                placeholder="Special requests..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none resize-none placeholder:text-neutral-500"
+              />
+            </InputGroup>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting || loadingPrice}
+              className={cn(
+                "w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-black font-black py-4 rounded-xl transition-all duration-300",
+                "flex items-center justify-center gap-2 text-sm uppercase tracking-widest shadow-[0_0_25px_rgba(22,163,74,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)]",
+                "disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+              )}
             >
-              {phoneCodeList.map((country) => (
-                <option key={country.code} value={country.phoneCode} className="bg-black/90 text-white">
-                  {country.phoneCode}
-                </option>
-              ))}
-            </select>
-            <input
-              id="phoneNumber"
-              type="tel"
-              required
-              placeholder="Enter phone number"
-              value={formData.phoneNumber}
-              onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value.replace(/\D/g, "") })}
-              className="w-2/3 rounded-full bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-base
-                       placeholder-green-400 outline-none border border-white/20
-                       focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                       hover:bg-white/15 transition-all duration-200"
-            />
-          </div>
-        </div>
+              {isSubmitting ? (
+                <span className="animate-pulse flex items-center gap-2"><Loader2 className="animate-spin" size={16} /> Processing</span>
+              ) : (
+                <>Confirm Booking <Send size={16} strokeWidth={2.5} /></>
+              )}
+            </button>
 
-        {/* Email */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="email" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="📧" label="email" />
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            required
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full rounded-full bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-base
-                     placeholder-green-400 outline-none border border-white/20
-                     focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                     hover:bg-white/15 transition-all duration-200"
-          />
-        </div>
-
-        {/* Date */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="date" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="📅" label="calendar" />
-            Date
-          </label>
-          <input
-            id="date"
-            type="date"
-            required
-            min={today}
-            value={formData.date}
-            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-            className="w-full rounded-full bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-base
-                     outline-none border border-white/20 [color-scheme:dark]
-                     focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                     hover:bg-white/15 transition-all duration-200"
-          />
-        </div>
-
-        {/* Tour Package */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="tourPackage" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="🎫" label="ticket" />
-            Tour Package
-          </label>
-          <input
-            id="tourPackage"
-            type="text"
-            disabled
-            value={formData.tourPackage}
-            className="w-full rounded-full bg-white/5 backdrop-blur-sm text-green-400 px-4 py-3 text-base
-                     cursor-not-allowed border border-white/10"
-          />
-        </div>
-
-        {/* Message */}
-        <div className="space-y-1 sm:space-y-2">
-          <label htmlFor="message" className="text-white font-semibold text-sm flex items-center">
-            <Emoji symbol="💬" label="message" />
-            Message (Optional)
-          </label>
-          <textarea
-            id="message"
-            rows={3}
-            placeholder="Any additional details?"
-            value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full rounded-2xl bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-base
-                     placeholder-green-400 outline-none resize-none border border-white/20
-                     focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white/20
-                     hover:bg-white/15 transition-all duration-200"
-          />
-        </div>
-
-        {/* Submit Button */}
-        <Button
-          type="submit"
-          disabled={loading}
-          className={cn(
-            "w-full rounded-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 text-base",
-            "transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]",
-            "disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100",
-            "shadow-lg hover:shadow-green-500/25"
-          )}
-        >
-          {loading ? "Submitting..." : "Submit Booking"}
-        </Button>
-
-        {/* Notification */}
-        {notification && (
-          <div
-            className={cn(
-              "mt-4 p-3 text-center rounded-2xl font-semibold text-base transition-all duration-300",
-              notification.type === "success"
-                ? "bg-green-600/90 backdrop-blur-sm text-white"
-                : "bg-black/90 backdrop-blur-sm text-white ring-2 ring-green-500"
+            {/* Notification */}
+            {notification && (
+              <div className={cn("p-4 rounded-xl text-xs font-mono text-center border backdrop-blur-md animate-in fade-in slide-in-from-bottom-2",
+                notification.type === "success" ? "bg-green-500/20 border-green-500/50 text-green-400" : "bg-red-500/20 border-red-500/50 text-red-400")}>
+                {/* <span className="font-bold mr-2">[{notification.type === "success" ? "SUCCESS" : "ERROR"}]</span> */}
+                {notification.message}
+              </div>
             )}
-          >
-            {notification.message}
-          </div>
-        )}
-      </form>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
+
+// --- RESPONSIVE SUB-COMPONENTS ---
+
+const Label = ({ children }: { children: React.ReactNode }) => (
+  <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-1.5 block">{children}</label>
+);
+
+const InputGroup = ({ icon, label, children }: { icon: React.ReactNode, label: string, children: React.ReactNode }) => (
+  <div className="group">
+    <Label>{label}</Label>
+    <div className="relative flex items-start bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 group-focus-within:border-green-500/60 group-focus-within:shadow-[0_0_15px_rgba(34,197,94,0.1)] transition-all duration-300">
+      <div className="pl-4 pt-3.5 text-neutral-500 group-focus-within:text-green-400 transition-colors">{icon}</div>
+      {children}
+    </div>
+  </div>
+);
+
+const CounterBtn = ({ onClick, icon }: { onClick: () => void, icon: React.ReactNode }) => (
+  <button type="button" onClick={onClick} className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-green-500/20 hover:text-green-400 rounded-lg text-white transition-all border border-transparent hover:border-green-500/30 active:scale-95">
+    {icon}
+  </button>
+);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AddOnCard = ({ active, onClick, icon, title, desc, price }: any) => (
+  <div onClick={onClick} className={cn("relative overflow-hidden cursor-pointer rounded-xl border p-4 transition-all duration-300 backdrop-blur-md group",
+    active ? "bg-green-500/10 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.15)]" : "bg-black/40 border-white/10 hover:border-green-500/30 hover:bg-white/5")}>
+    <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start gap-3">
+        <div className={cn("p-2 rounded-lg transition-colors", active ? "bg-green-500 text-black" : "bg-white/10 text-neutral-400 group-hover:text-white")}>{icon}</div>
+        <div>
+          <h4 className={cn("text-sm font-bold transition-colors", active ? "text-green-400" : "text-white")}>{title}</h4>
+          <p className="text-[10px] text-neutral-400 leading-relaxed mt-1 line-clamp-2">{desc}</p>
+        </div>
+      </div>
+      <div className="text-right shrink-0">
+        <div className="text-white font-mono font-bold">${price}</div>
+        <div className="text-[9px] text-neutral-500 uppercase">Per Pax</div>
+      </div>
+    </div>
+    <div className={cn("absolute top-2 right-2 transition-all duration-300", active ? "opacity-100 scale-100" : "opacity-0 scale-50")}>
+      <CheckCircle2 size={16} className="text-green-500 fill-green-500/20" />
+    </div>
+  </div>
+);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PriceRow = ({ label, amount, color = "text-neutral-400", highlight }: any) => (
+  <div className={cn("flex justify-between items-center", color, highlight && "font-bold text-white text-sm")}>
+    <span>{label}</span>
+    <span>${amount.toFixed(2)}</span>
+  </div>
+);

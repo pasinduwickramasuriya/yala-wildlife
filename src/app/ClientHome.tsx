@@ -1,14 +1,17 @@
 "use client";
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import ElfsightReviews from "@/components/ElfsightReviews";
-import FeaturableReviews from "@/components/FeaturableReviews";
+// import ElfsightReviews from "@/components/ElfsightReviews";
+// import FeaturableReviews from "@/components/FeaturableReviews";
 import GallerySection from "@/components/GallerySection";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
+import MemoryGallery from "@/components/MemoryGallery";
+import ModernReviews from "@/components/ModernReviews";
 import PackageCard from "@/components/PackageCard";
 import PhotoGallery from "@/components/PhotoGallery";
-import ReviewsSection from "@/components/ReviewsSection";
+import ReviewSlider from "@/components/ReviewSlider";
+// import ReviewsSection from "@/components/ReviewsSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { useState, useEffect } from "react";
 
@@ -49,12 +52,17 @@ export default function ClientHome() {
           ))}
         </div>
       </div>
-      <ElfsightReviews />
+      <MemoryGallery/>
+      <ModernReviews/>
+      {/* <ElfsightReviews /> */}
       <PhotoGallery />
-      <ReviewsSection />
+      {/* <ReviewsSection /> */}
+     
       <WhyChooseUs />
       <GallerySection />
-      <FeaturableReviews/>
+      
+      {/* <FeaturableReviews/> */}
+       <ReviewSlider/>
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
