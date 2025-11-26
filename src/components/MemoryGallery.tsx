@@ -140,7 +140,7 @@ import imgYala3 from "../../public/uploads/yala2.webp";
 const MEMORIES = [
   {
     id: 1,
-    src: imgYala1, // Use the imported variable
+    src: imgYala1, // Use the imported variabl
     title: "The Apex Predator",
     location: "Block 1, Yala",
     tag: "Leopard Sighting",
