@@ -50,7 +50,7 @@ prisma/*.db
 prisma/migrations/
 
 # Public uploads folder
-public/uploads/
+# public/uploads/
 
 # Qodo specific files
 .qodo/
@@ -83,3 +83,4 @@ yarn-error.log*
 .next/middleware-manifest.json
 .next/interception-route-rewrite-manifest.js
 .next/middleware-build-manifest.js
+
