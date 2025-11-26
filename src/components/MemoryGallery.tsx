@@ -8,7 +8,7 @@ import { Camera, MapPin, Star, Zap } from "lucide-react";
 const MEMORIES = [
   {
     id: 1,
-    src: "/uploads/yala.jpeg", // Ensure this file exists in public/uploads/
+    src: "/uploads/yala.jpeg", // Ensure this file exists in public/uploads
     title: "The Apex Predator",
     location: "Block 1, Yala",
     tag: "Leopard Sighting",
