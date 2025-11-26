@@ -12,7 +12,6 @@ import {
   Users,
   MessageSquare,
   HelpCircle,
-  Send,
   Heart
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -161,23 +160,6 @@ export default function Footer() {
                 Exclusive sightings, safari tips, and special offers delivered to your inbox.
               </p>
               
-              <form className="space-y-3 relative" onSubmit={(e) => e.preventDefault()}>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-3.5 h-4 w-4 text-neutral-500" />
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white text-sm rounded-xl py-3 pl-10 pr-4 placeholder:text-neutral-600 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white text-sm font-bold py-3 rounded-xl transition-all duration-300 hover:shadow-[0_4px_20px_rgba(22,163,74,0.3)] active:scale-[0.98]"
-                >
-                  <span>Subscribe</span>
-                  <Send className="h-3 w-3" />
-                </button>
-              </form>
             </div>
           </div>
 
