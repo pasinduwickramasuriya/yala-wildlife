@@ -66,16 +66,16 @@ export default function Footer() {
   return (
     <footer className="relative w-full bg-neutral-950 pt-20 pb-10 overflow-hidden border-t border-white/5 font-sans">
       
-      {/* --- 1. Background Ambient Effects --- */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none">
+      {/* --- 1. Background Ambient Effects (Optimized for Mobile GPU) --- */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none transform-gpu">
         {/* Subtle Grid Pattern */}
         <div 
           className="absolute inset-0 opacity-[0.03]" 
           style={{ backgroundImage: 'radial-gradient(#22c55e 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
         />
-        {/* Glowing Orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] translate-y-1/2" />
+        {/* Glowing Orbs - Added transform-gpu to prevent lag */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] -translate-y-1/2 transform-gpu" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] translate-y-1/2 transform-gpu" />
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -101,19 +101,18 @@ export default function Footer() {
 
             <div className="flex items-center gap-4">
               {socialLinks.map(({ name, icon: Icon, href }) => (
-                <Link
+                // FIX: Changed Link to <a> for external links to prevent Next.js Router overhead
+                <a
                   key={name}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  // ✅ FIX: Add this prop to ignore browser extension changes to the URL
-                  suppressHydrationWarning={true}
                   className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900 border border-neutral-800 text-neutral-400 transition-all duration-300 hover:border-green-500 hover:text-white hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-green-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                   <Icon className="relative h-4 w-4 z-10" />
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -138,13 +137,13 @@ export default function Footer() {
             <ul className="space-y-4">
               {contactLinks.map(({ name, href, icon: Icon }) => (
                 <li key={name}>
-                  <Link href={href} className="group flex items-start gap-3">
+                  {/* FIX: Using <a> for tel: and mailto: to prevent hydration stalls */}
+                  <a href={href} className="group flex items-start gap-3">
                     <Icon className="h-5 w-5 text-neutral-600 group-hover:text-green-500 transition-colors shrink-0 mt-0.5" />
-                    {/* Added 'break-all' to fix the long email overflow issue */}
                     <span className="text-sm text-neutral-400 group-hover:text-white transition-colors leading-relaxed break-all">
                       {name}
                     </span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -152,7 +151,7 @@ export default function Footer() {
 
           {/* Newsletter Card (Span 3) */}
           <div className="lg:col-span-3">
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 border border-white/10 p-6 backdrop-blur-md">
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 border border-white/10 p-6 backdrop-blur-md transform-gpu">
               <div className="absolute top-0 right-0 w-20 h-20 bg-green-500/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               
               <h4 className="text-lg font-bold text-white mb-2">Join the Pack</h4>
@@ -167,9 +166,9 @@ export default function Footer() {
 
         {/* --- 3. Bottom Bar --- */}
         <div className="border-t border-neutral-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Copyright */}
+          {/* Copyright - FIX: Added suppressHydrationWarning to prevent React errors on Date */}
           <p className="text-neutral-500 text-xs font-medium order-2 md:order-1">
-            © {new Date().getFullYear()} Yala Wildlife. All rights reserved.
+            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Yala Wildlife. All rights reserved.
           </p>
           
           {/* Legal Links */}
@@ -205,11 +204,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-
-
-
-
-
-
-

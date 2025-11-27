@@ -385,3 +385,313 @@ export default function PhotoGallery() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+// "use client";
+
+// import Image from "next/image";
+// import { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// interface Photo {
+//   id: number;
+//   title: string;
+//   description: string;
+//   imageUrl: string;
+// }
+
+// export default function PhotoGallery() {
+//   const photos: Photo[] = [
+//     {
+//       id: 1,
+//       title: "Yala Leopard Sighting",
+//       description: "A majestic leopard spotted during a sunrise safari.",
+//       imageUrl: "https://images.unsplash.com/photo-1553524082-82690780f842?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGxlb3BhcmR8ZW58MHx8MHx8fDA%3D",
+//     },
+//     {
+//       id: 2,
+//       title: "Elephant Herd",
+//       description: "A family of elephants roaming freely in Yala.",
+//       imageUrl: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGVsZXBoYW50c3xlbnwwfHwwfHx8MA%3D%3D",
+//     },
+//     {
+//       id: 3,
+//       title: "Sunset Over Yala",
+//       description: "A breathtaking sunset view during an evening safari.",
+//       imageUrl: "https://plus.unsplash.com/premium_photo-1669750818169-b598e1de3a1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8U3Vuc2V0fGVufDB8fDB8fHww",
+//     },
+//     {
+//       id: 4,
+//       title: "Birds of Yala",
+//       description: "Colorful birdlife in Yala National Park.",
+//       imageUrl: "https://plus.unsplash.com/premium_photo-1724864863815-1469c8b74711?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QmlyZHN8ZW58MHx8MHx8fDA%3D",
+//     },
+//     {
+//       id: 5,
+//       title: "wild dear",
+//       description: "Yala national park",
+//       imageUrl: "https://images.unsplash.com/photo-1451303688941-9e06d4b1277a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGVhcnxlbnwwfHwwfHx8MA%3D%3D",
+//     },
+//     {
+//       id: 6,
+//       title: "Yala elephant",
+//       description: "wild elephant",
+//       imageUrl: "https://images.unsplash.com/photo-1603483080228-04f2313d9f10?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWxlcGhhbnR8ZW58MHx8MHx8fDA%3D",
+//     },
+//     {
+//       id: 7,
+//       title: "Yala Deer",
+//       description: "A deer spotted in the park's grasslands.",
+//       imageUrl: "https://images.unsplash.com/photo-1745240939551-9a1a9dd41325?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRlZXIlMjBzcmklMjBsYW5ha2F8ZW58MHx8MHx8fDA%3D",
+//     },
+//   ];
+
+//   // REMOVED: Complex Shuffle Logic to prevent re-renders and freezing
+//   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+
+//   // Animation variants
+//   const containerVariants = {
+//     hidden: { opacity: 0 },
+//     visible: {
+//       opacity: 1,
+//       transition: {
+//         staggerChildren: 0.1, // Faster stagger for perceived speed
+//       },
+//     },
+//   };
+
+//   const itemVariants = {
+//     hidden: { opacity: 0, y: 20, scale: 0.9 },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       scale: 1,
+//       transition: {
+//         duration: 0.4, // Faster animation
+//         ease: "easeOut",
+//       },
+//     },
+//   };
+
+//   return (
+//     <section className="relative w-full py-20 px-4 md:px-6 overflow-hidden">
+//       {/* Background elements - Added transform-gpu for mobile performance */}
+//       <div className="absolute inset-0 backdrop-blur-xl transform-gpu"></div>
+//       <div className="absolute inset-0 bg-gradient-to-br via-transparent animate-pulse"></div>
+
+//       <div className="absolute top-20 left-10 w-32 h-32 bg-green-400/5 rounded-full blur-3xl animate-pulse transform-gpu"></div>
+//       <div className="absolute bottom-20 right-20 w-48 h-48 bg-green-400/3 rounded-full blur-3xl animate-pulse delay-1000 transform-gpu"></div>
+
+//       <div className="relative z-10">
+//         {/* Header */}
+//         <motion.div
+//           initial={{ opacity: 0, y: -20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6 }}
+//           className="text-center mb-16"
+//         >
+//           <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4">
+//             Yala Wildlife{" "}
+//             <span className="text-green-400 relative">
+//               Photo Gallery
+//               <div className="absolute -bottom-2 left-0 w-full h-1 bg-green-400/30 rounded-full"></div>
+//             </span>
+//           </h2>
+//           <p className="text-green-200 text-lg max-w-2xl mx-auto">
+//             Discover the incredible wildlife and breathtaking moments captured in Yala National Park
+//           </p>
+//         </motion.div>
+
+//         {/* Gallery Grid */}
+//         <motion.div
+//           variants={containerVariants}
+//           initial="hidden"
+//           whileInView="visible"
+//           viewport={{ once: true, margin: "-50px" }} // Start loading sooner
+//           className="container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-6"
+//         >
+//           {/* Left Side */}
+//           <div className="md:col-span-2 flex flex-col gap-6">
+//             {/* Top Row: Two Square Images */}
+//             <div className="grid grid-cols-2 gap-6">
+//               {photos.slice(0, 2).map((photo, index) => (
+//                 <motion.div
+//                   key={photo.id}
+//                   layoutId={`photo-${photo.id}`}
+//                   variants={itemVariants}
+//                   className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
+//                   onClick={() => setSelectedPhoto(photo)}
+//                 >
+//                   <div className="relative w-full h-[200px] md:h-[250px] aspect-square">
+//                     <Image
+//                       src={photo.imageUrl}
+//                       alt={photo.title || "Gallery image"}
+//                       fill
+//                       priority={index < 2} // Load first images immediately
+//                       className="object-cover transition-all duration-700 group-hover:scale-105"
+//                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 20vw, 15vw"
+//                     />
+//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//                       <div className="absolute bottom-4 left-4 right-4 text-white">
+//                         <h3 className="font-bold text-sm mb-1">{photo.title}</h3>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               ))}
+//             </div>
+
+//             {/* Middle Row: Three Stacked Images */}
+//             <div className="grid grid-cols-3 gap-6">
+//               {photos.slice(2, 5).map((photo) => (
+//                 <motion.div
+//                   key={photo.id}
+//                   layoutId={`photo-${photo.id}`}
+//                   variants={itemVariants}
+//                   className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
+//                   onClick={() => setSelectedPhoto(photo)}
+//                 >
+//                   <div className="relative w-full h-[200px] md:h-[250px]">
+//                     <Image
+//                       src={photo.imageUrl}
+//                       alt={photo.title || "Gallery image"}
+//                       fill
+//                       className="object-cover transition-all duration-700 group-hover:scale-105"
+//                       sizes="(max-width: 640px) 33vw, (max-width: 1024px) 15vw, 10vw"
+//                     />
+//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//                       <div className="absolute bottom-2 left-2 right-2 text-white">
+//                         <h3 className="font-bold text-xs">{photo.title}</h3>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               ))}
+//             </div>
+
+//             {/* Bottom Row: One Full-Width Image */}
+//             {(() => {
+//               const bottomPhoto = photos[5];
+//               return bottomPhoto ? (
+//                 <motion.div
+//                   layoutId={`photo-${bottomPhoto.id}`}
+//                   variants={itemVariants}
+//                   className="w-full group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
+//                   onClick={() => setSelectedPhoto(bottomPhoto)}
+//                 >
+//                   <div className="relative w-full h-[200px] md:h-[250px]">
+//                     <Image
+//                       src={bottomPhoto.imageUrl}
+//                       alt={bottomPhoto.title || "Gallery image"}
+//                       fill
+//                       className="object-cover transition-all duration-700 group-hover:scale-105"
+//                       sizes="(max-width: 640px) 100vw, 40vw"
+//                     />
+//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//                       <div className="absolute bottom-4 left-4 right-4 text-white">
+//                         <h3 className="font-bold text-lg">{bottomPhoto.title}</h3>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               ) : null;
+//             })()}
+//           </div>
+
+//           {/* Right Side */}
+//           <div className="md:col-span-3 grid grid-rows-2 gap-6">
+//             {[0, 6].map((idx) => {
+//               const photo = photos[idx];
+//               return photo ? (
+//                 <motion.div
+//                   key={`large-${photo.id}`}
+//                   layoutId={`photo-${photo.id}-large`}
+//                   variants={itemVariants}
+//                   className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
+//                   onClick={() => setSelectedPhoto(photo)}
+//                 >
+//                   <div className="relative w-full h-[200px] md:h-[390px]">
+//                     <Image
+//                       src={photo.imageUrl}
+//                       alt={photo.title || "Gallery image"}
+//                       fill
+//                       priority={true} // Critical Image
+//                       className="object-cover transition-all duration-700 group-hover:scale-105"
+//                       sizes="(max-width: 640px) 100vw, 60vw"
+//                     />
+//                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+//                       <div className="absolute bottom-6 left-6 right-6 text-white">
+//                         <h3 className="text-2xl md:text-3xl font-bold mb-2 text-green-400">
+//                           {photo.title}
+//                         </h3>
+//                         <p className="text-sm md:text-base text-gray-200">
+//                           {photo.description}
+//                         </p>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               ) : null;
+//             })}
+//           </div>
+//         </motion.div>
+
+//         {/* Modal */}
+//         <AnimatePresence>
+//           {selectedPhoto && (
+//             <motion.div
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               onClick={() => setSelectedPhoto(null)}
+//               className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
+//             >
+//               <motion.div
+//                 layoutId={`photo-${selectedPhoto.id}`}
+//                 className="relative max-w-4xl w-full bg-black/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-green-400/40 shadow-2xl"
+//                 onClick={(e) => e.stopPropagation()}
+//               >
+//                 <div className="relative w-full aspect-[4/3] md:aspect-[16/9]">
+//                   <Image
+//                     src={selectedPhoto.imageUrl}
+//                     alt={selectedPhoto.title || "Selected gallery image"}
+//                     fill
+//                     className="object-cover"
+//                     sizes="100vw"
+//                     priority
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none">
+//                     <div className="absolute bottom-6 left-6 right-6 text-white">
+//                       <h3 className="text-2xl md:text-4xl font-bold mb-2 text-green-400">
+//                         {selectedPhoto.title}
+//                       </h3>
+//                       <p className="text-base md:text-lg text-gray-200">
+//                         {selectedPhoto.description}
+//                       </p>
+//                     </div>
+//                   </div>
+//                 </div>
+//                 <button
+//                   onClick={() => setSelectedPhoto(null)}
+//                   className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors z-50"
+//                   aria-label="Close modal"
+//                 >
+//                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+//                   </svg>
+//                 </button>
+//               </motion.div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </div>
+//     </section>
+//   );
+// }
