@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -26,15 +23,21 @@ model Package {
   name        String
   description String
   imageUrl    String
-  price       Float
+  price       Float    // This is the Base Jeep Price
+  
+  // --- NEW FIELDS ADDED HERE ---
+  mealPrice   Float    @default(0.0) // Cost per person for meals
+  ticketPrice Float    @default(0.0) // Cost per person for park tickets
+  // -----------------------------
+
   slug        String   @unique
 }
 
 model HeroSection {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  imageUrl  String
-  title     String
-  subtitle  String
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  imageUrl String
+  title    String
+  subtitle String
 }
 
 model CustomerReview {

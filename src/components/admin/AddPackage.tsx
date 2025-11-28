@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image"; // Added import for Image component
+import Image from "next/image";
 
 interface Package {
   id: string;
@@ -9,6 +9,8 @@ interface Package {
   description: string;
   imageUrl: string;
   price: number;
+  mealPrice: number;   // Added
+  ticketPrice: number; // Added
   slug: string;
 }
 
@@ -19,6 +21,8 @@ export default function AddPackage() {
     description: "",
     imageUrl: "",
     price: "",
+    mealPrice: "",   // Added
+    ticketPrice: "", // Added
     slug: "",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -26,7 +30,7 @@ export default function AddPackage() {
   const [token, setToken] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch token from localStorage on mount (client-side only)
+  // Fetch token
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("token") || "";
@@ -35,7 +39,7 @@ export default function AddPackage() {
     }
   }, []);
 
-  // Fetch packages on mount
+  // Fetch packages
   useEffect(() => {
     fetchPackages();
   }, []);
@@ -64,17 +68,17 @@ export default function AddPackage() {
     const url = editId ? `/api/package?id=${editId}` : "/api/package";
     const method = editId ? "PUT" : "POST";
 
-    console.log("Submitting:", { method, editId, formData, imageFile });
-
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("description", formData.description);
     formDataToSend.append("price", formData.price);
+    // Append new fields
+    formDataToSend.append("mealPrice", formData.mealPrice);
+    formDataToSend.append("ticketPrice", formData.ticketPrice);
+    
     formDataToSend.append("slug", formData.slug);
 
-    // Image handling based on method
     if (method === "POST") {
-      // For create, require an image
       if (!imageFile && !formData.imageUrl) {
         setError("Please provide an image URL or upload an image");
         return;
@@ -85,14 +89,12 @@ export default function AddPackage() {
         formDataToSend.append("imageUrl", formData.imageUrl);
       }
     } else if (method === "PUT") {
-      // For update, image is optional
       if (imageFile) {
         formDataToSend.append("image", imageFile);
       }
       if (formData.imageUrl) {
         formDataToSend.append("imageUrl", formData.imageUrl);
       }
-      // No error if neither is provided; API retains existing imageUrl
     }
 
     try {
@@ -106,7 +108,6 @@ export default function AddPackage() {
 
       if (!res.ok) {
         const errorData = await res.json();
-        console.error("Server response:", errorData);
         throw new Error(`${errorData.error || "Request failed"} - Status: ${res.status}`);
       }
 
@@ -116,14 +117,22 @@ export default function AddPackage() {
         setEditId(null);
       } else {
         setPackages([...packages, updatedPackage]);
-        fetchPackages(); // Refresh list after create
+        fetchPackages();
       }
-      setFormData({ name: "", description: "", imageUrl: "", price: "", slug: "" });
+      // Reset form including new fields
+      setFormData({ 
+        name: "", 
+        description: "", 
+        imageUrl: "", 
+        price: "", 
+        mealPrice: "", 
+        ticketPrice: "", 
+        slug: "" 
+      });
       setImageFile(null);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
-      console.error("Submit error:", err);
     }
   };
 
@@ -132,41 +141,33 @@ export default function AddPackage() {
       name: pkg.name,
       description: pkg.description,
       imageUrl: pkg.imageUrl,
-      price: pkg.price.toString(), // Convert number to string for input
+      price: pkg.price.toString(),
+      mealPrice: pkg.mealPrice ? pkg.mealPrice.toString() : "0",     // Added
+      ticketPrice: pkg.ticketPrice ? pkg.ticketPrice.toString() : "0", // Added
       slug: pkg.slug,
     });
-    setImageFile(null); // Clear file input for edits
+    setImageFile(null);
     setEditId(pkg.id);
-    console.log("Editing package:", pkg);
   };
 
   const handleDelete = async (id: string) => {
-    setError(null);
-
     if (!token) {
       setError("Please log in to perform this action");
       return;
     }
-
     try {
       const res = await fetch(`/api/package?id=${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-
       if (!res.ok) {
         const errorData = await res.json();
         throw new Error(errorData.error || "Delete failed");
       }
-
       setPackages(packages.filter((p) => p.id !== id));
-      fetchPackages(); // Refresh list
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
-      console.error("Delete error:", err);
     }
   };
 
@@ -174,7 +175,7 @@ export default function AddPackage() {
     const file = e.target.files?.[0] || null;
     setImageFile(file);
     if (file) {
-      setFormData({ ...formData, imageUrl: "" }); // Clear imageUrl if file is selected
+      setFormData({ ...formData, imageUrl: "" });
     }
   };
 
@@ -191,7 +192,6 @@ export default function AddPackage() {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
-            placeholder="Package Name"
             required
           />
         </div>
@@ -202,7 +202,6 @@ export default function AddPackage() {
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
-            placeholder="Package Description"
           />
         </div>
         <div>
@@ -213,7 +212,6 @@ export default function AddPackage() {
             value={formData.imageUrl}
             onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
             className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
-            placeholder="https://example.com/image.jpg"
             disabled={!!imageFile}
           />
         </div>
@@ -227,19 +225,48 @@ export default function AddPackage() {
             className="mt-1 block w-full text-foreground"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-foreground">Price</label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
-            placeholder="199.99"
-            step="0.01"
-            required
-          />
+        
+        {/* Price Fields Group */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-foreground">Base Jeep Price</label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+              className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
+              placeholder="0.00"
+              step="0.01"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground">Meal Price (Per Person)</label>
+            <input
+              type="number"
+              name="mealPrice"
+              value={formData.mealPrice}
+              onChange={(e) => setFormData({ ...formData, mealPrice: e.target.value })}
+              className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
+              placeholder="0.00"
+              step="0.01"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-foreground">Ticket Price (Per Person)</label>
+            <input
+              type="number"
+              name="ticketPrice"
+              value={formData.ticketPrice}
+              onChange={(e) => setFormData({ ...formData, ticketPrice: e.target.value })}
+              className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
+              placeholder="0.00"
+              step="0.01"
+            />
+          </div>
         </div>
+
         <div>
           <label className="block text-sm font-medium text-foreground">Slug</label>
           <input
@@ -248,7 +275,6 @@ export default function AddPackage() {
             value={formData.slug}
             onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
             className="mt-1 block w-full border border-border rounded p-2 bg-input text-foreground"
-            placeholder="package-slug"
             required
           />
         </div>
@@ -263,7 +289,7 @@ export default function AddPackage() {
             <button
               type="button"
               onClick={() => {
-                setFormData({ name: "", description: "", imageUrl: "", price: "", slug: "" });
+                setFormData({ name: "", description: "", imageUrl: "", price: "", mealPrice: "", ticketPrice: "", slug: "" });
                 setImageFile(null);
                 setEditId(null);
               }}
@@ -288,21 +314,21 @@ export default function AddPackage() {
                 className="flex justify-between items-center border border-border p-2 rounded bg-card"
               >
                 <div className="flex items-center space-x-4">
-                  {/* Changed: Replaced <img> with <Image> to fix @next/next/no-img-element */}
                   <Image
                     src={pkg.imageUrl}
                     alt={pkg.name}
-                    width={64} // 16 * 4 = 64px (matches w-16)
-                    height={64} // 16 * 4 = 64px (matches h-16)
+                    width={64}
+                    height={64}
                     className="object-cover rounded"
                     onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")}
                   />
                   <div>
                     <p className="font-medium text-foreground">{pkg.name}</p>
-                    <p className="text-sm text-muted-foreground">{pkg.description}</p>
-                    <p className="text-sm text-muted-foreground">Price: ${pkg.price.toFixed(2)}</p>
-                    <p className="text-xs text-muted-foreground">Slug: {pkg.slug}</p>
-                    <p className="text-xs text-muted-foreground truncate max-w-xs">{pkg.imageUrl}</p>
+                    <p className="text-sm text-muted-foreground">Jeep: ${pkg.price.toFixed(2)}</p>
+                    {/* Display new prices */}
+                    <p className="text-xs text-muted-foreground">
+                      Meals: ${pkg.mealPrice?.toFixed(2) || '0.00'} | Tickets: ${pkg.ticketPrice?.toFixed(2) || '0.00'}
+                    </p>
                   </div>
                 </div>
                 <div className="space-x-2">

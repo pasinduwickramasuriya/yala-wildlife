@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
@@ -5,13 +6,13 @@ import { countries } from "countries-list";
 import { cn } from "@/lib/utils";
 import {
   Calendar, Globe, Mail, MessageSquare, User, Ticket, Send,
-  Users, Utensils, Plus, Minus, CheckCircle2, Loader2, Package, ShieldCheck, ArrowRight
+  Users, Utensils, Plus, Minus, CheckCircle2, Loader2, Package, ShieldCheck
 } from "lucide-react";
 
 // --- CONFIGURATION ---
-const CONSTANTS = {
-  TICKET_PRICE: 43, // USD per person
-  MEAL_PRICE: 10,   // USD per person
+const FALLBACK_CONSTANTS = {
+  TICKET_PRICE: 45, // USD per person (Fallback)
+  MEAL_PRICE: 10,   // USD per person (Fallback)
   DEFAULT_PHONE: "+94",
   MAX_PASSENGERS: 7,
 };
@@ -34,6 +35,8 @@ interface BookingData {
 interface PackageDetails {
   name: string;
   price: number;
+  mealPrice?: number; // Fetched from DB
+  ticketPrice?: number; // Fetched from DB
   slug: string;
 }
 
@@ -54,10 +57,10 @@ export default function BookingForm({
       .sort((a, b) => a.name.localeCompare(b.name));
   }, []);
 
-  // Define Initial State for Resetting
-  const initialFormState: BookingData = {
+  // 2. STATE
+  const [formData, setFormData] = useState<BookingData>({
     name: "",
-    phoneCode: CONSTANTS.DEFAULT_PHONE,
+    phoneCode: FALLBACK_CONSTANTS.DEFAULT_PHONE,
     phoneNumber: "",
     email: "",
     date: "",
@@ -67,17 +70,12 @@ export default function BookingForm({
     includeMeals: false,
     includeTickets: false,
     startTime: "06:00 AM",
-  };
+  });
 
-  // 2. STATE
-  const [formData, setFormData] = useState<BookingData>(initialFormState);
   const [packageDetails, setPackageDetails] = useState<PackageDetails | null>(null);
   const [loadingPrice, setLoadingPrice] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{ type: "success" | "error", message: string } | null>(null);
-
-  // ✅ NEW: Success State to toggle Full Screen Message
-  const [isSuccess, setIsSuccess] = useState(false);
 
   // 3. LOGIC: AUTO-UPDATE PHONE CODE
   useEffect(() => {
@@ -97,7 +95,8 @@ export default function BookingForm({
         const res = await fetch(`/api/package?slug=${tourPackageSlug}`, { cache: 'no-store' });
         if (!res.ok) throw new Error("Failed to load package");
         const data = await res.json();
-        setPackageDetails({ name: data.name, price: data.price, slug: data.slug });
+        // Ensure data includes mealPrice and ticketPrice
+        setPackageDetails(data);
       } catch (error) {
         console.error(error);
         setNotification({ type: "error", message: "Could not load package pricing." });
@@ -110,12 +109,16 @@ export default function BookingForm({
   }, [tourPackageSlug]);
 
   // 5. CALCULATIONS
+  // Use DB prices if available, otherwise fallback to constants
+  const currentTicketPrice = packageDetails?.ticketPrice ?? FALLBACK_CONSTANTS.TICKET_PRICE;
+  const currentMealPrice = packageDetails?.mealPrice ?? FALLBACK_CONSTANTS.MEAL_PRICE;
+
   const totals = useMemo(() => {
     const base = packageDetails?.price || 0;
-    const tickets = formData.includeTickets ? formData.passengers * CONSTANTS.TICKET_PRICE : 0;
-    const meals = formData.includeMeals ? formData.passengers * CONSTANTS.MEAL_PRICE : 0;
+    const tickets = formData.includeTickets ? formData.passengers * currentTicketPrice : 0;
+    const meals = formData.includeMeals ? formData.passengers * currentMealPrice : 0;
     return { base, tickets, meals, grandTotal: base + tickets + meals };
-  }, [packageDetails, formData.passengers, formData.includeTickets, formData.includeMeals]);
+  }, [packageDetails, formData.passengers, formData.includeTickets, formData.includeMeals, currentTicketPrice, currentMealPrice]);
 
   // 6. SUBMIT
   const handleSubmit = async (e: React.FormEvent) => {
@@ -140,14 +143,10 @@ export default function BookingForm({
 
       if (res.ok) {
         setNotification({ type: "success", message: "Booking Confirmed! Check your email." });
-
-        // ✅ ACTION: Show Success Screen & Clear Form
-        setIsSuccess(true);
-        setFormData(initialFormState);
+        setFormData(prev => ({ ...prev, name: "", email: "", phoneNumber: "", message: "" }));
       } else {
         throw new Error("Booking failed");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setNotification({ type: "error", message: "Transmission failed. Please try again." });
     } finally {
@@ -155,35 +154,6 @@ export default function BookingForm({
     }
   };
 
-  // ✅ RENDER: FULL SCREEN SUCCESS MESSAGE
-  if (isSuccess) {
-    return (
-      <div className="relative w-full max-w-3xl mx-auto font-sans">
-        <div className="relative rounded-3xl border border-green-500/50 bg-black/60 backdrop-blur-2xl p-1 shadow-[0_0_50px_-10px_rgba(34,197,94,0.5)] ring-1 ring-white/10 transition-all min-h-[600px] flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-500">
-          <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(34,197,94,0.4)] animate-bounce">
-            <CheckCircle2 size={48} className="text-green-400" />
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
-            Mission <span className="text-green-400">Confirmed</span>
-          </h2>
-
-          <p className="text-neutral-400 text-sm md:text-base max-w-md mb-10 leading-relaxed px-6">
-            Your expedition has been successfully secured. We have sent a confirmation signal to your email. Get ready for the wild.
-          </p>
-
-          <button
-            onClick={() => setIsSuccess(false)}
-            className="group bg-white/10 hover:bg-green-500/20 border border-white/10 hover:border-green-500/50 text-white font-bold py-4 px-10 rounded-xl transition-all flex items-center gap-2"
-          >
-            Book Another <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // ✅ RENDER: FORM (Standard View)
   return (
     <div className="relative w-full max-w-3xl mx-auto font-sans">
 
@@ -307,7 +277,7 @@ export default function BookingForm({
 
             {/* 2. PASSENGERS */}
             <div>
-              <Label>Pax Count (Max {CONSTANTS.MAX_PASSENGERS})</Label>
+              <Label>Pax Count (Max {FALLBACK_CONSTANTS.MAX_PASSENGERS})</Label>
               <div className="flex items-center justify-between bg-black/40 backdrop-blur-xl rounded-xl border border-green-500/30 p-3">
                 <CounterBtn onClick={() => setFormData(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} icon={<Minus size={16} />} />
                 <div className="flex items-center gap-3">
@@ -315,7 +285,7 @@ export default function BookingForm({
                   <span className="text-2xl font-black text-white font-mono">{formData.passengers}</span>
                   <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Guests</span>
                 </div>
-                <CounterBtn onClick={() => setFormData(p => ({ ...p, passengers: Math.min(CONSTANTS.MAX_PASSENGERS, p.passengers + 1) }))} icon={<Plus size={16} />} />
+                <CounterBtn onClick={() => setFormData(p => ({ ...p, passengers: Math.min(FALLBACK_CONSTANTS.MAX_PASSENGERS, p.passengers + 1) }))} icon={<Plus size={16} />} />
               </div>
             </div>
 
@@ -329,7 +299,7 @@ export default function BookingForm({
                   icon={<Utensils size={18} />}
                   title="Picnic Meals"
                   desc="Breakfast/lunch packs included."
-                  price={CONSTANTS.MEAL_PRICE}
+                  price={currentMealPrice} // Use fetched price
                 />
                 <AddOnCard
                   active={formData.includeTickets}
@@ -337,7 +307,7 @@ export default function BookingForm({
                   icon={<Ticket size={18} />}
                   title="Park Tickets"
                   desc="Entrance tickets purchased for you."
-                  price={CONSTANTS.TICKET_PRICE}
+                  price={currentTicketPrice} // Use fetched price
                 />
               </div>
             </div>
@@ -357,7 +327,7 @@ export default function BookingForm({
 
                 {formData.includeMeals && (
                   <PriceRow
-                    label={`Meals (${formData.passengers} x $${CONSTANTS.MEAL_PRICE})`}
+                    label={`Meals (${formData.passengers} x $${currentMealPrice})`}
                     amount={totals.meals}
                     color="text-green-400/80"
                   />
@@ -365,7 +335,7 @@ export default function BookingForm({
 
                 {formData.includeTickets && (
                   <PriceRow
-                    label={`Tickets (${formData.passengers} x $${CONSTANTS.TICKET_PRICE})`}
+                    label={`Tickets (${formData.passengers} x $${currentTicketPrice})`}
                     amount={totals.tickets}
                     color="text-green-400/80"
                   />
@@ -412,7 +382,7 @@ export default function BookingForm({
             {notification && (
               <div className={cn("p-4 rounded-xl text-xs font-mono text-center border backdrop-blur-md animate-in fade-in slide-in-from-bottom-2",
                 notification.type === "success" ? "bg-green-500/20 border-green-500/50 text-green-400" : "bg-red-500/20 border-red-500/50 text-red-400")}>
-                {/* <span className="font-bold mr-2">[{notification.type === "success" ? "SUCCESS" : "ERROR"}]</span> */}
+                <span className="font-bold mr-2">[{notification.type === "success" ? "SUCCESS" : "ERROR"}]</span>
                 {notification.message}
               </div>
             )}
@@ -423,7 +393,7 @@ export default function BookingForm({
   );
 }
 
-// --- RESPONSIVE SUB-COMPONENTS ---
+// --- SUB-COMPONENTS ---
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-1.5 block">{children}</label>
