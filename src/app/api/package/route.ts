@@ -16,7 +16,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Utility function to normalize slugs
+// Utility function to normalize slug
 function normalizeSlug(slug: string): string {
   return slug
     .toLowerCase()
