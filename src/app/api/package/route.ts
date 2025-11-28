@@ -48,7 +48,7 @@ export async function GET(request: Request) {
       return NextResponse.json(packageItem);
     } else if (slug) {
       const normalizedSlug = normalizeSlug(slug);
-      console.log("Fetching package with slug:", normalizedSlug); 
+      console.log("Fetching package with slug:", normalizedSlug);
       const packageItem = await prisma.package.findUnique({
         where: { slug: normalizedSlug },
       });
@@ -65,80 +65,91 @@ export async function GET(request: Request) {
   }
 }
 
+
 export async function POST(request: Request) {
   try {
-    // Validate token
+    // 1. Auth Check
     const token = request.headers.get("authorization")?.split(" ")[1];
-    if (!token) {
-      return NextResponse.json({ error: "No token provided" }, { status: 401 });
-    }
-    const decoded = verifyToken(token);
-    if (!decoded || decoded.role !== "admin") {
+    if (!token || verifyToken(token)?.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    // Parse form data
+    // 2. Parse Data
     const formData = await request.formData();
     const name = formData.get("name") as string | null;
-    const description = formData.get("description") as string | null;
-    const price = parseFloat(formData.get("price") as string) || 0;
-    
-    // --- NEW FIELDS ---
-    const mealPrice = parseFloat(formData.get("mealPrice") as string) || 0;
-    const ticketPrice = parseFloat(formData.get("ticketPrice") as string) || 0;
-    // ------------------
-
     const slug = formData.get("slug") as string | null;
+    const description = formData.get("description") as string || "";
+
+    // Safer number parsing
+    const price = parseFloat(formData.get("price")?.toString() || "0");
+    const mealPrice = parseFloat(formData.get("mealPrice")?.toString() || "0");
+    const ticketPrice = parseFloat(formData.get("ticketPrice")?.toString() || "0");
+
+    // Image Data
     const imageUrl = formData.get("imageUrl") as string | null;
     const imageFile = formData.get("image") as File | null;
 
-    // Validate required fields
+    // 3. Validation Logging (Check your terminal if it fails!)
     if (!name || !slug) {
+      console.error("POST Failed: Missing Name or Slug", { name, slug });
       return NextResponse.json({ error: "Name and slug are required" }, { status: 400 });
     }
 
-    // Normalize slug
-    const normalizedSlug = normalizeSlug(slug);
+    // 4. Image Handling Logic
+    let finalImageUrl = "";
 
-    // Handle image upload or URL
-    let finalImageUrl: string;
+    // Priority 1: File Upload
     if (imageFile && imageFile.size > 0) {
-      const arrayBuffer = await imageFile.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-      const uploadResult = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
-        cloudinary.uploader
-          .upload_stream(
+      console.log("Uploading image to Cloudinary...");
+      try {
+        const arrayBuffer = await imageFile.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const uploadResult = await new Promise<CloudinaryUploadResult>((resolve, reject) => {
+          cloudinary.uploader.upload_stream(
             { folder: "packages", resource_type: "image" },
             (error, result) => (error ? reject(error) : resolve(result as CloudinaryUploadResult))
-          )
-          .end(buffer);
-      });
-      finalImageUrl = uploadResult.secure_url;
-    } else if (imageUrl) {
+          ).end(buffer);
+        });
+        finalImageUrl = uploadResult.secure_url;
+      } catch (uploadError) {
+        console.error("Cloudinary Upload Failed:", uploadError);
+        return NextResponse.json({ error: "Image upload failed" }, { status: 500 });
+      }
+    }
+    // Priority 2: URL String
+    else if (imageUrl && imageUrl.trim() !== "") {
       finalImageUrl = imageUrl;
-    } else {
-      return NextResponse.json({ error: "Image URL or file is required" }, { status: 400 });
+    }
+    // Fail if neither exists
+    else {
+      console.error("POST Failed: No Image Provided");
+      return NextResponse.json({ error: "Image is required" }, { status: 400 });
     }
 
-    // Create package
+    // 5. Create Record
+    const normalizedSlug = normalizeSlug(slug);
+
     const pkg = await prisma.package.create({
       data: {
         name,
-        description: description || "",
+        slug: normalizedSlug,
+        description,
         imageUrl: finalImageUrl,
         price,
-        mealPrice,   // Added
-        ticketPrice, // Added
-        slug: normalizedSlug,
+        mealPrice,
+        ticketPrice,
       },
     });
 
+    console.log("Package Created Successfully:", pkg.id);
     return NextResponse.json(pkg, { status: 201 });
+
   } catch (error) {
+    // This logs the exact Prisma error to your terminal
+    console.error("POST Database Error:", error);
     return handleError(error, "creating");
   }
 }
-
 export async function PUT(request: Request) {
   try {
     // Validate token
@@ -162,7 +173,7 @@ export async function PUT(request: Request) {
     const formData = await request.formData();
     const name = formData.get("name") as string | null;
     const description = formData.get("description") as string | null;
-    
+
     // Price parsing
     const priceRaw = formData.get("price") as string | null;
     const price = priceRaw ? parseFloat(priceRaw) : undefined;
