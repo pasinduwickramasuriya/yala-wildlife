@@ -54,7 +54,27 @@ export const metadata: Metadata = {
     "private safari booking yala",
     "luxury safari contact yala",
     "yala safari customer service",
-    "wildlife tours sri lanka contact"
+    "wildlife tours sri lanka contact",
+    // --- Booking Intents ---
+    "contact yala safari", "book yala safari online", "yala jeep booking number",
+    "yala safari price 2025", "reserve safari jeep yala", "yala national park contact",
+    "safari reservation sri lanka", "yala ticket booking", "buy yala tickets",
+    "private jeep hire yala", "luxury safari booking", "budget safari yala contact",
+
+    // --- Location Specifics ---
+    "safari from tissamaharama", "safari from kataragama", "safari from hambantota",
+    "yala safari from colombo", "yala safari from galle", "yala safari from ella",
+    "palatupana entrance contact", "katagamuwa entrance safari", "galge entrance booking",
+
+    // --- Wildlife & Experience ---
+    "leopard safari booking", "best safari guide yala", "yala bird watching tour",
+    "yala photography tour", "camping in yala contact", "family safari yala",
+    "morning safari booking", "full day safari price", "afternoon safari yala",
+
+    // --- Service & Trust ---
+    "yala safari customer care", "best rated safari operator", "safe safari yala",
+    "experienced driver yala", "english speaking guide yala", "french speaking guide yala",
+    "german speaking guide yala", "yala safari whatsapp number"
   ],
 
   other: {

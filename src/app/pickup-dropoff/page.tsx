@@ -22,7 +22,42 @@ export const metadata: Metadata = {
         "luxury kdh van hire sri lanka",
         "safari jeep pickup yala",
         "reliable taxi service sri lanka",
-        "tourist transport sri lanka"
+        "tourist transport sri lanka",
+        // --- 🔥 HIGH VOLUME & CORE SERVICES ---
+        "yala taxi service", "sri lanka private driver", "taxi service sri lanka",
+        "yala transport booking", "private car hire with driver sri lanka",
+        "sri lanka tourist transport", "yala drop off service", "yala pickup service",
+        "reliable taxi yala", "safe taxi sri lanka", "24/7 taxi service sri lanka",
+
+        // --- ✈️ AIRPORT TRANSFERS (High Priority) ---
+        "colombo airport to yala taxi", "bandaranaike international airport to yala",
+        "BIA to yala transfer", "CMB airport taxi price", "mattala airport to yala taxi",
+        "HRI airport transfer", "airport pickup sri lanka", "airport drop off yala",
+        "colombo airport luxury transfer", "airport taxi rates sri lanka",
+
+        // --- 📍 POPULAR ROUTES (The "Golden" Tourist Routes) ---
+        "ella to yala taxi price", "ella to yala travel time", "galle to yala taxi",
+        "mirissa to yala transfer", "weligama to yala taxi", "arugam bay to yala transport",
+        "tangalle to yala taxi", "kandy to yala private car", "nuwara eliya to yala taxi",
+        "hikkaduwa to yala transfer", "bentota to yala taxi", "hambantota to yala taxi",
+        "udawalawe to yala transfer", "hiriketiya to yala taxi", "ahungalla to yala",
+
+        // --- 🚐 VEHICLE SPECIFIC (Targeting specific needs) ---
+        "luxury kdh van hire sri lanka", "toyota kdh high roof rental",
+        "private sedan car hire", "luxury car rental sri lanka", "safari jeep pickup yala",
+        "9 seater van hire sri lanka", "car with english speaking driver",
+        "air conditioned taxi sri lanka", "comfortable tourist van",
+
+        // --- 💰 PRICING & BOOKING INTENT ---
+        "yala taxi rates 2025", "cheap taxi to yala", "best price taxi sri lanka",
+        "fair price taxi yala", "book taxi online sri lanka", "taxi cost calculator sri lanka",
+        "uber alternative yala", "pickme alternative yala", "negotiable taxi rates",
+
+        // --- 🌟 NICHE & EXPERIENCE ---
+        "luxury transport yala", "vip transfer sri lanka", "family transport sri lanka",
+        "safe driver for solo female traveler", "surf board transport sri lanka",
+        "expressway taxi sri lanka", "southern expressway taxi rates",
+        "door to door transfer sri lanka", "hotel transfer yala"
     ],
     openGraph: {
         type: "website",

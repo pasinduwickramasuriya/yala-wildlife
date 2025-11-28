@@ -104,7 +104,71 @@ export const metadata: Metadata = {
     "traditional knowledge blog",
     "cultural heritage blog",
     "archaeology yala blog",
-    "historical sites blog"
+    "historical sites blog",
+    // --- 🔥 TOP TIER: High Volume & Main Intent (The "Big" Keywords) ---
+    "yala safari blog", "yala national park safari", "sri lanka safari guide",
+    "best safari in sri lanka", "yala wildlife tours", "yala jeep safari booking",
+    "visit yala national park", "yala safari price 2025", "yala entrance fee",
+    "safari holidays sri lanka", "wildlife holiday sri lanka", "yala park tickets",
+
+    // --- 🐆 WILDLIFE SPECIFIC (Targeting Animal Lovers) ---
+    "leopard safari sri lanka", "best place to see leopards", "sri lankan leopard",
+    "panthera pardus koti", "sloth bear sightings yala", "asian elephant safari",
+    "yala bird watching", "yala crocodile safari", "spotted deer yala",
+    "wild boar sightings", "yala peacock dance", "black necked stork yala",
+    "painted stork colony", "sri lanka big five", "yala reptiles guide",
+    "mugger crocodile yala", "golden jackal sri lanka", "wild buffalo yala",
+
+    // --- 📸 PHOTOGRAPHY NICHE (High Value / Pro Audience) ---
+    "wildlife photography tips sri lanka", "best lens for yala safari",
+    "camera settings for safari", "yala golden hour photography",
+    "bird photography yala", "leopard photography tips", "safari photography gear guide",
+    "sony a7rv wildlife settings", "canon r5 safari settings", "nikon z9 wildlife tips",
+    "bean bag for safari photography", "monopod vs tripod for safari",
+    "best camera for sri lanka wildlife", "photographing black bears yala",
+
+    // --- 📅 PLANNING & LOGISTICS ("How To" & "When To") ---
+    "best time to visit yala 2025", "yala safari morning vs afternoon",
+    "full day safari yala worth it", "yala safari duration", "yala park opening hours",
+    "yala block 1 vs block 5", "palatupana entrance yala", "katagamuwa entrance",
+    "galge gate yala", "sithulpawwa road safari", "how to get to yala from colombo",
+    "ella to yala safari trip", "galle to yala day tour", "mirissa to yala taxi",
+    "safari jeep hire cost", "yala safari shared jeep price",
+
+    // --- 🏨 ACCOMMODATION & LIFESTYLE (Luxury vs Budget) ---
+    "luxury safari camping yala", "glamping yala national park", "eco lodges yala",
+    "budget safari yala", "best hotels near yala national park",
+    "tissamaharama safari hotels", "chena huts yala review", "wild coast tented lodge",
+    "camping inside yala park", "treehouse stay yala", "family friendly safari hotels",
+    "honeymoon safari packages yala", "sustainable hotels yala",
+
+    // --- 🌍 CONSERVATION & EDUCATION (Building Authority) ---
+    "yala conservation projects", "human elephant conflict sri lanka",
+    "sustainable tourism yala", "eco friendly safari tips", "plastic free yala",
+    "protecting sri lanka leopards", "wildlife ranger stories",
+    "biodiversity of yala", "endemic species sri lanka", "dry zone ecosystem",
+    "yala flora and fauna", "invasive plants yala", "responsible wildlife watching",
+
+    // --- 🆚 COMPARISON KEYWORDS (Helping Users Choose) ---
+    "yala vs udawalawe safari", "yala vs wilpattu for leopards",
+    "yala vs minneriya for elephants", "yala vs bundala bird watching",
+    "best national park sri lanka for kids", "yala vs kumana national park",
+
+    // --- ❓ LONG TAIL QUESTIONS (Voice Search Optimization) ---
+    "is yala national park open today", "what to wear on yala safari",
+    "is yala safe for tourists", "do i need a guide for yala safari",
+    "can you drive your own car in yala", "how many leopards in yala block 1",
+    "likelihood of seeing a leopard in yala", "tipping safari guides sri lanka",
+    "breakfast in yala national park", "toilet facilities yala park",
+
+    // --- 🏛️ CULTURE & HISTORY (Local Context) ---
+    "sithulpawwa rock temple history", "magul maha viharaya yala",
+    "ancient civilizations yala", "monastic ruins sri lanka",
+    "kataragama temple visit", "history of ruhuna kingdom",
+
+    // --- 🌦️ WEATHER & SEASONS ---
+    "yala weather february", "yala drought season", "yala monsoon safari",
+    "yala safari in rain", "best month for yala safari", "yala park closing dates 2025"
   ],
   other: {
     "geo.region": "LK-82",

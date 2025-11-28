@@ -133,7 +133,70 @@ export const metadata: Metadata = {
     "patanangala beach yala",
     "sithulpawwa yala",
     "kumana national park",
-    "bundala wetland safari"
+    "bundala wetland safari",
+    // --- 🔥 HIGH VOLUME / BRAND CORE ---
+    "yala national park", "yala safari", "sri lanka safari", "yala wildlife safari",
+    "yala jeep safari", "yala national park safari", "official yala safari",
+    "visit yala", "yala sri lanka", "safari in sri lanka",
+
+    // --- 💰 BOOKING & PRICING INTENT (Transactional) ---
+    "book yala safari online", "yala safari price 2025", "yala entrance fee 2025",
+    "yala jeep rental cost", "reserve safari jeep yala", "buy yala tickets online",
+    "yala safari booking official", "best price safari yala", "budget safari yala",
+    "luxury safari packages yala", "private jeep hire yala", "shared safari jeep yala",
+    "yala full day safari price", "half day safari rates yala", "cheap yala tours",
+    "yala safari cancellation policy", "last minute safari booking yala",
+
+    // --- 🐆 SPECIFIC WILDLIFE (The "Big 3" & More) ---
+    "yala leopard safari", "sri lankan leopard sightings", "panthera pardus koti",
+    "best place to see leopards in sri lanka", "yala sloth bear sightings",
+    "melursus ursinus yala", "yala elephant safari", "asian elephant sri lanka",
+    "yala crocodile tour", "yala bird watching", "painted stork yala",
+    "black necked stork yala", "yala reptiles", "wild boar yala", "spotted deer herds",
+    "yala peacock dance", "yala hornbill", "wildlife of yala", "big game safari sri lanka",
+
+    // --- 📍 LOCATION & LOGISTICS (Geographic SEO) ---
+    "colombo to yala safari", "galle to yala day trip", "ella to yala transfer",
+    "mirissa to yala safari tour", "hambantota to yala", "tangalle to yala",
+    "kandy to yala tour", "arugam bay to yala", "mattala airport to yala",
+    "tissamaharama safari", "hotels in tissamaharama", "safari near kataragama",
+    "palatupana entrance yala", "katagamuwa entrance safari", "galge entrance yala",
+    "yala block 1 safari", "yala block 5 safari", "sithulpawwa road safari",
+    "kirinda to yala", "southern province things to do",
+
+    // --- 🌟 EXPERIENCE TYPES (Niche Targeting) ---
+    "luxury yala safari experience", "vip safari sri lanka", "glamping yala national park",
+    "camping inside yala", "yala eco lodge", "family friendly safari sri lanka",
+    "honeymoon safari packages", "romantic safari yala", "kids safari yala",
+    "senior citizen friendly safari", "accessible safari sri lanka",
+    "corporate safari packages", "educational wildlife tours", "school trip yala",
+
+    // --- 📸 PHOTOGRAPHY & EXPERT LED ---
+    "yala wildlife photography tour", "professional safari guide yala",
+    "birding tour yala", "best lens for yala safari", "wildlife filmmaker fixer yala",
+    "golden hour safari yala", "morning vs evening safari yala", "full day game drive",
+    "yala tracker service", "expert naturalist yala", "custom safari itinerary",
+
+    // --- 📅 TIMING & PLANNING (Informational) ---
+    "best time to visit yala", "yala safari season", "yala drought season",
+    "yala park closing dates 2025", "yala weather september", "yala weather december",
+    "yala safari opening hours", "how long is yala safari", "what to wear yala safari",
+    "yala safari rules", "safety in yala national park",
+
+    // --- 🌿 SUSTAINABILITY & VALUES ---
+    "eco friendly safari yala", "sustainable tourism sri lanka", "responsible wildlife watching",
+    "ethical safari operator", "conservation projects yala", "plastic free safari",
+    "support local guides yala", "community tourism sri lanka",
+
+    // --- 🆚 COMPARISONS (Competitor Targeting) ---
+    "yala vs udawalawe", "yala vs wilpattu", "yala vs minneriya",
+    "best national park in sri lanka", "yala vs bundala", "kumana vs yala",
+
+    // --- 🚀 LONG TAIL & VOICE SEARCH ---
+    "where to see leopards in sri lanka", "how to book yala jeep online",
+    "can you see bears in yala", "driver for yala safari", "taxi to yala national park",
+    "is yala national park open today", "safari tour with breakfast yala",
+    "sunset safari yala national park", "early morning safari yala"
   ],
 
   other: {
