@@ -577,7 +577,7 @@ export default function Header() {
   // PERFORMANCE FIX: Removed 'ref' target. 
   // Tracking window scroll directly is much more performant for fixed headers.
   const { scrollY } = useScroll();
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [packages, setPackages] = useState<Package[]>([]);
@@ -994,7 +994,9 @@ const NavItems: React.FC<NavItemsProps> = ({
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             href={item.link}
-            className="relative px-3 py-1.5 text-xs text-white hover:text-green-400 flex items-center"
+            // className="relative px-3 py-1.5 text-bold  text-white hover:text-green-400 flex items-center"
+            className="relative px-3 py-1.5 font-bold text-white hover:text-green-400 flex items-center"
+
           >
             {hovered === idx && (
               <motion.div
@@ -1019,7 +1021,7 @@ const NavItems: React.FC<NavItemsProps> = ({
                   <Link
                     key={pkg.id}
                     href={`/safari-packages/${pkg.slug}`}
-                    className="block px-3 py-1 text-xs text-neutral-400 hover:bg-green-900/20 rounded-md transition-colors duration-200"
+                    className="block px-3 py-1 text-xs text-orange-500 hover:bg-green-900/50 rounded-md transition-colors duration-200"
                     onClick={onItemClick}
                   >
                     {pkg.name}
