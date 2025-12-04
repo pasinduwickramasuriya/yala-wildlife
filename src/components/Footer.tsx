@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Facebook,
   Instagram,
@@ -15,6 +16,9 @@ import {
   Heart
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// --- Assets ---
+const BG_IMAGE = "/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp";
 
 // --- Brand Icon ---
 const RabbitIcon = ({ className }: { className?: string }) => (
@@ -48,7 +52,8 @@ const exploreLinks = [
   { name: "Safari Packages", href: "/safari-packages", icon: Package },
   { name: "About Us", href: "/about", icon: Users },
   { name: "Blog", href: "/blog", icon: MessageSquare },
-  { name: "Booking & FAQs", href: "/contact", icon: HelpCircle },
+  { name: "Booking & FAQs", href: "/safari-packages", icon: HelpCircle },
+  { name: "Pickup & Dropoff", href: "/pickup-dropoff", icon: HelpCircle },
 ];
 
 const socialLinks = [
@@ -64,51 +69,62 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-neutral-950 pt-20 pb-10 overflow-hidden border-t border-white/5 font-sans">
+    <footer className="relative w-full bg-neutral-950 pt-32 pb-10 overflow-hidden border-t border-white/5 font-sans">
       
-      {/* --- 1. Background Ambient Effects (Optimized for Mobile GPU) --- */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none transform-gpu">
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]" 
-          style={{ backgroundImage: 'radial-gradient(#22c55e 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
+      {/* --- 0. BACKGROUND IMAGE LAYER --- */}
+      <div className="absolute inset-0 w-full h-full z-0 select-none">
+        <Image 
+          src={BG_IMAGE}
+          alt="Yala Leopard"
+          fill
+          priority={false}
+          className="object-cover object-top opacity-80" 
         />
-        {/* Glowing Orbs - Added transform-gpu to prevent lag */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-[128px] -translate-y-1/2 transform-gpu" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] translate-y-1/2 transform-gpu" />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-neutral-950/10" />
+      </div>
+
+      {/* --- 1. Background Textures --- */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none transform-gpu z-0">
+        <div 
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay" 
+          style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
+        />
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         
         {/* --- 2. Main Grid Layout --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+        {/* Added text-center for mobile, lg:text-left for desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-20 text-center lg:text-left">
           
           {/* Brand & Mission (Span 5) */}
           <div className="lg:col-span-5 space-y-8">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-green-900/20 border border-green-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(34,197,94,0.2)] group-hover:shadow-[0_0_25px_rgba(34,197,94,0.4)] transition-all duration-500">
+            {/* Logo: Centered on mobile (mx-auto), left on desktop (lg:mx-0) */}
+            <Link href="/" className="inline-flex items-center gap-3 group mx-auto lg:mx-0">
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-green-900/20 border border-green-500/30 backdrop-blur-md transition-all duration-500">
                 <RabbitIcon className="h-7 w-7 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-extrabold text-white tracking-tight">Yala<span className="text-green-500">Wildlife</span></span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-bold">Safari Adventures</span>
+              <div className="flex flex-col items-start">
+                <span className="text-2xl font-extrabold text-white tracking-tight drop-shadow-md">Yala<span className="text-green-500">Wildlife</span></span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold">Safari Adventures</span>
               </div>
             </Link>
             
-            <p className="text-neutral-400 text-base leading-relaxed max-w-md font-light">
+            {/* Description: Centered on mobile (mx-auto), left on desktop (lg:mx-0) */}
+            <p className="text-neutral-300 text-base leading-relaxed max-w-md font-light drop-shadow-md mx-auto lg:mx-0">
               Experience the raw beauty of nature. We curate premium, eco-friendly safari tours that connect you with the wild heart of Sri Lanka.
             </p>
 
-            <div className="flex items-center gap-4">
+            {/* Social Icons: Centered on mobile (justify-center), left on desktop (lg:justify-start) */}
+            <div className="flex items-center justify-center lg:justify-start gap-4">
               {socialLinks.map(({ name, icon: Icon, href }) => (
-                // FIX: Changed Link to <a> for external links to prevent Next.js Router overhead
                 <a
                   key={name}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900 border border-neutral-800 text-neutral-400 transition-all duration-300 hover:border-green-500 hover:text-white hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] overflow-hidden"
+                  className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 text-neutral-400 transition-all duration-300 hover:border-green-500 hover:text-white overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-green-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                   <Icon className="relative h-4 w-4 z-10" />
@@ -119,12 +135,13 @@ export default function Footer() {
 
           {/* Navigation Links (Span 2 + 2) */}
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-2">Explore</h4>
+            <h4 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-2 drop-shadow-sm">Explore</h4>
             <ul className="space-y-4">
               {exploreLinks.map(({ name, href }) => (
                 <li key={name}>
-                  <Link href={href} className="text-sm text-neutral-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-neutral-700 group-hover:bg-green-500 transition-colors" />
+                  {/* Link: Centered flex on mobile (justify-center), left on desktop (lg:justify-start) */}
+                  <Link href={href} className="text-sm text-neutral-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group drop-shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-neutral-600 group-hover:bg-green-500 transition-colors" />
                     {name}
                   </Link>
                 </li>
@@ -133,14 +150,14 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-2">Contact</h4>
+            <h4 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-2 drop-shadow-sm">Contact</h4>
             <ul className="space-y-4">
               {contactLinks.map(({ name, href, icon: Icon }) => (
                 <li key={name}>
-                  {/* FIX: Using <a> for tel: and mailto: to prevent hydration stalls */}
-                  <a href={href} className="group flex items-start gap-3">
-                    <Icon className="h-5 w-5 text-neutral-600 group-hover:text-green-500 transition-colors shrink-0 mt-0.5" />
-                    <span className="text-sm text-neutral-400 group-hover:text-white transition-colors leading-relaxed break-all">
+                  {/* Contact Link: Centered flex on mobile, left on desktop */}
+                  <a href={href} className="group flex items-center lg:items-start justify-center lg:justify-start gap-3">
+                    <Icon className="h-5 w-5 text-neutral-500 group-hover:text-green-500 transition-colors shrink-0 mt-0.5 drop-shadow-sm" />
+                    <span className="text-sm text-neutral-300 group-hover:text-white transition-colors leading-relaxed break-all drop-shadow-sm text-center lg:text-left">
                       {name}
                     </span>
                   </a>
@@ -151,23 +168,20 @@ export default function Footer() {
 
           {/* Newsletter Card (Span 3) */}
           <div className="lg:col-span-3">
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 border border-white/10 p-6 backdrop-blur-md transform-gpu">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-green-500/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-              
-              <h4 className="text-lg font-bold text-white mb-2">Join the Pack</h4>
-              <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-neutral-800/40 to-neutral-900/60 border border-white/10 p-6 backdrop-blur-md transform-gpu shadow-xl">
+              <h4 className="text-lg font-bold text-white mb-2 drop-shadow-md">Join the Pack</h4>
+              <p className="text-xs text-neutral-300 mb-6 leading-relaxed drop-shadow-sm">
                 Exclusive sightings, safari tips, and special offers delivered to your inbox.
               </p>
-              
             </div>
           </div>
 
         </div>
 
         {/* --- 3. Bottom Bar --- */}
-        <div className="border-t border-neutral-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Copyright - FIX: Added suppressHydrationWarning to prevent React errors on Date */}
-          <p className="text-neutral-500 text-xs font-medium order-2 md:order-1">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Copyright */}
+          <p className="text-neutral-400 text-xs font-medium order-2 md:order-1 drop-shadow-md text-center md:text-left">
             © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Yala Wildlife. All rights reserved.
           </p>
           
@@ -177,20 +191,20 @@ export default function Footer() {
               <Link
                 key={name}
                 href={href}
-                className="text-xs font-medium text-neutral-500 hover:text-green-400 transition-colors hover:underline decoration-green-500/50 underline-offset-4"
+                className="text-xs font-medium text-neutral-400 hover:text-green-400 transition-colors hover:underline decoration-green-500/50 underline-offset-4 drop-shadow-md"
               >
                 {name}
               </Link>
             ))}
           </div>
 
-          {/* Credits Badge */}
+          {/* Credits */}
           <div className="order-3">
             <a 
               href="#" 
               target="_blank" 
               rel="noreferrer"
-              className="flex items-center gap-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 px-4 py-2 rounded-full transition-all duration-300 group"
+              className="flex items-center gap-2 bg-neutral-900/60 hover:bg-neutral-800 border border-white/10 px-4 py-2 rounded-full transition-all duration-300 group backdrop-blur-md"
             >
               <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider group-hover:text-white">Built by</span>
               <span className="text-xs font-bold text-white group-hover:text-green-400 flex items-center gap-1">
