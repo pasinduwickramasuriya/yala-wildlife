@@ -1259,6 +1259,413 @@
 
 
 
+// "use client";
+
+// import { useState, useEffect, useCallback } from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+// import { AnimatePresence, motion } from "framer-motion";
+// import { ArrowRight, MapPin } from "lucide-react";
+
+// interface HeroSection {
+//   id: string;
+//   imageUrl: string;
+//   title: string;
+//   subtitle: string;
+// }
+
+// // --- Memoized Typewriter Component ---
+// const Typewriter = ({
+//   text,
+//   delay = 0,
+//   speed = 50,
+//   className = ""
+// }: {
+//   text: string;
+//   delay?: number;
+//   speed?: number;
+//   className?: string;
+// }) => {
+//   const [displayText, setDisplayText] = useState("");
+//   const [showCursor, setShowCursor] = useState(false);
+
+//   useEffect(() => {
+//     setDisplayText("");
+//     setShowCursor(false);
+
+//     let typingInterval: NodeJS.Timeout;
+//     const startTimeout = setTimeout(() => {
+//       setShowCursor(true);
+//       let currentIndex = 0;
+
+//       typingInterval = setInterval(() => {
+//         if (currentIndex <= text.length) {
+//           setDisplayText(text.slice(0, currentIndex));
+//           currentIndex++;
+//         } else {
+//           clearInterval(typingInterval);
+//         }
+//       }, speed);
+//     }, delay);
+
+//     return () => {
+//       clearTimeout(startTimeout);
+//       if (typingInterval) clearInterval(typingInterval);
+//     };
+//   }, [text, delay, speed]);
+
+//   return (
+//     <span className={className}>
+//       {displayText}
+//       <span className={`inline-block w-[2px] h-[1em] bg-lime-400 ml-1 align-middle ${showCursor ? "animate-pulse" : "opacity-0"}`}></span>
+//     </span>
+//   );
+// };
+
+// // --- Pre-optimized Animations (GPU Friendly) ---
+// const containerVariants = {
+//   hidden: { opacity: 0 },
+//   visible: {
+//     opacity: 1,
+//     transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+//   },
+// } as const;
+
+// const textGlowVariants = {
+//   hidden: { opacity: 0, y: 10 },
+//   visible: {
+//     opacity: 1,
+//     y: 0,
+//     transition: { duration: 0.6, ease: "easeOut" }
+//   },
+// } as const;
+
+// const cardVariants = {
+//   hidden: { opacity: 0, x: 20, scale: 0.98 },
+//   visible: {
+//     opacity: 1,
+//     x: 0,
+//     scale: 1,
+//     transition: { type: "spring", stiffness: 200, damping: 25 }
+//   },
+//   hover: { y: -3, transition: { duration: 0.2 } }
+// } as const;
+
+// export default function HeroSlider() {
+//   const [heroSections, setHeroSections] = useState<HeroSection[]>([]);
+//   const [currentSlide, setCurrentSlide] = useState(0);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+//   const [mounted, setMounted] = useState(false);
+
+//   // ✅ FIXED: Dynamic re-fetching + No Cache for new images
+//   const fetchHeroSections = useCallback(async () => {
+//     try {
+//       const res = await fetch("/api/hero", {
+//         cache: 'no-store',
+//         next: { revalidate: 1 }
+//       });
+//       if (!res.ok) throw new Error(`Failed to fetch`);
+//       const data = await res.json();
+
+//       setHeroSections(data);
+//       setCurrentSlide(0);
+//       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//     } catch (err) {
+//       setError("System Offline");
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
+
+//   // ✅ Poll for new data every 30 seconds
+//   useEffect(() => {
+//     if (!mounted) return;
+//     fetchHeroSections();
+//     const interval = setInterval(fetchHeroSections, 30000);
+//     return () => clearInterval(interval);
+//   }, [fetchHeroSections, mounted]);
+
+//   useEffect(() => {
+//     setMounted(true);
+//   }, []);
+
+//   // Optimized auto-slide effect
+//   useEffect(() => {
+//     if (heroSections.length <= 1 || !mounted) return;
+//     const interval = setInterval(() => {
+//       setCurrentSlide((prev) => (prev + 1) % heroSections.length);
+//     }, 8000);
+//     return () => clearInterval(interval);
+//   }, [heroSections.length, mounted]);
+
+//   // Early return for loading/error states
+//   if (loading) {
+//     return (
+//       <div className="min-h-screen w-full bg-black flex flex-col items-center justify-center gap-4 p-4">
+//         <div className="w-10 h-10 border-2 border-lime-500 border-t-transparent rounded-full animate-spin" />
+//         <span className="text-lime-500 font-mono text-xs sm:text-[10px] tracking-[0.3em] animate-pulse text-center">LOADING</span>
+//       </div>
+//     );
+//   }
+
+//   if (error || heroSections.length === 0) {
+//     return (
+//       <div className="min-h-screen w-full bg-black flex items-center justify-center text-white p-4">
+//         <p className="text-xs sm:text-[10px] font-mono tracking-[0.3em] text-lime-500 border border-lime-500/30 px-4 py-2 rounded text-center">NO SIGNAL</p>
+//       </div>
+//     );
+//   }
+
+//   // Memoized slide data
+//   const section = heroSections[currentSlide];
+//   const nextSlideIndex = (currentSlide + 1) % heroSections.length;
+//   const nextNextSlideIndex = (currentSlide + 2) % heroSections.length;
+//   const card1Data = heroSections[nextSlideIndex];
+//   const card2Data = heroSections[nextNextSlideIndex];
+
+//   // Memoized title split
+//   const titleWords = section.title.split(" ");
+//   const firstWord = titleWords[0];
+//   const restTitleWords = titleWords.slice(1).join(" ");
+
+//   return (
+//     <div className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black will-change-auto">
+
+//       {/* 1. BACKGROUND IMAGE - OPTIMIZED FOR SPEED */}
+//       <div className="absolute inset-0 w-full h-full perspective-1000">
+//         <AnimatePresence mode="wait">
+//           <motion.div
+//             key={`${section.id}-${section.imageUrl}`}
+//             initial={{ opacity: 0, scale: 1.05 }} // Reduced scale scale for less jank
+//             animate={{ opacity: 1, scale: 1 }}
+//             exit={{ opacity: 0 }}
+//             transition={{ duration: 1.2, ease: "easeOut" }}
+//             // Added transform-gpu to force hardware acceleration
+//             className="absolute inset-0 origin-center transform-gpu will-change-transform"
+//           >
+//             <Image
+//               src={section.imageUrl}
+//               alt={section.title}
+//               fill
+//               priority={currentSlide === 0}
+//               className="object-cover object-center brightness-[0.85]" // Slightly brighter for Lime
+//               style={{ objectFit: 'cover' }}
+//               // Optimization: Download smaller image on mobile to load faster
+//               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+//               // Optimization: 80 is virtually identical to 100 but 60% smaller file size
+//               quality={80}
+//             />
+//             {/* Cleaner Overlays */}
+//             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/10 to-transparent pointer-events-none" />
+//             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       {/* 2. MAIN CONTENT */}
+//       <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-12 h-full flex flex-col justify-center min-h-screen py-12 sm:py-20">
+
+//         <AnimatePresence mode="wait">
+//           <motion.div
+//             key={currentSlide}
+//             variants={containerVariants}
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-center w-full h-full text-center lg:text-left"
+//           >
+//             {/* LEFT COLUMN: Typography */}
+//             <motion.div className="lg:col-span-7 space-y-6 sm:space-y-8 relative flex flex-col items-center lg:items-start w-full">
+
+//               {/* Counter - Blurred Background */}
+//               <motion.div
+//                 variants={textGlowVariants}
+//                 className="inline-flex items-center justify-center lg:justify-start gap-3 px-4 py-2 bg-black/30 backdrop-blur-md rounded-full border border-white/10"
+//               >
+//                 <span className="text-lime-400 font-mono text-sm md:text-[10px] font-bold drop-shadow-[0_0_10px_rgba(163,230,53,0.8)]">
+//                   0{currentSlide + 1}
+//                 </span>
+//                 <div className="w-8 h-[1px] bg-white/30"></div>
+//                 <span className="text-white/80 font-mono text-sm md:text-[10px]">0{heroSections.length}</span>
+//               </motion.div>
+
+//               {/* Title - Blurred Background Block */}
+//               <div className="relative w-full flex justify-center lg:justify-start">
+//                 <motion.div
+//                   variants={textGlowVariants}
+//                   className="bg-black/20 backdrop-blur-sm rounded-3xl p-4 lg:p-6 border border-white/5 shadow-2xl inline-block"
+//                 >
+//                   <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight uppercase">
+//                     <span className="block text-white font-fredoka drop-shadow-md">
+//                       <Typewriter text={firstWord} speed={80} delay={200} />
+//                     </span>
+//                     {/* <span className="block text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-green-400 font-poppins pl-1 drop-shadow-sm">
+//                       <Typewriter text={restTitleWords} speed={60} delay={600} />
+//                     </span> */}
+//                     <span className="block text-lime-300 font-poppins pl-1
+//   [text-shadow:_0_0_10px_rgba(163,230,53,0.8),0_0_20px_rgba(163,230,53,0.6)]">
+//                       <Typewriter text={restTitleWords} speed={60} delay={600} />
+//                     </span>
+
+//                   </h1>
+//                 </motion.div>
+//               </div>
+
+//               {/* Subtitle & CTA */}
+//               <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-2">
+//                 <motion.div
+//                   variants={textGlowVariants}
+//                   className="max-w-md bg-black/30 backdrop-blur-md rounded-xl p-4 border-l-4 border-lime-500 shadow-lg"
+//                 >
+//                   <Typewriter
+//                     text={section.subtitle}
+//                     speed={20}
+//                     delay={1000}
+//                     className="text-lg md:text-xl text-white font-medium leading-relaxed tracking-wide block drop-shadow-md"
+//                   />
+//                 </motion.div>
+
+//                 <motion.div
+//                   variants={textGlowVariants}
+//                   whileHover={{ scale: 1.05 }}
+//                   whileTap={{ scale: 0.95 }}
+//                   className="flex-shrink-0"
+//                 >
+//                   <Link href="/safari-packages" className="group block relative">
+//                     <div className="absolute inset-0 bg-lime-500 blur-lg opacity-90 group-hover:opacity-60 transition-opacity duration-500 rounded-full"></div>
+//                     <div className="relative bg-white/10 backdrop-blur-xl border border-lime-500/30 text-white px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-lime-500 hover:border-lime-500 transition-all rounded-full flex items-center gap-3">
+//                       <span className="text-sm font-bold uppercase tracking-[0.2em]">Book Now</span>
+//                       <div className="bg-white text-black rounded-full p-1">
+//                         <ArrowRight className="w-3 h-3 group-hover:rotate-45 transition-transform duration-300" />
+//                       </div>
+//                     </div>
+//                   </Link>
+//                 </motion.div>
+//               </div>
+
+//               {/* Location Pin */}
+//               <motion.div variants={textGlowVariants} className="pt-4 w-full flex justify-center lg:justify-start">
+//                 <div
+//                   className="inline-flex items-center gap-3 px-5 py-3 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-lg"
+//                 >
+//                   <div className="w-8 h-8 flex items-center justify-center bg-lime-500 rounded-full shadow-[0_0_10px_#84cc16]">
+//                     <MapPin className="w-4 h-4 text-black animate-bounce" />
+//                   </div>
+//                   <div className="flex flex-col text-left">
+//                     <span className="text-lime-300 font-mono text-[10px] font-bold uppercase tracking-widest leading-none">
+//                       Yala National Park
+//                     </span>
+//                     <span className="text-white/90 text-[9px] font-mono uppercase tracking-wider leading-tight mt-0.5">
+//                       Southern Province • Sri Lanka
+//                     </span>
+//                   </div>
+//                 </div>
+//               </motion.div>
+//             </motion.div>
+
+//             {/* RIGHT COLUMN: Preview Cards (Hidden on Mobile) */}
+//             <motion.div
+//               variants={containerVariants}
+//               className="hidden lg:flex lg:col-span-5 flex-col sm:flex-row gap-6 justify-center lg:justify-end mt-12 lg:mt-0 items-center perspective-1000"
+//             >
+//               {/* CARD 1: NEXT */}
+//               <motion.div
+//                 variants={cardVariants}
+//                 whileHover="hover"
+//                 onClick={() => setCurrentSlide(nextSlideIndex)}
+//                 className="group relative w-64 h-96 flex-shrink-0 cursor-pointer"
+//               >
+//                 <motion.div
+//                   className="w-full h-full relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/20 transform-gpu"
+//                   whileHover={{ y: -10, rotateX: 5 }}
+//                   transition={{ type: "spring", stiffness: 200 }}
+//                 >
+//                   <Image
+//                     key={card1Data.imageUrl}
+//                     src={card1Data.imageUrl}
+//                     alt={card1Data.title}
+//                     fill
+//                     className="object-cover transition-transform duration-700 group-hover:scale-110"
+//                     sizes="25vw"
+//                     quality={75} // Lower quality for thumbnails to load fast
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+
+//                   <div className="absolute top-4 right-4">
+//                     <div className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[9px] font-bold text-white uppercase tracking-widest">
+//                       Next
+//                     </div>
+//                   </div>
+
+//                   <div className="absolute bottom-0 left-0 w-full p-6">
+//                     <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
+//                       <h3 className="text-white text-lg font-black uppercase tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors">
+//                         {card1Data.title}
+//                       </h3>
+//                       <div className="h-1 w-8 bg-lime-500 rounded-full mt-2" />
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               </motion.div>
+
+//               {/* CARD 2: INCOMING */}
+//               <motion.div
+//                 variants={cardVariants}
+//                 onClick={() => setCurrentSlide(nextNextSlideIndex)}
+//                 className="group relative w-48 h-72 flex-shrink-0 cursor-pointer opacity-60 hover:opacity-100 transition-all duration-500 hidden xl:block"
+//               >
+//                 <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden border border-white/10 grayscale group-hover:grayscale-0 transition-all transform-gpu">
+//                   <Image
+//                     key={card2Data.imageUrl}
+//                     src={card2Data.imageUrl}
+//                     alt={card2Data.title}
+//                     fill
+//                     className="object-cover"
+//                     sizes="20vw"
+//                     quality={60} // Lower quality for thumbnails
+//                   />
+//                   <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
+
+//                   <div className="absolute bottom-4 left-4 right-4">
+//                     <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-white/5">
+//                       <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">Up Next</span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </motion.div>
+//             </motion.div>
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       {/* Progress Bar */}
+//       <div className="absolute bottom-0 left-0 w-full h-1.5 bg-white/10 z-20 flex pointer-events-none">
+//         {heroSections.map((_, idx) => (
+//           <div key={idx} className="flex-1 h-full border-r border-black/20 relative bg-black/20 backdrop-blur-sm">
+//             {idx === currentSlide && (
+//               <motion.div
+//                 initial={{ width: "0%" }}
+//                 animate={{ width: "100%" }}
+//                 transition={{ duration: 8, ease: "linear" }}
+//                 className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16]"
+//               />
+//             )}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
@@ -1322,33 +1729,34 @@ const Typewriter = ({
   );
 };
 
-// --- Pre-optimized Animations (GPU Friendly) ---
+// --- Smooth Animations ---
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
   },
 } as const;
 
 const textGlowVariants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
+    scale: 1,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
   },
 } as const;
 
 const cardVariants = {
-  hidden: { opacity: 0, x: 20, scale: 0.98 },
+  hidden: { opacity: 0, x: 30, scale: 0.9 },
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
-    transition: { type: "spring", stiffness: 200, damping: 25 }
+    transition: { type: "spring", stiffness: 120, damping: 20 }
   },
-  hover: { y: -3, transition: { duration: 0.2 } }
+  hover: { y: -5, transition: { duration: 0.3 } }
 } as const;
 
 export default function HeroSlider() {
@@ -1358,7 +1766,6 @@ export default function HeroSlider() {
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  // ✅ FIXED: Dynamic re-fetching + No Cache for new images
   const fetchHeroSections = useCallback(async () => {
     try {
       const res = await fetch("/api/hero", {
@@ -1367,10 +1774,9 @@ export default function HeroSlider() {
       });
       if (!res.ok) throw new Error(`Failed to fetch`);
       const data = await res.json();
-
       setHeroSections(data);
       setCurrentSlide(0);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("System Offline");
     } finally {
@@ -1378,7 +1784,6 @@ export default function HeroSlider() {
     }
   }, []);
 
-  // ✅ Poll for new data every 30 seconds
   useEffect(() => {
     if (!mounted) return;
     fetchHeroSections();
@@ -1390,7 +1795,6 @@ export default function HeroSlider() {
     setMounted(true);
   }, []);
 
-  // Optimized auto-slide effect
   useEffect(() => {
     if (heroSections.length <= 1 || !mounted) return;
     const interval = setInterval(() => {
@@ -1399,7 +1803,6 @@ export default function HeroSlider() {
     return () => clearInterval(interval);
   }, [heroSections.length, mounted]);
 
-  // Early return for loading/error states
   if (loading) {
     return (
       <div className="min-h-screen w-full bg-black flex flex-col items-center justify-center gap-4 p-4">
@@ -1417,14 +1820,12 @@ export default function HeroSlider() {
     );
   }
 
-  // Memoized slide data
   const section = heroSections[currentSlide];
   const nextSlideIndex = (currentSlide + 1) % heroSections.length;
   const nextNextSlideIndex = (currentSlide + 2) % heroSections.length;
   const card1Data = heroSections[nextSlideIndex];
   const card2Data = heroSections[nextNextSlideIndex];
 
-  // Memoized title split
   const titleWords = section.title.split(" ");
   const firstWord = titleWords[0];
   const restTitleWords = titleWords.slice(1).join(" ");
@@ -1432,16 +1833,15 @@ export default function HeroSlider() {
   return (
     <div className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black will-change-auto">
 
-      {/* 1. BACKGROUND IMAGE - OPTIMIZED FOR SPEED */}
+      {/* 1. BACKGROUND IMAGE - CLEAN & BRIGHT */}
       <div className="absolute inset-0 w-full h-full perspective-1000">
         <AnimatePresence mode="wait">
           <motion.div
             key={`${section.id}-${section.imageUrl}`}
-            initial={{ opacity: 0, scale: 1.05 }} // Reduced scale scale for less jank
+            initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            // Added transform-gpu to force hardware acceleration
             className="absolute inset-0 origin-center transform-gpu will-change-transform"
           >
             <Image
@@ -1449,15 +1849,13 @@ export default function HeroSlider() {
               alt={section.title}
               fill
               priority={currentSlide === 0}
-              className="object-cover object-center brightness-[0.85]" // Slightly brighter for Lime
+              className="object-cover object-center brightness-[0.85]"
               style={{ objectFit: 'cover' }}
-              // Optimization: Download smaller image on mobile to load faster
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
-              // Optimization: 80 is virtually identical to 100 but 60% smaller file size
-              quality={80}
+              quality={80} 
             />
-            {/* Cleaner Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/10 to-transparent pointer-events-none" />
+            {/* Minimal overlays for text contrast without hiding image */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
           </motion.div>
         </AnimatePresence>
@@ -1475,38 +1873,38 @@ export default function HeroSlider() {
             exit="hidden"
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-center w-full h-full text-center lg:text-left"
           >
-            {/* LEFT COLUMN: Typography */}
+            {/* LEFT COLUMN */}
             <motion.div className="lg:col-span-7 space-y-6 sm:space-y-8 relative flex flex-col items-center lg:items-start w-full">
 
-              {/* Counter - Blurred Background */}
-              <motion.div
-                variants={textGlowVariants}
-                className="inline-flex items-center justify-center lg:justify-start gap-3 px-4 py-2 bg-black/30 backdrop-blur-md rounded-full border border-white/10"
+              {/* Counter - Clean Text with Shadow */}
+              <motion.div 
+                variants={textGlowVariants} 
+                className="inline-flex items-center justify-center lg:justify-start gap-3 px-2 py-1 drop-shadow-xl"
               >
-                <span className="text-lime-400 font-mono text-sm md:text-[10px] font-bold drop-shadow-[0_0_10px_rgba(163,230,53,0.8)]">
+                <span className="text-lime-400 font-mono text-sm md:text-[10px] font-bold drop-shadow-[0_0_10px_rgba(163,230,53,1)]">
                   0{currentSlide + 1}
                 </span>
-                <div className="w-8 h-[1px] bg-white/30"></div>
-                <span className="text-white/80 font-mono text-sm md:text-[10px]">0{heroSections.length}</span>
+                <div className="w-8 h-[2px] bg-lime-400/80 shadow-[0_0_8px_rgba(163,230,53,0.8)]"></div>
+                <span className="text-white font-mono text-sm md:text-[10px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">0{heroSections.length}</span>
               </motion.div>
 
-              {/* Title - Blurred Background Block */}
+              {/* Title - Clean Floating Text */}
               <div className="relative w-full flex justify-center lg:justify-start">
-                <motion.div
-                  variants={textGlowVariants}
-                  className="bg-black/20 backdrop-blur-sm rounded-3xl p-4 lg:p-6 border border-white/5 shadow-2xl inline-block"
+                <motion.div 
+                   variants={textGlowVariants}
+                   className="inline-block"
                 >
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight uppercase">
-                    <span className="block text-white font-fredoka drop-shadow-md">
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
+                    <span className="block text-white font-fredoka">
                       <Typewriter text={firstWord} speed={80} delay={200} />
                     </span>
-                    {/* <span className="block text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-green-400 font-poppins pl-1 drop-shadow-sm">
+                    {/* <span className="block text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-lime-500 font-poppins pl-1 drop-shadow-[0_0_15px_rgba(132,204,22,0.5)]">
                       <Typewriter text={restTitleWords} speed={60} delay={600} />
                     </span> */}
                     <span className="block text-lime-300 font-poppins pl-1
   [text-shadow:_0_0_10px_rgba(163,230,53,0.8),0_0_20px_rgba(163,230,53,0.6)]">
-                      <Typewriter text={restTitleWords} speed={60} delay={600} />
-                    </span>
+  <Typewriter text={restTitleWords} speed={60} delay={600} />
+</span>
 
                   </h1>
                 </motion.div>
@@ -1516,13 +1914,14 @@ export default function HeroSlider() {
               <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-2">
                 <motion.div
                   variants={textGlowVariants}
-                  className="max-w-md bg-black/30 backdrop-blur-md rounded-xl p-4 border-l-4 border-lime-500 shadow-lg"
+                  // REMOVED BACKGROUND, ADDED TEXT SHADOW
+                  className="max-w-md p-2 border-l-4 border-lime-500 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                 >
                   <Typewriter
                     text={section.subtitle}
                     speed={20}
                     delay={1000}
-                    className="text-lg md:text-xl text-white font-medium leading-relaxed tracking-wide block drop-shadow-md"
+                    className="text-lg md:text-xl text-white font-medium leading-relaxed tracking-wide block"
                   />
                 </motion.div>
 
@@ -1533,30 +1932,30 @@ export default function HeroSlider() {
                   className="flex-shrink-0"
                 >
                   <Link href="/safari-packages" className="group block relative">
-                    <div className="absolute inset-0 bg-lime-500 blur-lg opacity-90 group-hover:opacity-60 transition-opacity duration-500 rounded-full"></div>
-                    <div className="relative bg-white/10 backdrop-blur-xl border border-lime-500/30 text-white px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-lime-500 hover:border-lime-500 transition-all rounded-full flex items-center gap-3">
+                    <div className="absolute inset-0 bg-lime-500 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500 rounded-full"></div>
+                    <div className="relative bg-lime-500 text-black px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-white hover:text-black transition-all rounded-full flex items-center gap-3">
                       <span className="text-sm font-bold uppercase tracking-[0.2em]">Book Now</span>
-                      <div className="bg-white text-black rounded-full p-1">
-                        <ArrowRight className="w-3 h-3 group-hover:rotate-45 transition-transform duration-300" />
+                      <div className="bg-black text-white rounded-full p-1 group-hover:bg-lime-500 group-hover:text-black transition-colors">
+                         <ArrowRight className="w-3 h-3 group-hover:rotate-45 transition-transform duration-300" />
                       </div>
                     </div>
                   </Link>
                 </motion.div>
               </div>
 
-              {/* Location Pin */}
+              {/* Location Pin - Clean Text with Shadow */}
               <motion.div variants={textGlowVariants} className="pt-4 w-full flex justify-center lg:justify-start">
                 <div
-                  className="inline-flex items-center gap-3 px-5 py-3 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-lg"
+                  className="inline-flex items-center gap-3 px-2 py-1 drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)]"
                 >
-                  <div className="w-8 h-8 flex items-center justify-center bg-lime-500 rounded-full shadow-[0_0_10px_#84cc16]">
-                    <MapPin className="w-4 h-4 text-black animate-bounce" />
+                  <div className="w-8 h-8 flex items-center justify-center bg-lime-500/20 border border-lime-500 rounded-full shadow-[0_0_15px_#84cc16]">
+                    <MapPin className="w-4 h-4 text-lime-400 animate-bounce" />
                   </div>
                   <div className="flex flex-col text-left">
-                    <span className="text-lime-300 font-mono text-[10px] font-bold uppercase tracking-widest leading-none">
+                    <span className="text-lime-300 font-mono text-[10px] font-bold uppercase tracking-widest leading-none drop-shadow-md">
                       Yala National Park
                     </span>
-                    <span className="text-white/90 text-[9px] font-mono uppercase tracking-wider leading-tight mt-0.5">
+                    <span className="text-white text-[9px] font-mono uppercase tracking-wider leading-tight mt-0.5 font-bold">
                       Southern Province • Sri Lanka
                     </span>
                   </div>
@@ -1577,7 +1976,7 @@ export default function HeroSlider() {
                 className="group relative w-64 h-96 flex-shrink-0 cursor-pointer"
               >
                 <motion.div
-                  className="w-full h-full relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/20 transform-gpu"
+                  className="w-full h-full relative rounded-[2rem] overflow-hidden shadow-2xl border-2 border-white/20 transform-gpu"
                   whileHover={{ y: -10, rotateX: 5 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
@@ -1588,22 +1987,22 @@ export default function HeroSlider() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="25vw"
-                    quality={75} // Lower quality for thumbnails to load fast
+                    quality={75}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-
+                  
                   <div className="absolute top-4 right-4">
-                    <div className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[9px] font-bold text-white uppercase tracking-widest">
-                      Next
-                    </div>
+                     <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-lime-500/50 text-[9px] font-bold text-lime-400 uppercase tracking-widest shadow-lg">
+                        Next
+                     </div>
                   </div>
 
                   <div className="absolute bottom-0 left-0 w-full p-6">
-                    <div className="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10">
-                      <h3 className="text-white text-lg font-black uppercase tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors">
-                        {card1Data.title}
-                      </h3>
-                      <div className="h-1 w-8 bg-lime-500 rounded-full mt-2" />
+                    <div className="drop-shadow-lg">
+                       <h3 className="text-white text-lg font-black uppercase tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors drop-shadow-md">
+                         {card1Data.title}
+                       </h3>
+                       <div className="h-1 w-8 bg-lime-500 rounded-full mt-2 shadow-[0_0_10px_#84cc16]" />
                     </div>
                   </div>
                 </motion.div>
@@ -1615,7 +2014,7 @@ export default function HeroSlider() {
                 onClick={() => setCurrentSlide(nextNextSlideIndex)}
                 className="group relative w-48 h-72 flex-shrink-0 cursor-pointer opacity-60 hover:opacity-100 transition-all duration-500 hidden xl:block"
               >
-                <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden border border-white/10 grayscale group-hover:grayscale-0 transition-all transform-gpu">
+                <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden border border-white/10 grayscale group-hover:grayscale-0 transition-all transform-gpu shadow-xl">
                   <Image
                     key={card2Data.imageUrl}
                     src={card2Data.imageUrl}
@@ -1623,14 +2022,14 @@ export default function HeroSlider() {
                     fill
                     className="object-cover"
                     sizes="20vw"
-                    quality={60} // Lower quality for thumbnails
+                    quality={60}
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
-
+                  
                   <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-white/5">
-                      <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">Up Next</span>
-                    </div>
+                     <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-white/5">
+                        <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">Up Next</span>
+                     </div>
                   </div>
                 </div>
               </motion.div>
