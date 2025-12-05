@@ -667,4 +667,4 @@ export default async function BlogPost({ params }: BlogPostProps) {
 }
 
 // Enable ISR: Re-generate page every hour to keep SEO fresh
-export const revalidate = 3600;
+export const revalidate = 0;
