@@ -1168,7 +1168,7 @@ export default function Header() {
           "fixed inset-x-0 top-0 z-50 w-full transition-all duration-500 transform-gpu pt-4"
         )}
       >
-        {/* Desktop Nav */}
+        {/* --- DESKTOP NAV (Unchanged) --- */}
         <NavBody visible={visible}>
           {/* Logo - Wrapped in its own Glass Pill */}
           <Link
@@ -1201,50 +1201,51 @@ export default function Header() {
           </div>
         </NavBody>
 
-        {/* Mobile Nav */}
-        <MobileNav visible={visible}>
-          <div className="flex w-full items-center justify-between">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-lg font-bold text-green-400 hover:text-green-400 transition-colors duration-300"
-            >
-              <PawPrintIcon className="w-5 h-5" />
-              <span>Yala Wildlife</span>
-            </Link>
-            <button
-              onClick={toggleMenu}
-              className="text-white focus:outline-none p-2 bg-white/10 rounded-full backdrop-blur-md"
-              aria-label="Toggle menu"
-            >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="w-5 h-5" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="w-5 h-5" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
-        </MobileNav>
+        {/* --- MOBILE NAV (Floating Pills) --- */}
+        <MobileNavWrapper>
+          {/* Left Pill: Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 shadow-lg active:scale-95 transition-transform"
+          >
+            <PawPrintIcon className="w-5 h-5" />
+            <span className="font-bold text-green-400 text-sm">Yala Wildlife</span>
+          </Link>
+
+          {/* Right Pill: Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="p-2.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 shadow-lg text-white active:scale-95 transition-transform"
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-5 h-5" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="w-5 h-5" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+        </MobileNavWrapper>
       </motion.header>
 
-      {/* Full-Screen Mobile Menu (Unchanged logic, just keeping it here) */}
+      {/* Full-Screen Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -1270,65 +1271,83 @@ export default function Header() {
               exit={{ scale: 0.9, opacity: 0 }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div className="w-full max-w-md mx-auto px-6 pointer-events-auto">
+              {/* Content Container - Centered */}
+              <div className="w-full max-w-md mx-auto px-6 pointer-events-auto flex flex-col items-center">
+                
+                {/* Close Button Floating */}
                 <motion.button
                   onClick={closeMenu}
-                  className="fixed top-6 right-6 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl text-white z-50"
+                  className="fixed top-6 right-6 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl text-white z-50 border border-white/5"
                 >
                   <X className="w-6 h-6" />
                 </motion.button>
 
-                <div className="text-center mb-12">
-                  <Link href="/" onClick={handleLinkClick} className="inline-flex items-center gap-3 text-2xl font-bold text-green-400">
-                    <PawPrintIcon className="w-8 h-8" />
+                <div className="text-center mb-10">
+                  <Link href="/" onClick={handleLinkClick} className="inline-flex items-center gap-3 text-3xl font-bold text-green-400">
+                    <PawPrintIcon className="w-10 h-10" />
                     <span>Yala Wildlife</span>
                   </Link>
                 </div>
 
-                <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center gap-6 w-full">
                   {navItems.map((item, idx) => (
                     <motion.div
                       key={item.name}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 + idx * 0.05 }}
-                      className="w-full"
+                      className="w-full text-center"
                     >
                       {item.name === "Safari Packages" ? (
-                        <div className="text-center">
-                          <button onClick={() => setExpandedPackages(!expandedPackages)} className="flex items-center justify-center gap-2 text-lg font-semibold text-green-400 mx-auto">
+                        <div className="flex flex-col items-center">
+                          {/* CHANGED: Text Color to Green-400 */}
+                          <button 
+                            onClick={() => setExpandedPackages(!expandedPackages)} 
+                            className="flex items-center justify-center gap-2 text-xl font-bold text-green-400 hover:text-green-300 transition-colors"
+                          >
                             <span>{item.name}</span>
                             <ChevronDown className={`h-5 w-5 transition-transform ${expandedPackages ? "rotate-180" : ""}`} />
                           </button>
                           <AnimatePresence>
                             {expandedPackages && (
-                              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-4">
-                                <div className="flex flex-col items-center gap-3">
-                                  {packages.map((pkg) => (
-                                    <Link key={pkg.id} href={`/safari-packages/${pkg.slug}`} onClick={handleLinkClick} className="text-sm text-neutral-300">
-                                      {pkg.name}
-                                    </Link>
-                                  ))}
+                              <motion.div 
+                                initial={{ height: 0, opacity: 0 }} 
+                                animate={{ height: "auto", opacity: 1 }} 
+                                exit={{ height: 0, opacity: 0 }} 
+                                className="overflow-hidden mt-4 w-full"
+                              >
+                                <div className="flex flex-col items-center gap-4 py-2 bg-white/5 rounded-2xl border border-white/5">
+                                  {packages.length > 0 ? (
+                                    packages.map((pkg) => (
+                                      // CHANGED: Sub-links to Green-200 for hierarchy but green theme
+                                      <Link key={pkg.id} href={`/safari-packages/${pkg.slug}`} onClick={handleLinkClick} className="text-sm text-green-200 font-medium hover:text-green-400">
+                                        {pkg.name}
+                                      </Link>
+                                    ))
+                                  ) : (
+                                    <div className="text-sm text-neutral-500">Loading...</div>
+                                  )}
                                 </div>
                               </motion.div>
                             )}
                           </AnimatePresence>
                         </div>
                       ) : (
-                        <Link href={item.link} onClick={handleLinkClick} className="block text-center text-lg font-semibold text-green-400">
+                        // CHANGED: Text Color to Green-400
+                        <Link href={item.link} onClick={handleLinkClick} className="block text-xl font-bold text-green-400 hover:text-green-300 transition-colors">
                           {item.name}
                         </Link>
                       )}
                     </motion.div>
                   ))}
                 </div>
-
-                <div className="mt-12 flex flex-col items-center gap-6">
-                  <Link href="/safari-packages" onClick={handleLinkClick} className="px-8 py-3 rounded-2xl bg-green-400 text-black text-sm font-bold">
+                
+                <div className="mt-12 flex flex-col items-center gap-6 w-full">
+                  <Link href="/safari-packages" onClick={handleLinkClick} className="px-10 py-3.5 rounded-full bg-green-500 text-black text-sm font-bold shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] transition-all transform hover:scale-105">
                     Book Now
                   </Link>
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs text-neutral-400">Theme:</span>
+                  <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+                    <span className="text-xs text-neutral-400">Theme</span>
                     <ModeToggle />
                   </div>
                 </div>
@@ -1341,7 +1360,7 @@ export default function Header() {
   );
 }
 
-// --- DESKTOP CONTAINER: No Background, just layout ---
+// --- DESKTOP CONTAINER ---
 const NavBody = ({
   children,
   visible,
@@ -1352,45 +1371,32 @@ const NavBody = ({
   <motion.div
     animate={{ y: visible ? 0 : 0 }}
     transition={{ type: "spring", stiffness: 200, damping: 50 }}
-    // REMOVED: bg-black/30 backdrop-blur-md
-    // ADDED: bg-transparent (Invisible container)
     className={cn(
       "hidden lg:flex mx-auto w-full max-w-7xl items-center justify-between bg-transparent px-6 py-2 transform-gpu pointer-events-none"
     )}
   >
-    {/* Enable pointer events on children since parent is none */}
     <div className="contents pointer-events-auto">
       {children}
     </div>
   </motion.div>
 );
 
-// --- MOBILE CONTAINER: Cutter Style ---
-const MobileNav = ({
+// --- MOBILE CONTAINER: Transparent Wrapper ---
+// Only layout logic here, no backgrounds
+const MobileNavWrapper = ({
   children,
-  visible,
 }: {
   children: React.ReactNode;
-  visible?: boolean;
 }) => (
-  <motion.div
-    animate={{
-      width: visible ? "90%" : "95%",
-      y: visible ? 5 : 0,
-    }}
-    transition={{ type: "spring", stiffness: 200, damping: 50 }}
-    className={cn(
-      "lg:hidden mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center",
-      // Mobile gets a solid glass bar for better usability
-      "bg-black/60 backdrop-blur-xl border border-white/10 shadow-lg",
-      "px-4 py-3 rounded-2xl transform-gpu"
-    )}
-  >
-    {children}
-  </motion.div>
+  <div className="lg:hidden fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-4 pointer-events-none">
+    {/* Re-enable pointer events for the buttons themselves */}
+    <div className="contents pointer-events-auto">
+      {children}
+    </div>
+  </div>
 );
 
-// --- NAV ITEMS: The "Tabs" Logic ---
+// --- NAV ITEMS ---
 const NavItems: React.FC<NavItemsProps> = ({
   items,
   packages,
@@ -1413,14 +1419,12 @@ const NavItems: React.FC<NavItemsProps> = ({
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             href={item.link}
-            // --- NEW DESIGN: Glass Pill for each tab ---
             className={cn(
               "relative px-5 py-2.5 rounded-full flex items-center gap-1 transition-all duration-300",
-              "bg-black/40 backdrop-blur-md border border-white/10 shadow-sm", // The "Cutter" Background
-              "hover:border-green-500/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.15)]" // Hover Glow
+              "bg-black/40 backdrop-blur-md border border-white/10 shadow-sm",
+              "hover:border-green-500/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.15)]"
             )}
           >
-            {/* The Green Hover Fill Effect */}
             {hovered === idx && (
               <motion.div
                 layoutId="hovered"
@@ -1428,14 +1432,14 @@ const NavItems: React.FC<NavItemsProps> = ({
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               />
             )}
-
+            
             <span className={cn(
               "relative z-10 font-bold",
               hovered === idx ? "text-green-400" : "text-white"
             )}>
               {item.name}
             </span>
-
+            
             {item.name === "Safari Packages" && (
               <ChevronDown className={cn(
                 "ml-1 h-3 w-3 transition-transform duration-300",
@@ -1444,7 +1448,6 @@ const NavItems: React.FC<NavItemsProps> = ({
             )}
           </Link>
 
-          {/* Dropdown Menu */}
           {item.name === "Safari Packages" && (
             <div
               className={cn(
