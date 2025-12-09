@@ -55,5 +55,13 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "iOS >= 12",
+    "Safari >= 12",
+    "last 2 versions",
+    "not ie < 11",
+    "> 1%"
+  ]
 }

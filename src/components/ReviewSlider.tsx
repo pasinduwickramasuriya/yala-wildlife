@@ -43,7 +43,7 @@ const SliderCard = ({ review }: { review: Review }) => (
             loading="lazy"
           />
         ) : (
-          <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">
+          <div className="w-12 h-12 bg-[#00ff00] rounded-full flex items-center justify-center text-white font-bold">
             {review.author_name.charAt(0)}
           </div>
         )}
@@ -120,7 +120,7 @@ export default function ReviewSlider() {
             <h2 className="text-3xl md:text-3xl font-bold text-white mb-4">
                 What Travelers Say
             </h2>
-            <div className="w-20 h-1.5 bg-green-600 mx-auto rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[#00ff00] mx-auto rounded-full"></div>
         </div>
 
         {/* --- Slider Area --- */}
@@ -132,7 +132,7 @@ export default function ReviewSlider() {
             {/* FIX: Conditional Rendering for Loading State */}
             {loading ? (
                 <div className="flex justify-center items-center h-[280px] w-full">
-                    <FaSpinner className="w-8 h-8 text-green-500 animate-spin" />
+                    <FaSpinner className="w-8 h-8 text-[#00ff00] animate-spin" />
                 </div>
             ) : (
                 <div className="flex w-full">
@@ -152,7 +152,7 @@ export default function ReviewSlider() {
                 href={GOOGLE_REVIEW_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-green-500/30 group"
+                className="inline-flex items-center gap-3 bg-[#00ff00] hover:bg-[#00ff00] text-black font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-green-500/30 group"
             >
                 <FaPenFancy className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 <span>Write a Review</span>
