@@ -6,6 +6,7 @@ import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import GallerySection from "@/components/GallerySection";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
+import HomeBlogSection from "@/components/HomeBlogSection";
 import MemoryGallery from "@/components/MemoryGallery";
 import ModernReviews from "@/components/ModernReviews";
 import PackageCard from "@/components/PackageCard";
@@ -52,17 +53,18 @@ export default function ClientHome() {
           ))}
         </div>
       </div>
-      <MemoryGallery/>
-      <ModernReviews/>
+      <HomeBlogSection />
+      <MemoryGallery />
+      <ModernReviews />
       {/* <ElfsightReviews /> */}
       <PhotoGallery />
       {/* <ReviewsSection /> */}
-     
+
       <WhyChooseUs />
       <GallerySection />
-      
+
       {/* <FeaturableReviews/> */}
-       <ReviewSlider/>
+      <ReviewSlider />
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
