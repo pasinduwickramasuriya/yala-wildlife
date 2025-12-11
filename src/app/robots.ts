@@ -1,5 +1,5 @@
 // import { MetadataRoute } from 'next'
- 
+
 // export default function robots(): MetadataRoute.Robots {
 //   return {
 //     rules: {
@@ -14,7 +14,7 @@
 
 
 // import { MetadataRoute } from 'next'
- 
+
 // export default function robots(): MetadataRoute.Robots {
 //   return {
 //     rules: [
@@ -47,7 +47,7 @@
 
 
 import { MetadataRoute } from 'next'
- 
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -86,7 +86,16 @@ export default function robots(): MetadataRoute.Robots {
         ],
       }
     ],
-    sitemap: 'https://www.yalawildlife.com/sitemap.xml',  // ✅ FIXED: Added www subdomain
-    host: 'https://www.yalawildlife.com'  // ✅ FIXED: Added www subdomain for consistency
+    sitemap: [
+      'https://www.yalawildlife.com/sitemap.xml',
+      'https://www.yalawildlife.com/safari-packages/sitemap.xml',
+      'https://www.yalawildlife.com/blog/sitemap.xml',
+      'https://www.yalawildlife.com/about/sitemap.xml',
+      'https://www.yalawildlife.com/contact/sitemap.xml',
+      'https://www.yalawildlife.com/reviews/sitemap.xml',
+      'https://www.yalawildlife.com/faq/sitemap.xml',
+      'https://www.yalawildlife.com/pickup-dropoff/sitemap.xml',
+    ],
+    host: 'https://www.yalawildlife.com'
   }
 }
