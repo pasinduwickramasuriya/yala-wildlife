@@ -183,7 +183,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7  // Good for content marketing SEO
     }))
 
-    // ✅ ADDED: High-value keyword-specific pages for better SEO coverage
+    // ✅ ADDED: High-value keyword-specific pages for better SEO coverag
     const keywordPages: MetadataRoute.Sitemap = [
       {
         url: `${baseUrl}/yala-national-park`,
