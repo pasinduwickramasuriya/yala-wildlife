@@ -12,6 +12,7 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { Analytics } from "@vercel/analytics/next";
 
 import { SEOIndicator } from "@/components/SEOIndicator";
 // import DotsBackground from "@/components/DotsBackground";
@@ -78,6 +79,8 @@ export default function RootLayout({
         {/* Debug panel - remove in production */}
         {/* <SEODebug /> */}
         {/* <DotsBackground/> */}
+
+        <Analytics />
       </body>
     </html>
   );
