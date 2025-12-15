@@ -405,7 +405,7 @@ import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 const BASE_URL = "https://www.yalawildlife.com";
 
-// ✅ SEO-ENHANCED: Contact page metadata (UNTOUCHED
+// ✅ SEO-ENHANCED: Contact page metadata (UNTOUCHE
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
