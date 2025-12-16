@@ -578,7 +578,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
             </Link>
 
             {/* --- The Glass Card (Borderless & Cute) --- */}
-            <article className="relative bg-black/40 backdrop-blur-2xl rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-700">
+            <article className="relative bg-black/60 backdrop-blur-sm rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-700">
 
               {/* Hero Image inside Card */}
               <div className="relative w-full aspect-[16/9] md:h-[450px] m-2 rounded-[2.5rem] overflow-hidden shadow-inner">
