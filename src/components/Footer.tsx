@@ -289,8 +289,8 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { name: "Privacy Policy", href: "/contact" },
-  { name: "Terms of Service", href: "/safari-packages" },
+  { name: "Privacy Policy", href: "/legal" },
+  { name: "Terms of Service", href: "/legal" },
 ];
 
 export default function Footer() {
