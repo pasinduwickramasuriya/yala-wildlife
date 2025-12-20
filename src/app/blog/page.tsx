@@ -12,7 +12,7 @@ import {
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Calendar, ArrowUpRight, BookOpen, Tag } from "lucide-react";
 
-// ✅ SEO-OPTIMIZED: Base URL for consistency
+// ✅ SEO-OPTIMIZED: Base URL for consistenc
 const BASE_URL = "https://www.yalawildlife.com";
 
 // ✅ ENHANCED: Blog page metadata (UNTOUCHED)
