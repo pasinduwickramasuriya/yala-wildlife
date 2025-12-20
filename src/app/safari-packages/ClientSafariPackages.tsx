@@ -10,6 +10,7 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Compass, Map, Shield, Star } from "lucide-react";
+import AdvancePaymentForm from "@/components/AdvancePaymentForm";
 
 // Define the Package interface
 interface SafariPackage {
@@ -182,6 +183,7 @@ export default function ClientSafariPackages() {
                 <p className="text-neutral-400 text-lg">No expeditions currently available.</p>
               </div>
             )}
+            <AdvancePaymentForm/>
           </div>
 
           {/* SEO Content (Hidden Visually) */}

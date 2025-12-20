@@ -58,3 +58,26 @@ model Blog {
   slug      String   @unique
   createdAt DateTime @default(now())
 }
+
+// schema.prisma
+
+model AdvanceBooking {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt      DateTime @default(now())
+
+  // Customer Details
+  firstName      String
+  lastName       String
+  email          String
+  phone          String
+  country        String
+
+  // Booking Details
+  additionalNote String?
+
+  // Payment Info
+  amount         Float    // Amount in LKR
+  currency       String   @default("LKR") // Changed to LKR per your request
+  status         String   @default("PENDING") // PENDING, SUCCESS
+  paymentId      String?  // PayHere Reference ID
+}
