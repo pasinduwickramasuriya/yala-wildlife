@@ -70,23 +70,23 @@ export default function ClientHome() {
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
         pageType="home"
       >
-        <div className="container mx-auto px-4 py-8">
-          <h1>Yala Wildlife Safari</h1>
+        <div className="container mx-auto px-4 py-8 bg-black/60 text-center ">
+          <h1 className="text-[#00ff00]">Yala Wildlife Safari</h1>
 
           {/* ✅ ADD MORE CONTENT LIKE THIS: */}
-          <p>
+          <p className="text-white/90">
             Welcome to Yala Wildlife Safari - Your gateway to unforgettable wildlife
             experiences in Sri Lankas premier national park. Our expert guides ensure
             safe adventures with guaranteed leopard sightings.
           </p>
 
-          <p>
+          <p className="text-white/90">
             Discover the magic of Yala National Park with our premium safari packages.
             Experience the thrill of spotting elusive leopards, majestic elephants, and
             over 200 species of birds in their natural habitat. Book your adventure today!
           </p>
 
-          <p>
+          <p className="text-white/90">
             Yala boasts the highest leopard density in the world. Our professional guides
             know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
             equipped with safety features and optimal viewing configurations.
