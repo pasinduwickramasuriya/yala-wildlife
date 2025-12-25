@@ -12,7 +12,7 @@ import {
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Calendar, ArrowUpRight, BookOpen, Tag } from "lucide-react";
 
-// ✅ SEO-OPTIMIZED: Base URL for consistency
+// ✅ SEO-OPTIMIZED: Base URL for consistenc
 const BASE_URL = "https://www.yalawildlife.com";
 
 // ✅ ENHANCED: Blog page metadata (UNTOUCHED)
@@ -373,14 +373,14 @@ export default async function BlogPage() {
 
           {/* HERO SECTION (Removed box container for cleaner look) */}
           <div className="relative z-10 text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 backdrop-blur-md mb-6 border border-white/5">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-xs font-mono uppercase tracking-widest text-green-400">Yala Intelligence</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-6 border border-white/5">
+              <span className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse"></span>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#00ff00]">Yala Intelligence</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-              Wildlife <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Chronicles</span>
+            <h1 className="text-4xl md:text-4xl font-bold text-[#00ff00] mb-6 tracking-tight">
+              Wildlife <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff00]  to-[#00ff00] ">Chronicles</span>
             </h1>
-            <p className="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto leading-relaxed font-light">
+            <p className="text-lg md:text-md text-white max-w-2xl mx-auto leading-relaxed font-light bg-black/60">
               Discover fascinating wildlife stories, expert photography tips, and conservation insights from our expert guides.
             </p>
           </div>
@@ -397,7 +397,7 @@ export default async function BlogPage() {
           <main className="mt-16">
             <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <BookOpen className="text-green-500 w-5 h-5" />
+                <BookOpen className="text-[#00ff00] w-5 h-5" />
                 Latest Insights
               </h2>
             </div>
@@ -430,7 +430,7 @@ export default async function BlogPage() {
 
                         {/* Minimal Badge */}
                         <div className="absolute top-2 left-2">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-black bg-green-500/90">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-black bg-[#00ff00]/90">
                             Wildlife
                           </span>
                         </div>
@@ -451,7 +451,7 @@ export default async function BlogPage() {
                         </div>
 
                         {/* Title - Tight Leading */}
-                        <h3 className="text-sm font-bold text-white mb-2 group-hover:text-green-400 transition-colors leading-snug line-clamp-2">
+                        <h3 className="text-sm font-bold text-white mb-2 group-hover:text-[#00ff00] transition-colors leading-snug line-clamp-2">
                           {post.title}
                         </h3>
 
@@ -462,10 +462,10 @@ export default async function BlogPage() {
 
                         {/* Footer Action - Minimal */}
                         <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
-                          <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider group-hover:text-green-400">
+                          <span className="text-[10px] font-bold text-[#00ff00] uppercase tracking-wider group-hover:text-[#00ff00]">
                             Read
                           </span>
-                          <ArrowUpRight size={12} className="text-neutral-500 group-hover:text-green-400 transition-colors" />
+                          <ArrowUpRight size={12} className="text-neutral-500 group-hover:text-[#00ff00] transition-colors" />
                         </div>
                       </div>
                     </Link>
@@ -485,7 +485,7 @@ export default async function BlogPage() {
                 </p>
                 <Link
                   href="/safari-packages"
-                  className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-6 py-2 text-sm rounded-full font-bold transition-all duration-300"
+                  className="inline-flex items-center justify-center bg-[#00ff00] hover:bg-[#00ff00] text-white px-6 py-2 text-sm rounded-full font-bold transition-all duration-300"
                 >
                   Book Your Experience
                 </Link>
@@ -510,15 +510,19 @@ export default async function BlogPage() {
           </section>
 
           {/* SEO CONTENT WRAPPER (Hidden Visual Style, Visible for SEO) */}
-          <div className="mt-16 opacity-60">
+          <div className="mt-16 opacity-90 text-center">
             <AutoSEOWrapper
               pageTitle="Yala Wildlife Blog | Safari Tips & Wildlife Guides"
               pageDescription="Expert wildlife blog featuring Yala safari tips, leopard tracking guides, photography techniques, and Sri Lanka conservation news. Updated weekly!"
               pageType="blog"
             >
-              <div className="container mx-auto px-4 py-8 text-neutral-500 text-xs">
+              <div className="container mx-auto px-4 py-8 text-neutral-500 text-xs ">
                 <h1 className="text-white text-sm font-bold mb-2">Yala Wildlife Blog</h1>
-                <p className="mb-2">Welcome to the Yala Wildlife Safari blog...</p>
+                <p className="mb-2 text-white">Welcome to the Yala Wildlife Safari blog...Yala boasts the highest leopard density in the world. Our professional guides
+                  know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
+                  equipped with safety features and optimal viewing configurations. Discover the magic of Yala National Park with our premium safari packages.
+                  Experience the thrill of spotting elusive leopards, majestic elephants, and
+                  over 200 species of birds in their natural habitat. Book your adventure today!</p>
                 {/* ... (Rest of SEO content remains same for crawlers) ... */}
               </div>
             </AutoSEOWrapper>
