@@ -12,12 +12,18 @@ export default function AdminLogin() {
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     setError(null);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
     try {
       const res = await fetch("/api/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
+
       if (res.ok) {
         const { token } = await res.json();
         localStorage.setItem("token", token);
@@ -35,9 +41,14 @@ export default function AdminLogin() {
           setError("Login failed (Server Error)");
         }
       }
-    } catch (error) {
-      console.error("Login fetch error:", error);
-      setError("An error occurred. Please try again.");
+    } catch (error: unknown) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.error("Login request timed out");
+        setError("Request timed out. Please check your network or server logs.");
+      } else {
+        console.error("Login fetch error:", error);
+        setError("An error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
