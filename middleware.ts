@@ -34,11 +34,12 @@
 
 
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { verifyToken } from "@/lib/auth";
 
-export function middleware(request: Request) {
+export function middleware(request: NextRequest) {
   const url = new URL(request.url);
-  const token = request.headers.get("authorization")?.split(" ")[1];
+  const token = request.cookies.get("token")?.value;
 
   // Allow access to /admin/login without token
   if (url.pathname === "/admin/login") {
