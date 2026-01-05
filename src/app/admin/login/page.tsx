@@ -25,8 +25,7 @@ export default function AdminLogin() {
       clearTimeout(timeoutId);
 
       if (res.ok) {
-        const { token } = await res.json();
-        localStorage.setItem("token", token);
+        // Token is set in cookie, just redirect
         router.push("/admin");
       } else {
         console.error("Login response status:", res.status);

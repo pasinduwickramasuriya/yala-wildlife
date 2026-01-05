@@ -35,7 +35,18 @@ export async function POST(request: Request) {
     const token = await signToken({ id: user.id, role: user.role });
     console.log("Auth route: Token signed, returning response");
 
-    return NextResponse.json({ token });
+    const response = NextResponse.json({ success: true });
+
+    // Set HTTP-only cookie
+    response.cookies.set("admin_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
+
+    return response;
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({ error: "Login failed" }, { status: 500 });
