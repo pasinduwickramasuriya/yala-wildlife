@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const token = req.headers.get("Authorization")?.replace("Bearer ", "");
+    const token = req.cookies.get("admin_token")?.value || req.headers.get("Authorization")?.replace("Bearer ", "");
     const decoded = token ? await verifyToken(token) : null;
 
     if (!token || !decoded) {
@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const token = req.headers.get("Authorization")?.replace("Bearer ", "");
+    const token = req.cookies.get("admin_token")?.value || req.headers.get("Authorization")?.replace("Bearer ", "");
     const decoded = token ? await verifyToken(token) : null;
 
     if (!token || !decoded) {
@@ -146,7 +146,7 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const token = req.headers.get("Authorization")?.replace("Bearer ", "");
+    const token = req.cookies.get("admin_token")?.value || req.headers.get("Authorization")?.replace("Bearer ", "");
     const decoded = token ? await verifyToken(token) : null;
 
     if (!token || !decoded) {

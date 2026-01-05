@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 interface Package {
@@ -9,8 +9,8 @@ interface Package {
   description: string;
   imageUrl: string;
   price: number;
-  mealPrice: number;   // Added
-  ticketPrice: number; // Added
+  mealPrice: number;
+  ticketPrice: number;
   slug: string;
 }
 
@@ -21,32 +21,17 @@ export default function AddPackage() {
     description: "",
     imageUrl: "",
     price: "",
-    mealPrice: "",   // Added
-    ticketPrice: "", // Added
+    mealPrice: "",
+    ticketPrice: "",
     slug: "",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [editId, setEditId] = useState<string | null>(null);
-  const [token, setToken] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch token
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = localStorage.getItem("token") || "";
-      setToken(storedToken);
-      if (!storedToken) console.warn("No token found. Please log in.");
-    }
-  }, []);
-
-  // Fetch packages
-  useEffect(() => {
-    fetchPackages();
-  }, []);
-
-  const fetchPackages = async () => {
+  const fetchPackages = useCallback(async () => {
     try {
-      const res = await fetch("/api/package");
+      const res = await fetch("/api/package", { cache: "no-store" });
       if (!res.ok) throw new Error(`Failed to fetch packages: ${res.statusText}`);
       const data = await res.json();
       setPackages(data);
@@ -54,16 +39,16 @@ export default function AddPackage() {
       setError("Error fetching packages");
       console.error("Fetch error:", err);
     }
-  };
+  }, []);
+
+  // Fetch packages on mount
+  useEffect(() => {
+    fetchPackages();
+  }, [fetchPackages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
-    if (!token) {
-      setError("Please log in to perform this action");
-      return;
-    }
 
     const url = editId ? `/api/package?id=${editId}` : "/api/package";
     const method = editId ? "PUT" : "POST";
@@ -75,7 +60,7 @@ export default function AddPackage() {
     // Append new fields
     formDataToSend.append("mealPrice", formData.mealPrice);
     formDataToSend.append("ticketPrice", formData.ticketPrice);
-    
+
     formDataToSend.append("slug", formData.slug);
 
     if (method === "POST") {
@@ -100,39 +85,46 @@ export default function AddPackage() {
     try {
       const res = await fetch(url, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // Cookies sent automatically
         body: formDataToSend,
       });
 
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : {};
+
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(`${errorData.error || "Request failed"} - Status: ${res.status}`);
+        console.error("Server response:", data);
+        if (res.status === 401) {
+          setError("Unauthorized: Please log in again.");
+          return;
+        }
+        throw new Error(data.error || text || `Request failed - Status: ${res.status}`);
       }
 
-      const updatedPackage = await res.json();
+      const updatedPackage = data;
+
       if (method === "PUT") {
         setPackages(packages.map((p) => (p.id === editId ? updatedPackage : p)));
         setEditId(null);
       } else {
         setPackages([...packages, updatedPackage]);
-        fetchPackages();
+        await fetchPackages();
       }
       // Reset form including new fields
-      setFormData({ 
-        name: "", 
-        description: "", 
-        imageUrl: "", 
-        price: "", 
-        mealPrice: "", 
-        ticketPrice: "", 
-        slug: "" 
+      setFormData({
+        name: "",
+        description: "",
+        imageUrl: "",
+        price: "",
+        mealPrice: "",
+        ticketPrice: "",
+        slug: ""
       });
       setImageFile(null);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
+      console.error("Submit error:", err);
     }
   };
 
@@ -142,8 +134,8 @@ export default function AddPackage() {
       description: pkg.description,
       imageUrl: pkg.imageUrl,
       price: pkg.price.toString(),
-      mealPrice: pkg.mealPrice ? pkg.mealPrice.toString() : "0",     // Added
-      ticketPrice: pkg.ticketPrice ? pkg.ticketPrice.toString() : "0", // Added
+      mealPrice: pkg.mealPrice ? pkg.mealPrice.toString() : "0",
+      ticketPrice: pkg.ticketPrice ? pkg.ticketPrice.toString() : "0",
       slug: pkg.slug,
     });
     setImageFile(null);
@@ -151,23 +143,28 @@ export default function AddPackage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!token) {
-      setError("Please log in to perform this action");
-      return;
-    }
     try {
       const res = await fetch(`/api/package?id=${id}`, {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
+        // Cookies sent automatically
       });
+
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : {};
+
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Delete failed");
+        if (res.status === 401) {
+          setError("Unauthorized: Please log in again.");
+          return;
+        }
+        throw new Error(data.error || text || "Delete failed");
       }
       setPackages(packages.filter((p) => p.id !== id));
+      await fetchPackages();
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
+      console.error("Delete error:", err);
     }
   };
 
@@ -225,7 +222,7 @@ export default function AddPackage() {
             className="mt-1 block w-full text-foreground"
           />
         </div>
-        
+
         {/* Price Fields Group */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>

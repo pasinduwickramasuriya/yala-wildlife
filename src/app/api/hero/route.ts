@@ -214,7 +214,8 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const token = request.headers.get("authorization")?.split(" ")[1];
+    const token = (request as any).cookies?.get("admin_token")?.value || request.headers.get("authorization")?.split(" ")[1];
+
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
@@ -269,7 +270,7 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const token = request.headers.get("authorization")?.split(" ")[1];
+    const token = (request as any).cookies?.get("admin_token")?.value || request.headers.get("authorization")?.split(" ")[1];
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
@@ -329,7 +330,7 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const token = request.headers.get("authorization")?.split(" ")[1];
+    const token = (request as any).cookies?.get("admin_token")?.value || request.headers.get("authorization")?.split(" ")[1];
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
