@@ -6,9 +6,12 @@ import LoginForm from "@/components/LoginForm";
 
 export default function AdminLogin() {
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (email: string, password: string) => {
+    setIsLoading(true);
+    setError(null);
     try {
       const res = await fetch("/api/auth", {
         method: "POST",
@@ -35,6 +38,8 @@ export default function AdminLogin() {
     } catch (error) {
       console.error("Login fetch error:", error);
       setError("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -45,7 +50,7 @@ export default function AdminLogin() {
           Admin Login
         </h1>
         {error && <p className="text-destructive mb-4">{error}</p>}
-        <LoginForm onSubmit={handleLogin} />
+        <LoginForm onSubmit={handleLogin} loading={isLoading} />
       </div>
     </div>
   );
