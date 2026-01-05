@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-
+//p
 export async function GET() {
     try {
         console.log("Test DB route: Attempting connection...");
