@@ -69,8 +69,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     // 1. Auth Check
+    // 1. Auth Check
     const token = request.headers.get("authorization")?.split(" ")[1];
-    if (!token || verifyToken(token)?.role !== "admin") {
+    const decoded = token ? await verifyToken(token) : null;
+
+    if (!token || !decoded || decoded.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
@@ -157,7 +160,7 @@ export async function PUT(request: Request) {
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     if (!decoded || decoded.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
@@ -238,7 +241,7 @@ export async function DELETE(request: Request) {
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     if (!decoded || decoded.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }

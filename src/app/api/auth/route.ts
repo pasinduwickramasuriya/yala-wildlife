@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    const token = signToken({ id: user.id, role: user.role });
+    const token = await signToken({ id: user.id, role: user.role });
     return NextResponse.json({ token });
   } catch (error) {
     console.error("Login error:", error);

@@ -51,7 +51,7 @@
 //       const uploadDir = path.join(process.cwd(), "public/uploads");
 //       // Ensure the uploads directory exists
 //       await fs.mkdir(uploadDir, { recursive: true });
-      
+
 //       const newFileName = `${Date.now()}-${imageFile.name}`;
 //       const filePath = path.join(uploadDir, newFileName);
 //       const buffer = Buffer.from(await imageFile.arrayBuffer());
@@ -110,7 +110,7 @@
 //       const uploadDir = path.join(process.cwd(), "public/uploads");
 //       // Ensure the uploads directory exists
 //       await fs.mkdir(uploadDir, { recursive: true });
-      
+
 //       const newFileName = `${Date.now()}-${imageFile.name}`;
 //       const filePath = path.join(uploadDir, newFileName);
 //       const buffer = Buffer.from(await imageFile.arrayBuffer());
@@ -218,7 +218,7 @@ export async function POST(request: Request) {
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     if (!decoded || decoded.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
@@ -273,7 +273,7 @@ export async function PUT(request: Request) {
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     if (!decoded || decoded.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
@@ -333,7 +333,7 @@ export async function DELETE(request: Request) {
     if (!token) {
       return NextResponse.json({ error: "No token provided" }, { status: 401 });
     }
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     if (!decoded || decoded.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }

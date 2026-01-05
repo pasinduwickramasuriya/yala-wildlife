@@ -43,7 +43,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    if (!token || !verifyToken(token)) {
+    const decoded = token ? await verifyToken(token) : null;
+
+    if (!token || !decoded) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -92,7 +94,9 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    if (!token || !verifyToken(token)) {
+    const decoded = token ? await verifyToken(token) : null;
+
+    if (!token || !decoded) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -143,7 +147,9 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    if (!token || !verifyToken(token)) {
+    const decoded = token ? await verifyToken(token) : null;
+
+    if (!token || !decoded) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

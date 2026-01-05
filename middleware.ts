@@ -36,7 +36,7 @@
 import { NextResponse } from "next/server";
 import { verifyToken } from "@/lib/auth";
 
-export function middleware(request: Request) {
+export async function middleware(request: Request) {
   const url = new URL(request.url);
   const token = request.headers.get("authorization")?.split(" ")[1];
 
@@ -52,7 +52,7 @@ export function middleware(request: Request) {
     }
 
     try {
-      const decoded = verifyToken(token);
+      const decoded = await verifyToken(token);
       // Check if decoded is null or lacks required properties
       if (!decoded || decoded.role !== "admin") {
         return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
