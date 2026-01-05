@@ -20,10 +20,20 @@ export default function AdminLogin() {
         localStorage.setItem("token", token);
         router.push("/admin");
       } else {
-        const data = await res.json();
-        setError(data.error || "Login failed");
+        console.error("Login response status:", res.status);
+        try {
+          const data = await res.json();
+          console.error("Login error data:", data);
+          setError(data.error || "Login failed");
+        } catch (jsonError) {
+          console.error("Login error parsing JSON:", jsonError);
+          const text = await res.text();
+          console.error("Login raw response:", text);
+          setError("Login failed (Server Error)");
+        }
       }
-    } catch {
+    } catch (error) {
+      console.error("Login fetch error:", error);
       setError("An error occurred. Please try again.");
     }
   };
