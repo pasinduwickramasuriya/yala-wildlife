@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+Wildlife+Safari/@6.265796,81.2651137,14z/data=!4m12!1m2!2m1!1syala+wildlife+safari,+wickrama,+kasingama,+tissamaharama+82600!3m8!1s0x62b813f2717b2b81:0xf0b7e34cc97ec936!8m2!3d6.265796!4d81.3011626!9m1!1b1!15sCj55YWxhIHdpbGRsaWZlIHNhZmFyaSwgd2lja3JhbWEsIGthc2luZ2FtYSwgdGlzc2FtYWhhcmFtYSA4MjYwMFo9Ijt5YWxhIHdpbGRsaWZlIHNhZmFyaSB3aWNrcmFtYSBrYXNpbmdhbWEgdGlzc2FtYWhhcmFtYSA4MjYwMJIBDXRvdXJfb3BlcmF0b3KaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVTUlZsVVFsWlNWMUpLVVcxYWJXUXlNWGxWYTJkMFpFaG5NMU5GUlJBQuABAPoBBAggEEs!16s%2Fg%2F11xsktsk1j?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D';
-
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+Wildlife+Safari/@6.265796,81.2651137,14z/data=!4m12!1m2!2m1!1syala+wildlife+safari,+wickrama,+kasingama,+tissamaharama+82600!3m8!1s0x62b813f2717b2b81:0xf0b7e34cc97ec936!8m2!3d6.265796!4d81.3011626!9m1!1b1!15sCj55YWxhIHdpbGRsaWZlIHNhZmFyaSwgd2lja3JhbWEsIGthc2luZ2FtYSwgdGlzc2FtYWhhcmFtYSA4MjYwMFo9Ijt5YWxhIHdpbGRsaWZlIHNhZmFyaSB3aWNrcmFtYSBrYXNpbmdhbWEgdGlzc2FtYWhhcmFtYSA4MjYwMJIBDXRvdXJfb3BlcmF0b3KaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVTUlZsVVFsWlNWMUpLVVcxYWJXUXlNWGxWYTJkMFpFaG5NMU5GUlJBQuABAPoBBAggEEs!16s%2Fg%2F11xsktsk1j?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D';
+const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!3m1!4b1!4m6!3m5!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D';
 async function scrapeReviews() {
   console.log('🚀 Starting "Slow & Steady" Scraper...');
 
