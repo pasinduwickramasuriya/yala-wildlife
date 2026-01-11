@@ -177,10 +177,10 @@ export default function ReviewsPage() {
       />
 
       <Header />
-      
+
       {/* 1. GOOGLE/AI SUMMARY SECTION */}
       <ModernReviews />
-      
+
       {/* 2. SLIDER SECTION (Visual Proof) */}
       <ReviewSlider />
 
@@ -200,13 +200,13 @@ export default function ReviewsPage() {
         pageDescription="Read authentic reviews from travelers who experienced Yala Wildlife Safari. 4.9-star rating on TripAdvisor, Google, and Facebook. Book with confidence!"
         pageType="other"
       >
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 bg-black/50 ">
           <h1>Yala Safari Reviews - Why We Are Rated #1</h1>
 
           <p>
             Don&apos;t just take our word for it—read <strong className="text-green-500">authentic reviews</strong> from thousands of
             satisfied travelers who experienced unforgettable wildlife adventures with
-            <strong className="text-white"> Yala Wildlife Safari</strong>. With an outstanding <span className="text-white">4.9-star average rating</span> on 
+            <strong className="text-white"> Yala Wildlife Safari</strong>. With an outstanding <span className="text-white">4.9-star average rating</span> on
             Google and TripAdvisor, we are proud to be Sri Lanka&apos;s most trusted safari operator.
           </p>
 
@@ -218,8 +218,8 @@ export default function ReviewsPage() {
 
           <p>
             Families love our <strong className="text-white">child-friendly safari tours</strong> designed for safe, educational
-            wildlife encounters. Parents appreciate our experienced drivers who ensure a smooth ride in our 
-            <span className="text-white"> luxury cushioned jeeps</span>, engaging children with fascinating animal facts 
+            wildlife encounters. Parents appreciate our experienced drivers who ensure a smooth ride in our
+            <span className="text-white"> luxury cushioned jeeps</span>, engaging children with fascinating animal facts
             and interactive spotting games.
           </p>
 
