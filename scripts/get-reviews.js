@@ -72,7 +72,7 @@ async function scrapeReviews() {
     let noNewDataCount = 0;
 
     // Loop up to 30 times (enough for hundreds of reviews)
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
 
       // A. Scrape current view
       const batch = await page.evaluate(() => {

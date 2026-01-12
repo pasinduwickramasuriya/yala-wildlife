@@ -134,7 +134,7 @@ export default function PhotoGallery() {
   return (
     <section className="relative w-full py-20 px-4 md:px-6 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0  backdrop-blur-xl"></div>
+      <div className="absolute inset-0"></div>
       <div className="absolute inset-0 bg-gradient-to-br  via-transparent animate-pulse"></div>
 
       <div className="absolute top-20 left-10 w-32 h-32 bg-green-400/5 rounded-full blur-3xl animate-pulse"></div>
@@ -149,7 +149,7 @@ export default function PhotoGallery() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4">
+          <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4  inline-block px-6 py-3 rounded-3xl bg-black/70">
             Yala Wildlife{" "}
             <span className="text-green-400 relative">
               Photo Gallery
@@ -162,7 +162,8 @@ export default function PhotoGallery() {
               ></motion.div>
             </span>
           </h2>
-          <p className="text-green-200 text-lg max-w-2xl mx-auto">
+          <br />
+          <p className="text-green-200 text-lg max-w-2xl mx-auto inline-block px-6 py-3 rounded-3xl bg-black/70">
             Discover the incredible wildlife and breathtaking moments captured in Yala National Park
           </p>
         </motion.div>
