@@ -193,7 +193,7 @@ export default function ClientSafariPackages() {
                 pageType="package"
               >
                 <div className="text-neutral-500 text-sm font-mono leading-relaxed">
-                  <h2 className="text-green-500/50 text-xs font-bold uppercase mb-4 tracking-widest flex items-center justify-center gap-2">
+                  <h2 className="text-green-500 text-xs font-bold uppercase mb-4 tracking-widest flex items-center justify-center gap-2">
                     <Star size={12} /> Expedition Notes
                   </h2>
                   <div className="space-y-4">
