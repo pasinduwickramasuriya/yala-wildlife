@@ -274,7 +274,7 @@ export default async function PackageDetailPage(props: Props) {
                     </div>
                   ))}
                 </div>
-              </div> */}
+               </div> */}
 
               {/* Description List - Dark Glass, No Border */}
               <div className="bg-black/30 backdrop-blur-sm rounded-[2.5rem] p-8 shadow-xl border border-white/5">
