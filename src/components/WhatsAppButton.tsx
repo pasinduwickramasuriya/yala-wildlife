@@ -47,7 +47,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { MessageCircle, X, Send, User, Sparkles } from "lucide-react"; // Added Sparkles for cuteness
+import { MessageCircle, X, Send, User, Sparkles } from "lucide-react"; 
 
 export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +66,7 @@ export default function WhatsAppButton() {
 
     const textToSend = message.trim().length > 0 
       ? message 
-      : "Hello, I'm interested in your safaris 🐆"; // Added cute emoji to default text
+      : "Hello, I'm interested in your safaris 🐆";
 
     const encodedText = encodeURIComponent(textToSend);
     const finalUrl = `${baseUrl}?text=${encodedText}`;
@@ -96,7 +96,6 @@ export default function WhatsAppButton() {
              {/* Operator Avatar with Bounce */}
             <div className="relative group">
               <div className="w-12 h-12 bg-neutral-700 rounded-full flex items-center justify-center border-2 border-neutral-600 group-hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden">
-                 {/* Replaced Icon with an Image or nicer Icon */}
                  <User className="w-7 h-7 text-[#00ff00]" />
               </div>
               {/* Cute Online Dot */}
@@ -137,13 +136,20 @@ export default function WhatsAppButton() {
         {/* --- Input Area (Pill Shaped) --- */}
         <div className="bg-neutral-900 p-4 border-t border-neutral-800">
            <form onSubmit={handleSend} className="flex items-center gap-2 bg-neutral-800 rounded-full p-1.5 border border-neutral-700 focus-within:border-[#00ff00] transition-colors duration-300">
+             
+             {/* ZOOM FIX: 
+                Changed 'text-sm' to 'text-base md:text-sm'.
+                'text-base' = 16px (Prevents iOS zoom on mobile)
+                'md:text-sm' = 14px (Keeps it small on desktop)
+             */}
              <input 
                type="text" 
                placeholder="Type a message..." 
-               className="flex-1 bg-transparent rounded-full px-4 text-sm text-white placeholder-neutral-500 focus:outline-none"
+               className="flex-1 bg-transparent rounded-full px-4 text-base md:text-sm text-white placeholder-neutral-500 focus:outline-none"
                value={message}
                onChange={(e) => setMessage(e.target.value)}
              />
+
              <button 
                 type="submit" 
                 className="w-10 h-10 flex items-center justify-center bg-[#00ff00] hover:bg-[#33ff33] rounded-full text-black transition-transform duration-300 hover:scale-110 active:scale-95 shadow-lg"
