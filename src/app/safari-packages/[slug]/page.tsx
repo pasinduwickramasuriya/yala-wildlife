@@ -10,7 +10,7 @@ import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import { MapPin, Clock, Shield, Users, CheckCircle2 } from "lucide-react";
+import { MapPin, Clock, Shield, Users } from "lucide-react";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -258,7 +258,7 @@ export default async function PackageDetailPage(props: Props) {
               </div>
 
               {/* Description List - Dark Glass, No Border */}
-              <div className="bg-black/30 backdrop-blur-2xl rounded-3xl p-8 shadow-xl">
+              {/* <div className="bg-black/30 backdrop-blur-2xl rounded-3xl p-8 shadow-xl">
                 <h3 className="text-2xl font-bold text-white mb-8">
                   Expedition Highlights
                 </h3>
@@ -274,6 +274,45 @@ export default async function PackageDetailPage(props: Props) {
                     </div>
                   ))}
                 </div>
+              </div> */}
+
+              {/* Description List - Dark Glass, No Border */}
+              <div className="bg-black/30 backdrop-blur-sm rounded-[2.5rem] p-8 shadow-xl border border-white/5">
+                <h3 className="text-2xl font-bold text-white mb-8">
+                  Expedition Highlights
+                </h3>
+
+                <div className="grid gap-5">
+                  {descriptionPoints.map((point, index) => {
+                    if (!point) return null;
+
+                    // --- THE FIX: Unicode-Safe Splitting ---
+                    // This creates an array of real characters (handling emojis correctly)
+                    const charArray = [...point];
+
+                    // 1. Get the first character (Safe for Emojis)
+                    const firstChar = charArray[0] || "";
+                    const firstLetter = firstChar.toUpperCase();
+
+                    // 2. Get the rest of the text
+                    const restOfText = charArray.slice(1).join("");
+
+                    return (
+                      <div key={index} className="flex items-start gap-4 group">
+                        {/* Added suppressHydrationWarning to be extra safe against browser extensions */}
+                        <p
+                          className="text-neutral-200 text-base leading-relaxed font-light"
+                          suppressHydrationWarning
+                        >
+                          <span className="text-[#00ff00] text-3xl font-bold mr-1 leading-none">
+                            {firstLetter}
+                          </span>
+                          {restOfText}.
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
             </div>
@@ -283,7 +322,7 @@ export default async function PackageDetailPage(props: Props) {
               <div className="sticky top-24 space-y-8">
 
                 {/* Pricing Card - Glowing, No Border */}
-                <div className="bg-gradient-to-br from-green-600 to-emerald-800 rounded-3xl p-8 text-center relative overflow-hidden shadow-[0_0_50px_rgba(22,163,74,0.4)]">
+                <div className="bg-black/10 rounded-3xl p-8 text-center relative overflow-hidden ">
                   <div className="absolute inset-0 bg-[url('/pattern-grid.svg')] opacity-10 mix-blend-overlay"></div>
                   <p className="text-green-100/80 text-xs font-bold uppercase tracking-widest mb-2">Total Package Price</p>
                   <div className="flex items-baseline justify-center gap-1">
