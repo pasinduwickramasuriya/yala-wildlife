@@ -50,6 +50,7 @@ export default function HomeBlogSection() {
                 const res = await fetch("/api/blogs/featured");
                 const data = await res.json();
                 setBlogs(data);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (error) {
                 console.error("Failed to load blogs");
             } finally {
@@ -67,17 +68,29 @@ export default function HomeBlogSection() {
     return (
         <section className="relative py-20 px-4 md:px-8 overflow-hidden">
             {/* Background Gradient Blob for Atmosphere */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#00ff00] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header */}
                 <header className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                    <div>
-                        <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-2">
+                    {/* <div>
+                        <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white mb-2 inline-block px-4 py-2 rounded-3xl bg-black/70">
                             LATEST <span className="text-[#00ff00]">STORIES</span>
-                        </h2>
-                        <p className="text-gray-400 text-lg">Insights from the wild.</p>
+                        </h2><br />
+                        <p className="text-gray-400 text-lg inline-block px-4 py-2 rounded-3xl bg-black/70">Insights from the wild.</p>
+                    </div> */}
+                    <div className="text-center">
+                        <div className="inline-flex flex-col items-center gap-3">
+                            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white inline-block px-4 py-2 rounded-3xl bg-black/70">
+                                LATEST <span className="text-[#00ff00]">STORIES</span>
+                            </h2>
+
+                            <p className="text-gray-400 text-lg inline-block px-4 py-2 rounded-3xl bg-black/70">
+                                Insights from the wild.
+                            </p>
+                        </div>
                     </div>
+
                     <Link
                         href="/blog"
                         className="hidden md:inline-flex items-center justify-center px-6 py-3 rounded-full bg-white/5 hover:bg-[#00ff00] text-white hover:text-black font-semibold transition-all duration-300 backdrop-blur-sm"

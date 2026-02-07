@@ -44,7 +44,7 @@ export default function ClientHome() {
 
       <HeroSlider />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6 text-center text-lime-400">
+        <h1 className="text-3xl font-bold mb-6 text-lime-400 px-6 py-3 rounded-3xl bg-black/70 mx-auto w-fit text-center">
           Our Safari Packages
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

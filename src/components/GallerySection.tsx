@@ -180,12 +180,12 @@ const GallerySection = () => {
             <div className="inline-flex items-center gap-2 text-green-600 font-bold uppercase tracking-widest text-xs bg-green-100 dark:bg-green-900/30 px-3 py-1 rounded-full">
               <Camera className="w-3 h-3" />
               <span>Captured Moments</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
+            </div> <br />
+            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight inline-block px-4 py-2 rounded-3xl bg-black/70">
               Into the <span className="text-green-600">Wild</span>
             </h2>
           </div>
-          <p className="text-muted-foreground max-w-md text-sm md:text-base leading-relaxed text-left md:text-right">
+          <p className="text-muted-foreground max-w-md text-sm md:text-base leading-relaxed text-left md:text-right     inline-block px-4 py-2 rounded-3xl bg-black/70">
             Experience the untold stories of Yala through our lens. Every snapshot is a memory waiting to be made.
           </p>
         </div>

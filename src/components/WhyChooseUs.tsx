@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
 
       <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
         {/* Main Heading */}
-        <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-16 tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-16 tracking-tight    inline-block px-4 py-2 rounded-3xl bg-black/70">
           Why Choose <span className="text-green-500 underline decoration-wavy decoration-green-300 underline-offset-4">Yala Wildlife</span>
         </h2>
 
