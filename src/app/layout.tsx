@@ -15,6 +15,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Analytics } from "@vercel/analytics/next";
 
 import { SEOIndicator } from "@/components/SEOIndicator";
+import ChatAssistant from "@/components/ChatAssistant";
 // import DotsBackground from "@/components/DotsBackground";
 
 
@@ -72,6 +73,7 @@ export default function RootLayout({
           <Footer />
         </ThemeProvider>
         <WhatsAppButton />
+        <ChatAssistant/>
         
         {/* Visual indicator */}
         <SEOIndicator />
