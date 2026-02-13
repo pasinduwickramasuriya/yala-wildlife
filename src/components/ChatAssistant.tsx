@@ -1,7 +1,3 @@
-
-
-
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -178,8 +174,8 @@ export default function ChatAssistant() {
                             {/* Message Bubble (Smooth Rounded App Style) */}
                             <div
                                 className={`p-3 text-[13px] leading-relaxed shadow-sm ${msg.role === 'user'
-                                        ? 'bg-white text-black font-medium rounded-2xl rounded-tr-sm'
-                                        : 'bg-[#111] text-neutral-300 font-light rounded-2xl rounded-tl-sm border border-white/5'
+                                    ? 'bg-white text-black font-medium rounded-2xl rounded-tr-sm'
+                                    : 'bg-[#111] text-neutral-300 font-light rounded-2xl rounded-tl-sm border border-white/5'
                                     }`}
                             >
                                 {/* Formats points and bold text clearly */}
@@ -216,7 +212,8 @@ export default function ChatAssistant() {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Initiate query..."
-                            className="w-full bg-transparent py-2.5 pl-3 pr-10 text-[13px] text-white placeholder-neutral-500 focus:outline-none font-mono"
+                            // FIX: Changed text-[13px] to text-[16px] sm:text-[13px] to prevent iOS zoom
+                            className="w-full bg-transparent py-2.5 pl-3 pr-10 text-[16px] sm:text-[13px] text-white placeholder-neutral-500 focus:outline-none font-mono"
                             disabled={isLoading}
                         />
                         <button
