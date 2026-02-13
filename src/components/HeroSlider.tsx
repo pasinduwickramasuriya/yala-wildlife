@@ -2201,9 +2201,8 @@ export default function HeroSlider() {
   // --- Loading State ---
   if (!mounted || loading) {
     return (
-      <div className="min-h-screen w-full bg-black flex flex-col items-center justify-center gap-4 p-4">
+      <div className="min-h-screen w-full flex flex-col items-center justify-center gap-4 p-4">
         <div className="w-12 h-12 border-4 border-lime-500 border-t-transparent rounded-full animate-spin" />
-        <span className="text-lime-500 font-mono text-xs tracking-[0.3em] animate-pulse">LOADING EXPERIENCE</span>
       </div>
     );
   }

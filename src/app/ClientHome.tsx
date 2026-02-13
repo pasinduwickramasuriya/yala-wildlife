@@ -14,6 +14,7 @@ import PhotoGallery from "@/components/PhotoGallery";
 import ReviewSlider from "@/components/ReviewSlider";
 // import ReviewsSection from "@/components/ReviewsSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import YalaMapExplorer from "@/components/YalaMapExplorer";
 import { useState, useEffect } from "react";
 
 interface Package {
@@ -53,6 +54,7 @@ export default function ClientHome() {
           ))}
         </div>
       </div>
+      <YalaMapExplorer/>
       <HomeBlogSection />
       <MemoryGallery />
       <ModernReviews />

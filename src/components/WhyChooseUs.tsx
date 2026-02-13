@@ -29,7 +29,7 @@ export default function WhyChooseUs() {
       
       {/* FIX: Added 'transform-gpu' and 'translate-z-0' to force Hardware Acceleration */}
       {/* This moves the heavy blur calculation to the GPU, preventing mobile lag */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]  rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
 
       <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
         {/* Main Heading */}
