@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { history, message } = body;
 
-    // Use -latest to prevent 404 errors on newer SDK versions
+    // Use -latest to prevent 404 errors on newer SDK version
     const model = genAI.getGenerativeModel({
     //   model: "gemini-1.5-flash-latest",
      model: 'gemini-2.5-flash-lite',
