@@ -3,145 +3,51 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Camera, X } from "lucide-react";
 
 interface Photo {
   id: number;
   title: string;
-  description: string;
+  content: string;
   imageUrl: string;
+  slug?: string;
 }
 
-export default function PhotoGallery() {
-  const photos: Photo[] = [
-    {
-      id: 1,
-      title: "Yala Leopard Sighting",
-      description: "A majestic leopard spotted during a sunrise safari.",
-      imageUrl: "https://images.unsplash.com/photo-1553524082-82690780f842?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGxlb3BhcmR8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 2,
-      title: "Elephant Herd",
-      description: "A family of elephants roaming freely in Yala.",
-      imageUrl: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGVsZXBoYW50c3xlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: 3,
-      title: "Sunset Over Yala",
-      description: "A breathtaking sunset view during an evening safari.",
-      imageUrl: "https://plus.unsplash.com/premium_photo-1669750818169-b598e1de3a1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8U3Vuc2V0fGVufDB8fDB8fHww",
-    },
-    {
-      id: 4,
-      title: "Birds of Yala",
-      description: "Colorful birdlife in Yala National Park.",
-      imageUrl: "https://plus.unsplash.com/premium_photo-1724864863815-1469c8b74711?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QmlyZHN8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 5,
-      title: "wild dear",
-      description: "Yala national park",
-      imageUrl: "https://images.unsplash.com/photo-1451303688941-9e06d4b1277a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGVhcnxlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: 6,
-      title: "Yala elephant",
-      description: "wild elephant",
-      imageUrl: "https://images.unsplash.com/photo-1603483080228-04f2313d9f10?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWxlcGhhbnR8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      id: 7,
-      title: "Yala Deer",
-      description: "A deer spotted in the park's grasslands.",
-      imageUrl: "https://images.unsplash.com/photo-1745240939551-9a1a9dd41325?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRlZXIlMjBzcmklMjBsYW5ha2F8ZW58MHx8MHx8fDA%3D",
-    },
-  ];
-
-  const [displayPhotos, setDisplayPhotos] = useState<Photo[]>(photos);
+export default function AppleCuteGallery() {
+  const [displayPhotos, setDisplayPhotos] = useState<Photo[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Safe photo shuffling with comprehensive bounds checking
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDisplayPhotos((prevPhotos) => {
-        if (!prevPhotos || prevPhotos.length < 2) return prevPhotos;
-
-        const newPhotos = [...prevPhotos];
-        const index1 = Math.floor(Math.random() * newPhotos.length);
-        let index2 = Math.floor(Math.random() * newPhotos.length);
-
-        while (index2 === index1 && newPhotos.length > 1) {
-          index2 = Math.floor(Math.random() * newPhotos.length);
-        }
-
-        if (newPhotos[index1] && newPhotos[index2]) {
-          [newPhotos[index1], newPhotos[index2]] = [newPhotos[index2], newPhotos[index1]];
-        }
-
-        return newPhotos;
-      });
-    }, 8000);
-
-    return () => clearInterval(interval);
+    const fetchPhotos = async () => {
+      try {
+        const response = await fetch("/api/blogs/featured");
+        if (!response.ok) throw new Error("Failed to fetch");
+        const data = await response.json();
+        if (Array.isArray(data)) setDisplayPhotos(data);
+      } catch (error) {
+        console.error("Gallery Fetch Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPhotos();
   }, []);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const photoHoverVariants = {
-    rest: { scale: 1, rotateY: 0 },
-    hover: {
-      scale: 1.05,
-      rotateY: 5,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  // Safe function to get photo by index
-  const getPhotoSafely = (index: number): Photo | null => {
-    return displayPhotos && displayPhotos[index] ? displayPhotos[index] : null;
-  };
-
-  // Safe function to get photo slice
-  const getPhotoSliceSafely = (start: number, end: number): Photo[] => {
-    return displayPhotos ? displayPhotos.slice(start, end) : [];
-  };
+  if (loading) {
+    return (
+      <div className="w-full h-[40vh] flex items-center justify-center">
+        <p className="text-[#00ff00] font-mono text-[10px] tracking-[0.3em] uppercase animate-pulse">
+          Syncing...
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <section className="relative w-full py-20 px-4 md:px-6 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0"></div>
-      <div className="absolute inset-0 bg-gradient-to-br  via-transparent animate-pulse"></div>
+    <section className="relative w-full py-12 md:py-20 px-4 md:px-12 bg-transparent text-white overflow-hidden">
+      <div className="max-w-[1200px] mx-auto">
 
-      <div className="absolute top-20 left-10 w-32 h-32 bg-green-400/5 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-20 w-48 h-48 bg-green-400/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-
-      <div className="relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -151,10 +57,10 @@ export default function PhotoGallery() {
         >
           <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4  inline-block px-6 py-3 rounded-3xl bg-black/70">
             Yala Wildlife{" "}
-            <span className="text-green-400 relative">
+            <span className="text-[#00ff00] relative">
               Photo Gallery
               <motion.div
-                className="absolute -bottom-2 left-0 w-full h-1 bg-green-400/30 rounded-full"
+                className="absolute -bottom-2 left-0 w-full h-1 bg-[#00ff00] rounded-full"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -167,532 +73,118 @@ export default function PhotoGallery() {
             Discover the incredible wildlife and breathtaking moments captured in Yala National Park
           </p>
         </motion.div>
+        {/* --- RESPONSIVE BENTO GRID --- */}
+        {/* Mobile: 1 Column, fixed height cards
+            Tablet: 2 Columns
+            Desktop: 12-column Bento (Your original layout)
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 h-auto md:h-[750px]">
 
-        {/* Gallery Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-6"
-        >
-          {/* Left Side */}
-          <div className="md:col-span-2 flex flex-col gap-6">
-            {/* Top Row: Two Square Images */}
-            <div className="grid grid-cols-2 gap-6">
-              {getPhotoSliceSafely(0, 2).map((photo) => (
-                <motion.div
-                  key={photo.id}
-                  layoutId={`photo-${photo.id}`}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  initial="rest"
-                  animate="rest"
-                  className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer"
-                  onClick={() => setSelectedPhoto(photo)}
-                >
-                  <motion.div
-                    variants={photoHoverVariants}
-                    className="relative w-full h-[200px] md:h-[250px] aspect-square"
-                  >
-                    <Image
-                      src={photo.imageUrl}
-                      alt={photo.title || "Gallery image"}
-                      fill
-                      className="object-cover transition-all duration-700 group-hover:brightness-110"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 16.5vw, 12.5vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="font-bold text-sm mb-1">{photo.title}</h3>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Middle Row: Three Stacked Images */}
-            <div className="grid grid-cols-3 gap-6">
-              {getPhotoSliceSafely(2, 5).map((photo) => (
-                <motion.div
-                  key={photo.id}
-                  layoutId={`photo-${photo.id}`}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  initial="rest"
-                  animate="rest"
-                  className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer"
-                  onClick={() => setSelectedPhoto(photo)}
-                >
-                  <motion.div
-                    variants={photoHoverVariants}
-                    className="relative w-full h-[200px] md:h-[250px]"
-                  >
-                    <Image
-                      src={photo.imageUrl}
-                      alt={photo.title || "Gallery image"}
-                      fill
-                      className="object-cover transition-all duration-700 group-hover:brightness-110"
-                      sizes="(max-width: 640px) 33vw, (max-width: 1024px) 11vw, 8.3vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-2 left-2 right-2 text-white">
-                        <h3 className="font-bold text-xs">{photo.title}</h3>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Bottom Row: One Full-Width Image - SAFE ACCESS */}
-            {(() => {
-              const bottomPhoto = getPhotoSafely(5);
-              return bottomPhoto ? (
-                <motion.div
-                  layoutId={`photo-${bottomPhoto.id}`}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  initial="rest"
-                  animate="rest"
-                  className="w-full group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer"
-                  onClick={() => setSelectedPhoto(bottomPhoto)}
-                >
-                  <motion.div
-                    variants={photoHoverVariants}
-                    className="relative w-full h-[200px] md:h-[250px]"
-                  >
-                    <Image
-                      src={bottomPhoto.imageUrl}
-                      alt={bottomPhoto.title || "Gallery image"}
-                      fill
-                      className="object-cover transition-all duration-700 group-hover:brightness-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="font-bold text-lg">{bottomPhoto.title}</h3>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ) : null;
-            })()}
+          {/* Card 1: Main Hero */}
+          <div className="h-[300px] sm:h-[400px] md:h-auto md:col-span-8 md:row-span-2 relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-neutral-900 shadow-xl">
+            <ImageCard photo={displayPhotos[0]} priority onClick={setSelectedPhoto} />
           </div>
 
-          {/* Right Side - COMPLETELY SAFE ACCESS */}
-          <div className="md:col-span-3 grid grid-rows-2 gap-6">
-            {[0, 1].map((idx) => {
-              const photo = getPhotoSafely(idx);
-              return photo ? (
-                <motion.div
-                  key={photo.id}
-                  layoutId={`photo-${photo.id}`}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  initial="rest"
-                  animate="rest"
-                  className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer"
-                  onClick={() => setSelectedPhoto(photo)}
-                >
-                  <motion.div
-                    variants={photoHoverVariants}
-                    className="relative w-full h-[200px] md:h-[390px]"
-                  >
-                    <Image
-                      src={photo.imageUrl}
-                      alt={photo.title || "Gallery image"}
-                      fill
-                      className="object-cover transition-all duration-700 group-hover:brightness-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
-                      <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <motion.h3
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          className="text-2xl md:text-3xl font-bold mb-2 text-green-400"
-                        >
-                          {photo.title}
-                        </motion.h3>
-                        <motion.p
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 }}
-                          className="text-sm md:text-base text-gray-200"
-                        >
-                          {photo.description}
-                        </motion.p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ) : (
-                <div key={`placeholder-${idx}`} className="bg-black/20 rounded-2xl flex items-center justify-center">
-                  <p className="text-green-400">Loading...</p>
-                </div>
-              );
-            })}
+          {/* Card 2 */}
+          <div className="h-[250px] md:h-auto md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-neutral-900 shadow-lg">
+            <ImageCard photo={displayPhotos[1]} onClick={setSelectedPhoto} />
           </div>
-        </motion.div>
 
-        {/* Modal */}
-        <AnimatePresence>
-          {selectedPhoto && (
+          {/* Card 3 */}
+          <div className="h-[250px] md:h-auto md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-neutral-900 shadow-lg">
+            <ImageCard photo={displayPhotos[2]} onClick={setSelectedPhoto} />
+          </div>
+
+          {/* Card 4 */}
+          <div className="h-[250px] md:h-auto md:col-span-5 md:row-span-1 relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-neutral-900 shadow-lg">
+            <ImageCard photo={displayPhotos[3]} onClick={setSelectedPhoto} />
+          </div>
+
+          {/* Card 5 */}
+          <div className="h-[250px] md:h-auto md:col-span-7 md:row-span-1 relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-neutral-900 shadow-lg">
+            <ImageCard photo={displayPhotos[4] || displayPhotos[0]} onClick={setSelectedPhoto} />
+          </div>
+        </div>
+      </div>
+
+      {/* --- REFINED RESPONSIVE MODAL --- */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 md:p-6"
+            onClick={() => setSelectedPhoto(null)}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedPhoto(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              layoutId={`photo-${selectedPhoto.id}`}
+              className="relative w-full max-w-4xl bg-black rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col md:flex-row shadow-2xl max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                layoutId={`photo-${selectedPhoto.id}`}
-                className="relative max-w-4xl max-h-4xl bg-black/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-green-400/40"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="relative w-full h-96 md:h-[600px]">
-                  <Image
-                    src={selectedPhoto.imageUrl}
-                    alt={selectedPhoto.title || "Selected gallery image"}
-                    fill
-                    className="object-cover"
-                    sizes="90vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent">
-                    <div className="absolute bottom-6 left-6 right-6 text-white">
-                      <h3 className="text-3xl md:text-4xl font-bold mb-2 text-green-400">
-                        {selectedPhoto.title}
-                      </h3>
-                      <p className="text-lg text-gray-200">
-                        {selectedPhoto.description}
-                      </p>
-                    </div>
-                  </div>
+              {/* Modal Image Section */}
+              <div className="relative w-full md:flex-1 h-[250px] sm:h-[350px] md:h-auto bg-neutral-950">
+                <Image src={selectedPhoto.imageUrl} alt={selectedPhoto.title} fill className="object-cover" />
+              </div>
+
+              {/* Modal Content Section */}
+              <div className="w-full md:w-[320px] p-6 md:p-8 flex flex-col justify-center bg-black overflow-y-auto">
+                <div className="flex items-center gap-2 text-[#00ff00] mb-3 md:mb-4">
+                  <Camera size={12} />
+                  <span className="text-[9px] font-mono tracking-widest uppercase opacity-70">Capture Detail</span>
                 </div>
+                <h3 className="text-lg md:text-xl font-bold tracking-tight text-white mb-3 md:mb-4 leading-tight">
+                  {selectedPhoto.title}
+                </h3>
+                <p className="text-neutral-400 text-[11px] md:text-[12px] leading-relaxed mb-6 line-clamp-4 md:line-clamp-6">
+                  {selectedPhoto.content}
+                </p>
                 <button
                   onClick={() => setSelectedPhoto(null)}
-                  className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
-                  aria-label="Close modal"
+                  className="w-full py-3 bg-white text-black font-bold text-[10px] rounded-full uppercase tracking-widest hover:bg-[#00ff00] transition-all active:scale-95"
                 >
-                  &times;
+                  Close
                 </button>
-              </motion.div>
+              </div>
+
+              {/* Close Button */}
+              <button className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-white transition-colors bg-black/50 rounded-full p-1 md:bg-transparent" onClick={() => setSelectedPhoto(null)}>
+                <X size={20} strokeWidth={2} />
+              </button>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
 
+function ImageCard({ photo, onClick, priority = false }: { photo: Photo | null, onClick: (p: Photo) => void, priority?: boolean }) {
+  if (!photo) return <div className="w-full h-full bg-neutral-900 animate-pulse rounded-[1.5rem] md:rounded-[2rem]" />;
 
+  return (
+    <div className="w-full h-full cursor-pointer" onClick={() => onClick(photo)}>
+      <Image
+        src={photo.imageUrl}
+        alt={photo.title}
+        fill
+        priority={priority}
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
 
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
 
-
-
-
-
-// "use client";
-
-// import Image from "next/image";
-// import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-
-// interface Photo {
-//   id: number;
-//   title: string;
-//   description: string;
-//   imageUrl: string;
-// }
-
-// export default function PhotoGallery() {
-//   const photos: Photo[] = [
-//     {
-//       id: 1,
-//       title: "Yala Leopard Sighting",
-//       description: "A majestic leopard spotted during a sunrise safari.",
-//       imageUrl: "https://images.unsplash.com/photo-1553524082-82690780f842?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGxlb3BhcmR8ZW58MHx8MHx8fDA%3D",
-//     },
-//     {
-//       id: 2,
-//       title: "Elephant Herd",
-//       description: "A family of elephants roaming freely in Yala.",
-//       imageUrl: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGVsZXBoYW50c3xlbnwwfHwwfHx8MA%3D%3D",
-//     },
-//     {
-//       id: 3,
-//       title: "Sunset Over Yala",
-//       description: "A breathtaking sunset view during an evening safari.",
-//       imageUrl: "https://plus.unsplash.com/premium_photo-1669750818169-b598e1de3a1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8U3Vuc2V0fGVufDB8fDB8fHww",
-//     },
-//     {
-//       id: 4,
-//       title: "Birds of Yala",
-//       description: "Colorful birdlife in Yala National Park.",
-//       imageUrl: "https://plus.unsplash.com/premium_photo-1724864863815-1469c8b74711?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QmlyZHN8ZW58MHx8MHx8fDA%3D",
-//     },
-//     {
-//       id: 5,
-//       title: "wild dear",
-//       description: "Yala national park",
-//       imageUrl: "https://images.unsplash.com/photo-1451303688941-9e06d4b1277a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGVhcnxlbnwwfHwwfHx8MA%3D%3D",
-//     },
-//     {
-//       id: 6,
-//       title: "Yala elephant",
-//       description: "wild elephant",
-//       imageUrl: "https://images.unsplash.com/photo-1603483080228-04f2313d9f10?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWxlcGhhbnR8ZW58MHx8MHx8fDA%3D",
-//     },
-//     {
-//       id: 7,
-//       title: "Yala Deer",
-//       description: "A deer spotted in the park's grasslands.",
-//       imageUrl: "https://images.unsplash.com/photo-1745240939551-9a1a9dd41325?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRlZXIlMjBzcmklMjBsYW5ha2F8ZW58MHx8MHx8fDA%3D",
-//     },
-//   ];
-
-//   // REMOVED: Complex Shuffle Logic to prevent re-renders and freezing
-//   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
-
-//   // Animation variants
-//   const containerVariants = {
-//     hidden: { opacity: 0 },
-//     visible: {
-//       opacity: 1,
-//       transition: {
-//         staggerChildren: 0.1, // Faster stagger for perceived speed
-//       },
-//     },
-//   };
-
-//   const itemVariants = {
-//     hidden: { opacity: 0, y: 20, scale: 0.9 },
-//     visible: {
-//       opacity: 1,
-//       y: 0,
-//       scale: 1,
-//       transition: {
-//         duration: 0.4, // Faster animation
-//         ease: "easeOut",
-//       },
-//     },
-//   };
-
-//   return (
-//     <section className="relative w-full py-20 px-4 md:px-6 overflow-hidden">
-//       {/* Background elements - Added transform-gpu for mobile performance */}
-//       <div className="absolute inset-0 backdrop-blur-xl transform-gpu"></div>
-//       <div className="absolute inset-0 bg-gradient-to-br via-transparent animate-pulse"></div>
-
-//       <div className="absolute top-20 left-10 w-32 h-32 bg-green-400/5 rounded-full blur-3xl animate-pulse transform-gpu"></div>
-//       <div className="absolute bottom-20 right-20 w-48 h-48 bg-green-400/3 rounded-full blur-3xl animate-pulse delay-1000 transform-gpu"></div>
-
-//       <div className="relative z-10">
-//         {/* Header */}
-//         <motion.div
-//           initial={{ opacity: 0, y: -20 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.6 }}
-//           className="text-center mb-16"
-//         >
-//           <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4">
-//             Yala Wildlife{" "}
-//             <span className="text-green-400 relative">
-//               Photo Gallery
-//               <div className="absolute -bottom-2 left-0 w-full h-1 bg-green-400/30 rounded-full"></div>
-//             </span>
-//           </h2>
-//           <p className="text-green-200 text-lg max-w-2xl mx-auto">
-//             Discover the incredible wildlife and breathtaking moments captured in Yala National Park
-//           </p>
-//         </motion.div>
-
-//         {/* Gallery Grid */}
-//         <motion.div
-//           variants={containerVariants}
-//           initial="hidden"
-//           whileInView="visible"
-//           viewport={{ once: true, margin: "-50px" }} // Start loading sooner
-//           className="container max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-6"
-//         >
-//           {/* Left Side */}
-//           <div className="md:col-span-2 flex flex-col gap-6">
-//             {/* Top Row: Two Square Images */}
-//             <div className="grid grid-cols-2 gap-6">
-//               {photos.slice(0, 2).map((photo, index) => (
-//                 <motion.div
-//                   key={photo.id}
-//                   layoutId={`photo-${photo.id}`}
-//                   variants={itemVariants}
-//                   className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
-//                   onClick={() => setSelectedPhoto(photo)}
-//                 >
-//                   <div className="relative w-full h-[200px] md:h-[250px] aspect-square">
-//                     <Image
-//                       src={photo.imageUrl}
-//                       alt={photo.title || "Gallery image"}
-//                       fill
-//                       priority={index < 2} // Load first images immediately
-//                       className="object-cover transition-all duration-700 group-hover:scale-105"
-//                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 20vw, 15vw"
-//                     />
-//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//                       <div className="absolute bottom-4 left-4 right-4 text-white">
-//                         <h3 className="font-bold text-sm mb-1">{photo.title}</h3>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </motion.div>
-//               ))}
-//             </div>
-
-//             {/* Middle Row: Three Stacked Images */}
-//             <div className="grid grid-cols-3 gap-6">
-//               {photos.slice(2, 5).map((photo) => (
-//                 <motion.div
-//                   key={photo.id}
-//                   layoutId={`photo-${photo.id}`}
-//                   variants={itemVariants}
-//                   className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
-//                   onClick={() => setSelectedPhoto(photo)}
-//                 >
-//                   <div className="relative w-full h-[200px] md:h-[250px]">
-//                     <Image
-//                       src={photo.imageUrl}
-//                       alt={photo.title || "Gallery image"}
-//                       fill
-//                       className="object-cover transition-all duration-700 group-hover:scale-105"
-//                       sizes="(max-width: 640px) 33vw, (max-width: 1024px) 15vw, 10vw"
-//                     />
-//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//                       <div className="absolute bottom-2 left-2 right-2 text-white">
-//                         <h3 className="font-bold text-xs">{photo.title}</h3>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </motion.div>
-//               ))}
-//             </div>
-
-//             {/* Bottom Row: One Full-Width Image */}
-//             {(() => {
-//               const bottomPhoto = photos[5];
-//               return bottomPhoto ? (
-//                 <motion.div
-//                   layoutId={`photo-${bottomPhoto.id}`}
-//                   variants={itemVariants}
-//                   className="w-full group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
-//                   onClick={() => setSelectedPhoto(bottomPhoto)}
-//                 >
-//                   <div className="relative w-full h-[200px] md:h-[250px]">
-//                     <Image
-//                       src={bottomPhoto.imageUrl}
-//                       alt={bottomPhoto.title || "Gallery image"}
-//                       fill
-//                       className="object-cover transition-all duration-700 group-hover:scale-105"
-//                       sizes="(max-width: 640px) 100vw, 40vw"
-//                     />
-//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//                       <div className="absolute bottom-4 left-4 right-4 text-white">
-//                         <h3 className="font-bold text-lg">{bottomPhoto.title}</h3>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </motion.div>
-//               ) : null;
-//             })()}
-//           </div>
-
-//           {/* Right Side */}
-//           <div className="md:col-span-3 grid grid-rows-2 gap-6">
-//             {[0, 6].map((idx) => {
-//               const photo = photos[idx];
-//               return photo ? (
-//                 <motion.div
-//                   key={`large-${photo.id}`}
-//                   layoutId={`photo-${photo.id}-large`}
-//                   variants={itemVariants}
-//                   className="group relative rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10 hover:border-green-400/40 transition-all duration-500 cursor-pointer transform-gpu"
-//                   onClick={() => setSelectedPhoto(photo)}
-//                 >
-//                   <div className="relative w-full h-[200px] md:h-[390px]">
-//                     <Image
-//                       src={photo.imageUrl}
-//                       alt={photo.title || "Gallery image"}
-//                       fill
-//                       priority={true} // Critical Image
-//                       className="object-cover transition-all duration-700 group-hover:scale-105"
-//                       sizes="(max-width: 640px) 100vw, 60vw"
-//                     />
-//                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
-//                       <div className="absolute bottom-6 left-6 right-6 text-white">
-//                         <h3 className="text-2xl md:text-3xl font-bold mb-2 text-green-400">
-//                           {photo.title}
-//                         </h3>
-//                         <p className="text-sm md:text-base text-gray-200">
-//                           {photo.description}
-//                         </p>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </motion.div>
-//               ) : null;
-//             })}
-//           </div>
-//         </motion.div>
-
-//         {/* Modal */}
-//         <AnimatePresence>
-//           {selectedPhoto && (
-//             <motion.div
-//               initial={{ opacity: 0 }}
-//               animate={{ opacity: 1 }}
-//               exit={{ opacity: 0 }}
-//               onClick={() => setSelectedPhoto(null)}
-//               className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
-//             >
-//               <motion.div
-//                 layoutId={`photo-${selectedPhoto.id}`}
-//                 className="relative max-w-4xl w-full bg-black/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-green-400/40 shadow-2xl"
-//                 onClick={(e) => e.stopPropagation()}
-//               >
-//                 <div className="relative w-full aspect-[4/3] md:aspect-[16/9]">
-//                   <Image
-//                     src={selectedPhoto.imageUrl}
-//                     alt={selectedPhoto.title || "Selected gallery image"}
-//                     fill
-//                     className="object-cover"
-//                     sizes="100vw"
-//                     priority
-//                   />
-//                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none">
-//                     <div className="absolute bottom-6 left-6 right-6 text-white">
-//                       <h3 className="text-2xl md:text-4xl font-bold mb-2 text-green-400">
-//                         {selectedPhoto.title}
-//                       </h3>
-//                       <p className="text-base md:text-lg text-gray-200">
-//                         {selectedPhoto.description}
-//                       </p>
-//                     </div>
-//                   </div>
-//                 </div>
-//                 <button
-//                   onClick={() => setSelectedPhoto(null)}
-//                   className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors z-50"
-//                   aria-label="Close modal"
-//                 >
-//                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-//                   </svg>
-//                 </button>
-//               </motion.div>
-//             </motion.div>
-//           )}
-//         </AnimatePresence>
-//       </div>
-//     </section>
-//   );
-// }
+      <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end">
+        <div className="flex items-end justify-between">
+          <div className="translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
+            <span className="text-[#00ff00] font-mono text-[8px] tracking-[0.3em] uppercase mb-1 block font-bold opacity-80">Live Feed</span>
+            <h3 className="text-sm md:text-lg font-bold tracking-tight text-white leading-tight">{photo.title}</h3>
+          </div>
+          <div className="h-8 w-8 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:bg-[#00ff00] group-hover:text-black transition-all duration-500">
+            <ArrowUpRight size={14} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

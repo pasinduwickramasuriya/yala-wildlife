@@ -2,124 +2,101 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Camera, MapPin, Star, Zap } from "lucide-react";
+import { MapPin, ArrowRight, Camera } from "lucide-react";
 
-// --- DATA ---
+// --- ENRICHED DATA FOR YALAWILDLIFE.COM ---
 const MEMORIES = [
   {
     id: 1,
-    src: "/uploads/yala.jpeg", // Ensure this file exists in public/uploads
-    title: "The Apex Predator",
-    location: "Block 1, Yala",
-    tag: "Leopard Sighting",
-    desc: "Our expert trackers know exactly where to find the elusive Sri Lankan Leopard."
+    src: "/uploads/yala.jpeg",
+    title: "The Ghost of Yala",
+    location: "Block 1, Palatupana",
+    tag: "Rare Sighting",
+    desc: "Yala National Park is world-renowned for having one of the highest leopard densities on the planet. Our experienced trackers specialize in locating the elusive Panthera pardus kotiya, often found resting on the iconic granite outcrops of Block 1 during the early morning golden hour."
   },
   {
     id: 2,
     src: "/uploads/yala1.webp",
-    title: "Gentle Giants",
-    location: "Waterhole 3",
-    tag: "Elephant Herds",
-    desc: "Witness the majesty of elephant families in their natural habitat from our safety-first jeeps."
+    title: "The Great Gathering",
+    location: "Main Entrance",
+    tag: "Wildlife",
+    desc: "Witness the majestic Asian Elephant herds as they migrate towards the ancient water reservoirs. These gentle giants are the heart of the dry zone ecosystem, often seen in large family groups where playful calves learn the ways of the wild under the watchful eyes of experienced matriarchs."
   },
   {
     id: 3,
     src: "/uploads/yala2.webp",
-    title: "The Safari Fleet",
-    location: "Base Camp",
-    tag: "Premium Service",
-    desc: "Custom-modified luxury jeeps designed for photography, comfort, and maximum visibility."
+    title: "The Ultimate Rig",
+    location: "Base Operations",
+    tag: "Premium Fleet",
+    desc: "Our safari experience is defined by our equipment. We utilize custom-modified 4x4 Toyota Hilux jeeps, featuring elevated stadium seating for 360-degree unobstructed views, specialized beanbag mounts for professional wildlife photography, and heavy-duty suspension for a smooth off-road journey."
   }
 ];
 
-const SERVICES = [
-  { icon: <Camera size={18} />, label: "Photography Ready" },
-  { icon: <Zap size={18} />, label: "Experienced Trackers" },
-  { icon: <Star size={18} />, label: "5-Star Rated" },
-];
-
-export default function MemoryGallery() {
+export default function AppleCuteGallery() {
   return (
-    <section className="relative w-full py-24 px-4 md:px-8 overflow-hidden">
-      
-      {/* --- BACKGROUND ELEMENTS --- */}
-      <div className="absolute inset-0 ">
-        {/* Green ambient glow */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-green-900/20 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[100px] pointer-events-none" />
-      </div>
+    <section className="w-full py-12 px-6 bg-transparent">
+      <div className="max-w-5xl mx-auto">
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* --- GALLERY GRID --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* --- GRID --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {MEMORIES.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative h-[500px] w-full rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl cursor-none md:cursor-default"
+              className="group relative flex flex-col rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-1"
             >
-              {/* Image Layer */}
-              <div className="absolute inset-0">
+              {/* IMAGE AREA */}
+              <div className="relative aspect-square w-full overflow-hidden bg-neutral-900 shadow-inner">
                 <Image
                   src={item.src}
                   alt={item.title}
                   fill
-                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                {/* Gradient Overlay (Always visible for text readability) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+
+                {/* INLINE TAG */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-2.5 py-0.5 bg-black/60 backdrop-blur-md border border-white/10 text-[9px] font-black text-[#00ff00] uppercase tracking-widest rounded-full">
+                    {item.tag}
+                  </span>
+                </div>
               </div>
 
-              {/* Content Layer (Glassmorphism) */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                
-                {/* Floating Top Tag */}
-                <div className="absolute top-6 right-6 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                   <span className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono uppercase tracking-widest text-white">
-                      {item.tag}
-                   </span>
+              {/* INLINE CONTENT BLOCK */}
+              <div className="mt-[-50px] relative z-10 mx-3 mb-3 p-5 bg-neutral-900/80 backdrop-blur-3xl border border-white/10 rounded-[1.5rem] shadow-2xl">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <MapPin size={10} className="text-[#00ff00]" />
+                  <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
+                    {item.location}
+                  </span>
                 </div>
 
-                {/* Text Content */}
-                <div className="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="flex items-center gap-2 text-green-400 text-xs font-mono mb-2 opacity-80">
-                    <MapPin size={12} />
-                    <span className="uppercase tracking-wider">{item.location}</span>
+                <h3 className="text-lg font-bold text-white mb-2 tracking-tight leading-tight">
+                  {item.title}
+                </h3>
+
+                {/* The "More Text" part - increased line-clamp for readability */}
+                <p className="text-neutral-400 text-[11px] leading-relaxed mb-4 font-medium line-clamp-4">
+                  {item.desc}
+                </p>
+
+                <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                  <div className="flex items-center gap-2 text-neutral-500">
+                    <Camera size={12} />
+                    <span className="text-[9px] uppercase font-bold tracking-tighter">HD Gallery</span>
                   </div>
-                  
-                  <h3 className="text-3xl font-bold text-white mb-3 leading-tight">
-                    {item.title}
-                  </h3>
-                  
-                  <p className="text-neutral-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-3">
-                    {item.desc}
-                  </p>
+                  <button className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#00ff00] transition-all active:scale-90">
+                    <ArrowRight size={14} />
+                  </button>
                 </div>
-
-                {/* Decorative Border Effect */}
-                <div className="absolute inset-4 border border-white/10 rounded-[2rem] pointer-events-none opacity-50 group-hover:border-green-500/30 transition-colors duration-500"></div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* --- SERVICE HIGHLIGHTS BAR --- */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
-           {SERVICES.map((s, i) => (
-             <div key={i} className="flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-green-900/20 hover:border-green-500/30 transition-all duration-300 backdrop-blur-md group">
-                <div className="text-neutral-500 group-hover:text-green-400 transition-colors">{s.icon}</div>
-                <span className="text-sm font-bold text-neutral-300 group-hover:text-white uppercase tracking-wide">{s.label}</span>
-             </div>
-           ))}
-        </div>
-
       </div>
     </section>
   );
 }
-
-
-
