@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 import { verifyToken } from "@/lib/auth";
 
-// Define a minimal type for Cloudinary upload resul
+// Define a minimal type for Cloudinary upload resu
 interface CloudinaryUploadResult {
   secure_url: string;
 }
