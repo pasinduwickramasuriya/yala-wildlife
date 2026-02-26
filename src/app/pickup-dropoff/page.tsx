@@ -5,6 +5,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import TransportForm from "@/components/TransportForm";
 import { MapPin, ShieldCheck, Zap, Clock, Car, Star, UserCheck, Navigation } from "lucide-react";
+import TourNavigator from "@/components/TourNavigator";
 
 // --- 1. SEO METADATA ---
 export const metadata: Metadata = {
@@ -120,6 +121,7 @@ export default function PickupDropoffPage() {
                 {/* =========================================
             CONTENT CONTAINER
         ========================================= */}
+                <TourNavigator />
                 <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -138,14 +140,14 @@ export default function PickupDropoffPage() {
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                                         </span>
-                                        <span className="text-[10px] font-mono uppercase tracking-widest text-green-300 font-bold">Fleet Online</span>
+                                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#00ff00] font-bold">Fleet Online</span>
                                     </div>
                                     <span className="text-[10px] font-mono text-neutral-300 uppercase tracking-wider">Island-Wide Coverage</span>
                                 </div>
 
                                 <h1 className="text-5xl md:text-4xl font-black text-white tracking-tighter leading-[0.95] mb-6">
                                     PREMIUM <br />
-                                    <span className="text-green-400 font-bold">LOGISTICS</span>
+                                    <span className="text-[#00ff00] font-bold">LOGISTICS</span>
 
                                 </h1>
 
@@ -156,10 +158,10 @@ export default function PickupDropoffPage() {
 
                             {/* 2. METRICS GRID */}
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <StatCard label="Reliability" value="100%" icon={<ShieldCheck size={14} className="text-green-400" />} />
-                                <StatCard label="Availability" value="24/7" icon={<Clock size={14} className="text-green-400" />} />
-                                <StatCard label="Pricing" value="Best Rate" icon={<Zap size={14} className="text-green-400" />} />
-                                <StatCard label="Feedback" value="5.0/5" icon={<Star size={14} className="text-green-400" />} />
+                                <StatCard label="Reliability" value="100%" icon={<ShieldCheck size={14} className="text-[#00ff00] " />} />
+                                <StatCard label="Availability" value="24/7" icon={<Clock size={14} className="text-[#00ff00] " />} />
+                                <StatCard label="Pricing" value="Best Rate" icon={<Zap size={14} className="text-[#00ff00] " />} />
+                                <StatCard label="Feedback" value="5.0/5" icon={<Star size={14} className="text-[#00ff00] " />} />
                             </div>
 
                             {/* 3. FLEET SPECS */}
@@ -186,7 +188,7 @@ export default function PickupDropoffPage() {
                                     {/* Van Card */}
                                     <div className="group relative backdrop-blur-xl bg-black/40 rounded-2xl p-5 transition-all duration-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]">
                                         <div className="absolute top-3 right-3 opacity-50 group-hover:opacity-100 transition-opacity">
-                                            <Navigation size={16} className="text-green-400" />
+                                            <Navigation size={16} className="text-[#00ff00] " />
                                         </div>
                                         <h3 className="text-white font-bold text-sm mb-1">Luxury KDH Van</h3>
                                         <p className="text-[10px] text-neutral-400 mb-3">Perfect for families & groups.</p>
@@ -202,7 +204,7 @@ export default function PickupDropoffPage() {
                             {/* 4. CHAUFFEUR INFO */}
                             <div className="backdrop-blur-xl bg-black/50 rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6">
                                 <div className="w-12 h-12 rounded-full bg-green-900/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
-                                    <UserCheck size={24} className="text-green-400" />
+                                    <UserCheck size={24} className="text-[#00ff00] " />
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-bold text-white mb-1">Verified Professional Chauffeurs</h3>
@@ -215,7 +217,7 @@ export default function PickupDropoffPage() {
                             {/* 5. POPULAR ROUTES */}
                             <div>
                                 <div className="flex items-center gap-2 text-xs font-mono text-neutral-300 uppercase tracking-widest mb-4">
-                                    <MapPin size={14} className="text-green-400" /> High-Frequency Connections
+                                    <MapPin size={14} className="text-[#00ff00] " /> High-Frequency Connections
                                 </div>
                                 <div className="flex flex-wrap gap-2">
                                     <RoutePill from="Colombo Airport (BIA)" />

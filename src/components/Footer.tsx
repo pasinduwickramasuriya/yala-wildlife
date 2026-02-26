@@ -1,286 +1,60 @@
-// "use client";
-
-// import Link from "next/link";
-// import Image from "next/image";
-// import {
-//   Facebook,
-//   Instagram,
-//   Twitter,
-//   MapPin,
-//   Phone,
-//   Mail,
-//   Package,
-//   Users,
-//   MessageSquare,
-//   HelpCircle,
-//   Heart
-// } from "lucide-react";
-// import { cn } from "@/lib/utils";
-
-// // --- Assets ---
-// const BG_IMAGE = "/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp";
-
-// // --- Brand Icon ---
-// const RabbitIcon = ({ className }: { className?: string }) => (
-//   <svg
-//     xmlns="http://www.w3.org/2000/svg"
-//     viewBox="0 0 24 24"
-//     fill="none"
-//     stroke="currentColor"
-//     strokeWidth="2"
-//     strokeLinecap="round"
-//     strokeLinejoin="round"
-//     className={cn("text-green-400", className)}
-//   >
-//     <path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-//     <path d="M17.5 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-//     <path d="M6.5 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-//     <path d="M15.5 19.5c.5-1.5 1-3.5 0-5" />
-//     <path d="M8.5 19.5c-.5-1.5-1-3.5 0-5" />
-//     <path d="M12 21a7.5 7.5 0 0 0 5-2.5c1.5-2 0-5.5-5-5.5s-6.5 3.5-5 5.5A7.5 7.5 0 0 0 12 21Z" />
-//   </svg>
-// );
-
-// // --- Data ---
-// const contactLinks = [
-//   { name: "Yala National Park, Sri Lanka", href: "#", icon: MapPin },
-//   { name: "+94 778 158 004", href: "tel:+94778158004", icon: Phone },
-//   { name: "pasinduwick@icloud.com", href: "mailto:pasinduwick@icloud.com", icon: Mail },
-// ];
-
-// const exploreLinks = [
-//   { name: "Safari Packages", href: "/safari-packages", icon: Package },
-//   { name: "About Us", href: "/about", icon: Users },
-//   { name: "Blog", href: "/blog", icon: MessageSquare },
-//   { name: "Booking & FAQs", href: "/safari-packages", icon: HelpCircle },
-//   { name: "Pickup & Dropoff", href: "/pickup-dropoff", icon: HelpCircle },
-// ];
-
-// const socialLinks = [
-//   { name: "Facebook", icon: Facebook, href: "https://web.facebook.com/ceylonnaturesafari" },
-//   { name: "Instagram", icon: Instagram, href: "https://web.facebook.com/ceylonnaturesafari" },
-//   { name: "Twitter", icon: Twitter, href: "https://web.facebook.com/ceylonnaturesafari" },
-// ];
-
-// const legalLinks = [
-//   { name: "Privacy Policy", href: "/contact" },
-//   { name: "Terms of Service", href: "/safari-packages" },
-// ];
-
-// export default function Footer() {
-//   return (
-//     <footer className="relative w-full bg-neutral-950 pt-32 pb-10 overflow-hidden border-t border-white/5 font-sans">
-      
-//       {/* --- 0. BACKGROUND IMAGE LAYER --- */}
-//       <div className="absolute inset-0 w-full h-full z-0 select-none">
-//         <Image 
-//           src={BG_IMAGE}
-//           alt="Yala Leopard"
-//           fill
-//           priority={false}
-//           className="object-cover object-top opacity-80" 
-//         />
-//         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-neutral-950/10" />
-//       </div>
-
-//       {/* --- 1. Background Textures --- */}
-//       <div className="absolute inset-0 w-full h-full pointer-events-none transform-gpu z-0">
-//         <div 
-//           className="absolute inset-0 opacity-[0.03] mix-blend-overlay" 
-//           style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
-//         />
-//       </div>
-
-//       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        
-//         {/* --- 2. Main Grid Layout --- */}
-//         {/* Added text-center for mobile, lg:text-left for desktop */}
-//         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-20 text-center lg:text-left">
-          
-//           {/* Brand & Mission (Span 5) */}
-//           <div className="lg:col-span-5 space-y-8">
-//             {/* Logo: Centered on mobile (mx-auto), left on desktop (lg:mx-0) */}
-//             <Link href="/" className="inline-flex items-center gap-3 group mx-auto lg:mx-0">
-//               <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-green-900/20 border border-green-500/30 backdrop-blur-md transition-all duration-500">
-//                 <RabbitIcon className="h-7 w-7 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6" />
-//               </div>
-//               <div className="flex flex-col items-start">
-//                 <span className="text-2xl font-extrabold text-white tracking-tight drop-shadow-md">Yala<span className="text-green-500">Wildlife</span></span>
-//                 <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold">Safari Adventures</span>
-//               </div>
-//             </Link>
-            
-//             {/* Description: Centered on mobile (mx-auto), left on desktop (lg:mx-0) */}
-//             <p className="text-neutral-300 text-base leading-relaxed max-w-md font-light drop-shadow-md mx-auto lg:mx-0">
-//               Experience the raw beauty of nature. We curate premium, eco-friendly safari tours that connect you with the wild heart of Sri Lanka.
-//             </p>
-
-//             {/* Social Icons: Centered on mobile (justify-center), left on desktop (lg:justify-start) */}
-//             <div className="flex items-center justify-center lg:justify-start gap-4">
-//               {socialLinks.map(({ name, icon: Icon, href }) => (
-//                 <a
-//                   key={name}
-//                   href={href}
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                   aria-label={name}
-//                   className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 text-neutral-400 transition-all duration-300 hover:border-green-500 hover:text-white overflow-hidden"
-//                 >
-//                   <div className="absolute inset-0 bg-green-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-//                   <Icon className="relative h-4 w-4 z-10" />
-//                 </a>
-//               ))}
-//             </div>
-//           </div>
-
-//           {/* Navigation Links (Span 2 + 2) */}
-//           <div className="lg:col-span-2 space-y-6">
-//             <h4 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-2 drop-shadow-sm">Explore</h4>
-//             <ul className="space-y-4">
-//               {exploreLinks.map(({ name, href }) => (
-//                 <li key={name}>
-//                   {/* Link: Centered flex on mobile (justify-center), left on desktop (lg:justify-start) */}
-//                   <Link href={href} className="text-sm text-neutral-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group drop-shadow-sm">
-//                     <span className="w-1.5 h-1.5 rounded-full bg-neutral-600 group-hover:bg-green-500 transition-colors" />
-//                     {name}
-//                   </Link>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           <div className="lg:col-span-2 space-y-6">
-//             <h4 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-2 drop-shadow-sm">Contact</h4>
-//             <ul className="space-y-4">
-//               {contactLinks.map(({ name, href, icon: Icon }) => (
-//                 <li key={name}>
-//                   {/* Contact Link: Centered flex on mobile, left on desktop */}
-//                   <a href={href} className="group flex items-center lg:items-start justify-center lg:justify-start gap-3">
-//                     <Icon className="h-5 w-5 text-neutral-500 group-hover:text-green-500 transition-colors shrink-0 mt-0.5 drop-shadow-sm" />
-//                     <span className="text-sm text-neutral-300 group-hover:text-white transition-colors leading-relaxed break-all drop-shadow-sm text-center lg:text-left">
-//                       {name}
-//                     </span>
-//                   </a>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           {/* Newsletter Card (Span 3) */}
-//           <div className="lg:col-span-3">
-//             <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-neutral-800/40 to-neutral-900/60 border border-white/10 p-6 backdrop-blur-md transform-gpu shadow-xl">
-//               <h4 className="text-lg font-bold text-white mb-2 drop-shadow-md">Join the Pack</h4>
-//               <p className="text-xs text-neutral-300 mb-6 leading-relaxed drop-shadow-sm">
-//                 Exclusive sightings, safari tips, and special offers delivered to your inbox.
-//               </p>
-//             </div>
-//           </div>
-
-//         </div>
-
-//         {/* --- 3. Bottom Bar --- */}
-//         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-//           {/* Copyright */}
-//           <p className="text-neutral-400 text-xs font-medium order-2 md:order-1 drop-shadow-md text-center md:text-left">
-//             © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Yala Wildlife. All rights reserved.
-//           </p>
-          
-//           {/* Legal Links */}
-//           <div className="flex items-center gap-8 order-1 md:order-2">
-//             {legalLinks.map(({ name, href }) => (
-//               <Link
-//                 key={name}
-//                 href={href}
-//                 className="text-xs font-medium text-neutral-400 hover:text-green-400 transition-colors hover:underline decoration-green-500/50 underline-offset-4 drop-shadow-md"
-//               >
-//                 {name}
-//               </Link>
-//             ))}
-//           </div>
-
-//           {/* Credits */}
-//           <div className="order-3">
-//             <a 
-//               href="#" 
-//               target="_blank" 
-//               rel="noreferrer"
-//               className="flex items-center gap-2 bg-neutral-900/60 hover:bg-neutral-800 border border-white/10 px-4 py-2 rounded-full transition-all duration-300 group backdrop-blur-md"
-//             >
-//               <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider group-hover:text-white">Built by</span>
-//               <span className="text-xs font-bold text-white group-hover:text-green-400 flex items-center gap-1">
-//                 Pasindu <Heart className="h-3 w-3 text-red-500 fill-red-500 animate-pulse" />
-//               </span>
-//             </a>
-//           </div>
-//         </div>
-
-//       </div>
-//     </footer>
-//   );
-// }
-
-
-
-
-
 
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Facebook,
   Instagram,
   Twitter,
+  Heart,
   MapPin,
   Phone,
   Mail,
-  Package,
-  Users,
-  MessageSquare,
-  HelpCircle,
-  Heart
+  ChevronRight,
 } from "lucide-react";
-import "@/app/style/footer.css"; // 1. Import CSS
 
-// --- Assets ---
-const BG_IMAGE = "/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp";
+// --- Animation Config (Webflow Easing) ---
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+  }
+};
 
-// --- Brand Icon ---
-const RabbitIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-    <path d="M17.5 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-    <path d="M6.5 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-    <path d="M15.5 19.5c.5-1.5 1-3.5 0-5" />
-    <path d="M8.5 19.5c-.5-1.5-1-3.5 0-5" />
-    <path d="M12 21a7.5 7.5 0 0 0 5-2.5c1.5-2 0-5.5-5-5.5s-6.5 3.5-5 5.5A7.5 7.5 0 0 0 12 21Z" />
-  </svg>
-);
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    }
+  }
+};
 
-// --- Data ---
-const contactLinks = [
-  { name: "Yala National Park, Sri Lanka", href: "#", icon: MapPin },
-  { name: "+94 778 158 004", href: "tel:+94778158004", icon: Phone },
-  { name: "pasinduwick@icloud.com", href: "mailto:pasinduwick@icloud.com", icon: Mail },
-];
-
-const exploreLinks = [
-  { name: "Safari Packages", href: "/safari-packages", icon: Package },
-  { name: "About Us", href: "/about", icon: Users },
-  { name: "Blog", href: "/blog", icon: MessageSquare },
-  { name: "Booking & FAQs", href: "/safari-packages", icon: HelpCircle },
-  { name: "Pickup & Dropoff", href: "/pickup-dropoff", icon: HelpCircle },
-];
+// --- Data Arrays ---
+const navigation = {
+  explore: [
+    { name: "Safari Packages", href: "/safari-packages" },
+    { name: "About Us", href: "/about" },
+    { name: "Wildlife Blog", href: "/blog" },
+    { name: "Reviews Gallery", href: "/reviews" },
+  ],
+  support: [
+    { name: "Booking & FAQs", href: "/safari-packages" },
+    { name: "Pickup & Dropoff/tours", href: "/pickup-dropoff" },
+    { name: "Contact Support", href: "/contact" },
+  ],
+  legal: [
+    { name: "Privacy Policy", href: "/legal#privacy" },
+    { name: "Terms of Service", href: "/legal#terms" },
+    { name: "Refund Policy", href: "/legal#cancellation" },
+  ],
+};
 
 const socialLinks = [
   { name: "Facebook", icon: Facebook, href: "https://web.facebook.com/ceylonnaturesafari" },
@@ -288,152 +62,142 @@ const socialLinks = [
   { name: "Twitter", icon: Twitter, href: "https://web.facebook.com/ceylonnaturesafari" },
 ];
 
-const legalLinks = [
-  { name: "Privacy Policy", href: "/legal#privacy" },
-  { name: "Terms of Service", href: "/legal#terms" },
-  { name: "Refund Policy", href: "legal#cancellation" },
-];
-
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="site-footer">
-      
-      {/* --- 0. BACKGROUND IMAGE LAYER --- */}
-      <div className="footer-bg-image-wrapper">
-        <Image 
-          src={BG_IMAGE}
+    <footer className="relative bg-[#0a0a0a] text-[#d1d1d6] overflow-hidden selection:bg-[#00ff00] selection:text-black">
+
+      {/* --- BACKGROUND LAYER --- */}
+      <div className="absolute inset-0 z-0 opacity-60">
+        <Image
+          src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
           alt="Yala Leopard"
           fill
-          priority={false}
-          className="footer-bg-image" 
+          className="object-cover object-center grayscale-[0.5]"
         />
-        <div className="footer-bg-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent" />
       </div>
 
-      {/* --- 1. Background Textures --- */}
-      <div className="footer-texture">
-        <div className="footer-texture-inner" />
-      </div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={staggerContainer}
+        className="relative z-10 max-w-[1024px] mx-auto px-6 py-16"
+      >
 
-      <div className="footer-container">
-        
-        {/* --- 2. Main Grid Layout --- */}
-        <div className="footer-grid">
-          
-          {/* Brand & Mission */}
-          <div className="brand-column">
-            <Link href="/" className="brand-link group">
-              <div className="brand-icon-box">
-                <RabbitIcon className="rabbit-icon" />
-              </div>
-              <div className="brand-text-col">
-                <span className="brand-title">Yala<span>Wildlife</span></span>
-                <span className="brand-subtitle">Safari Adventures</span>
-              </div>
-            </Link>
-            
-            <p className="brand-desc">
-              Experience the raw beauty of nature. We curate premium, eco-friendly safari tours that connect you with the wild heart of Sri Lanka.
-            </p>
-
-            <div className="social-row">
-              {socialLinks.map(({ name, icon: Icon, href }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                  className="social-btn"
-                >
-                  <div className="social-fill" />
-                  <Icon className="social-icon" />
-                </a>
-              ))}
+        {/* --- TOP BRAND SECTION --- */}
+        <div className="flex flex-col md:flex-row justify-between items-start border-b border-white/10 pb-12 mb-12 gap-8">
+          <motion.div variants={fadeInUp} className="max-w-sm">
+            <h2 className="text-[#00ff00] text-3xl font-black uppercase tracking-tighter mb-4 leading-none">
+              YALA
+              <br /><span className="text-[#00ff00]">WILDLIFE</span>
+            </h2>
+            <div className="space-y-4">
+              <p className="text-[13px] leading-relaxed text-white font-medium">
+                As Sri Lanka&apos;s premier eco-expedition partner, Yala Wildlife operates with a strict &quot;Nature First&quot; policy. We bridge luxury and raw wilderness, ensuring every journey supports local conservation efforts and ethical wildlife tracking.
+              </p>
+              <p className="text-[11px] leading-relaxed text-[#86868b] uppercase tracking-widest font-bold">
+                1. Licensed Trackers Only • Guaranteed Ethical Observations • Federal Wildlife Safety Compliant.
+              </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Navigation Links */}
-          <div className="links-column">
-            <h4 className="column-title">Explore</h4>
-            <ul className="links-list">
-              {exploreLinks.map(({ name, href }) => (
-                <li key={name}>
-                  <Link href={href} className="footer-link">
-                    <span className="link-dot" />
-                    {name}
+          <motion.div variants={fadeInUp} className="flex flex-col gap-6">
+            <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#00ff00]">Secure Comms</span>
+            <div className="flex flex-col gap-3">
+              <a href="tel:+94778158004" className="group flex items-center gap-3">
+                <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
+                  <Phone size={14} className="text-[#00ff00]" />
+                </div>
+                <span className="text-white text-sm font-bold tracking-tight">+94 77 815 8004</span>
+              </a>
+              <a href="mailto:pasinduwick@icloud.com" className="group flex items-center gap-3">
+                <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
+                  <Mail size={14} className="text-[#00ff00]" />
+                </div>
+                <span className="text-white text-sm font-bold tracking-tight">pasinduwick@icloud.com</span>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* --- NAVIGATION GRID --- */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
+            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">Explore</h4>
+            <ul className="flex flex-col gap-3">
+              {navigation.explore.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="group text-[13px] text-[#86868b] hover:text-[#00ff00] transition-colors flex items-center gap-1">
+                    <ChevronRight size={10} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                    {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Contact Links */}
-          <div className="links-column">
-            <h4 className="column-title">Contact</h4>
-            <ul className="links-list">
-              {contactLinks.map(({ name, href, icon: Icon }) => (
-                <li key={name}>
-                  <a href={href} className="contact-link">
-                    <Icon className="contact-icon" />
-                    <span className="contact-text">
-                      {name}
-                    </span>
-                  </a>
+          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
+            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">Support</h4>
+            <ul className="flex flex-col gap-3">
+              {navigation.support.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="group text-[13px] text-[#86868b] hover:text-[#00ff00] transition-colors flex items-center gap-1">
+                    <ChevronRight size={10} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Newsletter Card */}
-          <div className="links-column newsletter-column">
-            <div className="newsletter-card">
-              <h4 className="newsletter-title">Join the Pack</h4>
-              <p className="newsletter-desc">
-                Exclusive sightings, safari tips, and special offers delivered to your inbox.
-              </p>
+          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
+            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">HQ_Location</h4>
+            <div className="flex items-start gap-3 text-[13px] text-[#86868b] leading-loose">
+              <MapPin size={16} className="text-[#00ff00] shrink-0 mt-1" />
+              <span>Wickrama,kasingama<br />Yala Entrance Road,<br />Southern Province, Sri Lanka</span>
             </div>
-          </div>
+          </motion.div>
 
+          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
+            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">Social_Signals</h4>
+            <div className="flex gap-4">
+              {socialLinks.map((link, i) => (
+                <a
+                  key={i}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:border-[#00ff00]/50 hover:text-[#00ff00] transition-all duration-500"
+                >
+                  <link.icon size={18} />
+                </a>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
-        {/* --- 3. Bottom Bar --- */}
-        <div className="bottom-bar">
-          {/* Copyright */}
-          <p className="copyright">
-            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Yala Wildlife. All rights reserved.
-          </p>
-          
-          {/* Legal Links */}
-          <div className="legal-links">
-            {legalLinks.map(({ name, href }) => (
-              <Link
-                key={name}
-                href={href}
-                className="legal-link"
-              >
-                {name}
-              </Link>
+        {/* --- BOTTOM BAR --- */}
+        <motion.div variants={fadeInUp} className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-[11px] font-bold tracking-tight text-[#636366]">
+            <p className="text-[#86868b]">© {currentYear} Yala Wildlife Adventure Inc.</p>
+            {navigation.legal.map((item) => (
+              <Link key={item.name} href={item.href} className="hover:text-white transition-colors duration-300">{item.name}</Link>
             ))}
           </div>
 
-          {/* Credits */}
-          <div className="credits-box">
-            <a 
-              href="#" 
-              target="_blank" 
-              rel="noreferrer"
-              className="credits-link"
-            >
-              <span className="credits-label">Built by</span>
-              <span className="credits-name">
-                Pasindu <Heart className="heart-icon" />
-              </span>
-            </a>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 group cursor-pointer bg-white/5 px-4 py-2 rounded-full border border-white/10 transition-all duration-500 hover:bg-[#00ff00]/10 hover:border-[#00ff00]/30">
+              <span className="text-[10px] uppercase font-black tracking-widest text-white/60">Architect</span>
+              <span className="text-[11px] font-black text-white group-hover:text-[#00ff00] transition-colors">PASINDU</span>
+              <Heart size={10} className="text-[#00ff00] fill-current animate-pulse" />
+            </div>
           </div>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </footer>
   );
 }
