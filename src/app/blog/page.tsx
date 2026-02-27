@@ -372,7 +372,7 @@ export default async function BlogPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
 
           {/* HERO SECTION (Removed box container for cleaner look) */}
-          <div className="relative z-10 text-center mb-16">
+          {/* <div className="relative z-10 text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-6 border border-white/5">
               <span className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse"></span>
               <span className="text-xs font-mono uppercase tracking-widest text-[#00ff00]">Yala Intelligence</span>
@@ -391,7 +391,95 @@ export default async function BlogPage() {
             keywords={keywords}
             relatedLinks={relatedLinks}
             showKeywords={true}
-          />
+          /> */}
+          <section className="relative w-full py-20 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
+
+            {/* --- 1. HERO COMPONENT: NANO-CUTTER REBUILD --- */}
+            <div className="relative z-10 text-center mb-16 md:mb-24 space-y-6 px-4">
+
+              {/* SIGNAL STATUS */}
+              <div className="flex justify-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,255,0,0.1)]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span>
+                  <span className="text-[7px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#00ff00]">
+                    Yala Naturalist Intelligence Signal
+                  </span>
+                </div>
+              </div>
+
+              {/* MAIN TITLE: SEGMENTED DATA BLOCKS */}
+              <div className="flex flex-col items-center gap-2">
+                <div className="inline-block bg-black/70 px-5 md:px-8 py-2 rounded-full border border-white/5">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-[-0.05em] leading-none">
+                    Wildlife
+                  </h1>
+                </div>
+                <div className="inline-block bg-black/70 px-5 md:px-8 py-2 rounded-full">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#00ff00] uppercase tracking-[-0.05em] leading-none">
+                    Chronicles
+                  </span>
+                </div>
+              </div>
+
+              {/* SUB-TEXT: MODULAR DATA STRIPS */}
+              <div className="flex flex-wrap justify-center gap-2 pt-4 max-w-4xl mx-auto">
+                {[
+                  "Discover fascinating wildlife stories and expert photography tips,",
+                  "and conservation insights from our expert guides."
+                ].map((text, i) => (
+                  <div key={i} className="bg-black/60 px-3 md:px-4 py-1.5 rounded-full border border-white/5 max-w-fit">
+                    <p className="text-[8px] md:text-[11px] text-neutral-300 font-black uppercase tracking-[0.15em] leading-tight">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* --- 2. INTELLIGENCE HUB: SURGICAL HUD STYLE --- */}
+            <div className="relative z-10 flex flex-col items-center gap-3 px-4">
+              {/* Header Label */}
+              <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full border border-[#00ff00]/10">
+                <h2 className="text-[8px] md:text-[11px] font-black text-[#00ff00] uppercase tracking-[0.4em]">
+                  Verified Expert Intelligence Protocol
+                </h2>
+              </div>
+
+              {/* Segmented Description Blocks (SEO & Trust Density) */}
+              <div className="max-w-6xl flex flex-wrap justify-center gap-2">
+                {[
+                  "Our blog features in-depth articles about Yala's incredible biodiversity,",
+                  "professional wildlife photography techniques, animal behavior patterns,",
+                  "conservation efforts, and practical safari tips from our certified",
+                  "naturalist guides with over 10 years of field experience.",
+                  "Official SLTDA Licensed Operator intelligence and sustainable travel methodology.",
+                  "Hyper-specialized technical analysis of Yala's leopard populations,",
+                  "Leveraging shutter-speed optimization and behavioral monitoring protocols,",
+                  "Integrating practical safari safety and ethical wildlife tracking standards.",
+                  "Preserving the wild heart of Sri Lanka through transparent reporting."
+                ].map((text, i) => (
+                  <div key={i} className="bg-black/60 px-3 md:px-4 py-2 rounded-full border border-white/5 backdrop-blur-sm max-w-[92vw] md:max-w-fit">
+                    <p className="text-[10px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-widest leading-none">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* --- 3. SEO SHADOW LAYER --- */}
+            <div className="sr-only">
+              <SEOContentBlock
+                title="Expert Wildlife Content & Safari Insights Sri Lanka"
+                description="In-depth articles about Yala's biodiversity, photography techniques, and conservation from guides with 10 years of experience."
+                keywords={keywords}
+                relatedLinks={relatedLinks}
+                showKeywords={false}
+              />
+            </div>
+
+          </section>
+
 
           {/* BLOG GRID - Smaller, Cutter, No Borders */}
           <main className="mt-16">

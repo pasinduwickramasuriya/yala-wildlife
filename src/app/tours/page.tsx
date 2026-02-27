@@ -57,7 +57,7 @@ export default function ToursPage() {
                     <div className="inline-block bg-black/70 px-4 py-1 rounded-full border border-[#00ff00]/20 mb-6">
                         {/* H1 is critical for SEO - we keep your styling */}
                         <h1 className="text-[10px] font-black text-[#00ff00] uppercase tracking-[0.6em]">
-                            SmartWay_Tour_Specialists_LKA
+                            Tour Specialists
                         </h1>
                     </div>
                     <h2 className="text-5xl md:text-4xl font-black text-white tracking-[-0.09em] uppercase leading-[0.75] mb-8">

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { Compass, Search } from "lucide-react";
 // Import the data and the card component
@@ -20,7 +20,7 @@ export default function TourNavigator() {
         <section className="relative w-full min-h-screen overflow-hidden selection:bg-[#00ff00] selection:text-black">
 
             {/* --- HIGH-VISIBILITY BACKGROUND --- */}
-            <div className="absolute inset-0 z-0">
+            {/* <div className="absolute inset-0 z-0">
                 <Image
                     src="https://res.cloudinary.com/dkfnpmzpv/image/upload/v1771636100/blogs/vrbgk9djfy59uaf6ol4p.jpg"
                     alt="Wildlife Chronicles Background"
@@ -30,7 +30,7 @@ export default function TourNavigator() {
                     className="object-cover brightness-[0.9] transition-transform duration-[40s] scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" />
-            </div>
+            </div> */}
 
             {/* --- CONTENT LAYER --- */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-24 flex flex-col items-center">
@@ -87,7 +87,7 @@ export default function TourNavigator() {
                         </button>
                     </Link>
 
-                    <p className="text-[8px] font-mono text-white/30 tracking-[0.5em] uppercase">End_Of_Intelligence_Feed</p>
+                    <p className="text-[12px] font-mono text-white tracking-[0.5em] uppercase inline-block bg-black/60 rounded-full">End Of Intelligence Feed</p>
                 </div>
 
             </div>
