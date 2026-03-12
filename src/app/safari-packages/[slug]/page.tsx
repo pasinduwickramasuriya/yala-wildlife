@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Metadata } from "next";
 import { Package } from "@prisma/client";
 import { notFound } from "next/navigation";
@@ -10,7 +11,7 @@ import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import { MapPin, Clock, Shield, Users } from "lucide-react";
+import { Shield, Users } from "lucide-react";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -150,15 +151,382 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function PackageDetailPage(props: Props) {
+// export default async function PackageDetailPage(props: Props) {
+//   const params = await props.params;
+//   const pkg = await getPackage(params.slug);
+
+//   // Split description into points
+//   const descriptionPoints = pkg.description
+//     .split(".")
+//     .map((point) => point.trim())
+//     .filter((point) => point.length > 0);
+
+//   const breadcrumbItems = [
+//     { name: "Home", item: "/" },
+//     { name: "Safari Packages", item: "/safari-packages" },
+//     { name: pkg.name, item: `/safari-packages/${pkg.slug}` },
+//   ];
+
+//   return (
+//     <>
+//       <Header />
+//       <SafariPackageJsonLd
+//         name={pkg.name}
+//         description={pkg.description}
+//         price={pkg.price}
+//         image={pkg.imageUrl}
+//         slug={pkg.slug}
+//       />
+//       <BreadcrumbJsonLd items={breadcrumbItems} />
+//       <FAQJsonLd faqs={defaultFAQs} />
+//       <BreadcrumbSchema items={breadcrumbItems} />
+
+//       <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30">
+
+//         {/* =========================================
+//             BACKGROUND IMAGE (Global - Fixed)
+//         ========================================= */}
+//         <div className="fixed inset-0 z-0">
+//           <Image
+//             src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
+//             alt="Yala Leopard Background"
+//             fill
+//             priority
+//             // Slightly increased opacity for better visibility against the dark overlay
+//             className="object-cover opacity-50"
+//             quality={90}
+//           />
+//           {/* Cinematic Overlay - Stronger gradients so text pops without borders */}
+//           <div className="absolute inset-0 bg-gradient-to-b " />
+//           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#050505_100%)]" />
+//         </div>
+
+//         {/* =========================================
+//             CONTENT
+//         ========================================= */}
+//         <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
+
+//           {/* Breadcrumb / Metadata HUD */}
+//           <div className="flex items-center gap-4 text-xs font-mono text-neutral-400 mb-8 uppercase tracking-widest">
+//             <span>Yala National Park</span>
+//             <span className="w-px h-3 bg-neutral-600"></span>
+//             <span className="text-green-400">Expedition ID: {pkg.slug.toUpperCase().substring(0, 6)}</span>
+//           </div>
+
+//           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+//             {/* LEFT COLUMN: DETAILS (Span 7) */}
+//             <div className="lg:col-span-7 space-y-10">
+
+//               {/* Title Block */}
+//               <div className="space-y-6">
+//                 <h1 className="text-4xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter drop-shadow-lg">
+//                   {pkg.name}
+//                 </h1>
+//                 {/* Badges - No Borders, just glass */}
+//                 <div className="flex flex-wrap gap-3 pt-2">
+//                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
+//                     <Clock size={14} className="text-green-400" />
+//                     <span className="text-xs font-bold uppercase text-white">4-6 Hours</span>
+//                   </div>
+//                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
+//                     <Users size={14} className="text-green-400" />
+//                     <span className="text-xs font-bold uppercase text-white">Max 7 Guests</span>
+//                   </div>
+//                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
+//                     <Shield size={14} className="text-green-400" />
+//                     <span className="text-xs font-bold uppercase text-white">Insured</span>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Main Image (Cutter Style - Deep Shadow, No Border) */}
+//               <div className="relative aspect-video rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] group">
+//                 <Image
+//                   src={pkg.imageUrl}
+//                   alt={pkg.name}
+//                   fill
+//                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
+//                   sizes="(max-width: 768px) 100vw, 60vw"
+//                   priority
+//                 />
+//                 {/* Overlay Gradient */}
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+//                 <div className="absolute bottom-6 left-6 flex items-center gap-2 text-xs font-mono text-green-400 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
+//                   <MapPin size={12} />
+//                   <span>Sector 1 - Palatupana Gate</span>
+//                 </div>
+//               </div>
+
+//               {/* Description List - Dark Glass, No Border */}
+//               {/* <div className="bg-black/30 backdrop-blur-2xl rounded-3xl p-8 shadow-xl">
+//                 <h3 className="text-2xl font-bold text-white mb-8">
+//                   Expedition Highlights
+//                 </h3>
+//                 <div className="grid gap-5">
+//                   {descriptionPoints.map((point, index) => (
+//                     <div key={index} className="flex items-start gap-4 group">
+//                       <div className="mt-1 p-1 bg-green-500/20 rounded-full">
+//                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
+//                       </div>
+//                       <p className="text-neutral-200 text-base leading-relaxed font-light">
+//                         {point}.
+//                       </p>
+//                     </div>
+//                   ))}
+//                 </div>
+//                </div> */}
+
+//               {/* Description List - Dark Glass, No Border */}
+//               <div className="bg-black/30 backdrop-blur-sm rounded-[2.5rem] p-8 shadow-xl border border-white/5">
+//                 <h3 className="text-2xl font-bold text-white mb-8">
+//                   Expedition Highlights
+//                 </h3>
+
+//                 <div className="grid gap-5">
+//                   {descriptionPoints.map((point, index) => {
+//                     if (!point) return null;
+
+//                     // --- THE FIX: Unicode-Safe Splitting ---
+//                     // This creates an array of real characters (handling emojis correctly)
+//                     const charArray = [...point];
+
+//                     // 1. Get the first character (Safe for Emojis)
+//                     const firstChar = charArray[0] || "";
+//                     const firstLetter = firstChar.toUpperCase();
+
+//                     // 2. Get the rest of the text
+//                     const restOfText = charArray.slice(1).join("");
+
+//                     return (
+//                       <div key={index} className="flex items-start gap-4 group">
+//                         {/* Added suppressHydrationWarning to be extra safe against browser extensions */}
+//                         <p
+//                           className="text-neutral-200 text-base leading-relaxed font-light"
+//                           suppressHydrationWarning
+//                         >
+//                           <span className="text-[#00ff00] text-3xl font-bold mr-1 leading-none">
+//                             {firstLetter}
+//                           </span>
+//                           {restOfText}.
+//                         </p>
+//                       </div>
+//                     );
+//                   })}
+//                 </div>
+//               </div>
+
+//             </div>
+
+//             {/* RIGHT COLUMN: BOOKING CONSOLE (Span 5) */}
+//             <div className="lg:col-span-5">
+//               <div className="sticky top-24 space-y-8">
+
+//                 {/* Pricing Card - Glowing, No Border */}
+//                 <div className="bg-black/10 rounded-3xl p-8 text-center relative overflow-hidden ">
+//                   <div className="absolute inset-0 bg-[url('/pattern-grid.svg')] opacity-10 mix-blend-overlay"></div>
+//                   <p className="text-green-100/80 text-xs font-bold uppercase tracking-widest mb-2">Total Package Price</p>
+//                   <div className="flex items-baseline justify-center gap-1">
+//                     <span className="text-3xl font-bold text-green-200">$</span>
+//                     <span className="text-6xl font-black text-white tracking-tighter drop-shadow-md">{pkg.price.toFixed(0)}</span>
+//                   </div>
+//                   <p className="text-white text-sm mt-3 font-medium bg-white/10 py-1 px-3 rounded-full inline-block">Per Jeep (All Inclusive)</p>
+//                 </div>
+
+//                 {/* Booking Form Container - Deep Glass, No Border */}
+//                 <div className="backdrop-blur-2xl bg-black/50 rounded-3xl p-8 shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+//                   <div className="mb-8">
+//                     <h3 className="text-2xl font-bold text-white mb-2">Secure Your Seat</h3>
+//                     <p className="text-base text-neutral-400">Instant confirmation. Your adventure awaits.</p>
+//                   </div>
+
+//                   {/* Integrated Booking Form */}
+//                   <BookingForm tourPackageSlug={pkg.name} />
+//                 </div>
+
+//                 {/* Trust Badges - Dark Capsules, No Border */}
+//                 <div className="grid grid-cols-2 gap-4">
+//                   <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-5 text-center shadow-inner">
+//                     <div className="text-green-400 font-black text-2xl mb-1">4.9/5</div>
+//                     <div className="text-[10px] text-neutral-400 uppercase tracking-wider font-bold">Guest Rating</div>
+//                   </div>
+//                   <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-5 text-center shadow-inner">
+//                     <div className="text-green-400 font-black text-2xl mb-1">100%</div>
+//                     <div className="text-[10px] text-neutral-400 uppercase tracking-wider font-bold">Refund Guarantee</div>
+//                   </div>
+//                 </div>
+
+//               </div>
+//             </div>
+
+//           </div>
+//         </div>
+//       </main>
+//     </>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+// export default async function PackageDetailPage(props: Props) {
+//   const params = await props.params;
+//   const pkg = await getPackage(params.slug);
+
+//   const descriptionPoints = pkg.description
+//     .split(".")
+//     .map((point) => point.trim())
+//     .filter((point) => point.length > 0);
+
+//   return (
+//     <>
+//       <Header />
+//       <main className="relative min-h-screen bg-black text-white selection:bg-[#00ff00]/30 font-sans overflow-x-hidden">
+
+//         {/* --- GLOBAL FIXED BACKGROUND --- */}
+//         <div className="fixed inset-0 z-0 h-full w-full pointer-events-none">
+//           <Image
+//             src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
+//             alt="Yala Background Feed"
+//             fill
+//             priority
+//             className="object-cover opacity-60 grayscale-[40%]"
+//           />
+//           <div className="absolute inset-0 bg-black/60" />
+//         </div>
+
+//         <div className="relative z-10">
+//           {/* SECTION 1: FULL SCREEN HERO */}
+//           <section className="relative h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden">
+//             <div className="absolute inset-0 z-0">
+//               <Image src={pkg.imageUrl} alt={pkg.name} fill priority className="object-cover scale-105" quality={100} />
+//               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
+//             </div>
+
+//             <div className="relative z-10 container max-w-7xl mx-auto text-center space-y-6">
+//               <div className="flex justify-center">
+//                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-xl rounded-full ">
+//                   <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse"></span>
+//                   <span className="text-[12px] font-black  tracking-[0.5em] text-[#00ff00]">
+//                     {pkg.slug.toUpperCase().substring(0, 8)}
+//                   </span>
+//                 </div>
+//               </div>
+
+//               <div className="space-y-4">
+//                 <div className="inline-block bg-black/40 backdrop-blur-md px-8 py-3 rounded-2xl">
+//                   <h1 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">{pkg.name}</h1>
+//                 </div>
+
+//                 <div className="flex flex-wrap justify-center gap-2">
+//                   {[
+//                     { icon: Users, label: "MAX 07 CAPACITY" },
+//                     { icon: Shield, label: "SECURE PROTOCOL" },
+//                   ].map((badge, i) => (
+//                     <div key={i} className="flex items-center gap-2 bg-black/80 px-4 py-1.5 rounded-full backdrop-blur-md">
+//                       <badge.icon size={12} className="text-[#00ff00]" />
+//                       <span className="text-[12px] font-black text-white tracking-widest uppercase">{badge.label}</span>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+//                 <div className="w-[1px] h-12 bg-[#00ff00]" />
+//               </div>
+//             </div>
+//           </section>
+
+//           {/* SECTION 2: CENTERED DATA CONSOLE */}
+//           <div className="container max-w-4xl mx-auto px-4 py-24 space-y-20 flex flex-col items-center">
+
+//             {/* CENTERED HIGHLIGHTS */}
+//             <div className="w-full flex flex-col items-center space-y-8">
+//               <div className="inline-block bg-black/60 px-4 py-1.5 rounded-full">
+//                 <h3 className="text-[12px] font-black text-[#00ff00] uppercase tracking-[0.4em]">Expedition_Metadata_Feed</h3>
+//               </div>
+
+//               <div className="grid gap-1 w-full">
+//                 {descriptionPoints.map((point, index) => {
+//                   const firstLetter = point.charAt(0).toUpperCase();
+//                   const restOfText = point.slice(1);
+//                   return (
+//                     <div key={index} className="bg-black/70 p-1 rounded-full text-center">
+//                       <p className="text-[14px] md:text-[16px] text-neutral-300 font-medium leading-relaxed tracking-wide">
+//                         <span className="text-[#00ff00] text-4xl font-black mr-1 inline-block align-middle leading-none">
+//                           {firstLetter}
+//                         </span>
+//                         {restOfText}
+//                       </p>
+//                     </div>
+//                   );
+//                 })}
+//               </div>
+//             </div>
+
+//             {/* CENTERED BOOKING CONSOLE */}
+//             <div className="w-full max-w-2xl space-y-6">
+
+//               {/* PRICING */}
+//               <div className="bg-black/80  rounded-full p-1 text-center relative overflow-hidden shadow-2xl border border-white/5">
+//                 <p className="text-[#00ff00] text-[12px] font-black tracking-[0.5em] mb-4">Unit Investment</p>
+//                 <div className="flex items-baseline justify-center gap-1">
+//                   <span className="text-xl font-black text-[#00ff00]">$</span>
+//                   <span className="text-7xl font-black text-white tracking-tighter">{pkg.price.toFixed(0)}</span>
+//                   <span className="text-[12px] text-neutral-500 font-black uppercase ml-2 tracking-widest">/ Jeep</span>
+//                 </div>
+//               </div>
+
+//               {/* BOOKING FORM */}
+//               <div className="bg-black/90 backdrop-blur-3xl rounded-[2.5rem] p-10 shadow-2xl text-center border border-white/5">
+//                 <div className="mb-8">
+//                   <h2 className="text-2xl font-black text-white uppercase tracking-tighter">Initialize_Booking</h2>
+//                   <p className="text-[12px] text-neutral-500 uppercase tracking-widest font-black pt-1">Encryption: Active_Protocol</p>
+//                 </div>
+//                 <div className="text-left"> {/* Keeping form fields left-aligned for usability while container is centered */}
+//                   <BookingForm tourPackageSlug={pkg.name} />
+//                 </div>
+//               </div>
+
+//               {/* AUTH METRICS */}
+//               <div className="grid grid-cols-2 gap-4 w-full">
+//                 <div className="bg-black/60 p-6 rounded-2xl text-center backdrop-blur-xl shadow-lg border border-white/5">
+//                   <div className="text-[#00ff00] text-xl font-black tracking-tighter">4.9/5</div>
+//                   <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">User_Rating</div>
+//                 </div>
+//                 <div className="bg-black/60 p-6 rounded-2xl text-center backdrop-blur-xl shadow-lg border border-white/5">
+//                   <div className="text-[#00ff00] text-xl font-black tracking-tighter">100%</div>
+//                   <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">Refund_Auth</div>
+//                 </div>
+//               </div>
+
+//             </div>
+//           </div>
+//         </div>
+//       </main>
+//     </>
+//   );
+// }
+
+
+
+
+
+
+
+export default async function PackageDetailPage(props: any) {
   const params = await props.params;
   const pkg = await getPackage(params.slug);
 
-  // Split description into points
   const descriptionPoints = pkg.description
     .split(".")
-    .map((point) => point.trim())
-    .filter((point) => point.length > 0);
+    .map((point: string) => point.trim())
+    .filter((point: string) => point.length > 0);
 
   const breadcrumbItems = [
     { name: "Home", item: "/" },
@@ -168,7 +536,6 @@ export default async function PackageDetailPage(props: Props) {
 
   return (
     <>
-      <Header />
       <SafariPackageJsonLd
         name={pkg.name}
         description={pkg.description}
@@ -178,186 +545,167 @@ export default async function PackageDetailPage(props: Props) {
       />
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <FAQJsonLd faqs={defaultFAQs} />
-      <BreadcrumbSchema items={breadcrumbItems} />
 
-      <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30">
+      {/* Ensure your Header component has 'absolute' or 'fixed' styling 
+          so it floats OVER the hero rather than pushing it down.
+      */}
+      <Header />
 
-        {/* =========================================
-            BACKGROUND IMAGE (Global - Fixed)
-        ========================================= */}
-        <div className="fixed inset-0 z-0">
+      <main className="relative min-h-screen bg-black text-white selection:bg-[#00ff00]/30 font-sans overflow-x-hidden">
+
+        {/* --- GLOBAL FIXED BACKGROUND --- */}
+        <div className="fixed inset-0 z-0 h-full w-full pointer-events-none">
           <Image
             src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Leopard Background"
+            alt="Yala Background Feed"
             fill
             priority
-            // Slightly increased opacity for better visibility against the dark overlay
-            className="object-cover opacity-50"
-            quality={90}
+            className="object-cover opacity-60 grayscale-[40%]"
           />
-          {/* Cinematic Overlay - Stronger gradients so text pops without borders */}
-          <div className="absolute inset-0 bg-gradient-to-b " />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#050505_100%)]" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
-        {/* =========================================
-            CONTENT
-        ========================================= */}
-        <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
+        {/* Z-10 ensures content stays above fixed background. 
+            No top padding here so Section 1 hits the very top.
+        */}
+        <div className="relative z-10">
 
-          {/* Breadcrumb / Metadata HUD */}
-          <div className="flex items-center gap-4 text-xs font-mono text-neutral-400 mb-8 uppercase tracking-widest">
-            <span>Yala National Park</span>
-            <span className="w-px h-3 bg-neutral-600"></span>
-            <span className="text-green-400">Expedition ID: {pkg.slug.toUpperCase().substring(0, 6)}</span>
-          </div>
+          {/* SECTION 1: FULL SCREEN HERO */}
+          <section className="relative h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden">
+            <div className="absolute inset-0 z-0">
+              <Image
+                src={pkg.imageUrl}
+                alt={pkg.name}
+                fill
+                priority
+                className="object-cover object-center scale-105"
+                quality={100}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black" />
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="relative z-20 container max-w-7xl mx-auto text-center space-y-6">
+              {/* BREADCRUMB HUD - Floating inside the hero area */}
+              <div className="mb-4 opacity-40 hover:opacity-100 transition-opacity">
+                <BreadcrumbSchema items={breadcrumbItems} />
+              </div>
 
-            {/* LEFT COLUMN: DETAILS (Span 7) */}
-            <div className="lg:col-span-7 space-y-10">
-
-              {/* Title Block */}
-              <div className="space-y-6">
-                <h1 className="text-4xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter drop-shadow-lg">
-                  {pkg.name}
-                </h1>
-                {/* Badges - No Borders, just glass */}
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-                    <Clock size={14} className="text-green-400" />
-                    <span className="text-xs font-bold uppercase text-white">4-6 Hours</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-                    <Users size={14} className="text-green-400" />
-                    <span className="text-xs font-bold uppercase text-white">Max 7 Guests</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-                    <Shield size={14} className="text-green-400" />
-                    <span className="text-xs font-bold uppercase text-white">Insured</span>
-                  </div>
+              <div className="flex justify-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-xl rounded-full ">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse"></span>
+                  <span className="text-[12px] font-black tracking-[0.5em] text-[#00ff00]">
+                    {pkg.slug.toUpperCase().substring(0, 8)}
+                  </span>
                 </div>
               </div>
 
-              {/* Main Image (Cutter Style - Deep Shadow, No Border) */}
-              <div className="relative aspect-video rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] group">
-                <Image
-                  src={pkg.imageUrl}
-                  alt={pkg.name}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 60vw"
-                  priority
-                />
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 flex items-center gap-2 text-xs font-mono text-green-400 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
-                  <MapPin size={12} />
-                  <span>Sector 1 - Palatupana Gate</span>
+              <div className="space-y-4">
+                <div className="inline-block bg-black/40 backdrop-blur-md px-8 py-3 rounded-2xl">
+                  <h1 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">{pkg.name}</h1>
                 </div>
-              </div>
+                <br />
+                <div className="inline-block bg-black/70  px-7 py-2 rounded-2xl">
+                  <h1 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">
+                    <span className="text-4xl font-black text-[#00ff00]">$</span>{pkg.price}</h1>
+                </div>
 
-              {/* Description List - Dark Glass, No Border */}
-              {/* <div className="bg-black/30 backdrop-blur-2xl rounded-3xl p-8 shadow-xl">
-                <h3 className="text-2xl font-bold text-white mb-8">
-                  Expedition Highlights
-                </h3>
-                <div className="grid gap-5">
-                  {descriptionPoints.map((point, index) => (
-                    <div key={index} className="flex items-start gap-4 group">
-                      <div className="mt-1 p-1 bg-green-500/20 rounded-full">
-                        <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                      </div>
-                      <p className="text-neutral-200 text-base leading-relaxed font-light">
-                        {point}.
-                      </p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {[
+                    { icon: Users, label: "MAX 07 CAPACITY" },
+                    { icon: Shield, label: "SECURE PROTOCOL" },
+                  ].map((badge, i) => (
+                    <div key={i} className="flex items-center gap-2 bg-black/80 px-4 py-1.5 rounded-full backdrop-blur-md">
+                      <badge.icon size={12} className="text-[#00ff00]" />
+                      <span className="text-[12px] font-black text-white tracking-widest uppercase">{badge.label}</span>
                     </div>
                   ))}
                 </div>
-               </div> */}
+              </div>
 
-              {/* Description List - Dark Glass, No Border */}
-              <div className="bg-black/30 backdrop-blur-sm rounded-[2.5rem] p-8 shadow-xl border border-white/5">
-                <h3 className="text-2xl font-bold text-white mb-8">
-                  Expedition Highlights
-                </h3>
+              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+                <div className="w-[1px] h-12 bg-[#00ff00]" />
+              </div>
+            </div>
+          </section>
 
-                <div className="grid gap-5">
-                  {descriptionPoints.map((point, index) => {
-                    if (!point) return null;
+          {/* SECTION 2: CENTERED DATA CONSOLE */}
+          <div className="container max-w-4xl mx-auto px-4 py-24 space-y-20 flex flex-col items-center">
 
-                    // --- THE FIX: Unicode-Safe Splitting ---
-                    // This creates an array of real characters (handling emojis correctly)
-                    const charArray = [...point];
+            {/* CENTERED HIGHLIGHTS */}
+            <div className="w-full flex flex-col items-center space-y-8">
+              <div className="inline-block bg-black/60 px-4 py-1.5 rounded-full">
+                <h3 className="text-[12px] font-black text-[#00ff00] uppercase tracking-[0.4em]">Expedition_Metadata_Feed</h3>
+              </div>
 
-                    // 1. Get the first character (Safe for Emojis)
-                    const firstChar = charArray[0] || "";
-                    const firstLetter = firstChar.toUpperCase();
+              <div className="grid gap-1 w-full">
+                {descriptionPoints.map((point: string, index: number) => {
+                  const firstLetter = point.charAt(0).toUpperCase();
+                  const restOfText = point.slice(1);
+                  return (
+                    <div key={index} className="bg-black/70 p-1 rounded-full text-center">
+                      <p className="text-[14px] md:text-[16px] text-neutral-300 font-medium leading-relaxed tracking-wide">
+                        <span className="text-[#00ff00] text-4xl font-black mr-1 inline-block align-middle leading-none">
+                          {firstLetter}
+                        </span>
+                        {restOfText}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
-                    // 2. Get the rest of the text
-                    const restOfText = charArray.slice(1).join("");
-
-                    return (
-                      <div key={index} className="flex items-start gap-4 group">
-                        {/* Added suppressHydrationWarning to be extra safe against browser extensions */}
-                        <p
-                          className="text-neutral-200 text-base leading-relaxed font-light"
-                          suppressHydrationWarning
-                        >
-                          <span className="text-[#00ff00] text-3xl font-bold mr-1 leading-none">
-                            {firstLetter}
-                          </span>
-                          {restOfText}.
-                        </p>
-                      </div>
-                    );
-                  })}
+            {/* CENTERED BOOKING CONSOLE */}
+            <div className="w-full max-w-2xl space-y-6">
+              <div className="bg-black/80 rounded-full p-1 text-center relative overflow-hidden ">
+                <p className="text-[#00ff00] text-[12px] font-black tracking-[0.5em] mb-4">Unit Investment</p>
+                <div className="flex items-baseline justify-center gap-1">
+                  <span className="text-xl font-black text-[#00ff00]">$</span>
+                  <span className="text-7xl font-black text-white tracking-tighter">{pkg.price.toFixed(0)}</span>
+                  <span className="text-[12px] text-neutral-500 font-black uppercase ml-2 tracking-widest">/ Jeep</span>
                 </div>
               </div>
 
-            </div>
+              {/* <div className="bg-black/60 rounded-[2.5rem] p-10 shadow-2xl text-center border border-white/5">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-black text-white uppercase tracking-tighter">Initialize_Booking</h2>
+                  <p className="text-[12px] text-neutral-500 uppercase tracking-widest font-black pt-1">Encryption: Active Protocol</p>
+                </div>
+                <div className="text-center">
+                  <BookingForm tourPackageSlug={pkg.name} />
+                </div>
+              </div> */}
+              <div className="flex flex-col items-center gap-4 mx-auto max-w-sm">
 
-            {/* RIGHT COLUMN: BOOKING CONSOLE (Span 5) */}
-            <div className="lg:col-span-5">
-              <div className="sticky top-24 space-y-8">
-
-                {/* Pricing Card - Glowing, No Border */}
-                <div className="bg-black/10 rounded-3xl p-8 text-center relative overflow-hidden ">
-                  <div className="absolute inset-0 bg-[url('/pattern-grid.svg')] opacity-10 mix-blend-overlay"></div>
-                  <p className="text-green-100/80 text-xs font-bold uppercase tracking-widest mb-2">Total Package Price</p>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-3xl font-bold text-green-200">$</span>
-                    <span className="text-6xl font-black text-white tracking-tighter drop-shadow-md">{pkg.price.toFixed(0)}</span>
-                  </div>
-                  <p className="text-white text-sm mt-3 font-medium bg-white/10 py-1 px-3 rounded-full inline-block">Per Jeep (All Inclusive)</p>
+                {/* TOP BLOCK: STATUS HEADER */}
+                <div className="bg-black/60 rounded-full px-8 py-4 w-full ">
+                  <h2 className="text-lg font-black text-white uppercase tracking-tighter leading-none text-center">
+                    Initialize_Booking
+                  </h2>
+                  <p className="text-[10px] text-[#00ff00] uppercase tracking-[0.3em] font-black pt-2 flex items-center justify-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-[#00ff00] animate-pulse"></span>
+                    Encryption: Active
+                  </p>
                 </div>
 
-                {/* Booking Form Container - Deep Glass, No Border */}
-                <div className="backdrop-blur-2xl bg-black/50 rounded-3xl p-8 shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
-                  <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-white mb-2">Secure Your Seat</h3>
-                    <p className="text-base text-neutral-400">Instant confirmation. Your adventure awaits.</p>
-                  </div>
-
-                  {/* Integrated Booking Form */}
+                {/* BOTTOM BLOCK: THE BOOKING CONSOLE */}
+                <div className="w-full">
                   <BookingForm tourPackageSlug={pkg.name} />
                 </div>
 
-                {/* Trust Badges - Dark Capsules, No Border */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-5 text-center shadow-inner">
-                    <div className="text-green-400 font-black text-2xl mb-1">4.9/5</div>
-                    <div className="text-[10px] text-neutral-400 uppercase tracking-wider font-bold">Guest Rating</div>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-5 text-center shadow-inner">
-                    <div className="text-green-400 font-black text-2xl mb-1">100%</div>
-                    <div className="text-[10px] text-neutral-400 uppercase tracking-wider font-bold">Refund Guarantee</div>
-                  </div>
-                </div>
+              </div>
 
+              <div className="grid grid-cols-2 gap-4 w-full">
+                <div className="bg-black/70 p-6 rounded-full text-center">
+                  <div className="text-[#00ff00] text-xl font-black tracking-tighter">4.9/5</div>
+                  <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">User_Rating</div>
+                </div>
+                <div className="bg-black/70 p-6 rounded-full text-center ">
+                  <div className="text-[#00ff00] text-xl font-black tracking-tighter">100%</div>
+                  <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">Refund_Auth</div>
+                </div>
               </div>
             </div>
-
           </div>
         </div>
       </main>

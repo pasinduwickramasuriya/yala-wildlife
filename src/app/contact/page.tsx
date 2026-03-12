@@ -586,7 +586,7 @@ export default function ContactPage() {
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#00ff00] leading-tight drop-shadow-xl">
+            <h1 className="text-2xl md:text-2xl font-extrabold tracking-tight text-[#00ff00] leading-tight drop-shadow-xl">
               Let's Plan Your{" "}
               <span className="text-[#00ff00]">Adventure</span>
             </h1>

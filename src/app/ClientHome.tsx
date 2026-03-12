@@ -54,7 +54,7 @@ export default function ClientHome() {
           ))}
         </div>
       </div>
-      <YalaMapExplorer/>
+      <YalaMapExplorer />
       <HomeBlogSection />
       <MemoryGallery />
       <ModernReviews />
@@ -72,27 +72,39 @@ export default function ClientHome() {
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
         pageType="home"
       >
-        <div className="container mx-auto px-4 py-8 bg-black/60 text-center ">
-          <h1 className="text-[#00ff00]">Yala Wildlife Safari</h1>
+        <div className="container mx-auto px-4 py-12 text-center space-y-1">
+          {/* Main Title */}
+          <h1 className="text-[#00ff00] text-xl md:text-2
+          xl  mb-8   inline-block bg-black/70 rounded-full px-6 py-3">
+            Yala Wildlife Safari
+          </h1>
 
-          {/* ✅ ADD MORE CONTENT LIKE THIS: */}
-          <p className="text-white/90">
-            Welcome to Yala Wildlife Safari - Your gateway to unforgettable wildlife
-            experiences in Sri Lankas premier national park. Our expert guides ensure
-            safe adventures with guaranteed leopard sightings.
-          </p>
+          {/* Block 01 */}
+          <div className="inline-block bg-black/70  px-6 py-3 rounded-full">
+            <p className="text-white text-[13px] md:text-sm leading-relaxed tracking-tight font-light">
+              Welcome to **Yala Wildlife Safari** - Your gateway to unforgettable wildlife
+              experiences in Sri Lankas premier national park. Our expert guides ensure
+              safe adventures with guaranteed leopard sightings.
+            </p>
+          </div>
 
-          <p className="text-white/90">
-            Discover the magic of Yala National Park with our premium safari packages.
-            Experience the thrill of spotting elusive leopards, majestic elephants, and
-            over 200 species of birds in their natural habitat. Book your adventure today!
-          </p>
+          {/* Block 02 */}
+          <div className="inline-block bg-black/70 px-6 py-3 rounded-full">
+            <p className="text-white text-[13px] md:text-sm leading-relaxed tracking-tight font-light">
+              Discover the magic of **Yala National Park** with our premium safari packages.
+              Experience the thrill of spotting elusive leopards, majestic elephants, and
+              over 200 species of birds in their natural habitat. Book your adventure today!
+            </p>
+          </div>
 
-          <p className="text-white/90">
-            Yala boasts the highest leopard density in the world. Our professional guides
-            know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
-            equipped with safety features and optimal viewing configurations.
-          </p>
+          {/* Block 03 */}
+          <div className="inline-block bg-black/70  px-6 py-3 rounded-full">
+            <p className="text-white text-[13px] md:text-sm leading-relaxed tracking-tight font-light">
+              Yala boasts the **highest leopard density** in the world. Our professional guides
+              know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
+              equipped with safety features and optimal viewing configurations.
+            </p>
+          </div>
         </div>
       </AutoSEOWrapper>
 

@@ -110,45 +110,80 @@ export default function ClientSafariPackages() {
           {/* HERO HEADER */}
           <div className="container max-w-7xl mx-auto mb-16 text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-green-400 font-bold">Premium Expeditions</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+              <span className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse"></span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#00ff00] font-bold">Premium Expeditions</span>
             </div>
 
-            {/* Title - Added subtle text shadow for better readability against brighter background */}
-            {/* <h1 className="text-5xl md:text-4xl font-black text-white mb-8 tracking-tighter leading-[0.9] drop-shadow-lg">
-              YALA <span className="text-transparent bg-clip-text bg-gradient-to-br from-green-400 to-emerald-600 drop-shadow-none">Safari Packages</span>
-            </h1> */}
-            <h1 className="text-5xl md:text-4xl font-black text-white mb-8 tracking-tighter leading-[0.9] drop-shadow-lg">
-              YALA{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-br from-green-400 to-emerald-600 drop-shadow-none">
-                <span className="mr-4">Safari</span>
-                <span>Packages</span>
-              </span>
+
+            <h1 className="flex flex-col items-center gap-3 mb-12 selection:bg-[#00ff00] selection:text-black">
+              {/* YALA SEGMENT */}
+              <div className="inline-block bg-black/60 px-6 py-2 rounded-full border border-white/5 backdrop-blur-md shadow-2xl">
+                <span className="text-2xl md:text-2xl font-black text-white uppercase tracking-[-0.05em] leading-none">
+                  Yala
+                </span>
+              </div>
+
+              {/* SAFARI PACKAGES SEGMENT */}
+              <div className="inline-block bg-black/60 px-6 py-2 rounded-full ">
+                <span className="text-2xl md:text-2xl font-black text-[#00ff00] uppercase tracking-[-0.05em] leading-none">
+                  Safari&nbsp;&nbsp;&nbsp;Packages
+                </span>
+              </div>
             </h1>
 
 
-            {/* Intro Card - Borderless Glass */}
-            <div className="backdrop-blur-xl bg-white/5 rounded-[2.5rem] p-8 md:p-12 max-w-4xl mx-auto shadow-2xl ring-1 ring-white/5">
-              <p className="text-lg md:text-xl leading-relaxed text-neutral-300 mb-8 font-light">
-                Explore the breathtaking beauty of <strong className="text-white font-medium">Yala National Park</strong> with our expert-guided safari packages.
-                Witness the park&apos;s rich biodiversity, including the elusive leopard and majestic elephants, in complete luxury.
-              </p>
 
-              {/* Feature Icons */}
-              <div className="flex flex-wrap justify-center gap-10 md:gap-16 pt-4">
-                <div className="group flex flex-col items-center gap-3">
-                  <Shield className="text-green-500 w-6 h-6 drop-shadow-[0_0_10px_rgba(34,197,94,0.4)]" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-white transition-colors">Secure</span>
+            <div className="flex flex-col items-center gap-3 max-w-5xl mx-auto px-4 mb-16">
+
+              {/* BLOCK_01: PRIMARY_DATA */}
+              <div className="inline-block bg-black/60 px-5 py-2 rounded-full">
+                <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.2em] leading-none">
+                  Explore the breathtaking beauty of Yala National Park with our expert-guided safari packages.
+                </p>
+              </div>
+
+              {/* BLOCK_02: SECONDARY_DATA */}
+              <div className="inline-block bg-black/60 px-5 py-2 rounded-full ">
+                <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.2em] leading-none">
+                  Witness the park&apos;s rich biodiversity, including elusive leopards and majestic elephants.
+                </p>
+              </div>
+
+              {/* DATA_BLOCK_04: TECHNICAL_INSIGHT */}
+              <div className="inline-block bg-black/60 px-5 py-2 rounded-full ">
+                <p className="text-[12px] md:text-[12px] text-white font-black  tracking-[0.2em] leading-none">
+                  Apex predator surveillance and habitat monitoring protocols managed by senior field guides.
+                </p>
+              </div>
+
+              {/* FEATURE_PILLS */}
+              <div className="flex flex-wrap justify-center gap-2 pt-4">
+
+                {/* PILL_01 */}
+                <div className="group flex items-center gap-2 bg-black/70 px-4 py-1.5 rounded-full">
+                  <Shield className="text-[#00ff00] w-5 h-5 drop-shadow-[0_0_8px_#00ff00]" />
+                  <span className="text-[12px] font-black uppercase tracking-[0.3em] text-white/70">
+                    SECURE PROTOCOL
+                  </span>
                 </div>
-                <div className="group flex flex-col items-center gap-3">
-                  <Compass className="text-green-500 w-6 h-6 drop-shadow-[0_0_10px_rgba(34,197,94,0.4)]" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-white transition-colors">Expert</span>
+
+                {/* PILL_02 */}
+                <div className="group flex items-center gap-2 bg-black/70 px-4 py-1.5 rounded-full">
+                  <Compass className="text-[#00ff00] w-5 h-5 drop-shadow-[0_0_8px_#00ff00]" />
+                  <span className="text-[12px] font-black uppercase tracking-[0.3em] text-white/70">
+                    EXPERT GUIDE
+                  </span>
                 </div>
-                <div className="group flex flex-col items-center gap-3">
-                  <Map className="text-green-500 w-6 h-6 drop-shadow-[0_0_10px_rgba(34,197,94,0.4)]" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-white transition-colors">Prime Zones</span>
+
+                {/* PILL_03 */}
+                <div className="group flex items-center gap-2 bg-black/70 px-4 py-1.5 rounded-full">
+                  <Map className="text-[#00ff00] w-5 h-5 drop-shadow-[0_0_8px_#00ff00]" />
+                  <span className="text-[12px] font-black uppercase tracking-[0.3em] text-white/70">
+                    PRIME ZONES
+                  </span>
                 </div>
+
               </div>
             </div>
           </div>
@@ -185,7 +220,7 @@ export default function ClientSafariPackages() {
           </div>
 
           {/* SEO Content (Hidden Visually) */}
-          <div className="container max-w-7xl mx-auto mt-32 opacity-100  transition-opacity duration-500">
+          {/* <div className="container max-w-7xl mx-auto mt-32 opacity-100  transition-opacity duration-500">
             <div className="text-center max-w-4xl mx-auto backdrop-blur-sm bg-black/20 rounded-3xl p-8">
               <AutoSEOWrapper
                 pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
@@ -216,6 +251,64 @@ export default function ClientSafariPackages() {
                     </p>
                   </div>
                 </div>
+              </AutoSEOWrapper>
+            </div>
+          </div> */}
+          <div className="flex flex-col items-center gap-3 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">
+
+            {/* PROTOCOL_HEADER */}
+            <div className="inline-block bg-black/70 px-4 py-1.5 rounded-full mb-2">
+              <h2 className="text-[12px] md:text-[12px] font-black text-[#00ff00]  tracking-[0.5em] flex items-center gap-2">
+                <Star size={10} className="animate-pulse" /> Expedition Intelligence Notes
+              </h2>
+            </div>
+
+            {/* MISSION_OVERVIEW_STRIP */}
+            <div className="inline-block bg-black/60 px-5 py-2 rounded-full">
+              <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.15em] leading-none">
+                Explore curated Yala National Park safari packages designed for mission-specific traveler requirements and budgets.
+              </p>
+            </div>
+
+            {/* SECTOR_01: HALF_DAY_LOG */}
+            <div className="inline-block bg-black/60 px-5 py-2 rounded-full">
+              <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.15em] leading-none">
+                Half-day excursions: 4-hour deep-penetration missions into Block 1. Witness leopards and elephants with expert naturalist guides.
+              </p>
+            </div>
+
+            {/* SECTOR_02: FULL_DAY_LOG */}
+            <div className="inline-block bg-black/60 px-5 py-2 rounded-full ">
+              <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.15em] leading-none">
+                Full-day expeditions: 10-hour comprehensive multi-zone coverage. Includes premium photography support and tactical logistics.
+              </p>
+            </div>
+
+            {/* OPERATIONAL_TRUST_STRIPS */}
+            <div className="flex flex-wrap justify-center gap-2 pt-4">
+              {[
+                "SLTDA_LICENSED_OPERATOR",
+                "CERTIFIED_NATURALIST_INTELLIGENCE",
+                "ALL_INCLUSIVE_EXPEDITION_LOGISTICS",
+                "PREMIUM_WILDLIFE_PHOTOGRAPHY_SUPPORT"
+              ].map((status, i) => (
+                <div key={i} className="bg-black/80 px-4 py-1.5 rounded-full">
+                  <span className="text-[7px] md:text-[9px] font-black uppercase tracking-[0.3em] text-neutral-400">
+                    {status}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* STEALTH_SEO_LAYER (Preserves your original Wrapper for Google) */}
+            <div className="sr-only">
+              <AutoSEOWrapper
+                pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
+                pageDescription="Choose from half-day, full-day, and private Yala safari packages. All-inclusive tours with expert guides and luxury jeeps."
+                pageType="package"
+              >
+                <p>Explore our carefully curated Yala National Park safari packages designed to suit every travelers needs and budget. From budget-friendly half-day excursions to luxury full-day expeditions, we offer the best safari experiences in Sri Lanka.</p>
+                <p>Our half-day safari package is perfect for travelers with limited time. Departing at dawn or afternoon, this 4-hour adventure takes you deep into Block 1 of Yala National Park. Witness leopards, elephants, crocodiles, and exotic birds in their natural habitat with our expert naturalist guides.</p>
               </AutoSEOWrapper>
             </div>
           </div>
