@@ -30,7 +30,7 @@
 //         const response = await fetch(`/api/package?slug=${slug}`, { 
 //           next: { revalidate: 3600 } // Cache for 1 hour
 //         });
-        
+
 //         if (!response.ok) throw new Error("Failed to fetch package");
 //         const packageData: Package = await response.json();
 //         setPackage(packageData);
@@ -77,7 +77,7 @@
 //         "hover:shadow-[0_0_30px_-10px_rgba(34,197,94,0.2)]", // Green glow
 //         "transition-all duration-500 ease-out"
 //       )}>
-        
+
 //         {/* Image Section */}
 //         <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-900">
 //           <Image
@@ -90,7 +90,7 @@
 //             sizes="(max-width: 768px) 100vw, 280px"
 //             className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-80"
 //           />
-          
+
 //           {/* Gradient Overlay for text contrast */}
 //           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
@@ -125,7 +125,7 @@
 //             <span className="text-[9px] font-mono uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors">
 //               Explore
 //             </span>
-            
+
 //             {/* Arrow Interaction */}
 //             <ArrowUpRight 
 //               size={14} 
@@ -181,7 +181,7 @@
 //         const response = await fetch(`/api/package?slug=${slug}`, { 
 //           next: { revalidate: 3600 }
 //         });
-        
+
 //         if (!response.ok) throw new Error("Failed to fetch");
 //         const packageData: Package = await response.json();
 //         setPackage(packageData);
@@ -221,7 +221,7 @@
 //           "hover:shadow-2xl hover:shadow-lime-900/20 hover:border-lime-500/30" // Green glow on hover
 //         )}
 //       >
-        
+
 //         {/* --- 1. Background Image (Full Bleed) --- */}
 //         <div className="absolute inset-0 z-0">
 //           <Image
@@ -248,7 +248,7 @@
 
 //         {/* --- 3. Content Stack (Bottom) --- */}
 //         <div className="absolute bottom-0 left-0 w-full p-5 z-10 flex flex-col gap-3">
-          
+
 //           {/* Location Badge */}
 //           <div className="inline-flex items-center gap-1.5 text-white/60 text-[10px] font-mono uppercase tracking-widest">
 //             <MapPin className="w-3 h-3 text-lime-400" />
@@ -275,7 +275,7 @@
 //               <span className="text-xs font-bold text-white uppercase tracking-widest group-hover:text-black transition-colors">
 //                 View Package
 //               </span>
-              
+
 //               <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-black/20 transition-colors">
 //                 <ArrowUpRight 
 //                   size={16} 
@@ -286,7 +286,7 @@
 //           </div>
 
 //         </div>
-        
+
 //       </div>
 //     </Link>
 //   );
@@ -301,9 +301,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, MapPin } from "lucide-react"; 
+import { ArrowUpRight, MapPin } from "lucide-react";
 // ✅ 1. Import the CSS file
-import "@/app/style/packagecard.css"; 
+import "@/app/style/packagecard.css";
 
 interface Package {
   id: string;
@@ -322,10 +322,10 @@ export default function PackageCard({ slug }: { slug: string }) {
   useEffect(() => {
     const fetchPackage = async () => {
       try {
-        const response = await fetch(`/api/package?slug=${slug}`, { 
+        const response = await fetch(`/api/package?slug=${slug}`, {
           next: { revalidate: 3600 }
         });
-        
+
         if (!response.ok) throw new Error("Failed to fetch");
         const packageData: Package = await response.json();
         setPackage(packageData);
@@ -352,12 +352,12 @@ export default function PackageCard({ slug }: { slug: string }) {
   if (!pkg) return null;
 
   return (
-    <Link 
-      href={`/safari-packages/${pkg.slug}`} 
+    <Link
+      href={`/safari-packages/${pkg.slug}`}
       className="package-card-link group"
     >
       <div ref={cardRef} className="package-card">
-        
+
         {/* --- 1. Background Image (Full Bleed) --- */}
         <div className="package-card__image-wrapper">
           <Image
@@ -365,7 +365,7 @@ export default function PackageCard({ slug }: { slug: string }) {
             alt={pkg.name}
             fill
             quality={80}
-            sizes="(max-width: 640px) 100vw, 300px" 
+            sizes="(max-width: 640px) 100vw, 300px"
             className="package-card__image"
           />
           {/* Cinematic Overlay */}
@@ -384,7 +384,7 @@ export default function PackageCard({ slug }: { slug: string }) {
 
         {/* --- 3. Content Stack (Bottom) --- */}
         <div className="package-card__content">
-          
+
           {/* Location Badge */}
           <div className="location-badge">
             <MapPin className="location-icon" />
@@ -407,7 +407,7 @@ export default function PackageCard({ slug }: { slug: string }) {
               <span className="btn-text">
                 View Package
               </span>
-              
+
               <div className="btn-icon-circle">
                 <ArrowUpRight className="arrow-icon" />
               </div>
@@ -415,7 +415,7 @@ export default function PackageCard({ slug }: { slug: string }) {
           </div>
 
         </div>
-        
+
       </div>
     </Link>
   );

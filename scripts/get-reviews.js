@@ -71,8 +71,7 @@ async function scrapeReviews() {
     const masterReviewMap = new Map();
     let noNewDataCount = 0;
 
-    // Loop up to 30 times (enough for hundreds of reviews)
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 350; i++) {
 
       // A. Scrape current view
       const batch = await page.evaluate(() => {
@@ -109,8 +108,8 @@ async function scrapeReviews() {
       // D. Stop condition
       if (addedCount === 0) {
         noNewDataCount++;
-        if (noNewDataCount >= 4) { // If 4 scrolls produce no new data, we are done
-          console.log('⏹️ No new reviews found for 4 loops. Stopping.');
+        if (noNewDataCount >= 10) { // If 10 scrolls produce no new data, Google is out of reviews
+          console.log('⏹️ No new reviews found for 10 loops. Stopping.');
           break;
         }
       } else {
@@ -124,9 +123,24 @@ async function scrapeReviews() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) { }
 
-      // F. Scroll Down
-      await page.mouse.wheel({ deltaY: 1000 }); // Small, controlled scroll
-      await new Promise(r => setTimeout(r, 2500)); // Wait for load
+      // F. Scroll Down robustly
+      await page.evaluate(() => {
+        const cards = Array.from(document.querySelectorAll('div[data-review-id]'));
+        if (cards.length > 0) {
+            cards[cards.length - 1].scrollIntoView({ behavior: 'auto', block: 'end' });
+        }
+        
+        const scrollContainers = Array.from(document.querySelectorAll('.m6QErb[aria-label]'));
+        for (let el of scrollContainers) {
+           if (el.scrollHeight > el.clientHeight) {
+               el.scrollTop = el.scrollHeight; // Force scroll to bottom of infinite list container
+           }
+        }
+      });
+      
+      // Secondary fallback scroll event trigger
+      await page.mouse.wheel({ deltaY: 2000 });
+      await new Promise(r => setTimeout(r, 4000)); // Crucial delay for 300+ reviews load payload sizes
     }
 
     // ---------------------------------------------------------

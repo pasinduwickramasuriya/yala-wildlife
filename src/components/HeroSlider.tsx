@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
 
 interface HeroSection {
@@ -33,7 +33,7 @@ const ModernReveal = ({
         transition={{
           duration: 1.2,
           delay: delay,
-          ease: [0.25, 1, 0.5, 1]
+          ease: [0.16, 1, 0.3, 1] // Webflow signature easing
         }}
         // PERFORMANCE: Hint browser this will move
         style={{ willChange: "transform" }}
@@ -55,11 +55,11 @@ const containerVariants = {
 };
 
 const itemAnim = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
   },
 };
 
@@ -79,6 +79,21 @@ export default function HeroSlider() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+
+  // Wait for hydration to do window checks
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Parallax Scroll Effect (Only applied on desktop)
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, [0, 1000], [0, isMobile ? 0 : 300]);
+  const parallaxOpacity = useTransform(scrollY, [0, 800], [1, isMobile ? 1 : 0.2]);
 
   // --- Data Fetching ---
   const fetchHeroSections = useCallback(async () => {
@@ -120,11 +135,16 @@ export default function HeroSlider() {
   // --- Auto Slider Logic ---
   useEffect(() => {
     if (heroSections.length <= 1 || !mounted) return;
-    const interval = setInterval(() => {
+    
+    // Using setTimeout and dependency on currentSlide ensures 
+    // the timer resets flawlessly on auto-slides or manual clicks, 
+    // and prevents background-tab interval throttling bugs.
+    const timeout = setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSections.length);
     }, 7000);
-    return () => clearInterval(interval);
-  }, [heroSections.length, mounted]);
+    
+    return () => clearTimeout(timeout);
+  }, [heroSections.length, mounted, currentSlide]);
 
   // --- Loading State ---
   if (!mounted || loading) {
@@ -164,61 +184,62 @@ export default function HeroSlider() {
   return (
     <div className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black">
 
-      {/* 0. PERFORMANCE HACK: HIDDEN PRELOADER 
-          Downloads the next image silently so it's instant when slide changes. 
+      {/* 0. PERFORMANCE HACK: <link rel="preload"> (Instead of rendering hidden images)
+          Let the browser handle native preloading of the next hero image.
       */}
-      <div className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
-        {nextImageToPreload && (
-          <Image
-            src={nextImageToPreload}
-            width={10}
-            height={10}
-            alt="preload"
-            priority={true}
-            quality={10} // Low quality just to warm the connection
-          />
-        )}
-      </div>
+      {nextImageToPreload && (
+        <link rel="preload" as="image" href={nextImageToPreload} />
+      )}
 
       {/* 1. BACKGROUND IMAGE - GPU OPTIMIZED */}
-      <div className="absolute inset-0 w-full h-full bg-black z-0">
-        <AnimatePresence>
-          <motion.div
-            key={section.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            // PERFORMANCE: Promote to GPU layer
-            style={{ willChange: "opacity" }}
-            className="absolute inset-0 w-full h-full"
-          >
+      <motion.div 
+        style={{ y: parallaxY, opacity: parallaxOpacity }}
+        className="absolute inset-0 w-full h-full bg-black z-0"
+      >
+        {heroSections.map((slide, idx) => {
+          const isActive = idx === currentSlide;
+          return (
             <motion.div
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 8, ease: "linear" }}
+              key={slide.id}
+              initial={false}
+              animate={{ opacity: isActive ? 1 : 0 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               // PERFORMANCE: Promote to GPU layer
-              style={{ willChange: "transform" }}
-              className="w-full h-full relative"
+              style={{ 
+                willChange: "transform, opacity",
+                zIndex: isActive ? 10 : 0,
+                pointerEvents: isActive ? "auto" : "none"
+              }}
+              className="absolute inset-0 w-full h-full bg-black"
             >
-              <Image
-                src={section.imageUrl}
-                alt={section.title}
-                fill
-                priority // Priority loading for LCP
-                className="object-cover object-center brightness-[0.85]"
-                style={{ objectFit: 'cover' }}
-                sizes="100vw"
-                quality={75} // PERFORMANCE: 75 is lighter and faster than 100
-              />
-            </motion.div>
+              <motion.div
+                key={`scale-${slide.id}-${isActive}`} // Resets scale animation when it becomes active
+                initial={{ scale: isActive ? 1.1 : 1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 8, ease: "linear" }}
+                // PERFORMANCE: Promote to GPU layer
+                style={{ willChange: "transform" }}
+                className="w-full h-full relative"
+              >
+                <Image
+                  src={slide.imageUrl}
+                  alt={slide.title}
+                  fill
+                  priority={isActive || idx === 0} // Preload active/first frames
+                  className="object-cover object-center brightness-[0.85]"
+                  style={{ objectFit: 'cover' }}
+                  sizes="100vw"
+                  quality={75} // PERFORMANCE: 75 is lighter and faster than 100
+                />
+              </motion.div>
 
-            {/* Static Overlays (Faster than animating divs) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+              {/* Static Overlays (Faster than animating divs) */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+            </motion.div>
+          );
+        })}
+      </motion.div>
 
       {/* 2. MAIN CONTENT */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-12 h-full flex flex-col justify-center min-h-screen py-12 sm:py-20">
@@ -272,7 +293,7 @@ export default function HeroSlider() {
               <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-2">
                 <motion.div
                   variants={itemAnim}
-                  className="max-w-md p-2 border-l-0 lg:border-l-4 border-lime-500 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+                  className="hidden md:block max-w-md p-2 border-l-0 lg:border-l-4 border-lime-500 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                 >
                   <p className="text-lg md:text-xl text-white font-medium leading-relaxed tracking-wide">
                     {section.subtitle}
@@ -366,7 +387,7 @@ export default function HeroSlider() {
                 onClick={() => setCurrentSlide(nextNextSlideIndex)}
                 className="group relative w-48 h-72 flex-shrink-0 cursor-pointer opacity-60 hover:opacity-100 transition-all duration-500 hidden xl:block"
               >
-                <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden grayscale group-hover:grayscale-0 transition-all transform-gpu shadow-xl">
+                <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden transition-all transform-gpu shadow-xl">
                   <Image
                     key={card2Data.imageUrl}
                     src={card2Data.imageUrl}
@@ -396,11 +417,11 @@ export default function HeroSlider() {
           <div key={idx} className="flex-1 h-full border-r border-black/20 relative bg-black/20 backdrop-blur-sm">
             {idx === currentSlide && (
               <motion.div
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
                 transition={{ duration: 7, ease: "linear" }}
                 // PERFORMANCE: Animate transform (scaleX) instead of width for GPU
-                style={{ transformOrigin: "left", willChange: "transform" }}
+                style={{ transformOrigin: "left", willChange: "transform", width: "100%" }}
                 className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16]"
               />
             )}

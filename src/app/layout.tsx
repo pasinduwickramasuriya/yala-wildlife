@@ -16,11 +16,8 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { SEOIndicator } from "@/components/SEOIndicator";
 import ChatAssistant from "@/components/ChatAssistant";
+import SmoothScroll from "@/components/SmoothScroll";
 // import DotsBackground from "@/components/DotsBackground";
-
-
-
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -65,12 +62,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
+          <SmoothScroll>
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
 
-          <Footer />
+            <Footer />
+          </SmoothScroll>
         </ThemeProvider>
         <WhatsAppButton />
         <ChatAssistant/>

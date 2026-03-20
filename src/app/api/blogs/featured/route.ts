@@ -29,7 +29,7 @@ export async function GET() {
 
     // 2. Shuffle array to get "Random" blogs from the recent pool
     const shuffled = blogs.sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 4); // Get 4 blogs
+    const selected = shuffled.slice(0, 5); // Get 4 blogs
 
     return NextResponse.json(selected);
   } catch (error) {

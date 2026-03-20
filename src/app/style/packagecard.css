@@ -8,7 +8,8 @@
   margin: 0 auto;
   text-decoration: none;
   outline: none;
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  -webkit-tap-highlight-color: transparent;
+  /* Remove tap highlight on mobile */
 }
 
 .package-card {
@@ -17,9 +18,10 @@
   width: 100%;
   overflow: hidden;
   border-radius: 2rem;
-  background-color: #0a0a0a; /* bg-neutral-950 */
+  background-color: #0a0a0a;
+  /* bg-neutral-950 */
   border: 1px solid rgba(255, 255, 255, 0.05);
-  
+
   /* GPU & Transitions */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -28,15 +30,20 @@
 
 /* Hover Effect: Green Glow & Border */
 .package-card-link:hover .package-card {
-  box-shadow: 0 25px 50px -12px rgba(0, 255, 0, 0.2); /* Neon Green Shadow */
-  border-color: rgba(0, 255, 0, 0.3); /* Neon Green Border */
+  box-shadow: 0 25px 50px -12px rgba(0, 255, 0, 0.2);
+  /* Neon Green Shadow */
+  border-color: rgba(0, 255, 0, 0.3);
+  /* Neon Green Border */
 }
 
 /* --- 1. Background Image Section --- */
 .package-card__image-wrapper {
   position: absolute;
   /* Fallback for 'inset: 0' on old devices */
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   z-index: 0;
 }
@@ -56,7 +63,10 @@
 
 .package-card__overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   /* Cinematic Dark Gradient Overlay */
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
@@ -76,20 +86,21 @@
   align-items: center;
   /* Gap fallback: margins on children */
   gap: 0.25rem;
-  
-  background-color: #00ff00; /* Neon Lime */
+
+  background-color: #00ff00;
+  /* Neon Lime */
   color: black;
   padding: 0.375rem 0.75rem;
   border-radius: 9999px;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
-  
+
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   transition: transform 300ms ease;
 }
 
 /* Margin fallback for gap on old iOS */
-.price-tag > *:not(:last-child) {
+.price-tag>*:not(:last-child) {
   margin-right: 0.25rem;
 }
 
@@ -126,7 +137,7 @@
 }
 
 /* Fallback spacing for flex column gap */
-.package-card__content > *:not(:last-child) {
+.package-card__content>*:not(:last-child) {
   margin-bottom: 0.75rem;
 }
 
@@ -142,14 +153,15 @@
   letter-spacing: 0.1em;
 }
 
-.location-badge > *:not(:last-child) {
+.location-badge>*:not(:last-child) {
   margin-right: 0.375rem;
 }
 
 .location-icon {
   width: 0.75rem;
   height: 0.75rem;
-  color: #00ff00; /* Neon Lime */
+  color: #00ff00;
+  /* Neon Lime */
 }
 
 /* Title */
@@ -164,7 +176,8 @@
 }
 
 .package-card-link:hover .package-title {
-  color: #00ff00; /* Neon Lime */
+  color: #00ff00;
+  /* Neon Lime */
 }
 
 /* Description */
@@ -173,7 +186,8 @@
   color: white;
   font-weight: 700;
   line-height: 1.625;
-  border-left: 2px solid rgba(0, 255, 0, 0.3); /* Neon Lime Border */
+  border-left: 2px solid rgba(0, 255, 0, 0.3);
+  /* Neon Lime Border */
   padding-left: 0.75rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -195,21 +209,22 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
-  
+
   /* Fallback Background for old devices (Solid Dark Grey) */
   background-color: rgba(30, 30, 30, 0.9);
-  
+
   /* Modern Glass Background */
   background-color: rgba(255, 255, 255, 0.05);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  
+
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 300ms ease;
 }
 
 .package-card-link:hover .action-btn {
-  background-color: #00ff00; /* Neon Lime */
+  background-color: #00ff00;
+  /* Neon Lime */
   border-color: #00ff00;
 }
 
@@ -276,6 +291,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
 }

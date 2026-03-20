@@ -16,6 +16,7 @@ import ReviewSlider from "@/components/ReviewSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import YalaMapExplorer from "@/components/YalaMapExplorer";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface Package {
   id: string;
@@ -44,13 +45,26 @@ export default function ClientHome() {
       <Header />
 
       <HeroSlider />
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6 text-lime-400 px-6 py-3 rounded-3xl bg-black/70 mx-auto w-fit text-center">
+      <div className="container mx-auto px-4 py-8 overflow-hidden z-10 relative">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+          className="text-3xl font-bold mb-6 text-lime-400 px-6 py-3 rounded-3xl bg-black/70 mx-auto w-fit text-center">
           Our Safari Packages
-        </h1>
+        </motion.h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {packages.map((pkg) => (
-            <PackageCard key={pkg.id} slug={pkg.slug} />
+          {packages.map((pkg, idx) => (
+            <motion.div
+              key={pkg.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] }}
+            >
+              <PackageCard slug={pkg.slug} />
+            </motion.div>
           ))}
         </div>
       </div>

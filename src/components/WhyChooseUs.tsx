@@ -1,7 +1,7 @@
 "use client";
 
 import { ShieldCheck, Truck, Sparkles } from 'lucide-react'; 
-
+import { motion } from 'framer-motion';
 export default function WhyChooseUs() {
   const features = [
     {
@@ -33,14 +33,23 @@ export default function WhyChooseUs() {
 
       <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
         {/* Main Heading */}
-        <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-16 tracking-tight    inline-block px-4 py-2 rounded-3xl bg-black/70">
+        <motion.h2 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl md:text-4xl font-extrabold text-foreground mb-16 tracking-tight    inline-block px-4 py-2 rounded-3xl bg-black/70">
           Why Choose <span className="text-green-500 underline decoration-wavy decoration-green-300 underline-offset-4">Yala Wildlife</span>
-        </h2>
+        </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {features.map((feature, index) => (
-            <div 
+            <motion.div 
               key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="group relative p-8 rounded-[2.5rem] bg-white/50 dark:bg-neutral-900/50 border border-green-100 dark:border-white/5 backdrop-blur-sm hover:shadow-[0_20px_50px_-12px_rgba(22,163,74,0.15)] transition-all duration-500 hover:-translate-y-2"
             >
               {/* Icon Bubble */}
@@ -57,7 +66,7 @@ export default function WhyChooseUs() {
               <p className="text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

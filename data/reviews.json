@@ -1,18 +1,538 @@
 [
   {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21OalZqWTFaMmRWV1ZNd2NHcHVaMUZFYUVWV1dIYxAB",
+    "author_name": "Paochieh Cheng",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKpvIvLBPDPJ-xpmq-0o-FkDVXy0zwMYU46P0ac04HfmcFInA=w36-h36-p-rp-mo-ba8-br100",
+    "rating": 5,
+    "relative_time_description": "a day ago",
+    "text": "Yala National Park\nIf viewing a diverse array of wildlife is at the top of your agenda then Yala national park is the place to visit. The vegetation consists of scrub jungle, …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2w5U2RVTnRZVFZWV0VWeGRITlVNSFF6YlRkR2JrRRAB",
+    "author_name": "Chris Adikaram",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUHWf9ZuLIlxwphiKkIcndRb_XlJdY0-iIu4wZeF05EqQvm4mXh3g=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "a day ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT201U1NEVnFSMnMwYldsclkzWjFNMlZwWTJ0RlFrRRAB",
+    "author_name": "chulanga amarasuriya",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVCDNWQiIehgknRuQVkk265Ga51h-YNlsZjPI-YDtiQzHAwdlgd=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "2 days ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2s5d2FFTXdRVVZQWDFseldGOW5hRmRoTVhob1FtYxAB",
+    "author_name": "Kirusan Palsar",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKMUH8fVhs7wpQrxTnaRxR9GWrXcjIBjLnJULauVUSIb6AKTQ=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "4 days ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25OVldIbzVWSGxXYkZGNFVraFdVbkIzWmxZeFpGRRAB",
+    "author_name": "Matthew Lee",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJO_Vw4_FcJxmHCNcgXBLfWYrx8h4l7ppAoUVbajPpr9ErMuQ=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 5,
+    "relative_time_description": "a week ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2toVmVVeFNWWEpyVWtaZk5Vd3RkMFZuU1d0VE5sRRAB",
+    "author_name": "Walter Fichtenbauer",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocI9FSTTk0DiXFIyBUge83IA1p8H-xOusio5CpQ9VxzXRCwaYA=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 5,
+    "relative_time_description": "2 weeks ago",
+    "text": "Beautiful national park with numerous animals! Water buffalo, elephants, leopards, monkeys, etc…"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2trMU1EUnhVVGx5V2xkVFJrSkpOREIwTWt0S01IYxAB",
+    "author_name": "Fabien BARTOLO",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWEx0_Qs-RxbaQxwvmdtnrqrikvxi6dBSrLDjCnzXfBIGe0zNwaOA=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "2 weeks ago",
+    "text": "Huge park with various species of birds and animals.\nVery pretty and well-maintained.\nEntrance fee: 10,000 Rs"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pGYWEwNDBUMk01YlVoaVdFNTZUM1JKYTJkNVJVRRAB",
+    "author_name": "Thay Pann",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLFkLuYQnIfMjTLd_G6Mgg9GeAUq4WZIwe6jdhDvrTFwEOk5w=w36-h36-p-rp-mo-br100",
+    "rating": 3,
+    "relative_time_description": "2 weeks ago",
+    "text": "Extremely crowded, even though we were somehow in the off-season - end of February, columns of cars waiting to see a leopard that was nowhere to be found."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21neVRrTlFNVEZKTlhWTFJEZDJhMWx3YTFkamMzYxAB",
+    "author_name": "Chathura Lakmal",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUmdIzCVBkYSC9TLjgoNwIdYQf9MG_GpF8nBXqpCQqOJVae_z-7=w36-h36-p-rp-mo-ba6-br100",
+    "rating": 5,
+    "relative_time_description": "2 weeks ago",
+    "text": "Main entrace for yala block 1"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2psTWFYYzRlVE13TnpSMlNqTXdkbVkxYWxrME9VRRAB",
+    "author_name": "N EYAL",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXBY31iurpr0X0d8_sug9_JbKe3t6aLnKuWpbGOOy8K-rbCB2_98w=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 5,
+    "relative_time_description": "2 weeks ago",
+    "text": "A large and diverse nature reserve with water bodies, open areas and an area that is forested/dense. We did an afternoon walk of about 3 hours until almost sunset. A very large variety of birds and waterfowl and animals in general. We saw …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21WbVprOXViVU5EY2xaU2VGVkNVazVhVUZGU2NrRRAB",
+    "author_name": "steve Partridge",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJxxB6s9I_N5Sai3b3PcaNL8popWPqK9Z6-PTZvsseGUziZaA=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 2,
+    "relative_time_description": "2 weeks ago",
+    "text": "Not really sure how anyone can give this 4 or 5 stars.\nThe Safari starts with a queue at the main entrance with a long line of Toyota Jeeps, it is impossible to count them but there is a least 100, all diesel and …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25SdVN6ZDVSMlJWVVRCV1dVTlFhR2ROU25nM1ZYYxAB",
+    "author_name": "Jarek Andrzejak",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJuvJqT21Pbz96RLeHfnTseBxbYVgQCCraKuKUwrgKJiTFgSw=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "2 weeks ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2toSVkwSlFlamxVYjFoUk9IbEtRbDk0TkVveFNWRRAB",
+    "author_name": "Georg “Onlineoldie”",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUPGw_YCJwt7LnGdR6hLjQ2sXb6Ii37_4UCgAQMfu9mrxbu34Cn=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "3 weeks ago",
+    "text": "A beautiful park with abundant wildlife. Spotting animals in a park is always a bit of a gamble, but the guides are experienced and do their best. We were lucky. The jeeps are definitely better spread out, and there seem to be significantly fewer of them than in other parks. Entrance fees are high, as is typical."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tkSlIyTTViR1pJY1ZoWVltRlhkVkU1YUVSbFptYxAB",
+    "author_name": "Tharindu Shyamaka",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLXJOi83EepiSnA1liMXts1UXaXgY57JWpKnAgbEb7vT-4goA=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "3 weeks ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25adWVVVTNhRXhDWldWMVNFNVVabkZ2TTJ0NlNWRRAB",
+    "author_name": "Marek flo",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIakfk-rfpu2KuoWqSCtsqKKFztlHZLpcTQHadd7SSRBdYyXg=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 4,
+    "relative_time_description": "3 weeks ago",
+    "text": "Having mixed feelings about my experience there, I'll tell you what was great and what was awful in my opinion. We went there early in the morning with a few people, thinking we'd avoid the crowds, but right after entering the park, we were …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21kSVRXMHRRWEY1ZDI0M2VEaFljRE5EYlZReU4wRRAB",
+    "author_name": "Paul Petrovski",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXKZhHHotbrV0h15GPHGpYj2Z7TxCGQcmI2I8w75T0N_c7Yu9w=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "3 weeks ago",
+    "text": "One of the best budget resorts I’ve visited. The place is very beautiful, calm, and peaceful. The staff are friendly and the safari arrangements were excellent. The surroundings are full of greenery and nature, which makes it very relaxing. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tKMllUSlFVVVpPUjI1NWVqQTFORlp3VVV4Q1UwRRAB",
+    "author_name": "Pubudu Hansitha",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWQTodvvy2QdMWbBeh1RoSQlTklCw6BPvxnFQWFKp5sMpeN8IFU=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 0,
+    "relative_time_description": "3 weeks ago",
+    "text": "Adventure safari"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pOWVdtZDJOMkpoUkhVeWNFMUxOV0pzU1RSRlEzYxAB",
+    "author_name": "Tim B.",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLnAyycoySXC4nr1nwn9SwbUigRbhFvyk9Pd7G3Hs-U1Hv8ig=w36-h36-p-rp-mo-br100",
+    "rating": 4,
+    "relative_time_description": "3 weeks ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2t0R09XdGlPSGxYZVdaQlZtOVVWVzVKUVZOQmNVRRAB",
+    "author_name": "Travel Life",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVewLv8gK9HBl963Bddnysw7ZAaieer4QunVMYoOmcDFYGA_Io=w36-h36-p-rp-mo-ba6-br100",
+    "rating": 5,
+    "relative_time_description": "3 weeks ago",
+    "text": "Yala is more than just its wildlife; it’s a place brimming with natural beauty. Capturing its essence is a challenge, but being connected to nature brings the moment to life. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tKUVNEaEJaMjR6UzJ3dE1FNWFlbEpEZFVndE0wRRAB",
+    "author_name": "Jon Watson",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU4dYNB5cJza_rw27nfy3diYGthKC0EO2fnMR7NH5qPft3y38ihlg=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 0,
+    "relative_time_description": "a month ago",
+    "text": "Water buffalo, a rabbit, 2 stray dogs, and hundreds of jeeps on our trip"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2sxQ05YYzBla1F0VEdrMFlWbExSR296Y1U5UmJWRRAB",
+    "author_name": "Sjors Schot",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJt9SaKLJIe-1inLazPJQ8YPkAEqCNexJ-8Yalit_PLcP4aoQ=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 0,
+    "relative_time_description": "Edited a month ago",
+    "text": "Avoid this !!!\nOur driver was using drugs, and giving it to other drivers. While driving the jeep with 7 of us in it. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xSSmNXSnNkVFowY0V4eFNrdE1Ua2s0YzFKSFoyYxAB",
+    "author_name": "Angun Khodkham",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVbPNLob_JxHcx0oLpKN45O2Y5f8YIWGnuL1q0JCgxm5ueDd50YoQ=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tSbWEwZHZialZyYkdoUVgwSnRhbmxSVkhvMWNrRRAB",
+    "author_name": "Craig Backham",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUUXSqxzVZ2sEOYgDRUdw6Whw0COAq4cSyIbDb2-cpeJE9DA_Uc=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21KMlYydHJTREpZU0RWclIzVmhTMHhGTUV4ZmMxRRAB",
+    "author_name": "Pascal Dto",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWdsYAvPNkEBepe6NGDTtwhpHVPGUqMSeTv5ZImytCz3-TQCYJilg=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 3,
+    "relative_time_description": "a month ago",
+    "text": "A disappointing experience; admittedly beautiful scenery and some lovely animals, but far too many jeeps all concentrated in the same places – not recommended after Kruger 😉 …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pGbFpqUkZSME0wU2pCVFNqaFNkRTVaYjBsQ1dGRRAB",
+    "author_name": "Basil Mikhnevich",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLCABaJnyLLtFYroUywuWNHP2has89ZvvEB_cj0oWbG8NO0Kg=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25wbFNYRk9iR2wyYzJOVVVUSkpMWEIxZW5jdFZHYxAB",
+    "author_name": "Dasun Sudheera jayasinghe",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXPUmuHWpnUMFxDOtaC7xgSDLxnOxM_W1wfd4HERJxIVOZCEvMN=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pGallUQmlPVkpwVVdWUlMxcGZUVWg2WDBoaGFYYxAB",
+    "author_name": "Владислав Санин",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVcaQ2ZPXzz9inndy4aB5RxTuOPc-0aUxxWRfEl75c1LblCA7m_=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 4,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25ZMFVtbEpTbE5xUWt3MFVUZGFUa1ZEZWtSbVFtYxAB",
+    "author_name": "Ushanka Silva",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU_Cl3dIb3VU4L9nElnI0eQ0eArp_S_06YaQ6Bs4Xi2G0Lso-cyrA=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2s5ak5tMXZWMTlIZDJ0eVVUVTFTMUpyUVRGb05XYxAB",
+    "author_name": "James Keating",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJUnxN-2MYgpyVrVkw-eQH-tUKmMatkQriubFlLBSBUOC-DWg=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xOMWNVcEdTR1p6VFVocE5HaDNXR3MyYmt4VGFsRRAB",
+    "author_name": "Tatiana Gaydina",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJXKUoA-zfeIkEIv7lPz3xyFjjToxiDFzWOSxJRw7yr3yVyNA=w36-h36-p-rp-mo-br100",
+    "rating": 0,
+    "relative_time_description": "a month ago",
+    "text": "There are so many jeeps, the poor animals don't know where to hide.\nThe safari area is limited; we just drove in circles around the same places. The rest of the roads are closed to the public. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25KcVdFNWlOVVZHZG5GWmJXZDBiMFpyVG5sdWQwRRAB",
+    "author_name": "Melan",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV3rPP8B9Be1CVtcJdkBjy82Sx6rkvFeGCVbEUkTyp6UJ57E9Y=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pCYUxURXlNelY2VW5oTmMyZElSMWhmT1djeFJtYxAB",
+    "author_name": "wokrz_places",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXEcO_tHsskPavCbSJCTM-xzGg4e6BBzVCJKnDJCzNUHP-Ebbg=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25WMFoycDFhMjUzYTBoR1NXczVWVmxrWm1ZeFUzYxAB",
+    "author_name": "Edith Wilson",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVgN6OqDKV80QHf9hDIWcnPlNLwzYlCbTiaMxl8hmJo6Kpn-HYf=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Yala National Park was an amazing experience. Seeing wild elephants and spotting a leopard in its natural habitat was unforgettable. The safari felt real and adventurous, especially in the early morning. Definitely a must-visit place if you love wildlife and nature."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tsU2R6TjFWV00wVDJONVVuTmFkVlZVV2kwNGRXYxAB",
+    "author_name": "Lila Debosz",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjW_RUm1IS4SlY1te8tdXnBP-2TLbJVD8bMI-qAtr1Rv-AISkwwBpw=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xKSlZVOUhWVTFSV0hkME1VSkhNM1pFVms1b1RsRRAB",
+    "author_name": "Gulfraj Khan",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVa0Die_nPEk75GLObE_Myt5KEPilOA9_m1jkowlVcWqhHwci4=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Yala national park is grat place to visit. Although familiar with a few of the more common animals here which we saw such elephant peafowl water Buffalo spotted deer crocodiles it was the first time seeing some of these creatures in life and not on a docum..."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25sRVdERTFYMmd0VlRKUE5HRnpWSGN6Wm0xZmJsRRAB",
+    "author_name": "Matthias Koch",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWcJfVKq5sQgf1Vo-maDaIXwkXhnjVqmsq0hIQ1s4n2jFn881jcng=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "A large park with many jeeps, but there's still plenty to see. We were lucky enough to see a leopard too."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xCdVJ6ZzFlR0ZKYTJ4aWFIWmFVbE01V1VSa2NtYxAB",
+    "author_name": "Tom Kearney",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXXLwx52gUNY13FTSfiQT-KIJy8eWlrKNOdswMBaPpv6PtbnfLCQA=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Guide was incredible. It seemed like the wildlife was everywhere. Saw two leopards, male elephant, peacocks everywhere, biodiversity at the watering hole was incredible. Beautiful place. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21NNE1WZFlVSE40Ym5ORlJtOW1VemxIVFhSRVEyYxAB",
+    "author_name": "Batumi Rulit",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXh6bu9jXp-KbNyxy0sHV44E_ld3d7KX0cYHjG2lH9p0FF0bDc=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "The park is beautiful, you can drive right up to the entrance in a car and rent a jeep... There are a lot of them parked in front of the ticket office, they cost from 10 to 15 thousand per car."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2t4M1MxcGxWMFJDUnpKTVZqZDBMVGxhWVd4a1ltYxAB",
+    "author_name": "Ivan Mateev",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVnM9r91Dm8hLlNDIitpFscIPi2V3JAZgX9GAWpC_FD6Mejj9o=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Good Park. Very big. A lot of elephants. Leopard chasing can be tiring. Big junctions whenever someone spots Leopard. And they mostly sleep high on the trees. For lunch they drive you by the ocean for a 2 hour picnic and break and that is quite awesome."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tKTVdIUXpiWFV4UlRoSmIydEljM0kxUzFoc1VsRRAB",
+    "author_name": "juan carlos Colmenarejo",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLEB0-oTKpco-bMDg57kG56RuBGjMxXqPFDcd-5Z9FG9FxEiw=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pFMFZqSnpiMUpFYUdacGEybzJjek0zWlRKUk5VRRAB",
+    "author_name": "Рудченко Владимир",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXtAGEYEJPA8sO1zBh8mdbhobqLJ6ZEMMTYfi7bXl0IYck6-f9G=w36-h36-p-rp-mo-br100",
+    "rating": 0,
+    "relative_time_description": "a month ago",
+    "text": "Предмет: Complaint Regarding Yala National Park Safari Experience\n\nI am extremely disappointed with my safari experience at Yala National Park from …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21vMmMyOTJiME5sV0dselQyeHVWWGd4TkVSVGNsRRAB",
+    "author_name": "Eddy Kim",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU-nm62SnmvV98qlcTHKPcW1dbf9LhsLSI84dsDPz91QL8muycU=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 2,
+    "relative_time_description": "a month ago",
+    "text": "My wife and I paid 17,000 rupees for the safari and 23,000 rupees for the entrance fee. We picked up at 5 a.m. and returned to our lodging around 10 a.m. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xWaFJVUXhNRzFJYm14UFptTXRZMDlSUVhBM1VVRRAB",
+    "author_name": "Elia",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocI_ri5-AzktPhVF9a_5xsIzLOnSQp-r33dhQ8_DTAYuohVqFw=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 4,
+    "relative_time_description": "a month ago",
+    "text": "Nice national park that seems to be well taken care of as I could see. Visitors are not allowed to exit the cars and walk freely whoch is very good for protecting the animals habitats! We saw amongst other thing, elephants, buffalos, …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xac1owVTRXRmxuTWxkRFEyOTFlVVpPYlU1c1dWRRAB",
+    "author_name": "# fork999",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVReHnQdfzlbGDaaR1IihSOjmf4zA8TmqjIfQk7VHU5272QZJ06=w36-h36-p-rp-mo-ba8-br100",
+    "rating": 4,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tkU1FtZHJhR0V3YW1Zd2FITkRWWGM0VDBWdU5GRRAB",
+    "author_name": "Sebastián Nicolás Luna",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWkSPRwnOyn4BVnMejOBjtJRJQJVXjJitJf2wmLqW1j5guVkoEKmw=w36-h36-p-rp-mo-ba6-br100",
+    "rating": 4,
+    "relative_time_description": "a month ago",
+    "text": "I highly recommend taking the morning safari in Yala National Park. I was told that the afternoon safari can be more challenging due to the intense heat, which often causes the animals to seek shelter and makes them harder to spot. In my …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25CVk9UbDNRME50TURGUFRXa3pXVFZ1ZUUxdWRGRRAB",
+    "author_name": "Robert Skrzecz",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV8AL10Y769dMCMogmYzlYpY2nR8XExU56kIw2iP2QlueA4zvWL-Q=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT214RFpWZHdkamR1TFVGVWVXSlVYMHhTUWxKa0xVRRAB",
+    "author_name": "Karunakar Nagirikanti",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUUYXwE-T96xpYAABHRjmqpr9PhpJKDu7_5RIIK5uR-Z9RWfLU=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2taUlgwWXRTSE5UWm5GbldqTnZORzlmTVZobE0zYxAB",
+    "author_name": "N&R Creation",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWk1FZJ_UH0yf4nUrgHvrER6t_M_YpB0cNLpkCnqQpFz6UZHbXT=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25sU1RXcGhPVkJoYUdGeVdFUnFWR2RDUms1aE9HYxAB",
+    "author_name": "wes m",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLjgkprAfI5ML3KvTcchvieQHW7Wv_95n0JCi2zDbYyo_0IuA=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 4,
+    "relative_time_description": "a month ago",
+    "text": "First things first, on a safari it’s a gamble on what you can see, if you’re looking for a gaurentee animal sighting first time then visit a zoo. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2tkT1ZtaE5XVWQ0UkdwR05FNUtXbkIxTFc5R1dYYxAB",
+    "author_name": "P Dilinika",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUtI_iJRvDSdexN-sRuckECJwgGxfb2CjlqUyRv0SfObvyRyrvz=w36-h36-p-rp-mo-ba6-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Main Entrance (Palatupana) is convenient and with easy access for Yala safari. It can be fully crowded and may involve waiting in lines specially in morning and evening time. We should take tickets to enter the national park. It’s better planning your timing (early morning is best) tends to make the experience more enjoyable"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pSaGVHcExibFpDUVdSck1FNUhaRVpOTWtoUFptYxAB",
+    "author_name": "Warren",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUyt79BxoHsUk9nkgT7f4N6-I9c3eg0L42Pp_zMkzbVh7uGTe-d=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "A great wildlife safari. It’s not Africa, but it’s not bad either."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT214SE1ITlFOazVYZFdsblJsYzFPVVZVUzA5eWJVRRAB",
+    "author_name": "vigneesh patmanathan",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLDd2Zq6EAl9cW5VdIeXzNBMyLXXrNNJH5GFvtveCFWV9vbuw=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Yala National Park was a good experience and definitely worth visiting. We saw quite a number of animals, which made the safari enjoyable. It’s important to get a good vehicle with proper suspension and a driver who is willing to provide a …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2t4elNGQkxObE5zUm1GeVNuSjVTR05aZFhoSU5WRRAB",
+    "author_name": "DineSh PrasaD",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX3IQ96mtxaIkksuFJ1qcCVSRgT0R68gQf3JccC2Up1G_6UPOe9=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xrMU5YbG1lbkkwY0ZGa1VWZExUSFoyV0VOa1YxRRAB",
+    "author_name": "Chanaka Thalpahewa",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXHR-BOhJ04LbRxf11fj4a03PZsBKJy3lVHdmvld9ZcnCD9JarX6w=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pGaFMwMDJjMGQ0VEdWVk9UWmxiRXRZY205Mk9WRRAB",
+    "author_name": "Sydney Mclennan",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXiNfZ8PlKGqdhA0r0yPMGSiKfX4r0XXUxZ8pu1WNUMud61uiZs=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "Saw 4 leopards and tons of elephants! Amazing experience - I recommend a morning tour :)"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pWbFlXWlNhVVZYWkZsMlRGQkZaRGwxWldVMllVRRAB",
+    "author_name": "Karolina Spychalska",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWgGYeBeVesee0F6GaZqvrYFT0hZJFANWuzymg6rBGZDbh28g=w36-h36-p-rp-mo-ba2-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "A beautiful place.\nDownside: unfortunately, it's loud and full of jeeps."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xCbVVXWlNNMkZOYldkcmN6UkhNemxUWWtwMFNGRRAB",
+    "author_name": "Réka Kelemen",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXYhM_vZIM7I5mX3DndeXCEaj9UdL6Hi2PU5V7SP3JmqGwsr2PApA=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 4,
+    "relative_time_description": "a month ago",
+    "text": "The park is beautiful and huge, the animals are around so you can be lucky and see them, but mass tourism is very disappointing and the jeep drivers make it worse. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT21GeVRURnNZMVZZVGxKUFgyUjFRMU5SWm5WdmExRRAB",
+    "author_name": "Xavier Llaona Olivet",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX5YBvo0XfkqMGhoWZ_7awnc-9Z9xtkkdHxEFqi5p6Rs33pFiDi=w36-h36-p-rp-mo-br100",
+    "rating": 0,
+    "relative_time_description": "a month ago",
+    "text": "It was a rally safari. Almost 400 jeeps at 6 am in the main entrance, mostly of them with only 2 passengers. They should limit the number of jeeps to ensure calm and good conditions for the natural park. …"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pOdGVWVnhiVjlIY1V0NWVHbDRUalEwTUc1Mk4xRRAB",
+    "author_name": "Sri With Lanka",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU99qDnerYDnZp2EXNlPs1WOvvE1v4yDXOIYnzw5IhXSKOIp0om=w36-h36-p-rp-mo-ba5-br100",
+    "rating": 5,
+    "relative_time_description": "a month ago",
+    "text": "You must visit experience tour guide otherwise you will be disappointed"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pKR01FOUhkWEpWZGs5aFdHVmxjRFZoZHpVNU5IYxAB",
+    "author_name": "Lina Rimkiene",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXacWR-vI82UXTA1cPztJKTW_ClyW7h-Uo0pYfka78OphVQr6WnZQ=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "Edited a month ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xwdFdVMHhRblJRVHpGMVZ5MXZRalJEZFdSWGJVRRAB",
+    "author_name": "Ryan Fenwick",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL2GLLYCF85kCZv0N6s4zf7AlTBNB79yKQUaMbrznhgO3rRLg=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "2 months ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pSdE1HeEtRWFl5WDJwYU4xbFdVelJrZG5CeExVRRAB",
+    "author_name": "New Grand Matt",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIMOUOflYXxYtsDjCHQ8BQ_25fVq22VKOC06gcLHWHyG5K8bA=w36-h36-p-rp-mo-br100",
+    "rating": 5,
+    "relative_time_description": "Edited 2 months ago",
+    "text": ""
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pKRmFEUlpTVXhsV0ZaT05VMDNTRVkyUWtadU0wRRAB",
+    "author_name": "Muriel Laurenzi",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKJmzEJQq4sazRbGMQ0wI5v8tUjXbh_lVZEej0uE9wFreKetQ=w36-h36-p-rp-mo-ba3-br100",
+    "rating": 5,
+    "relative_time_description": "2 months ago",
+    "text": "Amazing experience!\nEasy access and very courteous staff"
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2xwRVZrdGFSaTFyWDNaSFdHZHdNM2cxUVd0M05VRRAB",
+    "author_name": "Supun Dharmawardhana",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWxzRNerVReaF7SkNsWymn7wUmy8lfaP8N0BrI-7_zLqdZqou7_=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "2 months ago",
+    "text": "#yalanationalpark #srilankanleopards #wildlifesrilanka"
+  },
+  {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT25reFgwOTNjSFZwZDNFMlZIQXRRMUZrV21kcmJtYxAB",
     "author_name": "kangeuikwon",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLJBTrjx3b_MitBOg24C9Pt3q-KeU-7TYJu2MYpMO1u9rOeow=w36-h36-p-rp-mo-ba2-br100",
     "rating": 0,
-    "relative_time_description": "11 hours ago",
-    "text": "It wasn't a zip safari, but a zip drive. I was stuck in traffic for an hour, unable to move, because I saw a leopard that was barely visible. The next morning, I went to the market and was happy to see more animals."
+    "relative_time_description": "2 months ago",
+    "text": "It wasn't a zip safari, but a zip drive. I was stuck in traffic for an hour, unable to move, because I saw a leopard, which was barely visible. The next morning, I went to the market and was happy to see more animals."
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT25ab1FtNUNkR1pPZG5aQmNWUnFiMDlDVjJ0MWVHYxAB",
+    "author_name": "Ranindu Dilruwan Dayananda",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWgUlLc7mPgJub_t6Z95M41et-zMh1bN58QGjaxZBaRXQvLzQCZiw=w36-h36-p-rp-mo-ba4-br100",
+    "rating": 5,
+    "relative_time_description": "2 months ago",
+    "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2taNGVIZEVka0ZZZFc1MVREaFhPR2hsWmxoNU0zYxAB",
     "author_name": "Sharon Dorward",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK8pbfr0aRV7ITAANFW6BfhNyQjEEUoi2aktN0ifyMtcRJn7Q=w36-h36-p-rp-mo-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK8pbfr0aRV7ITAANFW6BfhNyQjEEUoi2aktN0ifyMtcRJn7Q=w36-h36-p-rp-mo-ba2-br100",
     "rating": 2,
-    "relative_time_description": "a day ago",
+    "relative_time_description": "2 months ago",
     "text": "Very dissapointing experience due to the amount of vehicles on the roads at once. It seems to be more about the money than the experience of sharing the beautiful animals.\nSaw more on the public roads."
   },
   {
@@ -20,7 +540,7 @@
     "author_name": "r r",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIMFwW1ffUfU0hLriJB9TD6Umw1wiAkg7FDHEEK5GL5wsrAwAc=w36-h36-p-rp-mo-ba2-br100",
     "rating": 2,
-    "relative_time_description": "a day ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -28,7 +548,7 @@
     "author_name": "Nikola Feketija",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXJcuDGekje4AXmTBLI2hez6VzoQbDlaawlJ69Zm1Ds_OsubMyx=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "2 days ago",
+    "relative_time_description": "2 months ago",
     "text": "🫡💪 …"
   },
   {
@@ -36,7 +556,7 @@
     "author_name": "Евгений Криворучко",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUQMt-PRi9j5RrCLbFd6fzuWsYgm2BeU0gRPo2IWxuGVu08bwWu=w36-h36-p-rp-mo-ba3-br100",
     "rating": 4,
-    "relative_time_description": "3 days ago",
+    "relative_time_description": "2 months ago",
     "text": "I was expecting a more exciting safari, so I booked a full-day trip. In reality, a half-day trip is sufficient, and there's almost no point in spending the night in Yala just for that. It's easier to take a tour from the coast."
   },
   {
@@ -44,7 +564,7 @@
     "author_name": "Liliya Kim",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJg-gzbN1L7c6MntJ3JfOymDSoP7ocAvyv1QRr7xg2rPk4j4Q=w36-h36-p-rp-mo-br100",
     "rating": 0,
-    "relative_time_description": "3 days ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -52,63 +572,47 @@
     "author_name": "Sivamani Kandan",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWCd3CnO8_rvmQFKHvA_h7WiYlYkDukJeaB8kJxM8CnwyJ-69zG=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "3 days ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT21acldVTnBSbmhNUlRoWGRrbFphemRxWW5wNFgyYxAB",
     "author_name": "Pink Big Shark",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWk32ARaEmwB1Bby61HNeDF7zxLC5SjzZnUk_meFW6I_B1ip7J5=w36-h36-p-rp-mo-ba7-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWk32ARaEmwB1Bby61HNeDF7zxLC5SjzZnUk_meFW6I_B1ip7J5=w36-h36-p-rp-mo-ba8-br100",
     "rating": 4,
-    "relative_time_description": "4 days ago",
+    "relative_time_description": "2 months ago",
     "text": "Very good"
-  },
-  {
-    "id": "Ci9DQUlRQUNvZENodHljRjlvT25oM04xOTNjRlpXT0ZoQ01WYzNabmxPT0V0b2FXYxAB",
-    "author_name": "Paochieh Cheng",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKpvIvLBPDPJ-xpmq-0o-FkDVXy0zwMYU46P0ac04HfmcFInA=w36-h36-p-rp-mo-ba6-br100",
-    "rating": 5,
-    "relative_time_description": "4 days ago",
-    "text": "Yala National Park\nIf viewing a diverse array of wildlife is at the top of your agenda then Yala national park is the place to visit. The vegetation consists of scrub jungle, …"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT20xRmRscFRORVZzWDNNeWIyTlJMVEYxTlhSTWIyYxAB",
     "author_name": "Sesan Wathiyage",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLfv_VIdYymN5TasSR4Q4RCMmkdi9SuTj9lMdqBSS6rmU82z3M=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "4 days ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT25OTk5uZFhha3c0TTBSM1F6VndhMmt5WmtsalkzYxAB",
-    "author_name": "Raz Van",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVKvEWSibjnZfjhDHmkMgKUqovO0p7R-ETBxhZlYpcl62T8EvTpIQ=w36-h36-p-rp-mo-ba4-br100",
+    "author_name": "Razvan Velterean",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXSGvbw-WUiYte4OvLQrCbEip9T7JyShU49j80ikf56aqYlA3Xr3g=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "5 days ago",
+    "relative_time_description": "2 months ago",
     "text": "A must see while in Sri Lanca"
-  },
-  {
-    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pSdE1HeEtRWFl5WDJwYU4xbFdVelJrZG5CeExVRRAB",
-    "author_name": "New Grand Matt",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIMOUOflYXxYtsDjCHQ8BQ_25fVq22VKOC06gcLHWHyG5K8bA=w36-h36-p-rp-mo-br100",
-    "rating": 5,
-    "relative_time_description": "5 days ago",
-    "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2xGYU4wdzNTWEJ3YkVOemFYSkhhV1kzV1hVeExYYxAB",
     "author_name": "Dihark Nisthar",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVmjqtTs0TbfehDeZ2jjSUB65jb9xJnK20j8-Ux1BWIauZ1nnsg=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "6 days ago",
+    "relative_time_description": "2 months ago",
     "text": "Must go"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2toeE9HTkxOMFJxWTJGMlEzUTFOUzEwTUVKUFRGRRAB",
     "author_name": "Blagovest Grigorov",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL9jHe2u-R2t6zCGjqipaRt6zwns8DfQpk58_0rvU1m8UjsQw=w36-h36-p-rp-mo-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWXymRreOsrCW-vV_8AHto3o9A-DThhV1MgFexbG4cO26a7E4VP=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -116,15 +620,15 @@
     "author_name": "Jenna",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVS7_j1ONXxOcDuDMPp65GdReLjOS7xNGldGrFGo34KLA5vKBHp=w36-h36-p-rp-mo-ba3-br100",
     "rating": 0,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": "Far too many jeeps in one place. We had a really unpleasant experience with our guide and an elephant, apparently named Gamunu. The elephant was walking on the road where we wanted to go, and instead of stopping or turning around like all …"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT20xRmJHWlFUek5EV1VKSWRrWlBMVTl5U0dZelFXYxAB",
     "author_name": "Yani Rusev",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJ9x7zD3FuroDedJQRtyvGCNYPIqxZTsWLkcLaQ22MbQlY2XA=w36-h36-p-rp-mo-ba3-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXJ5UILgM1O8F-XWF3EILZ7CARw7zBG0lU8o9NswDe7sOR10A0=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -132,7 +636,7 @@
     "author_name": "Edo",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWgNhzjPiEvpDAmCFv8_BtWVLbh0rIObm-KSK9XkSZ0oAp-S_k=w36-h36-p-rp-mo-ba3-br100",
     "rating": 4,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -140,7 +644,7 @@
     "author_name": "Henri Gotzel",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUVyU9sHbhPv1WAvcimN2LJPXaDqiRXS8R0FCF-zwm7E68Dn_b1=w36-h36-p-rp-mo-ba3-br100",
     "rating": 0,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": "Yala National Park is incredibly disappointing. While we got to see an Elephant and some Crocodiles the mass tourism just destroys the entire experience.\nYou will be waiting in the smog of 1000 engines in lines of cars to not move at …"
   },
   {
@@ -148,7 +652,7 @@
     "author_name": "melisa ramirez ramirez",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLvZskzTjShRRINlhkjKLAqDzQc_OHxloSq_jK837-Lf2vx3A=w36-h36-p-rp-mo-ba3-br100",
     "rating": 0,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": "Many hours wasted standing around, too many jeeps making noise, and all you see are elephants, peacocks, crocodiles, and little else. It wasn't worth the early start (they picked us up at 4:30 am, only for the tour to start at 9 am) and …"
   },
   {
@@ -156,23 +660,15 @@
     "author_name": "Rachit Aggarwal",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX1MRVkgny5vqsXNvhX2Y9MyD3k486aXIiongJ1aQ0m6UE9N-vQSQ=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": "Better book online, its separate queue."
-  },
-  {
-    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pKR01FOUhkWEpWZGs5aFdHVmxjRFZoZHpVNU5IYxAB",
-    "author_name": "Lina Rimkiene",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXacWR-vI82UXTA1cPztJKTW_ClyW7h-Uo0pYfka78OphVQr6WnZQ=w36-h36-p-rp-mo-ba4-br100",
-    "rating": 5,
-    "relative_time_description": "a week ago",
-    "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT21kTk16Z3diRzVwUnpaT1JGbE1iMUYxV2pkMk5uYxAB",
     "author_name": "Rosária Alexandre",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL0TaxT4w6EwQynbfe-xuyYyBqH3a1lNcSSCg_JNHZad8YYlw=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "a week ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -180,7 +676,7 @@
     "author_name": "Anastasiia Knysh",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIcVjCPX9X9qA3hy5tFVMRl_ETy63wjrv-ysLCsLrmQRHkPHA=w36-h36-p-rp-mo-ba3-br100",
     "rating": 3,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": "That was okay, but we mostly saw animals when we left, even though we were inside for 3 hours."
   },
   {
@@ -188,15 +684,15 @@
     "author_name": "rashmika kudahetti",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXz5DDnoFP3Lz7htjnEnkCokIZ-A7653CDHzbrtmpKsffRY2rbX=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2t0WWRYTnNVVVo2TW1KVVJHMW9WekpLZEhaNlEyYxAB",
     "author_name": "treasure memories with Apple",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUVgn-_WdIRlszve1sQM1afPZ34DHvQwdn1gI6m-ff50sPnPLhQ=w36-h36-p-rp-mo-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUVgn-_WdIRlszve1sQM1afPZ34DHvQwdn1gI6m-ff50sPnPLhQ=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": "Amazing"
   },
   {
@@ -204,7 +700,7 @@
     "author_name": "Rishad Akram",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX5EV3F7WFJEf2k_FYsScyvncnWSonskbQfRDOw161cG1IdiAM7=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -212,15 +708,15 @@
     "author_name": "Sahidul Islam",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX5p6RN-5wdRuZJt4EADKLXV5HX89zgVyJ2maWVenIjWA7CR9l3GQ=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": "Wonderful place for kids"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2pocFVXSnJhUzAwYUUxRlpGa3lkMVJNZVdWVExWRRAB",
-    "author_name": "Nilantha Sanju",
+    "author_name": "Travel Sanju",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK76mqHjImKuil5Wq-jHaAgtm3Z4hR98aS6JNXDK55-0veMQQ=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -228,15 +724,15 @@
     "author_name": "Oren Bajayo",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUjVOlTP9t2l7tFZEUE3kwo9rumgagm-A7m8_W4dw6gkAfR9TEV=w36-h36-p-rp-mo-ba5-br100",
     "rating": 3,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": "It's a beautiful park but you spend most of the time in jeep traffic jams. Given the price you pay it's an over priced jeep ride."
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2s5VlQwWk1aalpOUWxCT2EweFZjMFZRWTBaaU5WRRAB",
     "author_name": "Maeve d'Angelo",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWknnXzAbWTGx8CKwVqqRyYapecStn8sS0J6G3tgaj7HseIVKsJAA=w36-h36-p-rp-mo-ba5-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUWir_f8qBgWnBjqcWZZS8qRcivDuC0QMwHrtPgKTkAifWPJ2c21Q=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "2 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -244,7 +740,7 @@
     "author_name": "Anisha Jack",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUaPiBUu70ZpIl_GGNGsLKWoOf02Bf0x8UY1gbd8m8gwSbZWlBB=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -252,7 +748,7 @@
     "author_name": "Tharindu Dilhan Samrathunga PG",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX-KOkwn1WgYoPFTZel_jm9navImJ1uNKG7m0nPeyszXN9bLWib=w36-h36-p-rp-mo-br100",
     "rating": 4,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "2 months ago",
     "text": ""
   },
   {
@@ -260,15 +756,15 @@
     "author_name": "Matin Dehghan",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXtGpmltmMFiRC-TW8F577-yEta4RI-Bn7pUjJMwhfvNzJF55Ya=w36-h36-p-rp-mo-ba6-br100",
     "rating": 4,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": "During a half-day safari, we spotted six elephants: twice a mother with her calf, and twice two lone male elephants. We were told that one of them was very aggressive. We spent a long time searching for a leopard, and finally, close to …"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT25WNFZtZ3RkWEI2TTA0d1N6Vk5hRlpzUXpaNlkyYxAB",
     "author_name": "Stefan Templin",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLsYl0ZX3P_9U-yVKxUfElr2GlDDm4Oj5jeAa7FBStAHw-CjZM=w36-h36-p-rp-mo-ba3-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLsYl0ZX3P_9U-yVKxUfElr2GlDDm4Oj5jeAa7FBStAHw-CjZM=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": "A wonderful park in terms of both landscapes and animals. No one should go to this park expecting to see leopards. It's more about the overall flora and fauna. The large number of visitors and jeeps is a downside, making it feel more like …"
   },
   {
@@ -276,7 +772,7 @@
     "author_name": "Deneth Dulmin",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVKY0rPkrj1tM0QJQ39jwovFX0zXh2upCCdTMWgwECYqJHzta8=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": "Lots of wild life. Beautiful environment. 10/10"
   },
   {
@@ -284,7 +780,7 @@
     "author_name": "Jagath Lalith",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVTVO_7AmGcQrREbtToP4DZQt-WA1i4fDomOBk9fsKjnnJpnkY=w36-h36-p-rp-mo-ba2-br100",
     "rating": 4,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -292,7 +788,7 @@
     "author_name": "Casey W",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVkRh74YMVgSKehGR3zbCMDi66AS1_BLnZB8fjc2faIwWUas_0ctQ=w36-h36-p-rp-mo-ba7-br100",
     "rating": 5,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -300,7 +796,7 @@
     "author_name": "Udeeshwara Subasinhe",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKTn7QgT5iqkNdGKKoDWj1KS5Jbdqph-Fcfs5_j3jt31S_wug=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -308,7 +804,7 @@
     "author_name": "sameera Madushan",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUEE59d-11x0KBedhrhOVkUiBOcEFZXmK-z-NC8d_SZXif6gA8=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "3 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -316,7 +812,7 @@
     "author_name": "Adam Piłat",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocI02OXOmAo6yE1sc9y1bToOqW66mYD-m0CXdNLYyD0pdX57gUA=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "4 weeks ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -324,7 +820,7 @@
     "author_name": "Carolina Cavaleiro",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVJ-_GR3fsXXQwv6v-k--K6MRCHSL-ax427On_kzdGZkm0VzZCtdA=w36-h36-p-rp-mo-ba3-br100",
     "rating": 2,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -332,15 +828,15 @@
     "author_name": "Anna “ZAS”",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLgzY9Fx-f9TXUE6SHptKRqrdij9E2hrdwqJkLrC20HPvDDww=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": "We didn't see any leopards, but maybe he saw us:)) There were elephants, reptiles, and birds. I liked it."
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2psVmJFaGxNbmhVWm5OU1VGSm1kVE5oV21SRU5sRRAB",
     "author_name": "Sami Alzahrani",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUJmjgvwh-fw3L0xwYS7rOkBlkppevZ6hOAYkAmdVIjSHPdgTQ0=w36-h36-p-rp-mo-ba5-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUJmjgvwh-fw3L0xwYS7rOkBlkppevZ6hOAYkAmdVIjSHPdgTQ0=w36-h36-p-rp-mo-ba6-br100",
     "rating": 5,
-    "relative_time_description": "Edited a month ago",
+    "relative_time_description": "Edited 3 months ago",
     "text": "Yala National Park is one of Sri Lanka’s most captivating natural destinations, offering an unforgettable wildlife experience for travelers seeking adventure and breathtaking scenery. The park is known for its remarkable biodiversity, …"
   },
   {
@@ -348,7 +844,7 @@
     "author_name": "Rakesh Chowki",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVE1IHjog1cMlHC_6rXouPVBDkftpNqO-ph4ZHo36KGaKEvACeiOQ=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -356,7 +852,7 @@
     "author_name": "yenuka silva",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWQpNTdPRlyLHWanyOFzuBZfSCt2NgFZnAfWxwBLjrm5V1G6fw=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -364,7 +860,7 @@
     "author_name": "Vanja Sironjic",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWkcuKQN8lmjQs-vMzTxhkQwUGxqJNQWs08Y1UWkn1S_NmoXhPY=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -372,7 +868,7 @@
     "author_name": "Roderick Schoon",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXrWbdb9VkxiMxFqpc-mI1hFMspiagAV6tQc3He-MuduTc-_9Y=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -380,7 +876,7 @@
     "author_name": "Jude Samarakone",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXwvUJUsqEpz9Ejm0Por1HSd3WCfoOW2anac7SDWWI945UYnm9f=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": ""
   },
   {
@@ -388,7 +884,7 @@
     "author_name": "Sela Akter Sela",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL-oIoUdgScToAa3htjEOaANvpTRnCh5w0h43chHKVYB3RtOQ=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "3 months ago",
     "text": "vary good"
   },
   {
@@ -396,7 +892,7 @@
     "author_name": "Christina Schmidbauer",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJFeT3-8nIjCYcIc1Rnto82fYoE_SGhBzRMPEur4c9WeyMIAh6i=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "4 months ago",
     "text": "You should plan on spending about half a day there.\n\nThe restrooms at the rest area on the beach are unfortunately not well-equipped …"
   },
   {
@@ -404,7 +900,7 @@
     "author_name": "Sameera Abeygooneratne",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIhHJCyJL1w6hKitYZ5XE2WeNzoZGxbHdewOXED0dC43qzwJutf=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -412,7 +908,7 @@
     "author_name": "TyT_u _TaM",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWy37PVHYkr7neXR-j8PHcylkdi7WJjWdrF2-jM3RuvR-GGPT9M=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "4 months ago",
     "text": "Everything was great, we saw elephants, a lot of birds, crocodiles, deer, buffalo, and even a leopard."
   },
   {
@@ -420,7 +916,7 @@
     "author_name": "Francisco Verenciano",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjULliEa54OOBhQpVxBcvt3jsYtU3cNgDSySDHL3W25-0ZIU3agzdw=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "a month ago",
+    "relative_time_description": "4 months ago",
     "text": "Great place to see animals. The roads could be better kept. Also the only toilets on site were a disgrace."
   },
   {
@@ -428,7 +924,7 @@
     "author_name": "Rahul Amin",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUwdkwiRwzocgVbvYBD8zgnTT0g-L5j9pwevMvQR970lacavyU=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": "♥️♥️♥️♥️"
   },
   {
@@ -436,7 +932,7 @@
     "author_name": "Susana de Salazar Casanova",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVu98h3Pzf7rDZY5K4eis0R4uBYe2ZgjFN-6xOtLf8-ir5AAEbu=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -444,7 +940,7 @@
     "author_name": "Hasindu Hettiarachchi",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXvfSJgED_1qN-dvdnR_Zj-Mjd4kjApPXLbSvLzOOLbWtKFLvU4=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -452,7 +948,7 @@
     "author_name": "Sreelakshmi CB",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVYneXSh9f40yy75hsz-CUuVRTiaPQH1mNjUJHUBeU8uYE8kGp-=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -460,7 +956,7 @@
     "author_name": "Sha Ch",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWLXGNhjI9f3MBHJCYDmitgTGTr3VZMk23kOK1RkoDt3GEiZwp9=w36-h36-p-rp-mo-br100",
     "rating": 4,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": "We saw many different animals and once a leopard in the bushes in the distance, but we were surrounded by dozens of jeeps.\nOn the way back, we finally took a nap on a small road, and what did we suddenly …"
   },
   {
@@ -468,7 +964,7 @@
     "author_name": "Steffen Schneider",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXyr2NjDMxeyVIfujdicDnzje_xDyMHBj4Xno2tWclrM6kCRyM7=w36-h36-p-rp-mo-ba5-br100",
     "rating": 4,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": "Great tour with lots of animals and a leopard."
   },
   {
@@ -476,7 +972,7 @@
     "author_name": "david ganlath",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKqo-ILZ_bxdTQB4Nms0zkMQdJH6RsPpPJuCeiw-kUe8OG2Dg=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -484,7 +980,7 @@
     "author_name": "wijekoon Bandara",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV9oSgKbIfeiYQhf9p8oXKjHApcVrJSLnXalfgl3wruaRhYHphP=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -492,23 +988,15 @@
     "author_name": "Keren Sardam",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWldf6LKB4P3NsqncyGw8ExM_tB2MdhC-sl6X1tb23fpYQk0An0lw=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
-  },
-  {
-    "id": "ChZDSUhNMG9nS0VJQ0FnSUNfby1UMUpnEAE",
-    "author_name": "Tharindu Shyamaka",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLXJOi83EepiSnA1liMXts1UXaXgY57JWpKnAgbEb7vT-4goA=w36-h36-p-rp-mo-ba2-br100",
-    "rating": 5,
-    "relative_time_description": "Edited 2 months ago",
-    "text": "Amazing time"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT25kQ1dFNTNVbTlTY1RoWWVWWjJlazl1WjNCeFZIYxAB",
     "author_name": "Lktourlanka",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWkN9fAv8EOSJVACHfl4mQD5aUUVqaagcWHF9nOodkLueiLs8j-=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "4 months ago",
     "text": ""
   },
   {
@@ -516,7 +1004,7 @@
     "author_name": "Eniko Laszlo",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXSC4Tm-n5bcB75HzWXRnm8OmSho8t6Gkf4HOLiu01LE3GPtQ_nFg=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "5 months ago",
     "text": "It really was a great experience and we enjoyed every minute!"
   },
   {
@@ -524,15 +1012,15 @@
     "author_name": "Sahan Madusanka",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVeXOtO4PnHq-U4cvFD-BrVp_lyujRYqhQn0DEE5Kw1LZpnWSq0=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "5 months ago",
     "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT21wZlVUazFRMmRaZEhOeVl6aFJlSFp6TkhkR2QxRRAB",
     "author_name": "Conor",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU11wj9wBbsYX24r-UzAfgRfwONS5_SM7Lm6NnuOunygC-2ucs=w36-h36-p-rp-mo-ba2-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU11wj9wBbsYX24r-UzAfgRfwONS5_SM7Lm6NnuOunygC-2ucs=w36-h36-p-rp-mo-ba3-br100",
     "rating": 3,
-    "relative_time_description": "2 months ago",
+    "relative_time_description": "5 months ago",
     "text": "Needed a wee"
   },
   {
@@ -540,7 +1028,7 @@
     "author_name": "Fernando Montero de Espinosa Paniagua",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVyxtJ5-D0J9JY2F1tTZPphO_pjeMRnp99staMug4umhPBjnn25=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": "Spectacular, we went in the afternoon from 2 to 6 and we were able to see deer, jackals, 2 leopards, deer, elephants, crocodiles, Sri Lankan chickens, a bear... incredible, yes, it was very hot."
   },
   {
@@ -548,7 +1036,7 @@
     "author_name": "Jibran Khan",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU5cBKx1apihGFBZePvRZMnMYFz7hSW-7UCu4hEZ8oDKRL930oC=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": ""
   },
   {
@@ -556,7 +1044,7 @@
     "author_name": "Lanka Lanka",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIuNTD4tVMitcI7aZm345gt2lmV_xqcVXs64WqxV75Pmu-0Mg=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": "Best safari 🥰🥰 …"
   },
   {
@@ -564,7 +1052,7 @@
     "author_name": "Seb G",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVL5GTWVgVVEsAGDiSzEonmot0fjaaly6D6PRUbbMBg4g6quTQJ=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "Edited 3 months ago",
+    "relative_time_description": "Edited 5 months ago",
     "text": "Very good experience, indeed we can see leopards"
   },
   {
@@ -572,7 +1060,7 @@
     "author_name": "Francisca Moya",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLRVnMf9t7_2k_wwKvXLymQyktEcxB432U3l3TZYqTKEJgaZA=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": "An incredible experience in Yala. We went with Back of Beyond, a super guide. I understand you can also go without a guide and pay less. Unfortunately, we didn't see any leopards because it was September, but we did see plenty of animals. I highly recommend it if you're near Yala; it's an adventure I won't forget."
   },
   {
@@ -580,7 +1068,7 @@
     "author_name": "Prasan Jayathilake",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLiIVAACgiFIKPsY60yccnWlHfUA0bluV-y6MGfh_Y_pb7lQw=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": ""
   },
   {
@@ -588,7 +1076,7 @@
     "author_name": "Tiron Wollace",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJOad7DORFC9bD61hSRragbOqp2G_rkzaP05n8BrI98czFgQw=w36-h36-p-rp-mo-br100",
     "rating": 4,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": ""
   },
   {
@@ -596,7 +1084,7 @@
     "author_name": "Yuanjian Chen (Uncle Chen)",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWoABHOW4j-hVVMKPwpFtl6RS5JX0Q37d-qb7TxT-goJlTykpmt=w36-h36-p-rp-mo-ba7-br100",
     "rating": 4,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "5 months ago",
     "text": ""
   },
   {
@@ -604,7 +1092,7 @@
     "author_name": "Alessandro Santi",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjW4CM-at15v8bP6dHWOeRlwfslwB4sk7zMleWNJB_jCcKmj_dU=w36-h36-p-rp-mo-ba6-br100",
     "rating": 4,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
@@ -612,15 +1100,15 @@
     "author_name": "Youssef el bakkali",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIkxyGZku0aMQIIsZM9S7sGPujsszuOt_zcAZ13bRmDhQ83tg=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "3 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2xSWFkyTjVZelo2YTJ4YWRXdEpVbTlTU2w5aU1FRRAB",
     "author_name": "Sean",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL4SHxiB7MRWdG0uuA0mk4jwrlwduLInCcpwhEqRxkfg_uJMg=w36-h36-p-rp-mo-ba3-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL4SHxiB7MRWdG0uuA0mk4jwrlwduLInCcpwhEqRxkfg_uJMg=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
@@ -628,15 +1116,15 @@
     "author_name": "David Croix",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWZxGWGUzBWPowq2CSUpNVEypdh49gtUI41z018qCEirLPND1H0=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "4 months ago",
-    "text": "Late afternoon spent in the park looking for animals. Our driver did what he could but I was disappointed by the number of jeeps present in the park. Since they all give each other the word about the animals present, everyone goes to the …"
+    "relative_time_description": "6 months ago",
+    "text": "Late afternoon spent in the park searching for animals. Our driver was doing his best, but I was disappointed by the number of jeeps in the park. Since they all seem to know which animals are there, everyone goes to the same place, causing …"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT25weFduQlhWR3gwUW5ndGFETmFPR3RYTUMxZmJYYxAB",
     "author_name": "Mohamed Awaad",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUtOs_FZhzYlO8sr4SzkA_HMWGJAz0DRiRWMWlV8wH-qmqlBTi-Mw=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
@@ -644,7 +1132,7 @@
     "author_name": "Alexandru Marian Martin",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUuFJvGw2OMq2Hah-XHAbjCR2MTHw3mGp9OzOUekaOYPaKxGaU_=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "National park with various species of animals that we encountered right at the entrance, during the time we spent there we saw all the emblematic animals for less than 3 hours"
   },
   {
@@ -652,23 +1140,23 @@
     "author_name": "kajal h",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLvJIIXonj5TZbpPJyFRN3gxtkcziEbr0uRfJYJbu7MmgXURxM=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT2tKSVUyNVRiazloUVZWbk0xOXpOV3cyVjJSMWJIYxAB",
-    "author_name": "Mithsala Samarakoon",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKuz_G4pie7Mv9wbOyFNOSALoLCNekPvT2taXzvFWxcn4yu14s=w36-h36-p-rp-mo-ba4-br100",
+    "author_name": "ABCD ABCD",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVxTb_duFaafSKJJKDxdtno_IQzqXrtNWWB7TSAsR4y__Hy0Ug=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "👍 …"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT21GbFYzRkhkWFYzYUhSelN6UnBlRXRNVnpGTlJIYxAB",
     "author_name": "Michael Schauer",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVCJOP7SqCm7P7rCRt_VgtphzFpzrOxNcuo4661WIK7g11qfTEtxA=w36-h36-p-rp-mo-ba3-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXgemX4Yjq8BDI4UhQvs90eKaElGZa3EiAEJ1LlVWJTRHl7pXxpKQ=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "Dreamlike national park with incredible wildlife"
   },
   {
@@ -676,7 +1164,7 @@
     "author_name": "T",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIsfETm0YI6HIGUFv_R7HRWzoLPSZhRAUZy5Cye3nocL1ehhzaf=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
@@ -684,7 +1172,7 @@
     "author_name": "Noor Alam",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV_tzfoPQEEsg-g0ChvFyhqDhm1TIQ7szSRe73SH5HGTnMJ8Wgr=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "So Beautiful ❤️"
   },
   {
@@ -692,7 +1180,7 @@
     "author_name": "Miriam Haba",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJI0TB1yK3g-VIW-xoCMweVH0CHFRCD30EYefYBxLCK5Jjulg=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "For us it was a 10 experience, in the first 2 hours of sunrise we were lucky to be able to see the 5 of Sri Lanka, buffalo, crocodile, elephant, leopard and bear. Surely it is not always possible but we were lucky. Our guide was a 10, with …"
   },
   {
@@ -700,15 +1188,15 @@
     "author_name": "呵呵",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJMlLyBrnGLSQ1KIJabzoqWXuh3NRxK1dx0ay6sIfhydyE4Bw=w36-h36-p-rp-mo-br100",
     "rating": 0,
-    "relative_time_description": "4 months ago",
-    "text": "A truly terrible experience. We spent a lot of money and saw no animals worth seeing. We left at 5:30 a.m. and arrived at the ticket office at 6:12 a.m., but the safari ended at 9:30 a.m., and there was a 40-minute traffic jam, so we only …"
+    "relative_time_description": "6 months ago",
+    "text": "It was a terrible experience. We spent a lot of money but didn't see many worthwhile animals. We set off at 5:30 am, arrived at the ticket office at 6:12 am, but it closed at 9:30 am, including a 40-minute traffic jam. Our actual safari …"
   },
   {
     "id": "Ci9DQUlRQUNvZENodHljRjlvT25aNVIzUk1hRlEzV2pKNVJ5MW1iREJtTjNCclFYYxAB",
     "author_name": "Archchana Ganeshalingam",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVs_rJGfwGr3NhXDb6rLHug54y3FAaMfGTDpW-mnFYbgbFjc2WC7g=w36-h36-p-rp-mo-ba5-br100",
     "rating": 4,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "A nice safari experience. You need to hire a jeep to inside the park. There is one zone that allows private vehicles. We were not fortunate enough to see any leopard. Otherwise we saw a lot of animals like elephants, fox, buffaloes, deers, …"
   },
   {
@@ -716,7 +1204,7 @@
     "author_name": "howin kuo",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJUYRIMQ175JHZuZEcvVpwX8M2yQzlrZutTvWgwEjYNPZZvtg=w36-h36-p-rp-mo-br100",
     "rating": 0,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": "It is so bad! There were absolutely no animals to see in this park. The species and numbers were few and far between. You'd have to take for a long time to see one. There were traffic jams and no one to maintain order. We spent a lot of money but didn't see any worthwhile animals. It was terrible. I don't recommend this park."
   },
   {
@@ -724,7 +1212,7 @@
     "author_name": "Christian Immler",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL7g0GCkG1rElrMvIqyXerla_3RHlqQTlWdYuOHVUmjV-rmRg=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
@@ -732,7 +1220,7 @@
     "author_name": "joachim debeuf",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK2t5aMWsFvQ-QD5fgN3v2D244oR99L8yn74sjxA7IP6xL5mQ=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "6 months ago",
     "text": ""
   },
   {
@@ -740,7 +1228,7 @@
     "author_name": "Balaji Babu",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIdakIfzJOWKZwpN9y8hegyqSEz-1-HWTEtqYgiDGfnGEhzaw=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "7 months ago",
     "text": ""
   },
   {
@@ -748,7 +1236,7 @@
     "author_name": "Mell Silva",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKR7s90BYrWmF3bWbSGjaQpiYQWmSsTiakPUyKwjryHHDWAuA=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "4 months ago",
+    "relative_time_description": "7 months ago",
     "text": "We saw the leopard at a distance on July 26, 2025. Additionally we saw were the crocodiles, buffoloes, monkeys,deer,and the elephants.\nThere is order in the entrance. There is a cafeteria if anyone wants to purchase breakfast."
   },
   {
@@ -756,7 +1244,7 @@
     "author_name": "Basura Senevirathne",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUu5BxRXQ-5bzvbeRynWIKFHeNzULOLgeTqdgl2wkAns4xhLxhL=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "Edited 5 months ago",
+    "relative_time_description": "Edited 7 months ago",
     "text": "The main entrance to Yala National Park is well-organized and gives you a warm welcome to one of Sri Lanka’s most famous wildlife destinations. Ticketing and entry procedures are smooth, and there are clear signboards with useful …"
   },
   {
@@ -764,7 +1252,7 @@
     "author_name": "MOHAMED RIFAD",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVViUBnLObZAcIz3ddkfXFCOOgRpU17fwUtMqhgTLmuCzATCDD_=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "5 months ago",
+    "relative_time_description": "7 months ago",
     "text": ""
   },
   {
@@ -772,7 +1260,7 @@
     "author_name": "René Leinen (DixiSGD)",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWRmoUA6HJIovvqkY6tcxzZ7z26q345-F4-eKOzfhP6WEAEThiHpQ=w36-h36-p-rp-mo-ba5-br100",
     "rating": 3,
-    "relative_time_description": "5 months ago",
+    "relative_time_description": "7 months ago",
     "text": "This is where all the safari cars line up to get in on time."
   },
   {
@@ -780,7 +1268,7 @@
     "author_name": "Dorothee Bulst",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKnA7tJWs9LasKfAv1T4QIuiUi_HCHtrICFdMRGLBSpX8gIpg=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "5 months ago",
+    "relative_time_description": "7 months ago",
     "text": "Great experience. Highly recommended."
   },
   {
@@ -788,7 +1276,7 @@
     "author_name": "Shashidu Shanaka",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjW7yVo9IB7UtHviGlt7O8plLyeX87FffZOJbHpT8-5y-vgS4Ftk=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "5 months ago",
+    "relative_time_description": "7 months ago",
     "text": ""
   },
   {
@@ -796,7 +1284,7 @@
     "author_name": "Chris H",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWqoSpundoGCsdKPUGh5zcKdU_bo6O9q3f4AVceAbO3Fptcxqn5=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "5 months ago",
+    "relative_time_description": "8 months ago",
     "text": "Opened on time!"
   },
   {
@@ -804,7 +1292,7 @@
     "author_name": "haresh seneviratne",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUQp3v1eAGYBheCzUGd-lWPCE_eHDTfuZ5vSG94IRGh1epCRa0=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "5 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -812,7 +1300,7 @@
     "author_name": "Kishani Weerasinghe",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL-dOy3KqhjSa5UY2hrcnuxXYqo1ffxPBjFOsjlUOZ-ICyoFg=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -820,7 +1308,7 @@
     "author_name": "Mhd_ Shameer",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXSIcB-c_1IKAa8ZlxafCqSyS7mwwc6D_GKcc2xe4Nx__PszavK=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -828,7 +1316,7 @@
     "author_name": "Martijn Breden",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIvFaQgzFCiIhkwcVl1Juk4pv3pj1X-lE24WJVe9jbELlBD_Q=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -836,7 +1324,7 @@
     "author_name": "Pushparajah Premila",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLfrXwyPJtZ_exIg1IxKJJ713Ei7A41_KGs4ukKATrqrdBLUw=w36-h36-p-rp-mo-br100",
     "rating": 2,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -844,7 +1332,7 @@
     "author_name": "Rizan Rizan ahamed",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVFhgiSqX5lvcVrtzRivlBYPvwcKteNOuvx4lPo4s_lhvO6soM=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -852,7 +1340,7 @@
     "author_name": "lukman ramlin",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUguS-FQYqyQu0TFH6K6xjiKmjZc0QKrpCgkbbaCu6SCSffHRMw=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "8 months ago",
     "text": ""
   },
   {
@@ -860,23 +1348,23 @@
     "author_name": "André Cunha",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVyMCnouLJcPRqrqIRpVm4TYjR7ivMS2eOcTAuZuUIxoA8-SUYM=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "6 months ago",
+    "relative_time_description": "9 months ago",
     "text": "Landscape is amazing. The chance to see more animals is higher in early morning, like 6AM!"
   },
   {
     "id": "ChdDSUhNMG9nS0VQU19zcURINS1XbXZRRRAB",
     "author_name": "Kate Giles",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUs2Qifvh3Yl_9CAYOgV83NZ7riMY3Z5tdw1wT92IqvyqIkp5N-=w36-h36-p-rp-mo-ba4-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUs2Qifvh3Yl_9CAYOgV83NZ7riMY3Z5tdw1wT92IqvyqIkp5N-=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "9 months ago",
     "text": "Good tour.\nI didn't appreciate the guide that is provided starts by telling you they expect a tip at the end, before you even start."
   },
   {
     "id": "ChZDSUhNMG9nS0VLVFdsSWFJc3VIVU13EAE",
-    "author_name": "Nadeeshe Dharmaratne",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUZhc4tRbiena1XC5lgJfK33nXR9_QAKaIIpba-j3hdZcXv246c=w36-h36-p-rp-mo-ba4-br100",
+    "author_name": "Nadee",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLAJ0fhZncqxDi4-1Ln1DHJZF4NAZnv2EYgb91EGgNa1-rl2Q=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "9 months ago",
     "text": ""
   },
   {
@@ -884,7 +1372,7 @@
     "author_name": "Krishan Narangoda",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLGKQHGgtQFUVkcLtsiplfVNbg9nkxptGIuSGHvU01Wah-xWQ=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "9 months ago",
     "text": ""
   },
   {
@@ -892,7 +1380,7 @@
     "author_name": "굠빈",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL0_qYbKtUe13ODJMjRK0VSP58mkmoPRB4lkxUgJZukMQeTPg=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "9 months ago",
     "text": "Maybe because we went during the off-season, there weren't many people. But the locals said that the peak season here is around May!\nI didn't see any leopards. …"
   },
   {
@@ -900,7 +1388,7 @@
     "author_name": "Ranjith Somarathna",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX8NOM_Sv7I3f-_mHMettof3y82CNb1rIMXxbB3EIi56-vMpVxX=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "10 months ago",
     "text": ""
   },
   {
@@ -908,7 +1396,7 @@
     "author_name": "Srinath Chaminda",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWuO933l8muAeLa13A5PK9kWbxGe141klqzSM3-UNp-zLB9LekD=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "10 months ago",
     "text": "Very beautiful place"
   },
   {
@@ -916,7 +1404,7 @@
     "author_name": "Akila Peiris",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXSy7v5AZcLo9YuazVi4pvNcSOUB80vY5h0syzCRirn-mS1Rna8=w36-h36-p-rp-mo-ba5-br100",
     "rating": 4,
-    "relative_time_description": "7 months ago",
+    "relative_time_description": "10 months ago",
     "text": ""
   },
   {
@@ -924,7 +1412,7 @@
     "author_name": "saaltmay Altmayer",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXAOHx7UyY77Z0j16oQ4yU8gyczJp-5lmUAMoJbt3PM8aGhzMla=w36-h36-p-rp-mo-ba5-br100",
     "rating": 4,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "10 months ago",
     "text": "The landscapes are very beautiful, but it's true that like the Google reviews, I have mixed feelings about the experience. Indeed, we saw a few elephants (4 for us), lots of buffalo, deer, does, birds, a crocodile.... We were able to see the leopard hiding very quickly because it was surrounded by 30 jeeps, so meh"
   },
   {
@@ -932,7 +1420,7 @@
     "author_name": "Del Senanayake",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL3oms0g7hEvrfsusYaXMsF5Aw0_OhuPBfEqekItRpTLzEryQ=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "10 months ago",
     "text": ""
   },
   {
@@ -940,7 +1428,7 @@
     "author_name": "sonne 131",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXnuHAYWdBnrE4FbNSVAiD226dzZ4BksPae8YyxHkqzIrs-0XY=w36-h36-p-rp-mo-ba5-br100",
     "rating": 3,
-    "relative_time_description": "Edited 8 months ago",
+    "relative_time_description": "Edited 10 months ago",
     "text": "I visited Yala National Park in March 2025. We saw many birds (bee-eaters, kingfishers, peacocks, eagles, etc.). Unfortunately, there were no leopards. However, we did see elephants. …"
   },
   {
@@ -948,7 +1436,7 @@
     "author_name": "Daniel",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWXMEhzL6kMfqZmr06IjbHDqUKNLcy3q90n03ngLAtohQ33IF-h=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "10 months ago",
     "text": ""
   },
   {
@@ -956,7 +1444,7 @@
     "author_name": "Yusra Aziz",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXKiUvNM-l0D2VTLm2NVAgGNQrBqSa2ERAr1RwabYpSN6fL4ZQ3=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "10 months ago",
     "text": "Amazing place as always."
   },
   {
@@ -964,7 +1452,7 @@
     "author_name": "Anuradha Senarath Mapa",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWEMO7W7FK5NDhJgJabzWqQ3YKhh7cdmv4-PnpSaZ63mkf8ceA_=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -972,7 +1460,7 @@
     "author_name": "Dish75",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUQPyr7shysH7bHd9ts0WKdvg4CUTbjlwx1K50sqGfAd0eM-GEZ=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -980,7 +1468,7 @@
     "author_name": "Rkk Priyantha",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXYQ2-yCEOrSnLO-nTNnBksUSdebsgf6ad84cIxyk1XDpVzCKIR7w=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "8 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -988,7 +1476,7 @@
     "author_name": "NF TRAVELS & TOURS",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXMCpM2WPHLUTM_G4yyK2IaGaLjQ_OK6mFq22X7aHxHmmlONM9o=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "Excellent"
   },
   {
@@ -996,7 +1484,7 @@
     "author_name": "Matúš Tajcnár",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWfiTXyMmxS4SwRrDwtNDI6MowWQuAg8X4lm2eeguBoky4oqwBH=w36-h36-p-rp-mo-ba2-br100",
     "rating": 3,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "It’s funny cause during the way from Weligama to Yala, we saw more animals then in the Yala National Park during paid Safari 😀🤷‍♂️\nI mean: …"
   },
   {
@@ -1004,7 +1492,7 @@
     "author_name": "jptovee",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWeqH09v2fTCoSfBR77JFqjzMdyWd1765PBxnzEwuV_EDmaBAkZ=w36-h36-p-rp-mo-ba4-br100",
     "rating": 2,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "Don't go here with high hopes. It is very dense and difficult to spot wildlife from the tracks, but the most disappointing aspect was that guides do not go very far into the park and our morning was spent covering a very small area and …"
   },
   {
@@ -1012,7 +1500,7 @@
     "author_name": "Butrimiškių Ranča Salė",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVzZdb-luQ0HErQ4xz06skgzKMdVx8eg3ZG0YsE87uetKk1In-k=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "Good park."
   },
   {
@@ -1020,7 +1508,7 @@
     "author_name": "Masoud Hashemi",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVwWVi17rmr9XwfBFEn54-UiFnXcVzfuD6DZq2zjHLx1uks8FGiUA=w36-h36-p-rp-mo-ba3-br100",
     "rating": 4,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -1028,7 +1516,7 @@
     "author_name": "Samantha Hwang",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWcCFGcVFpXcoSQ_XR3YOLlF1FFKvEKKfprvHUJiHC8QkRIYTw3=w36-h36-p-rp-mo-ba5-br100",
     "rating": 3,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -1036,7 +1524,7 @@
     "author_name": "Nima S",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIEr-8xfM270ixKik3ZYqozdsXbYHYuKhwvOSE4bCTy_cfwAw=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "We had an amazing guide, Kamesh who was very knowledgeable and helpful with finding all the animals. We had a great time at the national park and highly recommended the trip."
   },
   {
@@ -1044,7 +1532,7 @@
     "author_name": "amila desilva (Ami)",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUbNnuM2O1VkWYcz1Kxp-Hx4dkZ2mKfWSsZfY_4DsI-UTMRpx4dWw=w36-h36-p-rp-mo-ba6-br100",
     "rating": 5,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -1052,7 +1540,7 @@
     "author_name": "Bonny Varghese",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJpx7-24LTl3p3AosNxtn2OqafUtfkRcTykUgDod1atr9fp8w=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "It is a bird watcher paradise. Disappointed that we could not view a leopard."
   },
   {
@@ -1060,7 +1548,7 @@
     "author_name": "Noelle Marozeau",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXpIrhS9JJehQhHyzu9yeeu95X_a2ktii0yWWoyiZZOwX7W9eZ3=w36-h36-p-rp-mo-ba6-br100",
     "rating": 4,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "I loved doing this safari but I have to give it a four star and not five because there is a overcrowding problem with the jeeps. As opposed to other safaris, I have been.This place allows several jeeps up to 10 to corral the animals just to …"
   },
   {
@@ -1068,23 +1556,23 @@
     "author_name": "Lucia Moscato",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXK1UCFoQE_FqFjqbnaHR4GOCZ6PKRhlyVt9topjeBLlesnfqd2=w36-h36-p-rp-mo-ba5-br100",
     "rating": 0,
-    "relative_time_description": "9 months ago",
-    "text": "A mass of greenery that absolutely does not allow a clear view of the animals present in the park.\nYou can just glimpse some buffaloes, fawns and peacocks but otherwise a total …"
+    "relative_time_description": "11 months ago",
+    "text": "A mass of greenery that completely obscures the park's animals.\nYou can just glimpse some buffalo, deer, and peacocks, but otherwise it's a total disappointment, with just a hint of movement in the undergrowth, though …"
   },
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnTUNJakpURm53RRAB",
     "author_name": "Melwin Rathnayake",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWAJxlh5gRaRevnWy6YBcaABb1NWe9Jvqtf7rWa1-FP-6HujYcwpA=w36-h36-p-rp-mo-ba6-br100",
     "rating": 4,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
     "id": "ChZDSUhNMG9nS0VJQ0FnTUR3cHI3eVl3EAE",
     "author_name": "ftgrant",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJv2XdMa_dXHM_GzhZE83rD6DzD5jEWLeZRioivL5CxN3evCw=w36-h36-p-rp-mo-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV_Tnp_U6ZqEVoW1jpcc_Q-BUIzZgIDMNZcgF630kspJv_Xyn_o=w36-h36-p-rp-mo-br100",
     "rating": 0,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": ""
   },
   {
@@ -1092,7 +1580,7 @@
     "author_name": "Maciek J",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIezl55N4JKT-50nliYlcS_khUL5VY3o0bc5FjmdoxBOlLY_g=w36-h36-p-rp-mo-ba3-br100",
     "rating": 2,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "11 months ago",
     "text": "If you are after wildlife go to the Masai Mara. Yala is ok-ish if you run out of things to do in SriLanka, but not worth a dedicated trip. During the ‘safari’ you’ll drive for about four hours on potholed roads to spot some elephants, deer and rabbits."
   },
   {
@@ -1100,7 +1588,7 @@
     "author_name": "Kavinath Kanesalingam",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU_xycAYri__EsaHNQWrTaluZBUFT1YCM0TBCJIqlnYjw7uqc-EqA=w36-h36-p-rp-mo-ba4-br100",
     "rating": 3,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "a year ago",
     "text": "Jeep ride was fun. Paid LKR 12,000 through a 3rd party driver and around LKR 24,000 for 2 foreigners at the gate. …"
   },
   {
@@ -1108,7 +1596,7 @@
     "author_name": "Nanoss",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUgo_bTKnCpx8M-wItr8Hb8y467oC-FQ_oymF0pJpMSQ8j3K7E=w36-h36-p-rp-mo-ba3-br100",
     "rating": 0,
-    "relative_time_description": "9 months ago",
+    "relative_time_description": "a year ago",
     "text": "AVOID THIS! I would definitely not do it again. It’s not a safari but a jeep tour. We didn’t see any elephants or leopards, only a few birds, a buffalo, and a deer and 40-50 cars... …"
   },
   {
@@ -1116,7 +1604,7 @@
     "author_name": "Mireille Westerduin",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWkOS2XxrrAbg7Jucs224U39T3yjboZo9szTxKWONS8grtkbjV4=w36-h36-p-rp-mo-ba3-br100",
     "rating": 4,
-    "relative_time_description": "10 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1124,7 +1612,7 @@
     "author_name": "Serhii Veselov",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLvS7Lq_u2j9MiCF0zunp3SsISQvyn1Pxpp6uD-p3cp3jrrWg=w36-h36-p-rp-mo-ba2-br100",
     "rating": 0,
-    "relative_time_description": "10 months ago",
+    "relative_time_description": "a year ago",
     "text": "I liked the park itself, it is very large, beautiful wildlife, we even saw a few animals. But, the organization is at the lowest level. The car turned out to be faulty, we got stuck, they pulled us on a tow truck. Then we started it on the …"
   },
   {
@@ -1132,7 +1620,7 @@
     "author_name": "Анастасия Колмогорцева",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK12YTgnPVxc-_uYF-75YuQgyZUwU-KNqHBSjlDhXLn5dZyavI=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "10 months ago",
+    "relative_time_description": "a year ago",
     "text": "The place is worth visiting. Book a jeep in advance - you will save money. On average - 15,000 rupees per jeep. We were on a morning safari, saw many animals and birds. We did not see a cheetah, only tracks"
   },
   {
@@ -1140,7 +1628,7 @@
     "author_name": "Romina RAD",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXBU85D9Ev5Fw__eNIdVOoCl44utUK5ll361XyImy9vU2Tr8rUm=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "10 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1148,7 +1636,7 @@
     "author_name": "Panduka Bandara",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVta8k_PFOEPHk_y_fCcum0SWf4X7X-iDHZRJxkW1iVjx_Hioxp5w=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1156,15 +1644,15 @@
     "author_name": "charfi Mr",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWxQrMBI0NDqx94koMZxzZEFfKRAs3t6qyXAH2AzOziiqXd3MY=w36-h36-p-rp-mo-br100",
     "rating": 3,
-    "relative_time_description": "11 months ago",
-    "text": "Half a day at the Yala Safari Park painted with safari cars in a small park we saw the leopard but from a distance and after having queued for 30 minutes"
+    "relative_time_description": "a year ago",
+    "text": "Half a day at Yala Safari Park, painted with safari vehicles in a small park. We saw a leopard, but from a distance and after queuing for 30 minutes."
   },
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnTURBNXJXQzZRRRAB",
     "author_name": "surya sinha",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXI3Fn5vBlbohjOweJIFyP5NAluefPQmT1QSQjrrki8_ZciGJpPSg=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1172,15 +1660,15 @@
     "author_name": "Robert Pawliszko",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWzwzWfBkzHrpmxaLh2lc-Gu3Yd3lXhVOS6lHYxuHhe2Ybe3BOn=w36-h36-p-rp-mo-ba4-br100",
     "rating": 4,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "An unforgettable experience. We saw a lot of animals: from elephants to mongooses and peacocks. You can see many species of birds, butterflies and ungulates. The toilet on the way looks like a horse barn.... The stench, the dirt.... The …"
   },
   {
     "id": "ChZDSUhNMG9nS0VJQ0FnTUNBazZleUNnEAE",
-    "author_name": "GatorGuy",
+    "author_name": "Emergency_Ward",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUDkeB5-v3-RnxLFeJMStSJmbTEY78lHbQcL9H83RJTITMDAA=w36-h36-p-rp-mo-ba5-br100",
     "rating": 3,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "Must be prepared for long lines especially in the morning"
   },
   {
@@ -1188,7 +1676,7 @@
     "author_name": "Conall Hayes",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKUeyjLmve5gsT7I1R0E-cKMawyEOCfIsiKHJeR3x3ucy6QIpDq=w36-h36-p-rp-mo-ba6-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "A great experience.\nCrowded compared to other safaris but it's easy to see animals."
   },
   {
@@ -1196,7 +1684,7 @@
     "author_name": "Jūratė Stankevičienė",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXPlxHpV_LNbZjJQCf3XmaWRxmLNVykQ_xsaz7uD2ppTNI8p3o=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1204,7 +1692,7 @@
     "author_name": "Виктория Авдеева",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL0vPxwTfMirjESLeLyUEk4FDhgyL_GMUGWEUaXDxPyuzIY1Q=w36-h36-p-rp-mo-ba6-br100",
     "rating": 2,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "This is the worst safari I have ever been on. 1.5 elephants, 3 deer and a few peacocks, 3.5 hours spent on it. And about an hour stuck in a traffic jam of jeeps..."
   },
   {
@@ -1212,7 +1700,7 @@
     "author_name": "Aude Fourgous",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXqAjMu_72VySVpFaCgL5wlpNIWOuaMaBH-lsC356KvamKMShU=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "Safari to do! You will see elephants, leopards, crocodiles and many other wild animals"
   },
   {
@@ -1220,7 +1708,7 @@
     "author_name": "Jörg Bruckmann",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjW_M3TXdLTusbuzM6hNdyb_GB2tGVUfV-oRj_bGXAg_Dh5D5WlQLg=w36-h36-p-rp-mo-ba5-br100",
     "rating": 0,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "Shocked by people's behavior towards this magnificent natural environment. It's an absolute business center, miles away from the idea of ​​a national park where animals should be protected and where humans live in harmony with nature. The …"
   },
   {
@@ -1228,15 +1716,15 @@
     "author_name": "Udara Madhushanka",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVYxmGPTsO4t76Jp5PulY2jlDYmAjvu77yztC9jxldJRWhLL440=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnSURfd0xHSnNRRRAB",
     "author_name": "Kazi Mohiul Islam Torun",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjW4BeE5fdGGPk4LS9zA4gUNsW0uIvnVEv96KyVeDFXN9JhrCJmzlw=w36-h36-p-rp-mo-ba3-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVxsra9PkhVQO65h39-oStJUJuYoZCtKfPDeKItZkS2LP0Znygjhw=w36-h36-p-rp-mo-ba3-br100",
     "rating": 3,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1244,7 +1732,7 @@
     "author_name": "Катерина Приходько",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVVEamIRiwPpj4PD2WvI2Xq2TXdTOQJ4CSy-N8DC3ncVzAFfEQkOA=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1252,7 +1740,7 @@
     "author_name": "nadeesh ranathunga",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIw38_ZwOlZTa8B1796WHhWzovCXKgMJpKeazk-6tuO-Ry_6wk=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1260,7 +1748,7 @@
     "author_name": "Sri Lankan Best Tours",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWbPHZBxXpHOFxBsRzJc7jwAFq_rEp3wOkxtyp9flAAAzTMCCbh=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1268,7 +1756,7 @@
     "author_name": "Ran suari",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIT3w2ajYCUSRy449Cikg9INrpd2ahD_awcuYxI_tnY6KzeNQ=w36-h36-p-rp-mo-ba4-br100",
     "rating": 2,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "It was nice, but didn't worth the money or waking up before 5 in the morning.\nThere are just too many vehicles trying to get in at the same time.\nThe actual chances of seeing animals that you can't see outside of the reserve, …"
   },
   {
@@ -1276,7 +1764,7 @@
     "author_name": "Sanjay Kulkarni",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLiGja0VApQnMlF9zbJg8XQHz-MSwbrtmomZXZrreyLWuiyvg=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1284,7 +1772,7 @@
     "author_name": "Emilia Zeller",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUeb0ZB0Tf6Qrv6Pkv8bp4K9NOHqWKWYKKn-4IDQjYzwqbzl0YG=w36-h36-p-rp-mo-ba3-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1292,7 +1780,7 @@
     "author_name": "Janitha Wijeratne",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWbCazvRoN7h1WH1nJGia-aIbABgElw3-_bnQuZE4qkugg97tTkGg=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": "What an awesome experience! Got the wonderful opportunity to see the leopard. Also the beauty of the nature and the variety of animals. A must visit place for all…"
   },
   {
@@ -1300,7 +1788,7 @@
     "author_name": "Sikandar kumar",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKkJGU7Y4X_JTWMZthn4xwvTJ_uhYOJY3wJld8Tk7TYmXm0Ug=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1308,7 +1796,7 @@
     "author_name": "Udayanga Samarasiri",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIEcIqBX2xJbnmWWBNsKUv8fGgKHOonRn3DcwafClgOcXzWLw=w36-h36-p-rp-mo-br100",
     "rating": 4,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1316,7 +1804,7 @@
     "author_name": "BOB MONPARA",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKD5vv7HlesNbYm6jjZWhe6SPARMZZAFl1c6zsyvJ09Pj6csqQ=w36-h36-p-rp-mo-br100",
     "rating": 5,
-    "relative_time_description": "11 months ago",
+    "relative_time_description": "a year ago",
     "text": ""
   },
   {
@@ -1378,7 +1866,7 @@
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnSUR2b1lHby1nRRAB",
     "author_name": "Michal Vraňuch",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUngJWVeDcVcM9FelfHFCk0w3XbexBKsW8eTpDptx_ogsScgLvN7Q=w36-h36-p-rp-mo-ba5-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUTmBpHFXYJs2GL6EoDL5HHZk3cvvUb6aolOTrBN724C0eQz4inoQ=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
     "relative_time_description": "a year ago",
     "text": ""
@@ -1394,7 +1882,7 @@
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnSUN2aF9uWGlRRRAB",
     "author_name": "Asad Hijaz",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUhB3Err8d5apGEedcfKRp82NGgc0PZTddQkOXsOteaXg6VH18=w36-h36-p-rp-mo-ba4-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU6FaJvZSAG54RqUcCXc5ltaSSOcZ204nMZE39He1gncNtN1IPG=w36-h36-p-rp-mo-ba4-br100",
     "rating": 0,
     "relative_time_description": "a year ago",
     "text": "Worst safari park I have ever visited.\nYou won’t see anything apart from few elephants, peacocks, buffalos and few species of birds. …"
@@ -1458,7 +1946,7 @@
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnSURQb3BqZzNBRRAB",
     "author_name": "Péter Horváth",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXugN_VRGTZK9-MiqDSLxaBsyy5VvBphgqP6SXJ_Og2GKF5gJE=w36-h36-p-rp-mo-ba6-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXugN_VRGTZK9-MiqDSLxaBsyy5VvBphgqP6SXJ_Og2GKF5gJE=w36-h36-p-rp-mo-ba7-br100",
     "rating": 5,
     "relative_time_description": "a year ago",
     "text": ""
@@ -1602,10 +2090,10 @@
   {
     "id": "ChZDSUhNMG9nS0VJQ0FnSURudUktVlNBEAE",
     "author_name": "Sabela Ordax",
-    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVYuGmh80S62FRtV0-zEUg0hLIL64SuJT0muZC4Xbq7AW48LIKYjA=w36-h36-p-rp-mo-ba4-br100",
+    "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWTywScFCcnoWCOOeKhGfNUHsGMaRXtkRyK1Tlj8oq7X8iXNbJBpw=w36-h36-p-rp-mo-ba4-br100",
     "rating": 3,
     "relative_time_description": "a year ago",
-    "text": "We were quite disappointed, few animals, a long time in the jeep and our guide's attention was poor."
+    "text": "We were quite disappointed; few animals, a long time in the jeep, and our guide's service was poor."
   },
   {
     "id": "ChZDSUhNMG9nS0VJQ0FnSUNub196SmRnEAE",
@@ -1629,7 +2117,7 @@
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKbpnFEHpc32-6BBty-JPA98-ysecDsvruvlHLWI95tb-i3aA=w36-h36-p-rp-mo-ba5-br100",
     "rating": 4,
     "relative_time_description": "a year ago",
-    "text": "Unfortunately, we didn't see many animals and even when we did, we couldn't get any further in the jeep because they were all there."
+    "text": "Unfortunately, we didn't see many animals, and when we did, we couldn't get any further with the Jeep because they were all there."
   },
   {
     "id": "ChdDSUhNMG9nS0VJQ0FnSURIbEt1bjVnRRAB",
@@ -1765,7 +2253,7 @@
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVAY2lqFwBUJ8MrFs8LqP3Mpfn6vfDzP7KTzZ-4KdFs_ICGCaFAVQ=w36-h36-p-rp-mo-ba2-br100",
     "rating": 0,
     "relative_time_description": "a year ago",
-    "text": "Unfortunately, I expected too much from this national park.\nShortly before 6 a.m., before the park gate opens, nearly 100 jeeps gather on the access road. After that, everyone drives along the main road, and every now …"
+    "text": "Unfortunately, I had overestimated the capabilities of this national park.\n\nAround 6 a.m., just before the park gates open, nearly 100 jeeps gather on the …"
   },
   {
     "id": "ChZDSUhNMG9nS0VJQ0FnSURyam9tU2VBEAE",
@@ -1813,7 +2301,7 @@
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLgxo6FEuxQ2GK9DdlE1sV77e0vVlpdFAjeGjMvOkWpDc4XYg=w36-h36-p-rp-mo-ba2-br100",
     "rating": 5,
     "relative_time_description": "a year ago",
-    "text": "Incredible experience, I will never forget it. Although we couldn't see the leopard we enjoyed it very much."
+    "text": "Incredible experience, I'll never forget it. Although we didn't see the leopard, we enjoyed it immensely."
   },
   {
     "id": "ChZDSUhNMG9nS0VJQ0FnSURUdV9Mb0dBEAE",
@@ -1860,7 +2348,7 @@
     "author_name": "Tharini sulakna Wickramasekera",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXjOiD1pBUI2Q4GDeLr9BPyX8ku--0c184USigh-FsLiEAUnDXS4g=w36-h36-p-rp-mo-ba4-br100",
     "rating": 5,
-    "relative_time_description": "a year ago",
+    "relative_time_description": "2 years ago",
     "text": "Recommending anyone that to buy tickets in advance."
   },
   {
@@ -1868,7 +2356,7 @@
     "author_name": "Olaf CGN",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXWBprdDs-oxhjIYaHeRWwSosabNzb-kBH0o0nxhSepGfk5UIzH=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "a year ago",
+    "relative_time_description": "2 years ago",
     "text": "Great, great, great\nBut it's best to only wear old clothes\nAfterwards, everything will be stained by red dust"
   },
   {
@@ -1876,7 +2364,7 @@
     "author_name": "Borja Hughes",
     "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJxlU0Qxg6oYKtqx9-8HtNRbJycJe8sFgKfWdW7N8QuOxzIro51=w36-h36-p-rp-mo-ba5-br100",
     "rating": 5,
-    "relative_time_description": "a year ago",
+    "relative_time_description": "2 years ago",
     "text": "Pretty fun"
   },
   {
@@ -1884,7 +2372,7 @@
     "author_name": "Saman Nalinda Wickramasighelage Jayasekara",
     "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUr09daSUI2ZO_HWxkcDNQ_OdAGIsVTyJqLbMMbIfT2hE_r4Ah1=w36-h36-p-rp-mo-ba5-br100",
     "rating": 4,
-    "relative_time_description": "a year ago",
+    "relative_time_description": "2 years ago",
     "text": ""
   },
   {
