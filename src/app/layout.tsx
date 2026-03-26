@@ -62,14 +62,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SmoothScroll>
+          {/* <SmoothScroll> */}
             <Header />
             <main className="flex-grow">
               {children}
             </main>
 
             <Footer />
-          </SmoothScroll>
+          {/* </SmoothScroll> */}
         </ThemeProvider>
         <WhatsAppButton />
         <ChatAssistant/>

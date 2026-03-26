@@ -1,22 +1,20 @@
 "use client";
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-// import ElfsightReviews from "@/components/ElfsightReviews";
-// import FeaturableReviews from "@/components/FeaturableReviews";
-import GallerySection from "@/components/GallerySection";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
-import HomeBlogSection from "@/components/HomeBlogSection";
-import MemoryGallery from "@/components/MemoryGallery";
-import ModernReviews from "@/components/ModernReviews";
 import PackageCard from "@/components/PackageCard";
-import PhotoGallery from "@/components/PhotoGallery";
-import ReviewSlider from "@/components/ReviewSlider";
-// import ReviewsSection from "@/components/ReviewsSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import YalaMapExplorer from "@/components/YalaMapExplorer";
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const GallerySection = dynamic(() => import("@/components/GallerySection"), { ssr: false });
+const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"), { ssr: false });
+const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"), { ssr: false });
+const ModernReviews = dynamic(() => import("@/components/ModernReviews"), { ssr: false });
+const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"), { ssr: false });
+const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"), { ssr: false });
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: false });
+const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"), { ssr: false });
 
 interface Package {
   id: string;
@@ -27,18 +25,10 @@ interface Package {
   imageUrl?: string;
 }
 
-export default function ClientHome() {
-  const [packages, setPackages] = useState<Package[]>([]);
-
-  useEffect(() => {
-    const fetchPackages = async () => {
-      const response = await fetch("/api/package", { cache: "no-store" });
-      if (response.ok) {
-        setPackages(await response.json());
-      }
-    };
-    fetchPackages();
-  }, []);
+export default function ClientHome({ initialPackages = [] }: { initialPackages?: Package[] }) {
+  // We no longer fetch on mount, just use the server-provided packages.
+  // This drastically reduces waterfall requests and main-thread blockage on load.
+  const packages = initialPackages;
 
   return (
     <>
