@@ -99,8 +99,7 @@ export default function HeroSlider() {
   const fetchHeroSections = useCallback(async () => {
     try {
       const res = await fetch("/api/hero", {
-        cache: 'no-store',
-        next: { revalidate: 1 }
+        next: { revalidate: 60 } // Removed cache: 'no-store' to allow CDN/Server caching for instant load
       });
       if (!res.ok) throw new Error(`Failed to fetch`);
       const data = await res.json();
@@ -193,7 +192,7 @@ export default function HeroSlider() {
 
       {/* 1. BACKGROUND IMAGE - GPU OPTIMIZED */}
       <motion.div 
-        style={{ y: parallaxY, opacity: parallaxOpacity }}
+        style={isMobile ? undefined : { y: parallaxY, opacity: parallaxOpacity }}
         className="absolute inset-0 w-full h-full bg-black z-0"
       >
         {heroSections.map((slide, idx) => {
@@ -226,10 +225,11 @@ export default function HeroSlider() {
                   alt={slide.title}
                   fill
                   priority={isActive || idx === 0} // Preload active/first frames
+                  unoptimized // Crucial: Bypasses Next.js image optimization delay (fixes black flashes)
                   className="object-cover object-center brightness-[0.85]"
                   style={{ objectFit: 'cover' }}
                   sizes="100vw"
-                  quality={75} // PERFORMANCE: 75 is lighter and faster than 100
+                  quality={60} // Reduced for better low-end device performance
                 />
               </motion.div>
 
@@ -358,9 +358,10 @@ export default function HeroSlider() {
                     src={card1Data.imageUrl}
                     alt={card1Data.title}
                     fill
+                    unoptimized
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="25vw"
-                    quality={60}
+                    quality={50}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
@@ -393,9 +394,10 @@ export default function HeroSlider() {
                     src={card2Data.imageUrl}
                     alt={card2Data.title}
                     fill
+                    unoptimized
                     className="object-cover"
                     sizes="20vw"
-                    quality={50}
+                    quality={40}
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
 

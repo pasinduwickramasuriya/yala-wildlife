@@ -6,6 +6,7 @@ import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 
 const GallerySection = dynamic(() => import("@/components/GallerySection"), { ssr: false });
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"), { ssr: false });
@@ -29,6 +30,14 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
   // We no longer fetch on mount, just use the server-provided packages.
   // This drastically reduces waterfall requests and main-thread blockage on load.
   const packages = initialPackages;
+
+  // Defer below-the-fold heavy components to free up the main thread
+  // during the critical initial load & hero animation phase.
+  const [mountHeavy, setMountHeavy] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setMountHeavy(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -58,19 +67,25 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
           ))}
         </div>
       </div>
-      <YalaMapExplorer />
-      <HomeBlogSection />
-      <MemoryGallery />
-      <ModernReviews />
-      {/* <ElfsightReviews /> */}
-      <PhotoGallery />
-      {/* <ReviewsSection /> */}
+      {mountHeavy ? (
+        <>
+          <YalaMapExplorer />
+          <HomeBlogSection />
+          <MemoryGallery />
+          <ModernReviews />
+          {/* <ElfsightReviews /> */}
+          <PhotoGallery />
+          {/* <ReviewsSection /> */}
 
-      <WhyChooseUs />
-      <GallerySection />
+          <WhyChooseUs />
+          <GallerySection />
 
-      {/* <FeaturableReviews/> */}
-      <ReviewSlider />
+          {/* <FeaturableReviews/> */}
+          <ReviewSlider />
+        </>
+      ) : (
+        <div className="h-screen w-full" /> // Placeholder to maintain scroll height
+      )}
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
