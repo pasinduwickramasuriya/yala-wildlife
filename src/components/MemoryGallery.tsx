@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Camera } from "lucide-react";
 
 // --- ENRICHED DATA FOR YALAWILDLIFE.COM ---
@@ -40,12 +39,8 @@ export default function AppleCuteGallery() {
         {/* --- GRID --- */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {MEMORIES.map((item, index) => (
-            <motion.div
+            <div
               key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="group relative flex flex-col rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-1"
             >
               {/* IMAGE AREA */}
@@ -93,7 +88,7 @@ export default function AppleCuteGallery() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

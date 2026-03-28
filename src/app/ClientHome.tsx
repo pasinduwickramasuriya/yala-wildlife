@@ -4,7 +4,6 @@ import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
-import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 
@@ -45,25 +44,14 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
 
       <HeroSlider />
       <div className="container mx-auto px-4 py-8 overflow-hidden z-10 relative">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
-          className="text-3xl font-bold mb-6 text-lime-400 px-6 py-3 rounded-3xl bg-black/70 mx-auto w-fit text-center">
+        <h1 className="text-3xl font-bold mb-6 text-lime-400 px-6 py-3 rounded-3xl bg-black/70 mx-auto w-fit text-center">
           Our Safari Packages
-        </motion.h1>
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {packages.map((pkg, idx) => (
-            <motion.div
-              key={pkg.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] }}
-            >
+          {packages.map((pkg) => (
+            <div key={pkg.id}>
               <PackageCard slug={pkg.slug} />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

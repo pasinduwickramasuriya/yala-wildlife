@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User, X, Loader2, MessageSquare } from "lucide-react";
+import { Send, Bot, User, X, Loader2 } from "lucide-react";
 
 type Message = {
     role: "user" | "model";
@@ -100,30 +100,17 @@ export default function ChatAssistant() {
             ></div>
 
             {/* ========================================================= */}
-            {/* FLOATING ACTION BUTTON (Smaller Cutter Shape, White BG)   */}
+            {/* FLOATING ACTION BUTTON (Now detached as a floating pill)  */}
             {/* ========================================================= */}
 
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`fixed top-1/2 right-0 -translate-y-1/2 z-50 flex flex-col items-center gap-2 py-4 px-2 bg-white text-black transition-all duration-500 hover:bg-white group shadow-[-5px_0_20px_rgba(0,0,0,0.4)] rounded-l-xl ${isOpen ? 'translate-x-full opacity-0 pointer-events-none' : 'translate-x-0 opacity-100 delay-300'
+                // Changed right-0 to right-4, rounded-l-[20px] to rounded-full, and updated shadow and translation
+                className={`fixed top-1/2 right-2 -translate-y-1/2 z-50 flex flex-col items-center justify-center py-5 px-0.5 bg-white text-black transition-all duration-500 hover:text-[#00ff00]  shadow-[0_4px_20px_rgba(0,0,0,0.3)] rounded-full ${isOpen ? 'translate-x-[150%] opacity-0 pointer-events-none' : 'translate-x-0 opacity-100 delay-300'
                     }`}
-                style={{
-                    // Top-left stays rounded via 'rounded-l-xl'
-                    // Bottom-left gets a tiny 6px sharp cut
-                    clipPath: "polygon(100% 0, 100% 100%, 6px 100%, 0 calc(100% - 6px), 0 0)"
-                }}
             >
-                <div
-                    className="relative p-1.5 bg-black text-white group-hover:bg-black group-hover:text-[#00ff00] transition-colors"
-                    style={{ clipPath: "polygon(3px 0, 100% 0, 100% calc(100% - 3px), calc(100% - 3px) 100%, 0 100%, 0 3px)" }}
-                >
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-[#00ff00] rounded-none animate-pulse border border-black"
-                        style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }} // Tiny Diamond pulse
-                    ></span>
-                </div>
                 <span
-                    className="font-mono font-black uppercase tracking-[0.2em] text-[13px] pt-0.5"
+                    className="text-[15px] font-bold tracking-wide"
                     style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                 >
                     Ask AI
@@ -131,7 +118,7 @@ export default function ChatAssistant() {
             </button>
 
             {/* ========================================================= */}
-            {/* FLOATING CHAT WIDGET (Centered Right, Smaller Cutter)     */}
+            {/* FLOATING CHAT WIDGET                                      */}
             {/* ========================================================= */}
             <div
                 className={`fixed bottom-20 right-4 sm:right-8 w-[calc(100vw-32px)] sm:w-[360px] h-[520px] max-h-[calc(100dvh-100px)] bg-[#050505] z-50 flex flex-col shadow-[-15px_15px_40px_rgba(0,0,0,0.9)] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] border border-white/10 rounded-[1.5rem] overflow-hidden ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0 pointer-events-none'
@@ -162,8 +149,8 @@ export default function ChatAssistant() {
                 </div>
 
                 {/* Messages Area */}
-                <div 
-                    data-lenis-prevent="true" 
+                <div
+                    data-lenis-prevent="true"
                     className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-[#222] scrollbar-track-transparent"
                 >
                     {messages.map((msg, index) => (
@@ -215,7 +202,6 @@ export default function ChatAssistant() {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Initiate query..."
-                            // FIX: Changed text-[13px] to text-[16px] sm:text-[13px] to prevent iOS zoom
                             className="w-full bg-transparent py-2.5 pl-3 pr-10 text-[16px] sm:text-[13px] text-white placeholder-neutral-500 focus:outline-none font-mono"
                             disabled={isLoading}
                         />
