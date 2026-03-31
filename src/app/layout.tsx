@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -52,6 +53,7 @@ export default function RootLayout({
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
+        <Script src="https://www.payhere.lk/lib/payhere.js" strategy="lazyOnload" />
       </head>
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
