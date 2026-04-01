@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       const customData = custom_2 ? custom_2.split("|") : [];
       let customerName = custom_2;
       let customerPhone = "N/A";
-      
+
       if (customData.length >= 2) {
         customerName = `${customData[0]} ${customData[1]}`;
         if (customData.length >= 3) {
@@ -42,6 +42,7 @@ export async function POST(req: Request) {
       }
 
       // Send Email with Nodemailer
+      console.log(`[PayHere Notify] status_code=2 | email=${customerEmail} | EMAIL_USER=${!!process.env.EMAIL_USER} | EMAIL_PASS=${!!process.env.EMAIL_PASS}`);
       if (customerEmail && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
         const transporter = nodemailer.createTransport({
           service: "gmail",
@@ -106,10 +107,13 @@ export async function POST(req: Request) {
            `,
         };
 
-
-
-        await transporter.sendMail(mailOptions);
-        console.log(`Email sent successfully to ${customerEmail}`);
+        try {
+          await transporter.sendMail(mailOptions);
+          console.log(`[PayHere Notify] ✅ Email sent to ${customerEmail}`);
+        } catch (mailError: unknown) {
+          const msg = mailError instanceof Error ? mailError.message : String(mailError);
+          console.error(`[PayHere Notify] ❌ sendMail FAILED: ${msg}`);
+        }
       }
     }
 

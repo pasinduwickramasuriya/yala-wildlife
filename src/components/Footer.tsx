@@ -101,6 +101,16 @@ export default function Footer() {
               <p className="text-[11px] leading-relaxed text-[#86868b] uppercase tracking-widest font-bold">
                 1. Licensed Trackers Only • Guaranteed Ethical Observations • Federal Wildlife Safety Compliant.
               </p>
+
+              {/* payhere icon */}
+              <span className="text-[10px] uppercase tracking-[0.2em] text-white/90 font-bold ml-1">
+                Secure Card Payments
+              </span>
+              <a href="/safari-packages" target="_blank" rel="noopener noreferrer" className="flex items-center sm:hidden md:flex">
+
+                <img src="https://www.payhere.lk/downloads/images/payhere_short_banner.png" alt="Secure Payments by PayHere" width="150" className="opacity-100 hover:opacity-100 transition-opacity duration-300 pointer-events-auto" />
+              </a>
+
             </div>
           </motion.div>
 
