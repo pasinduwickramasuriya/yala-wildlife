@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "get-reviews": "node scripts/get-reviews.js",
+    "get-review-photos": "node scripts/get-review-photos.js",
     "seed": "ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/seed-admin.ts"
   },
   "dependencies": {

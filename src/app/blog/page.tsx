@@ -10,7 +10,7 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import { Calendar, ArrowUpRight, BookOpen, Tag } from "lucide-react";
+import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
 
 // ✅ SEO-OPTIMIZED: Base URL for consisten
 const BASE_URL = "https://www.yalawildlife.com";
@@ -356,11 +356,11 @@ export default async function BlogPage() {
             alt="Yala Leopard Emerging from Darkness"
             fill
             priority
-            className="object-cover opacity-90 md:opacity-80"
+            className="object-cover opacity-100 md:opacity-100"
             quality={90}
           />
           {/* Cinematic Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/5 to-black/90" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
           {/* Noise Texture */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
@@ -372,26 +372,6 @@ export default async function BlogPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
 
           {/* HERO SECTION (Removed box container for cleaner look) */}
-          {/* <div className="relative z-10 text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-6 border border-white/5">
-              <span className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse"></span>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#00ff00]">Yala Intelligence</span>
-            </div>
-            <h1 className="text-4xl md:text-4xl font-bold text-[#00ff00] mb-6 tracking-tight">
-              Wildlife <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff00]  to-[#00ff00] ">Chronicles</span>
-            </h1>
-            <p className="text-lg md:text-md text-white max-w-2xl mx-auto leading-relaxed font-light bg-black/60">
-              Discover fascinating wildlife stories, expert photography tips, and conservation insights from our expert guides.
-            </p>
-          </div>
-
-          <SEOContentBlock
-            title="Expert Wildlife Content & Safari Insights"
-            description="Our blog features in-depth articles about Yala's incredible biodiversity, professional wildlife photography techniques, animal behavior patterns, conservation efforts, and practical safari tips from our certified naturalist guides with over 10 years of field experience."
-            keywords={keywords}
-            relatedLinks={relatedLinks}
-            showKeywords={true}
-          /> */}
           <section className="relative w-full py-20 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
 
             {/* --- 1. HERO COMPONENT: NANO-CUTTER REBUILD --- */}
@@ -479,6 +459,8 @@ export default async function BlogPage() {
             </div>
 
           </section>
+
+
 
 
           {/* BLOG GRID - Smaller, Cutter, No Borders */}
@@ -582,36 +564,66 @@ export default async function BlogPage() {
           </main>
 
           {/* NEWSLETTER SECTION - Simplified */}
-          <section className="mt-20 backdrop-blur-md bg-black/40 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-            <h2 className="text-2xl font-bold text-white mb-3 relative z-10">
-              Stay Updated
-            </h2>
-            <p className="text-neutral-400 mb-6 max-w-lg mx-auto relative z-10 text-sm font-light">
-              Subscribe to receive the latest wildlife stories and conservation updates directly from our expert guides.
-            </p>
-            <Link
-              href="/contact"
-              className="relative z-10 inline-block bg-white text-black hover:bg-neutral-200 px-6 py-2 text-sm rounded-full font-bold transition-colors"
-            >
-              Get Updates
-            </Link>
+          <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out">
+            {/* 1. TINY TITLE ISLAND */}
+            <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
+              <h2 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+                Stay Updated
+              </h2>
+            </div>
+
+            {/* 2. MINI DESCRIPTION PILL */}
+            <div className="inline-block bg-black/80 px-6 py-3 rounded-2xl max-w-[660px] text-center shadow-2xl">
+              <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
+                "Wildlife stories and conservation updates from our expert guides.Subscribe to receive the latest wildlife stories and conservation updates directly from our expert guides."
+              </p>
+            </div>
+
+            {/* 3. SMALLEST ACTION BUTTON */}
+            <div className="inline-block">
+              <Link
+                href="/contact"
+                className="group flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full shadow-lg hover:bg-[#00ff00] transition-all active:scale-95"
+              >
+                <span className="text-[10px] font-black uppercase tracking-widest">
+                  Get Updates
+                </span>
+                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </div>
           </section>
 
           {/* SEO CONTENT WRAPPER (Hidden Visual Style, Visible for SEO) */}
-          <div className="mt-16 opacity-90 text-center">
+          <div className="mt-16 flex flex-col items-center gap-3 opacity-90 text-center animate-in slide-in-from-bottom duration-1000 ease-out">
             <AutoSEOWrapper
               pageTitle="Yala Wildlife Blog | Safari Tips & Wildlife Guides"
               pageDescription="Expert wildlife blog featuring Yala safari tips, leopard tracking guides, photography techniques, and Sri Lanka conservation news. Updated weekly!"
               pageType="blog"
             >
-              <div className="container mx-auto px-4 py-8 text-neutral-500 text-xs ">
-                <h1 className="text-white text-sm font-bold mb-2">Yala Wildlife Blog</h1>
-                <p className="mb-2 text-white">Welcome to the Yala Wildlife Safari blog...Yala boasts the highest leopard density in the world. Our professional guides
+              {/* 1. TITLE PILL */}
+              <div className="inline-block bg-black/80 px-5 py-2 rounded-full shadow-2xl">
+                <h1 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+                  Yala Wildlife Blog
+                </h1>
+              </div>
+
+              {/* 2. DESCRIPTION PILL (The "Cuter" larger block) */}
+              <div className="inline-block bg-black/80 px-8 py-5 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl">
+                <p className="text-[15px] text-white/80 font-medium leading-relaxed italic text-center">
+                  "Welcome to the Yala Wildlife Safari blog...Yala boasts the highest leopard density in the world. Our professional guides
                   know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
                   equipped with safety features and optimal viewing configurations. Discover the magic of Yala National Park with our premium safari packages.
                   Experience the thrill of spotting elusive leopards, majestic elephants, and
-                  over 200 species of birds in their natural habitat. Book your adventure today!</p>
-                {/* ... (Rest of SEO content remains same for crawlers) ... */}
+                  over 200 species of birds in their natural habitat. Book your adventure today!"
+                </p>
+              </div>
+
+              {/* 3. CTA PILL */}
+              <div className="inline-block">
+                <div className="flex items-center gap-2.5 bg-black/80 text-white/60 px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em]">
+                  <Globe className="w-3 h-3 text-[#00ff00]" />
+                  Optimized for Discovery
+                </div>
               </div>
             </AutoSEOWrapper>
           </div>
