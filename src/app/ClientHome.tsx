@@ -1,9 +1,11 @@
 "use client";
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
+import DiscountPopup from "@/components/DiscountPopup";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
+import { ArrowUpRight, Link } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 
@@ -70,49 +72,45 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
 
           {/* <FeaturableReviews/> */}
           <ReviewSlider />
+          <DiscountPopup/>
         </>
       ) : (
         <div className="h-screen w-full" /> // Placeholder to maintain scroll height
       )}
+
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
         pageType="home"
       >
-        <div className="container mx-auto px-4 py-12 text-center space-y-1">
-          {/* Main Title */}
-          <h1 className="text-[#00ff00] text-xl md:text-2
-          xl  mb-8   inline-block bg-black/70 rounded-full px-6 py-3">
-            Yala Wildlife Safari
-          </h1>
+        <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out selection:bg-[#00ff00] selection:text-black">
 
-          {/* Block 01 */}
-          <div className="inline-block bg-black/70  px-6 py-3 rounded-full">
-            <p className="text-white text-[13px] md:text-sm leading-relaxed tracking-tight font-light">
-              Welcome to **Yala Wildlife Safari** - Your gateway to unforgettable wildlife
-              experiences in Sri Lankas premier national park. Our expert guides ensure
-              safe adventures with guaranteed leopard sightings.
+
+          <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
+            <h1 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+              Yala Wildlife
+            </h1>
+          </div>
+
+
+          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
+            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
+              "Welcome to Yala Wildlife Safari Your gateway to unforgettable wildlife experiences in Sri Lanka's premier national park. Our expert guides ensure safe adventures with guaranteed leopard sightings."
             </p>
           </div>
 
-          {/* Block 02 */}
-          <div className="inline-block bg-black/70 px-6 py-3 rounded-full">
-            <p className="text-white text-[13px] md:text-sm leading-relaxed tracking-tight font-light">
-              Discover the magic of **Yala National Park** with our premium safari packages.
-              Experience the thrill of spotting elusive leopards, majestic elephants, and
-              over 200 species of birds in their natural habitat. Book your adventure today!
+          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
+            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
+              "Discover the magic of Yala National Park with our premium safari packages. Experience the thrill of spotting elusive leopards, majestic elephants, and over 200 species of birds in their natural habitat."
             </p>
           </div>
 
-          {/* Block 03 */}
-          <div className="inline-block bg-black/70  px-6 py-3 rounded-full">
-            <p className="text-white text-[13px] md:text-sm leading-relaxed tracking-tight font-light">
-              Yala boasts the **highest leopard density** in the world. Our professional guides
-              know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
-              equipped with safety features and optimal viewing configurations.
+          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
+            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
+              "Yala boasts the highest leopard density in the world. Our professional guides know the best routes and times for spotting. We use luxury 4x4 jeeps equipped with safety features and optimal viewing configurations."
             </p>
           </div>
-        </div>
+        </section>
       </AutoSEOWrapper>
 
     </>

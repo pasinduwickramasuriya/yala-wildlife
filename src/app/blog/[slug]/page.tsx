@@ -6,6 +6,7 @@ import prisma from "@/lib/prisma";
 import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { Metadata } from "next";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
+import DiscountPopup from "@/components/DiscountPopup";
 
 // --- Types ---
 interface Blog {
@@ -244,6 +245,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
   return (
     <>
+    <DiscountPopup/>
       {/* Inject Schema for Google */}
       <script
         type="application/ld+json"
