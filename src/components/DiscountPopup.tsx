@@ -60,6 +60,7 @@ export default function PetiteDiscountPopup() {
               </h2>
               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Per Person • All Included</p>
               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >Breakfast,lunch,fruits</p>
+               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >yala entrance tickets</p>
                <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >soft drinks ,water</p>
             </div>
 
