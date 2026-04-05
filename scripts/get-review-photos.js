@@ -7,8 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Same Google Maps URL used in get-reviews.js
-const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!4m16!1m9!3m8!1s0x3ae68358635c6555:0x8803c888ea746b75!2sYala+National+Park+-+Main+Entrance!8m2!3d6.2814969!4d81.4126321!9m1!1b1!16s%2Fg%2F11srm__g51!3m5!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D';
-
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!4m16!1m9!3m8!1s0x3ae68358635c6555:0x8803c888ea746b75!2sYala+National+Park+-+Main+Entrance!8m2!3d6.2814969!4d81.4126321!9m1!1b1!16s%2Fg%2F11srm__g51!3m5!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D';
+const GOOGLE_MAPS_URL='https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4693098,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D';
 async function scrapeReviewPhotos() {
   console.log('🚀 Starting Review Photo Scraper...');
 

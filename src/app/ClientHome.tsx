@@ -45,18 +45,33 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
       <Header />
 
       <HeroSlider />
-      <div className="container mx-auto px-4 py-8 overflow-hidden z-10 relative">
-        <h1 className="text-3xl font-bold mb-6 text-lime-400 px-6 py-3 rounded-3xl bg-black/70 mx-auto w-fit text-center">
-          Our Safari Packages
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div className="max-w-[1440px] mx-auto px-10 md:px-24 lg:px-48 py-16 overflow-hidden z-10 relative">
+
+        {/* --- 1. TITLE ISLAND --- */}
+        <div className="flex flex-col items-center justify-center w-full mb-10 animate-in fade-in zoom-in duration-1000">
+
+          {/* 1. PETITE SIGNAL BADGE (15px Text) */}
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-black/80  rounded-full mb-3 shadow-xl">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span>
+            <span className="text-[15px] font-black  tracking-[0.2em] text-[#00ff00] leading-none">
+              Safari   Packages
+            </span>
+          </div>
+
+        </div>
+
+        {/* --- 2. GRID TRACK --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-8 lg:gap-10">
           {packages.map((pkg) => (
-            <div key={pkg.id}>
+            <div key={pkg.id} className="flex justify-center">
               <PackageCard slug={pkg.slug} />
             </div>
           ))}
         </div>
+
       </div>
+
       {mountHeavy ? (
         <>
           <YalaMapExplorer />
@@ -72,7 +87,7 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
 
           {/* <FeaturableReviews/> */}
           <ReviewSlider />
-          <DiscountPopup/>
+          <DiscountPopup />
         </>
       ) : (
         <div className="h-screen w-full" /> // Placeholder to maintain scroll height
