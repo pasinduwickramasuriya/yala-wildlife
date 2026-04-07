@@ -214,24 +214,38 @@ export default function ClientSafariPackages() {
             </div>
           </div>
 
-          {/* PACKAGES LIST - Centered & Compact */}
-          <div className="container max-w-7xl mx-auto">
+          {/* --- INTELLIGENCE TRACK: PACKAGES GRID --- */}
+          <div className="max-w-[1440px] mx-auto px-6 md:px-24 lg:px-48 pb-20 relative z-10">
+
             {loading ? (
-              <div className="flex flex-wrap justify-center gap-8">
-                {Array(3).fill(null).map((_, index) => (
-                  <div key={index} className="w-full max-w-[340px] rounded-[2rem] bg-white/5 h-[450px] animate-pulse" />
+              /* --- SKELETON GRID --- */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                {Array(3).fill(null).map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-[280px] md:w-full aspect-[3/4] bg-black/80 rounded-[2.5rem] animate-pulse border border-white/5"
+                  />
                 ))}
               </div>
             ) : error ? (
-              <div className="text-center p-12 bg-red-500/10 rounded-3xl backdrop-blur-md mx-auto max-w-2xl">
-                <p className="text-red-400 text-lg font-medium">System Error: {error}</p>
+              /* --- ERROR PILL --- */
+              <div className="flex justify-center">
+                <div className="bg-black/80 px-6 py-3 rounded-2xl border border-red-500/20 shadow-2xl">
+                  <p className="text-red-400 text-[10px] font-black uppercase tracking-widest leading-none flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-red-500 animate-ping"></span>
+                    System Error: {error}
+                  </p>
+                </div>
               </div>
             ) : packages.length > 0 ? (
-              // ✅ FLEXBOX CENTERING: Perfectly centers items regardless of count
-              <div className="flex flex-wrap justify-center gap-8">
+              /* --- THE GRID: 3-Col Desktop | Petite Mobile --- */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 lg:gap-x-10 justify-items-center">
                 {packages.map((pkg) => (
-                  // ✅ COMPACT CARD WRAPPER: max-w-[340px] makes them smaller/sleeker
-                  <div key={pkg.id} className="w-full max-w-[340px] flex-shrink-0 transform hover:-translate-y-2 transition-transform duration-500">
+                  <div
+                    key={pkg.id}
+                    /* ✅ THE CUTTER FIX: Fixed 280px width on mobile, fills grid cell on desktop */
+                    className="w-[280px] md:w-full max-w-[340px] transition-all duration-700 hover:scale-[1.02] active:scale-[0.98]"
+                  >
                     <div className="h-full">
                       <PackageCard slug={pkg.slug} />
                     </div>
@@ -239,47 +253,18 @@ export default function ClientSafariPackages() {
                 ))}
               </div>
             ) : (
-              <div className="text-center p-12 bg-white/5 rounded-3xl backdrop-blur-md mx-auto max-w-md">
-                <p className="text-neutral-400 text-lg">No expeditions currently available.</p>
+              /* --- EMPTY DATA PILL --- */
+              <div className="flex justify-center">
+                <div className="bg-black/80 px-10 py-5 rounded-full border border-white/5 shadow-2xl">
+                  <p className="text-neutral-500 text-[9px] font-black uppercase tracking-[0.4em] text-center italic">
+                    No expeditions currently available.
+                  </p>
+                </div>
               </div>
             )}
+
           </div>
 
-          {/* SEO Content (Hidden Visually) */}
-          {/* <div className="container max-w-7xl mx-auto mt-32 opacity-100  transition-opacity duration-500">
-            <div className="text-center max-w-4xl mx-auto backdrop-blur-sm bg-black/20 rounded-3xl p-8">
-              <AutoSEOWrapper
-                pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
-                pageDescription="Choose from half-day, full-day, and private Yala safari packages. All-inclusive tours with expert guides and luxury jeeps."
-                pageType="package"
-              >
-                <div className="text-neutral-500 text-sm font-mono leading-relaxed">
-                  <h2 className="text-green-500 text-xs font-bold uppercase mb-4 tracking-widest flex items-center justify-center gap-2">
-                    <Star size={12} /> Expedition Notes
-                  </h2>
-                  <div className="space-y-4">
-                    <p>
-                      Explore our carefully curated Yala National Park safari packages designed to
-                      suit every travelers needs and budget. From budget-friendly half-day excursions
-                      to luxury full-day expeditions, we offer the best safari experiences in Sri Lanka.
-                    </p>
-                    <p>
-                      Our half-day safari package is perfect for travelers with limited time. Departing
-                      at dawn or afternoon, this 4-hour adventure takes you deep into Block 1 of Yala
-                      National Park. Witness leopards, elephants, crocodiles, and exotic birds in their
-                      natural habitat with our expert naturalist guides.
-                    </p>
-                    <p>
-                      For the ultimate experience, choose our full-day safari package covering multiple
-                      zones of the national park. This 8-10 hour comprehensive tour maximizes your
-                      wildlife encounter opportunities. Includes breakfast, packed lunch, expert guide,
-                      and premium wildlife photography support.
-                    </p>
-                  </div>
-                </div>
-              </AutoSEOWrapper>
-            </div>
-          </div> */}
           <div className="flex flex-col items-center gap-3 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">
 
             {/* PROTOCOL_HEADER */}
