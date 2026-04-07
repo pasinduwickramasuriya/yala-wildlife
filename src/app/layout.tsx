@@ -54,6 +54,13 @@ export default function RootLayout({
           }}
         />
         <Script src="https://www.payhere.lk/lib/payhere.js" strategy="lazyOnload" />
+        {/* google adsense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7796031889927448"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
