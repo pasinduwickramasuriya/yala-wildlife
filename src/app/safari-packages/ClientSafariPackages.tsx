@@ -11,6 +11,7 @@ import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Compass, Map, Shield, Star } from "lucide-react";
 import AdvancePaymentButton from "@/components/AdvancePaymentButton";
+import AdUnit from "@/components/AdUnit";
 
 // Define the Package interface
 interface SafariPackage {
@@ -263,6 +264,11 @@ export default function ClientSafariPackages() {
               </div>
             )}
 
+          </div>
+
+          {/* Ad unit after packages grid */}
+          <div className="max-w-5xl mx-auto px-4 pb-8">
+            <AdUnit />
           </div>
 
           <div className="flex flex-col items-center gap-3 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">

@@ -7,6 +7,7 @@ import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { Metadata } from "next";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
 import DiscountPopup from "@/components/DiscountPopup";
+import AdUnit from "@/components/AdUnit";
 
 // --- Types ---
 interface Blog {
@@ -245,7 +246,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
   return (
     <>
-    <DiscountPopup/>
+      <DiscountPopup />
       {/* Inject Schema for Google */}
       <script
         type="application/ld+json"
@@ -370,7 +371,11 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
               </div>
             </article>
-             <ReviewPhotoGallery/>
+            <ReviewPhotoGallery />
+            {/* Ad unit between blog grid and newsletter */}
+            <div className="mt-12">
+              <AdUnit />
+            </div>
           </div>
         </div>
       </main>

@@ -11,6 +11,7 @@ import {
 } from "@/lib/schema";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
+import AdUnit from "@/components/AdUnit";
 
 // ✅ SEO-OPTIMIZED: Base URL for consisten
 const BASE_URL = "https://www.yalawildlife.com";
@@ -562,6 +563,11 @@ export default async function BlogPage() {
               </div>
             )}
           </main>
+
+          {/* Ad unit between blog grid and newsletter */}
+          <div className="mt-12">
+            <AdUnit />
+          </div>
 
           {/* NEWSLETTER SECTION - Simplified */}
           <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out">
