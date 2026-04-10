@@ -7,7 +7,7 @@ import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { Metadata } from "next";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
 import DiscountPopup from "@/components/DiscountPopup";
-import AdUnit from "@/components/AdUnit";
+// import AdUnit from "@/components/AdUnit";
 
 // --- Types ---
 interface Blog {
@@ -373,9 +373,9 @@ export default async function BlogPost({ params }: BlogPostProps) {
             </article>
             <ReviewPhotoGallery />
             {/* Ad unit between blog grid and newsletter */}
-            <div className="mt-12">
+            {/* <div className="mt-12">
               <AdUnit />
-            </div>
+            </div> */}
           </div>
         </div>
       </main>

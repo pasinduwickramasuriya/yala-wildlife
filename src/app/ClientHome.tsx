@@ -1,7 +1,7 @@
 "use client";
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import AdUnit from "@/components/AdUnit";
+// import AdUnit from "@/components/AdUnit";
 import DiscountPopup from "@/components/DiscountPopup";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
@@ -95,9 +95,9 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
           <ReviewSlider />
 
           {/* Ad unit at bottom of page before footer */}
-          <div className="max-w-[1440px] mx-auto px-4 md:px-12 lg:px-24 py-4">
+          {/* <div className="max-w-[1440px] mx-auto px-4 md:px-12 lg:px-24 py-4">
             <AdUnit />
-          </div>
+          </div> */}
 
           <DiscountPopup />
         </>
