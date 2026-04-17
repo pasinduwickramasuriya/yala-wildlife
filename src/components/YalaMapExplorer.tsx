@@ -115,12 +115,12 @@ export default function YalaMapExplorer() {
             <div className="w-full lg:w-[40%] flex flex-col justify-start lg:justify-center items-start gap-4 lg:gap-6 animate-slideInLeft pb-8 lg:pb-0">
                 
                 {/* 1. Header Block */}
-                <div className="inline-block bg-black/60 backdrop-blur-xl p-5 sm:p-6 rounded-[2rem] border border-white/10 shadow-2xl transition-transform hover:scale-[1.01] duration-500 w-full lg:w-auto">
+                <div className="inline-block bg-black/70 p-5 sm:p-6 rounded-[2rem] shadow-2xl transition-transform hover:scale-[1.01] duration-500 w-full lg:w-auto">
                     <div className="flex items-center gap-2 mb-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse"></span>
                         <span className="text-[#00ff00] text-[10px] font-mono uppercase tracking-[0.2em]">Yala National Park</span>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase leading-none tracking-tight mb-2">
+                    <h1 className="text-3xl sm:text-3xl md:text-3xl font-black leading-none tracking-tight mb-2">
                         Explore <br/> <span className="text-neutral-500">The Sectors</span>
                     </h1>
                     <p className="text-neutral-400 max-w-[280px] text-[10px] sm:text-xs leading-relaxed font-mono">

@@ -6,6 +6,7 @@ import DiscountPopup from "@/components/DiscountPopup";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
+import ReviewFeed from "@/components/ReviewFeed";
 import { ArrowUpRight, Link } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
@@ -46,6 +47,7 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
       <Header />
 
       <HeroSlider />
+      <ReviewFeed/>
 
       <div className="max-w-[1440px] mx-auto px-10 md:px-24 lg:px-48 py-16 overflow-hidden z-10 relative">
 
