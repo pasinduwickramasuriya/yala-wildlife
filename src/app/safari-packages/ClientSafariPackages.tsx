@@ -190,14 +190,14 @@ export default function ClientSafariPackages() {
                 <div className="mt-10 flex flex-col items-center justify-center gap-6 animate-in slide-in-from-bottom duration-700">
 
                   {/* 1. Heading Pill */}
-                  <div className="inline-block bg-black/60 px-6 py-2 rounded-full shadow-sm">
+                  <div className="inline-block bg-black/80 px-6 py-2 rounded-full shadow-sm">
                     <h3 className="text-[#00ff00] font-black tracking-widest uppercase text-[10px] sm:text-xs">
                       Custom Expeditions Only
                     </h3>
                   </div>
 
                   {/* 2. Description Pill */}
-                  <div className="inline-block bg-black/60  px-8 py-4 rounded-full border border-white/5 max-w-sm">
+                  <div className="inline-block bg-black/80  px-8 py-4 rounded-full border border-white/5 max-w-sm">
                     <p className="text-white/90 text-[11px] sm:text-xs leading-relaxed text-center">
                       Have a pre-arranged custom expedition with our team? <br />
                       Secure your booking directly right here.

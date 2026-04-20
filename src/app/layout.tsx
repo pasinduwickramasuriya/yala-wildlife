@@ -13,6 +13,7 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import GoogleTranslate from "@/components/GoogleTranslate";
 import { Analytics } from "@vercel/analytics/next";
 
 import { SEOIndicator } from "@/components/SEOIndicator";
@@ -81,6 +82,7 @@ export default function RootLayout({
           {/* </SmoothScroll> */}
         </ThemeProvider>
         <WhatsAppButton />
+        <GoogleTranslate />
         <ChatAssistant/>
         
         {/* Visual indicator */}
