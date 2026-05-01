@@ -2,9 +2,8 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { MapPin, Compass, TreePine, Zap, Target } from "lucide-react";
+import { MapPin, Compass, TreePine } from "lucide-react";
 
-// Reordered so Block 2 is at the end of the drawing list (sitting on top)
 const BLOCK_DATA = [
     {
         id: 1,
@@ -81,9 +80,16 @@ const BLOCK_DATA = [
 export default function YalaMapExplorer() {
     const [activeBlockId, setActiveBlockId] = useState(1);
     const [isMounted, setIsMounted] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         setIsMounted(true);
+        const handleScroll = () => {
+            // Trigger curve when scrolled more than 50px
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const activeBlock = useMemo(() =>
@@ -93,30 +99,26 @@ export default function YalaMapExplorer() {
 
     return (
         <div className="w-full min-h-[110vh] font-sans overflow-hidden bg-black text-white selection:bg-[#00ff00] selection:text-black">
-            <section className={`relative w-full h-full min-h-[110vh] transition-opacity duration-700 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
-
+            <section
+                className={`relative w-full h-full min-h-[110vh] transition-all duration-700 ease-in-out ${isMounted ? 'opacity-100' : 'opacity-0'} ${isScrolled ? 'rounded-t-[40px] md:rounded-t-[80px]' : 'rounded-t-0'}`}
+                style={{ willChange: "transform, border-radius" }}
+            >
                 {/* --- Background Image Layer --- */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                     <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                         style={{
                             backgroundImage: "url('https://res.cloudinary.com/dkfnpmzpv/image/upload/v1775225442/blogs/unv6dheidbcpoaqmmato.jpg')",
-                            animation: "gentleFloat 20s infinite alternate linear"
+                            transform: 'translateZ(0)', // Force GPU acceleration
                         }}
                     ></div>
-                    {/* Added a slightly stronger dark vignette on the left to make white text readable */}
-                    <div className="absolute inset-0 bg-black/20"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent"></div>
                 </div>
 
                 <div className="relative z-10 w-full h-full flex flex-col lg:flex-row px-6 py-12 lg:px-20">
-
                     {/* --- LEFT: INFO CLUSTER --- */}
                     <div className="w-full lg:w-[38%] flex flex-col gap-4 animate-slideInLeft">
-
-
-
-                        {/* 2. Main Title Island - No Borders */}
                         <div className="inline-block self-start bg-transparent p-0 mb-2">
                             <h1 className="text-2xl lg:text-2xl font-black tracking-tighter leading-none mb-3 text-white drop-shadow-2xl">
                                 Yala&nbsp;&nbsp;National&nbsp;&nbsp;Park <br /> <span className="text-white">Sectors</span>
@@ -126,15 +128,15 @@ export default function YalaMapExplorer() {
                             </p>
                         </div>
 
-                        {/* 3. Navigation Pills - No Borders */}
-                        <div className="inline-block self-start bg-white/5 backdrop-blur-sm p-1 rounded-full flex gap-0.5">
-                            {BLOCK_DATA.sort((a, b) => a.id - b.id).map((block) => (
+                        {/* Navigation Pills - No Backdrop Blur */}
+                        <div className="inline-block self-start bg-white/10 p-1 rounded-full flex gap-0.5 shadow-md">
+                            {BLOCK_DATA.slice().sort((a, b) => a.id - b.id).map((block) => (
                                 <button
                                     key={block.id}
                                     onClick={() => setActiveBlockId(block.id)}
-                                    className={`px-3 py-1.5 text-[9px] font-black uppercase tracking-tight rounded-full transition-all duration-200 ${activeBlockId === block.id
+                                    className={`px-3 py-1.5 text-[9px] font-black uppercase tracking-tight rounded-full transition-colors duration-200 ${activeBlockId === block.id
                                         ? 'bg-[#00ff00] text-black '
-                                        : 'text-white/70 hover:text-white hover:bg-white/10'
+                                        : 'text-white/70 hover:text-white hover:bg-white/20'
                                         }`}
                                 >
                                     {block.shortName}
@@ -142,7 +144,7 @@ export default function YalaMapExplorer() {
                             ))}
                         </div>
 
-                        {/* 4. Tactical Intel Card - No Borders */}
+                        {/* Tactical Intel Card - No Backdrop Blur */}
                         <div className="inline-block self-start bg-transparent p-0 w-full max-w-[320px]">
                             <div key={activeBlock.id} className="animate-slideUp space-y-4">
                                 <div className="flex justify-between items-start">
@@ -158,13 +160,13 @@ export default function YalaMapExplorer() {
                                 </p>
 
                                 <div className="flex gap-2 pt-2">
-                                    <div className="bg-white/10 backdrop-blur-md px-3 py-2 rounded-xl flex-1 shadow-lg">
+                                    <div className="bg-black/40 px-3 py-2 rounded-xl flex-1 shadow-lg border border-white/5">
                                         <p className="text-[8px] text-[#00ff00] uppercase font-black mb-1 flex items-center gap-1">
                                             <TreePine className="w-2.5 h-2.5" /> Terrain
                                         </p>
                                         <p className="text-[11px] font-bold text-white drop-shadow-md">{activeBlock.terrain}</p>
                                     </div>
-                                    <div className="bg-white/10 backdrop-blur-md px-3 py-2 rounded-xl flex-1 shadow-lg">
+                                    <div className="bg-black/40 px-3 py-2 rounded-xl flex-1 shadow-lg border border-white/5">
                                         <p className="text-[8px] text-[#00ff00] uppercase font-black mb-1 flex items-center gap-1">
                                             <MapPin className="w-2.5 h-2.5" /> Entry
                                         </p>
@@ -176,15 +178,16 @@ export default function YalaMapExplorer() {
                     </div>
 
                     {/* --- RIGHT: THE MAP --- */}
-                    <div className="w-full lg:w-[62%] h-[400px] lg:h-[700px] flex items-center justify-center animate-fadeIn will-change-contents">
+                    <div className="w-full lg:w-[62%] h-[400px] lg:h-[700px] flex items-center justify-center animate-fadeIn">
                         <svg
                             viewBox="0 0 500 550"
                             className="w-full h-full drop-shadow-2xl"
                             preserveAspectRatio="xMidYMid meet"
+                            style={{ willChange: 'contents' }}
                         >
                             <defs>
                                 <filter id="mapGlow">
-                                    <feGaussianBlur stdDeviation="4" result="blur" />
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
                                     <feMerge>
                                         <feMergeNode in="blur" />
                                         <feMergeNode in="SourceGraphic" />
@@ -192,7 +195,6 @@ export default function YalaMapExplorer() {
                                 </filter>
                             </defs>
 
-                            {/* Block 2 is rendered last here to ensure it is always clickable on top */}
                             {BLOCK_DATA.map((block) => {
                                 const isActive = activeBlockId === block.id;
                                 return (
@@ -211,50 +213,42 @@ export default function YalaMapExplorer() {
                                     />
                                 );
                             })}
-
                         </svg>
                     </div>
-
-
                 </div>
             </section>
 
             <style jsx global>{`
-          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
-          
-          body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+                @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
+                
+                body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
 
-          @keyframes gentleFloat {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-          }
-          
-          .animate-slideInLeft {
-            animation: slideInLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-          }
-          .animate-slideUp {
-            animation: slideUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-          }
-          .animate-fadeIn {
-            animation: fadeIn 1s ease-out forwards;
-          }
-          
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-          }
-          @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
+                .animate-slideInLeft {
+                    animation: slideInLeft 0.5s ease-out forwards;
+                }
+                .animate-slideUp {
+                    animation: slideUp 0.4s ease-out forwards;
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.8s ease-out forwards;
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideInLeft {
+                    from { opacity: 0; transform: translateX(-15px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(8px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
 
-          *::-webkit-scrollbar { display: none; }
-          * { -ms-overflow-style: none; scrollbar-width: none; }
-        `}</style>
+                *::-webkit-scrollbar { display: none; }
+                * { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
         </div>
     );
 }

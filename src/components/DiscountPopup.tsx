@@ -74,7 +74,7 @@ export default function PetiteDiscountPopup() {
                 </div>
                 <div className="flex items-center gap-2 bg-white/5 px-2 py-1 rounded-lg">
                   <span className="text-[20px] text-white line-through font-mono">$75</span>
-                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$65</span>
+                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$54</span>
                 </div>
               </div>
 
@@ -86,7 +86,7 @@ export default function PetiteDiscountPopup() {
                 </div>
                 <div className="flex items-center gap-2 bg-[#00ff00]/5 px-2 py-1 rounded-lg">
                   <span className="text-[20px] text-white/80 line-through font-mono">$95</span>
-                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$83</span>
+                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$78</span>
                 </div>
               </div>
             </div>
