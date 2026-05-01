@@ -177,7 +177,7 @@ export default function YalaMapExplorer() {
                         </div>
                     </div>
 
-                    {/* --- RIGHT: THE MAP --- */}
+                    {/* --- RIGHT MAP --- */}
                     <div className="w-full lg:w-[62%] h-[400px] lg:h-[700px] flex items-center justify-center animate-fadeIn">
                         <svg
                             viewBox="0 0 500 550"
