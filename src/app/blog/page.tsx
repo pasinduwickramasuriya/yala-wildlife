@@ -297,6 +297,7 @@ export default async function BlogPage() {
     orderBy: {
       createdAt: "desc",
     },
+     take: 50, // ✅ ENHANCED: Limit for performance
   });
 
   const keywords = [
