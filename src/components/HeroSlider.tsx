@@ -58,14 +58,14 @@ export default function HeroSlider() {
   // --- Auto Slider Logic ---
   useEffect(() => {
     if (heroSections.length <= 1 || !mounted) return;
-    
+
     // Using setTimeout and dependency on currentSlide ensures 
     // the timer resets flawlessly on auto-slides or manual clicks, 
     // and prevents background-tab interval throttling bugs.
     const timeout = setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSections.length);
     }, 7000);
-    
+
     return () => clearTimeout(timeout);
   }, [heroSections.length, mounted, currentSlide]);
 
@@ -190,7 +190,7 @@ export default function HeroSlider() {
 
               <div className="flex-shrink-0 hover:scale-105 active:scale-95 transition-transform duration-300">
                 <Link href="/safari-packages" className="group block relative">
-                  <div className="absolute inset-0 bg-lime-500 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500 rounded-full"></div>
+                  <div className="absolute inset-0 bg-lime-500 opacity-60 group-hover:opacity-80 transition-opacity duration-500 rounded-full"></div>
                   <div className="relative bg-lime-500 text-black px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-white hover:text-black transition-all rounded-full flex items-center gap-3">
                     <span className="text-sm font-bold uppercase tracking-[0.2em]">Book Now</span>
                     <div className="bg-black text-white rounded-full p-1 group-hover:bg-lime-500 group-hover:text-black transition-colors">
@@ -290,16 +290,17 @@ export default function HeroSlider() {
         {heroSections.map((_, idx) => (
           <div key={idx} className="flex-1 h-full border-r border-black/20 relative bg-black/20 backdrop-blur-sm">
             {idx === currentSlide && (
-              <div 
-                className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16] w-full origin-left" 
+              <div
+                className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16] w-full origin-left"
                 style={{ animation: "hero-progress 7s linear" }}
               />
             )}
           </div>
         ))}
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html: `
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes hero-progress {
           0% { transform: scaleX(0); }
           100% { transform: scaleX(1); }
