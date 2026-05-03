@@ -387,7 +387,7 @@ export default async function BlogPage() {
                 </div>
               </div>
 
-              {/* MAIN TITLE: SEGMENTED DATA BLOCKS */}
+              {/* MAIN TITLE: SEGMENTED DATA BLOCK */}
               <div className="flex flex-col items-center gap-2">
                 <div className="inline-block bg-black/70 px-5 md:px-8 py-2 rounded-full border border-white/5">
                   <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-[-0.05em] leading-none">
