@@ -108,7 +108,7 @@ export default function YalaMapExplorer() {
                     <div
                         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                         style={{
-                            backgroundImage: "url('https://res.cloudinary.com/dkfnpmzpv/image/upload/v1775225442/blogs/unv6dheidbcpoaqmmato.jpg')",
+                            backgroundImage: "url('https://res.cloudinary.com/dkfnpmzpv/image/upload/v1777690831/blogs/ituwsxwpjiy93mlmmctx.jpg')",
                             transform: 'translateZ(0)', // Force GPU acceleration
                         }}
                     ></div>
