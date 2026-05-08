@@ -5,7 +5,7 @@ import Link from "next/link";
 import { X, MessageCircle, ShieldCheck, ArrowUpRight, Ticket, Car } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const WHATSAPP_NUMBER = "94778158004"; 
+const WHATSAPP_NUMBER = "94778158004";
 const WHATSAPP_MESSAGE = "Hi! I'm interested in the Official Yala Safari Discount Offer.";
 
 export default function PetiteDiscountPopup() {
@@ -36,7 +36,7 @@ export default function PetiteDiscountPopup() {
     <AnimatePresence>
       {visible && (
         <div className="fixed bottom-6 left-6 z-[99999] pointer-events-none">
-          <motion.div 
+          <motion.div
             initial={{ x: -20, opacity: 0, scale: 0.9 }}
             animate={{ x: 0, opacity: 1, scale: 1 }}
             exit={{ x: -20, opacity: 0, scale: 0.9 }}
@@ -56,12 +56,12 @@ export default function PetiteDiscountPopup() {
             {/* 2. PETITE HEADER */}
             <div className="mb-4">
               <h2 className="text-md font-black text-[#00ff00] italic uppercase tracking-tighter leading-none text-center">
-               {monthName}&nbsp;&nbsp;<span className="text-white">Discounts</span>
+                {monthName}&nbsp;&nbsp;<span className="text-white">Discounts</span>
               </h2>
               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Per Person • All Included</p>
               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >Breakfast,lunch,fruits</p>
-               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >yala entrance tickets</p>
-               <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >soft drinks ,water</p>
+              <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >yala entrance tickets</p>
+              <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1" >soft drinks ,water</p>
             </div>
 
             {/* 3. COMPACT RATES */}
@@ -74,7 +74,7 @@ export default function PetiteDiscountPopup() {
                 </div>
                 <div className="flex items-center gap-2 bg-white/5 px-2 py-1 rounded-lg">
                   <span className="text-[20px] text-white line-through font-mono">$75</span>
-                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$49.9</span>
+                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$49</span>
                 </div>
               </div>
 
@@ -86,14 +86,14 @@ export default function PetiteDiscountPopup() {
                 </div>
                 <div className="flex items-center gap-2 bg-[#00ff00]/5 px-2 py-1 rounded-lg">
                   <span className="text-[20px] text-white/80 line-through font-mono">$95</span>
-                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$69.9</span>
+                  <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$69</span>
                 </div>
               </div>
             </div>
 
             {/* 4. ACTIONS */}
             <div className="space-y-2">
-              
+
               <a
                 href={waUrl}
                 target="_blank"
@@ -106,9 +106,9 @@ export default function PetiteDiscountPopup() {
 
             {/* 5. MINIMAL TRUST DOCK */}
             <div className="mt-4 pt-3 flex justify-around items-center opacity-70 grayscale">
-                <Car size={10} className="text-white" />
-                <Ticket size={10} className="text-white" />
-                <span className="text-[7px] text-white font-black uppercase tracking-[0.3em]">Official Operator</span>
+              <Car size={10} className="text-white" />
+              <Ticket size={10} className="text-white" />
+              <span className="text-[7px] text-white font-black uppercase tracking-[0.3em]">Official Operator</span>
             </div>
 
           </motion.div>
