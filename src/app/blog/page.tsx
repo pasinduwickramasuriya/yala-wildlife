@@ -636,7 +636,7 @@ export default async function BlogPage() {
         </div>
       </div>
 
-      {/* ✅ ENHANCED: Comprehensive Schema markup (UNTOUCHED) */}
+      {/*  ENHANCED: Comprehensive Schema markup (UNTOUCHED) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
