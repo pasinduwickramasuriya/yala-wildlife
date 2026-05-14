@@ -369,77 +369,40 @@ export default async function BlogPage() {
         {/* =========================================
             MAIN CONTENT
         ========================================= */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20"> */}
+        <div className="relative z-10">
 
           {/* HERO SECTION (Removed box container for cleaner look) */}
-          <section className="relative w-full py-20 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
+          <section className="relative w-full py-20 mt-30 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
 
-            {/* --- 1. HERO COMPONENT: NANO-CUTTER REBUILD --- */}
-            <div className="relative z-10 text-center mb-16 md:mb-24 space-y-6 px-4">
+            {/* --- 1. HERO COMPONENT: PETITE PILL REBUILD --- */}
+            <div className="relative z-10 flex flex-col items-center gap-4 text-center mb-16 md:mb-24 px-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
 
-              {/* SIGNAL STATUS */}
-              <div className="flex justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,255,0,0.1)]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span>
-                  <span className="text-[7px] md:text-[9px] font-black uppercase tracking-[0.5em] text-[#00ff00]">
-                    Yala Naturalist Intelligence Signal
-                  </span>
-                </div>
+
+              {/* MAIN TITLE PILL */}
+              <div className="inline-block bg-black/80 px-8 py-3 rounded-full shadow-2xl border border-white/5">
+                <h1 className="text-[18px] md:text-[24px] font-black text-white uppercase tracking-[0.25em] leading-none">
+                  Wildlife <span className="text-white">Chronicles</span>
+                </h1>
               </div>
 
-              {/* MAIN TITLE: SEGMENTED DATA BLOCK */}
-              <div className="flex flex-col items-center gap-2">
-                <div className="inline-block bg-black/70 px-5 md:px-8 py-2 rounded-full border border-white/5">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-[-0.05em] leading-none">
-                    Wildlife
-                  </h1>
-                </div>
-                <div className="inline-block bg-black/70 px-5 md:px-8 py-2 rounded-full">
-                  <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#00ff00] uppercase tracking-[-0.05em] leading-none">
-                    Chronicles
-                  </span>
-                </div>
+              {/* DESCRIPTION PILL (The "Cuter" larger block) */}
+              <div className="inline-block bg-black/80 px-8 py-6 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl border border-white/5 backdrop-blur-sm">
+                <p className="text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic">
+                  "Explore fascinating wildlife stories and expert photography tips curated by our expert guides.
+                  We specialize in conservation insights and technical field analysis to preserve the wild heart
+                  of Sri Lanka through transparent reporting and sustainable methodology."
+                </p>
               </div>
 
-              {/* SUB-TEXT: MODULAR DATA STRIPS */}
-              <div className="flex flex-wrap justify-center gap-2 pt-4 max-w-4xl mx-auto">
+              {/* MODULAR DATA STRIPS (Refined to match Pill style) */}
+              <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-4xl">
                 {[
                   "Discover fascinating wildlife stories and expert photography tips,",
                   "and conservation insights from our expert guides."
                 ].map((text, i) => (
-                  <div key={i} className="bg-black/60 px-3 md:px-4 py-1.5 rounded-full border border-white/5 max-w-fit">
-                    <p className="text-[8px] md:text-[11px] text-neutral-300 font-black uppercase tracking-[0.15em] leading-tight">
-                      {text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* --- 2. INTELLIGENCE HUB: SURGICAL HUD STYLE --- */}
-            <div className="relative z-10 flex flex-col items-center gap-3 px-4">
-              {/* Header Label */}
-              <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full border border-[#00ff00]/10">
-                <h2 className="text-[8px] md:text-[11px] font-black text-[#00ff00] uppercase tracking-[0.4em]">
-                  Verified Expert Intelligence Protocol
-                </h2>
-              </div>
-
-              {/* Segmented Description Blocks (SEO & Trust Density) */}
-              <div className="max-w-6xl flex flex-wrap justify-center gap-2">
-                {[
-                  "Our blog features in-depth articles about Yala's incredible biodiversity,",
-                  "professional wildlife photography techniques, animal behavior patterns,",
-                  "conservation efforts, and practical safari tips from our certified",
-                  "naturalist guides with over 10 years of field experience.",
-                  "Official SLTDA Licensed Operator intelligence and sustainable travel methodology.",
-                  "Hyper-specialized technical analysis of Yala's leopard populations,",
-                  "Leveraging shutter-speed optimization and behavioral monitoring protocols,",
-                  "Integrating practical safari safety and ethical wildlife tracking standards.",
-                  "Preserving the wild heart of Sri Lanka through transparent reporting."
-                ].map((text, i) => (
-                  <div key={i} className="bg-black/60 px-3 md:px-4 py-2 rounded-full border border-white/5 backdrop-blur-sm max-w-[92vw] md:max-w-fit">
-                    <p className="text-[10px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-widest leading-none">
+                  <div key={i} className="bg-black/80 px-6 py-2 rounded-full border border-white/10 shadow-lg">
+                    <p className="text-[9px] md:text-[13px] text-neutral-300 font-medium  tracking-[0.2em] leading-relax italic">
                       {text}
                     </p>
                   </div>
@@ -463,102 +426,85 @@ export default async function BlogPage() {
 
 
 
+
           {/* BLOG GRID - Smaller, Cutter, No Borders */}
-          <main className="mt-16">
-            <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <BookOpen className="text-[#00ff00] w-5 h-5" />
-                Latest Insights
-              </h2>
-            </div>
+
+          <main className="w-full p-0 m-0 overflow-hidden bg-transparent selection:bg-[#00ff00] selection:text-black">
 
             {posts.length > 0 ? (
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                {posts.map((post) => (
-                  <article key={post.id} className="group h-full">
-                    <Link href={`/blog/${post.slug}`} className="flex flex-col h-full bg-black/20 hover:bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300">
-
-                      {/* Image Container - Fixed 3:2 Aspect Ratio */}
-                      <div className="relative aspect-[3/2] w-full overflow-hidden">
+              /* 
+                 FORCE FULL WIDTH: w-screen + left-1/2 -translate-x-1/2 
+                 This ensures it breaks out of any parent containers.
+              */
+              <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-0 p-0 m-0 border-none grid-flow-row-dense">
+                  {posts.map((post, index) => (
+                    <Link
+                      key={post.id}
+                      href={`/blog/${post.slug}`}
+                      className={`group relative overflow-hidden w-full p-0 m-0 border-none transition-all duration-700 ${index % 7 === 0
+                        ? "col-span-2 row-span-2 aspect-square md:aspect-auto min-h-[50vh]"
+                        : "col-span-1 row-span-1 aspect-square"
+                        }`}
+                    >
+                      {/* IMAGE LAYER */}
+                      <div className="absolute inset-0 z-0">
                         {post.imageUrl ? (
                           <Image
                             src={post.imageUrl}
-                            alt={`${post.title}`}
+                            alt={post.title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            sizes="100vw"
+                            className="object-cover transition-transform duration-[2.5s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105"
+                            priority={index < 4}
                           />
                         ) : (
-                          // Fallback Gradient
-                          <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
-                            <Tag className="text-neutral-600 w-8 h-8" />
-                          </div>
+                          <div className="w-full h-full bg-neutral-900" />
                         )}
-
-                        {/* Subtle Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-
-                        {/* Minimal Badge */}
-                        <div className="absolute top-2 left-2">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-black bg-[#00ff00]/90">
-                            Wildlife
-                          </span>
-                        </div>
                       </div>
 
-                      {/* Content Container - Compact Padding */}
-                      <div className="p-4 flex flex-col flex-grow">
-                        {/* Date */}
-                        <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500 mb-2">
-                          <Calendar size={10} />
-                          <time dateTime={new Date(post.createdAt).toISOString()}>
-                            {new Date(post.createdAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
-                          </time>
-                        </div>
+                      {/* CINEMATIC OVERLAY */}
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/5 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
 
-                        {/* Title - Tight Leading */}
-                        <h3 className="text-sm font-bold text-white mb-2 group-hover:text-[#00ff00] transition-colors leading-snug line-clamp-2">
-                          {post.title}
-                        </h3>
+                      {/* CONTENT LAYER: HUD STYLE */}
+                      <div className="absolute inset-0 z-20 p-4 md:p-6 flex flex-col justify-end">
+                        <div className="space-y-2">
+                          <div className="inline-block bg-black/40 px-2 py-0.5 rounded-sm mb-1">
+                            <span className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] text-[#00ff00]">
+                              Story-{index + 1}
+                            </span>
+                          </div>
 
-                        {/* Excerpt - Smaller Text */}
-                        <p className="text-neutral-400 text-xs leading-relaxed line-clamp-2 mb-4 flex-grow">
-                          {post.content.substring(0, 100)}...
-                        </p>
+                          <div className="flex items-center gap-2 text-[10px] font-bold text-white uppercase tracking-tight">
+                            {new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                          </div>
 
-                        {/* Footer Action - Minimal */}
-                        <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
-                          <span className="text-[10px] font-bold text-[#00ff00] uppercase tracking-wider group-hover:text-[#00ff00]">
-                            Read
-                          </span>
-                          <ArrowUpRight size={12} className="text-neutral-500 group-hover:text-[#00ff00] transition-colors" />
+                          <h3 className={`font-bold text-white tracking-wide leading-[1.2] group-hover:text-[#00ff00] transition-colors duration-500 max-w-[240px] ${index % 7 === 0 ? "text-sm md:text-xl" : "text-[9px] md:text-[11px]"
+                            }`}>
+                            {post.title}
+                          </h3>
+
+                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition-all duration-700">
+                            <div className="h-[1px] w-4 bg-[#00ff00]" />
+                            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">
+                              Access
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </Link>
-                  </article>
-                ))}
+                  ))}
+                </div>
               </div>
             ) : (
-              <div className="backdrop-blur-xl bg-white/5 rounded-2xl p-12 text-center">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BookOpen className="w-6 h-6 text-neutral-400" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Incoming Transmissions
+              /* --- EMPTY STATE --- */
+              <div className="w-full flex flex-col items-center py-48 bg-black border-y border-white/5">
+                <h3 className="text-lg font-black text-white uppercase tracking-[0.4em] mb-4">
+                  Incoming Signal
                 </h3>
-                <p className="text-sm text-neutral-400 mb-6 max-w-xs mx-auto">
-                  Our expert guides are currently in the field. Stories are being compiled.
+                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">
+                  Compiling field reports... Standby.
                 </p>
-                <Link
-                  href="/safari-packages"
-                  className="inline-flex items-center justify-center bg-[#00ff00] hover:bg-[#00ff00] text-white px-6 py-2 text-sm rounded-full font-bold transition-all duration-300"
-                >
-                  Book Your Experience
-                </Link>
               </div>
             )}
           </main>
