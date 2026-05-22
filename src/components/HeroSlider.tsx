@@ -166,7 +166,7 @@ export default function HeroSlider() {
             {/* Main Title */}
             <div className="relative w-full">
               <div className="inline-block">
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
                   {/* Part 1: White Text */}
                   <div className="block font-fredoka text-white pb-2">
                     {firstWord}
