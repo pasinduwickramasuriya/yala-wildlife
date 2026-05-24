@@ -127,7 +127,8 @@ export default function Footer() {
                 <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
                   <Mail size={14} className="text-[#00ff00]" />
                 </div>
-                <span className="text-white text-sm font-bold tracking-tight">pasinduwick@icloud.com</span>
+                {/* <span className="text-white text-sm font-bold tracking-tight">pasinduwick@icloud.com</span> */}
+                <span className="text-white text-sm font-bold tracking-tight">pasindusadanjana17@gmail.com</span>
               </a>
             </div>
           </motion.div>
