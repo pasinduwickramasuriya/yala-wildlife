@@ -460,11 +460,13 @@ export default function Header() {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "Safari Packages", link: "/safari-packages" },
+    // { name: "Park Tickets", link: "/yala-national-park-tickets" },
     { name: "Tours/pickup-Dropoff", link: "/pickup-dropoff" },
     { name: "About", link: "/about" },
     { name: "Contact", link: "/contact" },
     { name: "Reviews", link: "/reviews" },
     { name: "Blog", link: "/blog" },
+    { name: "Park Tickets", link: "/yala-national-park-tickets" },
   ];
 
   const closeMenu = () => {

@@ -88,6 +88,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'daily',  // Changed to daily for better crawling
         priority: 0.95  // Very high priority for main service page
       },
+      {
+        url: `${baseUrl}/yala-national-park-tickets`,
+        lastModified: currentDate,
+        changeFrequency: 'daily',
+        priority: 0.9
+      },
     ]
 
     // ✅ FIXED: Use currentDate for lastModified since createdAt doesn't exist
@@ -310,6 +316,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: currentDate,
         changeFrequency: 'daily',
         priority: 0.95
+      },
+      {
+        url: `${baseUrl}/yala-national-park-tickets`,
+        lastModified: currentDate,
+        changeFrequency: 'daily',
+        priority: 0.9
       },
     ]
   }

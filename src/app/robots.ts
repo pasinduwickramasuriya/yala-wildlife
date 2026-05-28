@@ -95,6 +95,8 @@ export default function robots(): MetadataRoute.Robots {
       'https://www.yalawildlife.com/reviews/sitemap.xml',
       'https://www.yalawildlife.com/faq/sitemap.xml',
       'https://www.yalawildlife.com/pickup-dropoff/sitemap.xml',
+      'https://www.yalawildlife.com/tours/sitemap.xml',
+      'https://www.yalawildlife.com/yala-national-park-tickets/sitemap.xml',
     ],
     host: 'https://www.yalawildlife.com'
   }

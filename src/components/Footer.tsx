@@ -62,6 +62,20 @@ const socialLinks = [
   { name: "Twitter", icon: Twitter, href: "https://web.facebook.com/ceylonnaturesafari" },
 ];
 
+const YalaLogo = () => (
+  <div className="group flex items-center gap-3">
+    <img
+      src="/favicon-96x96.png"
+      alt="Yala Wildlife"
+      className="w-9 h-9 object-contain group-hover:rotate-[15deg] transition-transform duration-500"
+    />
+    <div className="flex flex-col leading-none">
+      <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.4em] mb-1">Yala</span>
+      <span className="text-xs font-bold text-white uppercase tracking-tighter">Wildlife</span>
+    </div>
+  </div>
+);
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -90,10 +104,9 @@ export default function Footer() {
         {/* --- TOP BRAND SECTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-start border-b border-white/10 pb-12 mb-12 gap-8">
           <motion.div variants={fadeInUp} className="max-w-sm">
-            <h2 className="text-[#00ff00] text-3xl font-black uppercase tracking-tighter mb-4 leading-none">
-              YALA
-              <br /><span className="text-[#00ff00]">WILDLIFE</span>
-            </h2>
+            <div className="mb-4">
+              <YalaLogo />
+            </div>
             <div className="space-y-4">
               <p className="text-[13px] leading-relaxed text-white font-medium">
                 As Sri Lanka&apos;s premier eco-expedition partner, Yala Wildlife operates with a strict &quot;Nature First&quot; policy. We bridge luxury and raw wilderness, ensuring every journey supports local conservation efforts and ethical wildlife tracking.
