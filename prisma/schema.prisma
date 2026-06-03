@@ -58,3 +58,29 @@ model Blog {
   slug      String   @unique
   createdAt DateTime @default(now())
 }
+
+type ItineraryDay {
+  day         Int
+  title       String
+  description String
+  included    String?
+  highlight   String?
+}
+
+model Tour {
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  title           String         // Name of the tour
+  slug            String         @unique
+  route           String?        // Optional Route summary (e.g. Sigiriya -> Kandy -> Ella)
+  price           Float          // Price in USD
+  duration        String?        // Duration of the tour (e.g. "5 Days / 4 Nights")
+  imageUrl        String?        // Cloudinary image URL
+  isFeatured      Boolean        @default(false) // Whether to display as featured
+  description     String         // Short description
+  longDescription String?        // Long description
+  highlights      String[]       // Key highlights list
+  inclusions      String[]       // Inclusions list
+  exclusions      String[]       // Exclusions list
+  itinerary       ItineraryDay[] // Itinerary days
+  seoKeywords     String?        // SEO Tags
+}

@@ -14,12 +14,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
   // title: "Yala Safari Tours | #1 Wildlife Experience Sri Lanka",
-   title: {
+  title: {
     default: "Yala National Park Safari | #1 Official Jeep Booking & Prices 2025",
     template: "%s | Yala Wildlife Safari Sri Lanka",
   },
   // description: "Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps. Book Sri Lanka's top wildlife experience now!",
-    // 🚀 DESCRIPTION: High-conversion copy with "Guaranteed" and "Official" triggers
+  // 🚀 DESCRIPTION: High-conversion copy with "Guaranteed" and "Official" triggers
   description: "Official 2025 Yala National Park Safari Booking. 🐆 World's Highest Leopard Density. Luxury 4x4 Jeep Tours, Expert Naturalist Guides & Best Price Guarantee. Book Morning, Evening & Full Day Safaris Online. Instant Confirmation.",
 
 

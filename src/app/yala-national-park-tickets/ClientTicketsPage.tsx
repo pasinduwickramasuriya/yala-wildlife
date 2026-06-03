@@ -48,7 +48,7 @@ const RATES = {
 export default function ClientTicketsPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   // Exchange Rate State (Real-time live fetch with standard fallback)
-  const [exchangeRate, setExchangeRate] = useState(327);
+  const [exchangeRate, setExchangeRate] = useState(330);
   const [isLiveRate, setIsLiveRate] = useState(false);
   const [loadingRate, setLoadingRate] = useState(true);
 
@@ -88,6 +88,22 @@ export default function ClientTicketsPage() {
   const [jeeps, setJeeps] = useState(1);
   const [cars, setCars] = useState(0);
   const [buses, setBuses] = useState(0);
+
+  // Auto-calculate minimum jeeps based on total passengers (max 6 passengers per jeep)
+  const totalPassengersCount =
+    foreignAdults +
+    foreignChildren +
+    saarcAdults +
+    saarcChildren +
+    localAdults +
+    localChildren +
+    infants;
+
+  const minJeepsRequired = totalPassengersCount > 0 ? Math.max(1, Math.ceil(totalPassengersCount / 8)) : 0;
+
+  useEffect(() => {
+    setJeeps(minJeepsRequired);
+  }, [minJeepsRequired]);
 
   // --- 3. GUEST INFO FORM STATE ---
   const [name, setName] = useState("");
@@ -160,7 +176,7 @@ export default function ClientTicketsPage() {
 
     let serviceFeeLKR = 0;
     if (totalPassengers > 0) {
-      serviceFeeLKR = hasForeigners ? 10 * exchangeRate : RATES.SERVICE_LOCAL;
+      serviceFeeLKR = (hasForeigners ? 10 * exchangeRate : RATES.SERVICE_LOCAL) * (jeeps + cars + buses);
     }
 
     // Totals Math
@@ -168,7 +184,6 @@ export default function ClientTicketsPage() {
     const vatLKR = subtotalLKR * RATES.VAT_RATE;
 
     // LankaGate Gateway payment convenience fee (usually ~2% added at checkout)
-    // const convenienceFeeLKR = (subtotalLKR + vatLKR) * 0.02;
     const convenienceFeeLKR = (subtotalLKR + vatLKR) * 0.1;
     const totalLKR = subtotalLKR + vatLKR + convenienceFeeLKR;
 
@@ -453,7 +468,7 @@ export default function ClientTicketsPage() {
                     subtitle="LKR 300.00"
                     count={jeeps}
                     onInc={() => setJeeps((p) => p + 1)}
-                    onDec={() => setJeeps((p) => Math.max(0, p - 1))}
+                    onDec={() => setJeeps((p) => Math.max(minJeepsRequired, p - 1))}
                   />
                   <CounterCard
                     id="cnt-vehicle-car"

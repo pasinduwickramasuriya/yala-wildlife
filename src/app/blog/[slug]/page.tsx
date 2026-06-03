@@ -259,7 +259,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
       <Header />
 
-      <main className="relative min-h-screen w-full text-white overflow-x-hidden selection:bg-green-400 selection:text-black font-sans">
+      <main className="relative min-h-screen w-full text-white overflow-x-hidden selection:bg-[#00ff00] selection:text-black font-sans">
 
         {/* --- 3. Background Layer (High Visibility + Fixed) --- */}
         <div className="fixed inset-0 z-0">
@@ -283,7 +283,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
             {/* Back Button */}
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-md text-xs font-bold text-white hover:bg-green-500 hover:text-black transition-all mb-8 shadow-lg hover:shadow-green-500/20"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-md text-xs font-bold text-white hover:bg-[#00ff00] hover:text-black transition-all mb-8 shadow-lg hover:shadow-[#00ff00]/20"
             >
               <ArrowLeft className="w-3 h-3" />
               <span>Back</span>
@@ -304,7 +304,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 {/* Floating Date Badge */}
                 <div className="absolute top-4 left-4 flex gap-2">
                   <div className="flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider shadow-sm">
-                    <Calendar className="w-3 h-3 text-green-400" />
+                    <Calendar className="w-3 h-3 text-[#00ff00]" />
                     {blog.createdAt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </div>
                 </div>
@@ -314,7 +314,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
               <div className="px-6 py-8 md:px-10 md:py-10">
 
                 <header className="mb-8 text-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 text-green-300 text-[10px] font-bold uppercase tracking-widest mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00ff00]/20 text-[#00ff00] text-[10px] font-bold uppercase tracking-widest mb-4">
                     <Tag className="w-3 h-3" /> Wildlife Story
                   </div>
                   <h1 className="text-3xl md:text-4xl font-black text-white leading-tight mb-6 drop-shadow-sm">
@@ -324,7 +324,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                   {/* Author / Stats Row */}
                   <div className="flex items-center justify-center gap-6 text-xs font-medium text-neutral-300">
                     <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full">
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-black font-bold text-[10px]">Y</div>
+                      <div className="w-5 h-5 rounded-full bg-[#00ff00] flex items-center justify-center text-black font-bold text-[10px]">Y</div>
                       <span>Yala Team</span>
                     </div>
                     <div className="flex items-center gap-1.5">
@@ -345,7 +345,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                   {blog.content.split("\n").map((paragraph, index) => (
                     <p
                       key={index}
-                      className="text-neutral-200 leading-8 mb-5 font-light text-[1.05rem] first-letter:text-3xl first-letter:font-bold first-letter:text-green-400 first-letter:mr-1 first-letter:float-left"
+                      className="text-neutral-200 leading-8 mb-5 font-light text-[1.05rem] first-letter:text-3xl first-letter:font-bold first-letter:text-[#00ff00] first-letter:mr-1 first-letter:float-left"
                     >
                       {paragraph}
                     </p>
@@ -353,15 +353,15 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 </div>
 
                 {/* Footer CTA */}
-                <div className="mt-12 relative overflow-hidden rounded-[2rem] p-8 text-center shadow-lg group hover:shadow-green-500/20 transition-all bg-transparent">
+                <div className="mt-12 relative overflow-hidden rounded-[2rem] p-8 text-center shadow-lg group hover:shadow-[#00ff00]/20 transition-all bg-transparent">
                   <div className="relative z-10">
                     <h3 className="text-lg font-bold text-white mb-2">Ready to see this in real life?</h3>
-                    <p className="text-green-100 text-sm mb-6 max-w-sm mx-auto">
+                    <p className="text-white text-sm mb-6 max-w-sm mx-auto">
                       Book your Yala safari today and experience the magic firsthand.
                     </p>
                     <Link
                       href="/safari-packages"
-                      className="inline-block bg-white text-green-800 font-bold text-sm py-3 px-8 rounded-full transition-transform hover:scale-105 shadow-md"
+                      className="inline-block bg-white text-black hover:text-[#00ff00] font-bold text-sm py-3 px-8 rounded-full transition-transform hover:scale-105 shadow-md"
                     >
                       Explore Packages
                     </Link>

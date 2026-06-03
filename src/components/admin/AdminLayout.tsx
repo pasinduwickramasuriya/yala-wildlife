@@ -11,7 +11,12 @@ export default function AdminLayout({
         <ul className="space-y-2">
           <li>
             <Link href="/admin/packages" className="hover:underline">
-              Packages
+              Packages (Safari)
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/tours" className="hover:underline">
+              Tour Packages
             </Link>
           </li>
           <li>
