@@ -1,11 +1,11 @@
-
-
 import { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
 import TransportForm from "@/components/TransportForm";
 import { MapPin, ShieldCheck, Zap, Clock, Car, Star, UserCheck, Navigation } from "lucide-react";
 import TourNavigator from "@/components/TourNavigator";
+
+export const dynamic = "force-dynamic";
 
 // --- 1. SEO METADATA ---
 export const metadata: Metadata = {

@@ -6,6 +6,8 @@ import { TourItineraryItem, BookingForm } from "@/components/TourItineraryItem";
 import { TourPackageCard, Tour } from "@/components/TourPackageCard";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 // --- DYNAMIC SEO METADATA ---
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;

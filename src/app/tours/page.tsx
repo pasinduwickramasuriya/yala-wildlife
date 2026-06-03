@@ -7,6 +7,8 @@ import { TourPackageCard, Tour } from "@/components/TourPackageCard";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: "Sri Lanka Tour Packages 2026 | Private Driver & Guided Safaris",
     description: "Book premium Sri Lanka tours & private safaris. Expert SLTDA-licensed driver-guides, luxury transport & custom itineraries to Yala, Sigiriya, Ella & Kandy.",

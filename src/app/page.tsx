@@ -7,6 +7,8 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 
+export const dynamic = "force-dynamic";
+
 // ✅ FIXED: Use consistent static URL for canonical purposes
 const BASE_URL = "https://www.yalawildlife.com";
 
