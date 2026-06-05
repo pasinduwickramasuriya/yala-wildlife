@@ -530,7 +530,7 @@ export default async function BlogPage() {
               </p>
             </div>
 
-            {/* 3. SMALLEST ACTION BUTTON */}
+            {/* 3. SMALLEST ACTION BUTTN */}
             <div className="inline-block">
               <Link
                 href="/contact"
