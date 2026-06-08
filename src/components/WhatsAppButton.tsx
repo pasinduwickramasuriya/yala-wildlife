@@ -201,7 +201,7 @@ export default function WhatsAppButton() {
               <input 
                 type="text" 
                 placeholder="Type a custom message..." 
-                className="flex-1 bg-transparent px-3 py-1.5 text-xs text-white placeholder-neutral-500 focus:outline-none"
+                className="flex-1 bg-transparent px-3 py-1.5 text-base md:text-xs text-white placeholder-neutral-500 focus:outline-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
@@ -225,7 +225,7 @@ export default function WhatsAppButton() {
         {/* Promo Speech Bubble Badge */}
         {!isOpen && showPromo && (
           <div className="absolute right-16 bg-neutral-950 border border-white/10 text-white text-[11px] font-medium px-3.5 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.4)] flex items-center gap-2.5 whitespace-nowrap wa-animate-fade z-30">
-            <span>👋 Chat with us!</span>
+            <span>Chat with us!</span>
             <button 
               onClick={(e) => { 
                 e.stopPropagation(); 

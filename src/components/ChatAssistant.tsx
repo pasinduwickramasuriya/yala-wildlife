@@ -13,28 +13,22 @@ export default function ChatAssistant() {
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [isTyping, setIsTyping] = useState(false);
     const [isSoundOn, setIsSoundOn] = useState(false);
     const [isListening, setIsListening] = useState(false);
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
-    const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const recognitionRef = useRef<any>(null);
 
     // Auto-scroll to bottom when new messages arrive.
-    // Switching behavior to "auto" during active typing prevents scroll animation stutter.
     useEffect(() => {
         if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: isTyping ? "auto" : "smooth" });
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
-    }, [messages, isOpen, isTyping]);
+    }, [messages, isOpen]);
 
-    // Clean up typing interval and speech on unmount
+    // Clean up speech on unmount
     useEffect(() => {
         return () => {
-            if (typingIntervalRef.current) {
-                clearInterval(typingIntervalRef.current);
-            }
             if (typeof window !== "undefined" && window.speechSynthesis) {
                 window.speechSynthesis.cancel();
             }
@@ -169,49 +163,13 @@ export default function ChatAssistant() {
     };
 
     const streamResponse = (fullText: string) => {
-        if (typingIntervalRef.current) {
-            clearInterval(typingIntervalRef.current);
-        }
-
-        setIsTyping(true);
-        // Add an empty model message first
-        setMessages((prev) => [...prev, { role: "model", content: "" }]);
-
         // Speak the response if sound is on
         if (isSoundOn) {
             speakText(fullText);
         }
 
-        let currentLength = 0;
-        typingIntervalRef.current = setInterval(() => {
-            setMessages((prev) => {
-                const updated = [...prev];
-                const lastIndex = updated.length - 1;
-
-                if (lastIndex >= 0 && updated[lastIndex].role === "model") {
-                    // Type exactly 1 character at a time very slowly and smoothly
-                    currentLength += 1;
-
-                    if (currentLength >= fullText.length) {
-                        updated[lastIndex].content = fullText;
-                        if (typingIntervalRef.current) {
-                            clearInterval(typingIntervalRef.current);
-                            typingIntervalRef.current = null;
-                        }
-                        setIsTyping(false);
-                    } else {
-                        updated[lastIndex].content = fullText.slice(0, currentLength);
-                    }
-                } else {
-                    if (typingIntervalRef.current) {
-                        clearInterval(typingIntervalRef.current);
-                        typingIntervalRef.current = null;
-                    }
-                    setIsTyping(false);
-                }
-                return updated;
-            });
-        }, 3); // 55ms for very slow and smooth typewriter action
+        // Add the model message directly without typing animation
+        setMessages((prev) => [...prev, { role: "model", content: fullText }]);
     };
 
     // Trigger welcome message typing when chat is opened for the first time
@@ -224,7 +182,7 @@ export default function ChatAssistant() {
 
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!input.trim() || isLoading || isTyping) return;
+        if (!input.trim() || isLoading) return;
 
         const userMessage = input.trim();
         setInput("");
@@ -393,7 +351,7 @@ export default function ChatAssistant() {
                                 {/* Formats points and bold text clearly */}
                                 {msg.role === 'user'
                                     ? msg.content
-                                    : renderContent(msg.content, isTyping && index === messages.length - 1)}
+                                    : renderContent(msg.content, false)}
                             </div>
 
                         </div>
@@ -427,13 +385,13 @@ export default function ChatAssistant() {
                             onChange={(e) => setInput(e.target.value)}
                             placeholder={isListening ? "Listening..." : "Initiate query..."}
                             className={`w-full bg-transparent py-2.5 pl-3 pr-24 text-[16px] sm:text-[13px] text-white placeholder-neutral-500 focus:outline-none font-mono ${isListening ? 'text-[#00ff00]' : ''}`}
-                            disabled={isLoading || isTyping}
+                            disabled={isLoading}
                         />
                         <div className="absolute right-1 top-1 bottom-1 flex items-center gap-1">
                             <button
                                 type="button"
                                 onClick={toggleListening}
-                                disabled={isLoading || isTyping}
+                                disabled={isLoading}
                                 className={`px-2.5 h-8 rounded-lg transition-colors flex items-center justify-center ${isListening ? 'bg-[#00ff00]/20 text-[#00ff00] animate-pulse' : 'bg-white/5 text-neutral-400 hover:text-white disabled:opacity-30'}`}
                                 title={isListening ? "Stop listening" : "Talk to Emma"}
                             >
@@ -441,7 +399,7 @@ export default function ChatAssistant() {
                             </button>
                             <button
                                 type="submit"
-                                disabled={!input.trim() || isLoading || isTyping || isListening}
+                                disabled={!input.trim() || isLoading || isListening}
                                 className="h-8 px-3 bg-white text-black hover:bg-[#00ff00] disabled:bg-[#333] disabled:text-[#555] transition-colors flex items-center justify-center rounded-lg"
                             >
                                 <Send className="w-3.5 h-3.5" />
