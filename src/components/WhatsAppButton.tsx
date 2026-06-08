@@ -1,203 +1,284 @@
-// "use client";
-
-// import Link from "next/link";
-// import { MessageCircle } from "lucide-react";
-
-// export default function WhatsAppButton() {
-//   return (
-//     <div className="fixed bottom-8 right-8 z-50 group flex flex-col items-end">
-      
-//       {/* --- 1. The Button --- */}
-//       <Link
-//         href="https://wa.me/940778158004?text=Hello,%20I'm%20interested%20in%20your%20safaris"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         aria-label="Chat on WhatsApp"
-//         // ADDED: 'animate-bounce' for the effect, 'hover:animate-none' for better clickability
-//         className="relative flex items-center justify-center w-13 h-13 bg-[#00ff00] text-black rounded-full shadow-[0_4px_15px_rgba(0,255,0,0.4)] hover:shadow-[0_0_30px_#00ff00] hover:scale-110 transition-all duration-300 ease-out z-20 animate-bounce hover:animate-none"
-//       >
-//         {/* Inner Icon */}
-//         <MessageCircle className="w-9 h-9 fill-black/10 stroke-[2.5px]" />
-        
-//         {/* Glass Shine Effect (Subtle overlay) */}
-//         <div className="absolute inset-0 rounded-full ring-1 ring-white/20 bg-gradient-to-tr from-white/20 to-transparent pointer-events-none" />
-//       </Link>
-
-//       {/* --- 2. The "Pulse" Signal (Background Ring) --- */}
-//       {/* Stays distinct at the bottom to anchor the bounce */}
-//       <div className="absolute bottom-0 right-0 w-14 h-14 bg-[#00ff00] rounded-full opacity-20 animate-ping pointer-events-none z-10" />
-
-//       {/* --- 3. Modern Tooltip (Slides in from left) --- */}
-//       <div className="absolute right-16 top-1/2 -translate-y-1/2 pointer-events-none">
-//         <span className="block px-3 py-1.5 bg-neutral-900/90 backdrop-blur-md border border-white/10 text-white text-xs font-bold rounded-lg shadow-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap">
-//           Chat with us
-//           {/* Tooltip Arrow */}
-//           <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-neutral-900/90 border-t border-r border-white/10 rotate-45 transform" />
-//         </span>
-//       </div>
-
-//     </div>
-//   );
-// }
-
-
-
-
 "use client";
 
-import { useState, useRef } from "react";
-import { MessageCircle, X, Send, User, Sparkles } from "lucide-react"; 
+import { useState, useRef, useEffect } from "react";
+import { X, Send, ChevronRight } from "lucide-react"; 
+
+// Custom WhatsApp SVG Icon
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12.012 2C6.48 2 2 6.48 2 12.012c0 1.764.456 3.48 1.332 5.004L2 22l5.124-1.308c1.488.816 3.168 1.248 4.888 1.248C17.52 21.94 22 17.46 22 11.928 22 6.48 17.52 2 12.012 2zm4.704 14.1c-.24.672-1.2 1.248-1.668 1.344-.432.096-.996.168-3.084-.684-2.676-1.092-4.404-3.816-4.536-4-.132-.18-1.008-1.344-1.008-2.556 0-1.212.624-1.812.852-2.052.228-.24.504-.3.672-.3.168 0 .336.006.48.012.156.006.36-.06.564.396.204.504.708 1.728.768 1.848.06.12.1.264.018.42-.078.156-.12.264-.24.408-.12.144-.252.324-.36.432-.12.12-.24.252-.108.48.132.228.588.972 1.26 1.572.864.768 1.596 1.008 1.824 1.128.228.12.36.102.492-.048.132-.15.564-.66.72-.888.156-.228.312-.192.528-.108.216.084 1.368.648 1.608.768.24.12.396.18.456.288.06.108.06.624-.18 1.296z" />
+  </svg>
+);
+
+const QUICK_ACTIONS = [
+  { label: "Book Safari Jeep 🚜", text: "Hi! I would like to book a Jeep Safari in Yala National Park. Can you help me?" },
+  { label: "Packages & Prices 💰", text: "Hi! Could you please provide details about the packages and prices for safaris?" },
+  { label: "Best Time to Visit 📅", text: "Hi! When is the best time of year to visit Yala to see leopards and other wildlife?" },
+  { label: "General Inquiry 🐾", text: "Hi! I have a few questions about visiting Yala National Park." }
+];
 
 export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [showPromo, setShowPromo] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   
   const chatRef = useRef<HTMLDivElement>(null);
 
-  const toggleChat = () => setIsOpen(!isOpen);
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen) {
+      setShowPromo(false); // Hide the greeting badge when chat is opened
+    }
+  };
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    
+    triggerWhatsApp(message);
+  };
+
+  const triggerWhatsApp = (text: string) => {
     const phoneNumber = "940778158004"; 
     const baseUrl = `https://wa.me/${phoneNumber}`;
-
-    const textToSend = message.trim().length > 0 
-      ? message 
-      : "Hello, I'm interested in your safaris 🐆";
-
+    const textToSend = text.trim().length > 0 
+      ? text 
+      : "Hello, I'm interested in booking a Yala safari 🌿";
     const encodedText = encodeURIComponent(textToSend);
-    const finalUrl = `${baseUrl}?text=${encodedText}`;
-
-    window.open(finalUrl, "_blank");
+    window.open(`${baseUrl}?text=${encodedText}`, "_blank");
     setMessage("");
   };
 
+  const handleQuickAction = (text: string) => {
+    triggerWhatsApp(text);
+  };
+
+  // Close when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (chatRef.current && !chatRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div 
-      // FIX 1: Add 'pointer-events-none'. 
-      // This ensures the invisible container wrapper never blocks clicks on your website.
-      className="fixed bottom-8 right-8 z-50 flex flex-col items-end font-sans pointer-events-none"
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans pointer-events-none"
       ref={chatRef}
     >
-      
+      {/* Inject custom CSS keyframes and animations directly in component */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes wa-pulse-ring {
+          0% {
+            transform: scale(0.95);
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: scale(1.3);
+            opacity: 0;
+          }
+        }
+        @keyframes wa-fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes wa-pop-in {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+        .wa-pulse-active::before {
+          content: '';
+          position: absolute;
+          inset: -5px;
+          border-radius: 9999px;
+          border: 2px solid #25D366;
+          animation: wa-pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+          z-index: -1;
+        }
+        .wa-animate-pop {
+          animation: wa-pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .wa-animate-fade {
+          animation: wa-fade-in 0.3s ease-out forwards;
+        }
+      `}} />
+
       {/* ================================================================== */}
-      {/* 1. THE CUTE CHAT WINDOW                                            */}
+      {/* 1. THE CHAT WINDOW                                                 */}
       {/* ================================================================== */}
-      <div 
-        // FIX 2: Add 'pointer-events-auto' here.
-        // This makes sure the chat window ITSELF is clickable/typeable.
-        className={`
-          mb-6 w-[340px] bg-neutral-900 rounded-[2.5rem] shadow-2xl overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)] origin-bottom-right border-4 border-neutral-800 pointer-events-auto
-          ${isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-50 translate-y-10 pointer-events-none"}
-        `}
-      >
-        {/* --- Header --- */}
-        <div className="bg-neutral-800/90 backdrop-blur-md p-5 flex items-center justify-between text-white border-b border-neutral-700">
-          <div className="flex items-center gap-3">
-             {/* Operator Avatar */}
-            <div className="relative group">
-              <div className="w-12 h-12 bg-neutral-700 rounded-full flex items-center justify-center border-2 border-neutral-600 group-hover:scale-110 transition-transform duration-300 cursor-pointer overflow-hidden">
-                 <User className="w-7 h-7 text-[#00ff00]" />
+      {isOpen && (
+        <div 
+          className="mb-4 w-[350px] max-w-[calc(100vw-32px)] bg-neutral-950/95 backdrop-blur-md rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto wa-animate-pop origin-bottom-right"
+        >
+          {/* Header */}
+          <div className="bg-neutral-900/90 p-4 flex items-center justify-between border-b border-white/5">
+            <div className="flex items-center gap-3">
+              {/* Operator Avatar */}
+              <div className="relative">
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 bg-white">
+                  <img 
+                    src="/emma.png" 
+                    alt="Guide Avatar" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#25D366] border-2 border-neutral-900 rounded-full"></span>
               </div>
-              <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#00ff00] border-2 border-neutral-800 rounded-full animate-pulse"></span>
+              <div>
+                <h3 className="font-bold text-sm text-white flex items-center gap-1.5">
+                  Safari Guide
+                  <span className="text-[10px] bg-[#25D366]/10 text-[#25D366] px-1.5 py-0.5 rounded-full font-medium">Online</span>
+                </h3>
+                <p className="text-[10px] text-neutral-400">Ready to help 🌿</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-base text-white flex items-center gap-1">
-                Safari Team <Sparkles className="w-3 h-3 text-yellow-400 fill-yellow-400" />
-              </h3>
-              <p className="text-[11px] text-[#00ff00] font-medium opacity-90">Online & Happy to Help! 🌿</p>
+            <button 
+              onClick={toggleChat} 
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
+              aria-label="Close Chat"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Chat Body */}
+          <div className="h-[280px] bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] p-4 flex flex-col gap-4 overflow-y-auto relative scrollbar-thin">
+            {/* Background Texture Overlay */}
+            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none"></div>
+            
+            {/* Greeting Bubble */}
+            <div className="flex gap-2.5 max-w-[90%] z-10">
+              <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 bg-white border border-white/10">
+                <img src="/emma.png" alt="Guide Avatar" className="w-full h-full object-cover" />
+              </div>
+              <div className="bg-white/5 border border-white/10 p-3 rounded-2xl rounded-tl-none text-xs text-neutral-200 leading-relaxed shadow-sm">
+                <p className="font-semibold text-white mb-1">Ayubowan! 🌿</p>
+                <p>Welcome to Yala Safari. I'm your Yala Safari guide. Let me help you book your safari jeep or answer your questions. Chat with us directly on WhatsApp! 🐆</p>
+              </div>
+            </div>
+            
+            {/* Quick Action Chips */}
+            <div className="flex flex-col gap-1.5 ml-9.5 z-10">
+              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 mb-1">Select a topic:</p>
+              {QUICK_ACTIONS.map((action, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleQuickAction(action.text)}
+                  className="flex items-center justify-between px-3 py-2 bg-neutral-900/80 hover:bg-neutral-800/80 border border-white/5 hover:border-white/20 rounded-xl text-[11px] text-neutral-300 hover:text-white transition-all duration-200 text-left pointer-events-auto w-full group cursor-pointer"
+                >
+                  <span>{action.label}</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-neutral-500 group-hover:text-white transition-transform group-hover:translate-x-0.5" />
+                </button>
+              ))}
             </div>
           </div>
-          <button 
-            onClick={toggleChat} 
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-neutral-700/50 hover:bg-red-500/20 text-neutral-400 hover:text-red-400 transition-all duration-300"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
 
-        {/* --- Chat Body --- */}
-        <div className="h-[220px] bg-[#121212] p-5 flex flex-col overflow-y-auto relative">
-           <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none"></div>
-           
-           <div className="bg-neutral-800 p-4 rounded-3xl rounded-tl-none shadow-sm self-start text-sm text-gray-200 z-10 border border-neutral-700 max-w-[85%] animate-fadeIn">
-              <p className="leading-relaxed">
-                Hi there! <span className="text-xl"></span> <br/>
-                Ready to spot some Leopards?  <br/>
-                <span className="text-neutral-400 text-xs mt-2 block">Ask us anything!</span>
-              </p>
-           </div>
-           
-           <div className="text-[10px] text-neutral-600 mt-2 ml-2">Just now</div>
-        </div>
-
-        {/* --- Input Area --- */}
-        <div className="bg-neutral-900 p-4 border-t border-neutral-800">
-           <form onSubmit={handleSend} className="flex items-center gap-2 bg-neutral-800 rounded-full p-1.5 border border-neutral-700 focus-within:border-[#00ff00] transition-colors duration-300">
-             
-             <input 
-               type="text" 
-               placeholder="Type a message..." 
-               className="flex-1 bg-transparent rounded-full px-4 text-base md:text-sm text-white placeholder-neutral-500 focus:outline-none"
-               value={message}
-               onChange={(e) => setMessage(e.target.value)}
-             />
-
-             <button 
+          {/* Custom Message Form */}
+          <div className="bg-neutral-950 p-3.5 border-t border-white/5">
+            <form onSubmit={handleSend} className="flex items-center gap-2 bg-neutral-900 border border-white/10 rounded-xl p-1 focus-within:border-[#25D366]/40 transition-all">
+              <input 
+                type="text" 
+                placeholder="Type a custom message..." 
+                className="flex-1 bg-transparent px-3 py-1.5 text-xs text-white placeholder-neutral-500 focus:outline-none"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <button 
                 type="submit" 
-                className="w-10 h-10 flex items-center justify-center bg-[#00ff00] hover:bg-[#33ff33] rounded-full text-black transition-transform duration-300 hover:scale-110 active:scale-95 shadow-lg"
-             >
-                <Send className="w-4 h-4 ml-0.5 fill-current" />
-             </button>
-           </form>
+                className="w-8 h-8 flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
+                aria-label="Send to WhatsApp"
+              >
+                <Send className="w-3.5 h-3.5 fill-current text-white" />
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-
-
-      {/* ================================================================== */}
-      {/* 2. THE CUTE TRIGGER BUTTON                                         */}
-      {/* ================================================================== */}
-      <button
-        onClick={toggleChat}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        // FIX 3: Add 'pointer-events-auto' here.
-        // This makes sure the green button is still clickable.
-        className={`
-          relative flex items-center justify-center w-14 h-14 bg-[#00ff00] text-black rounded-[2rem] shadow-[0_8px_25px_rgba(0,255,0,0.3)] hover:shadow-[0_10px_40px_rgba(0,255,0,0.5)] transition-all duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275) z-20 pointer-events-auto
-          ${isOpen ? "rotate-[360deg] scale-90 bg-white text-black rounded-full" : "hover:scale-110 hover:-rotate-12"}
-        `}
-        aria-label="Toggle Chat"
-      >
-        {isOpen ? (
-          <X className="w-8 h-8" />
-        ) : (
-          <MessageCircle className="w-8 h-8 fill-black/10 stroke-[2.5px]" />
-        )}
-
-        {/* --- Cute Tooltip (Bubble) --- */}
-        {!isOpen && (
-            <div 
-              className={`
-                absolute right-20 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 
-                ${isHovered ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-4 scale-90'}
-              `}
-            >
-                <div className="relative px-4 py-2 bg-white text-black text-sm font-bold rounded-xl shadow-xl whitespace-nowrap">
-                  Chat with us! 💬
-                  <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-white rotate-45 rounded-sm"></span>
-                </div>
-            </div>
-        )}
-      </button>
-
-      {/* Ripple/Pulse Effect */}
-      {!isOpen && (
-         <div className="absolute bottom-0 right-0 w-16 h-16 bg-[#00ff00] rounded-[2rem] opacity-20 animate-ping pointer-events-none z-10 duration-1000" />
       )}
 
+      {/* ================================================================== */}
+      {/* 2. THE TRIGGER BUTTON                                             */}
+      {/* ================================================================== */}
+      <div className="relative flex items-center pointer-events-auto">
+        
+        {/* Promo Speech Bubble Badge */}
+        {!isOpen && showPromo && (
+          <div className="absolute right-16 bg-neutral-950 border border-white/10 text-white text-[11px] font-medium px-3.5 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.4)] flex items-center gap-2.5 whitespace-nowrap wa-animate-fade z-30">
+            <span>👋 Chat with us!</span>
+            <button 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                setShowPromo(false); 
+              }} 
+              className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
+              aria-label="Dismiss message"
+            >
+              <X className="w-3 h-3" />
+            </button>
+            <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2.5 h-2.5 bg-neutral-950 border-r border-t border-white/10 rotate-45"></span>
+          </div>
+        )}
+
+        {/* Floating Button */}
+        <button
+          onClick={toggleChat}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className={`
+            relative w-15 h-15 rounded-full flex items-center justify-center transition-all duration-500 shadow-[0_8px_25px_rgba(0,0,0,0.4)] z-20 overflow-visible cursor-pointer
+            ${isOpen 
+              ? "bg-white text-black hover:scale-105 rotate-180" 
+              : "bg-neutral-900 text-white hover:scale-105 wa-pulse-active"
+            }
+          `}
+          aria-label={isOpen ? "Close Chat" : "Open WhatsApp Chat"}
+        >
+          {isOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <div className="w-full h-full rounded-full overflow-hidden p-0.5 bg-neutral-900">
+              <img 
+                src="/emma.png" 
+                alt="Guide Avatar" 
+                className="w-full h-full object-cover rounded-full"
+              />
+              {/* WhatsApp overlapping Badge */}
+              <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-[#25D366] text-white rounded-full flex items-center justify-center border-2 border-neutral-900 shadow-md">
+                <WhatsAppIcon className="w-2.5 h-2.5" />
+              </div>
+            </div>
+          )}
+
+          {/* Simple Tooltip on Hover */}
+          {!isOpen && isHovered && !showPromo && (
+            <div className="absolute right-16 bg-neutral-950 border border-white/10 text-white text-[11px] font-medium px-3 py-1.5 rounded-xl shadow-lg whitespace-nowrap transition-all duration-200">
+              Chat with us 🌿
+              <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-neutral-950 border-r border-t border-white/10 rotate-45"></span>
+            </div>
+          )}
+        </button>
+      </div>
     </div>
   );
 }

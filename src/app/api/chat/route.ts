@@ -11,11 +11,12 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { history, message } = body;
 
-    // Use -latest to prevent 404 errors on newer SDK version
+    // Use gemini-flash-lite-latest to avoid the 503 service unavailable overload of gemini-flash-latest and bypass 20 RPD limits
     const model = genAI.getGenerativeModel({
-    //   model: "gemini-1.5-flash-latest",
-     model: 'gemini-2.5-flash-lite',
-      systemInstruction: companyKnowledge, 
+      // model: "gemini-3.1-flash-lite",
+      model: "gemini-flash-lite-latest",
+      // model: 'gemini-2.5-flash-lite', not working exceed 
+      systemInstruction: companyKnowledge,
     });
 
     // 1. Format the history array for Gemini
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
     // Because we are about to use `chat.sendMessage(message)` (which acts as a 'user'),
     // the history array MUST end with a 'model' role.
     if (formattedHistory.length > 0 && formattedHistory[formattedHistory.length - 1].role === "user") {
-        formattedHistory.pop(); // Remove it to prevent the sequence from breaking
+      formattedHistory.pop(); // Remove it to prevent the sequence from breaking
     }
 
     // 4. Start the chat with the clean, perfectly alternating history
@@ -47,11 +48,11 @@ export async function POST(req: Request) {
     const responseText = result.response.text();
 
     return NextResponse.json({ reply: responseText });
-    
+
   } catch (error: any) {
     // This will print the EXACT Google error in your terminal to help debug
     console.error("Detailed Gemini API Error:", error.message || error);
-    
+
     return NextResponse.json(
       { error: "Failed to process chat request.", details: error.message },
       { status: 500 }
