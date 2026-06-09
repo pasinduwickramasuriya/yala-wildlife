@@ -365,7 +365,7 @@ export default function ChatAssistant() {
                             </div>
                             <div className="p-3 bg-[#111] flex items-center gap-2 rounded-2xl rounded-tl-sm border border-white/5">
                                 <Loader2 className="w-3.5 h-3.5 text-[#00ff00] animate-spin" />
-                                <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest animate-pulse">Processing...</span>
+                                <span className="text-[9px] font-mono text-neutral-500 tracking-widest animate-pulse">Typing...</span>
                             </div>
                         </div>
                     )}

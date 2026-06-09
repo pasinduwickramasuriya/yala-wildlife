@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 import { verifyToken } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 // Define a minimal type for Cloudinary upload res
 interface CloudinaryUploadResult {
@@ -81,6 +82,11 @@ export async function POST(req: NextRequest) {
     const blog = await prisma.blog.create({
       data: { title, content, imageUrl: finalImageUrl!, slug },
     });
+
+    // Revalidate blog listing and the new post page
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${slug}`);
+
     return NextResponse.json({ message: "Blog created", blog }, { status: 201 });
   } catch (error) {
     console.error("Error creating blog:", error);
@@ -130,10 +136,24 @@ export async function PUT(req: NextRequest) {
       finalImageUrl = (uploadResult as CloudinaryUploadResult).secure_url;
     }
 
+    // Fetch the old blog slug to revalidate it if the slug changes
+    const oldBlog = await prisma.blog.findUnique({
+      where: { id },
+      select: { slug: true }
+    });
+
     const blog = await prisma.blog.update({
       where: { id },
       data: { title, content, imageUrl: finalImageUrl || undefined, slug },
     });
+
+    // Revalidate pages to display updated content
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${slug}`);
+    if (oldBlog && oldBlog.slug !== slug) {
+      revalidatePath(`/blog/${oldBlog.slug}`);
+    }
+
     return NextResponse.json({ message: "Blog updated", blog });
   } catch (error) {
     console.error("Error updating blog:", error);
@@ -158,7 +178,20 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: "Missing blog ID" }, { status: 400 });
     }
 
-    await prisma.blog.delete({ where: { id } });
+    // Fetch the blog to get the slug for revalidation before deleting
+    const blogToDelete = await prisma.blog.findUnique({
+      where: { id },
+      select: { slug: true }
+    });
+
+    if (blogToDelete) {
+      await prisma.blog.delete({ where: { id } });
+
+      // Revalidate pages to remove the deleted content from listing
+      revalidatePath("/blog");
+      revalidatePath(`/blog/${blogToDelete.slug}`);
+    }
+
     return NextResponse.json({ message: "Blog deleted" });
   } catch (error) {
     console.error("Error deleting blog:", error);
