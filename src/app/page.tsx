@@ -7,7 +7,7 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // ✅ Enable ISR cache for 1 hour to boost performance/TTFB
 
 // ✅ FIXED: Use consistent static URL for canonical purposes
 const BASE_URL = "https://www.yalawildlife.com";

@@ -69,7 +69,7 @@ export function generateMetadata({
     },
     authors: [{ name: siteConfig.name }],
     verification: {
-      google: "your-google-verification-code",
+      google: "vobQq0klynTsOpNnRKtuAD0BDLjmwpS5e2OrmSjojzU",
     },
   };
 }

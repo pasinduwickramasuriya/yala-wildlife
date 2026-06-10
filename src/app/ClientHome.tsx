@@ -1,15 +1,12 @@
 "use client";
 
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-// import AdUnit from "@/components/AdUnit";
 import DiscountPopup from "@/components/DiscountPopup";
-import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
 import ReviewFeed from "@/components/ReviewFeed";
-import { ArrowUpRight, Link } from "lucide-react";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
 
 const GallerySection = dynamic(() => import("@/components/GallerySection"), { ssr: false });
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"), { ssr: false });
@@ -17,7 +14,6 @@ const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"), { ssr:
 const ModernReviews = dynamic(() => import("@/components/ModernReviews"), { ssr: false });
 const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"), { ssr: false });
 const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"), { ssr: false });
-const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: false });
 const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"), { ssr: false });
 
 interface Package {
@@ -30,24 +26,12 @@ interface Package {
 }
 
 export default function ClientHome({ initialPackages = [] }: { initialPackages?: Package[] }) {
-  // We no longer fetch on mount, just use the server-provided packages.
-  // This drastically reduces waterfall requests and main-thread blockage on load.
   const packages = initialPackages;
-
-  // Defer below-the-fold heavy components to free up the main thread
-  // during the critical initial load & hero animation phase.
-  const [mountHeavy, setMountHeavy] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => setMountHeavy(true), 1500);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
-      <Header />
-
       <HeroSlider />
-      <ReviewFeed/>
+      <ReviewFeed />
 
       <div className="max-w-[1440px] mx-auto px-10 md:px-24 lg:px-48 py-16 overflow-hidden z-10 relative">
 
@@ -75,37 +59,15 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
 
       </div>
 
-      {/* Ad unit between packages and content sections */}
-      {/* <div className="max-w-[1440px] mx-auto px-4 md:px-12 lg:px-24 py-4">
-        <AdUnit />
-      </div> */}
-
-      {mountHeavy ? (
-        <>
-          <YalaMapExplorer />
-          <HomeBlogSection />
-          <MemoryGallery />
-          <ModernReviews />
-          {/* <ElfsightReviews /> */}
-          <PhotoGallery />
-          {/* <ReviewsSection /> */}
-
-          <WhyChooseUs />
-          <GallerySection />
-
-          {/* <FeaturableReviews/> */}
-          <ReviewSlider />
-
-          {/* Ad unit at bottom of page before footer */}
-          {/* <div className="max-w-[1440px] mx-auto px-4 md:px-12 lg:px-24 py-4">
-            <AdUnit />
-          </div> */}
-
-          <DiscountPopup />
-        </>
-      ) : (
-        <div className="h-screen w-full" /> // Placeholder to maintain scroll height
-      )}
+      <YalaMapExplorer />
+      <HomeBlogSection />
+      <MemoryGallery />
+      <ModernReviews />
+      <PhotoGallery />
+      <WhyChooseUs />
+      <GallerySection />
+      <ReviewSlider />
+      <DiscountPopup />
 
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
@@ -114,13 +76,11 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
       >
         <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out selection:bg-[#00ff00] selection:text-black">
 
-
           <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
             <h1 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
               Yala Wildlife
             </h1>
           </div>
-
 
           <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
             <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
@@ -141,7 +101,6 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
           </div>
         </section>
       </AutoSEOWrapper>
-
     </>
   );
 }
