@@ -15,44 +15,53 @@ interface Review {
   text: string;
 }
 
-const SliderCard = ({ review }: { review: Review }) => (
-  <div className="
-    relative flex-shrink-0 w-[280px] md:w-[320px] 
-    bg-black/80 border border-white/5 
-    rounded-[1.5rem] p-5 mx-2
-    transition-all duration-300 hover:scale-[1.01]
-    group cursor-pointer
-  ">
-    {/* 12px Header Info */}
-    <div className="flex items-center gap-3 mb-3">
-      <img
-        src={review.profile_photo_url || "/placeholder-user.jpg"}
-        alt={review.author_name}
-        className="w-10 h-10 rounded-full border border-white/10 object-cover"
-        loading="lazy"
-      />
-      <div className="overflow-hidden">
-        <h4 className="text-white font-bold text-[12px] truncate">{review.author_name}</h4>
-        <div className="flex text-[#00ff00] gap-0.5 mt-0.5">
-          {[...Array(5)].map((_, i) => (
-            <FaStar key={i} className={`w-2.5 h-2.5 ${i < review.rating ? 'fill-current' : 'text-neutral-800'}`} />
-          ))}
+const SliderCard = ({ review }: { review: Review }) => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <div className="
+      relative flex-shrink-0 w-[280px] md:w-[320px] 
+      bg-black/80 border border-white/5 
+      rounded-[1.5rem] p-5 mx-2
+      transition-all duration-300 hover:scale-[1.01]
+      group cursor-pointer
+    ">
+      {/* 12px Header Info */}
+      <div className="flex items-center gap-3 mb-3">
+        <img
+          src={review.profile_photo_url || "/placeholder-user.jpg"}
+          alt={review.author_name}
+          className="w-10 h-10 rounded-full border border-white/10 object-cover"
+          loading="lazy"
+        />
+        <div className="overflow-hidden">
+          <h4 className="text-white font-bold text-[12px] truncate">{review.author_name}</h4>
+          <div className="flex text-[#00ff00] gap-0.5 mt-0.5">
+            {[...Array(5)].map((_, i) => (
+              <FaStar key={i} className={`w-2.5 h-2.5 ${i < review.rating ? 'fill-current' : 'text-neutral-800'}`} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
 
-    {/* 12px Body Text */}
-    <p className="text-white/90 text-[12px] leading-relaxed line-clamp-3 italic">
-      &quot;{review.text}&quot;
-    </p>
+      {/* 12px Body Text */}
+      <p className="text-white/90 text-[12px] leading-relaxed line-clamp-3 italic">
+        &quot;{review.text}&quot;
+      </p>
 
-    {/* Footer */}
-    <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center">
-      <span className="text-[10px] text-neutral-400 uppercase tracking-widest">{review.relative_time_description}</span>
-      <FaQuoteLeft className="text-neutral-800 text-[10px]" />
+      {/* Footer */}
+      <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center">
+        <span className="text-[10px] text-neutral-400 uppercase tracking-widest">
+          {mounted ? review.relative_time_description : ''}
+        </span>
+        <FaQuoteLeft className="text-neutral-800 text-[10px]" />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function ReviewSlider() {
   const [reviews, setReviews] = useState<Review[]>([]);

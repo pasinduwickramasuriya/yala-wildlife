@@ -136,7 +136,7 @@ export default function Footer() {
                 </div>
                 <span className="text-white text-sm font-bold tracking-tight">+94 77 815 8004</span>
               </a>
-              <a href="mailto:pasinduwick@icloud.com" className="group flex items-center gap-3">
+              <a href="mailto:pasindusadanjana17@gmail.com" className="group flex items-center gap-3">
                 <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
                   <Mail size={14} className="text-[#00ff00]" />
                 </div>

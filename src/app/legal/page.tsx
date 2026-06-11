@@ -1,11 +1,16 @@
 'use client';
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Header from "@/components/Header";
 import { RefreshCcw, Lock, FileText } from "lucide-react";
 
 export default function LegalPage() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <main className="relative min-h-screen font-sans selection:bg-[#00ff00] selection:text-black">
       
@@ -132,7 +137,9 @@ export default function LegalPage() {
           {/* --- Footer Note --- */}
           <div className="text-center pt-8 border-t border-white/10 mb-12">
             <p className="text-neutral-300 text-xs font-mono">
-              Legal inquiries: <span className="text-white">pasindusadanjana17@gmail.com</span>
+              Legal inquiries: <span className="text-white">
+                {mounted ? "pasindusadanjana17@gmail.com" : "pasindusadanjana17 [at] gmail.com"}
+              </span>
             </p>
           </div>
 

@@ -103,7 +103,12 @@ const SummaryCard = () => (
 
 const ReviewCard = ({ review }: { review: Review }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const MAX_LENGTH = 100;
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <article className="inline-block w-full break-inside-avoid mb-6 bg-black/80 rounded-3xl p-6 border border-white/5">
@@ -126,7 +131,9 @@ const ReviewCard = ({ review }: { review: Review }) => {
                 </div>
                 <div className="flex flex-col overflow-hidden">
                     <h3 className="font-bold text-white text-[15px] tracking-tight truncate leading-tight">{review.author_name}</h3>
-                    <time className="text-xs text-neutral-500 uppercase tracking-wide mt-0.5">{review.relative_time_description}</time>
+                    {mounted && (
+                        <time className="text-xs text-neutral-500 uppercase tracking-wide mt-0.5">{review.relative_time_description}</time>
+                    )}
                 </div>
             </div>
 

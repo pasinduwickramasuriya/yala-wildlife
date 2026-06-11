@@ -77,9 +77,9 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
         <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out selection:bg-[#00ff00] selection:text-black">
 
           <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
-            <h1 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+            <h2 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
               Yala Wildlife
-            </h1>
+            </h2>
           </div>
 
           <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
