@@ -26,6 +26,7 @@ interface WebSite {
   "@context": "https://schema.org";
   "@type": "WebSite";
   name: string;
+  alternateName?: string[];
   url: string;
   potentialAction: {
     "@type": "SearchAction";
@@ -96,7 +97,8 @@ export const organizationSchema: Organization = {
 export const websiteSchema: WebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Yala Wildlife Safari",
+  "name": "Yala National Park",
+  "alternateName": ["Yala National Park Safari", "Yala Wildlife"],
   "url": "https://yalawildlife.com",
   "potentialAction": {
     "@type": "SearchAction",

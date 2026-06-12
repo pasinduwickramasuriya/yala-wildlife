@@ -90,7 +90,8 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   ];
 
   return {
-    title: `${blog.title} | Top Rated Yala Safari Guide`,
+    // title: `${blog.title} | Top Rated Yala Safari Guide`,
+    title: `Yala National Park | ${blog.title}`,
     description: description,
     applicationName: "Yala Wildlife",
     authors: [{ name: "Yala Wildlife Team", url: "https://yalawildlife.com" }],
@@ -116,7 +117,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
       title: blog.title,
       description: description,
       url: url,
-      siteName: "Yala Wildlife Safari",
+      siteName: "Yala National Park",
       images: images,
       locale: "en_US",
       type: "article",

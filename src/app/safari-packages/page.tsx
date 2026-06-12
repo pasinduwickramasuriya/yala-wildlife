@@ -13,7 +13,7 @@ const BASE_URL = "https://www.yalawildlife.com";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
-  title: "Yala Safari Packages | Best Wildlife Tours Sri Lanka 2025",
+  title: "Yala National Park Packages | Best Wildlife Tours Sri Lanka",
   description: "Book premium Yala safari packages with expert guides. Half-day, full-day & private leopard safaris from $75. Guaranteed wildlife sightings & luxury jeeps. Best rates!",
 
   keywords: [
@@ -235,7 +235,7 @@ export const metadata: Metadata = {
     title: "Yala Safari Packages | Best Wildlife Tours Sri Lanka 2025",
     description: "Book premium Yala safari packages with expert guides. Half-day, full-day & private leopard safaris from $75. Guaranteed wildlife sightings & luxury jeeps!",
     url: `${BASE_URL}/safari-packages`,
-    siteName: "Yala Wildlife Safari | Premier Safari Experience",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {

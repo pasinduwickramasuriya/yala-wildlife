@@ -99,7 +99,8 @@ const BASE_URL = "https://www.yalawildlife.com";
 // ✅ MEGA-SEO: Massive Keyword List for Top Ranking
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Yala Safari Reviews | 4.9/5 Rated by 1000+ Travelers",
+  // title: "Yala Safari Reviews | 4.9/5 Rated by 1000+ Travelers",
+  title: "Yala National Park | Official Site | Travelers Reviews | Yala Sri Lanka",
   description: "Read genuine 5-star reviews for Yala Wildlife Safari. Rated #1 on TripAdvisor & Google. Trusted by families, photographers, and couples for guaranteed leopard sightings.",
   keywords: [
     // --- 🔥 HIGH INTENT & REPUTATION ---
@@ -134,7 +135,7 @@ export const metadata: Metadata = {
     title: "Yala Safari Reviews | See Why We Are Rated #1",
     description: "Real stories from real travelers. 1000+ 5-Star reviews for Yala Wildlife Safari. Book the experience everyone is talking about.",
     url: `${BASE_URL}/reviews`,
-    siteName: "Yala Wildlife Safari",
+    siteName: "Yala National Park",
     images: [{
       url: `${BASE_URL}/og-reviews-yala.jpg`,
       width: 1200,

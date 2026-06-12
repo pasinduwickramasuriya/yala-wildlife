@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 // --- 1. SEO METADATA ---
 export const metadata: Metadata = {
-    title: "Sri Lanka Private Driver & Yala Taxi Service | Island-Wide Transport",
+    title: "Yala National Park | Sri Lanka Private Driver & Taxi Service | Island-Wide Transport",
     description: "Premium island-wide pickup & drop-off service. Luxury KDH vans & cars. Experienced chauffeurs, 24/7 support, and best market rates guaranteed. From Colombo, Ella, Galle, Mirissa to Yala.",
     keywords: [
         "yala taxi service",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
         title: "Premium Island-Wide Transport | Yala Wildlife Safari",
         description: "Safe, reliable, and affordable private transfers to Yala National Park from anywhere in Sri Lanka.",
         images: ["/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"],
-        siteName: "Yala Wildlife Safari",
+        siteName: "Yala National Park",
     },
     alternates: {
         canonical: "https://www.yalawildlife.com/pickup-dropoff",

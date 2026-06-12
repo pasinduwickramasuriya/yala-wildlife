@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const packageData = await getPackage(resolvedParams.slug);
 
-  const title = `${packageData.name} - Best Yala Safari Tour Package | Yala Wildlife Safari`;
+  const title = `Yala National Park | ${packageData.name} - Best Yala Safari Tour Package`;
   const description = `Experience the ultimate ${packageData.name} in Yala National Park. Professional guides, guaranteed wildlife sightings, and comfortable vehicles. Book your adventure today!`;
 
   return {
@@ -136,7 +136,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ],
       type: "website",
       url: `${siteConfig.url}/safari-packages/${packageData.slug}`,
-      siteName: siteConfig.name,
+      siteName: "Yala National Park",
     },
     twitter: {
       card: "summary_large_image",

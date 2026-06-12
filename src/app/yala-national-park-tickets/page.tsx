@@ -5,7 +5,7 @@ const BASE_URL = "https://www.yalawildlife.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Yala National Park Tickets 2026/2027 | Buy DWC Official Permits Online",
+  title: "Yala National Park Tickets | Official Permits Online",
   description: "Buy official 2026/2027 Yala National Park day entry permits online. Use our interactive DWC ticket calculator to instantly calculate passenger admission, vehicle fees, and VAT in USD/LKR. Skip the long ticket queues at the park gate entirely!",
   keywords: [
     "yala national park tickets 2026",
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     title: "Yala National Park Tickets 2026/2027 | Buy DWC Official Permits Online",
     description: "Interactive Yala entry ticket calculator. Calculate passenger fees, vehicle admission charges, and government VAT in LKR & USD. Secure your official permits instantly online!",
     url: `${BASE_URL}/yala-national-park-tickets`,
-    siteName: "Yala Wildlife Safari",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {

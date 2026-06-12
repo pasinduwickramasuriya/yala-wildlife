@@ -258,10 +258,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    title: "Yala Safari Tours | #1 Wildlife Experience Sri Lanka",
+    title: "Yala National Park | Official Site | Yala Sri Lanka",
     description: "Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps. Book your adventure today!",
     url: BASE_URL, // ✅ Always points to main domain only
-    siteName: "Yala Wildlife Safari | Premier Safari Experience",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {

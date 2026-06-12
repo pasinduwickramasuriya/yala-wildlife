@@ -25,7 +25,7 @@ export function generateMetadata({
       url,
       title,
       description,
-      siteName: siteConfig.name,
+      siteName: "Yala National Park",
       images: [
         {
           url: image.startsWith("http") ? image : `${siteConfig.url}${image}`,

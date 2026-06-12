@@ -409,7 +409,7 @@ const BASE_URL = "https://www.yalawildlife.com";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
-  title: "Contact Yala Safari Tours | Book Your Wildlife Adventure Now",
+  title: "Contact Yala National Park | Book Your Wildlife Adventure Now",
   description: "Contact Yala Wildlife Safari for bookings and inquiries. Expert guides, guaranteed leopard sightings, luxury jeeps. Call +94-778-158-004 or email us today!",
 
   keywords: [
@@ -504,7 +504,7 @@ export const metadata: Metadata = {
     title: "Contact Yala Safari Tours | Book Your Wildlife Adventure",
     description: "Contact us for expert-guided Yala safari tours. Guaranteed leopard sightings, luxury jeeps, professional guides. Book your adventure today!",
     url: `${BASE_URL}/contact`,
-    siteName: "Yala Wildlife Safari",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {

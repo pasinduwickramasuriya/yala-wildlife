@@ -19,7 +19,7 @@ const BASE_URL = "https://www.yalawildlife.com";
 // ✅ ENHANCED: Blog page metadata (UNTOUCHED)
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Yala Wildlife Blog | Expert Safari Stories & Wildlife Insights Sri Lanka",
+  title: "Yala National Park | Wildlife Blogs | Expert Safari Stories Sri Lanka",
   description: "Discover expert Yala safari stories, wildlife photography tips, leopard spotting guides, and conservation insights from Sri Lanka's premier national park. Latest wildlife updates & safari advice.",
   keywords: [
     "yala safari blog",
@@ -218,7 +218,7 @@ export const metadata: Metadata = {
     title: "Yala Wildlife Blog | Expert Safari Stories & Wildlife Insights Sri Lanka",
     description: "Discover expert Yala safari stories, wildlife photography tips, leopard spotting guides, and conservation insights from Sri Lanka's premier national park.",
     url: `${BASE_URL}/blog`,
-    siteName: "Yala Wildlife Safari | Premier Safari Experience",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {
