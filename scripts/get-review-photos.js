@@ -11,7 +11,8 @@ const __dirname = path.dirname(__filename);
 // const GOOGLE_MAPS_URL='https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4693098,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D';
 // const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4718847,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D';
 // const GOOGLE_MAPS_URL='https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4718847,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D';
-const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4693098,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D';
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4693098,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D';
+const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4693098,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D';
 
 async function scrapeReviewPhotos() {
   console.log('🚀 Starting Review Photo Scraper...');

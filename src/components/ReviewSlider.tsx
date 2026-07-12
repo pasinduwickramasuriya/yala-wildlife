@@ -149,7 +149,7 @@ export default function ReviewSlider() {
         }
         .animate-infinite-scroll {
           /* ✅ FIXED SPEED: 800s provides a very slow, premium reading pace */
-          animation: infinite-scroll 1500s linear infinite;
+          animation: infinite-scroll 15000s linear infinite;
           width: max-content;
           will-change: transform;
         }

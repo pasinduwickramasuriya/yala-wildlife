@@ -60,7 +60,8 @@ const ModernHeader = ({ reviewCount }: { reviewCount: number }) => (
                 </div>
             </div>
             <span className="text-xs text-neutral-400 uppercase tracking-[0.2em] font-medium">
-                Based on {reviewCount} Verified Visitor Reviews
+                {/* Based on {reviewCount} Verified Visitor Reviews */}
+                Based on Verified Visitor Reviews
             </span>
         </div>
 
