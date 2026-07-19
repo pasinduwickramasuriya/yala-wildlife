@@ -182,6 +182,7 @@ export default async function TourDetailPage({ params }: PageProps) {
             "price": tour.price,
             "priceCurrency": "USD",
             "priceValidUntil": "2027-12-31",
+            "validFrom": "2024-01-01",
             "availability": "https://schema.org/InStock",
             "seller": {
                 "@type": "LocalBusiness",

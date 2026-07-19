@@ -380,6 +380,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "75",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/half-day-morning-safari`
                     }
@@ -396,6 +398,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "75",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/half-day-evening-safari`
                     }
@@ -412,6 +416,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "150",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/full-day-safari`
                     }
@@ -428,6 +434,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "200",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/private-safari`
                     }
@@ -444,6 +452,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "250",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/photography-safari`
                     }
@@ -460,6 +470,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "350",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/luxury-safari`
                     }
