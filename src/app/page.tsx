@@ -387,9 +387,11 @@ export default async function Home() {
     }
   }) as any;
 
+  const heroSections = await prisma.heroSection.findMany() as any;
+
   return (
     <>
-      <ClientHome initialPackages={packages} />
+      <ClientHome initialPackages={packages} initialHeroSections={heroSections} />
 
       {/* Schema markup with consistent BASE_URL */}
       <script

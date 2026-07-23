@@ -78,7 +78,6 @@ const GallerySection = () => {
                   src={image.url}
                   alt={image.title}
                   fill
-                  unoptimized
                   // FIX: Prioritize loading the first 2 images to prevent "stuck" loading on mobile
                   priority={index < 2}
                   // FIX: Tell browser which size to download based on screen width

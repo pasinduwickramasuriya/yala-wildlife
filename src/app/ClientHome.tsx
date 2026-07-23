@@ -25,12 +25,25 @@ interface Package {
   imageUrl?: string;
 }
 
-export default function ClientHome({ initialPackages = [] }: { initialPackages?: Package[] }) {
+interface HeroSection {
+  id: string;
+  imageUrl: string;
+  title: string;
+  subtitle: string;
+}
+
+export default function ClientHome({ 
+  initialPackages = [], 
+  initialHeroSections = [] 
+}: { 
+  initialPackages?: Package[];
+  initialHeroSections?: HeroSection[];
+}) {
   const packages = initialPackages;
 
   return (
     <>
-      <HeroSlider />
+      <HeroSlider initialHeroSections={initialHeroSections} />
       <ReviewFeed />
 
       <div className="max-w-[1440px] mx-auto px-10 md:px-24 lg:px-48 py-16 overflow-hidden z-10 relative">
@@ -52,7 +65,7 @@ export default function ClientHome({ initialPackages = [] }: { initialPackages?:
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-8 lg:gap-10">
           {packages.map((pkg) => (
             <div key={pkg.id} className="flex justify-center">
-              <PackageCard slug={pkg.slug} />
+              <PackageCard pkg={pkg} slug={pkg.slug} />
             </div>
           ))}
         </div>

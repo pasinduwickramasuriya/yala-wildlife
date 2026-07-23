@@ -12,10 +12,10 @@ interface HeroSection {
   subtitle: string;
 }
 
-export default function HeroSlider() {
-  const [heroSections, setHeroSections] = useState<HeroSection[]>([]);
+export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSections?: HeroSection[] }) {
+  const [heroSections, setHeroSections] = useState<HeroSection[]>(initialHeroSections);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(initialHeroSections.length === 0);
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -49,11 +49,13 @@ export default function HeroSlider() {
 
   useEffect(() => {
     setMounted(true);
-    fetchHeroSections();
+    if (initialHeroSections.length === 0) {
+      fetchHeroSections();
+    }
     // Reduce fetch frequency to save bandwidth/performance
     const interval = setInterval(fetchHeroSections, 60000);
     return () => clearInterval(interval);
-  }, [fetchHeroSections]);
+  }, [fetchHeroSections, initialHeroSections.length]);
 
   // --- Auto Slider Logic ---
   useEffect(() => {
@@ -129,7 +131,6 @@ export default function HeroSlider() {
                   alt={slide.title}
                   fill
                   priority={isActive || idx === 0} // Preload active/first frames
-                  unoptimized // Crucial: Bypasses Next.js image optimization delay (fixes black flashes)
                   className="object-cover object-center brightness-[0.85]"
                   style={{ objectFit: 'cover' }}
                   sizes="100vw"
@@ -232,7 +233,6 @@ export default function HeroSlider() {
                   src={card1Data.imageUrl}
                   alt={card1Data.title}
                   fill
-                  unoptimized
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="25vw"
                   quality={50}
@@ -267,7 +267,6 @@ export default function HeroSlider() {
                   src={card2Data.imageUrl}
                   alt={card2Data.title}
                   fill
-                  unoptimized
                   className="object-cover"
                   sizes="20vw"
                   quality={40}

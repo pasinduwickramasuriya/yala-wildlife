@@ -402,8 +402,6 @@
 import {
   motion,
   AnimatePresence,
-  useScroll,
-  useTransform,
 } from "framer-motion";
 import { X, ArrowUpRight, Instagram, Phone, Globe, ChevronDown, Calendar } from "lucide-react";
 import Link from "next/link";
@@ -431,15 +429,21 @@ const YalaLogo = () => (
 );
 
 export default function Header() {
-  const { scrollY } = useScroll();
   const [isOpen, setIsOpen] = useState(false);
   const [packages, setPackages] = useState<Package[]>([]);
   const [expandedPackages, setExpandedPackages] = useState(false);
-
-  // Subtle header scaling on scroll
-  const headerScale = useTransform(scrollY, [0, 100], [1, 0.97]);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen || packages.length > 0) return;
     const fetchPackages = async () => {
       try {
         const response = await fetch("/api/package");
@@ -450,7 +454,7 @@ export default function Header() {
       }
     };
     fetchPackages();
-  }, []);
+  }, [isOpen, packages.length]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "unset";
@@ -476,9 +480,10 @@ export default function Header() {
 
   return (
     <>
-      <motion.header
-        style={{ scale: headerScale }}
-        className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-5 md:p-8 pointer-events-none"
+      <header
+        className={`fixed top-0 left-0 right-0 z-[100] flex justify-center p-5 md:p-8 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform origin-top ${
+          scrolled ? "scale-[0.97]" : "scale-100"
+        }`}
       >
         <div className="flex items-center gap-3 pointer-events-auto">
           {/* --- BRAND PILL --- */}
@@ -504,7 +509,7 @@ export default function Header() {
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
-      </motion.header>
+      </header>
 
       {/* --- OVERLAY MENU --- */}
       {/* --- OVERLAY MENU --- */}

@@ -15,11 +15,16 @@ interface Package {
   imageUrl?: string | null;
 }
 
-export default function PackageCard({ slug }: { slug: string }) {
-  const [pkg, setPackage] = useState<Package | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function PackageCard({ slug, pkg: initialPkg }: { slug: string; pkg?: Package | null }) {
+  const [pkg, setPackage] = useState<Package | null>(initialPkg || null);
+  const [loading, setLoading] = useState(!initialPkg);
 
   useEffect(() => {
+    if (initialPkg) {
+      setPackage(initialPkg);
+      setLoading(false);
+      return;
+    }
     const fetchPackage = async () => {
       try {
         const response = await fetch(`/api/package?slug=${slug}`);
@@ -33,7 +38,7 @@ export default function PackageCard({ slug }: { slug: string }) {
       }
     };
     fetchPackage();
-  }, [slug]);
+  }, [slug, initialPkg]);
 
   if (loading) return <div className="w-[300px] h-[400px] bg-white/5 animate-pulse rounded-[2rem] mx-auto" />;
   if (!pkg) return null;

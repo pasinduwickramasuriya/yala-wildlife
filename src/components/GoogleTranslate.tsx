@@ -465,20 +465,37 @@ export default function GoogleTranslate() {
         "gt-hidden-element"
       );
     };
-    if (!document.getElementById("gt-script")) {
-      const s = document.createElement("script");
-      s.id = "gt-script";
-      s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      s.async = true;
-      document.head.appendChild(s);
-    }
 
-    const interval = setInterval(() => {
-      if (document.body.style.top !== "0px" && document.body.style.top !== "") {
-        document.body.style.top = "0px";
+    const loadScript = () => {
+      if (!document.getElementById("gt-script")) {
+        const s = document.createElement("script");
+        s.id = "gt-script";
+        s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        s.async = true;
+        document.head.appendChild(s);
       }
-    }, 500);
-    return () => clearInterval(interval);
+    };
+
+    // Load after 3 seconds or on first user interaction to maximize initial load performance
+    const timer = setTimeout(loadScript, 3000);
+    const handleInteraction = () => {
+      loadScript();
+      clearTimeout(timer);
+      document.removeEventListener("scroll", handleInteraction);
+      document.removeEventListener("mousemove", handleInteraction);
+      document.removeEventListener("touchstart", handleInteraction);
+    };
+
+    document.addEventListener("scroll", handleInteraction, { passive: true });
+    document.addEventListener("mousemove", handleInteraction, { passive: true });
+    document.addEventListener("touchstart", handleInteraction, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("scroll", handleInteraction);
+      document.removeEventListener("mousemove", handleInteraction);
+      document.removeEventListener("touchstart", handleInteraction);
+    };
   }, []);
 
   useEffect(() => {
