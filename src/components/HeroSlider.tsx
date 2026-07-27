@@ -52,9 +52,6 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
     if (initialHeroSections.length === 0) {
       fetchHeroSections();
     }
-    // Reduce fetch frequency to save bandwidth/performance
-    const interval = setInterval(fetchHeroSections, 60000);
-    return () => clearInterval(interval);
   }, [fetchHeroSections, initialHeroSections.length]);
 
   // --- Auto Slider Logic ---
@@ -72,9 +69,9 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
   }, [heroSections.length, mounted, currentSlide]);
 
   // --- Loading State ---
-  if (!mounted || loading) {
+  if (loading && heroSections.length === 0) {
     return (
-      <div className="min-h-screen w-full flex flex-col items-center justify-center gap-4 p-4">
+      <div className="min-h-screen w-full flex flex-col items-center justify-center gap-4 p-4 bg-black">
         <div className="w-12 h-12 border-4 border-lime-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );

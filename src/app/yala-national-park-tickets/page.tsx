@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import ClientTicketsPage from "./ClientTicketsPage";
 
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
 const BASE_URL = "https://www.yalawildlife.com";
 
 export const metadata: Metadata = {

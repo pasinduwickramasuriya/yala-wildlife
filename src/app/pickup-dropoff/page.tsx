@@ -5,7 +5,7 @@ import TransportForm from "@/components/TransportForm";
 import { MapPin, ShieldCheck, Zap, Clock, Car, Star, UserCheck, Navigation } from "lucide-react";
 import TourNavigator from "@/components/TourNavigator";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
 // --- 1. SEO METADATA ---
 export const metadata: Metadata = {

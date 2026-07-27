@@ -6,6 +6,8 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
 

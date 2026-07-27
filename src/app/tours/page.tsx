@@ -7,7 +7,7 @@ import { TourPackageCard, Tour } from "@/components/TourPackageCard";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
 export const metadata: Metadata = {
     title: "Sri Lanka Tour Packages 2026 | Private Driver & Guided Safaris",

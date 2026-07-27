@@ -64,9 +64,11 @@ const socialLinks = [
 
 const YalaLogo = () => (
   <div className="group flex items-center gap-3">
-    <img
+    <Image
       src="/favicon-96x96.png"
       alt="Yala Wildlife"
+      width={36}
+      height={36}
       className="w-9 h-9 object-contain group-hover:rotate-[15deg] transition-transform duration-500"
     />
     <div className="flex flex-col leading-none">
@@ -88,6 +90,8 @@ export default function Footer() {
           src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
           alt="Yala Leopard"
           fill
+          sizes="100vw"
+          quality={50}
           className="object-cover object-center grayscale-[0.5]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent" />

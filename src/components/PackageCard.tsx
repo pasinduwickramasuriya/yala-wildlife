@@ -1,10 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { ArrowUpRight, MapPin, ShieldCheck } from "lucide-react";
-import "@/app/style/packagecard.css";
 
 interface Package {
   id: string;

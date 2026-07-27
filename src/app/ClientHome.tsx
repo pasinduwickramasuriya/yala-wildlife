@@ -6,15 +6,13 @@ import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
 import ReviewFeed from "@/components/ReviewFeed";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import dynamic from "next/dynamic";
-
-const GallerySection = dynamic(() => import("@/components/GallerySection"), { ssr: false });
-const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"), { ssr: false });
-const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"), { ssr: false });
-const ModernReviews = dynamic(() => import("@/components/ModernReviews"), { ssr: false });
-const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"), { ssr: false });
-const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"), { ssr: false });
-const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"), { ssr: false });
+import GallerySection from "@/components/GallerySection";
+import HomeBlogSection from "@/components/HomeBlogSection";
+import MemoryGallery from "@/components/MemoryGallery";
+import ModernReviews from "@/components/ModernReviews";
+import PhotoGallery from "@/components/PhotoGallery";
+import ReviewSlider from "@/components/ReviewSlider";
+import YalaMapExplorer from "@/components/YalaMapExplorer";
 
 interface Package {
   id: string;

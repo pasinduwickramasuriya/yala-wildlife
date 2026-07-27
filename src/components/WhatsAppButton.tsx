@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { X, Send, ChevronRight } from "lucide-react"; 
 
 // Custom WhatsApp SVG Icon
@@ -138,9 +139,11 @@ export default function WhatsAppButton() {
               {/* Operator Avatar */}
               <div className="relative">
                 <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 bg-white">
-                  <img 
+                  <Image 
                     src="/emma.png" 
-                    alt="Guide Avatar" 
+                    alt="Guide Avatar"
+                    width={40}
+                    height={40}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -165,13 +168,13 @@ export default function WhatsAppButton() {
 
           {/* Chat Body */}
           <div className="h-[280px] bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] p-4 flex flex-col gap-4 overflow-y-auto relative scrollbar-thin">
-            {/* Background Texture Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none"></div>
+            {/* Background Gradient Texture */}
+            <div className="absolute inset-0 opacity-[0.05] bg-radial from-white/10 to-transparent pointer-events-none" />
             
             {/* Greeting Bubble */}
             <div className="flex gap-2.5 max-w-[90%] z-10">
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 bg-white border border-white/10">
-                <img src="/emma.png" alt="Guide Avatar" className="w-full h-full object-cover" />
+                <Image src="/emma.png" alt="Guide Avatar" width={28} height={28} className="w-full h-full object-cover" />
               </div>
               <div className="bg-white/5 border border-white/10 p-3 rounded-2xl rounded-tl-none text-xs text-neutral-200 leading-relaxed shadow-sm">
                 <p className="font-semibold text-white mb-1">Ayubowan! 🌿</p>
@@ -258,9 +261,11 @@ export default function WhatsAppButton() {
             <X className="w-5 h-5" />
           ) : (
             <div className="w-full h-full rounded-full overflow-hidden p-0.5 bg-neutral-900">
-              <img 
+              <Image 
                 src="/emma.png" 
                 alt="Guide Avatar" 
+                width={60}
+                height={60}
                 className="w-full h-full object-cover rounded-full"
               />
               {/* WhatsApp overlapping Badge */}

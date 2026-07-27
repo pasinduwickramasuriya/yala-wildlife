@@ -18,30 +18,8 @@ const GOOGLE_REVIEW_URL = 'https://www.google.com/search?hl=en-LK&gl=lk&q=Yala+W
 
 // --- Sub-Components ---
 
-const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
-    const [displayedText, setDisplayedText] = useState('');
-    const [startTyping, setStartTyping] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => setStartTyping(true), delay);
-        return () => clearTimeout(timer);
-    }, [delay]);
-
-    useEffect(() => {
-        if (!startTyping) return;
-        let index = 0;
-        const intervalId = setInterval(() => {
-            if (index < text.length) {
-                setDisplayedText((prev) => prev + text.charAt(index));
-                index++;
-            } else {
-                clearInterval(intervalId);
-            }
-        }, 15);
-        return () => clearInterval(intervalId);
-    }, [startTyping, text]);
-
-    return <span className="text-sm tracking-normal">{displayedText}{startTyping && displayedText.length < text.length ? <span className="animate-pulse">_</span> : ''}</span>;
+const TypewriterText = ({ text }: { text: string; delay?: number }) => {
+    return <span className="text-sm tracking-normal text-neutral-200">{text}</span>;
 };
 
 const ModernHeader = ({ reviewCount }: { reviewCount: number }) => (

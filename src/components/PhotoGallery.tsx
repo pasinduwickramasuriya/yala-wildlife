@@ -13,8 +13,41 @@ interface Photo {
   slug?: string;
 }
 
+const FALLBACK_PHOTOS: Photo[] = [
+  {
+    id: 1,
+    title: "Elusive Leopard on Granite Rock",
+    content: "Spotting a Sri Lankan leopard basking on Patanangala rock in Yala Block 1.",
+    imageUrl: "/uploads/yala1.webp",
+  },
+  {
+    id: 2,
+    title: "Elephant Herd by Menik River",
+    content: "Majestic Asian elephants gathering at the river bank during twilight.",
+    imageUrl: "/uploads/yala2.webp",
+  },
+  {
+    id: 3,
+    title: "Sloth Bear Foraging",
+    content: "Rare sighting of a sloth bear searching for palu fruit in the dry zone scrub.",
+    imageUrl: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 4,
+    title: "Crocodile Lagoon",
+    content: "Mugger crocodiles basking along the saline lagoon shorelines.",
+    imageUrl: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 5,
+    title: "Painted Stork & Wetland Birds",
+    content: "Over 200 species of migratory and endemic birds soaring across Yala's sanctuaries.",
+    imageUrl: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?q=80&w=1200&auto=format&fit=crop",
+  },
+];
+
 export default function AppleCuteGallery() {
-  const [displayPhotos, setDisplayPhotos] = useState<Photo[]>([]);
+  const [displayPhotos, setDisplayPhotos] = useState<Photo[]>(FALLBACK_PHOTOS);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,11 +55,14 @@ export default function AppleCuteGallery() {
     const fetchPhotos = async () => {
       try {
         const response = await fetch("/api/blogs/featured");
-        if (!response.ok) throw new Error("Failed to fetch");
-        const data = await response.json();
-        if (Array.isArray(data)) setDisplayPhotos(data);
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setDisplayPhotos(data);
+          }
+        }
       } catch (error) {
-        console.error("Gallery Fetch Error:", error);
+        console.warn("Gallery sync notice (using fallback data):", error);
       } finally {
         setLoading(false);
       }

@@ -188,43 +188,27 @@
   }
 
   body {
-
     @apply bg-background text-foreground;
-
     background-image: radial-gradient(circle at 1px 1px, oklch(1 0 0 / 5%) 1px, transparent 0);
-
     background-size: 2rem 2rem;
-
     font-feature-settings: "rlig" 1, "calt" 1;
-
-    transition: background-color 0.3s ease, color 0.3s ease;
-
   }
 
   h1, h2, h3, h4, h5, h6 {
-
     @apply font-sans font-bold tracking-tight;
-
   }
 
   p {
-
     @apply text-base leading-relaxed text-muted-foreground;
-
   }
 
   button, a {
-
-    @apply transition-all duration-200 ease-in-out;
-
+    @apply transition-opacity transition-transform duration-200 ease-in-out;
   }
 
   button:hover, a:hover {
-
     @apply opacity-90;
-
   }
-
 }
 
 

@@ -13,7 +13,9 @@ import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
 // import AdUnit from "@/components/AdUnit";
 
-//  SEO-OPTIMIZED: Base URL for consisten
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
+// SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
 
 // ✅ ENHANCED: Blog page metadata (UNTOUCHED)

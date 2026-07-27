@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 const WhatsAppButton = dynamic(() => import("./WhatsAppButton"), { ssr: false });
 const GoogleTranslate = dynamic(() => import("./GoogleTranslate"), { ssr: false });
 const ChatAssistant = dynamic(() => import("./ChatAssistant"), { ssr: false });
-const SEOIndicator = dynamic(() => import("./SEOIndicator").then((mod) => mod.SEOIndicator), { ssr: false });
 
 export default function ClientWidgets() {
   useEffect(() => {
@@ -40,7 +39,6 @@ export default function ClientWidgets() {
       <WhatsAppButton />
       <GoogleTranslate />
       <ChatAssistant />
-      <SEOIndicator />
     </>
   );
 }

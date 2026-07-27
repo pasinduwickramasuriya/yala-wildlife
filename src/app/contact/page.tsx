@@ -237,164 +237,6 @@
 //                 <div className="backdrop-blur-md bg-green-900/20 border border-green-500/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
 //                   <Clock className="mb-2 text-green-400" />
 //                   <span className="text-2xl font-bold text-white">20 mins</span>
-//                   <span className="text-xs text-neutral-400 uppercase">From Park Entrance</span>
-//                 </div>
-//                 <div className="backdrop-blur-md bg-green-900/20 border border-green-500/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-//                   <ShieldCheck className="mb-2 text-green-400" />
-//                   <span className="text-2xl font-bold text-white">100%</span>
-//                   <span className="text-xs text-neutral-400 uppercase">Verified Guides</span>
-//                 </div>
-//               </div>
-
-//             </div>
-
-//             {/* RIGHT COLUMN: The Form */}
-//             <div className="lg:col-span-7">
-//               <div className="backdrop-blur-xl bg-black/40  rounded-3xl p-8 md:p-10 shadow-2xl ring-1 ring-white/5 relative overflow-hidden">
-
-//                 <div className="absolute -top-20 -right-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-//                 <div className="relative z-10 mb-8">
-//                   <h2 className="text-3xl font-bold text-white mb-2">Secure Your Safari</h2>
-//                   <p className="text-neutral-400">Fill out the details below. Our team responds within 2 hours with a curated itinerary.</p>
-//                 </div>
-
-//                 <div className="contact-form-wrapper">
-//                   <ContactForm />
-//                 </div>
-//               </div>
-//             </div>
-
-//           </div>
-//         </div>
-//       </main>
-
-//       {/* ✅ SEO-ENHANCED: Structured Data for Contact Page (UNTOUCHED) */}
-//       <script
-//         type="application/ld+json"
-//         dangerouslySetInnerHTML={{
-//           __html: JSON.stringify({
-//             "@context": "https://schema.org",
-//             "@type": "ContactPage",
-//             "name": "Contact Yala Wildlife Safari",
-//             "description": "Contact information for Yala Wildlife Safari tours and bookings",
-//             "url": `${BASE_URL}/contact`,
-//             "mainEntity": {
-//               "@type": "LocalBusiness",
-//               "name": "Yala Wildlife Safari",
-//               "image": `${BASE_URL}/yala-safari-office.jpg`,
-//               "telephone": "+94-778-158-004",
-//               "email": "pasindusadanjana17@gmail.com",
-//               "address": {
-//                 "@type": "PostalAddress",
-//                 "streetAddress": "Wickrama Kasingama, Tissamaharama Road",
-//                 "addressLocality": "Tissamaharama",
-//                 "addressRegion": "Southern Province",
-//                 "postalCode": "82600",
-//                 "addressCountry": "LK"
-//               },
-//               "geo": {
-//                 "@type": "GeoCoordinates",
-//                 "latitude": 6.3747,
-//                 "longitude": 81.1185
-//               },
-//               "openingHoursSpecification": [
-//                 {
-//                   "@type": "OpeningHoursSpecification",
-//                   "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//                   "opens": "06:00",
-//                   "closes": "20:00"
-//                 }
-//               ],
-//               "serviceType": "Safari Tours",
-//               "areaServed": "Yala National Park, Sri Lanka"
-//             }
-//           }),
-//         }}
-//       />
-
-//       {/* ✅ SEO-ENHANCED: Breadcrumb Schema (UNTOUCHED) */}
-//       <script
-//         type="application/ld+json"
-//         dangerouslySetInnerHTML={{
-//           __html: JSON.stringify({
-//             "@context": "https://schema.org",
-//             "@type": "BreadcrumbList",
-//             "itemListElement": [
-//               {
-//                 "@type": "ListItem",
-//                 "position": 1,
-//                 "name": "Home",
-//                 "item": BASE_URL
-//               },
-//               {
-//                 "@type": "ListItem",
-//                 "position": 2,
-//                 "name": "Contact",
-//                 "item": `${BASE_URL}/contact`
-//               }
-//             ]
-//           }),
-//         }}
-//       />
-
-//       <AutoSEOWrapper
-//         pageTitle="Contact Yala Wildlife Safari | Book Your Tour +94 778 158 004"
-//         pageDescription="Contact Yala Wildlife Safari for bookings and inquiries. Available 24/7 via phone, WhatsApp, and email. Based in Tissamaharama, Sri Lanka."
-//         pageType="contact"
-//       >
-
-//         <div className="container mx-auto px-4 py-8">
-//           {/* Glass Container */}
-//           <div className="backdrop-blur-xl bg-black/40  rounded-3xl p-8 md:p-12 shadow-2xl">
-
-
-//             <h1 className="text-3xl md:text-2xl font-bold text-green-400 mb-6 tracking-tight text-center">
-//               Contact Yala Wildlife Safari
-//             </h1>
-
-//             <div className="space-y-6 text-neutral-200 text-lg leading-relaxed font-light">
-//               <p>
-//                 Ready to experience the thrill of Yala National Park? Contact our friendly
-//                 team to book your safari, ask questions, or request custom tour packages.
-//                 We are available <span className="text-green-400 font-medium">24/7</span> to assist with all your safari needs.
-//               </p>
-
-//               <p>
-//                 Our office is conveniently located in Tissamaharama, just minutes from Yala
-//                 National Park entrance. Reach us via <span className="text-white font-medium">Phone, WhatsApp, or Email</span> for instant
-//                 booking confirmations and personalized travel advice from our experienced team.
-//               </p>
-
-//               <p>
-//                 Booking your Yala safari is simple and hassle-free. Contact us with your
-//                 preferred date, group size, and package choice. Well confirm availability
-//                 instantly and send booking confirmation with payment details. We accept bank
-//                 transfers, credit cards, and cash payments.
-//               </p>
-
-//               <p>
-//                 Looking for a personalized safari experience? Contact us for custom tour packages
-//                 tailored to your interests — <span className="text-white font-medium">wildlife photography tours, bird watching expeditions</span>,
-//                 multi-day safaris, or combined tours visiting multiple Sri Lankan national parks.
-//               </p>
-
-//               <p>
-//                 Yala National Park is located approximately 300 km from Colombo and 3 hours from
-//                 Galle. We can arrange transportation from major cities. Contact us for travel
-//                 advice, accommodation recommendations, and detailed directions to make your journey
-//                 smooth and enjoyable.
-//               </p>
-//             </div>
-
-//           </div>
-//         </div>
-//       </AutoSEOWrapper>
-//     </>
-//   );
-// }
-
-
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -403,9 +245,11 @@ import LocationMap from "@/components/LocationMap";
 import { Phone, Clock, ShieldCheck, UserCheck, MessageCircle, Mail, Landmark, Globe, Printer } from "lucide-react";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
 const BASE_URL = "https://www.yalawildlife.com";
 
-// ✅ SEO-ENHANCED: Contact page metadata (UNTOUCHE
+// ✅ SEO-ENHANCED: Contact page metadata
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
