@@ -14,6 +14,7 @@ import {
 } from "@/lib/schema";
 import ClientWidgets from "@/components/ClientWidgets";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -72,6 +73,7 @@ export default function RootLayout({
         {/* <DotsBackground/> */}
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
