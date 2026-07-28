@@ -183,9 +183,51 @@ type Blog = {
     createdAt: string;
 };
 
+const FALLBACK_BLOGS: Blog[] = [
+    {
+        id: "fb-1",
+        title: "Leopard Spotting in Yala Block 1",
+        content: "Discover the best granite outcrops and watering holes for spotting Sri Lankan leopards.",
+        imageUrl: "/uploads/yala1.webp",
+        slug: "leopard-spotting-yala-block-1",
+        createdAt: new Date().toISOString(),
+    },
+    {
+        id: "fb-2",
+        title: "The Wild Elephant Herds of Menik River",
+        content: "Experience Asian elephants gathering along the Menik River banks.",
+        imageUrl: "/uploads/yala2.webp",
+        slug: "wild-elephant-herds-menik-river",
+        createdAt: new Date().toISOString(),
+    },
+    {
+        id: "fb-3",
+        title: "Complete Guide to Yala Safari Seasons",
+        content: "Plan your wildlife trip with expert tips on climate and waterhole activity.",
+        imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1784456381/blogs/jqbr6khinkvptii7ax0c.jpg",
+        slug: "yala-safari-seasons-guide",
+        createdAt: new Date().toISOString(),
+    },
+    {
+        id: "fb-4",
+        title: "Sloth Bears & Rare Birdlife of Yala",
+        content: "Uncover Yala's incredible biodiversity beyond big cats.",
+        imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1784789489/blogs/cey5tcc2jkxwzj4kd9dc.jpg",
+        slug: "sloth-bears-rare-birdlife",
+        createdAt: new Date().toISOString(),
+    },
+    {
+        id: "fb-5",
+        title: "Luxury 4x4 Jeep Safari Experience",
+        content: "Why an upgraded custom 4x4 jeep makes all the difference.",
+        imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1784792078/blogs/q9pbmwka9hce9zfydocc.jpg",
+        slug: "luxury-4x4-jeep-safari",
+        createdAt: new Date().toISOString(),
+    }
+];
+
 export default function HomeBlogSection() {
-    const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [blogs, setBlogs] = useState<Blog[]>(FALLBACK_BLOGS);
 
     useEffect(() => {
         async function fetchBlogs() {
@@ -198,14 +240,11 @@ export default function HomeBlogSection() {
                 }
             } catch (error) {
                 console.error("Failed to load blogs");
-            } finally {
-                setLoading(false);
             }
         }
         fetchBlogs();
     }, []);
 
-    if (loading) return <BlogSkeleton />;
     if (blogs.length === 0) return null;
 
     return (

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import Header from "@/components/Header";
 import TransportForm from "@/components/TransportForm";
 import { MapPin, ShieldCheck, Zap, Clock, Car, Star, UserCheck, Navigation } from "lucide-react";
 import TourNavigator from "@/components/TourNavigator";
@@ -95,7 +94,6 @@ const transportSchema = {
 export default function PickupDropoffPage() {
     return (
         <>
-            <Header />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(transportSchema) }} />
 
             <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30 font-sans pt-24 sm:pt-32">

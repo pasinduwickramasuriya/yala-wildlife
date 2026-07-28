@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
@@ -352,8 +351,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Header />
-
       <div className="min-h-screen text-white relative">
 
         {/* =========================================

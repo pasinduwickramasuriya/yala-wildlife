@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/seo-config";
-import Header from "@/components/Header";
 import BookingForm from "@/components/BookingForm";
 import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
@@ -545,11 +544,6 @@ export default async function PackageDetailPage(props: any) {
       />
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <FAQJsonLd faqs={defaultFAQs} />
-
-      {/* Ensure your Header component has 'absolute' or 'fixed' styling 
-          so it floats OVER the hero rather than pushing it down.
-      */}
-      <Header />
 
       <main className="relative min-h-screen bg-black text-white selection:bg-[#00ff00]/30 font-sans overflow-x-hidden">
 

@@ -110,9 +110,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
                 </div>
                 <div className="flex flex-col overflow-hidden">
                     <h3 className="font-bold text-white text-[15px] tracking-tight truncate leading-tight">{review.author_name}</h3>
-                    {mounted && (
-                        <time className="text-xs text-neutral-500 uppercase tracking-wide mt-0.5">{review.relative_time_description}</time>
-                    )}
+                    <time className="text-xs text-neutral-500 uppercase tracking-wide mt-0.5">{review.relative_time_description}</time>
                 </div>
             </div>
 

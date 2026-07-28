@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/Header";
 import prisma from "@/lib/prisma";
 import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { Metadata } from "next";
@@ -257,9 +256,6 @@ export default async function BlogPost({ params }: BlogPostProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-
-      <Header />
-
       <main className="relative min-h-screen w-full text-white overflow-x-hidden selection:bg-[#00ff00] selection:text-black font-sans">
 
         {/* --- 3. Background Layer (High Visibility + Fixed) --- */}

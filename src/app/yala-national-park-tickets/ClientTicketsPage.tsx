@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { countries } from "countries-list";
-import Header from "@/components/Header";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import {
   Calendar,
@@ -288,8 +287,6 @@ export default function ClientTicketsPage() {
   const today = useMemo(() => new Date().toLocaleDateString("en-ca"), []);
   return (
     <>
-      <Header />
-
       <main className="relative min-h-screen text-white bg-transparent selection:bg-[#00ff00] selection:text-black font-sans pb-16">
 
         {/* ================= BACKGROUND INTERCEPT ================= */}

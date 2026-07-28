@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
 import GetCustomerReviews from "@/components/GetCustomerReviews";
 import ShowReviews from "@/components/ShowReviews";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
@@ -93,8 +92,6 @@ export default function ReviewsPage() {
           })
         }}
       />
-
-      <Header />
 
       {/* 1. GOOGLE/AI SUMMARY SECTION */}
       <ModernReviews />

@@ -12,40 +12,53 @@ interface HeroSection {
   subtitle: string;
 }
 
+const DEFAULT_HERO_SECTIONS: HeroSection[] = [
+  {
+    id: "default-1",
+    title: "YALA WILDLIFE SAFARI",
+    subtitle: "Experience Sri Lanka's premier national park with guaranteed leopard sightings and luxury 4x4 jeeps.",
+    imageUrl: "/uploads/yala1.webp",
+  },
+  {
+    id: "default-2",
+    title: "WILD ELEPHANT HERDS",
+    subtitle: "Watch majestic Asian elephants gathering along the scenic Menik River bank at dusk.",
+    imageUrl: "/uploads/yala2.webp",
+  },
+  {
+    id: "default-3",
+    title: "EXPERT SAFARI GUIDES",
+    subtitle: "Custom tailored wildlife game drives led by top naturalist trackers in Yala Block 1.",
+    imageUrl: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
+  },
+];
+
 export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSections?: HeroSection[] }) {
-  const [heroSections, setHeroSections] = useState<HeroSection[]>(initialHeroSections);
+  const [heroSections, setHeroSections] = useState<HeroSection[]>(
+    initialHeroSections.length > 0 ? initialHeroSections : DEFAULT_HERO_SECTIONS
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [loading, setLoading] = useState(initialHeroSections.length === 0);
-  const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
   // --- Data Fetching ---
   const fetchHeroSections = useCallback(async () => {
     try {
       const res = await fetch("/api/hero", {
-        next: { revalidate: 60 } // Removed cache: 'no-store' to allow CDN/Server caching for instant load
+        next: { revalidate: 60 }
       });
-      if (!res.ok) throw new Error(`Failed to fetch`);
+      if (!res.ok) return;
       const data = await res.json();
 
       if (Array.isArray(data) && data.length > 0) {
         setHeroSections(prev => {
-          // Only update if data changed to prevent re-renders
           if (JSON.stringify(prev) !== JSON.stringify(data)) return data;
           return prev;
         });
-        // PERFORMANCE FIX: Only reset slide if it's the first load
-        if (heroSections.length === 0) setCurrentSlide(0);
-      } else {
-        setError("No data found");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
-      setError("System Offline");
-    } finally {
-      setLoading(false);
+    } catch {
+      // Retain fallback hero sections silently
     }
-  }, [heroSections.length]);
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -68,36 +81,13 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
     return () => clearTimeout(timeout);
   }, [heroSections.length, mounted, currentSlide]);
 
-  // --- Loading State ---
-  if (loading && heroSections.length === 0) {
-    return (
-      <div className="min-h-screen w-full flex flex-col items-center justify-center gap-4 p-4 bg-black">
-        <div className="w-12 h-12 border-4 border-lime-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  // --- Error State ---
-  if (error || heroSections.length === 0) {
-    return (
-      <div className="min-h-screen w-full bg-black flex items-center justify-center text-white p-4">
-        <p className="text-xs font-mono tracking-widest text-lime-500 border border-lime-500/30 px-6 py-3 rounded-full">
-          NO SIGNAL
-        </p>
-      </div>
-    );
-  }
-
   // --- Data Setup ---
-  const section = heroSections[currentSlide];
+  const section = heroSections[currentSlide] || DEFAULT_HERO_SECTIONS[0];
   const nextSlideIndex = (currentSlide + 1) % heroSections.length;
   const nextNextSlideIndex = (currentSlide + 2) % heroSections.length;
 
-  // PERFORMANCE: Calculate next image for preloading
-  const nextImageToPreload = heroSections[nextSlideIndex]?.imageUrl;
-
-  const card1Data = heroSections[nextSlideIndex];
-  const card2Data = heroSections[nextNextSlideIndex];
+  const card1Data = heroSections[nextSlideIndex] || DEFAULT_HERO_SECTIONS[1] || section;
+  const card2Data = heroSections[nextNextSlideIndex] || DEFAULT_HERO_SECTIONS[2] || section;
 
   const titleWords = section.title ? section.title.split(" ") : ["YALA", "WILDLIFE"];
   const firstWord = titleWords[0];
@@ -105,13 +95,6 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black">
-
-      {/* 0. PERFORMANCE HACK: <link rel="preload"> (Instead of rendering hidden images)
-          Let the browser handle native preloading of the next hero image.
-      */}
-      {nextImageToPreload && (
-        <link rel="preload" as="image" href={nextImageToPreload} />
-      )}
 
       {/* 1. BACKGROUND IMAGE - GPU OPTIMIZED */}
       <div className="absolute inset-0 w-full h-full bg-black z-0">

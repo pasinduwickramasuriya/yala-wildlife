@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Header from "@/components/Header";
 import { RefreshCcw, Lock, FileText } from "lucide-react";
 
 export default function LegalPage() {
@@ -30,7 +29,6 @@ export default function LegalPage() {
 
       {/* --- Content Layer --- */}
       <div className="relative z-10">
-        <Header />
 
         <div className="container mx-auto px-4 py-24 max-w-4xl">
           

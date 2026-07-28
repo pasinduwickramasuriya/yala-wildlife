@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Header from "@/components/Header";
 import PackageCard from "@/components/PackageCard";
 import { OrganizationJsonLd, LocalBusinessJsonLd } from "@/components/JsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
@@ -83,7 +82,6 @@ export default function ClientSafariPackages() {
       ))}
 
       <div className="min-h-screen bg-[#050505] relative text-white overflow-hidden selection:bg-green-500/30">
-        <Header />
 
         {/* =========================================
             BACKGROUND IMAGE SECTION - UPDATED FOR VISIBILITY

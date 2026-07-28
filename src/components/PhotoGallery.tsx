@@ -30,19 +30,19 @@ const FALLBACK_PHOTOS: Photo[] = [
     id: 3,
     title: "Sloth Bear Foraging",
     content: "Rare sighting of a sloth bear searching for palu fruit in the dry zone scrub.",
-    imageUrl: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1784789489/blogs/cey5tcc2jkxwzj4kd9dc.jpg",
   },
   {
     id: 4,
     title: "Crocodile Lagoon",
     content: "Mugger crocodiles basking along the saline lagoon shorelines.",
-    imageUrl: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1785222594/blogs/adlf5cxnu4hjbwvlvlkf.jpg",
   },
   {
     id: 5,
     title: "Painted Stork & Wetland Birds",
     content: "Over 200 species of migratory and endemic birds soaring across Yala's sanctuaries.",
-    imageUrl: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "/uploads/yala2.webp",
   },
 ];
 
@@ -71,16 +71,6 @@ export default function AppleCuteGallery() {
     };
     fetchPhotos();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="w-full h-[40vh] flex items-center justify-center">
-        <p className="text-[#00ff00] font-mono text-[10px] tracking-[0.3em] uppercase animate-pulse">
-          Syncing...
-        </p>
-      </div>
-    );
-  }
 
   return (
     <section className="relative w-full py-12 md:py-20 px-4 md:px-12 bg-transparent text-white overflow-hidden">
