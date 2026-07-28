@@ -127,7 +127,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
                   src={slide.imageUrl}
                   alt={slide.title}
                   fill
-                  priority={isActive || idx === 0} // Preload active/first frames
+                  priority={idx === 0} // Preload only initial frame for maximum LCP performance
                   className="object-cover object-center brightness-[0.85]"
                   style={{ objectFit: 'cover' }}
                   sizes="100vw"

@@ -58,7 +58,9 @@ export default function AppleCuteGallery() {
         if (response.ok) {
           const data = await response.json();
           if (Array.isArray(data) && data.length > 0) {
-            setDisplayPhotos(data);
+            // High performance client-side shuffle for distinct photos
+            const shuffled = [...data].sort(() => 0.5 - Math.random());
+            setDisplayPhotos(shuffled.slice(0, 5));
           }
         }
       } catch (error) {
@@ -204,6 +206,7 @@ function ImageCard({ photo, onClick, priority = false }: { photo: Photo | null, 
         src={photo.imageUrl}
         alt={photo.title}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={priority}
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />

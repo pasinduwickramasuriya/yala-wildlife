@@ -192,7 +192,10 @@ export default function HomeBlogSection() {
             try {
                 const res = await fetch("/api/blogs/featured");
                 const data = await res.json();
-                setBlogs(data);
+                if (Array.isArray(data) && data.length > 0) {
+                    const shuffled = [...data].sort(() => 0.5 - Math.random());
+                    setBlogs(shuffled.slice(0, 5));
+                }
             } catch (error) {
                 console.error("Failed to load blogs");
             } finally {
@@ -266,7 +269,7 @@ export default function HomeBlogSection() {
 function BlogSkeleton() {
     return (
         <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-0 p-0 m-0 border-none overflow-hidden">
-            {[...Array(6)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
                 <div key={i} className="aspect-square bg-neutral-900 animate-pulse border-none" />
             ))}
         </div>

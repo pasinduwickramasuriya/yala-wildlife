@@ -44,6 +44,46 @@ const FALLBACK_BLOGS = [
     slug: "luxury-4x4-jeep-safari",
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "fb-6",
+    title: "Spotted Deer in Golden Morning Light",
+    content: "Graceful Axis deer grazing along the open savannahs of Yala during early morning safaris.",
+    imageUrl: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?q=80&w=1200&auto=format&fit=crop",
+    slug: "spotted-deer-golden-light",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "fb-7",
+    title: "Peacocks of Patanangala Dunes",
+    content: "Vibrant Indian peacocks displaying magnificent plumage across the coastal dunes.",
+    imageUrl: "https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=1200&auto=format&fit=crop",
+    slug: "peacocks-patanangala-dunes",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "fb-8",
+    title: "Sunset silhouetting Wild Water Buffalo",
+    content: "Massive wild water buffalo wallowing in Palatupana lagoon under sunset skies.",
+    imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+    slug: "sunset-wild-water-buffalo",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "fb-9",
+    title: "Crested Serpent Eagle in Canopy",
+    content: "Spotting majestic birds of prey perched high atop dry zone forest trees.",
+    imageUrl: "https://images.unsplash.com/photo-1618281377501-88c2328cbb9a?q=80&w=1200&auto=format&fit=crop",
+    slug: "crested-serpent-eagle-canopy",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "fb-10",
+    title: "Mugger Crocodile Basking on Sandbanks",
+    content: "Giant reptiles warming up along riverbanks and watering holes of Block 1.",
+    imageUrl: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=1200&auto=format&fit=crop",
+    slug: "mugger-crocodile-basking",
+    createdAt: new Date().toISOString(),
+  }
 ];
 
 export async function GET() {
@@ -67,10 +107,7 @@ export async function GET() {
       return NextResponse.json(FALLBACK_BLOGS, { status: 200 });
     }
 
-    const shuffled = [...blogs].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 5);
-
-    return NextResponse.json(selected, { status: 200 });
+    return NextResponse.json(blogs, { status: 200 });
   } catch (error) {
     console.error("Error fetching featured blogs, returning fallback data:", error);
     return NextResponse.json(FALLBACK_BLOGS, { status: 200 });

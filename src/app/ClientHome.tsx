@@ -1,18 +1,21 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import DiscountPopup from "@/components/DiscountPopup";
 import HeroSlider from "@/components/HeroSlider";
 import PackageCard from "@/components/PackageCard";
 import ReviewFeed from "@/components/ReviewFeed";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import GallerySection from "@/components/GallerySection";
-import HomeBlogSection from "@/components/HomeBlogSection";
-import MemoryGallery from "@/components/MemoryGallery";
-import ModernReviews from "@/components/ModernReviews";
-import PhotoGallery from "@/components/PhotoGallery";
-import ReviewSlider from "@/components/ReviewSlider";
-import YalaMapExplorer from "@/components/YalaMapExplorer";
+
+// Dynamic code-splitting for below-the-fold components to optimize FCP, LCP, and TBT
+const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
+const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
+const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"));
+const ModernReviews = dynamic(() => import("@/components/ModernReviews"));
+const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const GallerySection = dynamic(() => import("@/components/GallerySection"));
+const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"));
+const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"), { ssr: false });
 
 interface Package {
   id: string;

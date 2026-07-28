@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 import { Star, MapPin, Quote, ArrowUpRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // Use a more robust interface
 interface ReviewPhoto {
@@ -105,12 +105,13 @@ export default function HierarchicalReviewGrid() {
                             viewport={{ once: true }}
                             className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden min-h-[400px] md:min-h-0 shadow-lg"
                         >
-                            <img
+                            <Image
                                 src={reviews[0].url}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 alt={`Review by ${reviews[0].authorName}`}
-                                loading="eager" // Hero image should load fast
-                                decoding="async"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                priority
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />
 
@@ -169,12 +170,12 @@ export default function HierarchicalReviewGrid() {
                             viewport={{ once: true }}
                             className="relative group rounded-[2.5rem] overflow-hidden aspect-square sm:aspect-auto shadow-lg"
                         >
-                            <img
+                            <Image
                                 src={reviews[2].url}
-                                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                                 alt="Safari Snapshot"
-                                loading="lazy"
-                                decoding="async"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 25vw"
+                                className="object-cover transition-all duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <ArrowUpRight className="text-white w-8 h-8" />
