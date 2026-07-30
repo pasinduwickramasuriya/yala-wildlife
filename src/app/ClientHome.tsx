@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import HeroSlider from "@/components/HeroSlider";
-import PackageCard from "@/components/PackageCard";
+import SafariPackagesCarousel from "@/components/SafariPackagesCarousel";
 import ReviewFeed from "@/components/ReviewFeed";
 
 // Dynamic code-splitting for below-the-fold components to optimize FCP, LCP, and TBT
@@ -47,7 +47,7 @@ export default function ClientHome({
       <HeroSlider initialHeroSections={initialHeroSections} />
       <ReviewFeed />
 
-      <div className="max-w-[1440px] mx-auto px-10 md:px-24 lg:px-48 py-16 overflow-hidden z-10 relative">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-16 overflow-hidden z-10 relative">
 
         {/* --- 1. TITLE ISLAND --- */}
         <div className="flex flex-col items-center justify-center w-full mb-10 animate-in fade-in zoom-in duration-1000">
@@ -62,14 +62,8 @@ export default function ClientHome({
 
         </div>
 
-        {/* --- 2. GRID TRACK --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-8 lg:gap-10">
-          {packages.map((pkg) => (
-            <div key={pkg.id} className="flex justify-center">
-              <PackageCard pkg={pkg} slug={pkg.slug} />
-            </div>
-          ))}
-        </div>
+        {/* --- 2. CAROUSEL TRACK --- */}
+        <SafariPackagesCarousel packages={packages} />
 
       </div>
 

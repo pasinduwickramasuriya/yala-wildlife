@@ -14,7 +14,7 @@ interface Package {
   imageUrl?: string | null;
 }
 
-export default function PackageCard({ slug, pkg: initialPkg }: { slug: string; pkg?: Package | null }) {
+export default function PackageCard({ slug, pkg: initialPkg, isPriority = false }: { slug: string; pkg?: Package | null; isPriority?: boolean }) {
   const [pkg, setPackage] = useState<Package | null>(initialPkg || null);
   const [loading, setLoading] = useState(!initialPkg);
 
@@ -59,7 +59,9 @@ export default function PackageCard({ slug, pkg: initialPkg }: { slug: string; p
               // Added transform-gpu and will-change to prevent flickering/shrinking issues on desktop
               className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-100 transform-gpu will-change-transform"
               sizes="(max-width: 320px) 100vw, 320px"
-              priority
+              priority={isPriority}
+              loading={isPriority ? undefined : "lazy"}
+              quality={65}
             />
             {/* Dark Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent pointer-events-none" />
