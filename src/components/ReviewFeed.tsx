@@ -100,7 +100,26 @@ export default function HierarchicalReviewGrid() {
                 "position": i + 1,
                 "author": { "@type": "Person", "name": r.authorName },
                 "reviewBody": r.reviewText,
-                "reviewRating": { "@type": "Rating", "ratingValue": r.rating }
+                "reviewRating": { 
+                    "@type": "Rating", 
+                    "ratingValue": r.rating,
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "itemReviewed": {
+                    "@type": "LocalBusiness",
+                    "name": "Yala Wildlife Safari",
+                    "image": "https://www.yalawildlife.com/logo.png",
+                    "url": "https://www.yalawildlife.com",
+                    "telephone": "+94-778-158-004",
+                    "priceRange": "$$",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Tissamaharama",
+                        "addressRegion": "Southern Province",
+                        "addressCountry": "LK"
+                    }
+                }
             }))
         };
     }, [reviews]);

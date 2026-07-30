@@ -72,8 +72,10 @@ export default function ReviewsPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
+            "@id": `${BASE_URL}/#organization`,
             "name": "Yala Wildlife Safari",
-            "image": "https://www.yalawildlife.com/logo.png",
+            "url": BASE_URL,
+            "image": `${BASE_URL}/logo.png`,
             "telephone": "+94-778-158-004",
             "priceRange": "$$",
             "address": {

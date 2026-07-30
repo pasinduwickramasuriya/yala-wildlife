@@ -145,14 +145,14 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
       {/* --- MAIN CAROUSEL ROW: LEFT ARROW + CAROUSEL TRACK + RIGHT ARROW --- */}
       <div className="relative flex items-center justify-between w-full">
         
-        {/* Petite Left Arrow Button */}
+        {/* Left Arrow Button */}
         {packages.length > visibleCount && (
           <button
             onClick={handlePrev}
             aria-label="Previous Slide"
-            className="absolute -left-1 sm:-left-3 lg:-left-5 z-30 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-black/90 border border-white/15 text-white hover:text-black hover:bg-[#00ff00] hover:border-[#00ff00] transition-all duration-300 shadow-xl active:scale-90 backdrop-blur-md cursor-pointer hover:shadow-[0_0_15px_rgba(0,255,0,0.5)]"
+            className="absolute -left-1 sm:-left-4 lg:-left-6 z-40 flex items-center justify-center w-14 h-14 sm:w-14 sm:h-14 md:w-15 md:h-15 rounded-full bg-black/90 border-2 border-black text-white hover:text-black hover:bg-[#00ff00] transition-all duration-300 shadow-2xl active:scale-95 hover:scale-110 backdrop-blur-md cursor-pointer hover:shadow-[0_0_25px_rgba(0,255,0,0.7)]"
           >
-            <ChevronLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 -translate-x-0.5" />
+            <ChevronLeft className="w-8 h-8 sm:w-8 sm:h-8 -translate-x-0.5 stroke-[3.5]" />
           </button>
         )}
 
@@ -180,14 +180,14 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
           </div>
         </div>
 
-        {/* Petite Right Arrow Button */}
+        {/* Right Arrow Button */}
         {packages.length > visibleCount && (
           <button
             onClick={handleNext}
             aria-label="Next Slide"
-            className="absolute -right-1 sm:-right-3 lg:-right-5 z-30 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-black/90 border border-white/15 text-white hover:text-black hover:bg-[#00ff00] hover:border-[#00ff00] transition-all duration-300 shadow-xl active:scale-90 backdrop-blur-md cursor-pointer hover:shadow-[0_0_15px_rgba(0,255,0,0.5)]"
+            className="absolute -right-1 sm:-right-4 lg:-right-6 z-40 flex items-center justify-center w-14 h-14 sm:w-14 sm:h-14 md:w-15 md:h-15 rounded-full bg-black/90 border-2 border-black text-white hover:text-black hover:bg-[#00ff00] transition-all duration-300 shadow-2xl active:scale-95 hover:scale-110 backdrop-blur-md cursor-pointer hover:shadow-[0_0_25px_rgba(0,255,0,0.7)]"
           >
-            <ChevronRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 translate-x-0.5" />
+            <ChevronRight className="w-8 h-8 sm:w-8 sm:h-8 translate-x-0.5 stroke-[3.5]" />
           </button>
         )}
       </div>
@@ -195,7 +195,7 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
       {/* --- CUTEST PETITE DOTS INDICATOR --- */}
       {packages.length > visibleCount && (
         <div className="flex justify-center items-center mt-3">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/90 border border-white/10 rounded-full shadow-xl backdrop-blur-md">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-black/90 border-2 border-black rounded-full shadow-xl backdrop-blur-md">
             {Array.from({ length: totalDots }).map((_, idx) => (
               <button
                 key={idx}
@@ -203,8 +203,8 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all duration-300 rounded-full cursor-pointer ${
                   currentIndex === idx
-                    ? "w-5 h-1.5 bg-[#00ff00] shadow-[0_0_8px_#00ff00]"
-                    : "w-1.5 h-1.5 bg-white/25 hover:bg-white/60"
+                    ? "w-6 h-2 bg-[#00ff00] shadow-[0_0_8px_#00ff00]"
+                    : "w-2 h-2 bg-white/30 hover:bg-white/60"
                 }`}
               />
             ))}
