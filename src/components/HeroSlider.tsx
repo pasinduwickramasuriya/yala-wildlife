@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
+import { useThermalOptimization } from "@/hooks/useThermalOptimization";
 
 interface HeroSection {
   id: string;
@@ -34,6 +35,9 @@ const DEFAULT_HERO_SECTIONS: HeroSection[] = [
 ];
 
 export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSections?: HeroSection[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { shouldAnimate } = useThermalOptimization(containerRef);
+
   const [heroSections, setHeroSections] = useState<HeroSection[]>(
     initialHeroSections.length > 0 ? initialHeroSections : DEFAULT_HERO_SECTIONS
   );
@@ -69,7 +73,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
 
   // --- Auto Slider Logic ---
   useEffect(() => {
-    if (heroSections.length <= 1 || !mounted) return;
+    if (heroSections.length <= 1 || !mounted || !shouldAnimate) return;
 
     // Using setTimeout and dependency on currentSlide ensures 
     // the timer resets flawlessly on auto-slides or manual clicks, 
@@ -79,7 +83,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
     }, 7000);
 
     return () => clearTimeout(timeout);
-  }, [heroSections.length, mounted, currentSlide]);
+  }, [heroSections.length, mounted, currentSlide, shouldAnimate]);
 
   // --- Data Setup ---
   const section = heroSections[currentSlide] || DEFAULT_HERO_SECTIONS[0];
@@ -94,7 +98,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
   const restTitleWords = titleWords.slice(1).join(" ");
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black">
+    <div ref={containerRef} className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black">
 
       {/* 1. BACKGROUND IMAGE - GPU OPTIMIZED */}
       <div className="absolute inset-0 w-full h-full bg-black z-0">

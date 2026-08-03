@@ -115,8 +115,13 @@ export default function WhatsAppButton() {
           inset: -5px;
           border-radius: 9999px;
           border: 2px solid #25D366;
-          animation: wa-pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+          animation: wa-pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) 3;
           z-index: -1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .wa-pulse-active::before {
+            display: none !important;
+          }
         }
         .wa-animate-pop {
           animation: wa-pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;

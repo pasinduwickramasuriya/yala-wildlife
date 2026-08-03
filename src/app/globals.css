@@ -211,6 +211,32 @@
   }
 }
 
+/* ==========================================================================
+   PROJECT THERMAL ZERO — EXTREME PERFORMANCE & CPU UTILITIES
+   ========================================================================== */
+
+/* 1. Content Visibility Auto for Offscreen Page Sections */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+/* 2. Global Prefers-Reduced-Motion Override for Thermal Resilience */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 3. GPU Layer Optimization */
+.gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 
 
 

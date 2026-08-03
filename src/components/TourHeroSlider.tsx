@@ -1,30 +1,34 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Tour } from "./TourPackageCard";
+import { useThermalOptimization } from "@/hooks/useThermalOptimization";
 
 interface TourHeroSliderProps {
     tourPackages: Tour[];
 }
 
 export function TourHeroSlider({ tourPackages }: TourHeroSliderProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { shouldAnimate } = useThermalOptimization(containerRef);
+
     const [activeIndex, setActiveIndex] = useState(0);
 
     const activeTour = tourPackages[activeIndex] || tourPackages[0];
 
     // Auto Slider Logic (7 seconds)
     useEffect(() => {
-        if (tourPackages.length <= 1) return;
+        if (tourPackages.length <= 1 || !shouldAnimate) return;
 
         const timeout = setTimeout(() => {
             setActiveIndex((prev) => (prev + 1) % tourPackages.length);
         }, 7000);
 
         return () => clearTimeout(timeout);
-    }, [tourPackages.length, activeIndex]);
+    }, [tourPackages.length, activeIndex, shouldAnimate]);
 
     if (!activeTour) return null;
 
@@ -40,7 +44,7 @@ export function TourHeroSlider({ tourPackages }: TourHeroSliderProps) {
     const restTitleWords = titleWords.slice(1).join(" ");
 
     return (
-        <div className="relative w-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[65vh] overflow-hidden font-sans bg-transparent selection:bg-[#00ff00] selection:text-black">
+        <div ref={containerRef} className="relative w-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[65vh] overflow-hidden font-sans bg-transparent selection:bg-[#00ff00] selection:text-black">
 
             {/* 2. MAIN CONTENT */}
             <div className="relative z-20 container mx-auto px-4 sm:px-6 md:px-12 h-full flex flex-col justify-center min-h-[50vh] sm:min-h-[60vh] lg:min-h-[65vh] py-8 sm:py-12">

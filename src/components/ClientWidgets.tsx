@@ -19,19 +19,13 @@ export default function ClientWidgets() {
       document.head.appendChild(s);
     };
 
-    const triggerLoad = () => {
-      loadAdSense();
-      document.removeEventListener("scroll", triggerLoad);
-      document.removeEventListener("touchstart", triggerLoad);
-    };
-
-    document.addEventListener("scroll", triggerLoad, { passive: true });
-    document.addEventListener("touchstart", triggerLoad, { passive: true });
-
-    return () => {
-      document.removeEventListener("scroll", triggerLoad);
-      document.removeEventListener("touchstart", triggerLoad);
-    };
+    if ("requestIdleCallback" in window) {
+      const handle = (window as any).requestIdleCallback(loadAdSense, { timeout: 6000 });
+      return () => (window as any).cancelIdleCallback(handle);
+    } else {
+      const timer = setTimeout(loadAdSense, 5000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (

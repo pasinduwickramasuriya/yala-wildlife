@@ -148,25 +148,36 @@ export default function GoogleTranslate() {
       }
     };
 
-    // Load after 3 seconds or on first user interaction to maximize initial load performance
-    const timer = setTimeout(loadScript, 3000);
+    let idleId: number | null = null;
+    if ("requestIdleCallback" in window) {
+      idleId = (window as any).requestIdleCallback(loadScript, { timeout: 8000 });
+    } else {
+      idleId = setTimeout(loadScript, 5000) as any;
+    }
+
     const handleInteraction = () => {
       loadScript();
-      clearTimeout(timer);
-      document.removeEventListener("scroll", handleInteraction);
-      document.removeEventListener("mousemove", handleInteraction);
-      document.removeEventListener("touchstart", handleInteraction);
+      if (idleId !== null) {
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(idleId);
+        } else {
+          clearTimeout(idleId);
+        }
+      }
+      document.removeEventListener("pointerdown", handleInteraction);
     };
 
-    document.addEventListener("scroll", handleInteraction, { passive: true });
-    document.addEventListener("mousemove", handleInteraction, { passive: true });
-    document.addEventListener("touchstart", handleInteraction, { passive: true });
+    document.addEventListener("pointerdown", handleInteraction, { passive: true, once: true });
 
     return () => {
-      clearTimeout(timer);
-      document.removeEventListener("scroll", handleInteraction);
-      document.removeEventListener("mousemove", handleInteraction);
-      document.removeEventListener("touchstart", handleInteraction);
+      if (idleId !== null) {
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(idleId);
+        } else {
+          clearTimeout(idleId);
+        }
+      }
+      document.removeEventListener("pointerdown", handleInteraction);
     };
   }, []);
 

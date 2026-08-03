@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import ReviewCard from "./ReviewCard";
+import { useThermalOptimization } from "@/hooks/useThermalOptimization";
 
 interface Review {
   id: number;
@@ -13,6 +14,9 @@ interface Review {
 }
 
 const ReviewsSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { shouldAnimate } = useThermalOptimization(sectionRef);
+
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,11 +46,11 @@ const ReviewsSection = () => {
     fetchReviews();
   }, []);
 
-  // Smooth auto-scroll animation
+  // Smooth auto-scroll animation - Pauses when offscreen or tab inactive
   useEffect(() => {
-    if (!scrollRef.current || reviews.length <= 3 || isPaused) return;
+    if (!scrollRef.current || reviews.length <= 3 || isPaused || !shouldAnimate) return;
 
-    let scrollPosition = 0;
+    let scrollPosition = scrollRef.current.scrollLeft;
     const scrollContainer = scrollRef.current;
     const scrollSpeed = 0.5;
 
@@ -71,16 +75,16 @@ const ReviewsSection = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [reviews, isPaused]);
+  }, [reviews, isPaused, shouldAnimate]);
 
   // Pause animation on hover
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background with blur effect */}
-      <div className="absolute inset-0  backdrop-blur-xl"></div>
+    <section ref={sectionRef} className="relative py-24 overflow-hidden">
+      {/* Background with optimized fallback */}
+      <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Gradient overlays for depth */}
       <div className="absolute inset-0 bg-gradient-to-r  via-transparent "></div>

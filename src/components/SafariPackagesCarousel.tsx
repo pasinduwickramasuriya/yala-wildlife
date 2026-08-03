@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef, memo } from "react";
 import PackageCard from "@/components/PackageCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useThermalOptimization } from "@/hooks/useThermalOptimization";
 
 interface Package {
   id: string;
@@ -40,6 +41,9 @@ const CarouselSlideItem = memo(function CarouselSlideItem({
 });
 
 export default function SafariPackagesCarousel({ packages = [] }: SafariPackagesCarouselProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { shouldAnimate } = useThermalOptimization(containerRef);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isPaused, setIsPaused] = useState(false);
@@ -83,16 +87,16 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
     }
   }, [currentIndex, maxIndex]);
 
-  // High-performance Auto-slide (4s interval, pauses on hover)
+  // High-performance Auto-slide (4s interval, pauses on hover, offscreen or hidden tab)
   useEffect(() => {
-    if (packages.length <= visibleCount || isPaused) return;
+    if (packages.length <= visibleCount || isPaused || !shouldAnimate) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 4000);
 
     return () => clearInterval(timer);
-  }, [packages.length, visibleCount, maxIndex, isPaused]);
+  }, [packages.length, visibleCount, maxIndex, isPaused, shouldAnimate]);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
@@ -138,6 +142,7 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
 
   return (
     <div 
+      ref={containerRef}
       className="relative w-full py-2 select-none group/carousel max-w-6xl mx-auto"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}

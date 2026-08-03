@@ -248,7 +248,7 @@ export default function HomeBlogSection() {
     if (blogs.length === 0) return null;
 
     return (
-        <section className="relative w-full p-0 m-0 overflow-hidden border-none bg-black">
+        <section className="relative w-full p-0 m-0 overflow-hidden border-none bg-black cv-auto">
             {/* THE SEAMLESS BIG BLOCK WALL 
                - grid-flow-row-dense: Fills every hole perfectly
                - gap-0: Zero space between images
