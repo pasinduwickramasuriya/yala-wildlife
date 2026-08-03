@@ -332,10 +332,10 @@ export default function ContactPage() {
           {/* ================= BIG CUTTER MAP SECTION ================= */}
           <div className="mt-12 w-full h-[450px] md:h-[550px] rounded-[2.5rem] overflow-hidden relative shadow-2xl group bg-black/20 backdrop-blur-sm">
             {/* Tech Overlay */}
-            <div className="absolute top-6 left-6 z-20 bg-black/90 backdrop-blur-xl px-5 py-2.5 rounded-full border border-[#00ff00]/30 shadow-[0_0_20px_rgba(0,255,0,0.2)] flex items-center gap-3 pointer-events-none">
+            {/* <div className="absolute top-6 left-6 z-20 bg-black/90 backdrop-blur-xl px-5 py-2.5 rounded-full border border-[#00ff00]/30 shadow-[0_0_20px_rgba(0,255,0,0.2)] flex items-center gap-3 pointer-events-none">
               <div className="w-2.5 h-2.5 rounded-full bg-[#00ff00] animate-pulse"></div>
               <span className="text-xs font-bold text-white tracking-widest">YALA HQ LOCATION</span>
-            </div>
+            </div> */}
 
             {/* Map Container - Starts Dark, Brightens on Hover/Interaction */}
             <div className="w-full h-full filter brightness-[0.6] contrast-[1.1] group-hover:brightness-100 group-hover:contrast-100 transition-all duration-700 ease-in-out">
