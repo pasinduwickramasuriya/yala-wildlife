@@ -179,7 +179,7 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
                 key={pkg.id}
                 pkg={pkg}
                 visibleCount={visibleCount}
-                isPriority={idx < visibleCount}
+                isPriority={false}
               />
             ))}
           </div>

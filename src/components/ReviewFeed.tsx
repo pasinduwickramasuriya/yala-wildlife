@@ -50,11 +50,17 @@ const FALLBACK_REVIEWS: ReviewPhoto[] = [
     }
 ];
 
-export default function HierarchicalReviewGrid() {
-    const [reviews, setReviews] = useState<ReviewPhoto[]>(FALLBACK_REVIEWS);
+export default function HierarchicalReviewGrid({ initialReviews }: { initialReviews?: ReviewPhoto[] }) {
+    const [reviews, setReviews] = useState<ReviewPhoto[]>(
+        initialReviews && initialReviews.length > 0 ? initialReviews.slice(0, 4) : FALLBACK_REVIEWS
+    );
 
-    // Optimized Fetching with AbortController to prevent memory leaks on slow networks
     useEffect(() => {
+        if (initialReviews && initialReviews.length > 0) {
+            const curated = [...initialReviews].sort(() => Math.random() - 0.5).slice(0, 4);
+            setReviews(curated);
+            return;
+        }
         const controller = new AbortController();
 
         async function fetchReviews() {
@@ -87,7 +93,7 @@ export default function HierarchicalReviewGrid() {
 
         fetchReviews();
         return () => controller.abort();
-    }, []);
+    }, [initialReviews]);
 
     // SEO Helper: Component for Structured Data (JSON-LD)
     const structuredData = useMemo(() => {
@@ -150,7 +156,7 @@ export default function HierarchicalReviewGrid() {
                                 alt={`Review by ${reviews[0].authorName}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
-                                priority
+                                loading="lazy"
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />

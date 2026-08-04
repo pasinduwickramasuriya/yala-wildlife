@@ -44,32 +44,9 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mounted, setMounted] = useState(false);
 
-  // --- Data Fetching ---
-  const fetchHeroSections = useCallback(async () => {
-    try {
-      const res = await fetch("/api/hero", {
-        next: { revalidate: 60 }
-      });
-      if (!res.ok) return;
-      const data = await res.json();
-
-      if (Array.isArray(data) && data.length > 0) {
-        setHeroSections(prev => {
-          if (JSON.stringify(prev) !== JSON.stringify(data)) return data;
-          return prev;
-        });
-      }
-    } catch {
-      // Retain fallback hero sections silently
-    }
-  }, []);
-
   useEffect(() => {
     setMounted(true);
-    if (initialHeroSections.length === 0) {
-      fetchHeroSections();
-    }
-  }, [fetchHeroSections, initialHeroSections.length]);
+  }, []);
 
   // --- Auto Slider Logic ---
   useEffect(() => {

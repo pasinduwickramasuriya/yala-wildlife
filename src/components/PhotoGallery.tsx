@@ -46,19 +46,25 @@ const FALLBACK_PHOTOS: Photo[] = [
   },
 ];
 
-export default function AppleCuteGallery() {
-  const [displayPhotos, setDisplayPhotos] = useState<Photo[]>(FALLBACK_PHOTOS);
+export default function AppleCuteGallery({ initialPhotos }: { initialPhotos?: Photo[] }) {
+  const [displayPhotos, setDisplayPhotos] = useState<Photo[]>(
+    initialPhotos && initialPhotos.length > 0 ? initialPhotos.slice(0, 5) : FALLBACK_PHOTOS
+  );
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialPhotos || initialPhotos.length === 0);
 
   useEffect(() => {
+    if (initialPhotos && initialPhotos.length > 0) {
+      const shuffled = [...initialPhotos].sort(() => 0.5 - Math.random()).slice(0, 5);
+      setDisplayPhotos(shuffled);
+      return;
+    }
     const fetchPhotos = async () => {
       try {
         const response = await fetch("/api/blogs/featured");
         if (response.ok) {
           const data = await response.json();
           if (Array.isArray(data) && data.length > 0) {
-            // High performance client-side shuffle for distinct photos
             const shuffled = [...data].sort(() => 0.5 - Math.random());
             setDisplayPhotos(shuffled.slice(0, 5));
           }
@@ -70,7 +76,7 @@ export default function AppleCuteGallery() {
       }
     };
     fetchPhotos();
-  }, []);
+  }, [initialPhotos]);
 
   return (
     <section className="relative w-full py-12 md:py-20 px-4 md:px-12 bg-transparent text-white overflow-hidden">
@@ -102,15 +108,11 @@ export default function AppleCuteGallery() {
           </p>
         </motion.div>
         {/* --- RESPONSIVE BENTO GRID --- */}
-        {/* Mobile: 1 Column, fixed height cards
-            Tablet: 2 Columns
-            Desktop: 12-column Bento (Your original layout)
-        */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 h-auto md:h-[750px]">
 
           {/* Card 1: Main Hero */}
           <div className="h-[300px] sm:h-[400px] md:h-auto md:col-span-8 md:row-span-2 relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-neutral-900 shadow-xl">
-            <ImageCard photo={displayPhotos[0]} priority onClick={setSelectedPhoto} />
+            <ImageCard photo={displayPhotos[0]} priority={false} onClick={setSelectedPhoto} />
           </div>
 
           {/* Card 2 */}

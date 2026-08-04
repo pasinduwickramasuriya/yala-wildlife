@@ -226,10 +226,17 @@ const FALLBACK_BLOGS: Blog[] = [
     }
 ];
 
-export default function HomeBlogSection() {
-    const [blogs, setBlogs] = useState<Blog[]>(FALLBACK_BLOGS);
+export default function HomeBlogSection({ initialBlogs }: { initialBlogs?: Blog[] }) {
+    const [blogs, setBlogs] = useState<Blog[]>(
+        initialBlogs && initialBlogs.length > 0 ? initialBlogs.slice(0, 5) : FALLBACK_BLOGS
+    );
 
     useEffect(() => {
+        if (initialBlogs && initialBlogs.length > 0) {
+            const shuffled = [...initialBlogs].sort(() => 0.5 - Math.random()).slice(0, 5);
+            setBlogs(shuffled);
+            return;
+        }
         async function fetchBlogs() {
             try {
                 const res = await fetch("/api/blogs/featured");
@@ -243,7 +250,7 @@ export default function HomeBlogSection() {
             }
         }
         fetchBlogs();
-    }, []);
+    }, [initialBlogs]);
 
     if (blogs.length === 0) return null;
 
@@ -273,7 +280,7 @@ export default function HomeBlogSection() {
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                             className="object-cover transition-transform duration-[2s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
-                            priority={index < 3}
+                            loading="lazy"
                         />
 
                         {/* Cinematic Overlay */}

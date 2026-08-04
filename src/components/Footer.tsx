@@ -92,6 +92,7 @@ export default function Footer() {
           fill
           sizes="100vw"
           quality={50}
+          loading="lazy"
           className="object-cover object-center grayscale-[0.5]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent" />

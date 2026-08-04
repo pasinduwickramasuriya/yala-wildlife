@@ -219,10 +219,6 @@ export default function YalaMapExplorer() {
             </section>
 
             <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
-                
-                body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
-
                 .animate-slideInLeft {
                     animation: slideInLeft 0.5s ease-out forwards;
                 }

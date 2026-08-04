@@ -78,9 +78,7 @@ const GallerySection = () => {
                   src={image.url}
                   alt={image.title}
                   fill
-                  // FIX: Prioritize loading the first 2 images to prevent "stuck" loading on mobile
-                  priority={index < 2}
-                  // FIX: Tell browser which size to download based on screen width
+                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-all duration-700 ease-in-out group-hover:scale-110 group-hover:rotate-1"
                 />

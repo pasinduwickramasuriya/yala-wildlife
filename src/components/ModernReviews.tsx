@@ -134,13 +134,23 @@ const ReviewCard = ({ review }: { review: Review }) => {
 
 // --- Main Component ---
 
-export default function ModernReviews() {
-    const [totalCount, setTotalCount] = useState(0);
-    const [allReviews, setAllReviews] = useState<Review[]>([]);
+export default function ModernReviews({ initialReviews }: { initialReviews?: Review[] }) {
+    const [totalCount, setTotalCount] = useState(initialReviews?.length || 0);
+    const [allReviews, setAllReviews] = useState<Review[]>(() => {
+        if (initialReviews && initialReviews.length > 0) {
+            return initialReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
+        }
+        return [];
+    });
     const [visibleCount, setVisibleCount] = useState(12);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!initialReviews || initialReviews.length === 0);
 
     useEffect(() => {
+        if (initialReviews && initialReviews.length > 0) {
+            const filtered = initialReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
+            setAllReviews([...filtered].sort(() => Math.random() - 0.5));
+            return;
+        }
         async function fetchReviews() {
             try {
                 const response = await fetch('/api/greviews');
@@ -157,7 +167,7 @@ export default function ModernReviews() {
             }
         }
         fetchReviews();
-    }, []);
+    }, [initialReviews]);
 
     const displayedReviews = useMemo(() => allReviews.slice(0, visibleCount), [allReviews, visibleCount]);
 
@@ -170,7 +180,8 @@ export default function ModernReviews() {
                     alt="Yala Background"
                     fill
                     className="object-cover opacity-100"
-                    priority
+                    loading="lazy"
+                    sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-black/20" />
             </div>

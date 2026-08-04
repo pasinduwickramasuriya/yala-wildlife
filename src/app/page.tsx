@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ClientHome from "./ClientHome";
-import prisma from "@/lib/prisma";
+import { getHomePageData } from "@/lib/server-data";
 import {
   organizationSchema,
   websiteSchema,
@@ -376,22 +376,17 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const packages = await prisma.package.findMany({
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-      description: true,
-      price: true,
-      imageUrl: true,
-    }
-  }) as any;
-
-  const heroSections = await prisma.heroSection.findMany() as any;
+  const { packages, heroSections, blogs, reviewPhotos, reviews } = await getHomePageData();
 
   return (
     <>
-      <ClientHome initialPackages={packages} initialHeroSections={heroSections} />
+      <ClientHome
+        initialPackages={packages}
+        initialHeroSections={heroSections}
+        initialBlogs={blogs}
+        initialReviewPhotos={reviewPhotos}
+        initialReviews={reviews}
+      />
 
       {/* Schema markup with consistent BASE_URL */}
       <script

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 const WhatsAppButton = dynamic(() => import("./WhatsAppButton"), { ssr: false });
@@ -8,7 +8,46 @@ const GoogleTranslate = dynamic(() => import("./GoogleTranslate"), { ssr: false 
 const ChatAssistant = dynamic(() => import("./ChatAssistant"), { ssr: false });
 
 export default function ClientWidgets() {
+  const [loadWidgets, setLoadWidgets] = useState(false);
+
   useEffect(() => {
+    const handleInteraction = () => {
+      setLoadWidgets(true);
+      removeListeners();
+    };
+
+    const removeListeners = () => {
+      window.removeEventListener("scroll", handleInteraction);
+      window.removeEventListener("pointerdown", handleInteraction);
+      window.removeEventListener("keydown", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+
+    window.addEventListener("scroll", handleInteraction, { passive: true, once: true });
+    window.addEventListener("pointerdown", handleInteraction, { passive: true, once: true });
+    window.addEventListener("keydown", handleInteraction, { passive: true, once: true });
+    window.addEventListener("touchstart", handleInteraction, { passive: true, once: true });
+
+    let idleTimer: any;
+    if ("requestIdleCallback" in window) {
+      idleTimer = (window as any).requestIdleCallback(() => setLoadWidgets(true), { timeout: 3500 });
+    } else {
+      idleTimer = setTimeout(() => setLoadWidgets(true), 3500);
+    }
+
+    return () => {
+      removeListeners();
+      if ("cancelIdleCallback" in window) {
+        (window as any).cancelIdleCallback(idleTimer);
+      } else {
+        clearTimeout(idleTimer);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!loadWidgets) return;
+
     const loadAdSense = () => {
       if (document.getElementById("adsense-script")) return;
       const s = document.createElement("script");
@@ -19,14 +58,10 @@ export default function ClientWidgets() {
       document.head.appendChild(s);
     };
 
-    if ("requestIdleCallback" in window) {
-      const handle = (window as any).requestIdleCallback(loadAdSense, { timeout: 6000 });
-      return () => (window as any).cancelIdleCallback(handle);
-    } else {
-      const timer = setTimeout(loadAdSense, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    loadAdSense();
+  }, [loadWidgets]);
+
+  if (!loadWidgets) return null;
 
   return (
     <>

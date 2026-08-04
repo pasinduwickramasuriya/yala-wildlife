@@ -21,9 +21,9 @@ interface Package {
   id: string;
   name: string;
   slug: string;
-  description?: string;
-  price?: number;
-  imageUrl?: string;
+  description?: string | null;
+  price?: number | null;
+  imageUrl?: string | null;
 }
 
 interface HeroSection {
@@ -33,19 +33,27 @@ interface HeroSection {
   subtitle: string;
 }
 
-export default function ClientHome({ 
-  initialPackages = [], 
-  initialHeroSections = [] 
-}: { 
+interface ClientHomeProps {
   initialPackages?: Package[];
   initialHeroSections?: HeroSection[];
-}) {
+  initialBlogs?: any[];
+  initialReviewPhotos?: any[];
+  initialReviews?: any[];
+}
+
+export default function ClientHome({ 
+  initialPackages = [], 
+  initialHeroSections = [],
+  initialBlogs = [],
+  initialReviewPhotos = [],
+  initialReviews = [],
+}: ClientHomeProps) {
   const packages = initialPackages;
 
   return (
     <>
       <HeroSlider initialHeroSections={initialHeroSections} />
-      <ReviewFeed />
+      <ReviewFeed initialReviews={initialReviewPhotos} />
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-16 overflow-hidden z-10 relative">
 
@@ -53,10 +61,10 @@ export default function ClientHome({
         <div className="flex flex-col items-center justify-center w-full mb-10 animate-in fade-in zoom-in duration-1000">
 
           {/* 1. PETITE SIGNAL BADGE (15px Text) */}
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-black/80  rounded-full mb-3 shadow-xl">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-black/80 rounded-full mb-3 shadow-xl">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span>
-            <span className="text-[15px] font-black  tracking-[0.2em] text-[#00ff00] leading-none">
-              Safari   Packages
+            <span className="text-[15px] font-black tracking-[0.2em] text-[#00ff00] leading-none">
+              Safari Packages
             </span>
           </div>
 
@@ -68,10 +76,10 @@ export default function ClientHome({
       </div>
 
       <YalaMapExplorer />
-      <HomeBlogSection />
+      <HomeBlogSection initialBlogs={initialBlogs} />
       <MemoryGallery />
-      <ModernReviews />
-      <PhotoGallery />
+      <ModernReviews initialReviews={initialReviews} />
+      <PhotoGallery initialPhotos={initialBlogs} />
       <WhyChooseUs />
       <GallerySection />
       <ReviewSlider />
