@@ -36,6 +36,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preload" as="image" href="/uploads/yala1.webp" fetchPriority="high" type="image/webp" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

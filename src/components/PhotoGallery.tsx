@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Camera, X } from "lucide-react";
 
 interface Photo {
@@ -23,26 +22,20 @@ const FALLBACK_PHOTOS: Photo[] = [
   {
     id: 2,
     title: "Elephant Herd by Menik River",
-    content: "Majestic Asian elephants gathering at the river bank during twilight.",
+    content: "Wild Asian elephants gathering along the banks of the Menik River at sunset.",
     imageUrl: "/uploads/yala2.webp",
   },
   {
     id: 3,
     title: "Sloth Bear Foraging",
-    content: "Rare sighting of a sloth bear searching for palu fruit in the dry zone scrub.",
-    imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1784789489/blogs/cey5tcc2jkxwzj4kd9dc.jpg",
+    content: "Rare sighting of a sloth bear searching for termites in dry scrub jungle.",
+    imageUrl: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: 4,
-    title: "Crocodile Lagoon",
-    content: "Mugger crocodiles basking along the saline lagoon shorelines.",
-    imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1785222594/blogs/adlf5cxnu4hjbwvlvlkf.jpg",
-  },
-  {
-    id: 5,
-    title: "Painted Stork & Wetland Birds",
-    content: "Over 200 species of migratory and endemic birds soaring across Yala's sanctuaries.",
-    imageUrl: "/uploads/yala2.webp",
+    title: "Painted Storks at Lagoon",
+    content: "Vibrant birdlife wading in the saline coastal lagoons of Yala National Park.",
+    imageUrl: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
@@ -82,31 +75,23 @@ export default function AppleCuteGallery({ initialPhotos }: { initialPhotos?: Ph
     <section className="relative w-full py-12 md:py-20 px-4 md:px-12 bg-transparent text-white overflow-hidden">
       <div className="max-w-[1200px] mx-auto">
 
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <div
           className="text-center mb-16"
         >
-          <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4  inline-block px-6 py-3 rounded-3xl bg-black/70">
+          <h2 className="text-2xl md:text-2xl font-extrabold text-white mb-4 inline-block px-6 py-3 rounded-3xl bg-black/70">
             Yala Wildlife{" "}
             <span className="text-[#00ff00] relative">
               Photo Gallery
-              <motion.div
+              <div
                 className="absolute -bottom-2 left-0 w-full h-1 bg-[#00ff00] rounded-full"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              ></motion.div>
+              ></div>
             </span>
           </h2>
           <br />
           <p className="text-green-200 text-lg max-w-2xl mx-auto inline-block px-6 py-3 rounded-3xl bg-black/70">
             Discover the incredible wildlife and breathtaking moments captured in Yala National Park
           </p>
-        </motion.div>
+        </div>
         {/* --- RESPONSIVE BENTO GRID --- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 h-auto md:h-[750px]">
 
@@ -138,53 +123,47 @@ export default function AppleCuteGallery({ initialPhotos }: { initialPhotos?: Ph
       </div>
 
       {/* --- REFINED RESPONSIVE MODAL --- */}
-      <AnimatePresence>
-        {selectedPhoto && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 md:p-6"
-            onClick={() => setSelectedPhoto(null)}
+      {selectedPhoto && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 md:p-6 animate-in fade-in duration-200"
+          onClick={() => setSelectedPhoto(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-black rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col md:flex-row shadow-2xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              layoutId={`photo-${selectedPhoto.id}`}
-              className="relative w-full max-w-4xl bg-black rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 flex flex-col md:flex-row shadow-2xl max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Image Section */}
-              <div className="relative w-full md:flex-1 h-[250px] sm:h-[350px] md:h-auto bg-neutral-950">
-                <Image src={selectedPhoto.imageUrl} alt={selectedPhoto.title} fill className="object-cover" />
-              </div>
+            {/* Modal Image Section */}
+            <div className="relative w-full md:flex-1 h-[250px] sm:h-[350px] md:h-auto bg-neutral-950">
+              <Image src={selectedPhoto.imageUrl} alt={selectedPhoto.title} fill className="object-cover" />
+            </div>
 
-              {/* Modal Content Section */}
-              <div className="w-full md:w-[320px] p-6 md:p-8 flex flex-col justify-center bg-black overflow-y-auto">
-                <div className="flex items-center gap-2 text-[#00ff00] mb-3 md:mb-4">
-                  <Camera size={12} />
-                  <span className="text-[9px] font-mono tracking-widest uppercase opacity-70">Capture Detail</span>
-                </div>
-                <h3 className="text-lg md:text-xl font-bold tracking-tight text-white mb-3 md:mb-4 leading-tight">
-                  {selectedPhoto.title}
-                </h3>
-                <p className="text-neutral-400 text-[11px] md:text-[12px] leading-relaxed mb-6 line-clamp-4 md:line-clamp-6">
-                  {selectedPhoto.content}
-                </p>
-                <button
-                  onClick={() => setSelectedPhoto(null)}
-                  className="w-full py-3 bg-white text-black font-bold text-[10px] rounded-full uppercase tracking-widest hover:bg-[#00ff00] transition-all active:scale-95"
-                >
-                  Close
-                </button>
+            {/* Modal Content Section */}
+            <div className="w-full md:w-[320px] p-6 md:p-8 flex flex-col justify-center bg-black overflow-y-auto">
+              <div className="flex items-center gap-2 text-[#00ff00] mb-3 md:mb-4">
+                <Camera size={12} />
+                <span className="text-[9px] font-mono tracking-widest uppercase opacity-70">Capture Detail</span>
               </div>
-
-              {/* Close Button */}
-              <button className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-white transition-colors bg-black/50 rounded-full p-1 md:bg-transparent" onClick={() => setSelectedPhoto(null)}>
-                <X size={20} strokeWidth={2} />
+              <h3 className="text-lg md:text-xl font-bold tracking-tight text-white mb-3 md:mb-4 leading-tight">
+                {selectedPhoto.title}
+              </h3>
+              <p className="text-neutral-400 text-[11px] md:text-[12px] leading-relaxed mb-6 line-clamp-4 md:line-clamp-6">
+                {selectedPhoto.content}
+              </p>
+              <button
+                onClick={() => setSelectedPhoto(null)}
+                className="w-full py-3 bg-white text-black font-bold text-[10px] rounded-full uppercase tracking-widest hover:bg-[#00ff00] transition-all active:scale-95 cursor-pointer"
+              >
+                Close
               </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+
+            {/* Close Button */}
+            <button aria-label="Close Photo Modal" className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-white transition-colors bg-black/50 rounded-full p-1 md:bg-transparent cursor-pointer" onClick={() => setSelectedPhoto(null)}>
+              <X size={20} strokeWidth={2} />
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

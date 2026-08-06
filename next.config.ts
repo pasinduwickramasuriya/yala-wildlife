@@ -4,7 +4,11 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ['lucide-react', '@tabler/icons-react', 'react-icons', 'date-fns', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', '@tabler/icons-react', 'react-icons', 'date-fns'],
+    staleTimes: {
+      dynamic: 30,
+      static: 1800,
+    },
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -56,6 +60,15 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, s-maxage=3600, stale-while-revalidate=86400',
           },
         ],
       },

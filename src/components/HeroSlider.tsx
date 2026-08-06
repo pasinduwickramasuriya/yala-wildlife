@@ -81,6 +81,8 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
       <div className="absolute inset-0 w-full h-full bg-black z-0">
         {heroSections.map((slide, idx) => {
           const isActive = idx === currentSlide;
+          // Render image if active OR if mounted and previously viewed/preloaded
+          if (!isActive && !mounted) return null;
           return (
             <div
               key={slide.id}
@@ -91,17 +93,14 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
                   src={slide.imageUrl}
                   alt={slide.title}
                   fill
-                  priority={idx === 0} // Preload only initial frame for maximum LCP performance
+                  priority={idx === 0}
+                  loading={idx === 0 ? "eager" : "lazy"}
                   className="object-cover object-center brightness-[0.85]"
                   style={{ objectFit: 'cover' }}
                   sizes="100vw"
-                  quality={60} // Reduced for better low-end device performance
+                  quality={50}
                 />
               </div>
-
-              {/* Static Overlays (Faster than animating divs) */}
-              {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" /> */}
             </div>
           );
         })}

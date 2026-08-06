@@ -84,9 +84,16 @@ export default function YalaMapExplorer() {
 
     useEffect(() => {
         setIsMounted(true);
+        let ticking = false;
         const handleScroll = () => {
-            // Trigger curve when scrolled more than 50px
-            setIsScrolled(window.scrollY > 50);
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.scrollY > 50;
+                    setIsScrolled((prev) => prev !== scrolled ? scrolled : prev);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
@@ -101,15 +108,13 @@ export default function YalaMapExplorer() {
         <div className="w-full min-h-[110vh] font-sans overflow-hidden bg-black text-white selection:bg-[#00ff00] selection:text-black">
             <section
                 className={`relative w-full h-full min-h-[110vh] transition-all duration-700 ease-in-out ${isMounted ? 'opacity-100' : 'opacity-0'} ${isScrolled ? 'rounded-t-[40px] md:rounded-t-[80px]' : 'rounded-t-0'}`}
-                style={{ willChange: "transform, border-radius" }}
             >
                 {/* --- Background Image Layer --- */}
                 <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                     <div
                         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                         style={{
-                            backgroundImage: "url('https://res.cloudinary.com/dkfnpmzpv/image/upload/v1777690831/blogs/ituwsxwpjiy93mlmmctx.jpg')",
-                            transform: 'translateZ(0)', // Force GPU acceleration
+                            backgroundImage: "url('https://res.cloudinary.com/dkfnpmzpv/image/upload/w_1200,q_auto:eco,f_auto/v1777690831/blogs/ituwsxwpjiy93mlmmctx.jpg')",
                         }}
                     ></div>
                     <div className="absolute inset-0 bg-black/30"></div>

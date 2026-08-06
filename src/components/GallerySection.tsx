@@ -91,7 +91,7 @@ const GallerySection = () => {
 
               {/* Top Right: Heart Icon */}
               <div className="absolute top-4 right-4 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-75">
-                <button className="bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white hover:text-red-500 transition-colors">
+                <button aria-label="Like gallery photo" className="bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white hover:text-red-500 transition-colors cursor-pointer">
                   <Heart className="w-5 h-5" />
                 </button>
               </div>

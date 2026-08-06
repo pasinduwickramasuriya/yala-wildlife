@@ -3,7 +3,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Facebook,
   Instagram,
@@ -14,27 +13,6 @@ import {
   Mail,
   ChevronRight,
 } from "lucide-react";
-
-// --- Animation Config (Webflow Easing) ---
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-  }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    }
-  }
-};
 
 // --- Data Arrays ---
 const navigation = {
@@ -66,7 +44,7 @@ const YalaLogo = () => (
   <div className="group flex items-center gap-3">
     <Image
       src="/favicon-96x96.png"
-      alt="Yala Wildlife"
+      alt="Yala Wildlife Logo"
       width={36}
       height={36}
       className="w-9 h-9 object-contain group-hover:rotate-[15deg] transition-transform duration-500"
@@ -85,30 +63,24 @@ export default function Footer() {
     <footer className="relative bg-[#0a0a0a] text-[#d1d1d6] overflow-hidden selection:bg-[#00ff00] selection:text-black">
 
       {/* --- BACKGROUND LAYER --- */}
-      <div className="absolute inset-0 z-0 opacity-60">
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <Image
           src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-          alt="Yala Leopard"
+          alt="Yala Leopard background"
           fill
-          sizes="100vw"
-          quality={50}
+          sizes="(max-width: 768px) 100vw, 1024px"
+          quality={35}
           loading="lazy"
           className="object-cover object-center grayscale-[0.5]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent" />
       </div>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        variants={staggerContainer}
-        className="relative z-10 max-w-[1024px] mx-auto px-6 py-16"
-      >
+      <div className="relative z-10 max-w-[1024px] mx-auto px-6 py-16">
 
         {/* --- TOP BRAND SECTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-start border-b border-white/10 pb-12 mb-12 gap-8">
-          <motion.div variants={fadeInUp} className="max-w-sm">
+          <div className="max-w-sm">
             <div className="mb-4">
               <YalaLogo />
             </div>
@@ -124,38 +96,36 @@ export default function Footer() {
               <span className="text-[10px] uppercase tracking-[0.2em] text-white/90 font-bold ml-1">
                 Secure Card Payments
               </span>
-              <a href="/safari-packages" target="_blank" rel="noopener noreferrer" className="flex items-center sm:hidden md:flex">
-
+              <a href="/safari-packages" aria-label="Secure Card Payments by PayHere" className="flex items-center sm:hidden md:flex">
                 <img src="https://www.payhere.lk/downloads/images/payhere_short_banner.png" alt="Secure Payments by PayHere" width="150" className="opacity-100 hover:opacity-100 transition-opacity duration-300 pointer-events-auto" />
               </a>
 
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
             <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#00ff00]">Secure Comms</span>
             <div className="flex flex-col gap-3">
-              <a href="tel:+94778158004" className="group flex items-center gap-3">
+              <a href="tel:+94778158004" aria-label="Call Yala Wildlife (+94 77 815 8004)" className="group flex items-center gap-3">
                 <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
                   <Phone size={14} className="text-[#00ff00]" />
                 </div>
                 <span className="text-white text-sm font-bold tracking-tight">+94 77 815 8004</span>
               </a>
-              <a href="mailto:pasindusadanjana17@gmail.com" className="group flex items-center gap-3">
+              <a href="mailto:pasindusadanjana17@gmail.com" aria-label="Email Yala Wildlife" className="group flex items-center gap-3">
                 <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
                   <Mail size={14} className="text-[#00ff00]" />
                 </div>
-                {/* <span className="text-white text-sm font-bold tracking-tight">pasinduwick@icloud.com</span> */}
                 <span className="text-white text-sm font-bold tracking-tight">pasindusadanjana17@gmail.com</span>
               </a>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* --- NAVIGATION GRID --- */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
-            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">Explore</h4>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-white text-[12px] font-black uppercase tracking-widest">Explore</h3>
             <ul className="flex flex-col gap-3">
               {navigation.explore.map((item) => (
                 <li key={item.name}>
@@ -166,10 +136,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
-            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">Support</h4>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-white text-[12px] font-black uppercase tracking-widest">Support</h3>
             <ul className="flex flex-col gap-3">
               {navigation.support.map((item) => (
                 <li key={item.name}>
@@ -180,18 +150,18 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
-            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">HQ_Location</h4>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-white text-[12px] font-black uppercase tracking-widest">HQ Location</h3>
             <div className="flex items-start gap-3 text-[13px] text-[#86868b] leading-loose">
               <MapPin size={16} className="text-[#00ff00] shrink-0 mt-1" />
               <span>Wickrama,kasingama<br />Yala Entrance Road,<br />Southern Province, Sri Lanka</span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-col gap-4">
-            <h4 className="text-white text-[12px] font-black uppercase tracking-widest">Social_Signals</h4>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-white text-[12px] font-black uppercase tracking-widest">Social Signals</h3>
             <div className="flex gap-4">
               {socialLinks.map((link, i) => (
                 <a
@@ -199,17 +169,18 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Visit our ${link.name} page`}
                   className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:border-[#00ff00]/50 hover:text-[#00ff00] transition-all duration-500"
                 >
                   <link.icon size={18} />
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* --- BOTTOM BAR --- */}
-        <motion.div variants={fadeInUp} className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-[11px] font-bold tracking-tight text-[#636366]">
             <p className="text-[#86868b]">© {currentYear} Yala Wildlife Adventure Inc.</p>
             {navigation.legal.map((item) => (
@@ -224,9 +195,9 @@ export default function Footer() {
               <Heart size={10} className="text-[#00ff00] fill-current animate-pulse" />
             </div>
           </div>
-        </motion.div>
+        </div>
 
-      </motion.div>
+      </div>
     </footer>
   );
 }

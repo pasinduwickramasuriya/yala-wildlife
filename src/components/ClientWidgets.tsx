@@ -30,9 +30,9 @@ export default function ClientWidgets() {
 
     let idleTimer: any;
     if ("requestIdleCallback" in window) {
-      idleTimer = (window as any).requestIdleCallback(() => setLoadWidgets(true), { timeout: 3500 });
+      idleTimer = (window as any).requestIdleCallback(() => setLoadWidgets(true), { timeout: 7000 });
     } else {
-      idleTimer = setTimeout(() => setLoadWidgets(true), 3500);
+      idleTimer = setTimeout(() => setLoadWidgets(true), 7000);
     }
 
     return () => {

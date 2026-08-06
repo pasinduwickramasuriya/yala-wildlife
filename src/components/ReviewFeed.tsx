@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { Star, MapPin, Quote, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 // Use a more robust interface
 interface ReviewPhoto {
@@ -143,20 +142,18 @@ export default function HierarchicalReviewGrid({ initialReviews }: { initialRevi
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 auto-rows-min md:min-h-[700px]">
 
-                    {/* 1. HERO IMAGE CARD - Large on Mobile too for impact */}
+                    {/* 1. HERO IMAGE CARD */}
                     {reviews[0] && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden min-h-[400px] md:min-h-0 shadow-lg"
+                        <div
+                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden min-h-[400px] md:min-h-0 shadow-lg transition-transform duration-300"
                         >
                             <Image
                                 src={reviews[0].url}
-                                alt={`Review by ${reviews[0].authorName}`}
+                                alt={`Review photo by ${reviews[0].authorName}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
                                 loading="lazy"
+                                quality={50}
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />
@@ -177,15 +174,12 @@ export default function HierarchicalReviewGrid({ initialReviews }: { initialRevi
                                     <cite className="text-white not-italic font-bold text-[15px]">{reviews[0].authorName}</cite>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     )}
 
-                    {/* 2. TEXT EMPHASIS CARD - Improved wrapping on narrow screens */}
+                    {/* 2. TEXT EMPHASIS CARD */}
                     {reviews[1] && (
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                        <div
                             className="col-span-1 sm:col-span-2 md:col-span-2 bg-[#00ff00] rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between shadow-lg"
                         >
                             <div className="flex justify-between items-start">
@@ -205,36 +199,32 @@ export default function HierarchicalReviewGrid({ initialReviews }: { initialRevi
                                     {reviews[1].authorName}
                                 </span>
                             </div>
-                        </motion.div>
+                        </div>
                     )}
 
-                    {/* 3. PURE IMAGE SNAPSHOT - Hidden on very small devices or kept as square */}
+                    {/* 3. PURE IMAGE SNAPSHOT */}
                     {reviews[2] && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
+                        <div
                             className="relative group rounded-[2.5rem] overflow-hidden aspect-square sm:aspect-auto shadow-lg"
                         >
                             <Image
                                 src={reviews[2].url}
-                                alt="Safari Snapshot"
+                                alt={`Safari Snapshot review by ${reviews[2].authorName}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, 25vw"
+                                loading="lazy"
+                                quality={50}
                                 className="object-cover transition-all duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <ArrowUpRight className="text-white w-8 h-8" />
                             </div>
-                        </motion.div>
+                        </div>
                     )}
 
                     {/* 4. HYBRID GLASS CARD */}
                     {reviews[3] && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
+                        <div
                             className="bg-black/80 rounded-[2.5rem] p-8 flex flex-col justify-center shadow-lg border border-white/5"
                         >
                             <div className="flex gap-0.5 mb-4">
@@ -251,7 +241,7 @@ export default function HierarchicalReviewGrid({ initialReviews }: { initialRevi
                                     {reviews[3].authorName}
                                 </span>
                             </div>
-                        </motion.div>
+                        </div>
                     )}
 
                 </div>

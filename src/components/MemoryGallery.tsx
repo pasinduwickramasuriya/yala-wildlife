@@ -83,7 +83,7 @@ export default function AppleCuteGallery() {
                     <Camera size={12} />
                     <span className="text-[9px] uppercase font-bold tracking-tighter">HD Gallery</span>
                   </div>
-                  <button className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#00ff00] transition-all active:scale-90">
+                  <button aria-label="View Memory Gallery Item Details" className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#00ff00] transition-all active:scale-90 cursor-pointer">
                     <ArrowRight size={14} />
                   </button>
                 </div>
