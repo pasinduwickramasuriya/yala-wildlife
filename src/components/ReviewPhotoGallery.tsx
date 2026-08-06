@@ -135,7 +135,7 @@ export default function PetiteGallery() {
         {/* --- Header Section --- */}
         <div className="flex flex-col items-center text-center gap-3 mb-12">
 
-          {/* 1. THE BADGE ISLAND */}
+          {/* 1. THE BADGE  */}
           {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/70 shadow-2xl">
             <span className="h-1.5 w-1.5 rounded-full bg-[#00ff00] animate-pulse" aria-hidden="true" />
             <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.3em]">
