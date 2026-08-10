@@ -8,7 +8,7 @@ import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import { Compass, Map, Shield, Star } from "lucide-react";
+import { Compass, Map, Shield, Star, Sparkles } from "lucide-react";
 import AdvancePaymentButton from "@/components/AdvancePaymentButton";
 // import AdUnit from "@/components/AdUnit";
 
@@ -109,104 +109,96 @@ export default function ClientSafariPackages() {
 
           {/* HERO HEADER */}
           <div className="container max-w-7xl mx-auto mb-16 text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+            {/* Badge
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(0,255,0,0.15)]">
               <span className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse"></span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#00ff00] font-bold">Premium Expeditions</span>
-            </div>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#00ff00]">Premium Expeditions</span>
+            </div> */}
 
 
-            <h1 className="flex flex-col items-center gap-3 mb-12 selection:bg-[#00ff00] selection:text-black">
-              {/* YALA SEGMENT */}
-              <div className="inline-block bg-black/60 px-6 py-2 rounded-full border border-white/5 backdrop-blur-md shadow-2xl">
-                <span className="text-2xl md:text-2xl font-black text-white uppercase tracking-[-0.05em] leading-none">
-                  Yala
-                </span>
-              </div>
-
-              {/* SAFARI PACKAGES SEGMENT */}
-              <div className="inline-block bg-black/60 px-6 py-2 rounded-full ">
-                <span className="text-2xl md:text-2xl font-black text-[#00ff00] uppercase tracking-[-0.05em] leading-none">
-                  Safari&nbsp;&nbsp;&nbsp;Packages
+            <h1 className="flex justify-center items-center mb-10 selection:bg-[#00ff00] selection:text-black">
+              <div className="inline-block bg-black/80 px-6 py-2.5 rounded-full backdrop-blur-md shadow-2xl">
+                <span className="text-[15px] sm:text-base font-bold text-white tracking-wider leading-snug">
+                  Yala Safari Packages
                 </span>
               </div>
             </h1>
 
 
 
-            <div className="flex flex-col items-center gap-3 max-w-5xl mx-auto px-4 mb-16">
+            <div className="flex flex-col items-center gap-1.5 max-w-5xl mx-auto px-4 mb-16">
 
               {/* BLOCK_01: PRIMARY_DATA */}
-              <div className="inline-block bg-black/60 px-5 py-2 rounded-full">
-                <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.2em] leading-none">
+              <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
+                <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
                   Explore the breathtaking beauty of Yala National Park with our expert-guided safari packages.
                 </p>
               </div>
 
               {/* BLOCK_02: SECONDARY_DATA */}
-              <div className="inline-block bg-black/60 px-5 py-2 rounded-full ">
-                <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.2em] leading-none">
+              <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
+                <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
                   Witness the park&apos;s rich biodiversity, including elusive leopards and majestic elephants.
                 </p>
               </div>
 
               {/* DATA_BLOCK_04: TECHNICAL_INSIGHT */}
-              <div className="inline-block bg-black/60 px-5 py-2 rounded-full ">
-                <p className="text-[12px] md:text-[12px] text-white font-black  tracking-[0.2em] leading-none">
+              <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
+                <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
                   Apex predator surveillance and habitat monitoring protocols managed by senior field guides.
                 </p>
               </div>
 
               {/* FEATURE_PILLS */}
-              <div className="flex flex-wrap justify-center gap-2 pt-4">
+              <div className="flex flex-wrap justify-center gap-3 pt-4 mb-10">
 
                 {/* PILL_01 */}
-                <div className="group flex items-center gap-2 bg-black/70 px-4 py-1.5 rounded-full">
-                  <Shield className="text-[#00ff00] w-5 h-5 drop-shadow-[0_0_8px_#00ff00]" />
-                  <span className="text-[12px] font-black uppercase tracking-[0.3em] text-white/70">
+                <div className="group flex items-center gap-2 bg-black/80 px-4 py-2 rounded-full backdrop-blur-md shadow-lg">
+                  <Shield className="text-[#00ff00] w-4 h-4 drop-shadow-[0_0_6px_#00ff00]" />
+                  <span className="text-[12px] font-bold uppercase tracking-wider text-white">
                     SECURE PROTOCOL
                   </span>
                 </div>
 
                 {/* PILL_02 */}
-                <div className="group flex items-center gap-2 bg-black/70 px-4 py-1.5 rounded-full">
-                  <Compass className="text-[#00ff00] w-5 h-5 drop-shadow-[0_0_8px_#00ff00]" />
-                  <span className="text-[12px] font-black uppercase tracking-[0.3em] text-white/70">
+                <div className="group flex items-center gap-2 bg-black/80 px-4 py-2 rounded-full backdrop-blur-md shadow-lg">
+                  <Compass className="text-[#00ff00] w-4 h-4 drop-shadow-[0_0_6px_#00ff00]" />
+                  <span className="text-[12px] font-bold uppercase tracking-wider text-white">
                     EXPERT GUIDE
                   </span>
                 </div>
 
                 {/* PILL_03 */}
-                <div className="group flex items-center gap-2 bg-black/70 px-4 py-1.5 rounded-full">
-                  <Map className="text-[#00ff00] w-5 h-5 drop-shadow-[0_0_8px_#00ff00]" />
-                  <span className="text-[12px] font-black uppercase tracking-[0.3em] text-white/70">
+                <div className="group flex items-center gap-2 bg-black/80 px-4 py-2 rounded-full backdrop-blur-md shadow-lg">
+                  <Map className="text-[#00ff00] w-4 h-4 drop-shadow-[0_0_6px_#00ff00]" />
+                  <span className="text-[12px] font-bold uppercase tracking-wider text-white">
                     PRIME ZONES
                   </span>
                 </div>
 
-                {/* ADVANCE PAYMENT STRIP */}
-                <div className="mt-10 flex flex-col items-center justify-center gap-6 animate-in slide-in-from-bottom duration-700">
+              </div>
 
-                  {/* 1. Heading Pill */}
-                  <div className="inline-block bg-black/80 px-6 py-2 rounded-full shadow-sm">
-                    <h3 className="text-[#00ff00] font-black tracking-widest uppercase text-[10px] sm:text-xs">
-                      Custom Expeditions Only
-                    </h3>
-                  </div>
+              {/* ADVANCE PAYMENT STRIP */}
+              <div className="flex flex-col items-center justify-center gap-4 animate-in slide-in-from-bottom duration-700">
 
-                  {/* 2. Description Pill */}
-                  <div className="inline-block bg-black/80  px-8 py-4 rounded-full border border-white/5 max-w-sm">
-                    <p className="text-white/90 text-[11px] sm:text-xs leading-relaxed text-center">
-                      Have a pre-arranged custom expedition with our team? <br />
-                      Secure your booking directly right here.
-                    </p>
-                  </div>
+                {/* 1. Heading Pill */}
+                <div className="inline-block bg-black/80 px-6 py-2 rounded-full backdrop-blur-md shadow-md">
+                  <h3 className="text-[#00ff00] font-bold tracking-wider text-[10px] sm:text-xs">
+                    Custom Expeditions Only
+                  </h3>
+                </div>
 
-                  {/* 3. Button (Usually the button has its own bg, so we just wrap it to align) */}
-                  <div className="inline-block animate-pulse-slow">
-                    <AdvancePaymentButton />
-                  </div>
+                {/* 2. Description Pill */}
+                <div className="inline-block bg-black/80 px-8 py-3.5 rounded-full max-w-sm shadow-xl">
+                  <p className="text-white text-[11px] sm:text-xs font-normal leading-relaxed text-center">
+                    Have a pre-arranged custom expedition with our team? <br />
+                    Secure your booking directly right here.
+                  </p>
+                </div>
 
+                {/* 3. Button */}
+                <div className="inline-block animate-pulse-slow">
+                  <AdvancePaymentButton />
                 </div>
 
               </div>
@@ -222,15 +214,15 @@ export default function ClientSafariPackages() {
                 {Array(3).fill(null).map((_, i) => (
                   <div
                     key={i}
-                    className="w-[280px] md:w-full aspect-[3/4] bg-black/80 rounded-[2.5rem] animate-pulse border border-white/5"
+                    className="w-[280px] md:w-full aspect-[3/4] bg-black/80 rounded-[2.5rem] animate-pulse"
                   />
                 ))}
               </div>
             ) : error ? (
               /* --- ERROR PILL --- */
               <div className="flex justify-center">
-                <div className="bg-black/80 px-6 py-3 rounded-2xl border border-red-500/20 shadow-2xl">
-                  <p className="text-red-400 text-[10px] font-black uppercase tracking-widest leading-none flex items-center gap-2">
+                <div className="bg-black/80 px-6 py-3 rounded-2xl shadow-2xl">
+                  <p className="text-red-400 text-[10px] font-bold uppercase tracking-widest leading-none flex items-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-red-500 animate-ping"></span>
                     System Error: {error}
                   </p>
@@ -254,8 +246,8 @@ export default function ClientSafariPackages() {
             ) : (
               /* --- EMPTY DATA PILL --- */
               <div className="flex justify-center">
-                <div className="bg-black/80 px-10 py-5 rounded-full border border-white/5 shadow-2xl">
-                  <p className="text-neutral-500 text-[9px] font-black uppercase tracking-[0.4em] text-center italic">
+                <div className="bg-black/80 px-10 py-5 rounded-full shadow-2xl">
+                  <p className="text-neutral-400 text-[9px] font-bold uppercase tracking-widest text-center italic">
                     No expeditions currently available.
                   </p>
                 </div>
@@ -269,32 +261,32 @@ export default function ClientSafariPackages() {
             <AdUnit />
           </div> */}
 
-          <div className="flex flex-col items-center gap-3 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">
+          <div className="flex flex-col items-center gap-1.5 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">
 
             {/* PROTOCOL_HEADER */}
-            <div className="inline-block bg-black/70 px-4 py-1.5 rounded-full mb-2">
-              <h2 className="text-[12px] md:text-[12px] font-black text-[#00ff00]  tracking-[0.5em] flex items-center gap-2">
-                <Star size={10} className="animate-pulse" /> Expedition Intelligence Notes
+            <div className="inline-block bg-black/80 px-5 py-1.5 rounded-full backdrop-blur-md mb-1 shadow-md">
+              <h2 className="text-[13px] md:text-[13px] font-bold text-[#00ff00] tracking-wider flex items-center gap-2">
+                 Expedition Intelligence Notes
               </h2>
             </div>
 
             {/* MISSION_OVERVIEW_STRIP */}
-            <div className="inline-block bg-black/60 px-5 py-2 rounded-full">
-              <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.15em] leading-none">
+            <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
+              <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
                 Explore curated Yala National Park safari packages designed for mission-specific traveler requirements and budgets.
               </p>
             </div>
 
             {/* SECTOR_01: HALF_DAY_LOG */}
-            <div className="inline-block bg-black/60 px-5 py-2 rounded-full">
-              <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.15em] leading-none">
+            <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
+              <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
                 Half-day excursions: 4-hour deep-penetration missions into Block 1. Witness leopards and elephants with expert naturalist guides.
               </p>
             </div>
 
             {/* SECTOR_02: FULL_DAY_LOG */}
-            <div className="inline-block bg-black/60 px-5 py-2 rounded-full ">
-              <p className="text-[12px] md:text-[12px] text-white font-black tracking-[0.15em] leading-none">
+            <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
+              <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
                 Full-day expeditions: 10-hour comprehensive multi-zone coverage. Includes premium photography support and tactical logistics.
               </p>
             </div>
@@ -302,13 +294,13 @@ export default function ClientSafariPackages() {
             {/* OPERATIONAL_TRUST_STRIPS */}
             <div className="flex flex-wrap justify-center gap-2 pt-4">
               {[
-                "SLTDA_LICENSED_OPERATOR",
-                "CERTIFIED_NATURALIST_INTELLIGENCE",
-                "ALL_INCLUSIVE_EXPEDITION_LOGISTICS",
-                "PREMIUM_WILDLIFE_PHOTOGRAPHY_SUPPORT"
+                "SLTDA LICENSED OPERATOR",
+                "CERTIFIED NATURALIST INTELLIGENCE",
+                "ALL INCLUSIVE EXPEDITION LOGISTICS",
+                "PREMIUM WILDLIFE PHOTOGRAPHY SUPPORT"
               ].map((status, i) => (
-                <div key={i} className="bg-black/80 px-4 py-1.5 rounded-full">
-                  <span className="text-[7px] md:text-[9px] font-black uppercase tracking-[0.3em] text-neutral-400">
+                <div key={i} className="bg-black/80 px-4 py-1.5 rounded-full shadow-md">
+                  <span className="text-[7px] md:text-[9px] font-semibold uppercase tracking-wider text-neutral-300">
                     {status}
                   </span>
                 </div>
