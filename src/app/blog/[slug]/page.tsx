@@ -287,7 +287,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
             </Link>
 
             {/* --- The Glass Card (Borderless & Cute) --- */}
-            <article className="relative bg-black/60 backdrop-blur-sm rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-700">
+            <article className="relative bg-black/60 rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-700">
 
               {/* Hero Image inside Card */}
               <div className="relative w-full aspect-[16/9] md:h-[450px] m-2 rounded-[2.5rem] overflow-hidden shadow-inner">
@@ -300,7 +300,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
                 {/* Floating Date Badge */}
                 <div className="absolute top-4 left-4 flex gap-2">
-                  <div className="flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider shadow-sm">
+                  <div className="flex items-center gap-1.5 bg-black/50 px-4 py-1.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider shadow-sm">
                     <Calendar className="w-3 h-3 text-[#00ff00]" />
                     {blog.createdAt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </div>
@@ -311,7 +311,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
               <div className="px-6 py-8 md:px-10 md:py-10">
 
                 <header className="mb-8 text-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00ff00]/20 text-[#00ff00] text-[10px] font-bold uppercase tracking-widest mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 text-[#00ff00] text-[10px] font-bold uppercase tracking-widest mb-4">
                     <Tag className="w-3 h-3" /> Wildlife Story
                   </div>
                   <h1 className="text-3xl md:text-4xl font-black text-white leading-tight mb-6 drop-shadow-sm">
@@ -335,22 +335,29 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 </header>
 
                 {/* Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+                {/* <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" /> */}
 
                 {/* Prose Content */}
-                <div className="prose prose-invert prose-lg max-w-none">
-                  {blog.content.split("\n").map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className="text-neutral-200 leading-8 mb-5 font-light text-[1.05rem] first-letter:text-3xl first-letter:font-bold first-letter:text-[#00ff00] first-letter:mr-1 first-letter:float-left"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
+                <div className="prose prose-invert max-w-none">
+                  {blog.content.split("\n").map((paragraph, index) => {
+                    const isBullet = paragraph.trim().startsWith("*");
+
+                    return (
+                      <p
+                        key={index}
+                        className={`text-white font-light text-[1.05rem] leading-7 ${isBullet
+                            ? "pl-6 mb-3"
+                            : "mb-5 first-letter:text-3xl first-letter:font-bold first-letter:text-[#00ff00] first-letter:mr-1.5 first-letter:float-left"
+                          }`}
+                      >
+                        {paragraph}
+                      </p>
+                    );
+                  })}
                 </div>
 
                 {/* Footer CTA */}
-                <div className="mt-12 relative overflow-hidden rounded-[2rem] p-8 text-center shadow-lg group hover:shadow-[#00ff00]/20 transition-all bg-transparent">
+                <div className="mt-12 relative overflow-hidden rounded-[2rem] p-8 text-center shadow-lg group transition-all bg-transparent">
                   <div className="relative z-10">
                     <h3 className="text-lg font-bold text-white mb-2">Ready to see this in real life?</h3>
                     <p className="text-white text-sm mb-6 max-w-sm mx-auto">
@@ -358,7 +365,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                     </p>
                     <Link
                       href="/safari-packages"
-                      className="inline-block bg-white text-black hover:text-[#00ff00] font-bold text-sm py-3 px-8 rounded-full transition-transform hover:scale-105 shadow-md"
+                      className="inline-block bg-white text-black hover:text-black font-bold text-sm py-3 px-8 rounded-full transition-transform hover:scale-105 shadow-md"
                     >
                       Explore Packages
                     </Link>

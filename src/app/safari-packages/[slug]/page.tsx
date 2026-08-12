@@ -6,11 +6,11 @@ import Image from "next/image";
 import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/seo-config";
 import BookingForm from "@/components/BookingForm";
+import PackageCard from "@/components/PackageCard";
 import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import { Shield, Users } from "lucide-react";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -54,68 +54,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "leopard safari yala",
       "elephant safari yala",
       "safari booking yala",
-      // --- 🔥 HIGH VOLUME & BRAND CORE (The "Big Hits") ---
       "yala national park", "yala safari", "sri lanka safari", "yala wildlife safari",
       "yala national park safari", "safari in sri lanka", "visit yala",
       "yala park sri lanka", "yala safari official", "national parks in sri lanka",
       "best safari in sri lanka", "yala jeep safari", "wildlife tours sri lanka",
-
-      // --- 💰 HIGH INTENT & BOOKING (Transactional - Money Keywords) ---
       "book yala safari online", "yala safari price 2025", "yala safari cost per person",
       "yala jeep rental price", "reserve safari jeep yala", "buy yala national park tickets",
       "yala entrance fee 2025", "private jeep hire yala", "shared safari jeep yala",
       "best price safari yala", "luxury safari packages yala", "budget safari yala",
       "yala safari booking contact number", "yala safari cancellation policy",
       "last minute safari booking yala", "online safari reservation yala",
-
-      // --- 🐆 WILDLIFE SPECIFIC (The "Big 3" & Photographers) ---
       "yala leopard safari", "best place to see leopards in sri lanka", "panthera pardus koti",
       "sri lankan leopard sightings", "yala sloth bear safari", "melursus ursinus sightings",
       "asian elephant safari yala", "yala bird watching tours", "kumana bird sanctuary tour",
       "yala crocodile safari", "wild boar yala", "spotted deer yala",
       "yala wildlife photography tour", "wildlife filmmaker fixer yala", "birding tours sri lanka",
       "yala big game safari", "reptiles of yala", "peacock dance yala",
-
-      // --- 📍 LOCATION & ROUTE PLANNING (Geographic SEO) ---
       "colombo to yala safari", "galle to yala day trip", "ella to yala transfer",
       "mirissa to yala safari tour", "hambantota to yala safari", "tangalle to yala",
       "kandy to yala tour", "arugam bay to yala", "mattala airport to yala",
       "tissamaharama safari hotels", "hotels near yala national park", "safari near kataragama",
       "kirinda to yala", "weligama to yala day tour", "ahungalla to yala",
       "southern province things to do", "safari from bentota",
-
-      // --- 🚙 ZONES & ENTRANCES (Specific Knowledge) ---
       "palatupana entrance safari", "katagamuwa entrance yala", "galge entrance safari",
       "yala block 1 safari", "yala block 2 tours", "yala block 5 sightings",
       "sithulpawwa road safari", "yala strict natural reserve", "yala buffer zone safari",
       "best gate for yala safari", "less crowded yala safari block",
-
-      // --- 🌟 EXPERIENCE TYPES (Niche Targeting) ---
       "luxury camping yala", "glamping yala national park", "yala eco lodge",
       "camping inside yala national park", "vip safari experience sri lanka",
       "family friendly safari yala", "kids safari sri lanka", "honeymoon safari packages",
       "romantic safari dinner yala", "corporate safari team building",
       "educational wildlife tours", "school trip yala national park",
       "senior citizen friendly safari", "accessible safari sri lanka",
-
-      // --- ⏰ TIMING & SEASONAL (Informational) ---
       "best time to visit yala", "yala safari season", "yala drought season sightings",
       "is yala open in september", "yala national park closing dates 2025",
       "morning vs evening safari yala", "full day safari yala itinerary",
       "golden hour safari yala", "sunset safari yala", "early morning game drive",
       "yala weather february", "yala weather august",
-
-      // --- 🌿 SUSTAINABILITY & VALUES ---
       "eco friendly safari yala", "sustainable tourism sri lanka", "ethical safari operator",
       "responsible wildlife watching", "plastic free safari", "support local guides yala",
       "conservation projects yala", "community based tourism yala",
-
-      // --- 🆚 COMPARISONS (Competitor Targeting) ---
       "yala vs udawalawe", "yala vs wilpattu", "yala vs minneriya",
       "best national park for leopards", "yala vs bundala bird watching",
       "kumana vs yala east", "safari near galle vs yala",
-
-      // --- ❓ LONG TAIL QUESTIONS (Voice Search Optimization) ---
       "how to book a jeep for yala safari", "do i need a guide for yala safari",
       "can you see bears in yala", "how long is a safari in yala",
       "what to wear on a safari in sri lanka", "is yala national park safe",
@@ -150,388 +131,85 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// export default async function PackageDetailPage(props: Props) {
-//   const params = await props.params;
-//   const pkg = await getPackage(params.slug);
+export default async function PackageDetailPage(props: Props) {
+  const resolvedParams = await props.params;
+  const pkg = await getPackage(resolvedParams.slug);
 
-//   // Split description into points
-//   const descriptionPoints = pkg.description
-//     .split(".")
-//     .map((point) => point.trim())
-//     .filter((point) => point.length > 0);
+  const pkgAny = pkg as any;
 
-//   const breadcrumbItems = [
-//     { name: "Home", item: "/" },
-//     { name: "Safari Packages", item: "/safari-packages" },
-//     { name: pkg.name, item: `/safari-packages/${pkg.slug}` },
-//   ];
+  // Dynamic Highlights: Database array or parsed description points
+  const highlightsList: string[] =
+    pkgAny.highlights && pkgAny.highlights.length > 0
+      ? pkgAny.highlights
+      : pkg.description
+        .split(".")
+        .map((point) => point.trim())
+        .filter((point) => point.length > 0);
 
-//   return (
-//     <>
-//       <Header />
-//       <SafariPackageJsonLd
-//         name={pkg.name}
-//         description={pkg.description}
-//         price={pkg.price}
-//         image={pkg.imageUrl}
-//         slug={pkg.slug}
-//       />
-//       <BreadcrumbJsonLd items={breadcrumbItems} />
-//       <FAQJsonLd faqs={defaultFAQs} />
-//       <BreadcrumbSchema items={breadcrumbItems} />
+  // Dynamic Inclusions: Database array or package-informed defaults
+  const inclusionsList: string[] =
+    pkgAny.inclusions && pkgAny.inclusions.length > 0
+      ? pkgAny.inclusions
+      : [
+        "Private 4x4 Safari Jeep with customized seating",
+        "Experienced SLTDA-licensed driver guide",
+        "Free pick-up & drop-off in Tissamaharama / Yala area",
+        "Complimentary chilled bottled drinking water",
+        "All jeep fees, fuel, tolls and taxes included",
+      ];
 
-//       <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30">
-
-//         {/* =========================================
-//             BACKGROUND IMAGE (Global - Fixed)
-//         ========================================= */}
-//         <div className="fixed inset-0 z-0">
-//           <Image
-//             src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-//             alt="Yala Leopard Background"
-//             fill
-//             priority
-//             // Slightly increased opacity for better visibility against the dark overlay
-//             className="object-cover opacity-50"
-//             quality={90}
-//           />
-//           {/* Cinematic Overlay - Stronger gradients so text pops without borders */}
-//           <div className="absolute inset-0 bg-gradient-to-b " />
-//           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#050505_100%)]" />
-//         </div>
-
-//         {/* =========================================
-//             CONTENT
-//         ========================================= */}
-//         <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
-
-//           {/* Breadcrumb / Metadata HUD */}
-//           <div className="flex items-center gap-4 text-xs font-mono text-neutral-400 mb-8 uppercase tracking-widest">
-//             <span>Yala National Park</span>
-//             <span className="w-px h-3 bg-neutral-600"></span>
-//             <span className="text-green-400">Expedition ID: {pkg.slug.toUpperCase().substring(0, 6)}</span>
-//           </div>
-
-//           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-
-//             {/* LEFT COLUMN: DETAILS (Span 7) */}
-//             <div className="lg:col-span-7 space-y-10">
-
-//               {/* Title Block */}
-//               <div className="space-y-6">
-//                 <h1 className="text-4xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter drop-shadow-lg">
-//                   {pkg.name}
-//                 </h1>
-//                 {/* Badges - No Borders, just glass */}
-//                 <div className="flex flex-wrap gap-3 pt-2">
-//                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-//                     <Clock size={14} className="text-green-400" />
-//                     <span className="text-xs font-bold uppercase text-white">4-6 Hours</span>
-//                   </div>
-//                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-//                     <Users size={14} className="text-green-400" />
-//                     <span className="text-xs font-bold uppercase text-white">Max 7 Guests</span>
-//                   </div>
-//                   <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
-//                     <Shield size={14} className="text-green-400" />
-//                     <span className="text-xs font-bold uppercase text-white">Insured</span>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               {/* Main Image (Cutter Style - Deep Shadow, No Border) */}
-//               <div className="relative aspect-video rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] group">
-//                 <Image
-//                   src={pkg.imageUrl}
-//                   alt={pkg.name}
-//                   fill
-//                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
-//                   sizes="(max-width: 768px) 100vw, 60vw"
-//                   priority
-//                 />
-//                 {/* Overlay Gradient */}
-//                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-//                 <div className="absolute bottom-6 left-6 flex items-center gap-2 text-xs font-mono text-green-400 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
-//                   <MapPin size={12} />
-//                   <span>Sector 1 - Palatupana Gate</span>
-//                 </div>
-//               </div>
-
-//               {/* Description List - Dark Glass, No Border */}
-//               {/* <div className="bg-black/30 backdrop-blur-2xl rounded-3xl p-8 shadow-xl">
-//                 <h3 className="text-2xl font-bold text-white mb-8">
-//                   Expedition Highlights
-//                 </h3>
-//                 <div className="grid gap-5">
-//                   {descriptionPoints.map((point, index) => (
-//                     <div key={index} className="flex items-start gap-4 group">
-//                       <div className="mt-1 p-1 bg-green-500/20 rounded-full">
-//                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
-//                       </div>
-//                       <p className="text-neutral-200 text-base leading-relaxed font-light">
-//                         {point}.
-//                       </p>
-//                     </div>
-//                   ))}
-//                 </div>
-//                </div> */}
-
-//               {/* Description List - Dark Glass, No Border */}
-//               <div className="bg-black/30 backdrop-blur-sm rounded-[2.5rem] p-8 shadow-xl border border-white/5">
-//                 <h3 className="text-2xl font-bold text-white mb-8">
-//                   Expedition Highlights
-//                 </h3>
-
-//                 <div className="grid gap-5">
-//                   {descriptionPoints.map((point, index) => {
-//                     if (!point) return null;
-
-//                     // --- THE FIX: Unicode-Safe Splitting ---
-//                     // This creates an array of real characters (handling emojis correctly)
-//                     const charArray = [...point];
-
-//                     // 1. Get the first character (Safe for Emojis)
-//                     const firstChar = charArray[0] || "";
-//                     const firstLetter = firstChar.toUpperCase();
-
-//                     // 2. Get the rest of the text
-//                     const restOfText = charArray.slice(1).join("");
-
-//                     return (
-//                       <div key={index} className="flex items-start gap-4 group">
-//                         {/* Added suppressHydrationWarning to be extra safe against browser extensions */}
-//                         <p
-//                           className="text-neutral-200 text-base leading-relaxed font-light"
-//                           suppressHydrationWarning
-//                         >
-//                           <span className="text-[#00ff00] text-3xl font-bold mr-1 leading-none">
-//                             {firstLetter}
-//                           </span>
-//                           {restOfText}.
-//                         </p>
-//                       </div>
-//                     );
-//                   })}
-//                 </div>
-//               </div>
-
-//             </div>
-
-//             {/* RIGHT COLUMN: BOOKING CONSOLE (Span 5) */}
-//             <div className="lg:col-span-5">
-//               <div className="sticky top-24 space-y-8">
-
-//                 {/* Pricing Card - Glowing, No Border */}
-//                 <div className="bg-black/10 rounded-3xl p-8 text-center relative overflow-hidden ">
-//                   <div className="absolute inset-0 bg-[url('/pattern-grid.svg')] opacity-10 mix-blend-overlay"></div>
-//                   <p className="text-green-100/80 text-xs font-bold uppercase tracking-widest mb-2">Total Package Price</p>
-//                   <div className="flex items-baseline justify-center gap-1">
-//                     <span className="text-3xl font-bold text-green-200">$</span>
-//                     <span className="text-6xl font-black text-white tracking-tighter drop-shadow-md">{pkg.price.toFixed(0)}</span>
-//                   </div>
-//                   <p className="text-white text-sm mt-3 font-medium bg-white/10 py-1 px-3 rounded-full inline-block">Per Jeep (All Inclusive)</p>
-//                 </div>
-
-//                 {/* Booking Form Container - Deep Glass, No Border */}
-//                 <div className="backdrop-blur-2xl bg-black/50 rounded-3xl p-8 shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
-//                   <div className="mb-8">
-//                     <h3 className="text-2xl font-bold text-white mb-2">Secure Your Seat</h3>
-//                     <p className="text-base text-neutral-400">Instant confirmation. Your adventure awaits.</p>
-//                   </div>
-
-//                   {/* Integrated Booking Form */}
-//                   <BookingForm tourPackageSlug={pkg.name} />
-//                 </div>
-
-//                 {/* Trust Badges - Dark Capsules, No Border */}
-//                 <div className="grid grid-cols-2 gap-4">
-//                   <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-5 text-center shadow-inner">
-//                     <div className="text-green-400 font-black text-2xl mb-1">4.9/5</div>
-//                     <div className="text-[10px] text-neutral-400 uppercase tracking-wider font-bold">Guest Rating</div>
-//                   </div>
-//                   <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-5 text-center shadow-inner">
-//                     <div className="text-green-400 font-black text-2xl mb-1">100%</div>
-//                     <div className="text-[10px] text-neutral-400 uppercase tracking-wider font-bold">Refund Guarantee</div>
-//                   </div>
-//                 </div>
-
-//               </div>
-//             </div>
-
-//           </div>
-//         </div>
-//       </main>
-//     </>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-// export default async function PackageDetailPage(props: Props) {
-//   const params = await props.params;
-//   const pkg = await getPackage(params.slug);
-
-//   const descriptionPoints = pkg.description
-//     .split(".")
-//     .map((point) => point.trim())
-//     .filter((point) => point.length > 0);
-
-//   return (
-//     <>
-//       <Header />
-//       <main className="relative min-h-screen bg-black text-white selection:bg-[#00ff00]/30 font-sans overflow-x-hidden">
-
-//         {/* --- GLOBAL FIXED BACKGROUND --- */}
-//         <div className="fixed inset-0 z-0 h-full w-full pointer-events-none">
-//           <Image
-//             src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-//             alt="Yala Background Feed"
-//             fill
-//             priority
-//             className="object-cover opacity-60 grayscale-[40%]"
-//           />
-//           <div className="absolute inset-0 bg-black/60" />
-//         </div>
-
-//         <div className="relative z-10">
-//           {/* SECTION 1: FULL SCREEN HERO */}
-//           <section className="relative h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden">
-//             <div className="absolute inset-0 z-0">
-//               <Image src={pkg.imageUrl} alt={pkg.name} fill priority className="object-cover scale-105" quality={100} />
-//               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
-//             </div>
-
-//             <div className="relative z-10 container max-w-7xl mx-auto text-center space-y-6">
-//               <div className="flex justify-center">
-//                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-xl rounded-full ">
-//                   <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse"></span>
-//                   <span className="text-[12px] font-black  tracking-[0.5em] text-[#00ff00]">
-//                     {pkg.slug.toUpperCase().substring(0, 8)}
-//                   </span>
-//                 </div>
-//               </div>
-
-//               <div className="space-y-4">
-//                 <div className="inline-block bg-black/40 backdrop-blur-md px-8 py-3 rounded-2xl">
-//                   <h1 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">{pkg.name}</h1>
-//                 </div>
-
-//                 <div className="flex flex-wrap justify-center gap-2">
-//                   {[
-//                     { icon: Users, label: "MAX 07 CAPACITY" },
-//                     { icon: Shield, label: "SECURE PROTOCOL" },
-//                   ].map((badge, i) => (
-//                     <div key={i} className="flex items-center gap-2 bg-black/80 px-4 py-1.5 rounded-full backdrop-blur-md">
-//                       <badge.icon size={12} className="text-[#00ff00]" />
-//                       <span className="text-[12px] font-black text-white tracking-widest uppercase">{badge.label}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
-//                 <div className="w-[1px] h-12 bg-[#00ff00]" />
-//               </div>
-//             </div>
-//           </section>
-
-//           {/* SECTION 2: CENTERED DATA CONSOLE */}
-//           <div className="container max-w-4xl mx-auto px-4 py-24 space-y-20 flex flex-col items-center">
-
-//             {/* CENTERED HIGHLIGHTS */}
-//             <div className="w-full flex flex-col items-center space-y-8">
-//               <div className="inline-block bg-black/60 px-4 py-1.5 rounded-full">
-//                 <h3 className="text-[12px] font-black text-[#00ff00] uppercase tracking-[0.4em]">Expedition_Metadata_Feed</h3>
-//               </div>
-
-//               <div className="grid gap-1 w-full">
-//                 {descriptionPoints.map((point, index) => {
-//                   const firstLetter = point.charAt(0).toUpperCase();
-//                   const restOfText = point.slice(1);
-//                   return (
-//                     <div key={index} className="bg-black/70 p-1 rounded-full text-center">
-//                       <p className="text-[14px] md:text-[16px] text-neutral-300 font-medium leading-relaxed tracking-wide">
-//                         <span className="text-[#00ff00] text-4xl font-black mr-1 inline-block align-middle leading-none">
-//                           {firstLetter}
-//                         </span>
-//                         {restOfText}
-//                       </p>
-//                     </div>
-//                   );
-//                 })}
-//               </div>
-//             </div>
-
-//             {/* CENTERED BOOKING CONSOLE */}
-//             <div className="w-full max-w-2xl space-y-6">
-
-//               {/* PRICING */}
-//               <div className="bg-black/80  rounded-full p-1 text-center relative overflow-hidden shadow-2xl border border-white/5">
-//                 <p className="text-[#00ff00] text-[12px] font-black tracking-[0.5em] mb-4">Unit Investment</p>
-//                 <div className="flex items-baseline justify-center gap-1">
-//                   <span className="text-xl font-black text-[#00ff00]">$</span>
-//                   <span className="text-7xl font-black text-white tracking-tighter">{pkg.price.toFixed(0)}</span>
-//                   <span className="text-[12px] text-neutral-500 font-black uppercase ml-2 tracking-widest">/ Jeep</span>
-//                 </div>
-//               </div>
-
-//               {/* BOOKING FORM */}
-//               <div className="bg-black/90 backdrop-blur-3xl rounded-[2.5rem] p-10 shadow-2xl text-center border border-white/5">
-//                 <div className="mb-8">
-//                   <h2 className="text-2xl font-black text-white uppercase tracking-tighter">Initialize_Booking</h2>
-//                   <p className="text-[12px] text-neutral-500 uppercase tracking-widest font-black pt-1">Encryption: Active_Protocol</p>
-//                 </div>
-//                 <div className="text-left"> {/* Keeping form fields left-aligned for usability while container is centered */}
-//                   <BookingForm tourPackageSlug={pkg.name} />
-//                 </div>
-//               </div>
-
-//               {/* AUTH METRICS */}
-//               <div className="grid grid-cols-2 gap-4 w-full">
-//                 <div className="bg-black/60 p-6 rounded-2xl text-center backdrop-blur-xl shadow-lg border border-white/5">
-//                   <div className="text-[#00ff00] text-xl font-black tracking-tighter">4.9/5</div>
-//                   <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">User_Rating</div>
-//                 </div>
-//                 <div className="bg-black/60 p-6 rounded-2xl text-center backdrop-blur-xl shadow-lg border border-white/5">
-//                   <div className="text-[#00ff00] text-xl font-black tracking-tighter">100%</div>
-//                   <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">Refund_Auth</div>
-//                 </div>
-//               </div>
-
-//             </div>
-//           </div>
-//         </div>
-//       </main>
-//     </>
-//   );
-// }
-
-
-
-
-
-
-
-export default async function PackageDetailPage(props: any) {
-  const params = await props.params;
-  const pkg = await getPackage(params.slug);
-
-  const descriptionPoints = pkg.description
-    .split(".")
-    .map((point: string) => point.trim())
-    .filter((point: string) => point.length > 0);
+  // Dynamic Exclusions: Database array or package-informed defaults
+  const exclusionsList: string[] =
+    pkgAny.exclusions && pkgAny.exclusions.length > 0
+      ? pkgAny.exclusions
+      : [
+        `National Park entrance permits (Optional add-on: $${pkg.ticketPrice > 0 ? pkg.ticketPrice : 45}/person)`,
+        `Breakfast / Lunch meals (Optional add-on: $${pkg.mealPrice > 0 ? pkg.mealPrice : 10}/person)`,
+        "Tips & gratuities for driver-guide & tracker",
+        "Transfers outside Tissamaharama / Yala area",
+      ];
 
   const breadcrumbItems = [
     { name: "Home", item: "/" },
     { name: "Safari Packages", item: "/safari-packages" },
     { name: pkg.name, item: `/safari-packages/${pkg.slug}` },
   ];
+
+  // Fetch recommended packages dynamically from database
+  let otherPackages: Package[] = [];
+  try {
+    otherPackages = await prisma.package.findMany({
+      where: {
+        slug: { not: resolvedParams.slug },
+      },
+      take: 3,
+    });
+  } catch (err) {
+    console.error("Prisma lookup failed for recommended packages:", err);
+  }
+
+  // Structural SEO schema
+  const packageProductSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": pkg.name,
+    "image": pkg.imageUrl,
+    "description": pkg.description,
+    "offers": {
+      "@type": "Offer",
+      "url": `${siteConfig.url}/safari-packages/${pkg.slug}`,
+      "price": pkg.price,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "LocalBusiness",
+        "name": "Yala Wildlife Safaris",
+        "image": `${siteConfig.url}/favicon-96x96.png`,
+        "telephone": "+94778158004",
+        "priceRange": "$$"
+      }
+    }
+  };
 
   return (
     <>
@@ -545,161 +223,164 @@ export default async function PackageDetailPage(props: any) {
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <FAQJsonLd faqs={defaultFAQs} />
 
-      <main className="relative min-h-screen bg-black text-white selection:bg-[#00ff00]/30 font-sans overflow-x-hidden">
+      <main className="relative w-full min-h-screen bg-black selection:bg-[#00ff00]">
+        {/* STRUCTURAL SCHEMA DATA */}
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(packageProductSchema) }}
+        />
 
-        {/* --- GLOBAL FIXED BACKGROUND --- */}
-        <div className="fixed inset-0 z-0 h-full w-full pointer-events-none">
+        {/* =========================================
+            BACKGROUND IMAGE SECTION
+        ========================================= */}
+        <div className="fixed inset-0 z-0 h-screen">
           <Image
             src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Background Feed"
+            alt="Yala Leopard Emerging from Darkness"
             fill
             priority
-            className="object-cover opacity-60 grayscale-[40%]"
+            className="object-cover opacity-100 scale-105"
+            quality={75}
           />
-          <div className="absolute inset-0 bg-black/60" />
+          {/* Fast High-Contrast Overlay Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/95" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-transparent to-black/85" />
         </div>
 
-        {/* Z-10 ensures content stays above fixed background. 
-            No top padding here so Section 1 hits the very top.
-        */}
-        <div className="relative z-10">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-20">
 
-          {/* SECTION 1: FULL SCREEN HERO */}
-          <section className="relative h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden">
-            <div className="absolute inset-0 z-0">
-              <Image
-                src={pkg.imageUrl}
-                alt={pkg.name}
-                fill
-                priority
-                className="object-cover object-center scale-105"
-                quality={100}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black" />
-            </div>
+          {/* BREADCRUMB SCHEMA */}
+          <div className="mb-4 opacity-75 hover:opacity-100 transition-opacity">
+            <BreadcrumbSchema items={breadcrumbItems} />
+          </div>
 
-            <div className="relative z-20 container max-w-7xl mx-auto text-center space-y-6">
-              {/* BREADCRUMB HUD - Floating inside the hero area */}
-              <div className="mb-4 opacity-40 hover:opacity-100 transition-opacity">
-                <BreadcrumbSchema items={breadcrumbItems} />
-              </div>
+          {/* SPLIT HERO SECTION: Cover image first on mobile, Left details on desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
+            {/* RIGHT COL (First on Mobile): Sticky split-screen cover image (5/12) */}
+            <div className="order-1 lg:order-2 lg:col-span-5 lg:sticky lg:top-28">
+              <div className="relative w-full h-[300px] sm:h-[380px] lg:h-[480px] rounded-3xl overflow-hidden shadow-2xl group">
+                <Image
+                  src={pkg.imageUrl}
+                  alt={pkg.name}
+                  fill
+                  priority
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] brightness-[0.88] group-hover:brightness-[0.98]"
+                />
+                {/* Seamless gradients */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
-              <div className="flex justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-xl rounded-full ">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse"></span>
-                  <span className="text-[12px] font-black tracking-[0.5em] text-[#00ff00]">
-                    {pkg.slug.toUpperCase().substring(0, 8)}
-                  </span>
-                </div>
-              </div>
+                {/* Floating Badges */}
+                <div className="absolute top-4 left-4 flex flex-wrap gap-2.5 z-10">
 
-              <div className="space-y-4">
-                <div className="inline-block bg-black/40 backdrop-blur-md px-8 py-3 rounded-2xl">
-                  <h1 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">{pkg.name}</h1>
-                </div>
-                <br />
-                <div className="inline-block bg-black/70  px-7 py-2 rounded-2xl">
-                  <h1 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">
-                    <span className="text-4xl font-black text-[#00ff00]">$</span>{pkg.price}</h1>
-                </div>
-
-                <div className="flex flex-wrap justify-center gap-2">
-                  {[
-                    { icon: Users, label: "MAX 07 CAPACITY" },
-                    { icon: Shield, label: "SECURE PROTOCOL" },
-                  ].map((badge, i) => (
-                    <div key={i} className="flex items-center gap-2 bg-black/80 px-4 py-1.5 rounded-full backdrop-blur-md">
-                      <badge.icon size={12} className="text-[#00ff00]" />
-                      <span className="text-[12px] font-black text-white tracking-widest uppercase">{badge.label}</span>
+                  {pkg.price && (
+                    <div className="bg-black/90 text-white px-3.5 py-1.5 rounded-full shadow-lg font-black text-[10px] md:text-[11px] tracking-wide">
+                       ${pkg.price.toFixed(0)} USD
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
+            </div>
 
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
-                <div className="w-[1px] h-12 bg-[#00ff00]" />
+            {/* LEFT COL (Second on Mobile): Overview & Text Details (7/12) */}
+            <div className="order-2 lg:order-1 lg:col-span-7 space-y-4">
+              {/* H1 TITLE */}
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-snug inline-block bg-black/90 px-4 py-2.5 rounded-xl shadow-xl">
+                {pkg.name.split(":")[0]}
+                {pkg.name.split(":")[1] && (
+                  <>
+                    <br />
+                    <span className="text-[#00ff00] font-semibold text-sm md:text-base tracking-wide">
+                      {pkg.name.split(":")[1]}
+                    </span>
+                  </>
+                )}
+              </h1>
+
+              {/* MINI DESCRIPTION CARD - Clear, Cute & Smaller */}
+              <div className="bg-black/90 px-4 py-3 rounded-xl shadow-xl w-full">
+                <h2 className="sr-only">Safari Package Overview for {pkg.name}</h2>
+                <p className="text-xs sm:text-[13px] text-neutral-300 font-normal leading-relaxed">
+                  {pkg.description}
+                </p>
+              </div>
+
+              {/* DYNAMIC INCLUSIONS & EXCLUSIONS VIEWS */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+                {/* Inclusions */}
+                <div className="bg-black/90 p-5 rounded-2xl shadow-xl">
+                  <h3 className="text-xs md:text-sm font-bold text-[#00ff00] tracking-wider mb-3 flex items-center gap-2">
+                    <span className="flex items-center justify-center w-4 h-4 rounded-full bg-[#00ff00]/15 text-[#00ff00] text-[10px] font-black">✓</span>
+                    Inclusions
+                  </h3>
+                  <ul className="space-y-2 text-[12px] md:text-[13px] font-medium text-neutral-200 tracking-wide">
+                    {inclusionsList.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                        <span className="text-[#00ff00] font-bold select-none text-xs">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Exclusions */}
+                <div className="bg-black/90 p-5 rounded-2xl shadow-xl">
+                  <h3 className="text-xs md:text-sm font-bold text-rose-400 tracking-wider mb-3 flex items-center gap-2">
+                    <span className="flex items-center justify-center w-4 h-4 rounded-full bg-rose-500/15 text-rose-400 text-[10px] font-black">✗</span>
+                    Exclusions
+                  </h3>
+                  <ul className="space-y-2 text-[12px] md:text-[13px] font-medium text-neutral-300 tracking-wide">
+                    {exclusionsList.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                        <span className="text-rose-400 font-bold select-none text-xs">✗</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          {/* SECTION 2: CENTERED DATA CONSOLE */}
-          <div className="container max-w-4xl mx-auto px-4 py-24 space-y-20 flex flex-col items-center">
-
-            {/* CENTERED HIGHLIGHTS */}
-            <div className="w-full flex flex-col items-center space-y-8">
-              <div className="inline-block bg-black/60 px-4 py-1.5 rounded-full">
-                <h3 className="text-[12px] font-black text-[#00ff00] uppercase tracking-[0.4em]">Expedition_Metadata_Feed</h3>
+          {/* DYNAMIC ITINERARY / HIGHLIGHTS & BOOKING GRID */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12 mt-10">
+            <div className="order-2 lg:order-1 lg:col-span-2 space-y-5 md:space-y-6">
+              {/* OPERATIONAL ITINERARY ISLAND */}
+              <div className="inline-block bg-black/90 px-4 py-1.5 rounded-full shadow-xl mb-2">
+                <h2 className="text-[12px] md:text-[13px] font-extrabold text-white tracking-[0.2em]">
+                  Expedition Highlights & Features
+                </h2>
               </div>
 
-              <div className="grid gap-1 w-full">
-                {descriptionPoints.map((point: string, index: number) => {
-                  const firstLetter = point.charAt(0).toUpperCase();
-                  const restOfText = point.slice(1);
-                  return (
-                    <div key={index} className="bg-black/70 p-1 rounded-full text-center">
-                      <p className="text-[14px] md:text-[16px] text-neutral-300 font-medium leading-relaxed tracking-wide">
-                        <span className="text-[#00ff00] text-4xl font-black mr-1 inline-block align-middle leading-none">
-                          {firstLetter}
-                        </span>
-                        {restOfText}
+              <div className="space-y-3">
+                {highlightsList.map((point: string, idx: number) => (
+                  <div key={idx} className="flex gap-3.5 items-start bg-black/90 p-4 md:p-5 rounded-2xl shadow-xl transition-colors duration-200 hover:bg-zinc-900">
+                    <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[11px] font-black text-black bg-[#00ff00] shadow-[0_0_12px_rgba(0,255,0,0.3)]">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-xs md:text-sm font-bold text-white mb-0.5">Highlight {idx + 1}</h3>
+                      <p className="text-[12px] md:text-[13px] text-neutral-300 font-normal leading-relaxed">
+                        {point}{point.endsWith('.') ? '' : '.'}
                       </p>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* CENTERED BOOKING CONSOLE */}
-            <div className="w-full max-w-2xl space-y-6">
-              <div className="bg-black/80 rounded-full p-1 text-center relative overflow-hidden ">
-                <p className="text-[#00ff00] text-[12px] font-black tracking-[0.5em] mb-4">Unit Investment</p>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-xl font-black text-[#00ff00]">$</span>
-                  <span className="text-7xl font-black text-white tracking-tighter">{pkg.price.toFixed(0)}</span>
-                  <span className="text-[12px] text-neutral-500 font-black uppercase ml-2 tracking-widest">/ Jeep</span>
-                </div>
+            <aside className="order-1 lg:order-2 space-y-8">
+              {/* BOOKING INTERFACE */}
+              <div className="bg-[#00ff00] p-6 md:p-8 rounded-2xl md:rounded-3xl text-black shadow-[0_0_50px_rgba(0,255,0,0.15)] lg:sticky lg:top-32 transition-all">
+                <h2 className="text-base md:text-lg font-extrabold tracking-tight mb-1.5 leading-snug">
+                  Initialize Booking
+                </h2>
+                <p className="text-[11px] font-bold text-black/80 mb-4">
+                  Select your date, guest count, permits and meal add-ons.
+                </p>
+                <BookingForm tourPackageSlug={pkg.slug} />
               </div>
-
-              {/* <div className="bg-black/60 rounded-[2.5rem] p-10 shadow-2xl text-center border border-white/5">
-                <div className="mb-8">
-                  <h2 className="text-2xl font-black text-white uppercase tracking-tighter">Initialize_Booking</h2>
-                  <p className="text-[12px] text-neutral-500 uppercase tracking-widest font-black pt-1">Encryption: Active Protocol</p>
-                </div>
-                <div className="text-center">
-                  <BookingForm tourPackageSlug={pkg.name} />
-                </div>
-              </div> */}
-              <div className="flex flex-col items-center gap-4 mx-auto max-w-sm">
-
-                {/* TOP BLOCK: STATUS HEADER */}
-                <div className="bg-black/60 rounded-full px-8 py-4 w-full ">
-                  <h2 className="text-lg font-black text-white uppercase tracking-tighter leading-none text-center">
-                    Initialize_Booking
-                  </h2>
-                  <p className="text-[10px] text-[#00ff00] uppercase tracking-[0.3em] font-black pt-2 flex items-center justify-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-[#00ff00] animate-pulse"></span>
-                    Encryption: Active
-                  </p>
-                </div>
-
-                {/* BOTTOM BLOCK: THE BOOKING CONSOLE */}
-                <div className="w-full">
-                  <BookingForm tourPackageSlug={pkg.name} />
-                </div>
-
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 w-full">
-                <div className="bg-black/70 p-6 rounded-full text-center">
-                  <div className="text-[#00ff00] text-xl font-black tracking-tighter">4.9/5</div>
-                  <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">User_Rating</div>
-                </div>
-                <div className="bg-black/70 p-6 rounded-full text-center ">
-                  <div className="text-[#00ff00] text-xl font-black tracking-tighter">100%</div>
-                  <div className="text-[12px] text-neutral-500 uppercase font-black tracking-widest">Refund_Auth</div>
-                </div>
-              </div>
-            </div>
+            </aside>
           </div>
         </div>
       </main>

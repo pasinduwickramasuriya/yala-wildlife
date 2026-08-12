@@ -58,26 +58,9 @@ export default function ClientSafariPackages() {
       <FAQJsonLd faqs={defaultFAQs} />
       <BreadcrumbJsonLd items={breadcrumbItems} />
       {packages.map((pkg) => (
-        // <SafariPackageJsonLd
-        //   key={pkg.id}
-        //   package={{
-        //     ...pkg,
-        //     description: pkg.description || "",
-        //     price: pkg.price || 0,
-        //     imageUrl: pkg.imageUrl || "",
-        //   }}
-        // />
         <SafariPackageJsonLd
           key={pkg.id}
-          package={{
-            ...pkg,
-            description: pkg.description || "",
-            price: pkg.price || 0,
-            imageUrl: pkg.imageUrl || "",
-            // ✅ ADD THESE TWO LINES TO FIX THE BUILD ERROR
-            mealPrice: pkg.mealPrice || 0,
-            ticketPrice: pkg.ticketPrice || 0,
-          }}
+          package={pkg}
         />
       ))}
 

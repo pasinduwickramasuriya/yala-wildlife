@@ -31,6 +31,9 @@ model Package {
   // -----------------------------
 
   slug        String   @unique
+  highlights  String[]
+  inclusions  String[]
+  exclusions  String[]
 }
 
 model HeroSection {

@@ -1,208 +1,3 @@
-//                   <div className="w-4 h-[1px] bg-[#00ff00]/40" />
-//                   <span className="text-[14px] md:text-[16px] font-medium tracking-wide text-[#00ff00] uppercase">
-//                     {packageDetails?.name || tourPackageSlug.replace(/-/g, ' ')}
-//                   </span>
-//                 </div>
-//               </header>
-
-//               <form onSubmit={handleSubmit} className="space-y-16 md:space-y-32">
-
-//                 {/* 01 CONTACT INFORMATION */}
-//                 <section className="space-y-10">
-//                   <SectionLabel>01. Contact Information</SectionLabel>
-//                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-//                     <InputField icon={<User size={16} />} label="Full Name">
-//                       <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="form-input" placeholder="Enter your name" />
-//                     </InputField>
-
-//                     <InputField icon={<Globe size={16} />} label="Country">
-//                       <select value={formData.country} onChange={e => setFormData({ ...formData, country: e.target.value })} className="form-input appearance-none cursor-pointer">
-//                         <option value="">Select country</option>
-//                         {countryList.map(c => <option key={c.code} value={c.name}>{c.name}</option>)}
-//                       </select>
-//                     </InputField>
-
-//                     <InputField icon={<Mail size={16} />} label="Email Address">
-//                       <input type="email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} className="form-input" placeholder="email@example.com" />
-//                     </InputField>
-
-//                     <InputField icon={<Phone size={16} />} label="Phone Number">
-//                       <div className="flex items-center">
-//                         <span className="text-[#00ff00] font-mono text-sm mr-4 opacity-60">{formData.phoneCode}</span>
-//                         <input required type="tel" value={formData.phoneNumber} onChange={e => setFormData({ ...formData, phoneNumber: e.target.value.replace(/\D/g, "") })} className="form-input" placeholder="Number" />
-//                       </div>
-//                     </InputField>
-//                   </div>
-//                 </section>
-
-//                 {/* 02 SAFARI DETAILS */}
-//                 <section className="space-y-16">
-//                   <SectionLabel>02. Safari Details</SectionLabel>
-//                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-//                     <div className="space-y-4">
-//                       <span className="text-[12px] font-bold text-[#86868b] uppercase tracking-widest block mb-2">Safari Date</span>
-//                       <div className="bg-white/[0.02] p-6 rounded-2xl flex items-center gap-4 border border-white/[0.05] relative hover:bg-white/[0.04] transition-colors duration-500">
-//                         <Calendar size={18} className="text-[#00ff00] opacity-40" />
-//                         <input
-//                           type="date"
-//                           required
-//                           min={today}
-//                           value={formData.date}
-//                           onChange={e => {
-//                             setFormData({ ...formData, date: e.target.value });
-//                             e.target.blur(); // Fix for stuck desktop: release focus
-//                           }}
-//                           className="form-input border-none !p-0 !m-0 [color-scheme:dark] w-full"
-//                         />
-//                       </div>
-//                     </div>
-
-//                     <div className="bg-white/[0.02] p-8 rounded-[2rem] border border-white/5 flex items-center justify-between shadow-inner">
-//                       <span className="text-[12px] font-bold text-[#86868b] uppercase tracking-widest">Guests</span>
-//                       <div className="flex items-center gap-10">
-//                         <button type="button" onClick={() => setFormData(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Minus size={24} /></button>
-//                         <span className="text-4xl md:text-5xl font-semibold text-[#f5f5f7] font-mono leading-none">{formData.passengers}</span>
-//                         <button type="button" onClick={() => setFormData(p => ({ ...p, passengers: Math.min(7, p.passengers + 1) }))} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Plus size={24} /></button>
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//                     <AddOnToggle active={formData.includeMeals} onClick={() => setFormData(p => ({ ...p, includeMeals: !p.includeMeals }))} icon={<Utensils size={16} />} title="Include Meals" price={totals.meals} quantity={formData.includeMeals ? formData.mealCount : null} onInc={() => setFormData(p => ({ ...p, mealCount: Math.min(20, p.mealCount + 1) }))} onDec={() => setFormData(p => ({ ...p, mealCount: Math.max(1, p.mealCount - 1) }))} />
-//                     <AddOnToggle active={formData.includeTickets} onClick={() => setFormData(p => ({ ...p, includeTickets: !p.includeTickets }))} icon={<Ticket size={16} />} title="Entry Tickets" price={totals.tickets} />
-//                   </div>
-//                 </section>
-
-//                 {/* 03 SPECIAL REQUESTS */}
-//                 <section className="space-y-12">
-//                   <SectionLabel>03. Special Requests</SectionLabel>
-//                   <div className="bg-white/[0.02] p-10 rounded-[3rem] border border-white/5 focus-within:bg-white/[0.04] transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1)">
-//                     <div className="flex items-center gap-3 mb-8 opacity-30">
-//                       <MessageSquare size={18} />
-//                       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#86868b]">Message (Optional)</span>
-//                     </div>
-//                     <textarea rows={5} value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent text-[#f5f5f7] text-2xl font-medium outline-none resize-none placeholder:text-neutral-800" placeholder="Let us know if you have any special needs..." />
-//                   </div>
-//                 </section>
-
-//                 <div className="pt-24 border-t border-white/5">
-//                   <div className="bg-[#00ff00] p-10 md:p-20 rounded-[3rem] text-black mb-12 shadow-2xl relative overflow-hidden group">
-//                     <div className="relative z-10 text-black">
-//                       <div className="flex justify-between items-start mb-16 md:mb-20">
-//                         <div>
-//                           <span className="text-[12px] md:text-[14px] font-black uppercase tracking-[0.3em] opacity-50 block text-black">Total Price</span>
-//                           <h2 className="text-6xl md:text-[10rem] font-semibold tracking-tighter leading-none text-black">${totals.grandTotal.toFixed(2)}</h2>
-//                         </div>
-//                         <ShieldCheck size={64} className="opacity-10 hidden md:block" />
-//                       </div>
-//                       <div className="space-y-6 font-bold uppercase tracking-tight">
-//                         <SummaryLine label="Jeep Base Price" val={totals.base} />
-//                         {formData.includeMeals && <SummaryLine label={`Meals (x${formData.mealCount})`} val={totals.meals} />}
-//                         {formData.includeTickets && <SummaryLine label={`Permits (x${formData.passengers})`} val={totals.tickets} />}
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   <button type="submit" disabled={isSubmitting || loadingPrice} className="w-full bg-[#f5f5f7] text-black font-semibold py-10 rounded-[3rem] text-[15px] tracking-[0.4em] uppercase hover:bg-[#00ff00] transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) flex items-center justify-center gap-4 group">
-//                     {isSubmitting ? <Loader2 className="animate-spin" size={24} /> : <>Submit Booking <Send size={20} className="group-hover:translate-x-2 transition-transform duration-500" /></>}
-//                   </button>
-
-//                   {notification && (
-//                     <div className={cn("mt-12 p-10 rounded-[3rem] text-[16px] font-semibold text-center animate-in zoom-in-95", notification.type === "success" ? "bg-white/5 text-[#00ff00]" : "bg-red-500/10 text-red-400")}>
-//                       {notification.message}
-//                     </div>
-//                   )}
-//                 </div>
-//               </form>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       <style jsx global>{`
-//         .form-input {
-//           background: transparent;
-//           width: 100%;
-//           font-size: 24px;
-//           font-weight: 500;
-//           color: #f5f5f7;
-//           padding: 12px 0;
-//           outline: none;
-//           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-//           transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
-//         }
-//         .form-input:focus { border-bottom-color: #00ff00; padding-left: 8px; }
-//         .scrollbar-hide::-webkit-scrollbar { display: none; }
-//         input[type="date"]::-webkit-calendar-picker-indicator {
-//           background: transparent;
-//           width: 100%; height: 100%;
-//           position: absolute; top: 0; left: 0; opacity: 0; cursor: pointer;
-//         }
-//       `}</style>
-//     </>
-//   );
-// }
-
-// const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-//   <h3 className="text-[11px] font-black text-[#86868b] tracking-[0.4em] uppercase mb-10 pb-4 border-b border-white/[0.05]">{children}</h3>
-// );
-
-// const InputField = ({ icon, label, children }: any) => (
-//   <div className="flex flex-col group">
-//     <div className="flex items-center gap-3 mb-4 opacity-30 group-focus-within:opacity-100 transition-opacity duration-500">
-//       <div className="text-[#00ff00]">{icon}</div>
-//       <span className="text-[10px] font-black uppercase tracking-widest text-[#86868b]">{label}</span>
-//     </div>
-//     {children}
-//   </div>
-// );
-
-// const AddOnToggle = ({ active, onClick, icon, title, price, quantity, onInc, onDec }: any) => {
-//   const handleToggle = useCallback((e: any) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     onClick();
-//   }, [onClick]);
-
-//   return (
-//     <div className="flex flex-col gap-4">
-//       <button
-//         type="button"
-//         onClick={handleToggle}
-//         className={cn("flex items-center justify-between p-8 rounded-[2.5rem] transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) border", active ? "bg-[#f5f5f7] text-black border-white shadow-2xl scale-[1.02]" : "bg-white/[0.01] text-[#86868b] border-white/[0.05] hover:border-white/20 hover:text-[#f5f5f7]")}
-//       >
-//         <div className="flex items-center gap-6">
-//           <div className={cn("p-3 rounded-2xl transition-colors duration-500", active ? "bg-black/5 text-black" : "bg-white/5 text-[#86868b]")}>{icon}</div>
-//           <span className="text-lg font-semibold tracking-tight">{title}</span>
-//         </div>
-//         <span className="text-[11px] font-black opacity-40 uppercase tracking-widest text-[#86868b]">${price}</span>
-//       </button>
-//       {active && quantity !== undefined && (
-//         <div className="flex items-center justify-between px-10 py-5 bg-white/5 rounded-[2rem] border border-white/[0.03] animate-in slide-in-from-top-4 duration-500">
-//           <span className="text-[10px] font-black text-[#86868b] uppercase tracking-widest">Quantity</span>
-//           <div className="flex items-center gap-10">
-//             <button type="button" onClick={onDec} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Minus size={16} /></button>
-//             <span className="text-xl font-bold text-[#f5f5f7] font-mono leading-none pointer-events-none">{quantity}</span>
-//             <button type="button" onClick={onInc} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Plus size={16} /></button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// const SummaryLine = ({ label, val }: any) => (
-//   <div className="flex justify-between text-[15px] font-bold tracking-tight border-b border-black/[0.08] pb-4 text-black/60">
-//     <span>{label}</span>
-//     <span>${val.toFixed(2)}</span>
-//   </div>
-// );
-
-
-
-
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
@@ -364,16 +159,16 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
           <div className="absolute inset-0 bg-black/40 backdrop-blur-[60px] animate-in fade-in duration-700" onClick={() => setIsOpen(false)} />
 
           <div
-            className="relative w-full h-[88svh] md:h-[92vh] max-w-6xl bg-[#0a0a0a] rounded-[2.5rem] md:rounded-[3.5rem] border border-white/[0.08] flex flex-col shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-10 duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) isolate overflow-hidden touch-auto"
+            className="relative w-full h-[88svh] md:h-[92vh] max-w-6xl bg-white text-black rounded-[2.5rem] md:rounded-[3.5rem] border border-neutral-200 flex flex-col shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-10 duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) isolate overflow-hidden touch-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex justify-between items-center p-6 md:p-12 shrink-0 border-b border-white/[0.05]">
+            <div className="flex justify-between items-center p-6 md:p-12 shrink-0 border-b border-neutral-200">
               <div className="flex items-center gap-3">
-                <div className="w-1 h-1 rounded-full bg-[#00ff00] shadow-[0_0_8px_#00ff00]" />
-                <span className="text-[10px] font-black tracking-[0.4em] text-[#86868b] uppercase">Online Booking</span>
+                <div className="w-2 h-2 rounded-full bg-black shadow-[0_0_8px_rgba(0,0,0,0.4)]" />
+                <span className="text-[10px] font-black tracking-[0.4em] text-neutral-500 uppercase">Online Booking</span>
               </div>
-              <button onClick={() => setIsOpen(false)} className="p-3 rounded-full bg-white/5 text-[#86868b] hover:text-[#f5f5f7] active:scale-90 transition-all duration-500">
+              <button onClick={() => setIsOpen(false)} className="p-3 rounded-full bg-neutral-100 text-neutral-600 hover:text-black active:scale-90 transition-all duration-500">
                 <X size={20} />
               </button>
             </div>
@@ -384,12 +179,12 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
               data-lenis-prevent // This attribute prevents Smooth Scroller from hijacking this scroll
             >
               <header className="mt-8 md:mt-12 mb-16">
-                <h1 className="text-4xl md:text-8xl font-semibold tracking-tight text-[#f5f5f7] leading-tight">
-                  Confirm Your <br /><span className="text-[#86868b]">Adventure.</span>
+                <h1 className="text-4xl md:text-8xl font-semibold tracking-tight text-black leading-tight">
+                  Confirm Your <br /><span className="text-neutral-400">Adventure.</span>
                 </h1>
                 <div className="mt-4 flex items-center gap-3">
-                  <div className="w-4 h-[1px] bg-[#00ff00]/40" />
-                  <span className="text-[14px] md:text-[16px] font-medium tracking-wide text-[#00ff00] uppercase">
+                  <div className="w-4 h-[1px] bg-black/40" />
+                  <span className="text-[14px] md:text-[16px] font-bold tracking-wide text-black uppercase">
                     {packageDetails?.name || tourPackageSlug.replace(/-/g, ' ')}
                   </span>
                 </div>
@@ -406,9 +201,9 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
                     </InputField>
 
                     <InputField icon={<Globe size={16} />} label="Country">
-                      <select value={formData.country} onChange={e => setFormData({ ...formData, country: e.target.value })} className="form-input appearance-none cursor-pointer">
-                        <option value="">Select country</option>
-                        {countryList.map(c => <option key={c.code} value={c.name}>{c.name}</option>)}
+                      <select value={formData.country} onChange={e => setFormData({ ...formData, country: e.target.value })} className="form-input appearance-none cursor-pointer text-black">
+                        <option value="" className="text-black bg-white">Select country</option>
+                        {countryList.map(c => <option key={c.code} value={c.name} className="text-black bg-white">{c.name}</option>)}
                       </select>
                     </InputField>
 
@@ -418,7 +213,7 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
 
                     <InputField icon={<Phone size={16} />} label="Phone Number">
                       <div className="flex items-center">
-                        <span className="text-[#00ff00] font-mono text-sm mr-4 opacity-60">{formData.phoneCode}</span>
+                        <span className="text-black font-mono text-sm mr-4 font-bold">{formData.phoneCode}</span>
                         <input required type="tel" value={formData.phoneNumber} onChange={e => setFormData({ ...formData, phoneNumber: e.target.value.replace(/\D/g, "") })} className="form-input" placeholder="Number" />
                       </div>
                     </InputField>
@@ -430,9 +225,9 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
                   <SectionLabel>02. Safari Details</SectionLabel>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div className="space-y-4">
-                      <span className="text-[12px] font-bold text-[#86868b] uppercase tracking-widest block mb-2">Safari Date</span>
-                      <div className="bg-white/[0.02] p-6 rounded-2xl flex items-center gap-4 border border-white/[0.05] relative hover:bg-white/[0.04] transition-colors duration-500">
-                        <Calendar size={18} className="text-[#00ff00] opacity-40" />
+                      <span className="text-[12px] font-bold text-neutral-500 uppercase tracking-widest block mb-2">Safari Date</span>
+                      <div className="bg-neutral-100 p-6 rounded-2xl flex items-center gap-4 border border-neutral-200 relative hover:bg-neutral-200/60 transition-colors duration-500">
+                        <Calendar size={18} className="text-black opacity-60" />
                         <input
                           type="date"
                           required
@@ -442,17 +237,17 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
                             setFormData({ ...formData, date: e.target.value });
                             e.target.blur();
                           }}
-                          className="form-input border-none !p-0 !m-0 [color-scheme:dark] w-full"
+                          className="form-input border-none !p-0 !m-0 [color-scheme:light] w-full text-black"
                         />
                       </div>
                     </div>
 
-                    <div className="bg-white/[0.02] p-8 rounded-[2rem] border border-white/5 flex items-center justify-between shadow-inner">
-                      <span className="text-[12px] font-bold text-[#86868b] uppercase tracking-widest">Guests</span>
+                    <div className="bg-neutral-100 p-8 rounded-[2rem] border border-neutral-200 flex items-center justify-between shadow-inner">
+                      <span className="text-[12px] font-bold text-neutral-500 uppercase tracking-widest">Guests</span>
                       <div className="flex items-center gap-10">
-                        <button type="button" onClick={() => setFormData(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Minus size={24} /></button>
-                        <span className="text-4xl md:text-5xl font-semibold text-[#f5f5f7] font-mono leading-none">{formData.passengers}</span>
-                        <button type="button" onClick={() => setFormData(p => ({ ...p, passengers: Math.min(7, p.passengers + 1) }))} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Plus size={24} /></button>
+                        <button type="button" onClick={() => setFormData(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="text-neutral-500 hover:text-black transition-colors duration-500 p-2"><Minus size={24} /></button>
+                        <span className="text-4xl md:text-5xl font-semibold text-black font-mono leading-none">{formData.passengers}</span>
+                        <button type="button" onClick={() => setFormData(p => ({ ...p, passengers: Math.min(7, p.passengers + 1) }))} className="text-neutral-500 hover:text-black transition-colors duration-500 p-2"><Plus size={24} /></button>
                       </div>
                     </div>
                   </div>
@@ -466,16 +261,16 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
                 {/* 03 SPECIAL REQUESTS */}
                 <section className="space-y-12">
                   <SectionLabel>03. Special Requests</SectionLabel>
-                  <div className="bg-white/[0.02] p-10 rounded-[3rem] border border-white/5 focus-within:bg-white/[0.04] transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1)">
-                    <div className="flex items-center gap-3 mb-8 opacity-30">
-                      <MessageSquare size={18} />
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#86868b]">Message (Optional)</span>
+                  <div className="bg-neutral-100 p-10 rounded-[3rem] border border-neutral-200 focus-within:bg-neutral-200/50 transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1)">
+                    <div className="flex items-center gap-3 mb-8 opacity-50">
+                      <MessageSquare size={18} className="text-black" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-600">Message (Optional)</span>
                     </div>
-                    <textarea rows={5} value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent text-[#f5f5f7] text-2xl font-medium outline-none resize-none placeholder:text-neutral-800" placeholder="Let us know if you have any special needs..." />
+                    <textarea rows={5} value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} className="w-full bg-transparent text-black text-2xl font-medium outline-none resize-none placeholder:text-neutral-400" placeholder="Let us know if you have any special needs..." />
                   </div>
                 </section>
 
-                <div className="pt-24 border-t border-white/5">
+                <div className="pt-24 border-t border-neutral-200">
                   <div className="bg-[#00ff00] p-10 md:p-20 rounded-[3rem] md:rounded-[4.5rem] text-black mb-12 shadow-2xl relative overflow-hidden group">
                     <div className="relative z-10 text-black">
                       <div className="flex justify-between items-start mb-16 md:mb-20">
@@ -493,12 +288,12 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
                     </div>
                   </div>
 
-                  <button type="submit" disabled={isSubmitting || loadingPrice} className="w-full bg-[#f5f5f7] text-black font-semibold py-10 rounded-[3rem] text-[15px] tracking-[0.4em] uppercase hover:bg-[#00ff00] transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) flex items-center justify-center gap-4 group">
+                  <button type="submit" disabled={isSubmitting || loadingPrice} className="w-full bg-black text-white font-semibold py-10 rounded-[3rem] text-[15px] tracking-[0.4em] uppercase hover:bg-[#00ff00] hover:text-black transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) flex items-center justify-center gap-4 group">
                     {isSubmitting ? <Loader2 className="animate-spin" size={24} /> : <>Submit Booking <Send size={20} className="group-hover:translate-x-2 transition-transform duration-500" /></>}
                   </button>
 
                   {notification && (
-                    <div className={cn("mt-12 p-10 rounded-[3rem] text-[16px] font-semibold text-center animate-in zoom-in-95", notification.type === "success" ? "bg-white/5 text-[#00ff00]" : "bg-red-500/10 text-red-400")}>
+                    <div className={cn("mt-12 p-10 rounded-[3rem] text-[16px] font-semibold text-center animate-in zoom-in-95", notification.type === "success" ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-red-50 text-red-600 border border-red-200")}>
                       {notification.message}
                     </div>
                   )}
@@ -515,13 +310,13 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
           width: 100%;
           font-size: 24px;
           font-weight: 500;
-          color: #f5f5f7;
+          color: #000000;
           padding: 12px 0;
           outline: none;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.15);
           transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .form-input:focus { border-bottom-color: #00ff00; padding-left: 8px; }
+        .form-input:focus { border-bottom-color: #000000; padding-left: 8px; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         input[type="date"]::-webkit-calendar-picker-indicator {
           background: transparent;
@@ -534,14 +329,14 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
 }
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <h3 className="text-[11px] font-black text-[#86868b] tracking-[0.4em] uppercase mb-10 pb-4 border-b border-white/[0.05]">{children}</h3>
+  <h3 className="text-[11px] font-black text-neutral-500 tracking-[0.4em] uppercase mb-10 pb-4 border-b border-neutral-200">{children}</h3>
 );
 
 const InputField = ({ icon, label, children }: any) => (
   <div className="flex flex-col group">
-    <div className="flex items-center gap-3 mb-4 opacity-30 group-focus-within:opacity-100 transition-opacity duration-500">
-      <div className="text-[#00ff00]">{icon}</div>
-      <span className="text-[10px] font-black uppercase tracking-widest text-[#86868b]">{label}</span>
+    <div className="flex items-center gap-3 mb-4 opacity-60 group-focus-within:opacity-100 transition-opacity duration-500">
+      <div className="text-black">{icon}</div>
+      <span className="text-[10px] font-black uppercase tracking-widest text-neutral-500">{label}</span>
     </div>
     {children}
   </div>
@@ -559,21 +354,21 @@ const AddOnToggle = ({ active, onClick, icon, title, price, quantity, onInc, onD
       <button
         type="button"
         onClick={handleToggle}
-        className={cn("flex items-center justify-between p-8 rounded-[2.5rem] transition-all border ease-[cubic-bezier(0.16, 1, 0.3, 1)] duration-700", active ? "bg-[#f5f5f7] text-black border-white shadow-2xl scale-[1.02]" : "bg-white/[0.01] text-[#86868b] border-white/[0.05] hover:border-white/20 hover:text-[#f5f5f7]")}
+        className={cn("flex items-center justify-between p-8 rounded-[2.5rem] transition-all border ease-[cubic-bezier(0.16, 1, 0.3, 1)] duration-700", active ? "bg-black text-white border-black shadow-2xl scale-[1.02]" : "bg-neutral-100 text-black border-neutral-200 hover:border-black hover:text-black")}
       >
         <div className="flex items-center gap-6">
-          <div className={cn("p-3 rounded-2xl transition-colors duration-700", active ? "bg-black/5 text-black" : "bg-white/5 text-[#86868b]")}>{icon}</div>
+          <div className={cn("p-3 rounded-2xl transition-colors duration-700", active ? "bg-white/10 text-white" : "bg-neutral-200 text-neutral-700")}>{icon}</div>
           <span className="text-lg font-semibold tracking-tight">{title}</span>
         </div>
-        <span className="text-[11px] font-black opacity-40 uppercase tracking-widest text-[#86868b]">${price}</span>
+        <span className="text-[11px] font-black opacity-60 uppercase tracking-widest text-neutral-500">${price}</span>
       </button>
       {active && quantity !== undefined && (
-        <div className="flex items-center justify-between px-10 py-5 bg-white/5 rounded-[2rem] border border-white/[0.03] animate-in slide-in-from-top-4 duration-700">
-          <span className="text-[10px] font-black text-[#86868b] uppercase tracking-widest">Quantity</span>
+        <div className="flex items-center justify-between px-10 py-5 bg-neutral-100 rounded-[2rem] border border-neutral-200 animate-in slide-in-from-top-4 duration-700">
+          <span className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">Quantity</span>
           <div className="flex items-center gap-10">
-            <button type="button" onClick={onDec} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Minus size={16} /></button>
-            <span className="text-xl font-bold text-[#f5f5f7] font-mono leading-none pointer-events-none">{quantity}</span>
-            <button type="button" onClick={onInc} className="text-[#86868b] hover:text-[#00ff00] transition-colors duration-500 p-2"><Plus size={16} /></button>
+            <button type="button" onClick={onDec} className="text-neutral-500 hover:text-black transition-colors duration-500 p-2"><Minus size={16} /></button>
+            <span className="text-xl font-bold text-black font-mono leading-none pointer-events-none">{quantity}</span>
+            <button type="button" onClick={onInc} className="text-neutral-500 hover:text-black transition-colors duration-500 p-2"><Plus size={16} /></button>
           </div>
         </div>
       )}

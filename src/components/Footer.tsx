@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import NextImage from "next/image";
 import {
   Facebook,
   Instagram,
@@ -42,7 +42,7 @@ const socialLinks = [
 
 const YalaLogo = () => (
   <div className="group flex items-center gap-3">
-    <Image
+    <NextImage
       src="/favicon-96x96.png"
       alt="Yala Wildlife Logo"
       width={36}
@@ -60,22 +60,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#0a0a0a] text-[#d1d1d6] overflow-hidden selection:bg-[#00ff00] selection:text-black">
-
-      {/* --- BACKGROUND LAYER --- */}
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-        <Image
-          src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-          alt="Yala Leopard background"
-          fill
-          sizes="(max-width: 768px) 100vw, 1024px"
-          quality={35}
-          loading="lazy"
-          className="object-cover object-center grayscale-[0.5]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent" />
-      </div>
-
+    <footer className="relative bg-black/70 text-[#d1d1d6] overflow-hidden selection:bg-[#00ff00] selection:text-black">
       <div className="relative z-10 max-w-[1024px] mx-auto px-6 py-16">
 
         {/* --- TOP BRAND SECTION --- */}
@@ -153,7 +138,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <h3 className="text-white text-[12px] font-black uppercase tracking-widest">HQ Location</h3>
+            <h3 className="text-white text-[12px] font-black uppercase tracking-widest">Location</h3>
             <div className="flex items-start gap-3 text-[13px] text-[#86868b] leading-loose">
               <MapPin size={16} className="text-[#00ff00] shrink-0 mt-1" />
               <span>Wickrama,kasingama<br />Yala Entrance Road,<br />Southern Province, Sri Lanka</span>
@@ -189,7 +174,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 group cursor-pointer bg-white/5 px-4 py-2 rounded-full border border-white/10 transition-all duration-500 hover:bg-[#00ff00]/10 hover:border-[#00ff00]/30">
+            <div className="flex items-center gap-2 group cursor-pointer bg-transparent px-4 py-2 rounded-full transition-all duration-500">
               <span className="text-[10px] uppercase font-black tracking-widest text-white/60">Architect</span>
               <span className="text-[11px] font-black text-white group-hover:text-[#00ff00] transition-colors">PASINDU</span>
               <Heart size={10} className="text-[#00ff00] fill-current animate-pulse" />

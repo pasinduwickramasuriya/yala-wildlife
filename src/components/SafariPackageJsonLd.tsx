@@ -1,7 +1,17 @@
-import { Package } from "@prisma/client";
-
 interface SafariPackageJsonLdProps {
-  package: Package;
+  package: {
+    id?: string;
+    name: string;
+    description?: string | null;
+    imageUrl?: string | null;
+    price?: number | null;
+    mealPrice?: number | null;
+    ticketPrice?: number | null;
+    slug: string;
+    highlights?: string[];
+    inclusions?: string[];
+    exclusions?: string[];
+  };
 }
 
 export function SafariPackageJsonLd({
