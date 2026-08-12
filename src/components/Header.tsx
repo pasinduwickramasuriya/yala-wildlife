@@ -1,6 +1,6 @@
 "use client";
 
-import { X, ArrowUpRight, Phone, Globe, ChevronDown, Calendar } from "lucide-react";
+import { X, CalendarCheck, Phone, Globe, ChevronDown, Calendar } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
@@ -101,9 +101,9 @@ export default function Header() {
           <button
             onClick={() => setIsOpen(true)}
             aria-label="Open Navigation Menu"
-            className="group flex items-center gap-4 bg-black/70 backdrop-blur-md pl-5 pr-2 py-2 rounded-[2rem] shadow-2xl transition-all"
+            className="group flex items-center gap-4 bg-black/70 backdrop-blur-md pl-2 sm:pl-5 pr-2 py-2 rounded-[2rem] shadow-2xl transition-all"
           >
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white group-hover:text-[#00ff00] transition-colors">Menu</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white group-hover:text-[#00ff00] transition-colors hidden sm:block">Menu</span>
             <div className="w-10 h-10 bg-white/5 group-hover:bg-[#00ff00] rounded-full flex flex-col items-center justify-center gap-1 transition-all">
               <span className="w-4 h-[2px] bg-white group-hover:bg-black transition-colors" />
               <span className="w-2.5 h-[2px] bg-white group-hover:bg-black self-end mr-3 transition-colors" />
@@ -111,9 +111,10 @@ export default function Header() {
           </button>
 
           {/* --- EXTERNAL QUICK ACTION (DESKTOP ONLY) --- */}
-          <Link href="/safari-packages" aria-label="Book Safari Packages Now" className="hidden sm:flex items-center gap-3 bg-[#00ff00] text-black px-7 py-3.5 rounded-[2rem] font-black uppercase text-[10px] tracking-[0.2em] hover:brightness-110 active:scale-95 transition-all">
-            Book Now
-            <ArrowUpRight className="w-4 h-4" />
+          <Link href="/safari-packages" aria-label="Book Safari Packages Now" className="flex items-center gap-3 bg-[#00ff00] text-black px-3.5 sm:px-7 py-3.5 rounded-[2rem] font-black uppercase text-[10px] tracking-[0.2em] hover:brightness-110 active:scale-95 transition-all">
+            <span className="hidden sm:block">Book Now</span>
+            {/* <CalendarCheck className="w-4 h-4" /> */}
+            <CalendarCheck className="w-4 h-4" strokeWidth={3} />
           </Link>
         </div>
       </header>

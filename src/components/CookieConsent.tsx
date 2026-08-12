@@ -83,10 +83,7 @@ export default function CookieConsent() {
       aria-label="Cookie Consent Dialog"
       className="fixed top-[120px] left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:top-auto sm:bottom-4 sm:w-full sm:max-w-[340px] z-100 animate-in fade-in slide-in-from-top-4 sm:slide-in-from-bottom-4 duration-300 selection:bg-[#00ff00] selection:text-black"
     >
-      <div className="relative bg-zinc-950/95 backdrop-blur-2xl rounded-3xl p-4 shadow-[0_12px_40px_rgba(0,0,0,0.65)] text-white flex flex-col gap-3 mx-4 sm:mx-0">
-        {/* Glow accent */}
-        <div className="absolute -top-8 -left-8 w-24 h-24 bg-[#00ff00]/10 rounded-full blur-2xl pointer-events-none" />
-
+      <div className="relative bg-zinc-950/90 rounded-3xl p-4 text-white flex flex-col gap-3 mx-4 sm:mx-0">
         {/* Header */}
         <div className="flex items-center justify-between gap-2 relative z-10">
           <div className="flex items-center gap-2">
@@ -108,7 +105,9 @@ export default function CookieConsent() {
 
         {/* Readable & cute description */}
         <p className="text-[11px] text-zinc-300 leading-relaxed font-normal relative z-10">
-          We use cookies to improve your safari experience and analyze site traffic.
+          {/* We use cookies to improve your safari experience. */}
+
+          We use cookies to improve your experience. You can say no everything works the same either way. We’ll only ask once.
         </p>
 
         {/* Expandable Preferences Drawer (No borders) */}
