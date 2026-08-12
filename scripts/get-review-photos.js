@@ -23,12 +23,42 @@ async function scrapeReviewPhotos() {
   });
 
   const page = await browser.newPage();
+  // Pre-set Google consent cookies so Google does not show cookie dialog block
+  await page.setCookie(
+    { name: 'SOCS', value: 'CAESHAgBEhJnd3NfMjAyMzAzMjItMF9SQzEaAmRlIAEaBgiAo_CmBg', domain: '.google.com', path: '/' },
+    { name: 'CONSENT', value: 'YES+cb.20230531-04-p0.en+FX+917', domain: '.google.com', path: '/' }
+  );
+
   await page.setViewport({ width: 1400, height: 4000 });
   await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
   try {
     console.log('🗺️  Navigating to Google Maps...');
     await page.goto(GOOGLE_MAPS_URL, { waitUntil: 'networkidle2', timeout: 60000 });
+
+    // Handle Google Cookie Consent Dialog if present
+    try {
+      const consentHandled = await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button, form button'));
+        const acceptBtn = buttons.find(b => {
+          const text = (b.textContent || '').trim().toLowerCase();
+          const label = (b.getAttribute('aria-label') || '').toLowerCase();
+          return text.includes('accept all') || text.includes('i agree') || text.includes('accept') || text.includes('alle akzeptieren') ||
+                 label.includes('accept all') || label.includes('agree');
+        });
+        if (acceptBtn) {
+          (acceptBtn).click();
+          return true;
+        }
+        return false;
+      });
+      if (consentHandled) {
+        console.log('🍪 Accepted Google cookie consent popup.');
+        await new Promise(r => setTimeout(r, 3000));
+      }
+    } catch (cookieErr) {
+      console.log('ℹ️ Cookie dialog check completed.');
+    }
 
     // Step 1: Click the "Reviews" tab to make sure we're on the reviews view
     const reviewsTabSelector = 'button[aria-label*="Reviews"], div[role="tab"][aria-label*="Reviews"]';

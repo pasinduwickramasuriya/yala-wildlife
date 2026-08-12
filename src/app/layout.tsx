@@ -13,8 +13,10 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import ClientWidgets from "@/components/ClientWidgets";
+import CookieConsent from "@/components/CookieConsent";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -68,6 +70,7 @@ export default function RootLayout({
           {/* </SmoothScroll> */}
         </ThemeProvider>
         <ClientWidgets />
+        <CookieConsent />
 
         {/* Debug panel - remove in production */}
         {/* <SEODebug /> */}
