@@ -53,8 +53,9 @@ export default function PetiteDiscountPopup() {
           </h2>
           <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Per Person • All Included</p>
           <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Breakfast,lunch,fruits</p>
-          <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">yala entrance tickets</p>
+          {/* <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">yala entrance tickets</p> */}
           <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">soft drinks ,water</p>
+           <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Jeep ,Driver Guide</p>
         </div>
 
         {/* 3. COMPACT RATES */}
@@ -66,8 +67,10 @@ export default function PetiteDiscountPopup() {
               <span className="text-[8px] text-white/80 uppercase font-bold tracking-tighter">05:00 — 12:00</span>
             </div>
             <div className="flex items-center gap-2 bg-white/5 px-2 py-1 rounded-lg">
-              <span className="text-[20px] text-white line-through font-mono">$75</span>
-              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$49</span>
+              {/* <span className="text-[20px] text-white line-through font-mono">$75</span>
+              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$49</span> */}
+               <span className="text-[20px] text-white line-through font-mono">$49</span>
+              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$14</span>
             </div>
           </div>
 
@@ -78,8 +81,10 @@ export default function PetiteDiscountPopup() {
               <span className="text-[8px] text-white uppercase font-bold tracking-tighter">05:00 — 18:00</span>
             </div>
             <div className="flex items-center gap-2 bg-[#00ff00]/5 px-2 py-1 rounded-lg">
-              <span className="text-[20px] text-white/80 line-through font-mono">$95</span>
-              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$69</span>
+              {/* <span className="text-[20px] text-white/80 line-through font-mono">$95</span>
+              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$69</span> */}
+                    <span className="text-[20px] text-white/80 line-through font-mono">$69</span>
+              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$40</span>
             </div>
           </div>
         </div>
