@@ -145,7 +145,7 @@ export default function WhatsAppButton() {
               <div className="relative">
                 <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 bg-white">
                   <Image 
-                    src="/emma.png" 
+                    src="/emma-64.png" 
                     alt="Guide Avatar"
                     width={40}
                     height={40}
@@ -164,7 +164,7 @@ export default function WhatsAppButton() {
             </div>
             <button 
               onClick={toggleChat} 
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors cursor-pointer"
               aria-label="Close Chat"
             >
               <X className="w-4 h-4" />
@@ -179,7 +179,7 @@ export default function WhatsAppButton() {
             {/* Greeting Bubble */}
             <div className="flex gap-2.5 max-w-[90%] z-10">
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 bg-white border border-white/10">
-                <Image src="/emma.png" alt="Guide Avatar" width={28} height={28} className="w-full h-full object-cover" />
+                <Image src="/emma-64.png" alt="Guide Avatar" width={28} height={28} className="w-full h-full object-cover" />
               </div>
               <div className="bg-white/5 border border-white/10 p-3 rounded-2xl rounded-tl-none text-xs text-neutral-200 leading-relaxed shadow-sm">
                 <p className="font-semibold text-white mb-1">Ayubowan! 🌿</p>
@@ -267,7 +267,7 @@ export default function WhatsAppButton() {
           ) : (
             <div className="w-full h-full rounded-full overflow-hidden p-0.5 bg-neutral-900">
               <Image 
-                src="/emma.png" 
+                src="/emma-128.png" 
                 alt="Guide Avatar" 
                 width={60}
                 height={60}

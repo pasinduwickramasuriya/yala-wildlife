@@ -77,8 +77,9 @@ export default function ReviewSlider() {
         if (response.ok) {
           const data = (await response.json()) as Review[];
           const filtered = data.filter(r => r.rating >= 4 && r.text?.trim().length > 0);
-          // Duplicate list to create seamless infinite loop
-          setReviews([...filtered, ...filtered]);
+          // Curate top 8 reviews and duplicate for a lightweight, seamless infinite loop
+          const curated = filtered.slice(0, 8);
+          setReviews([...curated, ...curated]);
         }
       } catch (e) { console.error(e); } finally { setLoading(false); }
     }
@@ -151,7 +152,7 @@ export default function ReviewSlider() {
           to { transform: translateX(-50%); }
         }
         .animate-infinite-scroll {
-          animation: infinite-scroll 15000s linear infinite;
+          animation: infinite-scroll 40s linear infinite;
           width: max-content;
         }
         .pause-animation {

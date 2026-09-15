@@ -48,19 +48,32 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
     setMounted(true);
   }, []);
 
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    const onUserInteract = () => setHasInteracted(true);
+    window.addEventListener("scroll", onUserInteract, { passive: true, once: true });
+    window.addEventListener("touchstart", onUserInteract, { passive: true, once: true });
+    window.addEventListener("pointerdown", onUserInteract, { passive: true, once: true });
+
+    return () => {
+      window.removeEventListener("scroll", onUserInteract);
+      window.removeEventListener("touchstart", onUserInteract);
+      window.removeEventListener("pointerdown", onUserInteract);
+    };
+  }, []);
+
   // --- Auto Slider Logic ---
   useEffect(() => {
-    if (heroSections.length <= 1 || !mounted || !shouldAnimate) return;
+    if (!hasInteracted || heroSections.length <= 1 || !mounted || !shouldAnimate) return;
 
-    // Using setTimeout and dependency on currentSlide ensures 
-    // the timer resets flawlessly on auto-slides or manual clicks, 
-    // and prevents background-tab interval throttling bugs.
+    // Smooth 6s auto-slide once user has engaged
     const timeout = setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSections.length);
-    }, 7000);
+    }, 6000);
 
     return () => clearTimeout(timeout);
-  }, [heroSections.length, mounted, currentSlide, shouldAnimate]);
+  }, [heroSections.length, mounted, currentSlide, shouldAnimate, hasInteracted]);
 
   // --- Data Setup ---
   const section = heroSections[currentSlide] || DEFAULT_HERO_SECTIONS[0];
@@ -73,6 +86,13 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
   const titleWords = section.title ? section.title.split(" ") : ["YALA", "WILDLIFE"];
   const firstWord = titleWords[0];
   const restTitleWords = titleWords.slice(1).join(" ");
+
+  const getOptUrl = (url: string) => {
+    if (url && url.includes("res.cloudinary.com") && url.includes("/upload/") && !url.includes("f_auto")) {
+      return url.replace("/upload/", "/upload/f_auto,q_auto,w_1200/");
+    }
+    return url;
+  };
 
   return (
     <div ref={containerRef} className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black">
@@ -90,15 +110,16 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
             >
               <div className="w-full h-full relative">
                 <Image
-                  src={slide.imageUrl}
+                  src={getOptUrl(slide.imageUrl)}
                   alt={slide.title}
                   fill
                   priority={idx === 0}
                   loading={idx === 0 ? "eager" : "lazy"}
+                  fetchPriority={idx === 0 ? "high" : "low"}
                   className="object-cover object-center brightness-[0.85]"
                   style={{ objectFit: 'cover' }}
                   sizes="100vw"
-                  quality={50}
+                  quality={idx === 0 ? 60 : 50}
                 />
               </div>
             </div>
@@ -190,9 +211,10 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
               <div className="w-full h-full relative rounded-[3rem] overflow-hidden shadow-2xl bg-neutral-900 transition-transform duration-300 hover:-translate-y-2">
                 <Image
                   key={card1Data.imageUrl}
-                  src={card1Data.imageUrl}
+                  src={getOptUrl(card1Data.imageUrl)}
                   alt={card1Data.title}
                   fill
+                  loading="lazy"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="25vw"
                   quality={50}
@@ -224,9 +246,10 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
               <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden transition-all shadow-xl">
                 <Image
                   key={card2Data.imageUrl}
-                  src={card2Data.imageUrl}
+                  src={getOptUrl(card2Data.imageUrl)}
                   alt={card2Data.title}
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="20vw"
                   quality={40}

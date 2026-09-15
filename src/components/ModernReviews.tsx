@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import Image from 'next/image';
 import { FaCheckCircle, FaChevronDown, FaSpinner } from 'react-icons/fa';
 
 // --- Types ---
@@ -142,13 +141,13 @@ export default function ModernReviews({ initialReviews }: { initialReviews?: Rev
         }
         return [];
     });
-    const [visibleCount, setVisibleCount] = useState(12);
+    const [visibleCount, setVisibleCount] = useState(6);
     const [loading, setLoading] = useState(!initialReviews || initialReviews.length === 0);
 
     useEffect(() => {
         if (initialReviews && initialReviews.length > 0) {
             const filtered = initialReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
-            setAllReviews([...filtered].sort(() => Math.random() - 0.5));
+            setAllReviews(filtered);
             return;
         }
         async function fetchReviews() {
@@ -158,7 +157,7 @@ export default function ModernReviews({ initialReviews }: { initialReviews?: Rev
                     const data = await response.json();
                     setTotalCount(data.length);
                     const filtered = data.filter((r: any) => r.rating >= 4 && r.text?.trim());
-                    setAllReviews(filtered.sort(() => Math.random() - 0.5));
+                    setAllReviews(filtered);
                 }
             } catch (error) {
                 console.error("Fetch Error:", error);
@@ -172,21 +171,8 @@ export default function ModernReviews({ initialReviews }: { initialReviews?: Rev
     const displayedReviews = useMemo(() => allReviews.slice(0, visibleCount), [allReviews, visibleCount]);
 
     return (
-        <section className="relative py-16 sm:py-24 text-white overflow-hidden min-h-screen">
-            {/* Background */}
-            <div className="fixed inset-0 w-full h-full -z-50">
-                <Image
-                    src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-                    alt="Yala Background"
-                    fill
-                    className="object-cover opacity-100"
-                    loading="lazy"
-                    sizes="100vw"
-                />
-                <div className="absolute inset-0 bg-black/20" />
-            </div>
-
-            <div className="w-full max-w-7xl mx-auto px-12 sm:px-8 lg:px-35 relative z-10">
+        <section className="relative py-16 sm:py-24 text-white overflow-hidden bg-transparent">
+            <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                 <ModernHeader reviewCount={totalCount} />
 
                 {loading ? (
@@ -208,18 +194,15 @@ export default function ModernReviews({ initialReviews }: { initialReviews?: Rev
                 )}
 
                 {!loading && visibleCount < allReviews.length && (
-
                     <div className="flex justify-center mt-6 pb-6">
                         <button
-                            onClick={() => setVisibleCount(allReviews.length)}
-                            className="inline-flex items-center gap-4 bg-black/80 px-6 py-2.5 rounded-full  shadow-xl transition-all hover:bg-black group active:scale-95"
+                            onClick={() => setVisibleCount((prev) => Math.min(prev + 6, allReviews.length))}
+                            className="inline-flex items-center gap-4 bg-black/80 px-6 py-2.5 rounded-full shadow-xl transition-all hover:bg-black group active:scale-95 cursor-pointer"
                         >
-                            {/* Text: Reduced tracking for a tighter 'Petite' look */}
                             <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-black text-white/70 group-hover:text-[#00ff00] transition-colors">
-                                Expand Feed
+                                Load More Reviews ({allReviews.length - visibleCount} remaining)
                             </span>
 
-                            {/* Icon: Smaller and locked in a side-by-side layout */}
                             <div className="flex items-center justify-center w-5 h-5 rounded-full bg-white/5 group-hover:bg-[#00ff00]/10 transition-colors">
                                 <FaChevronDown className="text-[#00ff00] text-[10px] group-hover:translate-y-0.5 transition-transform duration-300" />
                             </div>

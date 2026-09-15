@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
 import { MapPin, Compass, TreePine } from "lucide-react";
 
 const BLOCK_DATA = [
@@ -105,18 +106,21 @@ export default function YalaMapExplorer() {
     );
 
     return (
-        <div className="w-full min-h-[110vh] font-sans overflow-hidden bg-black text-white selection:bg-[#00ff00] selection:text-black">
+        <div className="w-full min-h-[110vh] font-sans overflow-hidden bg-black text-white selection:bg-[#00ff00] selection:text-black cv-auto">
             <section
                 className={`relative w-full h-full min-h-[110vh] transition-all duration-700 ease-in-out ${isMounted ? 'opacity-100' : 'opacity-0'} ${isScrolled ? 'rounded-t-[40px] md:rounded-t-[80px]' : 'rounded-t-0'}`}
             >
                 {/* --- Background Image Layer --- */}
                 <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                        style={{
-                            backgroundImage: "url('https://res.cloudinary.com/dkfnpmzpv/image/upload/w_1200,q_auto:eco,f_auto/v1777690831/blogs/ituwsxwpjiy93mlmmctx.jpg')",
-                        }}
-                    ></div>
+                    <Image
+                        src="https://res.cloudinary.com/dkfnpmzpv/image/upload/w_1200,q_auto:eco,f_auto/v1777690831/blogs/ituwsxwpjiy93mlmmctx.jpg"
+                        alt="Yala Map Background"
+                        fill
+                        sizes="100vw"
+                        quality={45}
+                        loading="lazy"
+                        className="object-cover object-center"
+                    />
                     <div className="absolute inset-0 bg-black/30"></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent"></div>
                 </div>
