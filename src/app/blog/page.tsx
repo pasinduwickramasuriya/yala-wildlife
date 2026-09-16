@@ -601,7 +601,7 @@ export default async function BlogPage() {
         }}
       />
 
-      {/*ENHANCED: Breadcrumb schema blogs */}
+      {/*ENHANCED: Breadcrumb schema blog */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
