@@ -1,8 +1,7 @@
 
-"use client";
-
 import Link from "next/link";
-import NextImage from "next/image";
+import Image from "next/image";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import {
   Facebook,
   Instagram,
@@ -42,7 +41,7 @@ const socialLinks = [
 
 const YalaLogo = () => (
   <div className="group flex items-center gap-3">
-    <NextImage
+    <Image
       src="/favicon-96x96.png"
       alt="Yala Wildlife Logo"
       width={36}
@@ -60,7 +59,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-black/70 text-[#d1d1d6] overflow-hidden selection:bg-[#00ff00] selection:text-black">
+    <footer className="relative bg-black/70 text-[#d1d1d6] overflow-hidden selection:bg-[#00ff00] selection:text-black cv-auto">
       <div className="relative z-10 max-w-[1024px] mx-auto px-6 py-16">
 
         {/* --- TOP BRAND SECTION --- */}
@@ -82,7 +81,7 @@ export default function Footer() {
                 Secure Card Payments
               </span>
               <a href="/safari-packages" aria-label="Secure Card Payments by PayHere" className="flex items-center sm:hidden md:flex">
-                <img src="https://www.payhere.lk/downloads/images/payhere_short_banner.png" alt="Secure Payments by PayHere" width="150" className="opacity-100 hover:opacity-100 transition-opacity duration-300 pointer-events-auto" />
+                <Image src="/payhere_short_banner.png" alt="Secure Payments by PayHere" width={150} height={31} loading="lazy" className="opacity-100 hover:opacity-100 transition-opacity duration-300 pointer-events-auto" />
               </a>
 
             </div>
@@ -171,12 +170,7 @@ export default function Footer() {
             {navigation.legal.map((item) => (
               <Link key={item.name} href={item.href} className="hover:text-white transition-colors duration-300">{item.name}</Link>
             ))}
-            <button
-              onClick={() => window.dispatchEvent(new Event("open-cookie-settings"))}
-              className="hover:text-white transition-colors duration-300 cursor-pointer"
-            >
-              Cookie Preferences
-            </button>
+            <CookiePreferencesButton />
           </div>
 
           <div className="flex items-center gap-4">

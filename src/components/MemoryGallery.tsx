@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { MapPin, ArrowRight, Camera } from "lucide-react";
 
@@ -33,12 +31,12 @@ const MEMORIES = [
 
 export default function AppleCuteGallery() {
   return (
-    <section className="w-full py-12 px-6 bg-transparent">
+    <section className="w-full py-12 px-6 bg-transparent cv-auto">
       <div className="max-w-5xl mx-auto">
 
         {/* --- GRID --- */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {MEMORIES.map((item, index) => (
+          {MEMORIES.map((item) => (
             <div
               key={item.id}
               className="group relative flex flex-col rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-1"
@@ -49,6 +47,9 @@ export default function AppleCuteGallery() {
                   src={item.src}
                   alt={item.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  quality={60}
+                  loading="lazy"
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
 
