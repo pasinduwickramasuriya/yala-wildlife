@@ -109,25 +109,6 @@ const DEFAULT_BLOGS: BlogData[] = [
   },
 ];
 
-export function optimizeCloudinaryUrl(url?: string, width = 1200): string {
-  if (!url || typeof url !== 'string') return url || '';
-  if (url.includes('res.cloudinary.com') && url.includes('/upload/') && !url.includes('f_auto')) {
-    return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
-  }
-  return url;
-}
-
-export function optimizeReviewImageUrl(url?: string, width = 600): string {
-  if (!url || typeof url !== 'string') return url || '';
-  if (url.includes('googleusercontent.com') && url.includes('=')) {
-    return url.replace(/=[^=]*$/, `=w${width}`);
-  }
-  if (url.includes('res.cloudinary.com') && url.includes('/upload/') && !url.includes('f_auto')) {
-    return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
-  }
-  return url;
-}
-
 export async function getHomePageData() {
   let packages: PackageData[] = [];
   let heroSections: HeroSectionData[] = [];
@@ -146,11 +127,7 @@ export async function getHomePageData() {
         imageUrl: true,
       },
     });
-    packages = dbPackages.map((p) => ({
-      ...p,
-      description: p.description && p.description.length > 200 ? p.description.slice(0, 200) + "..." : p.description,
-      imageUrl: optimizeCloudinaryUrl(p.imageUrl, 800),
-    })) as PackageData[];
+    packages = dbPackages as PackageData[];
   } catch (error) {
     console.error("Error loading packages from DB:", error);
   }
@@ -158,10 +135,7 @@ export async function getHomePageData() {
   try {
     const dbHero = await prisma.heroSection.findMany();
     if (Array.isArray(dbHero) && dbHero.length > 0) {
-      heroSections = dbHero.map((h: any) => ({
-        ...h,
-        imageUrl: optimizeCloudinaryUrl(h.imageUrl, 1200),
-      })) as HeroSectionData[];
+      heroSections = dbHero as HeroSectionData[];
     } else {
       heroSections = DEFAULT_HERO_SECTIONS;
     }
@@ -185,10 +159,8 @@ export async function getHomePageData() {
     if (Array.isArray(dbBlogs) && dbBlogs.length > 0) {
       blogs = dbBlogs.map((b) => ({
         ...b,
-        content: b.content ? b.content.slice(0, 150) + "..." : "",
-        imageUrl: optimizeCloudinaryUrl(b.imageUrl, 800),
         createdAt: typeof b.createdAt === "string" ? b.createdAt : new Date(b.createdAt).toISOString(),
-      })) as BlogData[];
+      }));
     } else {
       blogs = DEFAULT_BLOGS;
     }
@@ -196,51 +168,29 @@ export async function getHomePageData() {
     blogs = DEFAULT_BLOGS;
   }
 
-  // Load Review Photos from JSON (randomized pool for diverse display)
+  // Load Review Photos from JSON
   try {
     const filePath = path.join(process.cwd(), "data", "review-photos.json");
     if (fs.existsSync(filePath)) {
       const raw = fs.readFileSync(filePath, "utf8");
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
-        // Filter valid reviews with URL, 4+ rating, and real text
-        const valid = parsed.filter((p: any) => p.url && p.rating >= 4 && p.reviewText?.trim().length > 0);
-        // Deduplicate by author / reviewId so each guest only appears once
-        const seen = new Set<string>();
-        const unique: any[] = [];
-        for (const item of valid) {
-          const key = (item.authorName || item.reviewId || '').trim().toLowerCase();
-          if (key && !seen.has(key)) {
-            seen.add(key);
-            unique.push(item);
-          }
-        }
-        // Fisher-Yates shuffle to pick a truly random pool of 24 unique guest reviews
-        for (let i = unique.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [unique[i], unique[j]] = [unique[j], unique[i]];
-        }
-        reviewPhotos = unique.slice(0, 4).map((p: any) => ({
-          ...p,
-          url: optimizeReviewImageUrl(p.url, 600),
-        }));
+        reviewPhotos = parsed
+          .filter((p: any) => p.url && p.rating >= 4 && p.reviewText?.trim().length > 0);
       }
     }
   } catch (error) {
     console.error("Error reading review-photos.json:", error);
   }
 
-  // Load Reviews from JSON (curated slice for initial display, leaving full dataset for /api/greviews)
+  // Load Reviews from JSON
   try {
     const filePath = path.join(process.cwd(), "data", "reviews.json");
     if (fs.existsSync(filePath)) {
       const raw = fs.readFileSync(filePath, "utf8");
-      
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
-        reviews = parsed
-          .filter((r: any) => r.rating >= 4 && r.text?.trim().length > 0)
-          .slice(0, 12);
+        reviews = parsed.filter((r: any) => r.rating >= 4 && r.text?.trim().length > 0);
       }
     }
   } catch (error) {

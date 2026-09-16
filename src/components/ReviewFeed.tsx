@@ -1,11 +1,15 @@
+'use client';
+
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { Star, MapPin, Quote, ArrowUpRight } from 'lucide-react';
 
+// Use a more robust interface
 interface ReviewPhoto {
     reviewId: string;
     authorName: string;
     rating: number;
-    relativeTime?: string;
+    relativeTime: string;
     reviewText: string;
     url: string;
 }
@@ -33,7 +37,7 @@ const FALLBACK_REVIEWS: ReviewPhoto[] = [
         rating: 5,
         relativeTime: "a month ago",
         reviewText: "Top tier 4x4 jeep safari. Spotting a sloth bear foraging was the highlight of our entire trip to Sri Lanka.",
-        url: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=800&auto=format&fit=crop",
+        url: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
     },
     {
         reviewId: "fr-4",
@@ -41,52 +45,92 @@ const FALLBACK_REVIEWS: ReviewPhoto[] = [
         rating: 5,
         relativeTime: "a month ago",
         reviewText: "Punctual pickup, incredible wildlife tracker, and stunning photography opportunities in Block 1.",
-        url: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800&auto=format&fit=crop",
+        url: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1200&auto=format&fit=crop",
     }
 ];
 
-export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: ReviewPhoto[] }) {
-    const reviews = initialReviews && initialReviews.length >= 4
-        ? initialReviews.slice(0, 4)
-        : (initialReviews && initialReviews.length > 0 ? initialReviews : FALLBACK_REVIEWS);
+export default function HierarchicalReviewGrid({ initialReviews }: { initialReviews?: ReviewPhoto[] }) {
+    const [reviews, setReviews] = useState<ReviewPhoto[]>(
+        initialReviews && initialReviews.length > 0 ? initialReviews.slice(0, 4) : FALLBACK_REVIEWS
+    );
 
-    // SEO Helper: Structured Data (JSON-LD) rendered purely on server
-    const structuredData = reviews.length > 0 ? {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": reviews.map((r, i) => ({
-            "@type": "Review",
-            "position": i + 1,
-            "author": { "@type": "Person", "name": r.authorName },
-            "reviewBody": r.reviewText,
-            "reviewRating": { 
-                "@type": "Rating", 
-                "ratingValue": r.rating,
-                "bestRating": "5",
-                "worstRating": "1"
-            },
-            "itemReviewed": {
-                "@type": "LocalBusiness",
-                "name": "Yala Wildlife Safari",
-                "image": "https://www.yalawildlife.com/logo.png",
-                "url": "https://www.yalawildlife.com",
-                "telephone": "+94-778-158-004",
-                "priceRange": "$$",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Tissamaharama",
-                    "addressRegion": "Southern Province",
-                    "addressCountry": "LK"
+    useEffect(() => {
+        if (initialReviews && initialReviews.length > 0) {
+            const curated = [...initialReviews].sort(() => Math.random() - 0.5).slice(0, 4);
+            setReviews(curated);
+            return;
+        }
+        const controller = new AbortController();
+
+        async function fetchReviews() {
+            try {
+                const res = await fetch('/api/greview-photos', {
+                    signal: controller.signal,
+                    next: { revalidate: 3600 }
+                });
+                const data = await res.json();
+
+                const premiumReviewsWithText = data.filter((p: any) =>
+                    p.url &&
+                    p.rating >= 4 &&
+                    p.reviewText?.trim().length > 0
+                );
+
+                if (Array.isArray(premiumReviewsWithText) && premiumReviewsWithText.length > 0) {
+                    const curated = premiumReviewsWithText
+                        .sort(() => Math.random() - 0.5)
+                        .slice(0, 4);
+
+                    setReviews(curated);
+                }
+            } catch (err) {
+                if (err instanceof Error && err.name !== 'AbortError') {
+                    console.error('Failed to fetch reviews:', err);
                 }
             }
-        }))
-    } : null;
+        }
+
+        fetchReviews();
+        return () => controller.abort();
+    }, [initialReviews]);
+
+    // SEO Helper: Component for Structured Data (JSON-LD)
+    const structuredData = useMemo(() => {
+        if (reviews.length === 0) return null;
+        return {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": reviews.map((r, i) => ({
+                "@type": "Review",
+                "position": i + 1,
+                "author": { "@type": "Person", "name": r.authorName },
+                "reviewBody": r.reviewText,
+                "reviewRating": { 
+                    "@type": "Rating", 
+                    "ratingValue": r.rating,
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "itemReviewed": {
+                    "@type": "LocalBusiness",
+                    "name": "Yala Wildlife Safari",
+                    "image": "https://www.yalawildlife.com/logo.png",
+                    "url": "https://www.yalawildlife.com",
+                    "telephone": "+94-778-158-004",
+                    "priceRange": "$$",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Tissamaharama",
+                        "addressRegion": "Southern Province",
+                        "addressCountry": "LK"
+                    }
+                }
+            }))
+        };
+    }, [reviews]);
 
     return (
-        <section 
-            className="bg-transparent py-4 overflow-hidden [content-visibility:auto] contain-intrinsic-size-[auto_500px]" 
-            aria-label="Guest Reviews"
-        >
+        <section className="bg-transparent py-2 overflow-hidden" aria-label="Guest Reviews">
             {/* SEO: Injection of Structured Data */}
             {structuredData && (
                 <script
@@ -101,18 +145,18 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
                     {/* 1. HERO IMAGE CARD */}
                     {reviews[0] && (
                         <div
-                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden min-h-[360px] md:min-h-0 shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden min-h-[400px] md:min-h-0 shadow-lg transition-transform duration-300"
                         >
                             <Image
                                 src={reviews[0].url}
                                 alt={`Review photo by ${reviews[0].authorName}`}
                                 fill
-                                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 50vw, 40vw"
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 loading="lazy"
                                 quality={50}
-                                className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />
 
                             <div className="absolute bottom-0 p-6 md:p-8 w-full">
                                 <div className="flex gap-1 mb-3">
@@ -136,7 +180,7 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
                     {/* 2. TEXT EMPHASIS CARD */}
                     {reviews[1] && (
                         <div
-                            className="col-span-1 sm:col-span-2 md:col-span-2 bg-[#00ff00] rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 md:p-10 flex flex-col justify-between shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                            className="col-span-1 sm:col-span-2 md:col-span-2 bg-[#00ff00] rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between shadow-lg"
                         >
                             <div className="flex justify-between items-start">
                                 <span className="bg-black text-[#00ff00] px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
@@ -161,18 +205,18 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
                     {/* 3. PURE IMAGE SNAPSHOT */}
                     {reviews[2] && (
                         <div
-                            className="relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden aspect-[4/3] sm:aspect-auto min-h-[220px] shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                            className="relative group rounded-[2.5rem] overflow-hidden aspect-square sm:aspect-auto shadow-lg"
                         >
                             <Image
                                 src={reviews[2].url}
                                 alt={`Safari Snapshot review by ${reviews[2].authorName}`}
                                 fill
-                                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 25vw, 20vw"
+                                sizes="(max-width: 768px) 100vw, 25vw"
                                 loading="lazy"
                                 quality={50}
-                                className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                                className="object-cover transition-all duration-700 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <ArrowUpRight className="text-white w-8 h-8" />
                             </div>
                         </div>
@@ -181,7 +225,7 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
                     {/* 4. HYBRID GLASS CARD */}
                     {reviews[3] && (
                         <div
-                            className="bg-black/80 rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 flex flex-col justify-center shadow-md md:shadow-lg border border-white/5 transform-gpu [transform:translateZ(0)]"
+                            className="bg-black/80 rounded-[2.5rem] p-8 flex flex-col justify-center shadow-lg border border-white/5"
                         >
                             <div className="flex gap-0.5 mb-4">
                                 {[...Array(reviews[3].rating)].map((_, i) => (

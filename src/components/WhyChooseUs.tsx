@@ -1,3 +1,5 @@
+"use client";
+
 import { ShieldCheck, Truck, Sparkles } from 'lucide-react';
 
 export default function WhyChooseUs() {
@@ -23,7 +25,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="relative bg-background py-20 overflow-hidden bg-transparent cv-auto">
+    <section className="relative bg-background py-20 overflow-hidden bg-transparent">
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
 

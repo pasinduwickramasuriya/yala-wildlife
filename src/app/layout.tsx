@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -33,8 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preload" as="image" href="/uploads/yala1.webp" fetchPriority="high" type="image/webp" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -45,6 +49,7 @@ export default function RootLayout({
             ]),
           }}
         />
+        <Script src="https://www.payhere.lk/lib/payhere.js" strategy="lazyOnload" />
       </head>
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
@@ -71,12 +76,8 @@ export default function RootLayout({
         {/* <SEODebug /> */}
         {/* <DotsBackground/> */}
 
-        {process.env.VERCEL ? (
-          <>
-            <Analytics />
-            <SpeedInsights />
-          </>
-        ) : null}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

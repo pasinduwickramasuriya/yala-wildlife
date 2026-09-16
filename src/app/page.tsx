@@ -1,27 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import dynamic from "next/dynamic";
+import ClientHome from "./ClientHome";
 import { getHomePageData } from "@/lib/server-data";
 import {
   organizationSchema,
   websiteSchema,
   localBusinessSchema,
 } from "@/lib/schema";
-
-import HeroSlider from "@/components/HeroSlider";
-import ReviewFeed from "@/components/ReviewFeed";
-import SafariPackagesCarousel from "@/components/SafariPackagesCarousel";
-import MemoryGallery from "@/components/MemoryGallery";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-
-const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
-const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
-const ModernReviews = dynamic(() => import("@/components/ModernReviews"));
-const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
-const GallerySection = dynamic(() => import("@/components/GallerySection"));
-const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"));
-const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"));
 
 export const revalidate = 3600; // ✅ Enable ISR cache for 1 hour to boost performance/TTFB
 
@@ -396,78 +380,13 @@ export default async function Home() {
 
   return (
     <>
-      {/* Main Page Background Image */}
-      <div className="fixed inset-0 -z-50 pointer-events-none overflow-hidden">
-        <Image
-          src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-          alt="Yala Wildlife Leopard Background"
-          fill
-          priority={false}
-          loading="lazy"
-          sizes="100vw"
-          quality={60}
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
-      </div>
-
-      <HeroSlider initialHeroSections={heroSections} />
-      <ReviewFeed initialReviews={reviewPhotos} />
-
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-16 overflow-hidden z-10 relative">
-        <div className="flex flex-col items-center justify-center w-full mb-10">
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-black/80 rounded-full mb-3 shadow-xl">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span>
-            <span className="text-[15px] font-black tracking-[0.2em] text-[#00ff00] leading-none">
-              Safari Packages
-            </span>
-          </div>
-        </div>
-
-        <SafariPackagesCarousel packages={packages} />
-      </div>
-
-      <YalaMapExplorer />
-      <HomeBlogSection initialBlogs={blogs} />
-      <MemoryGallery />
-      <ModernReviews initialReviews={reviews} />
-      <PhotoGallery initialPhotos={blogs} />
-      <WhyChooseUs />
-      <GallerySection />
-      <ReviewSlider />
-      <DiscountPopup />
-
-      <AutoSEOWrapper
-        pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
-        pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
-        pageType="home"
-      >
-        <section className="mt-16 flex flex-col items-center gap-2 selection:bg-[#00ff00] selection:text-black cv-auto">
-          <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
-            <h2 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
-              Yala Wildlife
-            </h2>
-          </div>
-
-          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
-            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-              &quot;Welcome to Yala Wildlife Safari Your gateway to unforgettable wildlife experiences in Sri Lanka&apos;s premier national park. Our expert guides ensure safe adventures with guaranteed leopard sightings.&quot;
-            </p>
-          </div>
-
-          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
-            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-              &quot;Discover the magic of Yala National Park with our premium safari packages. Experience the thrill of spotting elusive leopards, majestic elephants, and over 200 species of birds in their natural habitat.&quot;
-            </p>
-          </div>
-
-          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
-            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-              &quot;Yala boasts the highest leopard density in the world. Our professional guides know the best routes and times for spotting. We use luxury 4x4 jeeps equipped with safety features and optimal viewing configurations.&quot;
-            </p>
-          </div>
-        </section>
-      </AutoSEOWrapper>
+      <ClientHome
+        initialPackages={packages}
+        initialHeroSections={heroSections}
+        initialBlogs={blogs}
+        initialReviewPhotos={reviewPhotos}
+        initialReviews={reviews}
+      />
 
       {/* Schema markup with consistent BASE_URL */}
       <script

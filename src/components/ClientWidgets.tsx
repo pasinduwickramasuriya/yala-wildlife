@@ -21,17 +21,27 @@ export default function ClientWidgets() {
       window.removeEventListener("pointerdown", handleInteraction);
       window.removeEventListener("keydown", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
-      window.removeEventListener("mousemove", handleInteraction);
     };
 
     window.addEventListener("scroll", handleInteraction, { passive: true, once: true });
     window.addEventListener("pointerdown", handleInteraction, { passive: true, once: true });
     window.addEventListener("keydown", handleInteraction, { passive: true, once: true });
     window.addEventListener("touchstart", handleInteraction, { passive: true, once: true });
-    window.addEventListener("mousemove", handleInteraction, { passive: true, once: true });
+
+    let idleTimer: any;
+    if ("requestIdleCallback" in window) {
+      idleTimer = (window as any).requestIdleCallback(() => setLoadWidgets(true), { timeout: 7000 });
+    } else {
+      idleTimer = setTimeout(() => setLoadWidgets(true), 7000);
+    }
 
     return () => {
       removeListeners();
+      if ("cancelIdleCallback" in window) {
+        (window as any).cancelIdleCallback(idleTimer);
+      } else {
+        clearTimeout(idleTimer);
+      }
     };
   }, []);
 

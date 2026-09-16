@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { ArrowUpRight, Camera, X } from "lucide-react";
 
 interface Photo {
-  id: number | string;
+  id: number;
   title: string;
   content: string;
   imageUrl: string;

@@ -284,7 +284,7 @@ export default function ChatAssistant() {
                 <div className="flex-shrink-0 flex justify-between items-center p-4 bg-[#0a0a0a] relative">
                     <div className="flex items-center gap-3">
                         <div className="relative w-9 h-9 flex-shrink-0 overflow-hidden rounded-full bg-white">
-                            <img src="/emma-64.png" alt="Emma" className="w-full h-full object-cover" width={36} height={36} loading="lazy" />
+                            <img src="/emma.png" alt="Emma" className="w-full h-full object-cover" />
                         </div>
                         <div>
                             <h3 className="font-black text-white text-[15px] tracking-widest leading-none mb-1">Emma</h3>
@@ -337,7 +337,7 @@ export default function ChatAssistant() {
                                 {msg.role === 'user' ? (
                                     <User className="w-3.5 h-3.5 text-black" />
                                 ) : (
-                                    <img src="/emma-64.png" alt="Emma" className="w-full h-full object-cover" width={28} height={28} loading="lazy" />
+                                    <img src="/emma.png" alt="Emma" className="w-full h-full object-cover" />
                                 )}
                             </div>
 
@@ -361,7 +361,7 @@ export default function ChatAssistant() {
                     {isLoading && (
                         <div className="flex gap-2.5 max-w-[85%] mr-auto animate-fadeIn">
                             <div className="w-7 h-7 flex items-center justify-center flex-shrink-0 rounded-full overflow-hidden bg-white">
-                                <img src="/emma-64.png" alt="Emma" className="w-full h-full object-cover animate-pulse" width={28} height={28} />
+                                <img src="/emma.png" alt="Emma" className="w-full h-full object-cover animate-pulse" />
                             </div>
                             <div className="p-3 bg-[#111] flex items-center gap-2 rounded-2xl rounded-tl-sm border border-white/5">
                                 <Loader2 className="w-3.5 h-3.5 text-[#00ff00] animate-spin" />
