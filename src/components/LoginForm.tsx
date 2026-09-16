@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent } from "react";
 
-export default function LoginForm({ onSubmit }: { onSubmit: (email: string, password: string) => void }) {
+export default function LoginForm({ onSubmit, loading }: { onSubmit: (email: string, password: string) => void; loading?: boolean }) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -20,6 +20,7 @@ export default function LoginForm({ onSubmit }: { onSubmit: (email: string, pass
           name="email"
           className="w-full p-2 border rounded"
           required
+          disabled={loading}
         />
       </div>
       <div>
@@ -30,10 +31,15 @@ export default function LoginForm({ onSubmit }: { onSubmit: (email: string, pass
           name="password"
           className="w-full p-2 border rounded"
           required
+          disabled={loading}
         />
       </div>
-      <button type="submit" className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">
-        Login
+      <button
+        type="submit"
+        className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={loading}
+      >
+        {loading ? "Logging in..." : "Login"}
       </button>
     </form>
   );

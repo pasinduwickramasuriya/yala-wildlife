@@ -1,0 +1,207 @@
+import Image from 'next/image';
+import { Star, MapPin, Quote, ArrowUpRight } from 'lucide-react';
+
+interface ReviewPhoto {
+    reviewId: string;
+    authorName: string;
+    rating: number;
+    relativeTime?: string;
+    reviewText: string;
+    url: string;
+}
+
+const FALLBACK_REVIEWS: ReviewPhoto[] = [
+    {
+        reviewId: "fr-1",
+        authorName: "Markus V.",
+        rating: 5,
+        relativeTime: "a week ago",
+        reviewText: "Unbelievable safari experience in Yala! We spotted 2 Sri Lankan leopards resting on granite rocks and a huge elephant herd near the river.",
+        url: "/uploads/yala1.webp",
+    },
+    {
+        reviewId: "fr-2",
+        authorName: "Sarah Jenkins",
+        rating: 5,
+        relativeTime: "2 weeks ago",
+        reviewText: "Our driver was super knowledgeable and patient. Best safari operator in Sri Lanka hands down!",
+        url: "/uploads/yala2.webp",
+    },
+    {
+        reviewId: "fr-3",
+        authorName: "David Miller",
+        rating: 5,
+        relativeTime: "a month ago",
+        reviewText: "Top tier 4x4 jeep safari. Spotting a sloth bear foraging was the highlight of our entire trip to Sri Lanka.",
+        url: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=800&auto=format&fit=crop",
+    },
+    {
+        reviewId: "fr-4",
+        authorName: "Elena Rostova",
+        rating: 5,
+        relativeTime: "a month ago",
+        reviewText: "Punctual pickup, incredible wildlife tracker, and stunning photography opportunities in Block 1.",
+        url: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800&auto=format&fit=crop",
+    }
+];
+
+export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: ReviewPhoto[] }) {
+    const reviews = initialReviews && initialReviews.length >= 4
+        ? initialReviews.slice(0, 4)
+        : (initialReviews && initialReviews.length > 0 ? initialReviews : FALLBACK_REVIEWS);
+
+    // SEO Helper: Structured Data (JSON-LD) rendered purely on server
+    const structuredData = reviews.length > 0 ? {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": reviews.map((r, i) => ({
+            "@type": "Review",
+            "position": i + 1,
+            "author": { "@type": "Person", "name": r.authorName },
+            "reviewBody": r.reviewText,
+            "reviewRating": { 
+                "@type": "Rating", 
+                "ratingValue": r.rating,
+                "bestRating": "5",
+                "worstRating": "1"
+            },
+            "itemReviewed": {
+                "@type": "LocalBusiness",
+                "name": "Yala Wildlife Safari",
+                "image": "https://www.yalawildlife.com/logo.png",
+                "url": "https://www.yalawildlife.com",
+                "telephone": "+94-778-158-004",
+                "priceRange": "$$",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Tissamaharama",
+                    "addressRegion": "Southern Province",
+                    "addressCountry": "LK"
+                }
+            }
+        }))
+    } : null;
+
+    return (
+        <section 
+            className="bg-transparent py-4 overflow-hidden [content-visibility:auto] contain-intrinsic-size-[auto_500px]" 
+            aria-label="Guest Reviews"
+        >
+            {/* SEO: Injection of Structured Data */}
+            {structuredData && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+                />
+            )}
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 auto-rows-min md:min-h-[700px]">
+
+                    {/* 1. HERO IMAGE CARD */}
+                    {reviews[0] && (
+                        <div
+                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden min-h-[360px] md:min-h-0 shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                        >
+                            <Image
+                                src={reviews[0].url}
+                                alt={`Review photo by ${reviews[0].authorName}`}
+                                fill
+                                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 50vw, 40vw"
+                                loading="lazy"
+                                quality={50}
+                                className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none" />
+
+                            <div className="absolute bottom-0 p-6 md:p-8 w-full">
+                                <div className="flex gap-1 mb-3">
+                                    {[...Array(reviews[0].rating)].map((_, i) => (
+                                        <Star key={i} size={14} className="fill-[#00ff00] text-[#00ff00]" aria-hidden="true" />
+                                    ))}
+                                </div>
+                                <blockquote className="text-[14px] md:text-[15px] leading-relaxed text-white/90 mb-6 line-clamp-4 italic font-medium">
+                                    "{reviews[0].reviewText}"
+                                </blockquote>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-white uppercase text-xs border border-white/20">
+                                        {reviews[0].authorName.charAt(0)}
+                                    </div>
+                                    <cite className="text-white not-italic font-bold text-[15px]">{reviews[0].authorName}</cite>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* 2. TEXT EMPHASIS CARD */}
+                    {reviews[1] && (
+                        <div
+                            className="col-span-1 sm:col-span-2 md:col-span-2 bg-[#00ff00] rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 md:p-10 flex flex-col justify-between shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                        >
+                            <div className="flex justify-between items-start">
+                                <span className="bg-black text-[#00ff00] px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
+                                    Guest Review
+                                </span>
+                                <Quote className="text-black/20 w-8 h-8 md:w-10 md:h-10" />
+                            </div>
+
+                            <p className="text-black text-[14px] md:text-[15px] font-bold leading-relaxed my-6 line-clamp-5 md:line-clamp-6">
+                                "{reviews[1].reviewText}"
+                            </p>
+
+                            <div className="flex items-center gap-3">
+                                <div className="h-px w-8 bg-black/20" />
+                                <span className="text-black text-[13px] font-black uppercase tracking-tight">
+                                    {reviews[1].authorName}
+                                </span>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* 3. PURE IMAGE SNAPSHOT */}
+                    {reviews[2] && (
+                        <div
+                            className="relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden aspect-[4/3] sm:aspect-auto min-h-[220px] shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                        >
+                            <Image
+                                src={reviews[2].url}
+                                alt={`Safari Snapshot review by ${reviews[2].authorName}`}
+                                fill
+                                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 25vw, 20vw"
+                                loading="lazy"
+                                quality={50}
+                                className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                                <ArrowUpRight className="text-white w-8 h-8" />
+                            </div>
+                        </div>
+                    )}
+
+                    {/* 4. HYBRID GLASS CARD */}
+                    {reviews[3] && (
+                        <div
+                            className="bg-black/80 rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 flex flex-col justify-center shadow-md md:shadow-lg border border-white/5 transform-gpu [transform:translateZ(0)]"
+                        >
+                            <div className="flex gap-0.5 mb-4">
+                                {[...Array(reviews[3].rating)].map((_, i) => (
+                                    <Star key={i} size={10} className="fill-[#00ff00] text-[#00ff00]" />
+                                ))}
+                            </div>
+                            <p className="text-[14px] md:text-[15px] text-white/80 leading-relaxed italic line-clamp-4 md:line-clamp-3 mb-6">
+                                "{reviews[3].reviewText}"
+                            </p>
+                            <div className="flex items-center gap-2">
+                                <MapPin size={12} className="text-[#00ff00]" />
+                                <span className="text-[11px] font-black text-white/40 uppercase tracking-[0.2em]">
+                                    {reviews[3].authorName}
+                                </span>
+                            </div>
+                        </div>
+                    )}
+
+                </div>
+            </div>
+        </section>
+    );
+}

@@ -20,11 +20,11 @@ const SEOContentBlock: FC<SEOContentBlockProps> = ({
   showKeywords = false,
 }) => {
   return (
-    <div className="prose max-w-none mb-8">
-      <h1 className="text-2xl font-bold tracking-tight sm:text-2xl text-green-400">
+    <div className="prose max-w-none mb-8 text-center">
+      <h1 className="text-2xl font-bold tracking-tight sm:text-2xl text-[#00ff00] ">
         {title}
       </h1>
-      <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+      <p className="mt-6 text-base text-white dark:text-white">
         {description}
       </p>
 
@@ -50,7 +50,7 @@ const SEOContentBlock: FC<SEOContentBlockProps> = ({
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition"
+                className="text-zinc-600 bg-black hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition"
               >
                 {link.title}
               </Link>

@@ -12,7 +12,7 @@ export const siteConfig = {
 export const defaultMetadata = {
   metadataBase: new URL("https://yalawildlife.com"),
   title: {
-    default: "Yala Safari Tours & Jeep Service | #1 Wildlife Experience in Sri Lanka",
+    default: "Yala National Park | Official Site | Yala Sri Lanka",
     template: "%s | Yala Wildlife Safari"
   },
   description: "Premier Yala National Park safari tours and jeep service. Expert guides, guaranteed leopard sightings, and unforgettable wildlife experiences. Book your adventure today!",
@@ -54,9 +54,9 @@ export const defaultMetadata = {
     type: "website",
     locale: "en_US",
     url: "https://yalawildlife.com",
-    title: "Yala Safari Tours & Jeep Service | #1 Wildlife Experience in Sri Lanka",
+    title: "Yala National Park | Official Site | Yala Sri Lanka",
     description: "Premier Yala National Park safari tours and jeep service. Expert guides, guaranteed leopard sightings, and unforgettable wildlife experiences. Book your adventure today!",
-    siteName: "Yala Wildlife Safari",
+    siteName: "Yala National Park",
     images: [
       {
         url: "https://yalawildlife.com/og-image.jpg",
@@ -68,7 +68,7 @@ export const defaultMetadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yala Safari Tours & Jeep Service | #1 Wildlife Experience in Sri Lanka",
+    title: "Yala National Park | Official Site | Yala Sri Lanka",
     description: "Premier Yala National Park safari tours and jeep service. Expert guides, guaranteed leopard sightings, and unforgettable wildlife experiences.",
     images: ["https://yalawildlife.com/og-image.jpg"],
     creator: "@yalawildlife"

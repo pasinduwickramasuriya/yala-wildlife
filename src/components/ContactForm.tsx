@@ -1,8 +1,8 @@
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Loader2, Send, CheckCircle2, AlertCircle, User, Mail, MessageSquare } from "lucide-react";
+import { Loader2, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FormData {
@@ -24,15 +24,11 @@ export default function ContactForm() {
   });
   const [notification, setNotification] = useState<Notification | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setNotification(null);
-
-    // Simulate network delay for UX feel (optional, remove in prod)
-    await new Promise(resolve => setTimeout(resolve, 1000));
 
     try {
       const response = await fetch("/api/contact", {
@@ -41,160 +37,114 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send message");
-      }
+      if (!response.ok) throw new Error("Transmission failed");
 
-      setNotification({
-        type: "success",
-        message: "Request received. Standby for confirmation.",
-      });
+      setNotification({ type: "success", message: "Transmission_Complete. Standby." });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      setNotification({
-        type: "error",
-        message: error instanceof Error ? error.message : "Transmission failed. Retry.",
-      });
+      setNotification({ type: "error", message: "Signal_Lost. Retry_Transmission." });
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  /** * MOBILE ZOOM FIX:
+   * We set font-size to 16px so the browser doesn't zoom.
+   * We use scale(0.625) to make 16px look exactly like 10px (16 * 0.625 = 10).
+   */
+  const inputStyles = "w-full bg-transparent border-b border-white/10 py-3 text-[16px] font-black text-white uppercase tracking-[0.2em] placeholder:text-neutral-700 focus:outline-none focus:border-[#00ff00] transition-all origin-left";
+  const visualScale = { transform: 'scale(0.625)', width: '160%' };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 w-full">
+    <form onSubmit={handleSubmit} className="space-y-10 w-full selection:bg-[#00ff00] selection:text-black">
 
-      {/* Grid for Name and Email */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
         {/* Name Field */}
-        <div className="space-y-2 group">
-          <label
-            htmlFor="name"
-            className={cn(
-              "text-xs font-mono uppercase tracking-widest transition-colors duration-300 flex items-center gap-2",
-              focusedField === "name" ? "text-green-400" : "text-neutral-500"
-            )}
-          >
-            <User size={12} /> Full Name
+        <div className="relative group overflow-hidden">
+          <label className="block text-[7px] font-black uppercase tracking-[0.5em] text-[#00ff00] mb-2 opacity-60 group-focus-within:opacity-100 transition-opacity">
+            IDENT_NAME
           </label>
-          <div className="relative">
+          <div className="w-full">
             <input
-              id="name"
               type="text"
-              placeholder="e.g. John Doe"
+              required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              onFocus={() => setFocusedField("name")}
-              onBlur={() => setFocusedField(null)}
-              required
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/20 transition-all duration-300"
+              placeholder="FULL_LEGAL_NAME"
+              className={inputStyles}
+              style={visualScale}
             />
           </div>
         </div>
 
         {/* Email Field */}
-        <div className="space-y-2 group">
-          <label
-            htmlFor="email"
-            className={cn(
-              "text-xs font-mono uppercase tracking-widest transition-colors duration-300 flex items-center gap-2",
-              focusedField === "email" ? "text-green-400" : "text-neutral-500"
-            )}
-          >
-            <Mail size={12} /> Email Address
+        <div className="relative group overflow-hidden">
+          <label className="block text-[7px] font-black uppercase tracking-[0.5em] text-[#00ff00] mb-2 opacity-60 group-focus-within:opacity-100 transition-opacity">
+            COMMS_ENCRYPTED
           </label>
-          <div className="relative">
+          <div className="w-full">
             <input
-              id="email"
               type="email"
-              placeholder="john@example.com"
+              required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              onFocus={() => setFocusedField("email")}
-              onBlur={() => setFocusedField(null)}
-              required
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/20 transition-all duration-300"
+              placeholder="VALID_EMAIL_ADDR"
+              className={inputStyles}
+              style={visualScale}
             />
           </div>
         </div>
-
       </div>
 
       {/* Message Field */}
-      <div className="space-y-2">
-        <label
-          htmlFor="message"
-          className={cn(
-            "text-xs font-mono uppercase tracking-widest transition-colors duration-300 flex items-center gap-2",
-            focusedField === "message" ? "text-green-400" : "text-neutral-500"
-          )}
-        >
-          <MessageSquare size={12} /> Mission Details / Message
+      <div className="relative group overflow-hidden">
+        <label className="block text-[7px] font-black uppercase tracking-[0.5em] text-[#00ff00] mb-2 opacity-60 group-focus-within:opacity-100 transition-opacity">
+          MISSION_LOG_DATA
         </label>
-        <textarea
-          id="message"
-          placeholder="Tell us about your dates, group size, and interests..."
-          value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          onFocus={() => setFocusedField("message")}
-          onBlur={() => setFocusedField(null)}
-          required
-          className="w-full min-h-[160px] bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/20 transition-all duration-300 resize-none"
-        />
+        <div className="w-full">
+          <textarea
+            required
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            placeholder="ENTER_OBJECTIVES_DATES_AND_SIZE..."
+            className={cn(inputStyles, "min-h-[100px] resize-none")}
+            style={visualScale}
+          />
+        </div>
       </div>
 
-      {/* Modern Action Bar */}
-      <div className="flex flex-col gap-4 pt-2">
+      <div className="flex flex-col gap-6 items-center">
         <button
           type="submit"
           disabled={isSubmitting}
-          className={cn(
-            "group relative w-full overflow-hidden rounded-full py-4 transition-all duration-300",
-            isSubmitting ? "cursor-not-allowed opacity-80" : "hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.6)]"
-          )}
+          className="group relative w-full max-w-xs overflow-hidden rounded-full py-5 transition-all duration-500"
         >
-          {/* Button Background Gradient */}
-          <div className={cn(
-            "absolute inset-0 bg-gradient-to-r from-green-600 to-green-600 transition-transform duration-300",
-            !isSubmitting && "group-hover:scale-105"
-          )} />
-
-          {/* Button Content */}
-          <div className="relative flex items-center justify-center gap-3 text-white font-bold tracking-widest text-sm uppercase">
+          <div className="absolute inset-0 bg-[#00ff00] group-hover:bg-white transition-colors duration-500" />
+          <div className="relative flex items-center justify-center gap-4 text-black font-black tracking-[0.4em] text-[10px] uppercase">
             {isSubmitting ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Transmitting...</span>
+                <Loader2 className="w-3 h-3 animate-spin" />
+                <span>Syncing...</span>
               </>
             ) : (
               <>
-                <span>Initiate Booking</span>
-                <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <span>Transmit Request</span>
+                <Send className="w-3 h-3 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </>
             )}
           </div>
         </button>
-      </div>
 
-      {/* Status Notifications */}
-      {notification && (
-        <div
-          className={cn(
-            "p-4 rounded-xl border flex items-center gap-3 backdrop-blur-md animate-in fade-in slide-in-from-bottom-2 duration-300",
-            notification.type === "error"
-              ? "bg-red-500/10 border-red-500/20 text-red-200"
-              : "bg-green-500/10 border-green-500/20 text-green-200"
-          )}
-        >
-          {notification.type === "error" ? (
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
-          ) : (
-            <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-green-400" />
-          )}
-          <p className="text-sm font-medium">{notification.message}</p>
-        </div>
-      )}
+        {notification && (
+          <div className={cn(
+            "inline-flex items-center gap-3 px-4 py-2 rounded-lg border backdrop-blur-3xl animate-in fade-in slide-in-from-top-4 duration-500",
+            notification.type === "error" ? "bg-red-500/10 border-red-500/20 text-red-400" : "bg-[#00ff00]/10 border-[#00ff00]/20 text-[#00ff00]"
+          )}>
+            {notification.type === "error" ? <AlertCircle size={10} /> : <CheckCircle2 size={10} />}
+            <span className="text-[7px] font-black uppercase tracking-[0.3em]">{notification.message}</span>
+          </div>
+        )}
+      </div>
     </form>
   );
 }

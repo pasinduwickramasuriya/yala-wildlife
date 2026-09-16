@@ -6,8 +6,12 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+Wildlife+Safari/@6.265796,81.2651137,14z/data=!4m12!1m2!2m1!1syala+wildlife+safari,+wickrama,+kasingama,+tissamaharama+82600!3m8!1s0x62b813f2717b2b81:0xf0b7e34cc97ec936!8m2!3d6.265796!4d81.3011626!9m1!1b1!15sCj55YWxhIHdpbGRsaWZlIHNhZmFyaSwgd2lja3JhbWEsIGthc2luZ2FtYSwgdGlzc2FtYWhhcmFtYSA4MjYwMFo9Ijt5YWxhIHdpbGRsaWZlIHNhZmFyaSB3aWNrcmFtYSBrYXNpbmdhbWEgdGlzc2FtYWhhcmFtYSA4MjYwMJIBDXRvdXJfb3BlcmF0b3KaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVTUlZsVVFsWlNWMUpLVVcxYWJXUXlNWGxWYTJkMFpFaG5NMU5GUlJBQuABAPoBBAggEEs!16s%2Fg%2F11xsktsk1j?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D';
-
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+Wildlife+Safari/@6.265796,81.2651137,14z/data=!4m12!1m2!2m1!1syala+wildlife+safari,+wickrama,+kasingama,+tissamaharama+82600!3m8!1s0x62b813f2717b2b81:0xf0b7e34cc97ec936!8m2!3d6.265796!4d81.3011626!9m1!1b1!15sCj55YWxhIHdpbGRsaWZlIHNhZmFyaSwgd2lja3JhbWEsIGthc2luZ2FtYSwgdGlzc2FtYWhhcmFtYSA4MjYwMFo9Ijt5YWxhIHdpbGRsaWZlIHNhZmFyaSB3aWNrcmFtYSBrYXNpbmdhbWEgdGlzc2FtYWhhcmFtYSA4MjYwMJIBDXRvdXJfb3BlcmF0b3KaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVTUlZsVVFsWlNWMUpLVVcxYWJXUXlNWGxWYTJkMFpFaG5NMU5GUlJBQuABAPoBBAggEEs!16s%2Fg%2F11xsktsk1j?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D';
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!3m1!4b1!4m6!3m5!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D';
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!4m16!1m9!3m8!1s0x3ae68358635c6555:0x8803c888ea746b75!2sYala+National+Park+-+Main+Entrance!8m2!3d6.2814969!4d81.4126321!9m1!1b1!16s%2Fg%2F11srm__g51!3m5!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D';
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!4m8!3m7!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!9m1!1b1!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D';
+// const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park+-+Main+Entrance/@6.2814969,81.4126321,17z/data=!4m8!3m7!1s0x3ae68358635c6555:0x8803c888ea746b75!8m2!3d6.2814969!4d81.4126321!9m1!1b1!16s%2Fg%2F11srm__g51?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D';
+const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Yala+National+Park/@6.4639613,81.4693098,17z/data=!4m8!3m7!1s0x3ae5d3a62ffb9359:0x3bb623d70b5a3314!8m2!3d6.4639613!4d81.4718847!9m1!1b1!16zL20vMDJxMXo1?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D';
 async function scrapeReviews() {
   console.log('🚀 Starting "Slow & Steady" Scraper...');
 
@@ -18,6 +22,12 @@ async function scrapeReviews() {
 
   const page = await browser.newPage();
 
+  // Pre-set Google consent cookies so Google does not show cookie dialog block
+  await page.setCookie(
+    { name: 'SOCS', value: 'CAESHAgBEhJnd3NfMjAyMzAzMjItMF9SQzEaAmRlIAEaBgiAo_CmBg', domain: '.google.com', path: '/' },
+    { name: 'CONSENT', value: 'YES+cb.20230531-04-p0.en+FX+917', domain: '.google.com', path: '/' }
+  );
+
   // 1. Set Massive Viewport (Forces Google to render more items at once)
   await page.setViewport({ width: 1400, height: 4000 });
   await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
@@ -25,6 +35,30 @@ async function scrapeReviews() {
   try {
     console.log('🗺️ Navigating...');
     await page.goto(GOOGLE_MAPS_URL, { waitUntil: 'networkidle2', timeout: 60000 });
+
+    // Handle Google Cookie Consent Dialog if present
+    try {
+      const consentHandled = await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button, form button'));
+        const acceptBtn = buttons.find(b => {
+          const text = (b.textContent || '').trim().toLowerCase();
+          const label = (b.getAttribute('aria-label') || '').toLowerCase();
+          return text.includes('accept all') || text.includes('i agree') || text.includes('accept') || text.includes('alle akzeptieren') ||
+                 label.includes('accept all') || label.includes('agree');
+        });
+        if (acceptBtn) {
+          (acceptBtn).click();
+          return true;
+        }
+        return false;
+      });
+      if (consentHandled) {
+        console.log('🍪 Accepted Google cookie consent popup.');
+        await new Promise(r => setTimeout(r, 3000));
+      }
+    } catch (cookieErr) {
+      console.log('ℹ️ Cookie dialog check completed.');
+    }
 
     // 2. ENSURE REVIEWS TAB IS ACTIVE
     const reviewsTabSelector = 'button[aria-label*="Reviews"], div[role="tab"][aria-label*="Reviews"]';
@@ -71,8 +105,7 @@ async function scrapeReviews() {
     const masterReviewMap = new Map();
     let noNewDataCount = 0;
 
-    // Loop up to 30 times (enough for hundreds of reviews)
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 350; i++) {
 
       // A. Scrape current view
       const batch = await page.evaluate(() => {
@@ -109,8 +142,8 @@ async function scrapeReviews() {
       // D. Stop condition
       if (addedCount === 0) {
         noNewDataCount++;
-        if (noNewDataCount >= 4) { // If 4 scrolls produce no new data, we are done
-          console.log('⏹️ No new reviews found for 4 loops. Stopping.');
+        if (noNewDataCount >= 10) { // If 10 scrolls produce no new data, Google is out of reviews
+          console.log('⏹️ No new reviews found for 10 loops. Stopping.');
           break;
         }
       } else {
@@ -124,9 +157,24 @@ async function scrapeReviews() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) { }
 
-      // F. Scroll Down
-      await page.mouse.wheel({ deltaY: 1000 }); // Small, controlled scroll
-      await new Promise(r => setTimeout(r, 2500)); // Wait for load
+      // F. Scroll Down robustly
+      await page.evaluate(() => {
+        const cards = Array.from(document.querySelectorAll('div[data-review-id]'));
+        if (cards.length > 0) {
+          cards[cards.length - 1].scrollIntoView({ behavior: 'auto', block: 'end' });
+        }
+
+        const scrollContainers = Array.from(document.querySelectorAll('.m6QErb[aria-label]'));
+        for (let el of scrollContainers) {
+          if (el.scrollHeight > el.clientHeight) {
+            el.scrollTop = el.scrollHeight; // Force scroll to bottom of infinite list container
+          }
+        }
+      });
+
+      // Secondary fallback scroll event trigger
+      await page.mouse.wheel({ deltaY: 2000 });
+      await new Promise(r => setTimeout(r, 4000)); // Crucial delay for 300+ reviews load payload sizes
     }
 
     // ---------------------------------------------------------

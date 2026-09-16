@@ -1,0 +1,309 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+declare global {
+  interface Window {
+    google: any;
+    googleTranslateElementInit: () => void;
+  }
+}
+
+const LANGUAGES = [
+  { code: "", label: "Select Language", flag: "🇬🇧" },
+  { code: "af", label: "Afrikaans", flag: "🇿🇦" },
+  { code: "sq", label: "Albanian", flag: "🇦🇱" },
+  { code: "am", label: "Amharic", flag: "🇪🇹" },
+  { code: "ar", label: "Arabic", flag: "🇸🇦" },
+  { code: "hy", label: "Armenian", flag: "🇦🇲" },
+  { code: "az", label: "Azerbaijani", flag: "🇦🇿" },
+  { code: "eu", label: "Basque", flag: "🇪🇸" },
+  { code: "be", label: "Belarusian", flag: "🇧🇾" },
+  { code: "bn", label: "Bengali", flag: "🇧🇩" },
+  { code: "bs", label: "Bosnian", flag: "🇧🇦" },
+  { code: "bg", label: "Bulgarian", flag: "🇧🇬" },
+  { code: "ca", label: "Catalan", flag: "🇪🇸" },
+  { code: "ceb", label: "Cebuano", flag: "🇵🇭" },
+  { code: "ny", label: "Chichewa", flag: "🇲🇼" },
+  { code: "zh-CN", label: "Chinese (Simplified)", flag: "🇨🇳" },
+  { code: "zh-TW", label: "Chinese (Traditional)", flag: "🇹🇼" },
+  { code: "hr", label: "Croatian", flag: "🇭🇷" },
+  { code: "cs", label: "Czech", flag: "🇨🇿" },
+  { code: "da", label: "Danish", flag: "🇩🇰" },
+  { code: "nl", label: "Dutch", flag: "🇳🇱" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "eo", label: "Esperanto", flag: "🌍" },
+  { code: "et", label: "Estonian", flag: "🇪🇪" },
+  { code: "tl", label: "Filipino", flag: "🇵🇭" },
+  { code: "fi", label: "Finnish", flag: "🇫🇮" },
+  { code: "fr", label: "French", flag: "🇫🇷" },
+  { code: "fy", label: "Frisian", flag: "🇳🇱" },
+  { code: "gl", label: "Galician", flag: "🇪🇸" },
+  { code: "ka", label: "Georgian", flag: "🇬🇪" },
+  { code: "de", label: "German", flag: "🇩🇪" },
+  { code: "el", label: "Greek", flag: "🇬🇷" },
+  { code: "gu", label: "Gujarati", flag: "🇮🇳" },
+  { code: "ht", label: "Haitian Creole", flag: "🇭🇹" },
+  { code: "ha", label: "Hausa", flag: "🇳🇬" },
+  { code: "haw", label: "Hawaiian", flag: "🇺🇸" },
+  { code: "he", label: "Hebrew", flag: "🇮🇱" },
+  { code: "hi", label: "Hindi", flag: "🇮🇳" },
+  { code: "hmn", label: "Hmong", flag: "🌏" },
+  { code: "hu", label: "Hungarian", flag: "🇭🇺" },
+  { code: "is", label: "Icelandic", flag: "🇮🇸" },
+  { code: "ig", label: "Igbo", flag: "🇳🇬" },
+  { code: "id", label: "Indonesian", flag: "🇮🇩" },
+  { code: "ga", label: "Irish", flag: "🇮🇪" },
+  { code: "it", label: "Italian", flag: "🇮🇹" },
+  { code: "ja", label: "Japanese", flag: "🇯🇵" },
+  { code: "jw", label: "Javanese", flag: "🇮🇩" },
+  { code: "kn", label: "Kannada", flag: "🇮🇳" },
+  { code: "kk", label: "Kazakh", flag: "🇰🇿" },
+  { code: "km", label: "Khmer", flag: "🇰🇭" },
+  { code: "ko", label: "Korean", flag: "🇰🇷" },
+  { code: "ku", label: "Kurdish", flag: "🇹🇷" },
+  { code: "ky", label: "Kyrgyz", flag: "🇰🇬" },
+  { code: "lo", label: "Lao", flag: "🇱🇦" },
+  { code: "la", label: "Latin", flag: "🏛️" },
+  { code: "lv", label: "Latvian", flag: "🇱🇻" },
+  { code: "lt", label: "Lithuanian", flag: "🇱🇹" },
+  { code: "lb", label: "Luxembourgish", flag: "🇱🇺" },
+  { code: "mk", label: "Macedonian", flag: "🇲🇰" },
+  { code: "mg", label: "Malagasy", flag: "🇲🇬" },
+  { code: "ms", label: "Malay", flag: "🇲🇾" },
+  { code: "ml", label: "Malayalam", flag: "🇮🇳" },
+  { code: "mt", label: "Maltese", flag: "🇲🇹" },
+  { code: "mi", label: "Maori", flag: "🇳🇿" },
+  { code: "mr", label: "Marathi", flag: "🇮🇳" },
+  { code: "mn", label: "Mongolian", flag: "🇲🇳" },
+  { code: "my", label: "Myanmar (Burmese)", flag: "🇲🇲" },
+  { code: "ne", label: "Nepali", flag: "🇳🇵" },
+  { code: "no", label: "Norwegian", flag: "🇳🇴" },
+  { code: "pa", label: "Punjabi", flag: "🇵🇰" },
+  { code: "fa", label: "Persian", flag: "🇮🇷" },
+  { code: "pl", label: "Polish", flag: "🇵🇱" },
+  { code: "pt", label: "Portuguese", flag: "🇵🇹" },
+  { code: "ro", label: "Romanian", flag: "🇷🇴" },
+  { code: "ru", label: "Russian", flag: "🇷🇺" },
+  { code: "sm", label: "Samoan", flag: "🇼🇸" },
+  { code: "gd", label: "Scots Gaelic", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
+  { code: "sr", label: "Serbian", flag: "🇷🇸" },
+  { code: "st", label: "Sesotho", flag: "🇱🇸" },
+  { code: "sn", label: "Shona", flag: "🇿🇼" },
+  { code: "sd", label: "Sindhi", flag: "🇵🇰" },
+  { code: "si", label: "Sinhala", flag: "🇱🇰" },
+  { code: "sk", label: "Slovak", flag: "🇸🇰" },
+  { code: "sl", label: "Slovenian", flag: "🇸🇮" },
+  { code: "so", label: "Somali", flag: "🇸🇴" },
+  { code: "es", label: "Spanish", flag: "🇪🇸" },
+  { code: "su", label: "Sundanese", flag: "🇮🇩" },
+  { code: "sw", label: "Swahili", flag: "🇰🇪" },
+  { code: "sv", label: "Swedish", flag: "🇸🇪" },
+  { code: "tg", label: "Tajik", flag: "🇹🇯" },
+  { code: "ta", label: "Tamil", flag: "🇱🇰" },
+  { code: "te", label: "Telugu", flag: "🇮🇳" },
+  { code: "th", label: "Thai", flag: "🇹🇭" },
+  { code: "tr", label: "Turkish", flag: "🇹🇷" },
+  { code: "tk", label: "Turkmen", flag: "🇹🇲" },
+  { code: "uk", label: "Ukrainian", flag: "🇺🇦" },
+  { code: "ur", label: "Urdu", flag: "🇵🇰" },
+  { code: "uz", label: "Uzbek", flag: "🇺🇿" },
+  { code: "vi", label: "Vietnamese", flag: "🇻🇳" },
+  { code: "cy", label: "Welsh", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿" },
+  { code: "xh", label: "Xhosa", flag: "🇿🇦" },
+  { code: "yi", label: "Yiddish", flag: "🌍" },
+  { code: "yo", label: "Yoruba", flag: "🇳🇬" },
+  { code: "zu", label: "Zulu", flag: "🇿🇦" },
+];
+
+function triggerTranslate(langCode: string) {
+  const select = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+  if (!select) return;
+  select.value = langCode;
+  select.dispatchEvent(new Event("change", { bubbles: true }));
+}
+
+export default function GoogleTranslate() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(LANGUAGES[0]);
+  const [search, setSearch] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        { pageLanguage: "en", autoDisplay: false },
+        "gt-hidden-element"
+      );
+    };
+
+    const loadScript = () => {
+      if (!document.getElementById("gt-script")) {
+        const s = document.createElement("script");
+        s.id = "gt-script";
+        s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        s.async = true;
+        document.head.appendChild(s);
+      }
+    };
+
+    let idleId: number | null = null;
+    if ("requestIdleCallback" in window) {
+      idleId = (window as any).requestIdleCallback(loadScript, { timeout: 8000 });
+    } else {
+      idleId = setTimeout(loadScript, 5000) as any;
+    }
+
+    const handleInteraction = () => {
+      loadScript();
+      if (idleId !== null) {
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(idleId);
+        } else {
+          clearTimeout(idleId);
+        }
+      }
+      document.removeEventListener("pointerdown", handleInteraction);
+    };
+
+    document.addEventListener("pointerdown", handleInteraction, { passive: true, once: true });
+
+    return () => {
+      if (idleId !== null) {
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(idleId);
+        } else {
+          clearTimeout(idleId);
+        }
+      }
+      document.removeEventListener("pointerdown", handleInteraction);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleSelect = (lang: (typeof LANGUAGES)[number]) => {
+    setSelected(lang);
+    setIsOpen(false);
+    setSearch("");
+    triggerTranslate(lang.code);
+  };
+
+  const filteredLanguages = LANGUAGES.slice(1).filter((l) =>
+    l.label.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <>
+      <style>{`
+        .goog-te-banner-frame, iframe.goog-te-banner-frame { display:none!important; }
+        body { top:0!important; position: static !important; }
+        #goog-gt-tt, .goog-tooltip, .goog-te-balloon-frame { display:none!important; }
+        #gt-hidden-element { display:none!important; }
+
+        /* Mobile Zoom Fix: Use 16px font to fool iOS, then scale it down visually */
+        @media screen and (max-width: 768px) {
+          .no-zoom-search {
+            font-size: 16px !important;
+            transform: scale(0.75);
+            transform-origin: left center;
+            width: 133.33% !important; /* Compels the scaled input to fill container */
+          }
+        }
+      `}</style>
+
+      <div id="gt-hidden-element" aria-hidden="true" />
+
+      <div
+        ref={dropdownRef}
+        className="fixed"
+        style={{ 
+          bottom: "180px", 
+          right: "20px",
+          zIndex: 2147483647,
+          isolation: 'isolate'
+        }}
+      >
+        {/* DROPDOWN PANEL - Smaller & Smoother */}
+        <div
+          className="absolute bottom-full right-0 mb-3 w-44 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/5"
+          style={{
+            background: "rgba(20,20,20,0.95)",
+            backdropFilter: "blur(15px)",
+            WebkitBackdropFilter: "blur(15px)",
+            visibility: isOpen ? "visible" : "hidden",
+            opacity: isOpen ? 1 : 0,
+            transform: isOpen ? "translateY(0) scale(1)" : "translateY(15px) scale(0.95)",
+            transition: "all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)",
+            maxHeight: "260px",
+            overflowY: "auto",
+          }}
+        >
+          <div className="p-2 sticky top-0 bg-[#141414] z-10">
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search..."
+              className="no-zoom-search w-full bg-white/5 rounded-xl px-3 py-1.5 text-[11px] text-white placeholder-white/20 outline-none border border-transparent focus:border-green-500/30 transition-all"
+            />
+          </div>
+          
+          <div className="px-1 pb-1">
+            {filteredLanguages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => handleSelect(lang)}
+                className="w-full flex items-center gap-2.5 px-3 py-2 text-left rounded-xl transition-colors hover:bg-white/5 active:bg-white/10"
+              >
+                <span className="text-sm">{lang.flag}</span>
+                <span className={`text-[11px] font-medium ${selected.code === lang.code ? "text-green-400" : "text-white/80"}`}>
+                  {lang.label}
+                </span>
+              </button>
+            ))}
+            {filteredLanguages.length === 0 && (
+              <div className="text-[10px] text-white/30 text-center py-4">No results</div>
+            )}
+          </div>
+        </div>
+
+        {/* TRIGGER BUTTON - Smaller & Cutter */}
+        <button
+          onClick={() => {
+            setIsOpen(!isOpen);
+            if (!isOpen) setTimeout(() => searchInputRef.current?.focus(), 150);
+          }}
+          className="flex items-center gap-2 rounded-full px-4 py-2.5 shadow-xl transition-all active:scale-95"
+          style={{
+            background: isOpen ? "rgba(34, 197, 94, 0.15)" : "rgba(25, 25, 25, 0.9)",
+            backdropFilter: "blur(1px)",
+            WebkitBackdropFilter: "blur(1px)",
+          }}
+        >
+          <span className="text-base leading-none">{selected.flag}</span>
+          {/* <span className="text-[11px] font-bold text-white/90">
+            {selected.code === "" ? "Translate" : selected.label}
+          </span> */}
+          <svg
+            width="10" height="6" viewBox="0 0 12 8" fill="none"
+            className="transition-transform duration-300 opacity-90"
+            style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+          >
+            <path d="M1 1.5L6 6.5L11 1.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </>
+  );
+}

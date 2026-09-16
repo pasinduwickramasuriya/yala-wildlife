@@ -26,6 +26,7 @@ interface WebSite {
   "@context": "https://schema.org";
   "@type": "WebSite";
   name: string;
+  alternateName?: string[];
   url: string;
   potentialAction: {
     "@type": "SearchAction";
@@ -74,15 +75,15 @@ export const organizationSchema: Organization = {
   "description": "Premier Yala National Park safari tours and jeep service provider in Sri Lanka",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Your Street Address",
-    "addressLocality": "Yala",
+    "streetAddress": "Safari Base, Tissamaharama Road",
+    "addressLocality": "Tissamaharama",
     "addressRegion": "Southern Province",
-    "postalCode": "Your Postal Code",
+    "postalCode": "82600",
     "addressCountry": "LK"
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "Your-Phone-Number",
+    "telephone": "+94778158004",
     "contactType": "customer service",
     "availableLanguage": ["English", "Sinhala", "Tamil"]
   },
@@ -96,7 +97,8 @@ export const organizationSchema: Organization = {
 export const websiteSchema: WebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Yala Wildlife Safari",
+  "name": "Yala National Park",
+  "alternateName": ["Yala National Park Safari", "Yala Wildlife"],
   "url": "https://yalawildlife.com",
   "potentialAction": {
     "@type": "SearchAction",
@@ -113,19 +115,19 @@ export const localBusinessSchema: LocalBusiness = {
   "description": "Expert safari tours in Yala National Park with professional guides and luxury jeeps",
   "@id": "https://yalawildlife.com",
   "url": "https://yalawildlife.com",
-  "telephone": "Your-Phone-Number",
+  "telephone": "+94778158004",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Your Street Address",
-    "addressLocality": "Yala",
+    "streetAddress": "Safari Base, Tissamaharama Road",
+    "addressLocality": "Tissamaharama",
     "addressRegion": "Southern Province",
-    "postalCode": "Your Postal Code",
+    "postalCode": "82600",
     "addressCountry": "LK"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "YOUR_LATITUDE",
-    "longitude": "YOUR_LONGITUDE"
+    "latitude": "6.3016",
+    "longitude": "81.4289"
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",

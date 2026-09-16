@@ -28,25 +28,35 @@
 //   }
 // }
 
-import jwt from "jsonwebtoken";
+import { SignJWT, jwtVerify } from "jose";
 
-const SECRET = process.env.JWT_SECRET || "your-secret-key"; // Set in .env
+const SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || "your-secret-key"
+);
 
 export interface TokenPayload {
   id: string;
   role: string;
 }
 
-export function signToken(payload: TokenPayload): string {
-  return jwt.sign(payload, SECRET, { expiresIn: "1h" });
+export async function signToken(payload: TokenPayload): Promise<string> {
+  return new SignJWT({ ...payload })
+    .setProtectedHeader({ alg: "HS256" })
+    .setExpirationTime("1h")
+    .sign(SECRET);
 }
 
-export function verifyToken(token: string): TokenPayload | null {
+export async function verifyToken(token: string): Promise<TokenPayload | null> {
   try {
-    const decoded = jwt.verify(token, SECRET);
-    // Ensure decoded is an object with id and role
-    if (typeof decoded === "object" && decoded !== null && "id" in decoded && "role" in decoded) {
-      return decoded as TokenPayload;
+    const { payload } = await jwtVerify(token, SECRET);
+    // Ensure payload has id and role
+    if (
+      typeof payload === "object" &&
+      payload !== null &&
+      "id" in payload &&
+      "role" in payload
+    ) {
+      return { id: payload.id as string, role: payload.role as string };
     }
     throw new Error("Invalid token payload");
   } catch (error) {

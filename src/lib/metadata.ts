@@ -25,7 +25,7 @@ export function generateMetadata({
       url,
       title,
       description,
-      siteName: siteConfig.name,
+      siteName: "Yala National Park",
       images: [
         {
           url: image.startsWith("http") ? image : `${siteConfig.url}${image}`,
@@ -69,7 +69,7 @@ export function generateMetadata({
     },
     authors: [{ name: siteConfig.name }],
     verification: {
-      google: "your-google-verification-code",
+      google: "vobQq0klynTsOpNnRKtuAD0BDLjmwpS5e2OrmSjojzU",
     },
   };
 }

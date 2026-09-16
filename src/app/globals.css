@@ -181,51 +181,61 @@
 
   }
 
-  html {
-
-    scroll-behavior: smooth;
-
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
-
     @apply bg-background text-foreground;
-
     background-image: radial-gradient(circle at 1px 1px, oklch(1 0 0 / 5%) 1px, transparent 0);
-
     background-size: 2rem 2rem;
-
     font-feature-settings: "rlig" 1, "calt" 1;
-
-    transition: background-color 0.3s ease, color 0.3s ease;
-
   }
 
   h1, h2, h3, h4, h5, h6 {
-
     @apply font-sans font-bold tracking-tight;
-
   }
 
   p {
-
     @apply text-base leading-relaxed text-muted-foreground;
-
   }
-
-  button, a {
-
-    @apply transition-all duration-200 ease-in-out;
-
-  }
-
-  button:hover, a:hover {
-
-    @apply opacity-90;
-
-  }
-
 }
+
+/* ==========================================================================
+   PROJECT THERMAL ZERO — EXTREME PERFORMANCE & CPU UTILITIES
+   ========================================================================== */
+
+/* 1. Content Visibility Auto for Offscreen Page Sections */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+/* 2. Global Prefers-Reduced-Motion Override for Thermal Resilience */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 3. GPU Layer Optimization */
+.gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 4. Minimum legible font size on mobile for accessibility and Lighthouse */
+@media (max-width: 768px) {
+  .text-\[11px\], .text-\[10px\], .text-\[9px\], .text-\[8px\] {
+    font-size: 12px !important;
+  }
+}
+
 
 
 

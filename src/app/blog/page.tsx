@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,15 +9,18 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import { Calendar, ArrowUpRight, BookOpen, Tag } from "lucide-react";
+import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
+// import AdUnit from "@/components/AdUnit";
 
-// ✅ SEO-OPTIMIZED: Base URL for consistency
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
+// SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
 
 // ✅ ENHANCED: Blog page metadata (UNTOUCHED)
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Yala Wildlife Blog | Expert Safari Stories & Wildlife Insights Sri Lanka",
+  title: "Yala National Park | Wildlife Blogs | Expert Safari Stories Sri Lanka",
   description: "Discover expert Yala safari stories, wildlife photography tips, leopard spotting guides, and conservation insights from Sri Lanka's premier national park. Latest wildlife updates & safari advice.",
   keywords: [
     "yala safari blog",
@@ -217,7 +219,7 @@ export const metadata: Metadata = {
     title: "Yala Wildlife Blog | Expert Safari Stories & Wildlife Insights Sri Lanka",
     description: "Discover expert Yala safari stories, wildlife photography tips, leopard spotting guides, and conservation insights from Sri Lanka's premier national park.",
     url: `${BASE_URL}/blog`,
-    siteName: "Yala Wildlife Safari | Premier Safari Experience",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {
@@ -293,10 +295,16 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const posts = await prisma.blog.findMany({
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      imageUrl: true,
+      createdAt: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
-    take: 50, // ✅ ENHANCED: Limit for performance
   });
 
   const keywords = [
@@ -343,8 +351,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Header />
-
       <div className="min-h-screen text-white relative">
 
         {/* =========================================
@@ -356,11 +362,11 @@ export default async function BlogPage() {
             alt="Yala Leopard Emerging from Darkness"
             fill
             priority
-            className="object-cover opacity-90 md:opacity-80"
+            className="object-cover opacity-100 md:opacity-100"
             quality={90}
           />
           {/* Cinematic Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/5 to-black/90" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
           {/* Noise Texture */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
@@ -369,157 +375,212 @@ export default async function BlogPage() {
         {/* =========================================
             MAIN CONTENT
         ========================================= */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20"> */}
+        <div className="relative z-10">
 
           {/* HERO SECTION (Removed box container for cleaner look) */}
-          <div className="relative z-10 text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 backdrop-blur-md mb-6 border border-white/5">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-xs font-mono uppercase tracking-widest text-green-400">Yala Intelligence</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-              Wildlife <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Chronicles</span>
-            </h1>
-            <p className="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto leading-relaxed font-light">
-              Discover fascinating wildlife stories, expert photography tips, and conservation insights from our expert guides.
-            </p>
-          </div>
+          <section className="relative w-full py-20 mt-30 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
 
-          <SEOContentBlock
-            title="Expert Wildlife Content & Safari Insights"
-            description="Our blog features in-depth articles about Yala's incredible biodiversity, professional wildlife photography techniques, animal behavior patterns, conservation efforts, and practical safari tips from our certified naturalist guides with over 10 years of field experience."
-            keywords={keywords}
-            relatedLinks={relatedLinks}
-            showKeywords={true}
-          />
+            {/* --- 1. HERO COMPONENT: PETITE PILL REBUILD --- */}
+            <div className="relative z-10 flex flex-col items-center gap-4 text-center mb-16 md:mb-24 px-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
+
+
+              {/* MAIN TITLE PILL */}
+              <div className="inline-block bg-black/80 px-8 py-3 rounded-full shadow-2xl border border-white/5">
+                <h1 className="text-[18px] md:text-[24px] font-black text-white uppercase tracking-[0.25em] leading-none">
+                  Wildlife <span className="text-white">Chronicles</span>
+                </h1>
+              </div>
+
+              {/* DESCRIPTION PILL (The "Cuter" larger block) */}
+              <div className="inline-block bg-black/80 px-8 py-6 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl border border-white/5 backdrop-blur-sm">
+                <p className="text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic">
+                  "Explore fascinating wildlife stories and expert photography tips curated by our expert guides.
+                  We specialize in conservation insights and technical field analysis to preserve the wild heart
+                  of Sri Lanka through transparent reporting and sustainable methodology."
+                </p>
+              </div>
+
+              {/* MODULAR DATA STRIPS (Refined to match Pill style) */}
+              <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-4xl">
+                {[
+                  "Discover fascinating wildlife stories and expert photography tips,",
+                  "and conservation insights from our expert guides."
+                ].map((text, i) => (
+                  <div key={i} className="bg-black/80 px-6 py-2 rounded-full border border-white/10 shadow-lg">
+                    <p className="text-[9px] md:text-[13px] text-neutral-300 font-medium  tracking-[0.2em] leading-relax italic">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* --- 3. SEO SHADOW LAYER --- */}
+            <div className="sr-only">
+              <SEOContentBlock
+                title="Expert Wildlife Content & Safari Insights Sri Lanka"
+                description="In-depth articles about Yala's biodiversity, photography techniques, and conservation from guides with 10 years of experience."
+                keywords={keywords}
+                relatedLinks={relatedLinks}
+                showKeywords={false}
+              />
+            </div>
+
+          </section>
+
+
+
+
 
           {/* BLOG GRID - Smaller, Cutter, No Borders */}
-          <main className="mt-16">
-            <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <BookOpen className="text-green-500 w-5 h-5" />
-                Latest Insights
-              </h2>
-            </div>
+
+          <main className="w-full p-0 m-0 overflow-hidden bg-transparent selection:bg-[#00ff00] selection:text-black">
 
             {posts.length > 0 ? (
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                {posts.map((post) => (
-                  <article key={post.id} className="group h-full">
-                    <Link href={`/blog/${post.slug}`} className="flex flex-col h-full bg-black/20 hover:bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300">
-
-                      {/* Image Container - Fixed 3:2 Aspect Ratio */}
-                      <div className="relative aspect-[3/2] w-full overflow-hidden">
+              /* 
+                 FORCE FULL WIDTH: w-screen + left-1/2 -translate-x-1/2 
+                 This ensures it breaks out of any parent containers.
+              */
+              <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-0 p-0 m-0 border-none grid-flow-row-dense">
+                  {posts.map((post, index) => (
+                    <Link
+                      key={post.id}
+                      href={`/blog/${post.slug}`}
+                      className={`group relative overflow-hidden w-full p-0 m-0 border-none transition-all duration-700 ${index % 7 === 0
+                        ? "col-span-2 row-span-2 aspect-square md:aspect-auto min-h-[50vh]"
+                        : "col-span-1 row-span-1 aspect-square"
+                        }`}
+                    >
+                      {/* IMAGE LAYER */}
+                      <div className="absolute inset-0 z-0">
                         {post.imageUrl ? (
                           <Image
                             src={post.imageUrl}
-                            alt={`${post.title}`}
+                            alt={post.title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            sizes="100vw"
+                            className="object-cover transition-transform duration-[2.5s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105"
+                            priority={index < 4}
                           />
                         ) : (
-                          // Fallback Gradient
-                          <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
-                            <Tag className="text-neutral-600 w-8 h-8" />
-                          </div>
+                          <div className="w-full h-full bg-neutral-900" />
                         )}
-
-                        {/* Subtle Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-
-                        {/* Minimal Badge */}
-                        <div className="absolute top-2 left-2">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-black bg-green-500/90">
-                            Wildlife
-                          </span>
-                        </div>
                       </div>
 
-                      {/* Content Container - Compact Padding */}
-                      <div className="p-4 flex flex-col flex-grow">
-                        {/* Date */}
-                        <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500 mb-2">
-                          <Calendar size={10} />
-                          <time dateTime={new Date(post.createdAt).toISOString()}>
-                            {new Date(post.createdAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
-                          </time>
-                        </div>
+                      {/* CINEMATIC OVERLAY */}
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/5 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
 
-                        {/* Title - Tight Leading */}
-                        <h3 className="text-sm font-bold text-white mb-2 group-hover:text-green-400 transition-colors leading-snug line-clamp-2">
-                          {post.title}
-                        </h3>
+                      {/* CONTENT LAYER: HUD STYLE */}
+                      <div className="absolute inset-0 z-20 p-4 md:p-6 flex flex-col justify-end">
+                        <div className="space-y-2">
+                          <div className="inline-block bg-black/40 px-2 py-0.5 rounded-sm mb-1">
+                            <span className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] text-[#00ff00]">
+                              Story-{index + 1}
+                            </span>
+                          </div>
 
-                        {/* Excerpt - Smaller Text */}
-                        <p className="text-neutral-400 text-xs leading-relaxed line-clamp-2 mb-4 flex-grow">
-                          {post.content.substring(0, 100)}...
-                        </p>
+                          <div className="flex items-center gap-2 text-[10px] font-bold text-white uppercase tracking-tight">
+                            {new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                          </div>
 
-                        {/* Footer Action - Minimal */}
-                        <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
-                          <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider group-hover:text-green-400">
-                            Read
-                          </span>
-                          <ArrowUpRight size={12} className="text-neutral-500 group-hover:text-green-400 transition-colors" />
+                          <h3 className={`font-bold text-white tracking-wide leading-[1.2] group-hover:text-[#00ff00] transition-colors duration-500 max-w-[240px] ${index % 7 === 0 ? "text-sm md:text-xl" : "text-[9px] md:text-[11px]"
+                            }`}>
+                            {post.title}
+                          </h3>
+
+                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition-all duration-700">
+                            <div className="h-[1px] w-4 bg-[#00ff00]" />
+                            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">
+                              Access
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </Link>
-                  </article>
-                ))}
+                  ))}
+                </div>
               </div>
             ) : (
-              <div className="backdrop-blur-xl bg-white/5 rounded-2xl p-12 text-center">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BookOpen className="w-6 h-6 text-neutral-400" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Incoming Transmissions
+              /* --- EMPTY STATE --- */
+              <div className="w-full flex flex-col items-center py-48 bg-black border-y border-white/5">
+                <h3 className="text-lg font-black text-white uppercase tracking-[0.4em] mb-4">
+                  Incoming Signal
                 </h3>
-                <p className="text-sm text-neutral-400 mb-6 max-w-xs mx-auto">
-                  Our expert guides are currently in the field. Stories are being compiled.
+                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">
+                  Compiling field reports... Standby.
                 </p>
-                <Link
-                  href="/safari-packages"
-                  className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-6 py-2 text-sm rounded-full font-bold transition-all duration-300"
-                >
-                  Book Your Experience
-                </Link>
               </div>
             )}
           </main>
 
+          {/* Ad unit between blog grid and newsletter */}
+          {/* <div className="mt-12">
+            <AdUnit />
+          </div> */}
+
           {/* NEWSLETTER SECTION - Simplified */}
-          <section className="mt-20 backdrop-blur-md bg-black/40 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-            <h2 className="text-2xl font-bold text-white mb-3 relative z-10">
-              Stay Updated
-            </h2>
-            <p className="text-neutral-400 mb-6 max-w-lg mx-auto relative z-10 text-sm font-light">
-              Subscribe to receive the latest wildlife stories and conservation updates directly from our expert guides.
-            </p>
-            <Link
-              href="/contact"
-              className="relative z-10 inline-block bg-white text-black hover:bg-neutral-200 px-6 py-2 text-sm rounded-full font-bold transition-colors"
-            >
-              Get Updates
-            </Link>
+          <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out">
+            {/* 1. TINY TITLE ISLAND */}
+            <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
+              <h2 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+                Stay Updated
+              </h2>
+            </div>
+
+            {/* 2. MINI DESCRIPTION PILL */}
+            <div className="inline-block bg-black/80 px-6 py-3 rounded-2xl max-w-[660px] text-center shadow-2xl">
+              <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
+                "Wildlife stories and conservation updates from our expert guides.Subscribe to receive the latest wildlife stories and conservation updates directly from our expert guides."
+              </p>
+            </div>
+
+            {/* 3. SMALLEST ACTION BUTTN */}
+            <div className="inline-block">
+              <Link
+                href="/contact"
+                className="group flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full shadow-lg hover:bg-[#00ff00] transition-all active:scale-95"
+              >
+                <span className="text-[10px] font-black uppercase tracking-widest">
+                  Get Updates
+                </span>
+                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </div>
           </section>
 
           {/* SEO CONTENT WRAPPER (Hidden Visual Style, Visible for SEO) */}
-          <div className="mt-16 opacity-60">
+          <div className="mt-16 flex flex-col items-center gap-3 opacity-90 text-center animate-in slide-in-from-bottom duration-1000 ease-out">
             <AutoSEOWrapper
               pageTitle="Yala Wildlife Blog | Safari Tips & Wildlife Guides"
               pageDescription="Expert wildlife blog featuring Yala safari tips, leopard tracking guides, photography techniques, and Sri Lanka conservation news. Updated weekly!"
               pageType="blog"
             >
-              <div className="container mx-auto px-4 py-8 text-neutral-500 text-xs">
-                <h1 className="text-white text-sm font-bold mb-2">Yala Wildlife Blog</h1>
-                <p className="mb-2">Welcome to the Yala Wildlife Safari blog...</p>
-                {/* ... (Rest of SEO content remains same for crawlers) ... */}
+              {/* 1. TITLE PILL */}
+              <div className="inline-block bg-black/80 px-5 py-2 rounded-full shadow-2xl">
+                <h1 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+                  Yala Wildlife Blog
+                </h1>
+              </div>
+
+              {/* 2. DESCRIPTION PILL (The "Cuter" larger block) */}
+              <div className="inline-block bg-black/80 px-8 py-5 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl">
+                <p className="text-[15px] text-white/80 font-medium leading-relaxed italic text-center">
+                  "Welcome to the Yala Wildlife Safari blog...Yala boasts the highest leopard density in the world. Our professional guides
+                  know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
+                  equipped with safety features and optimal viewing configurations. Discover the magic of Yala National Park with our premium safari packages.
+                  Experience the thrill of spotting elusive leopards, majestic elephants, and
+                  over 200 species of birds in their natural habitat. Book your adventure today!"
+                </p>
+              </div>
+
+              {/* 3. CTA PILL */}
+              <div className="inline-block">
+                <div className="flex items-center gap-2.5 bg-black/80 text-white/60 px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em]">
+                  <Globe className="w-3 h-3 text-[#00ff00]" />
+                  Optimized for Discovery
+                </div>
               </div>
             </AutoSEOWrapper>
           </div>
@@ -527,7 +588,7 @@ export default async function BlogPage() {
         </div>
       </div>
 
-      {/* ✅ ENHANCED: Comprehensive Schema markup (UNTOUCHED) */}
+      {/*  ENHANCED: Comprehensive Schema markup (UNTOUCHED) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -540,7 +601,7 @@ export default async function BlogPage() {
         }}
       />
 
-      {/* ✅ ENHANCED: Breadcrumb schema */}
+      {/*ENHANCED: Breadcrumb schema blog */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

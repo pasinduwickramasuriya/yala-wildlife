@@ -6,6 +6,8 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
 
@@ -13,7 +15,7 @@ const BASE_URL = "https://www.yalawildlife.com";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
-  title: "Yala Safari Packages | Best Wildlife Tours Sri Lanka 2025",
+  title: "Yala National Park Packages | Best Wildlife Tours Sri Lanka",
   description: "Book premium Yala safari packages with expert guides. Half-day, full-day & private leopard safaris from $75. Guaranteed wildlife sightings & luxury jeeps. Best rates!",
 
   keywords: [
@@ -235,7 +237,7 @@ export const metadata: Metadata = {
     title: "Yala Safari Packages | Best Wildlife Tours Sri Lanka 2025",
     description: "Book premium Yala safari packages with expert guides. Half-day, full-day & private leopard safaris from $75. Guaranteed wildlife sightings & luxury jeeps!",
     url: `${BASE_URL}/safari-packages`,
-    siteName: "Yala Wildlife Safari | Premier Safari Experience",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {
@@ -380,6 +382,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "75",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/half-day-morning-safari`
                     }
@@ -396,6 +400,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "75",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/half-day-evening-safari`
                     }
@@ -412,6 +418,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "150",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/full-day-safari`
                     }
@@ -428,6 +436,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "200",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/private-safari`
                     }
@@ -444,6 +454,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "250",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/photography-safari`
                     }
@@ -460,6 +472,8 @@ export default function SafariPackages() {
                       "@type": "Offer",
                       priceCurrency: "USD",
                       price: "350",
+                      priceValidUntil: "2027-12-31",
+                      validFrom: "2024-01-01",
                       availability: "https://schema.org/InStock",
                       url: `${BASE_URL}/safari-packages/luxury-safari`
                     }

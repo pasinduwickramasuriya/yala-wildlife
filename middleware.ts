@@ -1,44 +1,12 @@
-// import { verifyToken } from "@/lib/auth";
-// import { NextResponse } from "next/server";
-// // import { verifyToken } from "./lib/auth";
-// // import { verifyToken } from "@/lib/auth";
-
-// export function middleware(request: Request) {
-//   const url = new URL(request.url);
-//   const token = request.headers.get("authorization")?.split(" ")[1];
-
-//   if (url.pathname === "/admin/login") {
-//     return NextResponse.next();
-//   }
-
-//   if (url.pathname.startsWith("/admin")) {
-//     if (!token) {
-//       return NextResponse.redirect(new URL("/admin/login", request.url));
-//     }
-//     try {
-//       const decoded = verifyToken(token);
-//       if (decoded.role !== "admin") {
-//         return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-//       }
-//       return NextResponse.next();
-//     } catch (error) {
-//       return NextResponse.redirect(new URL("/admin/login", request.url));
-//     }
-//   }
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/admin/:path*"],
-// };
-
-
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { verifyToken } from "@/lib/auth";
 
-export function middleware(request: Request) {
+export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
-  const token = request.headers.get("authorization")?.split(" ")[1];
+
+  // Retrieve token from cookie 'admin_token' or header
+  const token = request.cookies.get("admin_token")?.value || request.headers.get("authorization")?.split(" ")[1];
 
   // Allow access to /admin/login without token
   if (url.pathname === "/admin/login") {
@@ -52,7 +20,7 @@ export function middleware(request: Request) {
     }
 
     try {
-      const decoded = verifyToken(token);
+      const decoded = await verifyToken(token);
       // Check if decoded is null or lacks required properties
       if (!decoded || decoded.role !== "admin") {
         return NextResponse.json({ error: "Unauthorized" }, { status: 403 });

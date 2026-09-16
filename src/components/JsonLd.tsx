@@ -88,14 +88,14 @@ export function LocalBusinessJsonLd() {
           image: `${siteConfig.url}/logo.png`,
           "@id": siteConfig.url,
           url: siteConfig.url,
-          telephone: "+94-XX-XXX-XXXX",
+          telephone: "+94778158004",
           priceRange: "$$",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "Your Street Address",
-            addressLocality: "Yala",
+            streetAddress: "Safari Base, Tissamaharama Road",
+            addressLocality: "Tissamaharama",
             addressRegion: "Southern Province",
-            postalCode: "XXXXX",
+            postalCode: "82600",
             addressCountry: "LK",
           },
           geo: {

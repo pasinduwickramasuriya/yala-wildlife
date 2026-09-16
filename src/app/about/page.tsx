@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/Header";
 import {
   organizationSchema,
   websiteSchema,
@@ -9,13 +8,15 @@ import {
 } from "@/lib/schema";
 import { ArrowRight, Shield, Camera, Users, Leaf, HeartHandshake } from "lucide-react";
 
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
+
 // ✅ SEO-OPTIMIZED: Base URL for consistency
 const BASE_URL = "https://www.yalawildlife.com";
 
 // ✅ ENHANCED: About page metadata (UNTOUCHED)
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "About Yala Wildlife Safari | Expert Guides & Premium Tours Sri Lanka",
+  title: "About Yala National Park | Official Guides & Premium Tours Sri Lanka",
   description: "Learn about Yala Wildlife Safari - Sri Lanka's premier safari operator. Expert naturalist guides, luxury jeeps, guaranteed leopard sightings since 2015. 4.9/5 rating with 300+ reviews.",
   // ... (keeping your extensive keywords and other metadata as is for SEO)
   keywords: [
@@ -144,7 +145,7 @@ export const metadata: Metadata = {
     title: "About Yala Wildlife Safari | Expert Guides & Premium Tours Sri Lanka",
     description: "Learn about Sri Lanka's premier safari operator. Expert naturalist guides, luxury jeeps, guaranteed leopard sightings. 4.9/5 rating with 300+ reviews.",
     url: `${BASE_URL}/about`,
-    siteName: "Yala Wildlife Safari | Premier Safari Experience",
+    siteName: "Yala National Park",
     locale: "en_US",
     images: [
       {
@@ -221,8 +222,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Header />
-
       <div className="min-h-screen text-white relative overflow-hidden font-sans">
         {/* =========================================
             BACKGROUND IMAGE SECTION

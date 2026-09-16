@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image"; // Added import for Image component
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 interface HeroSection {
   id: string;
@@ -15,26 +15,11 @@ export default function AddHero() {
   const [formData, setFormData] = useState({ imageUrl: "", title: "", subtitle: "" });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [editId, setEditId] = useState<string | null>(null);
-  const [token, setToken] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch token from localStorage on mount (client-side only)
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = localStorage.getItem("token") || "";
-      setToken(storedToken);
-      if (!storedToken) console.warn("No token found. Please log in.");
-    }
-  }, []);
-
-  // Fetch hero sections on mount
-  useEffect(() => {
-    fetchHeroSections();
-  }, []);
-
-  const fetchHeroSections = async () => {
+  const fetchHeroSections = useCallback(async () => {
     try {
-      const res = await fetch("/api/hero");
+      const res = await fetch("/api/hero", { cache: "no-store" });
       if (!res.ok) throw new Error(`Failed to fetch hero sections: ${res.statusText}`);
       const data = await res.json();
       setHeroSections(data);
@@ -42,30 +27,27 @@ export default function AddHero() {
       setError("Error fetching hero sections");
       console.error("Fetch error:", err);
     }
-  };
+  }, []);
+
+  // Fetch hero sections on mount
+  useEffect(() => {
+    fetchHeroSections();
+  }, [fetchHeroSections]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (!token) {
-      setError("Please log in to perform this action");
-      return;
-    }
-
     const url = editId ? `/api/hero?id=${editId}` : "/api/hero";
     const method = editId ? "PUT" : "POST";
 
-    // Debug log to verify state before submission
     console.log("Submitting:", { method, editId, formData, imageFile });
 
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("subtitle", formData.subtitle);
 
-    // Image handling based on method
     if (method === "POST") {
-      // For create, require an image
       if (!imageFile && !formData.imageUrl) {
         setError("Please provide an image URL or upload an image");
         return;
@@ -76,38 +58,42 @@ export default function AddHero() {
         formDataToSend.append("imageUrl", formData.imageUrl);
       }
     } else if (method === "PUT") {
-      // For update, image is optional
       if (imageFile) {
         formDataToSend.append("image", imageFile);
       }
       if (formData.imageUrl) {
         formDataToSend.append("imageUrl", formData.imageUrl);
       }
-      // No error if neither is provided; API retains existing imageUrl
     }
 
     try {
       const res = await fetch(url, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // Cookies sent automatically
         body: formDataToSend,
       });
 
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : {};
+
       if (!res.ok) {
-        const errorData = await res.json();
-        console.error("Server response:", errorData);
-        throw new Error(`${errorData.error || "Request failed"} - Status: ${res.status}`);
+        console.error("Server response:", data);
+        if (res.status === 401) {
+          setError("Unauthorized: Please log in again.");
+          return;
+        }
+        throw new Error(data.error || text || `Request failed - Status: ${res.status}`);
       }
 
-      const updatedHero = await res.json();
+      // Handle response - assuming single object returned
+      const updatedHero = data;
+
       if (method === "PUT") {
         setHeroSections(heroSections.map((h) => (h.id === editId ? updatedHero : h)));
         setEditId(null);
       } else {
         setHeroSections([...heroSections, updatedHero]);
-        fetchHeroSections(); // Refresh list after create
+        await fetchHeroSections();
       }
       setFormData({ imageUrl: "", title: "", subtitle: "" });
       setImageFile(null);
@@ -120,34 +106,33 @@ export default function AddHero() {
 
   const handleEdit = (hero: HeroSection) => {
     setFormData({ imageUrl: hero.imageUrl, title: hero.title, subtitle: hero.subtitle });
-    setImageFile(null); // Clear file input for edits
+    setImageFile(null);
     setEditId(hero.id);
-    console.log("Editing hero:", hero); // Debug log
+    console.log("Editing hero:", hero);
   };
 
   const handleDelete = async (id: string) => {
     setError(null);
 
-    if (!token) {
-      setError("Please log in to perform this action");
-      return;
-    }
-
     try {
       const res = await fetch(`/api/hero?id=${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // Cookies sent automatically
       });
 
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : {};
+
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Delete failed");
+        if (res.status === 401) {
+          setError("Unauthorized: Please log in again.");
+          return;
+        }
+        throw new Error(data.error || text || "Delete failed");
       }
 
       setHeroSections(heroSections.filter((h) => h.id !== id));
-      fetchHeroSections(); // Refresh list
+      await fetchHeroSections();
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
@@ -159,7 +144,7 @@ export default function AddHero() {
     const file = e.target.files?.[0] || null;
     setImageFile(file);
     if (file) {
-      setFormData({ ...formData, imageUrl: "" }); // Clear imageUrl if file is selected
+      setFormData({ ...formData, imageUrl: "" });
     }
   };
 
@@ -250,12 +235,11 @@ export default function AddHero() {
                 className="flex justify-between items-center border border-border p-2 rounded bg-card"
               >
                 <div className="flex items-center space-x-4">
-                  {/* Changed: Replaced <img> with <Image> to fix @next/next/no-img-element */}
                   <Image
                     src={hero.imageUrl}
                     alt={hero.title}
-                    width={64} // 16 * 4 = 64px (matches w-16)
-                    height={64} // 16 * 4 = 64px (matches h-16)
+                    width={64}
+                    height={64}
                     className="object-cover rounded"
                     onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")}
                   />

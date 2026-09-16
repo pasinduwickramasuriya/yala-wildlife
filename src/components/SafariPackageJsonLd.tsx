@@ -1,7 +1,17 @@
-import { Package } from "@prisma/client";
-
 interface SafariPackageJsonLdProps {
-  package: Package;
+  package: {
+    id?: string;
+    name: string;
+    description?: string | null;
+    imageUrl?: string | null;
+    price?: number | null;
+    mealPrice?: number | null;
+    ticketPrice?: number | null;
+    slug: string;
+    highlights?: string[];
+    inclusions?: string[];
+    exclusions?: string[];
+  };
 }
 
 export function SafariPackageJsonLd({
@@ -20,6 +30,8 @@ export function SafariPackageJsonLd({
       "@type": "Offer",
       price: pkg.price,
       priceCurrency: "USD",
+      priceValidUntil: "2027-12-31",
+      validFrom: "2024-01-01",
       availability: "https://schema.org/InStock",
       url: `https://yalawildlife.com/safari-packages/${pkg.slug}`,
       priceSpecification: [

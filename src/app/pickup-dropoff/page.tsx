@@ -1,14 +1,14 @@
-
-
 import { Metadata } from "next";
 import Image from "next/image";
-import Header from "@/components/Header";
 import TransportForm from "@/components/TransportForm";
 import { MapPin, ShieldCheck, Zap, Clock, Car, Star, UserCheck, Navigation } from "lucide-react";
+import TourNavigator from "@/components/TourNavigator";
+
+export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
 // --- 1. SEO METADATA ---
 export const metadata: Metadata = {
-    title: "Sri Lanka Private Driver & Yala Taxi Service | Island-Wide Transport",
+    title: "Yala National Park | Sri Lanka Private Driver & Taxi Service | Island-Wide Transport",
     description: "Premium island-wide pickup & drop-off service. Luxury KDH vans & cars. Experienced chauffeurs, 24/7 support, and best market rates guaranteed. From Colombo, Ella, Galle, Mirissa to Yala.",
     keywords: [
         "yala taxi service",
@@ -64,14 +64,14 @@ export const metadata: Metadata = {
         title: "Premium Island-Wide Transport | Yala Wildlife Safari",
         description: "Safe, reliable, and affordable private transfers to Yala National Park from anywhere in Sri Lanka.",
         images: ["/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"],
-        siteName: "Yala Wildlife Safari",
+        siteName: "Yala National Park",
     },
     alternates: {
         canonical: "https://www.yalawildlife.com/pickup-dropoff",
     },
 };
 
-// --- 2. JSON-LD SCHEMA ---
+// --- 2. JSON-LD SCHEMA ---     
 const transportSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -94,10 +94,9 @@ const transportSchema = {
 export default function PickupDropoffPage() {
     return (
         <>
-            <Header />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(transportSchema) }} />
 
-            <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30 font-sans">
+            <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30 font-sans pt-24 sm:pt-32">
 
                 {/* =========================================
             BACKGROUND (Fixed & Visible)
@@ -120,7 +119,8 @@ export default function PickupDropoffPage() {
                 {/* =========================================
             CONTENT CONTAINER
         ========================================= */}
-                <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
+                <TourNavigator />
+                <div className="relative z-10 container mx-auto px-4 pt-6 sm:pt-10 pb-20">
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
@@ -128,38 +128,52 @@ export default function PickupDropoffPage() {
                         <div className="lg:col-span-7 space-y-10 pt-4">
 
                             {/* 1. HERO HEADER */}
-                            <div className="backdrop-blur- rounded-3xl p-8 relative overflow-hidden">
-                                {/* Decorative Glow */}
-                                {/* <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 rounded-full blur-3xl pointer-events-none"></div> */}
-
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="px-3 py-1 rounded-full bg-green-500/20 flex items-center gap-2">
-                                        <span className="relative flex h-2 w-2">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                        </span>
-                                        <span className="text-[10px] font-mono uppercase tracking-widest text-green-300 font-bold">Fleet Online</span>
+                            <div className="flex flex-col items-center lg:items-start gap-4 relative overflow-hidden text-center lg:text-left select-none animate-in slide-in-from-bottom duration-1000 ease-out">
+                                
+                                {/* 1. TINY TITLE ISLAND */}
+                                <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
+                                    <div className="flex items-center gap-3">
+                                        <div className="px-2 py-0.5 rounded-full bg-green-500/20 flex items-center gap-1.5">
+                                            <span className="relative flex h-1.5 w-1.5">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                                            </span>
+                                            <span className="text-[9px] font-mono uppercase tracking-widest text-[#00ff00] font-bold">Fleet Online</span>
+                                        </div>
+                                        <span className="text-[9px] font-mono text-neutral-300 uppercase tracking-wider">Island-Wide Coverage</span>
                                     </div>
-                                    <span className="text-[10px] font-mono text-neutral-300 uppercase tracking-wider">Island-Wide Coverage</span>
                                 </div>
 
-                                <h1 className="text-5xl md:text-4xl font-black text-white tracking-tighter leading-[0.95] mb-6">
-                                    PREMIUM <br />
-                                    <span className="text-green-400 font-bold">LOGISTICS</span>
+                                {/* 2. SPLIT TITLE WITH INLINE bg-black/80 BLOCKS */}
+                                <div className="space-y-2">
+                                    <div className="inline-block bg-black/80 px-6 py-2.5 rounded-2xl shadow-2xl">
+                                        <h1 className="text-2xl sm:text-2xl md:text-2xl font-light italic text-white tracking-tighter leading-none uppercase">
+                                            Premium
+                                        </h1>
+                                    </div>
+                                    <br />
+                                    <div className="inline-block bg-black/80 px-6 py-2.5 rounded-2xl shadow-2xl">
+                                        <h1 className="text-2xl sm:text-2xl md:text-2xl font-semibold italic text-[#00ff00] tracking-tighter leading-none uppercase">
+                                            Logistics
+                                        </h1>
+                                    </div>
+                                </div>
 
-                                </h1>
+                                {/* 3. MINI DESCRIPTION PILL */}
+                                <div className="inline-block bg-black/80 px-6 py-3 rounded-2xl max-w-xl text-center lg:text-left shadow-2xl border-l-2 border-[#00ff00]">
+                                    <p className="text-[14px] text-white/80 font-medium leading-relaxed italic">
+                                        "Experience the gold standard in Sri Lankan travel. We offer seamless Pickup & Drop-off services from any location on the island directly to Yala National Park. Secure, punctual, and priced for value."
+                                    </p>
+                                </div>
 
-                                <p className="text-sm text-neutral-200 font-light leading-relaxed max-w-xl">
-                                    Experience the gold standard in Sri Lankan travel. We offer seamless <span className="text-white font-semibold">Pickup & Drop-off services</span> from any location on the island directly to Yala National Park. Secure, punctual, and priced for value.
-                                </p>
                             </div>
 
                             {/* 2. METRICS GRID */}
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <StatCard label="Reliability" value="100%" icon={<ShieldCheck size={14} className="text-green-400" />} />
-                                <StatCard label="Availability" value="24/7" icon={<Clock size={14} className="text-green-400" />} />
-                                <StatCard label="Pricing" value="Best Rate" icon={<Zap size={14} className="text-green-400" />} />
-                                <StatCard label="Feedback" value="5.0/5" icon={<Star size={14} className="text-green-400" />} />
+                                <StatCard label="Reliability" value="100%" icon={<ShieldCheck size={14} className="text-[#00ff00] " />} />
+                                <StatCard label="Availability" value="24/7" icon={<Clock size={14} className="text-[#00ff00] " />} />
+                                <StatCard label="Pricing" value="Best Rate" icon={<Zap size={14} className="text-[#00ff00] " />} />
+                                <StatCard label="Feedback" value="5.0/5" icon={<Star size={14} className="text-[#00ff00] " />} />
                             </div>
 
                             {/* 3. FLEET SPECS */}
@@ -186,7 +200,7 @@ export default function PickupDropoffPage() {
                                     {/* Van Card */}
                                     <div className="group relative backdrop-blur-xl bg-black/40 rounded-2xl p-5 transition-all duration-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]">
                                         <div className="absolute top-3 right-3 opacity-50 group-hover:opacity-100 transition-opacity">
-                                            <Navigation size={16} className="text-green-400" />
+                                            <Navigation size={16} className="text-[#00ff00] " />
                                         </div>
                                         <h3 className="text-white font-bold text-sm mb-1">Luxury KDH Van</h3>
                                         <p className="text-[10px] text-neutral-400 mb-3">Perfect for families & groups.</p>
@@ -202,7 +216,7 @@ export default function PickupDropoffPage() {
                             {/* 4. CHAUFFEUR INFO */}
                             <div className="backdrop-blur-xl bg-black/50 rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6">
                                 <div className="w-12 h-12 rounded-full bg-green-900/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
-                                    <UserCheck size={24} className="text-green-400" />
+                                    <UserCheck size={24} className="text-[#00ff00] " />
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-bold text-white mb-1">Verified Professional Chauffeurs</h3>
@@ -215,7 +229,7 @@ export default function PickupDropoffPage() {
                             {/* 5. POPULAR ROUTES */}
                             <div>
                                 <div className="flex items-center gap-2 text-xs font-mono text-neutral-300 uppercase tracking-widest mb-4">
-                                    <MapPin size={14} className="text-green-400" /> High-Frequency Connections
+                                    <MapPin size={14} className="text-[#00ff00] " /> High-Frequency Connections
                                 </div>
                                 <div className="flex flex-wrap gap-2">
                                     <RoutePill from="Colombo Airport (BIA)" />

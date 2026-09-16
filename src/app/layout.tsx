@@ -11,19 +11,16 @@ import {
   websiteSchema,
   localBusinessSchema,
 } from "@/lib/schema";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import ClientWidgets from "@/components/ClientWidgets";
+import CookieConsent from "@/components/CookieConsent";
 import { Analytics } from "@vercel/analytics/next";
-
-import { SEOIndicator } from "@/components/SEOIndicator";
-// import DotsBackground from "@/components/DotsBackground";
-
-
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = defaultMetadata;
@@ -36,22 +33,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
+            __html: JSON.stringify([
+              organizationSchema,
+              websiteSchema,
+              localBusinessSchema,
+            ]),
           }}
         />
       </head>
@@ -64,23 +55,28 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
+          {/* <SmoothScroll> */}
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
 
-          <Footer />
+            <Footer />
+          {/* </SmoothScroll> */}
         </ThemeProvider>
-        <WhatsAppButton />
-        
-        {/* Visual indicator */}
-        <SEOIndicator />
+        <ClientWidgets />
+        <CookieConsent />
 
         {/* Debug panel - remove in production */}
         {/* <SEODebug /> */}
         {/* <DotsBackground/> */}
 
-        <Analytics />
+        {process.env.VERCEL ? (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        ) : null}
       </body>
     </html>
   );
