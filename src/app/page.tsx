@@ -396,32 +396,33 @@ export default async function Home() {
 
   return (
     <>
-      {/* Main Page Background Image */}
-      <div className="fixed inset-0 -z-50 pointer-events-none overflow-hidden">
-        <Image
-          src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-          alt="Yala Wildlife Leopard Background"
-          fill
-          priority={false}
-          loading="lazy"
-          sizes="100vw"
-          quality={60}
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
-      </div>
-
       <HeroSlider initialHeroSections={heroSections} />
       <ReviewFeed initialReviews={reviewPhotos} />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-16 overflow-hidden z-10 relative">
-        <div className="flex flex-col items-center justify-center w-full mb-10">
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-black/80 rounded-full mb-3 shadow-xl">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span>
-            <span className="text-[15px] font-black tracking-[0.2em] text-[#00ff00] leading-none">
+      <div
+        className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-16 overflow-hidden z-10 relative selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+      >
+        <div className="flex flex-col items-center justify-center w-full mb-12 text-center">
+          {/* Google Pill Header */}
+          <div className="bg-white px-6 py-2.5 rounded-full flex items-center justify-center gap-2 mb-3">
+            {/* <span className="w-2 h-2 rounded-full bg-[#00ff00]" /> */}
+            <h2 className="text-5xl font-bold text-[#000000] tracking-wider">
               Safari Packages
-            </span>
+            </h2>
           </div>
+
+          <p className="mt-5 text-lg text-[#5f6368] max-w-4xl leading-relaxed font-semibold">
+            Explore the breathtaking beauty of Yala National Park with our expert-guided safari packages.
+
+            Witness the park's rich biodiversity, including elusive leopards and majestic elephants.
+
+            Apex predator surveillance and habitat monitoring protocols managed by senior field guides.
+          </p>
+
         </div>
 
         <SafariPackagesCarousel packages={packages} />
@@ -437,33 +438,44 @@ export default async function Home() {
       <ReviewSlider />
       <DiscountPopup />
 
+
       <AutoSEOWrapper
         pageTitle="Yala Safari Tours | #1 Wildlife Experience Sri Lanka"
         pageDescription="Premium Yala National Park safari tours. Expert guides, guaranteed leopard sightings, luxury jeeps."
         pageType="home"
       >
-        <section className="mt-16 flex flex-col items-center gap-2 selection:bg-[#00ff00] selection:text-black cv-auto">
-          <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
-            <h2 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
+        <section
+          className="my-20 flex flex-col items-center  px-4 selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+          style={{
+            fontFamily:
+              '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+          }}
+        >
+          {/* Google Pill Header */}
+          <div className="bg-white px-6 py-2.5 rounded-full flex items-center justify-center">
+            <span className="text-4xl font-bold text-[#000000] tracking-relex">
               Yala Wildlife
-            </h2>
+            </span>
           </div>
 
-          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
-            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-              &quot;Welcome to Yala Wildlife Safari Your gateway to unforgettable wildlife experiences in Sri Lanka&apos;s premier national park. Our expert guides ensure safe adventures with guaranteed leopard sightings.&quot;
+          {/* Google Card 1 */}
+          <div className="bg-white p-8 sm:p-10 rounded-3xl max-w-[850px] w-full text-center flex flex-col items-center justify-center">
+            <p className="text-[18px] text-[#2d3135] font-semibold leading-relaxed">
+              &ldquo;Welcome to Yala Wildlife Safari your gateway to unforgettable wildlife experiences in Sri Lanka&apos;s premier national park. Our expert guides ensure safe adventures with guaranteed leopard sightings.&rdquo;
             </p>
           </div>
 
-          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
-            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-              &quot;Discover the magic of Yala National Park with our premium safari packages. Experience the thrill of spotting elusive leopards, majestic elephants, and over 200 species of birds in their natural habitat.&quot;
+          {/* Google Card 2 */}
+          <div className="bg-white p-8 sm:p-10 rounded-3xl max-w-[850px] w-full text-center flex flex-col items-center justify-center">
+            <p className="text-[18px] text-[#2d3135] font-semibold leading-relaxed">
+              &ldquo;Discover the magic of Yala National Park with our premium safari packages. Experience the thrill of spotting elusive leopards, majestic elephants, and over 200 species of birds in their natural habitat.&rdquo;
             </p>
           </div>
 
-          <div className="inline-block bg-black/80 px-6 py-4 rounded-2xl max-w-[850px] text-center shadow-2xl">
-            <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-              &quot;Yala boasts the highest leopard density in the world. Our professional guides know the best routes and times for spotting. We use luxury 4x4 jeeps equipped with safety features and optimal viewing configurations.&quot;
+          {/* Google Card 3 */}
+          <div className="bg-white p-8 sm:p-10 rounded-3xl max-w-[850px] w-full text-center flex flex-col items-center justify-center">
+            <p className="text-[18px] text-[#2d3135] font-semibold leading-relaxed">
+              &ldquo;Yala boasts the highest leopard density in the world. Our professional guides know the best routes and times for spotting. We use luxury 4x4 jeeps equipped with safety features and optimal viewing configurations.&rdquo;
             </p>
           </div>
         </section>

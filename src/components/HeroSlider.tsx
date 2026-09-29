@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
 import { useThermalOptimization } from "@/hooks/useThermalOptimization";
 
-interface HeroSection {
+export interface HeroSection {
   id: string;
   imageUrl: string;
   title: string;
@@ -17,284 +16,292 @@ const DEFAULT_HERO_SECTIONS: HeroSection[] = [
   {
     id: "default-1",
     title: "YALA WILDLIFE SAFARI",
-    subtitle: "Experience Sri Lanka's premier national park with guaranteed leopard sightings and luxury 4x4 jeeps.",
+    subtitle:
+      "Experience Sri Lanka's premier national park with guaranteed leopard sightings, verified tracker intelligence, and custom luxury 4x4 game drives.",
     imageUrl: "/uploads/yala1.webp",
   },
   {
     id: "default-2",
     title: "WILD ELEPHANT HERDS",
-    subtitle: "Watch majestic Asian elephants gathering along the scenic Menik River bank at dusk.",
+    subtitle:
+      "Watch majestic Asian elephants gathering along the scenic Menik River bank at dusk, tracked live with minimum visitor interference.",
     imageUrl: "/uploads/yala2.webp",
   },
   {
     id: "default-3",
     title: "EXPERT SAFARI GUIDES",
-    subtitle: "Custom tailored wildlife game drives led by top naturalist trackers in Yala Block 1.",
-    imageUrl: "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
+    subtitle:
+      "Custom tailored wildlife game drives led by top naturalist trackers and biology researchers in Yala Block 1.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1547970810-dc92b3848368?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
-export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSections?: HeroSection[] }) {
+export default function HeroSlider({
+  initialHeroSections = [],
+}: {
+  initialHeroSections?: HeroSection[];
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { shouldAnimate } = useThermalOptimization(containerRef);
 
-  const [heroSections, setHeroSections] = useState<HeroSection[]>(
-    initialHeroSections.length > 0 ? initialHeroSections : DEFAULT_HERO_SECTIONS
-  );
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const heroSections =
+    initialHeroSections.length > 0 ? initialHeroSections : DEFAULT_HERO_SECTIONS;
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTabVisible, setIsTabVisible] = useState(true);
+
+  // Pick next / prev slide with boundary guard
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % heroSections.length);
+  }, [heroSections.length]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + heroSections.length) % heroSections.length);
+  }, [heroSections.length]);
+
+  // Pause when tab is not active to prevent background GPU/CPU burn
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const [hasInteracted, setHasInteracted] = useState(false);
-
-  useEffect(() => {
-    const onUserInteract = () => setHasInteracted(true);
-    window.addEventListener("scroll", onUserInteract, { passive: true, once: true });
-    window.addEventListener("touchstart", onUserInteract, { passive: true, once: true });
-    window.addEventListener("pointerdown", onUserInteract, { passive: true, once: true });
-
-    return () => {
-      window.removeEventListener("scroll", onUserInteract);
-      window.removeEventListener("touchstart", onUserInteract);
-      window.removeEventListener("pointerdown", onUserInteract);
+    const handleVisibilityChange = () => {
+      setIsTabVisible(document.visibilityState === "visible");
     };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange, { passive: true });
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, []);
 
-  // --- Auto Slider Logic ---
+  // Low-spec & battery saver detection: stop loop if Save-Data is enabled or user wants reduced motion
+  const [isLowSpecDevice, setIsLowSpecDevice] = useState(false);
   useEffect(() => {
-    if (!hasInteracted || heroSections.length <= 1 || !mounted || !shouldAnimate) return;
+    const nav = navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    const isSaveData = nav.connection?.saveData === true;
+    const isSlowConn = nav.connection?.effectiveType === "2g" || nav.connection?.effectiveType === "slow-2g";
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Smooth 6s auto-slide once user has engaged
-    const timeout = setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSections.length);
-    }, 6000);
-
-    return () => clearTimeout(timeout);
-  }, [heroSections.length, mounted, currentSlide, shouldAnimate, hasInteracted]);
-
-  // --- Data Setup ---
-  const section = heroSections[currentSlide] || DEFAULT_HERO_SECTIONS[0];
-  const nextSlideIndex = (currentSlide + 1) % heroSections.length;
-  const nextNextSlideIndex = (currentSlide + 2) % heroSections.length;
-
-  const card1Data = heroSections[nextSlideIndex] || DEFAULT_HERO_SECTIONS[1] || section;
-  const card2Data = heroSections[nextNextSlideIndex] || DEFAULT_HERO_SECTIONS[2] || section;
-
-  const titleWords = section.title ? section.title.split(" ") : ["YALA", "WILDLIFE"];
-  const firstWord = titleWords[0];
-  const restTitleWords = titleWords.slice(1).join(" ");
-
-  const getOptUrl = (url: string) => {
-    if (url && url.includes("res.cloudinary.com") && url.includes("/upload/") && !url.includes("f_auto")) {
-      return url.replace("/upload/", "/upload/f_auto,q_auto,w_1200/");
+    if (isSaveData || isSlowConn || prefersReducedMotion) {
+      setIsLowSpecDevice(true);
     }
-    return url;
-  };
+  }, []);
+
+  // Safe auto-cycle timer (aborts during thermal load, background tab, or battery conservation mode)
+  useEffect(() => {
+    if (
+      heroSections.length <= 1 ||
+      isHovered ||
+      !shouldAnimate ||
+      !isTabVisible ||
+      isLowSpecDevice
+    ) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [heroSections.length, isHovered, shouldAnimate, isTabVisible, isLowSpecDevice, handleNext]);
+
+  if (!heroSections || heroSections.length === 0) return null;
+
+  const currentSlide = heroSections[currentIndex] || heroSections[0];
+
+  // 3 preview thumbnails following current slide
+  const upcomingPreviews = [1, 2, 3].map((offset) => {
+    const index = (currentIndex + offset) % heroSections.length;
+    return { slide: heroSections[index], index };
+  });
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-screen overflow-hidden font-sans bg-black selection:bg-lime-400 selection:text-black">
+    <section
+      ref={containerRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="w-full bg-white text-[#1f1f1f] pt-20 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden antialiased selection:bg-[#00ff00] selection:text-black [content-visibility:auto] [contain:style_layout]"
+      style={{
+        fontFamily: '"Google Sans", Roboto, Arial, sans-serif',
+      }}
+    >
+      <div className="max-w-7xl mx-auto flex flex-col gap-6 sm:gap-10">
 
-      {/* 1. BACKGROUND IMAGE - GPU OPTIMIZED */}
-      <div className="absolute inset-0 w-full h-full bg-black z-0">
-        {heroSections.map((slide, idx) => {
-          const isActive = idx === currentSlide;
-          // Render image if active OR if mounted and previously viewed/preloaded
-          if (!isActive && !mounted) return null;
-          return (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 w-full h-full bg-black transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'}`}
-            >
-              <div className="w-full h-full relative">
-                <Image
-                  src={getOptUrl(slide.imageUrl)}
-                  alt={slide.title}
-                  fill
-                  priority={idx === 0}
-                  loading={idx === 0 ? "eager" : "lazy"}
-                  fetchPriority={idx === 0 ? "high" : "low"}
-                  className="object-cover object-center brightness-[0.85]"
-                  style={{ objectFit: 'cover' }}
-                  sizes="100vw"
-                  quality={idx === 0 ? 60 : 50}
-                />
+        {/* Top Centered Headline */}
+        <div className="w-full text-center pb-2">
+          <h1
+            className="inline text-center [text-wrap:pretty] [overflow-wrap:break-word] antialiased"
+            style={{
+              fontSize: "48px",
+              fontStyle: "normal",
+              fontWeight: 700,
+              lineHeight: "56px",
+              letterSpacing: "-1px",
+              color: "#1f1f1f",
+              textRendering: "optimizeLegibility",
+              WebkitFontSmoothing: "antialiased",
+            }}
+          >
+            Yala Wildlife
+          </h1>
+          <p className="text-[18px] text-[#5f6368] font-semibold line-clamp-3 leading-relaxed w-full max-w-4xl mx-auto mt-2">
+            Experience Sri Lanka&apos;s premier national park with guaranteed leopard sightings, verified tracker intelligence, and custom luxury 4x4 game drives.
+          </p>
+        </div>
+
+        {/* Top Cards Showcase: Large Main Card + Vertical Pill Thumbnails */}
+        <div className="flex items-stretch gap-2.5 sm:gap-4 md:gap-6 w-full h-[260px] xs:h-[300px] sm:h-[380px] md:h-[430px] lg:h-[480px]">
+
+          {/* Main Card: Isolated compositor layer prevents re-rendering parent layout tree */}
+          <div className="relative w-[48%] xs:w-[50%] sm:w-[52%] md:w-[54%] h-full rounded-[22px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden bg-[#f1f3f4] border border-[#e0e2e5] group shadow-sm shrink-0 transform-gpu [backface-visibility:hidden] [contain:paint_layout]">
+            {currentSlide.imageUrl ? (
+              <Image
+                src={currentSlide.imageUrl}
+                alt={currentSlide.title}
+                fill
+                priority={currentIndex === 0}
+                className="object-cover object-center transition-transform duration-500 ease-out sm:group-hover:scale-105 will-change-transform"
+                sizes="(max-width: 640px) 48vw, (max-width: 1024px) 52vw, 680px"
+                quality={68}
+              />
+            ) : (
+              <div className="w-full h-full bg-[#f1f3f4] flex items-center justify-center text-[#5f6368] text-[18px] font-medium">
+                No Preview Available
               </div>
-            </div>
-          );
-        })}
-      </div>
+            )}
 
-      {/* 2. MAIN CONTENT */}
-      <div className="relative z-20 container mx-auto px-4 sm:px-6 md:px-12 h-full flex flex-col justify-center min-h-screen py-12 sm:py-20">
+            {/* Gradient overlay for contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10 opacity-75 group-hover:opacity-85 transition-opacity pointer-events-none" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full h-full">
-          {/* LEFT COLUMN: Text Content */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8 relative flex flex-col items-center lg:items-start w-full text-center lg:text-left transition-all duration-700 fade-in">
-
-            {/* Counter */}
-            <div className="inline-flex items-center gap-3 px-2 py-1 drop-shadow-xl">
-              <span className="text-lime-400 font-mono text-sm md:text-[10px] font-bold drop-shadow-[0_0_10px_rgba(163,230,53,1)]">
-                0{currentSlide + 1}
-              </span>
-              <div className="w-8 h-[2px] bg-lime-400/80 shadow-[0_0_8px_rgba(163,230,53,0.8)]"></div>
-              <span className="text-white font-mono text-sm md:text-[10px] drop-shadow-md">
-                0{heroSections.length}
-              </span>
-            </div>
-
-            {/* Main Title */}
-            <div className="relative w-full">
-              <div className="inline-block">
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
-                  {/* Part 1: White Text */}
-                  <div className="block font-fredoka text-white pb-2">
-                    {firstWord}
-                  </div>
-
-                  {/* Part 2: Gradient Text */}
-                  <div className="block font-poppins text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-lime-500 pb-2">
-                    {restTitleWords}
-                  </div>
-                </h1>
-              </div>
-            </div>
-
-            {/* Subtitle & CTA */}
-            <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-2">
-              <div className="hidden md:block max-w-md p-2 border-l-0 lg:border-l-4 border-lime-500 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                <p className="text-lg md:text-xl text-white font-medium leading-relaxed tracking-wide">
-                  {section.subtitle}
-                </p>
-              </div>
-
-              <div className="flex-shrink-0 hover:scale-105 active:scale-95 transition-transform duration-300">
-                <Link href="/safari-packages" className="group block relative">
-                  <div className="absolute inset-0 bg-lime-500 opacity-60 group-hover:opacity-80 transition-opacity duration-500 rounded-full"></div>
-                  <div className="relative bg-lime-500 text-black px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-white hover:text-black transition-all rounded-full flex items-center gap-3">
-                    <span className="text-sm font-bold uppercase tracking-[0.2em]">Book Now</span>
-                    <div className="bg-black text-white rounded-full p-1 group-hover:bg-lime-500 group-hover:text-black transition-colors">
-                      <ArrowRight className="w-3 h-3 group-hover:rotate-45 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-
-            {/* Location Pin */}
-            <div className="pt-4 w-full flex justify-center lg:justify-start">
-              <div className="inline-flex items-center gap-3 px-2 py-1 drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)]">
-                <div className="w-8 h-8 flex items-center justify-center bg-lime-500/20 border border-lime-500 rounded-full shadow-[0_0_15px_#84cc16]">
-                  <MapPin className="w-4 h-4 text-lime-400" />
-                </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-lime-300 font-mono text-[10px] font-bold uppercase tracking-widest leading-none drop-shadow-md">
-                    Yala National Park
-                  </span>
-                  <span className="text-white text-[9px] font-mono uppercase tracking-wider leading-tight mt-0.5 font-bold">
-                    Southern Province • Sri Lanka
-                  </span>
-                </div>
-              </div>
+            {/* Pill Action Button */}
+            <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 z-10">
+              <Link
+                href="/safari-packages"
+                className="inline-flex items-center gap-2 bg-white text-[#1f1f1f] hover:bg-[#f8f9fa] px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-[16px] sm:text-[18px] tracking-normal shadow-md hover:shadow-lg active:scale-95 transition-all duration-200"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-[#00ff00]" />
+                <span className="font-medium">Book Now</span>
+              </Link>
             </div>
           </div>
 
-          {/* RIGHT COLUMN (Hidden on Mobile) */}
-          <div className="hidden lg:flex lg:col-span-5 flex-col sm:flex-row gap-6 justify-center lg:justify-end mt-12 lg:mt-0 items-center perspective-1000">
-            {/* Next Card */}
-            <div
-              onClick={() => setCurrentSlide(nextSlideIndex)}
-              className="group relative w-64 h-96 flex-shrink-0 cursor-pointer"
-            >
-              <div className="w-full h-full relative rounded-[3rem] overflow-hidden shadow-2xl bg-neutral-900 transition-transform duration-300 hover:-translate-y-2">
-                <Image
-                  key={card1Data.imageUrl}
-                  src={getOptUrl(card1Data.imageUrl)}
-                  alt={card1Data.title}
-                  fill
-                  loading="lazy"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="25vw"
-                  quality={50}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+          {/* Vertical Pill Thumbnails */}
+          {/* <div className="flex-1 flex items-stretch gap-2 sm:gap-3.5 md:gap-5 h-full min-w-0">
+            {upcomingPreviews.map(({ slide: previewSlide, index }, i) => (
+              <button
+                key={previewSlide.id || index}
+                onClick={() => setCurrentIndex(index)}
+                className={`relative flex-1 h-full rounded-full overflow-hidden bg-[#f1f3f4] border border-[#e0e2e5] transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1a73e8] transform-gpu [backface-visibility:hidden] [contain:paint_layout]
+                  ${i === 2 ? "hidden sm:block" : ""}
+                  ${i === 1 ? "hidden xs:block" : ""}
+                `}
+                aria-label={`Select ${previewSlide.title}`}
+              >
+                {previewSlide.imageUrl ? (
+                  <Image
+                    src={previewSlide.imageUrl}
+                    alt={previewSlide.title}
+                    fill
+                    loading="lazy"
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 20vw, (max-width: 1024px) 15vw, 160px"
+                    quality={55}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[#f1f3f4]" />
+                )}
+                <div className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors pointer-events-none" />
+              </button>
+            ))}
+          </div> */}
 
-                <div className="absolute top-4 right-4">
-                  <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-bold text-lime-400 uppercase tracking-widest shadow-lg">
-                    Next
-                  </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 w-full p-6">
-                  <div className="drop-shadow-lg">
-                    <h3 className="text-white text-lg font-black uppercase tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors drop-shadow-md">
-                      {card1Data.title}
-                    </h3>
-                    <div className="h-1 w-8 bg-lime-500 rounded-full mt-2 shadow-[0_0_10px_#84cc16]" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Incoming Card */}
-            <div
-              onClick={() => setCurrentSlide(nextNextSlideIndex)}
-              className="group relative w-48 h-72 flex-shrink-0 cursor-pointer opacity-100 hover:opacity-100 transition-all duration-500 hidden xl:block"
-            >
-              <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden transition-all shadow-xl">
-                <Image
-                  key={card2Data.imageUrl}
-                  src={getOptUrl(card2Data.imageUrl)}
-                  alt={card2Data.title}
-                  fill
-                  loading="lazy"
-                  className="object-cover"
-                  sizes="20vw"
-                  quality={40}
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
-
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg">
-                    <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">Up Next</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Vertical Pill Thumbnails */}
+          <div className="flex-1 flex items-stretch gap-2 sm:gap-3.5 md:gap-5 h-full min-w-0">
+            {upcomingPreviews.map(({ slide: previewSlide, index }, i) => (
+              <button
+                key={previewSlide.id || index}
+                onClick={() => setCurrentIndex(index)}
+                className={`relative flex-1 h-full rounded-full overflow-hidden bg-[#f1f3f4] border border-[#e0e2e5] transition-transform duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1a73e8]
+        ${i === 2 ? "hidden sm:block" : ""}
+        ${i === 1 ? "hidden xs:block" : ""}
+      `}
+                aria-label={`Select ${previewSlide.title}`}
+              >
+                {previewSlide.imageUrl ? (
+                  <Image
+                    src={previewSlide.imageUrl}
+                    alt={previewSlide.title}
+                    fill
+                    className="object-cover object-center"
+                    // Increased size allocation to account for tall aspect ratios on 2x/3x Retina screens
+                    sizes="(max-width: 640px) 35vw, (max-width: 1024px) 25vw, 320px"
+                    // Boosted quality from 55 to 85 to remove compression blur
+                    quality={85}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[#f1f3f4]" />
+                )}
+                {/* Optional subtle hover highlight without permanent dulling tint */}
+                <div className="absolute inset-0 bg-transparent hover:bg-white/10 transition-colors pointer-events-none" />
+              </button>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 w-full h-1.5 bg-white/10 z-30 flex pointer-events-none">
-        {heroSections.map((_, idx) => (
-          <div key={idx} className="flex-1 h-full border-r border-black/20 relative bg-black/20 backdrop-blur-sm">
-            {idx === currentSlide && (
-              <div
-                className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16] w-full origin-left"
-                style={{ animation: "hero-progress 7s linear" }}
-              />
+        {/* Bottom Details & Navigation Row */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 pt-1 sm:pt-2">
+
+          {/* Slide Title and Description */}
+          <div className="max-w-3xl space-y-2 [contain:content]">
+            <h2 className="text-[24px] sm:text-[32px] md:text-[38px] lg:text-[42px] font-medium tracking-tight text-[#1f1f1f] leading-snug line-clamp-2">
+              {currentSlide.title}
+            </h2>
+            {currentSlide.subtitle && (
+              <p className="text-[18px] text-[#5f6368] font-semibold line-clamp-2 leading-relaxed">
+                {currentSlide.subtitle}
+              </p>
             )}
           </div>
-        ))}
-      </div>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @keyframes hero-progress {
-          0% { transform: scaleX(0); }
-          100% { transform: scaleX(1); }
-        }
-        @keyframes fade-in {
-          0% { opacity: 0; transform: translateY(10px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-          animation: fade-in 1s ease-out forwards;
-        }
-      `}} />
-    </div>
+          {/* Prev / Next Circular Navigation Buttons */}
+          <div className="flex items-center gap-3 shrink-0 self-end sm:self-auto">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Slide"
+              className="w-12 h-12 sm:w-13 sm:h-13 p-3.5 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] text-[#444746] hover:text-[#1f1f1f] active:scale-90 transition-transform duration-150 shadow-none border border-transparent cursor-pointer flex items-center justify-center transform-gpu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.2}
+                stroke="currentColor"
+                className="w-5 h-5 pointer-events-none"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+
+            <button
+              onClick={handleNext}
+              aria-label="Next Slide"
+              className="w-12 h-12 sm:w-13 sm:h-13 p-3.5 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] text-[#444746] hover:text-[#1f1f1f] active:scale-90 transition-transform duration-150 shadow-none border border-transparent cursor-pointer flex items-center justify-center transform-gpu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.2}
+                stroke="currentColor"
+                className="w-5 h-5 pointer-events-none"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
   );
 }

@@ -41,8 +41,8 @@ interface ClientHomeProps {
   initialReviews?: any[];
 }
 
-export default function ClientHome({ 
-  initialPackages = [], 
+export default function ClientHome({
+  initialPackages = [],
   initialHeroSections = [],
   initialBlogs = [],
   initialReviewPhotos = [],

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, MapPin, ShieldCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 interface Package {
   id: string;
@@ -14,7 +14,15 @@ interface Package {
   imageUrl?: string | null;
 }
 
-export default function PackageCard({ slug, pkg: initialPkg, isPriority = false }: { slug: string; pkg?: Package | null; isPriority?: boolean }) {
+export default function PackageCard({
+  slug,
+  pkg: initialPkg,
+  isPriority = false,
+}: {
+  slug: string;
+  pkg?: Package | null;
+  isPriority?: boolean;
+}) {
   const [pkg, setPackage] = useState<Package | null>(initialPkg || null);
   const [loading, setLoading] = useState(!initialPkg);
 
@@ -24,97 +32,103 @@ export default function PackageCard({ slug, pkg: initialPkg, isPriority = false 
       setLoading(false);
       return;
     }
+    let isMounted = true;
     const fetchPackage = async () => {
       try {
         const response = await fetch(`/api/package?slug=${slug}`);
         if (!response.ok) throw new Error("Failed to fetch");
         const data: Package = await response.json();
-        setPackage(data);
+        if (isMounted) setPackage(data);
       } catch (err) {
         console.error(err);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
     fetchPackage();
+    return () => {
+      isMounted = false;
+    };
   }, [slug, initialPkg]);
 
-  if (loading) return <div className="w-[300px] h-[400px] bg-white/5 animate-pulse rounded-[2rem] mx-auto" />;
+  if (loading) {
+    return (
+      <div className="w-full max-w-[360px] h-[520px] bg-white animate-pulse rounded-[2.5rem] mx-auto my-4" />
+    );
+  }
   if (!pkg) return null;
 
   return (
-    <div className="px-6 md:px-6 py-4">
+    <div
+      className="p-4 selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
       <Link
         href={`/safari-packages/${pkg.slug}`}
-        className="block group mx-auto max-w-[320px]"
+        className="block group mx-auto max-w-[360px] text-left"
       >
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-black shadow-2xl transition-all duration-500  z-0">
+        {/* Google Card Surface: Pure White, Smooth Rounded Edges, Zero Outlines */}
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-white transition-all duration-300 flex flex-col p-6 [contain:paint] transform-gpu hover:scale-[1.01]">
+          
+          {/* Header Row: Google Badge + Starting Price */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="inline-flex items-center gap-2 bg-[#f8f9fa] px-3.5 py-1.5 rounded-full">
+              <span className="text-[14px] font-semibold text-[#202124]">
+                Official Safari
+              </span>
+            </div>
 
-          {/* --- 1. IMAGE SECTION (Fixed Scaling) --- */}
-          <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-[2.5rem]">
-            <Image
-              src={pkg.imageUrl || "/placeholder-image.jpg"}
-              alt={pkg.name}
-              fill
-              // Added transform-gpu and will-change to prevent flickering/shrinking issues on desktop
-              className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-100 transform-gpu will-change-transform"
-              sizes="(max-width: 320px) 100vw, 320px"
-              priority={isPriority}
-              loading={isPriority ? undefined : "lazy"}
-              quality={65}
-            />
-            {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent pointer-events-none" />
-
-            {/* Floating Price Pill (Surgical) */}
-            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full z-10">
-              <span className="text-[#00ff00] text-[12px] font-black font-mono tracking-tighter">
-                ${pkg.price || '00'}
+            <div className="flex items-baseline gap-1">
+              <span className="text-[13px] text-[#5f6368] font-medium">from</span>
+              <span className="text-[18px] font-bold text-[#000000]">
+                ${pkg.price || "120"}
               </span>
             </div>
           </div>
 
-          {/* --- 2. CONTENT SECTION --- */}
-          <div className="p-6 flex flex-col gap-3 bg-black relative z-10">
-
-            {/* Status Badge */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00ff00]/10">
-                <ShieldCheck size={8} className="text-[#00ff00]" />
-                <span className="text-[8px] font-black text-[#00ff00] uppercase tracking-widest text-nowrap">Official Yala Tour</span>
-              </div>
-              <div className="flex items-center gap-1 text-white/30">
-                <MapPin size={8} />
-                <span className="text-[8px] font-bold uppercase tracking-widest">Block 01</span>
-              </div>
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg font-black text-white  tracking-tight italic leading-tight group-hover:text-[#00ff00] transition-colors">
-              {pkg.name}
-            </h3>
-
-            {/* Description */}
-            <p className="text-[11px] text-white/50 leading-relaxed line-clamp-2 font-medium">
-              {pkg.description || "Premium safari experience guided by our expert Sri Lankan naturalists."}
-            </p>
-
-            {/* --- 3. ACTION BUTTON --- */}
-            <div className="mt-2 pt-4  flex items-center justify-between">
-              <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.3em]">Discovery Protocol</span>
-
-              <div className="flex items-center gap-2 bg-white text-black pl-4 pr-1 py-1 rounded-full group-hover:bg-[#00ff00] transition-all duration-300">
-                <span className="text-[9px] font-black uppercase tracking-widest">Explore</span>
-                <div className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white">
-                  <ArrowUpRight size={12} className="group-hover:rotate-45 transition-transform" />
-                </div>
-              </div>
-            </div>
-
+          {/* Clean Rounded Image Canvas */}
+          <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden bg-[#f1f3f4] mb-5">
+            <Image
+              src={pkg.imageUrl || "/uploads/yala1.webp"}
+              alt={pkg.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 360px"
+              priority={isPriority}
+              loading={isPriority ? undefined : "lazy"}
+              quality={75}
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 transform-gpu"
+            />
           </div>
 
-          {/* Decorative Glow Orb */}
-          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#00ff00]/5 blur-[50px] rounded-full pointer-events-none z-0" />
+          {/* Editorial Content Section */}
+          <div className="flex flex-col flex-1 justify-between gap-4">
+            <div>
+              <h3 className="text-2xl font-bold text-[#000000] tracking-tight leading-snug mb-2 group-hover:text-[#000000] transition-colors">
+                {pkg.name}
+              </h3>
+
+              <p className="text-[18px] text-[#3c4043] leading-relaxed font-medium line-clamp-2">
+                {pkg.description ||
+                  "Experience the premier wildlife tracks of Yala with our certified naturalists and custom 4x4 Hilux vehicles."}
+              </p>
+            </div>
+
+            {/* Bottom Row: Location Tag & Google Button */}
+            <div className="pt-2 flex items-center justify-between border-t border-[#f1f3f4]">
+              <span className="text-[14px] text-[#5f6368] font-medium">
+                Block 01 Ruhuna
+              </span>
+
+              <div className="inline-flex items-center gap-2 bg-[#000000] group-hover:bg-[#00ff00] group-hover:text-black text-white px-5 py-2.5 rounded-full transition-all duration-200">
+                <span className="text-[14px] font-bold">Explore</span>
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              </div>
+            </div>
+          </div>
+
         </div>
       </Link>
     </div>

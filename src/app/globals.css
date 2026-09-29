@@ -97,11 +97,11 @@
 
 
 
-  --background: oklch(0.12 0.02 160); /* Deep, dark teal-black */
+  --background: white; /* Deep, dark teal-black */
 
 
 
-  --foreground: oklch(0.98 0.01 160); /* Soft, off-white */
+  --foreground: white; /* Soft, off-white */
 
 
 

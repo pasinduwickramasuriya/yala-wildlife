@@ -6,7 +6,7 @@ import {
   websiteSchema,
   localBusinessSchema,
 } from "@/lib/schema";
-import { ArrowRight, Shield, Camera, Users, Leaf, HeartHandshake } from "lucide-react";
+import { ArrowRight, Shield, Camera, Users, Leaf, HeartHandshake, Sparkles } from "lucide-react";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -219,137 +219,165 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default function AboutPageContent() {
   return (
     <>
-      <div className="min-h-screen text-white relative overflow-hidden font-sans">
-        {/* =========================================
-            BACKGROUND IMAGE SECTION
-        ========================================= */}
-        <div className="fixed inset-0 z-0">
-          <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Leopard Emerging from Darkness"
-            fill
-            priority // Critical for LCP
-            sizes="100vw" // Helps browser select right image size
-            className="object-cover opacity-90 md:opacity-80"
-            quality={85} // Reduced slightly for better performance without noticeable quality loss
-          />
-          {/* Cinematic Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/50 to-black/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
-        </div>
-
-        {/* =========================================
-            MAIN CONTENT CONTAINER
-        ========================================= */}
-        <main role="main" aria-labelledby="about-title" className="relative z-10 pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+      <div
+        className="w-full bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden [content-visibility:auto]"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+      >
+        <main
+          role="main"
+          aria-labelledby="about-title"
+          className="pt-28 sm:pt-32 pb-20 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto flex flex-col gap-16 sm:gap-24 bg-white"
+        >
 
           {/* =========================================
-              HERO / INTRODUCTION SECTION
+           1. HERO / INTRODUCTION SECTION (1 PRIMARY + 1 PILL PEEK)
           ========================================= */}
-          <section className="mb-20">
-            <div className="backdrop-blur-sm rounded-3xl p-8 md:p-12 relative overflow-hidden">
-              {/* Decorative glow */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                  <header className="mb-8">
-                    {/* Badge: Removed Border, Smaller Font */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 backdrop-blur-md mb-4">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-                      </span>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-green-400">Since 2015</span>
-                    </div>
-                    {/* H1: Smaller */}
-                    <h1 id="about-title" className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-                      We Are <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Yala Wildlife Safari</span>
-                    </h1>
-                    {/* Subtitle: Smaller */}
-                    <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
-                      Expert guides, luxury jeeps, and guaranteed wildlife sightings in Sri Lanka&apos;s premier national park.
-                    </p>
-                  </header>
-
-                  <div className="space-y-6 text-sm text-neutral-300 leading-relaxed font-light">
-                    <p>
-                      <strong className="text-white font-medium">Yala Wildlife Safari</strong> is Sri Lanka&apos;s most trusted safari operator, specializing in premium wildlife tours through Yala National Park. With over <span className="text-green-400 font-semibold">8 years of experience</span> and a <span className="text-green-400 font-semibold">4.9/5 rating</span> from 300+ satisfied guests, we provide unparalleled access to the world&apos;s highest leopard density park.
-                    </p>
-                    <p>
-                      Our team of certified naturalist guides brings deep expertise in wildlife behavior, conservation, and Yala&apos;s unique ecosystems. Every safari is conducted in modern, comfortable 4x4 vehicles equipped with safety features and optimal viewing configurations.
-                    </p>
-                    <p>
-                      We are committed to <strong className="text-white font-medium">sustainable eco-tourism</strong> and actively support local conservation efforts while providing authentic, educational wildlife experiences.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Image Container: Removed Border */}
-                <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
+          <section className="w-full bg-white [content-visibility:auto]">
+            <div className="max-w-7xl mx-auto flex flex-col gap-6 sm:gap-8 bg-white">
+              {/* Visual Strip: 1 Primary Landscape Frame + 1 Vertical Pill Peek */}
+              <div className="w-full flex gap-3 sm:gap-4 md:gap-5 h-[280px] xs:h-[340px] sm:h-[440px] md:h-[500px] [contain:strict] transform-gpu">
+                {/* Primary Landscape Frame (Fills viewport smoothly across mobile & desktop) */}
+                <div className="relative flex-1 h-full rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#f1f3f4] [contain:strict]">
                   <Image
-                    src="https://images.unsplash.com/photo-1553524082-82690780f842?w=1000&auto=format&fit=crop&q=60"
-                    alt="Yala National Park landscape showing diverse wildlife habitat with expert safari guides"
+                    src="https://images.unsplash.com/photo-1553524082-82690780f842?w=1200&auto=format&fit=crop&q=75"
+                    alt="Yala National Park landscape habitat with safari jeeps"
                     fill
-                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 filter grayscale-30 group-hover:grayscale-0"
-                    sizes="(max-width: 768px) 100vw, 50vw" // Optimized sizes
-                    priority // Load this image ASAP
+                    priority
+                    sizes="(max-width: 640px) 78vw, (max-width: 1024px) 75vw, 880px"
+                    quality={75}
+                    decoding="async"
+                    className="object-cover"
                   />
-                  {/* Image Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-6 left-6 right-6 text-white">
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-green-400 mb-1">Experience The Wild</p>
-                    <h3 className="text-xl font-bold">Expert-Guided Adventures</h3>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Floating Indicator Badge */}
+                  <div className="absolute top-4 left-4 sm:top-7 sm:left-7 pointer-events-none">
+                    <span className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/95 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[18px] sm:text-[18px] font-semibold text-[#1f1f1f] tracking-tight">
+                      {/* <span className="w-2 h-2 rounded-full bg-[#00ff00]" /> */}
+                      Since 2015
+                    </span>
                   </div>
                 </div>
+
+                {/* Pill Peek 1 (Proportional on mobile, stadium pill on tablet/desktop) */}
+                <div className="relative w-[70px] xs:w-[90px] sm:w-[140px] md:w-[170px] lg:w-[210px] shrink-0 h-full rounded-[2rem] sm:rounded-full overflow-hidden bg-[#f1f3f4] [contain:strict]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1553524082-82690780f842?w=1200&auto=format&fit=crop&q=75"
+                    alt="Sri Lankan leopard on granite rock"
+                    fill
+                    sizes="(max-width: 640px) 22vw, 210px"
+                    quality={65}
+                    loading="lazy"
+                    decoding="async"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Title & Circular Action Controls Row (Centered) */}
+              <div className="w-full flex flex-col items-center justify-center text-center pt-2 bg-white">
+                <div className="max-w-3xl flex flex-col items-center">
+                  <h1
+                    id="about-title"
+                    className="text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight"
+                  >
+                    We Are Yala Wildlife
+                  </h1>
+                  <p className="mt-2.5 sm:mt-3 text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+                    Expert guides, expedition-grade 4x4 jeeps, and verified tracker intelligence in Sri Lanka&apos;s premier national park.
+                  </p>
+                </div>
+              </div>
+
+              {/* Narrative Paragraphs (Centered) */}
+              <div className="w-full max-w-4xl mx-auto text-center text-[18px] text-[#5f6368] leading-relaxed font-semibold space-y-4 pt-1 sm:pt-2 bg-white">
+                <p className="text-[18px] text-[#5f6368] font-semibold ">
+                  Yala Wildlife Safari is Sri Lanka&apos;s premier safari team, specializing in ethical, naturalist-led wildlife expeditions through Yala National Park. Backed by 8+ years of field intelligence and a 4.9/5 rating across 300+ global travelers, we provide respectful, direct access to the world&apos;s densest leopard habitat.
+                </p>
+                <p className="text-[18px] text-[#5f6368] font-semibold ">
+                  Our certified naturalists combine generational tracking wisdom with biological research. Every drive is operated using custom-modified 4x4 Toyota Hilux jeeps built with elevated stadium seating, heavy-duty suspension, and photography beanbag mounts.
+                </p>
+                <p className="text-[18px] text-[#5f6368] font-semibold ">
+                  We uphold a strict{" "}
+                  Nature First conservation policy, maintaining generous animal buffer zones and directly supporting park habitat protection initiatives.
+                </p>
               </div>
             </div>
           </section>
 
           {/* =========================================
-              THE YALA EXPERIENCE SECTION
+              2. THE YALA HABITAT STATS SECTION
           ========================================= */}
-          <section className="mb-20">
-            {/* Removed Border */}
-            <div className="backdrop-blur-md bg-white/5 rounded-3xl p-8 md:p-12 shadow-xl">
-              <div className="max-w-4xl mx-auto text-center mb-12">
-                <Shield className="w-10 h-10 text-green-500 mx-auto mb-4 opacity-80" />
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
-                  Yala National Park: <span className="text-green-500">A Wildlife Paradise</span>
+          <section className="w-full bg-white">
+            <div className="bg-white rounded-[2.5rem] sm:rounded-[3.25rem] p-6 sm:p-10 lg:p-14 [contain:paint] transform-gpu">
+              {/* Centered Icon & Section Title */}
+              <div className="flex flex-col items-center justify-center text-center mb-12 bg-white">
+                <div className="w-12 h-12 rounded-2xl bg-[#f8f9fa] flex items-center justify-center mb-4">
+                  <Shield className="w-10 h-10 text-[#000000]" />
+                </div>
+
+                <h2 className="text-4xl sm:text-5xl font-bold text-[#000000] tracking-relax">
+                  Yala National Park A Wildlife Paradise
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                {/* Left Column: Text Content (Smaller Font) */}
-                <div className="space-y-6 text-sm text-neutral-300 leading-relaxed font-light order-2 md:order-1">
-                  <p>
-                    Nestled in Sri Lanka&apos;s southeastern region, <strong className="text-white font-medium">Yala National Park</strong> spans over 979 square kilometers of pristine wilderness. It is globally renowned for hosting the world&apos;s highest concentration of leopards.
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center bg-white">
+                {/* Left Description */}
+                <div className="space-y-4 text-[18px] text-[#5f6368] leading-relaxed font-normal bg-white text-center">
+                  <p className="text-[18px] text-[#5f6368] font-semibold ">
+                    Nestled in Sri Lanka&apos;s southeastern dry zone,{" "}
+                    Yala National Park encompasses 979 square kilometers of coastal scrub, monsoon forest, and granite inselbergs. It is recognized internationally for harboring the highest wild leopard concentration on Earth.
                   </p>
-                  <p>
-                    The park&apos;s diverse ecosystems include tropical dry forests, grasslands, coastal lagoons, and rocky outcrops, creating ideal habitats for over <span className="text-green-400 font-semibold">44 mammal species</span> and <span className="text-green-400 font-semibold">215 bird species</span>. Beyond leopards, visitors regularly encounter Asian elephants, sloth bears, spotted deer, sambars, and mugger crocodiles.
+                  <p className="text-[18px] text-[#5f6368] font-semibold ">
+                    Beyond leopards, the park supports more than{" "}
+                    <strong className="text-[#1f1f1f] font-semibold">
+                      44 mammal species
+                    </strong>{" "}
+                    and{" "}
+                    <strong className="text-[#1f1f1f] font-semibold">
+                      215 bird varieties
+                    </strong>
+                    . Visitors encounter herds of Asian elephants along the Menik River, sloth bears foraging termite mounds, and marsh crocodiles basking in tidal lagoons.
                   </p>
-                  <p>
-                    <strong className="text-white font-medium">Yala&apos;s conservation significance</strong> extends beyond wildlife diversity. It serves as a crucial wildlife corridor. Our expert guides share in-depth knowledge about these conservation efforts.
+                  <p className="text-[18px] text-[#5f6368] font-semibold ">
+                    Our trackers coordinate responsibly with wildlife conservation wardens to monitor migration corridors and preserve these pristine ecosystems.
                   </p>
                 </div>
 
-                {/* Right Column: Stats/Visuals (Removed Borders, Smaller Fonts) */}
-                <div className="grid grid-cols-2 gap-4 order-1 md:order-2">
-                  <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors duration-300">
-                    <span className="block text-3xl md:text-4xl font-bold text-green-500 mb-2">979</span>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Sq. Kilometers</span>
+                {/* Right 2x2 Metric Cards (All White, No Shadows, No Borders) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white">
+                  <div className="bg-[#f8f9fa] rounded-3xl p-6 text-center flex flex-col items-center justify-center">
+                    <span className="block text-4xl sm:text-5xl font-bold text-[#1f1f1f] mb-1">
+                      979
+                    </span>
+                    <span className="text-[13px] font-bold text-[#5f6368] uppercase tracking-wider">
+                      Sq. Kilometers
+                    </span>
                   </div>
-                  <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors duration-300">
-                    <span className="block text-3xl md:text-4xl font-bold text-green-500 mb-2">44+</span>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Mammal Species</span>
+
+                  <div className="bg-[#f8f9fa] rounded-3xl p-6 text-center flex flex-col items-center justify-center">
+                    <span className="block text-4xl sm:text-5xl font-bold text-[#1f1f1f] mb-1">
+                      44+
+                    </span>
+                    <span className="text-[13px] font-bold text-[#5f6368] uppercase tracking-wider">
+                      Mammal Species
+                    </span>
                   </div>
-                  <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors duration-300 col-span-2">
-                    <span className="block text-3xl md:text-4xl font-bold text-green-500 mb-2">Highest</span>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Leopard Density Globally</span>
+
+                  <div className="bg-[#f8f9fa] rounded-3xl p-6 text-center sm:col-span-2 flex flex-col items-center justify-center">
+                    <span className="block text-3xl sm:text-4xl font-bold text-[#1f1f1f] mb-1">
+                      Global #1 Density
+                    </span>
+                    <span className="text-[13px] font-bold text-[#5f6368] uppercase tracking-wider">
+                      Panthera Pardus Kotiya Habitat
+                    </span>
                   </div>
                 </div>
               </div>
@@ -357,118 +385,157 @@ export default function AboutPage() {
           </section>
 
           {/* =========================================
-              PREMIUM SERVICES SECTION
+              3. SERVICE VALUES BENTO GRID
           ========================================= */}
-          <section className="mb-20">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
-                Why Choose Our <span className="text-green-500">Premium Safari Services</span>
+          <section className="w-full bg-white">
+            {/* Header Section Centered */}
+            <div className="flex flex-col items-center justify-center text-center mb-12 bg-white">
+              <h2 className="text-4xl sm:text-5xl font-bold text-[#000000] tracking-tight leading-snug mb-3">
+                Why Choose Our Safari Expeditions
               </h2>
-              <p className="text-sm md:text-base text-neutral-300 font-light">
-                We combine expert local knowledge with modern luxury and safety standards for an unforgettable wildlife experience.
+              <p className="text-[18px] text-[#5f6368] font-semibold max-w-2xl">
+                We combine field naturalist knowledge with luxury equipment and strict wildlife welfare standards.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Service Card 1 (Removed Border, Smaller Font) */}
-              <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 group relative overflow-hidden">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
-                <Users className="w-8 h-8 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold text-white mb-4">Certified Naturalist Guides</h3>
-                <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
-                  Passionate experts with 5-15 years of field experience. They provide fascinating insights into animal behavior and conservation.
-                </p>
+            {/* 3 Pure White Bento Cards Centered */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 bg-white">
+              {/* Card 1 */}
+              <div className="bg-[#fff] rounded-[2.5rem] p-8 sm:p-10 flex flex-col items-center justify-between text-center [contain:paint] transform-gpu hover:scale-[1.01] transition-transform duration-200">
+                <div className="flex flex-col items-center w-full">
+                  <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-6 mx-auto">
+                    <Users className="w-7 h-7 text-[#000000]" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#1f1f1f] tracking-tight leading-snug mb-3">
+                    Certified Naturalist Guides
+                  </h3>
+                  <p className="text-[16px] text-[#5f6368] leading-relaxed font-semibold max-w-sm">
+                    Seasoned trackers with 5 to 15 years of daily field experience, offering deep insights into animal corridors and bird calls.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 flex items-center justify-center gap-2 w-full">
+                  <span className="text-[13px] font-semibold text-[#5f6368]">
+                    Naturalist Certified
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-[#00ff00]" />
+                </div>
               </div>
 
-              {/* Service Card 2 (Removed Border, Smaller Font) */}
-              <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 group relative overflow-hidden">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
-                <Camera className="w-8 h-8 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold text-white mb-4">Luxury Safari Vehicles</h3>
-                <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
-                  Modern 4x4 jeeps with elevated seating, panoramic windows, and professional-grade photography support for the best views.
-                </p>
+              {/* Card 2 */}
+              <div className="bg-[#ffffff] rounded-[2.5rem] p-8 sm:p-10 flex flex-col items-center justify-between text-center [contain:paint] transform-gpu hover:scale-[1.01] transition-transform duration-200">
+                <div className="flex flex-col items-center w-full">
+                  <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-6 mx-auto">
+                    <Camera className="w-7 h-7 text-[#000000]" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#1f1f1f] tracking-tight leading-snug mb-3">
+                    Expedition 4x4 Jeeps
+                  </h3>
+                  <p className="text-[16px] text-[#5f6368] leading-relaxed font-semibold max-w-sm">
+                    Custom Hilux rigs with elevated stadium seating, photography beanbag rests, and USB charging for full-day field convenience.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 flex items-center justify-center gap-2 w-full">
+                  <span className="text-[13px] font-semibold text-[#5f6368]">
+                    Comfort Optimized
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-[#00ff00]" />
+                </div>
               </div>
 
-              {/* Service Card 3 (Removed Border, Smaller Font) */}
-              <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 group relative overflow-hidden">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
-                <Leaf className="w-8 h-8 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold text-white mb-4">Customizable Packages</h3>
-                <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
-                  From 3-hour drives to multi-day adventures. Small groups ensure personalized attention and minimal environmental impact.
-                </p>
+              {/* Card 3 */}
+              <div className="bg-[#ffffff] rounded-[2.5rem] p-8 sm:p-10 flex flex-col items-center justify-between text-center [contain:paint] transform-gpu hover:scale-[1.01] transition-transform duration-200">
+                <div className="flex flex-col items-center w-full">
+                  <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-6 mx-auto">
+                    <Leaf className="w-7 h-7 text-[#000000]" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#1f1f1f] tracking-tight leading-snug mb-3">
+                    Flexible Packages
+                  </h3>
+                  <p className="text-[16px] text-[#5f6368] leading-relaxed font-semibold max-w-sm">
+                    Half-day morning tracking, full-day deep sector drives, and all-inclusive round-trip transfers with park tickets handled in advance.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 flex items-center justify-center gap-2 w-full">
+                  <span className="text-[13px] font-semibold text-[#5f6368]">
+                    All Inclusive
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-[#00ff00]" />
+                </div>
               </div>
             </div>
 
-            <div className="text-center mt-12">
+            {/* Pill CTA Button Centered */}
+            <div className="flex justify-center text-center mt-12 bg-white">
               <Link
                 href="/safari-packages"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full p-3 px-6 text-sm font-bold text-white transition-all duration-300 hover:scale-105 focus:outline-none"
+                className="inline-flex items-center gap-2 bg-[#f8f9fa] hover:bg-[#00ff00] text-black hover:text-black font-bold text-[16px] px-8 py-3.5 rounded-full transition-colors duration-150 active:scale-95 cursor-pointer shadow-none"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-500 transition-transform duration-300 group-hover:scale-105"></span>
-                <span className="relative flex items-center gap-2">
-                  Explore Safari Packages <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
+                <span>Explore Safari Packages</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
             </div>
           </section>
 
           {/* =========================================
-              CONSERVATION SECTION
+              4. CONSERVATION & COMMUNITY SECTION
           ========================================= */}
-          <section className="mb-20">
-            {/* Removed Border */}
-            <div className="backdrop-blur-md bg-white/5 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
-              {/* Decorative Background Element */}
-              <div className="absolute top-0 left-0 w-full h-full bg-[url('/pattern-leaf.svg')] opacity-[0.03] pointer-events-none"></div>
+          <section className="w-full bg-white">
+            <div className="bg-white rounded-[2.5rem] sm:rounded-[3.25rem] p-8 sm:p-12 lg:p-16 text-center flex flex-col items-center [contain:paint] transform-gpu">
+              <div className="w-14 h-14 rounded-2xl bg-[#f8f9fa] flex items-center justify-center mb-6">
+                <HeartHandshake className="w-10 h-10 text-[#000000]" />
+              </div>
 
-              <div className="max-w-4xl mx-auto text-center">
-                <HeartHandshake className="w-10 h-10 text-green-500 mx-auto mb-6 opacity-80" />
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
-                  Conservation Commitment & <span className="text-green-500">Community Impact</span>
-                </h2>
+              <h2 className="text-4xl sm:text-5xl font-bold text-[#000] tracking-tight leading-snug mb-6 max-w-2xl">
+                Conservation Commitment
+              </h2>
 
-                <div className="space-y-6 text-sm text-neutral-300 leading-relaxed font-light">
-                  <p>
-                    <strong className="text-white font-medium">Sustainable eco-tourism</strong> is at the heart of our mission. We actively collaborate with the Department of Wildlife Conservation and local communities to support habitat protection, anti-poaching efforts, and wildlife research.
-                  </p>
-                  <p>
-                    Our responsible tourism practices include limiting group sizes, maintaining safe distances from wildlife, supporting local employment, and contributing to conservation funding.
-                  </p>
-                  <p>
-                    Through educational safari experiences, we raise awareness about Sri Lanka&apos;s unique biodiversity and the positive impact that responsible tourism can have on protecting these precious natural resources.
-                  </p>
-                </div>
+              <div className="space-y-5 text-[18px] text-[#5f6368] leading-relaxed font-semibold">
+                <p className="text-[18px] text-[#5f6368] font-semibold ">
+                  Sustainable eco-tourism is the cornerstone of our operations. We work in direct coordination with the Department of Wildlife Conservation and local village councils in Tissamaharama to promote habitat preservation and anti-poaching vigilance.
+                </p>
+                <p className="text-[18px] text-[#5f6368] font-semibold ">
+                  Our game drives observe strict operational protocols: zero-litter compliance, speed limits inside park sectors, animal right-of-way priority, and small group quotas to keep noise footprint minimal.
+                </p>
+                <p className="text-[18px] text-[#5f6368] font-semibold ">
+                  By joining our safaris, you actively contribute to community trackers, local driver livelihood programs, and the ongoing conservation of Sri Lanka&apos;s wildlife heritage.
+                </p>
+              </div>
+
+              {/* Verified Tag Strip (No Borders) */}
+              <div className="mt-8 pt-6 flex flex-wrap items-center justify-center gap-4 text-[13px] font-semibold text-[#5f6368]">
+                <span className="inline-flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#000000]" />
+                  Zero Animal Disturbance
+                </span>
+                <span>•</span>
+                <span>Licensed Drivers</span>
+                <span>•</span>
+                <span>Eco Conservation Contributor</span>
               </div>
             </div>
           </section>
-
         </main>
       </div>
 
-      {/* ✅ ENHANCED: Schema markup (UNTOUCHED) */}
+      {/* Structured Schema Markup */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
-            organizationSchema,
-            websiteSchema,
-            localBusinessSchema,
             {
               "@context": "https://schema.org",
               "@type": "AboutPage",
               "name": "About Yala Wildlife Safari",
-              "description": "Learn about Sri Lanka's premier safari operator offering expert-guided Yala National Park tours since 2015",
-              "url": `${BASE_URL}/about`,
+              "description":
+                "Learn about Sri Lanka's premier safari operator offering expert-guided Yala National Park tours since 2015",
+              "url": "https://yalawildlife.com/about",
               "mainEntity": {
                 "@type": "Organization",
                 "name": "Yala Wildlife Safari",
                 "foundingDate": "2015",
-                "description": "Premier safari operator specializing in Yala National Park wildlife tours with expert guides and luxury vehicles",
-                "url": BASE_URL,
-                "logo": `${BASE_URL}/logo.png`,
-                "image": `${BASE_URL}/about-company.jpg`,
+                "description":
+                  "Premier safari operator specializing in Yala National Park wildlife tours with expert guides and luxury vehicles",
+                "url": "https://yalawildlife.com",
                 "telephone": "+94-778-158-004",
                 "email": "info@yalawildlife.com",
                 "address": {
@@ -477,68 +544,25 @@ export default function AboutPage() {
                   "addressLocality": "Tissamaharama",
                   "addressRegion": "Southern Province",
                   "postalCode": "82600",
-                  "addressCountry": "LK"
+                  "addressCountry": "LK",
                 },
                 "aggregateRating": {
                   "@type": "AggregateRating",
                   "ratingValue": "4.9",
                   "reviewCount": "300",
-                  "bestRating": "5"
+                  "bestRating": "5",
                 },
-                "serviceArea": {
-                  "@type": "Place",
-                  "name": "Yala National Park, Southern Province, Sri Lanka"
-                },
-                "hasOfferCatalog": {
-                  "@type": "OfferCatalog",
-                  "name": "Safari Tour Services",
-                  "itemListElement": [
-                    { "@type": "OfferCatalog", "name": "Half Day Safari Tours" },
-                    { "@type": "OfferCatalog", "name": "Full Day Safari Adventures" },
-                    { "@type": "OfferCatalog", "name": "Private Safari Experiences" },
-                    { "@type": "OfferCatalog", "name": "Photography Safari Tours" }
-                  ]
-                }
-              }
+              },
             },
             {
               "@context": "https://schema.org",
-              "@type": "TouristInformationCenter",
-              "name": "Yala Wildlife Safari Information",
-              "description": "Comprehensive information about Yala National Park and premium safari services",
-              "url": `${BASE_URL}/about`,
-              "knowsAbout": [
-                "Yala National Park Wildlife",
-                "Leopard Conservation",
-                "Sri Lankan Biodiversity",
-                "Eco Tourism",
-                "Wildlife Photography",
-                "Conservation Efforts"
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://yalawildlife.com" },
+                { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://yalawildlife.com/about" },
               ],
-              "serviceArea": {
-                "@type": "Place",
-                "name": "Yala National Park, Sri Lanka",
-                "geo": {
-                  "@type": "GeoCoordinates",
-                  "latitude": 6.3747,
-                  "longitude": 81.1185
-                }
-              }
-            }
+            },
           ]),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
-              { "@type": "ListItem", "position": 2, "name": "About Us", "item": `${BASE_URL}/about` }
-            ]
-          }),
         }}
       />
     </>

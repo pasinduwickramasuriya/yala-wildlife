@@ -1,96 +1,139 @@
-import Image from "next/image";
-import { MapPin, ArrowRight, Camera } from "lucide-react";
+"use client";
 
-// --- ENRICHED DATA FOR YALAWILDLIFE.COM ---
-const MEMORIES = [
+import { useState, useCallback, memo } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+interface Memory {
+  id: number;
+  title: string;
+  desc: string;
+  tag: string;
+  heroImage: string;
+  linkText: string;
+  href: string;
+}
+
+const MEMORIES: readonly Memory[] = [
   {
     id: 1,
-    src: "/uploads/yala.jpeg",
-    title: "The Ghost of Yala",
-    location: "Block 1, Palatupana",
-    tag: "Rare Sighting",
-    desc: "Yala National Park is world-renowned for having one of the highest leopard densities on the planet. Our experienced trackers specialize in locating the elusive Panthera pardus kotiya, often found resting on the iconic granite outcrops of Block 1 during the early morning golden hour."
+    title: "Discover the Elusive Leopards of Yala",
+    desc: "Yala National Park is world-renowned for having one of the highest leopard densities on the planet. Our experienced trackers specialize in locating the elusive Panthera pardus kotiya across the iconic granite outcrops of Block 1.",
+    tag: "Yala Leopard Sightings",
+    heroImage: "/uploads/yala.jpeg",
+    linkText: "Read field story",
+    href: "/blog",
   },
   {
     id: 2,
-    src: "/uploads/yala1.webp",
-    title: "The Great Gathering",
-    location: "Main Entrance",
-    tag: "Wildlife",
-    desc: "Witness the majestic Asian Elephant herds as they migrate towards the ancient water reservoirs. These gentle giants are the heart of the dry zone ecosystem, often seen in large family groups where playful calves learn the ways of the wild under the watchful eyes of experienced matriarchs."
+    title: "Encounter Ancient Elephant Herds",
+    desc: "Witness majestic Asian elephant herds as they migrate towards ancient water reservoirs. These gentle giants are the heart of the dry zone ecosystem, often seen moving in large family groups with experienced matriarchs.",
+    tag: "Menik River Corridors",
+    heroImage: "/uploads/yala1.webp",
+    linkText: "Read field story",
+    href: "/blog",
   },
   {
     id: 3,
-    src: "/uploads/yala2.webp",
-    title: "The Ultimate Rig",
-    location: "Base Operations",
-    tag: "Premium Fleet",
-    desc: "Our safari experience is defined by our equipment. We utilize custom-modified 4x4 Toyota Hilux jeeps, featuring elevated stadium seating for 360-degree unobstructed views, specialized beanbag mounts for professional wildlife photography, and heavy-duty suspension for a smooth off-road journey."
-  }
+    title: "Expedition-Grade Custom 4x4 Fleet",
+    desc: "Our safari experience is defined by our equipment. We utilize custom-modified 4x4 Toyota Hilux jeeps featuring elevated stadium seating for 360-degree views, photography beanbag mounts, and heavy-duty suspension.",
+    tag: "4x4 Hilux Safari Fleet",
+    heroImage: "/uploads/yala2.webp",
+    linkText: "Read field story",
+    href: "/blog",
+  },
 ];
 
-export default function AppleCuteGallery() {
+const SlideCard = memo(function SlideCard({ current }: { current: Memory }) {
   return (
-    <section className="w-full py-12 px-6 bg-transparent cv-auto">
-      <div className="max-w-5xl mx-auto">
+    <div className="relative w-full bg-white rounded-[3.25rem] p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14 overflow-hidden [contain:paint] transform-gpu">
+      {/* Left Column: Editorial Content */}
+      <div className="flex-1 flex flex-col items-center text-center lg:items-start lg:text-left max-w-lg z-10 bg-white">
+        <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-bold text-[#1f1f1f] tracking-tight leading-[1.12] mb-5">
+          {current.title}
+        </h2>
 
-        {/* --- GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {MEMORIES.map((item) => (
-            <div
-              key={item.id}
-              className="group relative flex flex-col rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-1"
+        <p className="text-[18px] text-[#444746] leading-relaxed font-semibold mb-8 max-w-md">
+          {current.desc}
+        </p>
+
+        <Link
+          href={current.href}
+          prefetch={false}
+          className="inline-flex items-center justify-center bg-[#000000] hover:bg-[#00ff00] text-white hover:text-black rounded-full px-8 py-3.5 text-[18px] font-bold tracking-wide transition-colors duration-150 active:scale-95 cursor-pointer shadow-none"
+        >
+          {current.linkText}
+        </Link>
+      </div>
+
+      {/* Right Column: Centered Image Wrapper for Mobile */}
+      <div className="relative w-full lg:w-[620px] h-[300px] xs:h-[340px] sm:h-[400px] lg:h-[450px] flex items-center justify-center shrink-0 bg-white [contain:strict]">
+        {/* Rounded Canvas Frame */}
+        <div className="relative lg:absolute lg:right-0 top-0 bottom-0 w-full sm:w-[90%] lg:w-[80%] h-full rounded-[2.5rem] overflow-hidden bg-white [contain:strict]">
+          <Image
+            src={current.heroImage}
+            alt={current.title}
+            fill
+            sizes="(max-width: 1024px) 100vw, 520px"
+            quality={65}
+            priority={current.id === 1}
+            loading={current.id === 1 ? "eager" : "lazy"}
+            decoding="async"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+        </div>
+      </div>
+    </div>
+  );
+});
+SlideCard.displayName = "SlideCard";
+
+export default function GoogleMemoriesShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handlePrev = useCallback(() => {
+    setActiveIndex((prev) => (prev === 0 ? MEMORIES.length - 1 : prev - 1));
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setActiveIndex((prev) => (prev === MEMORIES.length - 1 ? 0 : prev + 1));
+  }, []);
+
+  return (
+    <section
+      className="w-full bg-white text-[#1f1f1f] py-16 sm:py-24 selection:bg-[#00ff00] selection:text-black [content-visibility:auto] [contain-intrinsic-size:1px_750px]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 bg-white">
+        {/* Main Google Merchant Style Slide Card */}
+        <SlideCard current={MEMORIES[activeIndex]} />
+
+        {/* Carousel Navigation Bottom Controls (Centered on Mobile & Desktop) */}
+        <div className="w-full mt-6 px-4 flex items-center justify-center bg-white">
+          {/* Centered Prev / Next Arrow Buttons */}
+          <div className="flex items-center gap-3 bg-white">
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Previous Highlight"
+              className="w-12 h-12 rounded-full bg-white hover:bg-[#f8f9fa] text-[#444746] flex items-center justify-center transition-colors duration-150 cursor-pointer shadow-xs active:scale-95"
             >
-              {/* IMAGE AREA */}
-              <div className="relative aspect-square w-full overflow-hidden bg-neutral-900 shadow-inner">
-                <Image
-                  src={item.src}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  quality={60}
-                  loading="lazy"
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                />
-
-                {/* INLINE TAG */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-2.5 py-0.5 bg-black/60 backdrop-blur-md border border-white/10 text-[9px] font-black text-[#00ff00] uppercase tracking-widest rounded-full">
-                    {item.tag}
-                  </span>
-                </div>
-              </div>
-
-              {/* INLINE CONTENT BLOCK */}
-              <div className="mt-[-50px] relative z-10 mx-3 mb-3 p-5 bg-neutral-900/80 backdrop-blur-3xl border border-white/10 rounded-[1.5rem] shadow-2xl">
-                <div className="flex items-center gap-1.5 mb-2">
-                  <MapPin size={10} className="text-[#00ff00]" />
-                  <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
-                    {item.location}
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-bold text-white mb-2 tracking-tight leading-tight">
-                  {item.title}
-                </h3>
-
-                {/* The "More Text" part - increased line-clamp for readability */}
-                <p className="text-neutral-400 text-[11px] leading-relaxed mb-4 font-medium line-clamp-4">
-                  {item.desc}
-                </p>
-
-                <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                  <div className="flex items-center gap-2 text-neutral-500">
-                    <Camera size={12} />
-                    <span className="text-[9px] uppercase font-bold tracking-tighter">HD Gallery</span>
-                  </div>
-                  <button aria-label="View Memory Gallery Item Details" className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#00ff00] transition-all active:scale-90 cursor-pointer">
-                    <ArrowRight size={14} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Next Highlight"
+              className="w-12 h-12 rounded-full bg-[#00ff00] hover:bg-[#00ff00] text-[#444746] flex items-center justify-center transition-colors duration-150 cursor-pointer shadow-xs active:scale-95"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

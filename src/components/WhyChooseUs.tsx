@@ -1,59 +1,75 @@
-import { ShieldCheck, Truck, Sparkles } from 'lucide-react';
+import { ShieldCheck, Truck, Sparkles } from "lucide-react";
+
+const FEATURES = [
+  {
+    title: "Expert Guides",
+    description:
+      "Licensed naturalist trackers ensure safe adventures, optimal game drives, and guaranteed leopard sightings.",
+    icon: <ShieldCheck className="w-8 h-8 text-[#000000]" strokeWidth={2.2} />,
+  },
+  {
+    title: "Comfortable Jeeps",
+    description:
+      "Travel in modified 4x4 Toyota Hilux jeeps featuring elevated stadium seating and shock-absorbing suspension.",
+    icon: <Truck className="w-8 h-8 text-[#000000]" strokeWidth={2.2} />,
+  },
+  {
+    title: "Best Rates",
+    description:
+      "Direct park concession rates with full park admissions, taxes, and complimentary hotel transfers included.",
+    icon: <Sparkles className="w-8 h-8 text-[#000000]" strokeWidth={2.2} />,
+  },
+];
 
 export default function WhyChooseUs() {
-  const features = [
-    {
-      title: "Expert Guides",
-      description: "Our experienced guides ensure a safe and unforgettable safari adventure.",
-      icon: <ShieldCheck className="w-12 h-12 text-[#00ff00]" />,
-      color: "bg-green-100",
-    },
-    {
-      title: "Comfortable Jeeps",
-      description: "Travel in style with our well-maintained, spacious safari jeeps.",
-      icon: <Truck className="w-12 h-12 text-[#00ff00]" />,
-      color: "bg-emerald-100",
-    },
-    {
-      title: "Best Rates",
-      description: "Enjoy premium experiences at competitive prices without compromise.",
-      icon: <Sparkles className="w-12 h-12 text-[#00ff00]" />,
-      color: "bg-teal-100",
-    },
-  ];
-
   return (
-    <section className="relative bg-background py-20 overflow-hidden bg-transparent cv-auto">
+    <section
+      className="w-full py-16 sm:py-24 px-4 sm:px-8 md:px-12 selection:bg-[#00ff00] selection:text-black [content-visibility:auto] [contain-intrinsic-size:1px_500px]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      <div className="max-w-[1300px] mx-auto text-center">
+        {/* --- GOOGLE PILL HEADER & TITLE --- */}
+        <div className="flex flex-col items-center justify-center mb-14">
+          <h2 className="text-3xl sm:text-5xl font-bold text-black tracking-tight leading-[1.15]">
+            Why Choose Yala Wildlife
+          </h2>
+          <p className="mt-3 text-[18px] text-black leading-relaxed font-semibold max-w-4xl">
+            Engineered For The Ultimate Safari Reliable expedition gear, seasoned wildlife trackers, and transparent rates designed for memorable wilderness exploration.
+          </p>
+        </div>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] -z-10 pointer-events-none transform-gpu translate-z-0" />
-
-      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
-        {/* Main Heading */}
-        <h2
-          className="text-2xl md:text-2xl font-extrabold text-foreground mb-16 tracking-tight inline-block px-4 py-2 rounded-3xl bg-black/70">
-          Why Choose <span className="text-[#00ff00] underline decoration-wavy decoration-[#00ff00] underline-offset-4">Yala Wildlife</span>
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {features.map((feature, index) => (
+        {/* --- PURE WHITE GOOGLE BENTO CARDS --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {FEATURES.map((feature, index) => (
             <div
               key={index}
-              className="group relative p-8 rounded-[5rem] bg-black/80 hover:shadow-[0_20px_50px_-12px_rgba(22,163,74,0.15)] transition-all duration-500 hover:-translate-y-2"
+              className="relative p-8 sm:p-10 rounded-[2.5rem] bg-white text-center flex flex-col items-center justify-between [contain:paint] transform-gpu transition-transform duration-200 hover:scale-[1.01]"
             >
-              {/* Icon Bubble */}
-              <div className={`w-24 h-24 mx-auto ${feature.color} dark:bg-black/10 rounded-[2rem] flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm`}>
+              {/* Icon Container Centered */}
+              <div className="w-16 h-16 rounded-2xl bg-[#f8f9fa] flex items-center justify-center mb-8 shrink-0 mx-auto">
                 {feature.icon}
               </div>
 
-              {/* Card Heading */}
-              <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-[#00ff00] transition-colors">
-                {feature.title}
-              </h3>
+              {/* Text Area Centered */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-2xl font-bold text-[#000000] tracking-tight leading-snug mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-[18px] text-[#3c4043] leading-relaxed font-medium max-w-sm">
+                  {feature.description}
+                </p>
+              </div>
 
-              {/* Description */}
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
+              {/* Bottom Micro Indicator Centered */}
+              <div className="mt-8 pt-4 flex items-center justify-center gap-2.5 w-full">
+                <span className="text-[14px] font-medium text-[#5f6368]">
+                  Standard Feature
+                </span>
+                <span className="w-2 h-2 rounded-full bg-[#00ff00]" />
+              </div>
             </div>
           ))}
         </div>
@@ -61,8 +77,3 @@ export default function WhyChooseUs() {
     </section>
   );
 }
-
-
-
-
-
