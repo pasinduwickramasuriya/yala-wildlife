@@ -153,7 +153,7 @@ export default function HeroSlider({
         <div className="flex items-stretch gap-2.5 sm:gap-4 md:gap-6 w-full h-[260px] xs:h-[300px] sm:h-[380px] md:h-[430px] lg:h-[480px]">
 
           {/* Main Card: Isolated compositor layer prevents re-rendering parent layout tree */}
-          <div className="relative w-[48%] xs:w-[50%] sm:w-[52%] md:w-[54%] h-full rounded-[22px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden bg-[#f1f3f4] border border-[#e0e2e5] group shadow-sm shrink-0 transform-gpu [backface-visibility:hidden] [contain:paint_layout]">
+          <div className="relative w-[48%] xs:w-[50%] sm:w-[52%] md:w-[54%] h-full rounded-[22px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden bg-[#f1f3f4] shrink-0 transform-gpu [backface-visibility:hidden] [contain:paint_layout]">
             {currentSlide.imageUrl ? (
               <Image
                 src={currentSlide.imageUrl}
@@ -221,7 +221,7 @@ export default function HeroSlider({
               <button
                 key={previewSlide.id || index}
                 onClick={() => setCurrentIndex(index)}
-                className={`relative flex-1 h-full rounded-full overflow-hidden bg-[#f1f3f4] border border-[#e0e2e5] transition-transform duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1a73e8]
+                className={`relative flex-1 h-full rounded-full overflow-hidden bg-[#f1f3f4] transition-transform duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer  focus:outline-none focus:ring-2 focus:ring-[#1a73e8]
         ${i === 2 ? "hidden sm:block" : ""}
         ${i === 1 ? "hidden xs:block" : ""}
       `}

@@ -151,100 +151,86 @@ export const metadata: Metadata = {
   },
 };
 
-
-
 export default function ContactPage() {
   return (
     <>
-      <main className="relative min-h-screen text-white bg-black selection:bg-[#00ff00]/50 selection:text-black font-sans" role="main">
-
-        {/* =========================================
-            BACKGROUND
-        ========================================= */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Leopard Emerging from Darkness"
-            fill
-            priority
-            className="object-cover opacity-60 transition-all duration-[3s]"
-            quality={95}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
-        </div>
-
-        {/* Content Wrapper */}
-        <div className="relative z-10 pt-32 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
-
-          {/* Header */}
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff00] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ff00]"></span>
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#00ff00]">
-                24/7 Live Support
-              </span>
-            </div>
-
-            <h1 className="text-2xl md:text-2xl font-extrabold tracking-tight text-[#00ff00] leading-tight drop-shadow-xl">
-              Let's Plan Your{" "}
-              <span className="text-[#00ff00]">Adventure</span>
+      <main
+        className="w-full bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+        role="main"
+      >
+        <div className="pt-28 sm:pt-32 pb-20 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto flex flex-col gap-12 sm:gap-16 bg-white">
+          {/* =========================================
+              HEADER SECTION (CENTERED GOOGLE STYLE)
+          ========================================= */}
+          <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto bg-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-tight mb-4">
+              Let&apos;s Plan Your Adventure
             </h1>
 
-
-            <p className="text-sm md:text-base text-neutral-200 max-w-lg mx-auto font-medium leading-relaxed drop-shadow-md">
+            <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
               Experience the raw intensity of Yala. Secure your private safari jeep with our expert human agents.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
+          {/* =========================================
+              MAIN CONTACT GRID (NO SHADOWS / NO BORDERS)
+          ========================================= */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start bg-white">
             {/* ================= LEFT COLUMN ================= */}
-            <div className="lg:col-span-5 space-y-5">
-
-              {/* 1. Quick Customer Support Card (Transparent, Blurred, Linked) */}
-              <div className="backdrop-blur-xl bg-transparent rounded-3xl p-6 relative overflow-hidden group transition-all duration-500">
+            <div className="lg:col-span-5 flex flex-col gap-5 bg-white">
+              {/* 1. Quick Customer Support Card */}
+              <div className="bg-[#f8f9fa] rounded-[2.25rem] p-6 sm:p-8 flex flex-col [contain:paint]">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-[#00ff00]/10 flex items-center justify-center text-[#00ff00]">
+                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-[#1f1f1f] shrink-0">
                     <UserCheck size={24} />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white leading-none">Customer Service</h3>
-                    <p className="text-xs text-[#00ff00] mt-1 uppercase tracking-wider font-bold">Online Human Agent • Instant Reply</p>
+                    <h3 className="text-xl font-bold text-[#000] leading-snug">
+                      Customer Service
+                    </h3>
+                    <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+                      Online Human Agent • Instant Reply
+                    </p>
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="flex flex-col gap-3">
                   {/* WhatsApp Link */}
                   <a
                     href="https://wa.me/94778158004"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between group/link hover:pl-2 transition-all duration-300 bg-white/5 p-4 rounded-2xl hover:bg-white/10 cursor-pointer"
+                    className="flex items-center justify-between p-4 rounded-2xl bg-white hover:bg-[#00ff00] text-[#1f1f1f] transition-colors duration-150 group cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
-                      <MessageCircle size={20} className="text-[#00ff00]" />
+                      <MessageCircle size={20} className="text-[#1f1f1f]" />
                       <div>
-                        <div className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold">WhatsApp Hotline</div>
-                        <div className="text-lg font-bold text-white group-hover/link:text-[#00ff00] transition-colors">
+                        <div className="text-[18px] text-[#000] group-hover:text-black tracking-normal font-bold">
+                          WhatsApp Hotline
+                        </div>
+                        <div className="text-base sm:text-lg font-bold text-[#1f1f1f] group-hover:text-black">
                           +94 778 158 004
                         </div>
                       </div>
                     </div>
-                    <div className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_10px_#00ff00]"></div>
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#00ff00] group-hover:bg-black" />
                   </a>
 
                   {/* Email Link */}
                   <a
                     href="mailto:pasindusadanjana17@gmail.com"
-                    className="flex items-center gap-3 group/link hover:pl-2 transition-all duration-300 bg-white/5 p-4 rounded-2xl hover:bg-white/10 cursor-pointer"
+                    className="flex items-center gap-3 p-4 rounded-2xl bg-white hover:bg-[#00ff00] text-[#1f1f1f] transition-colors duration-150 group cursor-pointer"
                   >
-                    <Mail size={20} className="text-[#00ff00]" />
+                    <Mail size={20} className="text-[#1f1f1f] shrink-0" />
                     <div className="overflow-hidden">
-                      <div className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold">Email Reservations</div>
-                      <div className="text-sm font-bold text-white truncate group-hover/link:text-[#00ff00] transition-colors">
+                      <div className="text-[18px] text-[#000] group-hover:text-black tracking-normal font-bold">
+                        Email Reservations
+                      </div>
+                      <div className="text-sm sm:text-base font-bold text-[#1f1f1f] group-hover:text-black truncate">
                         pasindusadanjana17@gmail.com
                       </div>
                     </div>
@@ -252,135 +238,142 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* 2. Official Authority Card (DWC) (Transparent, Blurred, Linked) */}
-              <div className="backdrop-blur-xl bg-transparent rounded-3xl p-6 relative overflow-hidden group hover:bg-transparent transition-colors">
-                <div className="absolute left-0 top-6 bottom-6 w-1 bg-[#00ff00] rounded-r-full shadow-[0_0_15px_#00ff00]"></div>
-                <div className="pl-4">
-                  <h3 className="text-xs font-bold text-[#00ff00] mb-3 uppercase tracking-widest flex items-center gap-2">
-                    <Landmark size={14} /> Official Authority
-                  </h3>
+              {/* 2. Official Authority Card (DWC) */}
+              <div className="bg-[#f8f9fa] rounded-[2.25rem] p-6 sm:p-8 flex flex-col [contain:paint]">
+                <div className="flex items-center gap-2 text-[18px] font-bold text-[#000] tracking-wider mb-4">
+                  <Landmark size={25} className="text-[#000]" />
+                  <span>Official Authority</span>
+                </div>
 
-                  <a href="https://www.dwc.gov.lk/" target="_blank" rel="noopener noreferrer" className="block mb-3 hover:opacity-80 transition-opacity">
-                    <p className="text-sm font-bold text-white mb-1">Department of Wildlife Conservation</p>
-                    <div className="text-xs text-neutral-300 leading-relaxed font-medium">
-                      <p>811A, Jayanthipura,</p>
-                      <p>Battaramulla, Sri Lanka.</p>
-                    </div>
-                  </a>
+                <a
+                  href="https://www.dwc.gov.lk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mb-4 hover:opacity-80 transition-opacity"
+                >
+                  <p className="text-[18px] font-bold text-[#5f6368] mb-1">
+                    Department of Wildlife Conservation
+                  </p>
+                  <div className="text-[18px] sm:text-[18px] text-[#5f6368] leading-relaxed font-semibold">
+                    <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+                      811A, Jayanthipura,
+                    </p>
+                    <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+                      Battaramulla, Sri Lanka.
+                    </p>
+                  </div>
+                </a>
 
-                  <div className="grid grid-cols-1 gap-2 text-xs text-neutral-300">
-                    <div className="flex gap-4">
-                      <a href="tel:+94112888585" className="flex items-center gap-2 hover:text-[#00ff00] transition-colors py-1">
-                        <Phone size={12} /> <span className="font-mono font-bold">+94 11 2 888 585</span>
-                      </a>
-                      <a href="tel:+94112883355" className="flex items-center gap-2 hover:text-[#00ff00] transition-colors py-1">
-                        <Printer size={12} /> <span className="font-mono font-bold">+94 11 2 883 355</span>
-                      </a>
-                    </div>
-                    <a href="mailto:dg@dwc.gov.lk" className="flex items-center gap-2 hover:text-[#00ff00] transition-colors py-1 w-fit">
-                      <Mail size={12} /> <span className="font-bold">dg@dwc.gov.lk</span>
+                <div className="flex flex-col gap-2 pt-2 text-[16px] sm:text-[16px] text-[#5f6368] font-semibold">
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href="tel:+94112888585"
+                      className="inline-flex items-center gap-1.5 hover:text-black transition-colors py-1"
+                    >
+                      <Phone size={13} className="text-[#1f1f1f]" />
+                      <span>+94 11 2 888 585</span>
                     </a>
                     <a
-                      href="https://www.dwc.gov.lk/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 py-1 w-fit
-             font-bold
-             text-neutral-200
-             hover:text-[#00ff00]
-             transition-colors"
+                      href="tel:+94112883355"
+                      className="inline-flex items-center gap-1.5 hover:text-black transition-colors py-1"
                     >
-                      <Globe size={12} />
-                      <span>dwc.gov.lk</span>
+                      <Printer size={13} className="text-[#1f1f1f]" />
+                      <span>+94 11 2 883 355</span>
                     </a>
-
                   </div>
+                  <a
+                    href="mailto:dg@dwc.gov.lk"
+                    className="inline-flex items-center gap-1.5 hover:text-black transition-colors py-1 w-fit"
+                  >
+                    <Mail size={13} className="text-[#1f1f1f]" />
+                    <span>dg@dwc.gov.lk</span>
+                  </a>
+                  <a
+                    href="https://www.dwc.gov.lk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 hover:text-black transition-colors py-1 w-fit"
+                  >
+                    <Globe size={13} className="text-[#1f1f1f]" />
+                    <span>dwc.gov.lk</span>
+                  </a>
                 </div>
               </div>
 
-              {/* 3. Stats Row */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="backdrop-blur-xl bg-transparent rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <Clock className="mb-2 text-[#00ff00]" size={20} />
-                  <span className="text-xl font-bold text-white">20 <span className="text-xs font-normal text-neutral-400">mins</span></span>
-                  <span className="text-[9px] text-neutral-400 font-bold uppercase tracking-wider mt-1">To Park Gate</span>
+              {/* 3. Fast Stats Row */}
+              <div className="grid grid-cols-2 gap-3 w-full">
+                <div className="bg-[#f8f9fa] rounded-2xl p-5 min-h-[100px] flex flex-col items-center justify-center text-center [contain:paint]">
+                  <Clock className="mb-2 text-[#1f1f1f] shrink-0" size={22} />
+                  <span className="text-xl sm:text-2xl font-bold text-[#1f1f1f] leading-none mb-1">
+                    20 <span className="text-xs font-semibold text-[#5f6368]">mins</span>
+                  </span>
+                  <span className="text-[11px] text-[#5f6368] font-bold tracking-normal">
+                    To Park Gate
+                  </span>
                 </div>
-                <div className="backdrop-blur-xl bg-transparent rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <ShieldCheck className="mb-2 text-[#00ff00]" size={20} />
-                  <span className="text-xl font-bold text-white">100%</span>
-                  <span className="text-[9px] text-neutral-400 font-bold uppercase tracking-wider mt-1">Verified</span>
+
+                <div className="bg-[#f8f9fa] rounded-2xl p-5 min-h-[100px] flex flex-col items-center justify-center text-center [contain:paint]">
+                  <ShieldCheck className="mb-2 text-[#1f1f1f] shrink-0" size={22} />
+                  <span className="text-xl sm:text-2xl font-bold text-[#1f1f1f] leading-none mb-1">
+                    100%
+                  </span>
+                  <span className="text-[11px] text-[#5f6368] font-bold tracking-normal">
+                    Verified
+                  </span>
                 </div>
               </div>
-
             </div>
 
             {/* ================= RIGHT COLUMN (FORM) ================= */}
-            <div className="lg:col-span-7">
-              <div className="backdrop-blur-3xl bg-black/50 rounded-[2rem] p-6 md:p-8 shadow-2xl relative">
+            <div className="lg:col-span-7 bg-white">
+              <div className="bg-[#f8f9fa] rounded-[2.25rem] sm:rounded-[2.5rem] p-6 sm:p-10 flex flex-col [contain:paint]">
                 <div className="mb-6">
-                  <h2 className="text-2xl font-bold text-white">Secure Your Safari</h2>
-                  <p className="text-xs text-neutral-400 mt-1">Response time: <span className="text-[#00ff00] font-bold">~15 mins</span> during business hours.</p>
+                  <h2 className="text-xl sm:text-3xl font-bold text-[#1f1f1f] tracking-tight">
+                    Secure Your Safari
+                  </h2>
+                  <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold mt-1">
+                    Response time:{" "}
+                    <span className="text-[#1f1f1f] font-bold">~15 mins</span> during business hours.
+                  </p>
                 </div>
                 <div className="contact-form-wrapper">
                   <ContactForm />
                 </div>
               </div>
             </div>
-
           </div>
 
-          {/* ================= BIG CUTTER MAP SECTION ================= */}
-          <div className="mt-12 w-full h-[450px] md:h-[550px] rounded-[2.5rem] overflow-hidden relative shadow-2xl group bg-black/20 backdrop-blur-sm">
-            {/* Tech Overlay */}
-            {/* <div className="absolute top-6 left-6 z-20 bg-black/90 backdrop-blur-xl px-5 py-2.5 rounded-full border border-[#00ff00]/30 shadow-[0_0_20px_rgba(0,255,0,0.2)] flex items-center gap-3 pointer-events-none">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#00ff00] animate-pulse"></div>
-              <span className="text-xs font-bold text-white tracking-widest">YALA HQ LOCATION</span>
-            </div> */}
-
-            {/* Map Container - Starts Dark, Brightens on Hover/Interaction */}
-            <div className="w-full h-full filter brightness-[0.6] contrast-[1.1] group-hover:brightness-100 group-hover:contrast-100 transition-all duration-700 ease-in-out">
+          {/* ================= MAP SECTION ================= */}
+          <div className="w-full h-[380px] sm:h-[460px] md:h-[500px] rounded-[2.25rem] sm:rounded-[3rem] overflow-hidden relative bg-[#fff] [contain:strict]">
+            <div className="w-full h-full">
               <LocationMap />
             </div>
-
-            {/* Cutter Corners Overlay (Visual Effect) */}
-            <div className="absolute inset-0 pointer-events-none rounded-[2.5rem] ring-1 ring-white/5"></div>
           </div>
-
         </div>
       </main>
 
-      {/* ================= SEO CONTENT (Frosted & Readable) ================= */}
+      {/* ================= SEO CONTENT ================= */}
       <AutoSEOWrapper
         pageTitle="Contact Yala Wildlife Safari | Book Your Tour +94 778 158 004"
         pageDescription="Contact Yala Wildlife Safari for bookings and inquiries. Available 24/7 via phone, WhatsApp, and email. Based in Tissamaharama, Sri Lanka."
         pageType="contact"
       >
-        <div className="container mx-auto px-4 py-16  bg-transparent relative">
-          {/* Frosted Glass Container for Text Readability */}
-          <div className="max-w-5xl mx-auto backdrop-blur-xl bg-white/[0.03]  rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        <section className="w-full bg-white text-[#1f1f1f] py-14 px-4 sm:px-8 border-t border-[#f1f3f4] [content-visibility:auto] [contain-intrinsic-size:1px_300px]">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
+            <h2 className="text-4xl sm:text-4xl font-bold text-[#1f1f1f] mb-6 tracking-tight">
+              Contact Yala Wildlife Safari
+            </h2>
 
-            {/* Glow Accent */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-[#00ff00] shadow-[0_0_30px_#00ff00]"></div>
-
-            <h1 className="text-2xl md:text-3xl font-black text-white mb-8 tracking-tight text-center uppercase">
-              Contact <span className="text-[#00ff00]">Yala Wildlife Safari</span>
-            </h1>
-
-            <div className="space-y-6 text-neutral-300 text-lg leading-relaxed font-light text-center">
-              <p>
-                Ready to experience the thrill of Yala National Park? Contact our friendly
-                team to book your safari, ask questions, or request custom tour packages.
-                We are available <span className="text-[#00ff00] font-bold">24/7</span> to assist with all your safari needs.
+            <div className="space-y-4 text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+              <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+                Ready to experience the thrill of Yala National Park? Contact our team to book your safari, ask questions, or request custom tour packages. We are available 24/7 to assist with all your safari preparations.
               </p>
-
-              <p>
-                Our office is conveniently located in Tissamaharama, just minutes from Yala
-                National Park entrance. Reach us via <span className="text-white font-bold border-b border-[#00ff00]">Phone, WhatsApp, or Email</span> for instant
-                booking confirmations and personalized travel advice from our experienced team.
+              <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed">
+                Our office is located in Tissamaharama, just minutes from the Yala National Park entrance gates. Reach us via Phone, WhatsApp, or Email for instant booking confirmations and personalized travel advice from our experienced guides.
               </p>
             </div>
           </div>
-        </div>
+        </section>
       </AutoSEOWrapper>
     </>
   );

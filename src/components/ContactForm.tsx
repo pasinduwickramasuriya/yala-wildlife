@@ -1,15 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useState, FormEvent } from "react";
-import { Loader2, Send, CheckCircle2, AlertCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
+import { useState, FormEvent, useCallback, useRef } from "react";
+import { Loader2, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
 
 interface Notification {
   type: "success" | "error";
@@ -17,131 +9,149 @@ interface Notification {
 }
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const formRef = useRef<HTMLFormElement>(null);
   const [notification, setNotification] = useState<Notification | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!formRef.current) return;
+
     setIsSubmitting(true);
     setNotification(null);
+
+    const formData = new FormData(formRef.current);
+    const payload = {
+      name: (formData.get("name") as string)?.trim() ?? "",
+      email: (formData.get("email") as string)?.trim() ?? "",
+      message: (formData.get("message") as string)?.trim() ?? "",
+    };
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Transmission failed");
+      if (!response.ok) throw new Error("Submission failed");
 
-      setNotification({ type: "success", message: "Transmission_Complete. Standby." });
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      setNotification({ type: "error", message: "Signal_Lost. Retry_Transmission." });
+      setNotification({
+        type: "success",
+        message: "Message sent successfully! Our team will contact you shortly.",
+      });
+      formRef.current.reset();
+    } catch {
+      setNotification({
+        type: "error",
+        message: "Unable to send message. Please check your connection and retry.",
+      });
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, []);
 
-  /** * MOBILE ZOOM FIX:
-   * We set font-size to 16px so the browser doesn't zoom.
-   * We use scale(0.625) to make 16px look exactly like 10px (16 * 0.625 = 10).
-   */
-  const inputStyles = "w-full bg-transparent border-b border-white/10 py-3 text-[16px] font-black text-white uppercase tracking-[0.2em] placeholder:text-neutral-700 focus:outline-none focus:border-[#00ff00] transition-all origin-left";
-  const visualScale = { transform: 'scale(0.625)', width: '160%' };
+  const inputStyles =
+    "w-full bg-white rounded-2xl px-5 py-4 text-[16px] text-[#1f1f1f] placeholder:text-[#9aa0a6] placeholder:font-normal focus:outline-none focus:bg-[#f1f3f4] transition-colors duration-150 font-medium";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10 w-full selection:bg-[#00ff00] selection:text-black">
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="space-y-5 w-full bg-transparent selection:bg-[#00ff00] selection:text-black [contain:paint]"
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Name Field */}
-        <div className="relative group overflow-hidden">
-          <label className="block text-[7px] font-black uppercase tracking-[0.5em] text-[#00ff00] mb-2 opacity-60 group-focus-within:opacity-100 transition-opacity">
-            IDENT_NAME
+        <div className="flex flex-col gap-1.5 text-left">
+          <label
+            htmlFor="contact-name"
+            className="text-[18px] font-bold text-[#1f1f1f] tracking-tight px-1"
+          >
+            Your Name
           </label>
-          <div className="w-full">
-            <input
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="FULL_LEGAL_NAME"
-              className={inputStyles}
-              style={visualScale}
-            />
-          </div>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            placeholder="e.g. John Doe"
+            className={inputStyles}
+          />
         </div>
 
         {/* Email Field */}
-        <div className="relative group overflow-hidden">
-          <label className="block text-[7px] font-black uppercase tracking-[0.5em] text-[#00ff00] mb-2 opacity-60 group-focus-within:opacity-100 transition-opacity">
-            COMMS_ENCRYPTED
+        <div className="flex flex-col gap-1.5 text-left">
+          <label
+            htmlFor="contact-email"
+            className="text-[18px] font-bold text-[#1f1f1f] tracking-tight px-1"
+          >
+            Email Address
           </label>
-          <div className="w-full">
-            <input
-              type="email"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="VALID_EMAIL_ADDR"
-              className={inputStyles}
-              style={visualScale}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Message Field */}
-      <div className="relative group overflow-hidden">
-        <label className="block text-[7px] font-black uppercase tracking-[0.5em] text-[#00ff00] mb-2 opacity-60 group-focus-within:opacity-100 transition-opacity">
-          MISSION_LOG_DATA
-        </label>
-        <div className="w-full">
-          <textarea
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
             required
-            value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            placeholder="ENTER_OBJECTIVES_DATES_AND_SIZE..."
-            className={cn(inputStyles, "min-h-[100px] resize-none")}
-            style={visualScale}
+            autoComplete="email"
+            placeholder="e.g. name@example.com"
+            className={inputStyles}
           />
         </div>
       </div>
 
-      <div className="flex flex-col gap-6 items-center">
+      {/* Message Field */}
+      <div className="flex flex-col gap-1.5 text-left">
+        <label
+          htmlFor="contact-message"
+          className="text-[18px] font-bold text-[#1f1f1f] tracking-tight px-1"
+        >
+          Tour Requirements
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          required
+          rows={4}
+          placeholder="Tell us your preferred dates, party size, and safari package..."
+          className={`${inputStyles} min-h-[130px] resize-none`}
+        />
+      </div>
+
+      {/* Submit Button & Notification */}
+      <div className="flex flex-col items-center gap-4 pt-2">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group relative w-full max-w-xs overflow-hidden rounded-full py-5 transition-all duration-500"
+          className="inline-flex items-center justify-center gap-2 bg-[#000000] hover:bg-[#00ff00] text-white hover:text-black font-bold text-[16px] px-8 py-4 rounded-full transition-colors duration-150 active:scale-95 cursor-pointer disabled:opacity-50 disabled:pointer-events-none w-full sm:w-auto shadow-none"
         >
-          <div className="absolute inset-0 bg-[#00ff00] group-hover:bg-white transition-colors duration-500" />
-          <div className="relative flex items-center justify-center gap-4 text-black font-black tracking-[0.4em] text-[10px] uppercase">
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-3 h-3 animate-spin" />
-                <span>Syncing...</span>
-              </>
-            ) : (
-              <>
-                <span>Transmit Request</span>
-                <Send className="w-3 h-3 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </>
-            )}
-          </div>
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin stroke-[2.5]" />
+              <span>Sending...</span>
+            </>
+          ) : (
+            <>
+              <span>Send Message</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+            </>
+          )}
         </button>
 
         {notification && (
-          <div className={cn(
-            "inline-flex items-center gap-3 px-4 py-2 rounded-lg border backdrop-blur-3xl animate-in fade-in slide-in-from-top-4 duration-500",
-            notification.type === "error" ? "bg-red-500/10 border-red-500/20 text-red-400" : "bg-[#00ff00]/10 border-[#00ff00]/20 text-[#00ff00]"
-          )}>
-            {notification.type === "error" ? <AlertCircle size={10} /> : <CheckCircle2 size={10} />}
-            <span className="text-[7px] font-black uppercase tracking-[0.3em]">{notification.message}</span>
+          <div
+            role="status"
+            className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-2xl text-[14px] font-semibold ${notification.type === "error"
+                ? "bg-[#fce8e6] text-[#c5221f]"
+                : "bg-[#e6f4ea] text-[#137333]"
+              }`}
+          >
+            {notification.type === "error" ? (
+              <AlertCircle className="w-4 h-4 shrink-0" />
+            ) : (
+              <CheckCircle2 className="w-4 h-4 shrink-0" />
+            )}
+            <span className="leading-snug">{notification.message}</span>
           </div>
         )}
       </div>
