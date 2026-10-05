@@ -122,7 +122,7 @@ export default function PetiteGallery() {
   }, []);
 
   const visiblePhotos = useMemo(() => allPhotos.slice(0, visibleCount), [allPhotos, visibleCount]);
-  
+
   const loadMore = useCallback(() => {
     setVisibleCount((prev) => prev + 6);
   }, []);
@@ -149,7 +149,7 @@ export default function PetiteGallery() {
     if (selectedIdx === null || visiblePhotos.length === 0) return;
     const nextIdx = (selectedIdx + 1) % visiblePhotos.length;
     const prevIdx = (selectedIdx - 1 + visiblePhotos.length) % visiblePhotos.length;
-    
+
     if (visiblePhotos[nextIdx]?.url) {
       const imgNext = new Image();
       imgNext.src = visiblePhotos[nextIdx].url;
@@ -161,8 +161,8 @@ export default function PetiteGallery() {
   }, [selectedIdx, visiblePhotos]);
 
   return (
-    <section 
-      className="py-16 bg-white text-[#1f1f1f] [content-visibility:auto] [contain-intrinsic-size:1px_600px]" 
+    <section
+      className="py-16 bg-white text-[#1f1f1f] [content-visibility:auto] [contain-intrinsic-size:1px_600px]"
       aria-labelledby="gallery-title"
       style={{
         fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
@@ -176,7 +176,7 @@ export default function PetiteGallery() {
             Guest Snapshots
           </h2>
           <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center">
-            Authentic moments from the wild captured by our safari travelers.Don't just take our word for it read authentic reviews from thousands of satisfied travelers who experienced unforgettable wildlife adventures with Yala Wildlife.
+            Authentic moments from the wild captured by our safari travelers. Don't just take our word for it—read authentic reviews from thousands of satisfied travelers who experienced unforgettable wildlife adventures with Yala Wildlife.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -223,16 +223,16 @@ export default function PetiteGallery() {
         )}
       </div>
 
-      {/* --- Lightbox Dialog --- */}
+      {/* --- Lightbox Dialog (Transparent background, no dark overlay, no blur) --- */}
       {selectedIdx !== null && visiblePhotos[selectedIdx] && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[300] bg-black/60 flex items-center justify-center p-4 [contain:strict]"
+          className="fixed inset-0 z-[300] bg-transparent flex items-center justify-center p-4 [contain:strict]"
           onClick={closeLightbox}
         >
           <div
-            className="bg-white rounded-[2.25rem] sm:rounded-[2.5rem] max-w-4xl w-full overflow-hidden flex flex-col md:flex-row [contain:paint]"
+            className="bg-white rounded-[2.25rem] sm:rounded-[2.5rem] max-w-4xl w-full overflow-hidden flex flex-col md:flex-row shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] border border-[#e8eaed] [contain:paint]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image Preview Canvas */}
@@ -240,7 +240,7 @@ export default function PetiteGallery() {
               <img
                 key={visiblePhotos[selectedIdx].url}
                 src={visiblePhotos[selectedIdx].url}
-                className="max-h-[60vh] rounded-2xl object-contain"
+                className="max-h-[60vh] rounded-2xl object-contain select-none"
                 alt={`Full size review photo by ${visiblePhotos[selectedIdx].authorName}`}
                 decoding="async"
               />
@@ -248,14 +248,14 @@ export default function PetiteGallery() {
               <button
                 onClick={handlePrev}
                 aria-label="Previous image"
-                className="absolute left-4 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1f1f1f] hover:bg-[#00ff00] hover:text-black transition-colors active:scale-95 cursor-pointer shadow-none"
+                className="absolute left-4 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1f1f1f] hover:bg-[#00ff00] hover:text-black transition-colors active:scale-95 cursor-pointer shadow-sm border border-[#e8eaed]"
               >
                 <ChevronLeft size={20} strokeWidth={2.5} />
               </button>
               <button
                 onClick={handleNext}
                 aria-label="Next image"
-                className="absolute right-4 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1f1f1f] hover:bg-[#00ff00] hover:text-black transition-colors active:scale-95 cursor-pointer shadow-none"
+                className="absolute right-4 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1f1f1f] hover:bg-[#00ff00] hover:text-black transition-colors active:scale-95 cursor-pointer shadow-sm border border-[#e8eaed]"
               >
                 <ChevronRight size={20} strokeWidth={2.5} />
               </button>

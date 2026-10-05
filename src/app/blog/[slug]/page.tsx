@@ -2,10 +2,11 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { Metadata } from "next";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
 import DiscountPopup from "@/components/DiscountPopup";
+import ShareButton from "@/components/ShareButton";
 // import AdUnit from "@/components/AdUnit";
 
 // --- Types ---
@@ -256,131 +257,154 @@ export default async function BlogPost({ params }: BlogPostProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="relative min-h-screen w-full text-white overflow-x-hidden selection:bg-[#00ff00] selection:text-black font-sans">
 
-        {/* --- 3. Background Layer (High Visibility + Fixed) --- */}
-        <div className="fixed inset-0 z-0">
-          <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Wilderness Background - Sri Lankan Leopard"
-            fill
-            priority
-            quality={100}
-            className="object-cover object-center"
-          />
-          {/* Minimal Overlay for text readability at bottom */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80" />
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
+      <main
+        className="w-full bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+        role="main"
+      >
+        <div className="pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-4 sm:px-6 md:px-10 max-w-7xl mx-auto flex flex-col gap-8 sm:gap-12 md:gap-14 bg-white">
 
-        {/* --- Content Container --- */}
-        <div className="relative z-10 container mx-auto px-4 py-24 md:py-32 flex justify-center">
-
-          <div className="w-full max-w-3xl">
-            {/* Back Button */}
+          {/* =========================================
+            TOP CORNER BAR: ALL STORIES (LEFT) & SHARE (RIGHT)
+        ========================================= */}
+          <div className="w-full max-w-5xl mx-auto flex items-center justify-between [contain:paint]">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/30 backdrop-blur-md text-xs font-bold text-white hover:bg-[#00ff00] hover:text-black transition-all mb-8 shadow-lg hover:shadow-[#00ff00]/20"
+              className="inline-flex items-center gap-1.5 bg-[#f8f9fa] hover:bg-[#00ff00] text-[#1f1f1f] hover:text-black font-semibold text-[12px] sm:text-[13px] px-3.5 sm:px-4 py-0 rounded-full transition-colors duration-150 active:scale-95 shadow-none"
             >
-              <ArrowLeft className="w-3 h-3" />
-              <span>Back</span>
+              <ArrowLeft className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>All Stories</span>
             </Link>
 
-            {/* --- The Glass Card (Borderless & Cute) --- */}
-            <article className="relative bg-black/60 rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-700">
-
-              {/* Hero Image inside Card */}
-              <div className="relative w-full aspect-[16/9] md:h-[450px] m-2 rounded-[2.5rem] overflow-hidden shadow-inner">
-                <Image
-                  src={blog.imageUrl || "/placeholder-image.jpg"}
-                  alt={`${blog.title} - Yala National Park Blog`}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-1000"
-                />
-
-                {/* Floating Date Badge */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <div className="flex items-center gap-1.5 bg-black/50 px-4 py-1.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider shadow-sm">
-                    <Calendar className="w-3 h-3 text-[#00ff00]" />
-                    {blog.createdAt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                  </div>
-                </div>
-              </div>
-
-              {/* Content Body */}
-              <div className="px-6 py-8 md:px-10 md:py-10">
-
-                <header className="mb-8 text-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 text-[#00ff00] text-[10px] font-bold uppercase tracking-widest mb-4">
-                    <Tag className="w-3 h-3" /> Wildlife Story
-                  </div>
-                  <h1 className="text-3xl md:text-4xl font-black text-white leading-tight mb-6 drop-shadow-sm">
-                    {blog.title}
-                  </h1>
-
-                  {/* Author / Stats Row */}
-                  <div className="flex items-center justify-center gap-6 text-xs font-medium text-neutral-300">
-                    <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full">
-                      <div className="w-5 h-5 rounded-full bg-[#00ff00] flex items-center justify-center text-black font-bold text-[10px]">Y</div>
-                      <span>Yala Team</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-blue-400" />
-                      {getReadingTime(blog.content)}
-                    </div>
-                    <button className="flex items-center gap-1.5 hover:text-white transition-colors">
-                      <Share2 className="w-3.5 h-3.5" /> Share
-                    </button>
-                  </div>
-                </header>
-
-                {/* Divider */}
-                {/* <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" /> */}
-
-                {/* Prose Content */}
-                <div className="prose prose-invert max-w-none">
-                  {blog.content.split("\n").map((paragraph, index) => {
-                    const isBullet = paragraph.trim().startsWith("*");
-
-                    return (
-                      <p
-                        key={index}
-                        className={`text-white font-light text-[1.05rem] leading-7 ${isBullet
-                            ? "pl-6 mb-3"
-                            : "mb-5 first-letter:text-3xl first-letter:font-bold first-letter:text-[#00ff00] first-letter:mr-1.5 first-letter:float-left"
-                          }`}
-                      >
-                        {paragraph}
-                      </p>
-                    );
-                  })}
-                </div>
-
-                {/* Footer CTA */}
-                <div className="mt-12 relative overflow-hidden rounded-[2rem] p-8 text-center shadow-lg group transition-all bg-transparent">
-                  <div className="relative z-10">
-                    <h3 className="text-lg font-bold text-white mb-2">Ready to see this in real life?</h3>
-                    <p className="text-white text-sm mb-6 max-w-sm mx-auto">
-                      Book your Yala safari today and experience the magic firsthand.
-                    </p>
-                    <Link
-                      href="/safari-packages"
-                      className="inline-block bg-white text-black hover:text-black font-bold text-sm py-3 px-8 rounded-full transition-transform hover:scale-105 shadow-md"
-                    >
-                      Explore Packages
-                    </Link>
-                  </div>
-                </div>
-
-
-              </div>
-            </article>
-            <ReviewPhotoGallery />
-            {/* Ad unit between blog grid and newsletter */}
-            {/* <div className="mt-12">
-              <AdUnit />
-            </div> */}
+            <ShareButton title={blog.title} />
           </div>
+
+          {/* =========================================
+            1. HERO STAGE (IMAGE -> TITLE -> METADATA)
+        ========================================= */}
+          <section className="w-full max-w-5xl mx-auto flex flex-col items-center [contain:paint]">
+
+            {/* Top Featured Hero Image (High visual priority, isolated paint & size containment) */}
+            <div className="relative max-w-3xl w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] max-h-[320px] sm:max-h-[460px] md:max-h-[560px] rounded-[1.75rem] sm:rounded-[2.5rem] md:rounded-[3.25rem] overflow-hidden bg-[#f1f3f4] shadow-sm mb-6 sm:mb-8 [contain:strict]">
+              <Image
+                src={blog.imageUrl || "/placeholder-image.jpg"}
+                alt={`${blog.title} - Yala Wildlife Safari`}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
+                quality={70}
+                priority
+                fetchPriority="high"
+                className="object-cover object-center"
+              />
+            </div>
+
+            {/* Headline Stage (Refined bit smaller typography for cleaner editorial aesthetic) */}
+            <div className="w-full text-center max-w-2xl mb-6 sm:mb-8 px-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-[34px] font-bold text-[#1f1f1f] tracking-tight leading-[1.25] break-words">
+                {blog.title}
+              </h1>
+            </div>
+
+            {/* Unified Metadata Row (Centered & Balanced) */}
+            <div className="w-full max-w-[720px] flex items-center justify-center gap-2.5 sm:gap-3.5 py-3.5 sm:py-4 border-y border-[#f1f3f4] [contain:paint]">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-[#f8f9fa] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full shrink-0">
+                <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center font-bold text-[10px] sm:text-[11px] text-[#1f1f1f] shadow-xs">
+                  Y
+                </div>
+                <span className="text-[12px] sm:text-[13px] font-bold text-[#1f1f1f]">
+                  Yala Naturalist Team
+                </span>
+              </div>
+
+              <span className="text-[#dadce0]">•</span>
+
+              <div className="flex items-center gap-1.5 text-[12px] sm:text-[13px] font-medium text-[#5f6368] shrink-0">
+                <span className="w-2 h-2 rounded-full bg-[#00ff00] shrink-0" />
+                <time>
+                  {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+              </div>
+
+              <span className="text-[#dadce0]">•</span>
+
+              <span className="inline-flex items-center gap-1 text-[12px] sm:text-[13px] font-semibold text-[#5f6368] shrink-0">
+                <Clock className="w-3.5 h-3.5 text-[#5f6368]" />
+                {getReadingTime(blog.content)}
+              </span>
+            </div>
+          </section>
+
+          {/* =========================================
+            2. EDITORIAL PROSE SECTION (READABLE 720px COLUMN)
+        ========================================= */}
+          <section className="w-full max-w-[720px] mx-auto flex flex-col items-start text-left [contain:paint]">
+            <article className="w-full space-y-6 sm:space-y-7 px-1 sm:px-0">
+              {blog.content.split("\n").map((paragraph: string, index: number) => {
+                const trimmed = paragraph.trim();
+                if (!trimmed) return null;
+                const isBullet = trimmed.startsWith("*") || trimmed.startsWith("-");
+
+                if (isBullet) {
+                  return (
+                    <div key={index} className="flex items-start gap-3 sm:gap-3.5 pl-1.5 sm:pl-4">
+                      <span className="w-2 h-2 rounded-full bg-[#00ff00] mt-2.5 shrink-0" />
+                      <p className="text-[16px] sm:text-[18px] text-[#000] font-semibold leading-[1.75] sm:leading-[1.8] break-words">
+                        {trimmed.replace(/^[*-\s]+/, "")}
+                      </p>
+                    </div>
+                  );
+                }
+
+                return (
+                  <p
+                    key={index}
+                    className="text-[16px] sm:text-[18px] text-[#000] font-semibold leading-[1.75] sm:leading-[1.85] break-words"
+                  >
+                    {trimmed}
+                  </p>
+                );
+              })}
+            </article>
+
+            {/* In-Line Action Card */}
+            <div className="mt-10 sm:mt-14 w-full bg-[#fff] rounded-[1.75rem] sm:rounded-[2.25rem] p-6 sm:p-8 md:p-9 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6 [contain:paint]">
+              <div className="flex flex-col text-left">
+                <span className="text-[11px] sm:text-[12px] font-bold  tracking-wider text-[#5f6368] mb-1 text-center">
+                  Private Park Permit & Expeditions
+                </span>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#1f1f1f] tracking-tight leading-snug text-center">
+                  Experience Yala with our naturalists
+                </h3>
+                <p className="text-[18px] sm:text-[18px] text-[#5f6368] font-semibold mt-1 text-center">
+                  Custom 4×4 elevated jeeps with certified leopard-tracking drivers.
+                </p>
+              </div>
+
+              <Link
+                href="/safari-packages"
+                className="inline-flex items-center justify-center gap-2 bg-[#000000] hover:bg-[#00ff00] text-white hover:text-black font-bold text-[13px] sm:text-[14px] px-5 sm:px-6 py-3 sm:py-3.5 rounded-full transition-colors duration-150 active:scale-95 shrink-0 w-full sm:w-auto shadow-none"
+              >
+                <span>View Tours</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              </Link>
+            </div>
+          </section>
+
+          {/* =========================================
+            3. ATTACHED REVIEWS & GALLERY
+        ========================================= */}
+          <section className="w-full border-t border-[#f1f3f4] pt-10 sm:pt-12 [content-visibility:auto] [contain-intrinsic-size:1px_600px]">
+            <ReviewPhotoGallery />
+          </section>
+
         </div>
       </main>
     </>

@@ -9,7 +9,7 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
+import { Calendar, ArrowUpRight, BookOpen, Tag, Globe, ArrowRight } from "lucide-react";
 // import AdUnit from "@/components/AdUnit";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
@@ -294,17 +294,31 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await prisma.blog.findMany({
+  const rawPosts = await prisma.blog.findMany({
     select: {
       id: true,
       title: true,
       slug: true,
+      content: true,
       imageUrl: true,
       createdAt: true,
     },
     orderBy: {
       createdAt: "desc",
     },
+  });
+
+  const posts = rawPosts.map((post) => {
+    const plainText = post.content
+      ? post.content.replace(/[#*`_~]/g, "").replace(/\s+/g, " ").trim()
+      : "";
+    const excerpt =
+      plainText.length > 180 ? `${plainText.slice(0, 180).trim()}...` : plainText;
+
+    return {
+      ...post,
+      excerpt,
+    };
   });
 
   const keywords = [
@@ -351,72 +365,28 @@ export default async function BlogPage() {
 
   return (
     <>
-      <div className="min-h-screen text-white relative">
-
-        {/* =========================================
-            BACKGROUND IMAGE SECTION
+      <main
+        className="w-full bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+        role="main"
+      >
+        <div className="pt-28 sm:pt-32 pb-20 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto flex flex-col gap-12 sm:gap-16 bg-white">
+          {/* =========================================
+            HERO HEADER SECTION (GOOGLE STYLE CENTERED)
         ========================================= */}
-        <div className="fixed inset-0 z-0">
-          <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Leopard Emerging from Darkness"
-            fill
-            priority
-            className="object-cover opacity-100 md:opacity-100"
-            quality={90}
-          />
-          {/* Cinematic Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/5 to-black/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
-          {/* Noise Texture */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
-        </div>
+          <section className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto bg-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-tight mb-4 text-center">
+              Wildlife Chronicles
+            </h1>
 
-        {/* =========================================
-            MAIN CONTENT
-        ========================================= */}
-        {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20"> */}
-        <div className="relative z-10">
+            <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center">
+              Explore fascinating wildlife stories, photography field guides, and conservation insights curated by our expert guides in Yala National Park.
+            </p>
 
-          {/* HERO SECTION (Removed box container for cleaner look) */}
-          <section className="relative w-full py-20 mt-30 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
-
-            {/* --- 1. HERO COMPONENT: PETITE PILL REBUILD --- */}
-            <div className="relative z-10 flex flex-col items-center gap-4 text-center mb-16 md:mb-24 px-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
-
-
-              {/* MAIN TITLE PILL */}
-              <div className="inline-block bg-black/80 px-8 py-3 rounded-full shadow-2xl border border-white/5">
-                <h1 className="text-[18px] md:text-[24px] font-black text-white uppercase tracking-[0.25em] leading-none">
-                  Wildlife <span className="text-white">Chronicles</span>
-                </h1>
-              </div>
-
-              {/* DESCRIPTION PILL (The "Cuter" larger block) */}
-              <div className="inline-block bg-black/80 px-8 py-6 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl border border-white/5 backdrop-blur-sm">
-                <p className="text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic">
-                  "Explore fascinating wildlife stories and expert photography tips curated by our expert guides.
-                  We specialize in conservation insights and technical field analysis to preserve the wild heart
-                  of Sri Lanka through transparent reporting and sustainable methodology."
-                </p>
-              </div>
-
-              {/* MODULAR DATA STRIPS (Refined to match Pill style) */}
-              <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-4xl">
-                {[
-                  "Discover fascinating wildlife stories and expert photography tips,",
-                  "and conservation insights from our expert guides."
-                ].map((text, i) => (
-                  <div key={i} className="bg-black/80 px-6 py-2 rounded-full border border-white/10 shadow-lg">
-                    <p className="text-[9px] md:text-[13px] text-neutral-300 font-medium  tracking-[0.2em] leading-relax italic">
-                      {text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* --- 3. SEO SHADOW LAYER --- */}
+            {/* Hidden SEO Shadow Layer */}
             <div className="sr-only">
               <SEOContentBlock
                 title="Expert Wildlife Content & Safari Insights Sri Lanka"
@@ -426,169 +396,202 @@ export default async function BlogPage() {
                 showKeywords={false}
               />
             </div>
-
           </section>
 
-
-
-
-
-          {/* BLOG GRID - Smaller, Cutter, No Borders */}
-
-          <main className="w-full p-0 m-0 overflow-hidden bg-transparent selection:bg-[#00ff00] selection:text-black">
-
+          {/* =========================================================================
+            MODERN GOOGLE EDITORIAL LAYOUT (HERO SPOTLIGHT + CURATED DISCOVERY GRID)
+        ========================================================================= */}
+          <section className="w-full bg-white [contain:paint]">
             {posts.length > 0 ? (
-              /* 
-                 FORCE FULL WIDTH: w-screen + left-1/2 -translate-x-1/2 
-                 This ensures it breaks out of any parent containers.
-              */
-              <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-0 p-0 m-0 border-none grid-flow-row-dense">
-                  {posts.map((post, index) => (
+              <div className="flex flex-col gap-12 sm:gap-16 w-full">
+                {/* 1. LEAD SPOTLIGHT HERO FEATURE */}
+                {(() => {
+                  const lead = posts[0];
+                  return (
                     <Link
-                      key={post.id}
-                      href={`/blog/${post.slug}`}
-                      className={`group relative overflow-hidden w-full p-0 m-0 border-none transition-all duration-700 ${index % 7 === 0
-                        ? "col-span-2 row-span-2 aspect-square md:aspect-auto min-h-[50vh]"
-                        : "col-span-1 row-span-1 aspect-square"
-                        }`}
+                      key={lead.id}
+                      href={`/blog/${lead.slug}`}
+                      className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center text-left cursor-pointer transition-transform duration-200 active:scale-[0.99] [contain:paint]"
                     >
-                      {/* IMAGE LAYER */}
-                      <div className="absolute inset-0 z-0">
-                        {post.imageUrl ? (
+                      <div className="lg:col-span-7 relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[2.5rem] sm:rounded-[3.5rem] overflow-hidden bg-[#f1f3f4] [contain:strict]">
+                        {lead.imageUrl ? (
                           <Image
-                            src={post.imageUrl}
-                            alt={post.title}
+                            src={lead.imageUrl}
+                            alt={lead.title}
                             fill
-                            sizes="100vw"
-                            className="object-cover transition-transform duration-[2.5s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105"
-                            priority={index < 4}
+                            sizes="(max-width: 1024px) 100vw, 60vw"
+                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            priority
                           />
                         ) : (
-                          <div className="w-full h-full bg-neutral-900" />
+                          <div className="w-full h-full bg-[#f1f3f4] flex items-center justify-center text-[#5f6368] font-bold text-[15px]">
+                            Yala Wildlife Safari
+                          </div>
                         )}
                       </div>
 
-                      {/* CINEMATIC OVERLAY */}
-                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/5 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
+                      <div className="lg:col-span-5 flex flex-col items-start text-left">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f8f9fa] mb-4">
+                          <span className="w-2 h-2 rounded-full bg-[#00ff00]" />
+                          <span className="text-[12px] font-bold text-[#1f1f1f] uppercase tracking-wider">
+                            Featured Dispatch
+                          </span>
+                        </div>
 
-                      {/* CONTENT LAYER: HUD STYLE */}
-                      <div className="absolute inset-0 z-20 p-4 md:p-6 flex flex-col justify-end">
-                        <div className="space-y-2">
-                          <div className="inline-block bg-black/40 px-2 py-0.5 rounded-sm mb-1">
-                            <span className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] text-[#00ff00]">
-                              Story-{index + 1}
-                            </span>
-                          </div>
+                        <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#1f1f1f] group-hover:text-black tracking-tight leading-[1.25] mb-4">
+                          “{lead.title}”
+                        </h2>
 
-                          <div className="flex items-center gap-2 text-[10px] font-bold text-white uppercase tracking-tight">
-                            {new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                          </div>
+                        {lead.excerpt && (
+                          <p className="text-[16px] sm:text-[17px] text-[#5f6368] font-semibold leading-relaxed line-clamp-3 mb-6">
+                            {lead.excerpt}
+                          </p>
+                        )}
 
-                          <h3 className={`font-bold text-white tracking-wide leading-[1.2] group-hover:text-[#00ff00] transition-colors duration-500 max-w-[240px] ${index % 7 === 0 ? "text-sm md:text-xl" : "text-[9px] md:text-[11px]"
-                            }`}>
-                            {post.title}
-                          </h3>
+                        <div className="flex items-center gap-2 text-[14px] text-[#5f6368] font-semibold mb-6">
+                          <span>Field Tracker Guide</span>
+                          <span>•</span>
+                          <time>
+                            {new Date(lead.createdAt).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </time>
+                        </div>
 
-                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition-all duration-700">
-                            <div className="h-[1px] w-4 bg-[#00ff00]" />
-                            <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">
-                              Access
-                            </span>
-                          </div>
+                        <div className="inline-flex items-center justify-center gap-2 bg-[#000000] group-hover:bg-[#00ff00] text-white group-hover:text-black font-bold text-[14px] px-7 py-3.5 rounded-full transition-colors duration-150 shadow-none">
+                          <span>Explore Story</span>
+                          <ArrowRight className="w-4 h-4 stroke-[2.5] transition-transform duration-200 group-hover:translate-x-1" />
                         </div>
                       </div>
                     </Link>
-                  ))}
-                </div>
+                  );
+                })()}
+
+                {/* 2. SUBSEQUENT DISCOVERY EDITORIAL GRID */}
+                {posts.length > 1 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-4">
+                    {posts.slice(1).map((post, idx) => (
+                      <Link
+                        key={post.id}
+                        href={`/blog/${post.slug}`}
+                        className="group flex flex-col items-start text-left cursor-pointer transition-transform duration-200 active:scale-[0.99] [contain:paint]"
+                      >
+                        <div className="relative w-full aspect-[16/11] rounded-[2.25rem] sm:rounded-[2.75rem] overflow-hidden bg-[#f1f3f4] mb-5 [contain:strict]">
+                          {post.imageUrl ? (
+                            <Image
+                              src={post.imageUrl}
+                              alt={post.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                              loading={idx < 2 ? "eager" : "lazy"}
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-[#f1f3f4] flex items-center justify-center text-[#5f6368] font-bold text-[14px]">
+                              Yala Wildlife Safari
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex flex-col items-start text-left w-full px-1">
+                          <h3 className="text-xl sm:text-[22px] font-bold text-[#1f1f1f] group-hover:text-black tracking-tight leading-[1.3] mb-2 line-clamp-2">
+                            “{post.title}”
+                          </h3>
+
+                          {post.excerpt && (
+                            <p className="text-[15px] text-[#5f6368] font-semibold leading-relaxed line-clamp-2 mb-3">
+                              {post.excerpt}
+                            </p>
+                          )}
+
+                          <div className="flex items-center gap-2 text-[13px] text-[#5f6368] font-semibold mt-auto pt-1">
+                            <span>Field Observation</span>
+                            <span>•</span>
+                            <time>
+                              {new Date(post.createdAt).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              })}
+                            </time>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
-              /* --- EMPTY STATE --- */
-              <div className="w-full flex flex-col items-center py-48 bg-black border-y border-white/5">
-                <h3 className="text-lg font-black text-white uppercase tracking-[0.4em] mb-4">
-                  Incoming Signal
+              <div className="w-full flex flex-col items-center justify-center py-24 bg-[#f8f9fa] rounded-[2.25rem] text-center [contain:paint]">
+                <h3 className="text-2xl font-bold text-[#1f1f1f] tracking-tight mb-2 text-center">
+                  Field Reports Incoming
                 </h3>
-                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">
-                  Compiling field reports... Standby.
+                <p className="text-[18px] text-[#5f6368] font-semibold text-center">
+                  Compiling wildlife observations and tracking stories. Check back soon.
                 </p>
               </div>
             )}
-          </main>
-
-          {/* Ad unit between blog grid and newsletter */}
-          {/* <div className="mt-12">
-            <AdUnit />
-          </div> */}
-
-          {/* NEWSLETTER SECTION - Simplified */}
-          <section className="mt-16 flex flex-col items-center gap-2 animate-in slide-in-from-bottom duration-1000 ease-out">
-            {/* 1. TINY TITLE ISLAND */}
-            <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
-              <h2 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
-                Stay Updated
-              </h2>
-            </div>
-
-            {/* 2. MINI DESCRIPTION PILL */}
-            <div className="inline-block bg-black/80 px-6 py-3 rounded-2xl max-w-[660px] text-center shadow-2xl">
-              <p className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-                "Wildlife stories and conservation updates from our expert guides.Subscribe to receive the latest wildlife stories and conservation updates directly from our expert guides."
-              </p>
-            </div>
-
-            {/* 3. SMALLEST ACTION BUTTN */}
-            <div className="inline-block">
-              <Link
-                href="/contact"
-                className="group flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full shadow-lg hover:bg-[#00ff00] transition-all active:scale-95"
-              >
-                <span className="text-[10px] font-black uppercase tracking-widest">
-                  Get Updates
-                </span>
-                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-            </div>
           </section>
 
-          {/* SEO CONTENT WRAPPER (Hidden Visual Style, Visible for SEO) */}
-          <div className="mt-16 flex flex-col items-center gap-3 opacity-90 text-center animate-in slide-in-from-bottom duration-1000 ease-out">
-            <AutoSEOWrapper
-              pageTitle="Yala Wildlife Blog | Safari Tips & Wildlife Guides"
-              pageDescription="Expert wildlife blog featuring Yala safari tips, leopard tracking guides, photography techniques, and Sri Lanka conservation news. Updated weekly!"
-              pageType="blog"
-            >
-              {/* 1. TITLE PILL */}
-              <div className="inline-block bg-black/80 px-5 py-2 rounded-full shadow-2xl">
-                <h1 className="text-[15px] font-black text-white uppercase tracking-[0.2em]">
-                  Yala Wildlife Blog
-                </h1>
-              </div>
+          {/* =========================================
+            NEWSLETTER / CONTACT ACTION CARD
+        ========================================= */}
+          <section className="w-full bg-white rounded-[2.25rem] p-8 sm:p-12 flex flex-col items-center justify-center text-center [contain:paint]">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#1f1f1f] tracking-tight mb-3 text-center">
+              Stay Updated From The Field
+            </h2>
 
-              {/* 2. DESCRIPTION PILL (The "Cuter" larger block) */}
-              <div className="inline-block bg-black/80 px-8 py-5 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl">
-                <p className="text-[15px] text-white/80 font-medium leading-relaxed italic text-center">
-                  "Welcome to the Yala Wildlife Safari blog...Yala boasts the highest leopard density in the world. Our professional guides
-                  know the best routes and times for wildlife spotting. We use luxury 4x4 jeeps
-                  equipped with safety features and optimal viewing configurations. Discover the magic of Yala National Park with our premium safari packages.
-                  Experience the thrill of spotting elusive leopards, majestic elephants, and
-                  over 200 species of birds in their natural habitat. Book your adventure today!"
+            <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-8 max-w-xl text-center">
+              Receive seasonal leopard movements, photographic guides, and conservation announcements straight from our active driver-guides.
+            </p>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2.5 bg-[#000000] hover:bg-[#00ff00] text-white hover:text-black font-bold text-[16px] px-8 py-4 rounded-full transition-colors duration-150 active:scale-95 cursor-pointer shadow-none"
+            >
+              <span>Connect With Our Desk</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+            </Link>
+          </section>
+        </div>
+
+        {/* =========================================
+          SEO CONTENT WRAPPER
+      ========================================= */}
+        <AutoSEOWrapper
+          pageTitle="Yala Wildlife Blog | Safari Tips & Wildlife Guides"
+          pageDescription="Expert wildlife blog featuring Yala safari tips, leopard tracking guides, photography techniques, and Sri Lanka conservation news. Updated weekly!"
+          pageType="blog"
+        >
+          <section className="w-full bg-white text-[#1f1f1f] py-16 px-4 sm:px-8 md:px-12 border-t border-[#f1f3f4] [content-visibility:auto] [contain-intrinsic-size:1px_400px]">
+            <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+              <h2 className="text-4xl sm:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-tight mb-4 text-center">
+                Yala Wildlife Blog
+              </h2>
+
+              <div className="space-y-4 text-[18px] text-[#5f6368] font-semibold leading-relaxed text-center max-w-3xl mb-8">
+                <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center">
+                  Welcome to the official Yala Wildlife Safari editorial portal. Yala National Park features one of the highest documented leopard densities on earth, alongside major populations of Asian elephants, sloth bears, mugger crocodiles, and over 200 species of migratory and endemic avifauna.
+                </p>
+                <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center">
+                  Our naturalist drivers and trackers contribute original field observations, best visiting seasons, entrance gate logistics, and photography vehicle positioning recommendations to ensure travelers explore responsibly and sustainably.
                 </p>
               </div>
 
-              {/* 3. CTA PILL */}
-              <div className="inline-block">
-                <div className="flex items-center gap-2.5 bg-black/80 text-white/60 px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em]">
-                  <Globe className="w-3 h-3 text-[#00ff00]" />
-                  Optimized for Discovery
-                </div>
+              <div className="inline-flex items-center gap-2 bg-[#fff] px-5 py-2 rounded-full">
+                <Globe className="w-4 h-4 text-[#1f1f1f]" />
+                <span className="text-[13px] font-bold text-[#5f6368] uppercase tracking-wider">
+                  Updated Bi-Weekly • Field Verified
+                </span>
               </div>
-            </AutoSEOWrapper>
-          </div>
+            </div>
+          </section>
+        </AutoSEOWrapper>
+      </main>
 
-        </div>
-      </div>
-
-      {/*  ENHANCED: Comprehensive Schema markup (UNTOUCHED) */}
+      {/* Comprehensive Schema markup */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -596,32 +599,31 @@ export default async function BlogPage() {
             organizationSchema,
             websiteSchema,
             localBusinessSchema,
-            // ... (Schema content remains untouched) ...
           ]),
         }}
       />
 
-      {/*ENHANCED: Breadcrumb schema blog */}
+      {/* Breadcrumb schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
               {
                 "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": BASE_URL
+                position: 1,
+                name: "Home",
+                item: BASE_URL,
               },
               {
                 "@type": "ListItem",
-                "position": 2,
-                "name": "Wildlife Blog",
-                "item": `${BASE_URL}/blog`
-              }
-            ]
+                position: 2,
+                name: "Wildlife Blog",
+                item: `${BASE_URL}/blog`,
+              },
+            ],
           }),
         }}
       />
