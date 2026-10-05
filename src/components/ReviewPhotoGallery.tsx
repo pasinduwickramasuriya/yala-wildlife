@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { X, ChevronLeft, ChevronRight, Plus, Camera, Star, Maximize2 } from 'lucide-react';
 
 interface ReviewPhoto {
@@ -14,7 +14,6 @@ interface ReviewPhoto {
   thumbnailUrl: string;
 }
 
-// Ultra-compact initial fallback photos for 0ms initial render speed
 const INITIAL_FALLBACK_PHOTOS: ReviewPhoto[] = [
   {
     reviewId: "1",
@@ -23,7 +22,7 @@ const INITIAL_FALLBACK_PHOTOS: ReviewPhoto[] = [
     relativeTime: "Edited 18 hours ago",
     reviewText: "I recently visited Yala National Park, and it was an unforgettable wildlife adventure 🍂🐾",
     url: "https://lh3.googleusercontent.com/grass-cs/ANxoTn3iYrL-81ORrAUIE_DJFOnG7ukDe0yFvrmHIm5UbWvhf19CKSVjn8-NaJPHgnoi4yZjPXBBODnaTEuf_DhUZ29AkX842IGi0w576jyvQu-hQW1DIFsrONPLJmJfsZuKL5Rp2cnOOlum9rtN=w1200-h900",
-    thumbnailUrl: "https://lh3.googleusercontent.com/grass-cs/ANxoTn3iYrL-81ORrAUIE_DJFOnG7ukDe0yFvrmHIm5UbWvhf19CKSVjn8-NaJPHgnoi4yZjPXBBODnaTEuf_DhUZ29AkX842IGi0w576jyvQu-hQW1DIFsrONPLJmJfsZuKL5Rp2cnOOlum9rtN=w250-h250-p-k-no"
+    thumbnailUrl: "https://lh3.googleusercontent.com/grass-cs/ANxoTn3iYrL-81ORrAUIE_DJFOnG7ukDe0yFvrmHIm5UbWvhf19CKSVjn8-NaJPHgnoi4yZjPXBBODnaTEuf_DhUZ29AkX842IGi0w576jyvQu-hQW1DIFsrONPLJmJfsZuKL5Rp2cnOOlum9rtN=w200-h200-p-k-no"
   },
   {
     reviewId: "2",
@@ -32,7 +31,7 @@ const INITIAL_FALLBACK_PHOTOS: ReviewPhoto[] = [
     relativeTime: "2 days ago",
     reviewText: "Amazing park, real wild nature! A little hot, it's worth bringing water",
     url: "https://lh3.googleusercontent.com/grass-cs/ANxoTn0PK3VwCNtPHNp4auSx2WCt4TD_nSdTToDXOeC5VsiAc3CjBgBEFoicUhmBakWlcn4uvd8BIZFy06g0hKBOSJIPczc6JLOeGQyW9hvTM4V3L8Vt_R5bELc2x1jvTI8Uru36X2-BJCVvHUC0=w1200-h900",
-    thumbnailUrl: "https://lh3.googleusercontent.com/grass-cs/ANxoTn0PK3VwCNtPHNp4auSx2WCt4TD_nSdTToDXOeC5VsiAc3CjBgBEFoicUhmBakWlcn4uvd8BIZFy06g0hKBOSJIPczc6JLOeGQyW9hvTM4V3L8Vt_R5bELc2x1jvTI8Uru36X2-BJCVvHUC0=w250-h250-p-k-no"
+    thumbnailUrl: "https://lh3.googleusercontent.com/grass-cs/ANxoTn0PK3VwCNtPHNp4auSx2WCt4TD_nSdTToDXOeC5VsiAc3CjBgBEFoicUhmBakWlcn4uvd8BIZFy06g0hKBOSJIPczc6JLOeGQyW9hvTM4V3L8Vt_R5bELc2x1jvTI8Uru36X2-BJCVvHUC0=w200-h200-p-k-no"
   },
   {
     reviewId: "3",
@@ -41,12 +40,11 @@ const INITIAL_FALLBACK_PHOTOS: ReviewPhoto[] = [
     relativeTime: "4 days ago",
     reviewText: "Unbelievable sightings of the Sri Lankan leopard basking near Patanangala Rock.",
     url: "https://lh3.googleusercontent.com/grass-cs/ANxoTn3d8W9z_yZARBXxh7LNjE7QOfrmPN_GSz8YnK4r08E7KFsUcusH9gZKWWmt5ZgMY9Vxg3rjfAUTtcv78rZ-L5w6ndCXEOSF4KCXbC5gGzB5ve5I4ViAuMIdmdhbRlwRZAXuJ0Sb1859hRfk=w1200-h900",
-    thumbnailUrl: "https://lh3.googleusercontent.com/grass-cs/ANxoTn3d8W9z_yZARBXxh7LNjE7QOfrmPN_GSz8YnK4r08E7KFsUcusH9gZKWWmt5ZgMY9Vxg3rjfAUTtcv78rZ-L5w6ndCXEOSF4KCXbC5gGzB5ve5I4ViAuMIdmdhbRlwRZAXuJ0Sb1859hRfk=w250-h250-p-k-no"
+    thumbnailUrl: "https://lh3.googleusercontent.com/grass-cs/ANxoTn3d8W9z_yZARBXxh7LNjE7QOfrmPN_GSz8YnK4r08E7KFsUcusH9gZKWWmt5ZgMY9Vxg3rjfAUTtcv78rZ-L5w6ndCXEOSF4KCXbC5gGzB5ve5I4ViAuMIdmdhbRlwRZAXuJ0Sb1859hRfk=w200-h200-p-k-no"
   }
 ];
 
-// Helper to convert Google image URLs to ultra-low payload 250px grid thumbnails (shrinks image size by 90%!)
-function getOptimizedThumbnail(url: string, width = 250): string {
+function getOptimizedThumbnail(url: string, width = 200): string {
   if (!url) return '';
   if (url.includes('googleusercontent.com')) {
     return url.replace(/=w\d+.*$/, `=w${width}-h${width}-p-k-no`);
@@ -54,7 +52,6 @@ function getOptimizedThumbnail(url: string, width = 250): string {
   return url;
 }
 
-// Ultra-fast O(n) Fisher-Yates shuffle
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -66,13 +63,45 @@ function shuffleArray<T>(array: T[]): T[] {
   return arr;
 }
 
+interface PhotoCardProps {
+  photo: ReviewPhoto;
+  index: number;
+  onSelect: (index: number) => void;
+}
+
+const PhotoCard = memo(function PhotoCard({ photo, index, onSelect }: PhotoCardProps) {
+  const thumbUrl = useMemo(
+    () => getOptimizedThumbnail(photo.thumbnailUrl || photo.url, 200),
+    [photo.thumbnailUrl, photo.url]
+  );
+
+  return (
+    <div
+      role="listitem"
+      onClick={() => onSelect(index)}
+      className="relative aspect-square group cursor-pointer overflow-hidden rounded-2xl bg-[#f8f9fa] [contain:strict]"
+    >
+      <img
+        src={thumbUrl}
+        className="w-full h-full object-cover"
+        alt={`Yala Safari review photo by ${photo.authorName}`}
+        loading="lazy"
+        decoding="async"
+        width={200}
+        height={200}
+      />
+      <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+        <Maximize2 className="w-5 h-5 text-white" aria-label="View larger image" />
+      </div>
+    </div>
+  );
+});
+
 export default function PetiteGallery() {
   const [allPhotos, setAllPhotos] = useState<ReviewPhoto[]>(INITIAL_FALLBACK_PHOTOS);
   const [visibleCount, setVisibleCount] = useState(12);
-  const [loading, setLoading] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
-  // Fetch full photo set asynchronously and shuffle dynamically
   useEffect(() => {
     let isMounted = true;
     fetch('/api/greview-photos')
@@ -102,6 +131,10 @@ export default function PetiteGallery() {
     setSelectedIdx(null);
   }, []);
 
+  const handleSelect = useCallback((idx: number) => {
+    setSelectedIdx(idx);
+  }, []);
+
   const handlePrev = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedIdx((prev) => (prev !== null ? (prev - 1 + visiblePhotos.length) % visiblePhotos.length : null));
@@ -112,7 +145,6 @@ export default function PetiteGallery() {
     setSelectedIdx((prev) => (prev !== null ? (prev + 1) % visiblePhotos.length : null));
   }, [visiblePhotos.length]);
 
-  // Pre-load next/prev high-res images in background for 0ms latency in Lightbox
   useEffect(() => {
     if (selectedIdx === null || visiblePhotos.length === 0) return;
     const nextIdx = (selectedIdx + 1) % visiblePhotos.length;
@@ -129,42 +161,35 @@ export default function PetiteGallery() {
   }, [selectedIdx, visiblePhotos]);
 
   return (
-    <section className="py-16 bg-transparent" aria-labelledby="gallery-title">
-      <div className="max-w-6xl mx-auto px-6">
+    <section 
+      className="py-16 bg-white text-[#1f1f1f] [content-visibility:auto] [contain-intrinsic-size:1px_600px]" 
+      aria-labelledby="gallery-title"
+      style={{
+        fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12">
 
-        {/* --- Header Section --- */}
-        <div className="flex flex-col items-center text-center gap-3 mb-12">
+        {/* --- Header Section (Google Centered Layout) --- */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
+          <h2 id="gallery-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1f1f1f] mb-3 text-center">
+            Guest Snapshots
+          </h2>
+          <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center">
+            Authentic moments from the wild captured by our safari travelers.
+          </p>
 
-          {/* 1. THE BADGE  */}
-          {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/70 shadow-2xl">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#00ff00] animate-pulse" aria-hidden="true" />
-            <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.3em]">
-              Guest Chronicles
-            </span>
-          </div> */}
-
-          {/* 2. THE MAIN TITLE & DESC ISLAND */}
-          <div className="inline-block px-10 py-2 rounded-[2.5rem] bg-black/80 shadow-2xl">
-            <h2 id="gallery-title" className="text-[20px] font-bold tracking-tight text-white mb-1">
-              Guest Snapshots
-            </h2>
-            <p className="text-[10px] text-white/80 uppercase tracking-[0.2em] font-black">
-              Authentic moments from the wild
-            </p>
-          </div>
-
-          {/* 3. THE STATS DOCK (Individual Pills) */}
-          <div className="flex items-center gap-3 mt-1">
-            <div className="flex items-center gap-2.5 px-5 py-2.5 bg-black/80 rounded-full shadow-xl">
-              <Camera className="w-3.5 h-3.5 text-[#00ff00]" aria-hidden="true" />
-              <span className="text-[10px] font-black text-white uppercase tracking-widest">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f8f9fa] rounded-full [contain:paint]">
+              <Camera className="w-4 h-4 text-[#1f1f1f]" aria-hidden="true" />
+              <span className="text-[14px] sm:text-[15px] font-bold text-[#1f1f1f]">
                 {allPhotos.length} Photos Captured
               </span>
             </div>
 
-            <div className="flex items-center gap-2.5 px-5 py-2.5 bg-black/80 rounded-full shadow-xl">
-              <Star className="w-3.5 h-3.5 text-[#00ff00] fill-[#00ff00]" aria-hidden="true" />
-              <span className="text-[10px] font-black text-white uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f8f9fa] rounded-full [contain:paint]">
+              <Star className="w-4 h-4 text-[#e37400] fill-[#e37400]" aria-hidden="true" />
+              <span className="text-[14px] sm:text-[15px] font-bold text-[#1f1f1f]">
                 5.0 Average Rating
               </span>
             </div>
@@ -172,75 +197,50 @@ export default function PetiteGallery() {
         </div>
 
         {/* --- Photo Grid --- */}
-        {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-3" aria-hidden="true">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="aspect-square bg-white/5 animate-pulse rounded-2xl" />
-            ))}
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-3" role="list">
-              {visiblePhotos.map((photo, i) => {
-                const thumbUrl = getOptimizedThumbnail(photo.thumbnailUrl || photo.url, 250);
-                return (
-                  <div
-                    key={photo.url || photo.reviewId || i}
-                    role="listitem"
-                    onClick={() => setSelectedIdx(i)}
-                    className="relative aspect-square group cursor-pointer overflow-hidden rounded-2xl bg-black/20 border border-white/5 shadow-sm transform-gpu hover:scale-[0.98] transition-transform duration-200 ease-out"
-                  >
-                    <img
-                      src={thumbUrl}
-                      className="w-full h-full object-cover transform-gpu transition-transform duration-500 ease-out group-hover:scale-110"
-                      alt={`Yala Safari review photo by ${photo.authorName}`}
-                      loading="lazy"
-                      decoding="async"
-                      width={250}
-                      height={250}
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                      <Maximize2 className="w-4 h-4 text-white" aria-label="View larger image" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4 [contain:paint]" role="list">
+          {visiblePhotos.map((photo, i) => (
+            <PhotoCard
+              key={photo.url || photo.reviewId || i}
+              photo={photo}
+              index={i}
+              onSelect={handleSelect}
+            />
+          ))}
+        </div>
 
-            {/* --- Load More --- */}
-            {visibleCount < allPhotos.length && (
-              <div className="flex justify-center mt-12">
-                <button
-                  onClick={loadMore}
-                  aria-label="Load more guest photos"
-                  className="group flex items-center gap-3 bg-black/80 hover:bg-white px-8 py-3 rounded-full transition-all duration-300 active:scale-95 shadow-xl cursor-pointer"
-                >
-                  <span className="text-[10px] font-black text-white group-hover:text-black uppercase tracking-[0.2em]">Discover More</span>
-                  <Plus className="w-4 h-4 text-[#00ff00] group-hover:text-black" aria-hidden="true" />
-                </button>
-              </div>
-            )}
-          </>
+        {/* --- Load More Action --- */}
+        {visibleCount < allPhotos.length && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={loadMore}
+              aria-label="Load more guest photos"
+              className="inline-flex items-center gap-2.5 bg-[#000000] hover:bg-[#00ff00] text-white hover:text-black font-bold text-[16px] px-8 py-4 rounded-full transition-colors duration-150 active:scale-95 shadow-none cursor-pointer"
+            >
+              <span>Discover More</span>
+              <Plus className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
+            </button>
+          </div>
         )}
       </div>
 
-      {/* --- Lightbox --- */}
+      {/* --- Lightbox Dialog --- */}
       {selectedIdx !== null && visiblePhotos[selectedIdx] && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[300] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-[300] bg-black/60 flex items-center justify-center p-4 [contain:strict]"
           onClick={closeLightbox}
         >
           <div
-            className="bg-[#0a0a0a] rounded-[2.5rem] shadow-2xl max-w-4xl w-full overflow-hidden flex flex-col md:flex-row"
+            className="bg-white rounded-[2.25rem] sm:rounded-[2.5rem] max-w-4xl w-full overflow-hidden flex flex-col md:flex-row [contain:paint]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative flex-1 bg-black flex items-center justify-center p-4 min-h-[300px]">
+            {/* Image Preview Canvas */}
+            <div className="relative flex-1 bg-[#f8f9fa] flex items-center justify-center p-6 min-h-[320px]">
               <img
                 key={visiblePhotos[selectedIdx].url}
                 src={visiblePhotos[selectedIdx].url}
-                className="max-h-[60vh] rounded-2xl object-contain shadow-2xl animate-in fade-in duration-200"
+                className="max-h-[60vh] rounded-2xl object-contain"
                 alt={`Full size review photo by ${visiblePhotos[selectedIdx].authorName}`}
                 decoding="async"
               />
@@ -248,55 +248,56 @@ export default function PetiteGallery() {
               <button
                 onClick={handlePrev}
                 aria-label="Previous image"
-                className="absolute left-4 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-[#00ff00] hover:text-black transition-all duration-200 text-black cursor-pointer"
+                className="absolute left-4 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1f1f1f] hover:bg-[#00ff00] hover:text-black transition-colors active:scale-95 cursor-pointer shadow-none"
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft size={20} strokeWidth={2.5} />
               </button>
               <button
                 onClick={handleNext}
                 aria-label="Next image"
-                className="absolute right-4 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-[#00ff00] hover:text-black transition-all duration-200 text-black cursor-pointer"
+                className="absolute right-4 w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1f1f1f] hover:bg-[#00ff00] hover:text-black transition-colors active:scale-95 cursor-pointer shadow-none"
               >
-                <ChevronRight size={18} />
+                <ChevronRight size={20} strokeWidth={2.5} />
               </button>
             </div>
 
-            <div className="w-full md:w-80 p-8 flex flex-col gap-4">
+            {/* Sidebar Details Panel */}
+            <div className="w-full md:w-80 p-6 sm:p-8 flex flex-col gap-4 bg-white text-left">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-sm font-black text-white italic tracking-tight">
+                  <p className="text-[18px] font-bold text-[#1f1f1f] leading-snug">
                     {visiblePhotos[selectedIdx].authorName}
                   </p>
-                  <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">
+                  <p className="text-[12px] text-[#5f6368] font-bold uppercase tracking-wider mt-0.5">
                     {visiblePhotos[selectedIdx].relativeTime}
                   </p>
                 </div>
                 <button
                   onClick={closeLightbox}
                   aria-label="Close dialog"
-                  className="p-2 hover:bg-white/10 text-white/50 hover:text-white rounded-full transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-[#f8f9fa] hover:bg-[#e8eaed] flex items-center justify-center text-[#1f1f1f] transition-colors cursor-pointer"
                 >
-                  <X size={18} />
+                  <X size={16} strokeWidth={2.5} />
                 </button>
               </div>
 
-              <div className="flex gap-0.5" aria-label={`Rated ${visiblePhotos[selectedIdx].rating} out of 5 stars`}>
+              <div className="flex gap-1" aria-label={`Rated ${visiblePhotos[selectedIdx].rating} out of 5 stars`}>
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-3 h-3 ${i < visiblePhotos[selectedIdx].rating ? 'text-[#00ff00] fill-[#00ff00]' : 'text-neutral-800'}`}
+                    className={`w-4 h-4 ${i < visiblePhotos[selectedIdx].rating ? 'text-[#e37400] fill-[#e37400]' : 'text-[#dadce0]'}`}
                   />
                 ))}
               </div>
 
-              <blockquote className="text-xs text-neutral-400 leading-relaxed italic line-clamp-6 font-medium">
-                "{visiblePhotos[selectedIdx].reviewText}"
+              <blockquote className="text-[15px] sm:text-[16px] text-[#5f6368] font-semibold leading-relaxed line-clamp-6">
+                &ldquo;{visiblePhotos[selectedIdx].reviewText}&rdquo;
               </blockquote>
 
               <div className="mt-auto pt-6">
                 <button
                   onClick={closeLightbox}
-                  className="w-full py-4 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-[#00ff00] transition-all active:scale-95 shadow-xl cursor-pointer"
+                  className="w-full py-3.5 bg-[#f8f9fa] hover:bg-[#00ff00] text-black font-bold text-[15px] rounded-full transition-colors active:scale-95 cursor-pointer shadow-none"
                 >
                   Close Discovery
                 </button>

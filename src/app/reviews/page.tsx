@@ -104,83 +104,60 @@ export default function ReviewsPage() {
       {/* 3. VISITOR PHOTO GALLERY */}
       <ReviewPhotoGallery />
 
-      {/* 4. MANUAL REVIEW SUBMISSION & LIST (Existing Styling Preserved) */}
-      {/* <div className="min-h-screen bg-blur">
-        <div className="py-16 px-4 md:px-6">
-          <ShowReviews />
-          <div className="flex justify-center mt-8">
-            <GetCustomerReviews />
-          </div>
+      {/* ================= SEO CONTENT BLOCK ================= */}
+<AutoSEOWrapper
+  pageTitle="Yala Safari Reviews | 4.9★ Rating from 1000+ Travelers"
+  pageDescription="Read authentic reviews from travelers who experienced Yala Wildlife Safari. 4.9-star rating on TripAdvisor, Google, and Facebook. Book with confidence!"
+  pageType="other"
+>
+  <section 
+    className="w-full bg-white text-[#1f1f1f] py-16 px-4 sm:px-8 md:px-12 border-t border-[#f1f3f4] [content-visibility:auto] [contain-intrinsic-size:1px_400px]"
+    style={{
+      fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+    }}
+  >
+    <div className="max-w-6xl mx-auto flex flex-col items-center text-center bg-white">
+      {/* 1. Header Section */}
+      <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-[#1f1f1f] tracking-tight leading-tight mb-4 text-center">
+        Why We Are Rated #1 Yala Safari Reviews 
+      </h2>
+
+      <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-10 text-center max-w-3xl">
+        Don&apos;t just take our word for it read authentic reviews from thousands of satisfied travelers who experienced unforgettable wildlife adventures with Yala Wildlife Safari.
+      </p>
+
+      {/* 2. Pure White Content Cards */}
+      <div className="flex flex-col gap-6 w-full text-center bg-white">
+        {/* Card 1: Trust & Overview */}
+        <div className="bg-white rounded-[2.25rem] p-6 sm:p-8 flex flex-col items-center justify-center text-center [contain:paint]">
+          <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed text-center max-w-2xl">
+            With an outstanding <strong className="text-[#1f1f1f] font-bold">4.9-star average rating</strong> across Google and TripAdvisor, we are proud to be Sri Lanka&apos;s most trusted safari operator. Our commitment to wildlife ethics and service excellence has earned us over <strong className="text-[#1f1f1f] font-bold">1,000 five-star reviews</strong> from global adventurers.
+          </p>
         </div>
-      </div> */}
 
-      {/* seo content block */}
-      <AutoSEOWrapper
-        pageTitle="Yala Safari Reviews | 4.9★ Rating from 1000+ Travelers"
-        pageDescription="Read authentic reviews from travelers who experienced Yala Wildlife Safari. 4.9-star rating on TripAdvisor, Google, and Facebook. Book with confidence!"
-        pageType="other"
-      >
-        <div className="mt-20 flex flex-col items-center gap-4 animate-in slide-in-from-bottom duration-1000 ease-out">
-          {/* 1. THE TITLE ISLAND */}
-          <div className="inline-block  bg-black/70  px-6 py-2.5 rounded-full shadow-2xl">
-            <h1 className="text-[15px] font-black text-white  tracking-[0.2em] text-center">
-              Yala Safari Reviews Why We Are Rated number one
-            </h1>
-          </div>
-
-          {/* 2. THE EDITORIAL SEO BLOCK
-          {/* 1. TOP ISLAND: THE TRUST PILL */}
-          <div className="inline-block  bg-black/70  px-8 py-10 rounded-[3rem] max-w-[850px] mx-auto shadow-2xl">
-            <p className="text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic text-center">
-              Don&apos;t just take our word for it read <strong className="text-[#00ff00] font-black not-italic">authentic reviews</strong> from thousands of
-              satisfied travelers who experienced unforgettable wildlife adventures with
-              <strong className="text-white not-italic"> Yala Wildlife Safari</strong>. With an outstanding <span className="text-white not-italic">4.9-star average rating</span> on
-              Google and TripAdvisor, we are proud to be Sri Lanka&apos;s most trusted safari operator.
-            </p>
-          </div>
-
-          {/* 2. MIDDLE ISLAND: THE EXPERTISE PILL */}
-          <div className="inline-block  bg-black/70  px-8 py-10 rounded-[3rem] max-w-[850px] mx-auto shadow-2xl">
-            <div className="space-y-6 text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic text-center">
-              <p className="text-white/80">
-                Our commitment to excellence has earned us over <strong className="text-white not-italic">1,000 five-star reviews</strong> from
-                guests worldwide. Travelers consistently praise our <span className="text-[#00ff00] font-black not-italic">expert naturalist guides</span> for their
-                tracking skills, punctuality, and ability to spot elusive leopards and sloth bears that others miss.
-              </p>
-              <p className="text-white/80">
-                Families love our <strong className="text-white not-italic">child-friendly safari tours</strong> designed for safe, educational
-                wildlife encounters. Parents appreciate our experienced drivers who ensure a smooth ride in our
-                <span className="text-white not-italic"> luxury cushioned jeeps</span>, engaging children with fascinating animal facts
-                and interactive spotting games.
-              </p>
-            </div>
-          </div>
-
-          {/* 3. BOTTOM ISLAND: THE PASSION PILL */}
-          <div className="inline-block  bg-black/80  px-8 py-10 rounded-[3rem] max-w-[850px] mx-auto shadow-2xl">
-            <div className="space-y-6 text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic text-center">
-              <p className="text-white/80">
-                <strong className="text-white not-italic">Photography enthusiasts</strong> consistently rate our specialized wildlife photography
-                safaris as exceptional. Guests praise our guides&apos; understanding of <span className="text-[#00ff00] font-black not-italic">golden hour lighting</span>,
-                vehicle positioning, and patience required for National Geographic-worthy shots of elephants and birds.
-              </p>
-              <p className="text-white/80">
-                When you choose Yala Wildlife Safari, you&apos;re choosing a proven, reliable tour
-                operator with an outstanding track record. Our reviews demonstrate our dedication
-                to creating magical wildlife experiences while maintaining the <strong className="text-white not-italic">highest safety standards</strong>.
-              </p>
-            </div>
-          </div>
-          {/* </div> */}
-
-          {/* 3. VERIFIED BADGE PILL */}
-          <div className="mt-2 inline-block bg-black/60 px-4 py-1.5 rounded-full">
-            <span className="text-[10px] font-bold text-white/50 uppercase tracking-[0.3em]">
-              Verified Discovery Content
-            </span>
-          </div>
+        {/* Card 2: Naturalist Guides & Family Tours */}
+        <div className="bg-white rounded-[2.25rem] p-6 sm:p-8 flex flex-col items-center justify-center text-center space-y-4 [contain:paint]">
+          <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed text-center max-w-2xl">
+            Travelers consistently praise our <strong className="text-[#1f1f1f] font-bold">expert naturalist guides</strong> for their tracking precision, punctuality, and ability to locate elusive leopards and sloth bears that others miss.
+          </p>
+          <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed text-center max-w-2xl">
+            Families love our child-friendly safari tours designed for safe, educational encounters. Parents appreciate our experienced drivers who ensure a smooth ride in our luxury cushioned jeeps, keeping young explorers engaged with interactive spotting challenges.
+          </p>
         </div>
-      </AutoSEOWrapper>
+
+        {/* Card 3: Photography & High Safety Standards */}
+        <div className="bg-white rounded-[2.25rem] p-6 sm:p-8 flex flex-col items-center justify-center text-center space-y-4 [contain:paint]">
+          <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed text-center max-w-2xl">
+            Photography enthusiasts consistently rate our specialized wildlife expeditions as exceptional. Guests highlight our team&apos;s deep understanding of golden-hour lighting, strategic vehicle angles, and the patience needed for National Geographic-quality captures.
+          </p>
+          <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed text-center max-w-2xl">
+            When you choose Yala Wildlife Safari, you are selecting a proven, dependable expedition team committed to magical wildlife moments under the highest passenger safety standards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</AutoSEOWrapper>
 
     </>
   );
