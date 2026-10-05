@@ -176,7 +176,7 @@ export default function PetiteGallery() {
             Guest Snapshots
           </h2>
           <p className="text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center">
-            Authentic moments from the wild captured by our safari travelers.
+            Authentic moments from the wild captured by our safari travelers.Don't just take our word for it read authentic reviews from thousands of satisfied travelers who experienced unforgettable wildlife adventures with Yala Wildlife.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
