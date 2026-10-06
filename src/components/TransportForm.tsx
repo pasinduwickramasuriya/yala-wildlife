@@ -1,31 +1,30 @@
-
 "use client";
 
 import { useState, useMemo } from "react";
 import { 
-  MapPin, Navigation, Calendar, Clock, User, Phone, Mail, 
-  Car, Bus, Send, Loader2, CheckCircle2, ShieldCheck, ArrowRight} from "lucide-react";
+  MapPin, Navigation, Calendar, Clock, User, Mail, 
+  Car, Bus, Send, Loader2, CheckCircle2, ShieldCheck, ArrowRight 
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { countries } from "countries-list";
 
 // --- CONFIG ---
 const VEHICLES = [
-  { id: "car", name: "Private Sedan", seats: 3, luggage: 2, price: "Best Rate" },
-  { id: "van", name: "Luxury KDH Van", seats: 9, luggage: 8, price: "Best Value" },
+  { id: "car", name: "Private Sedan", seats: 3, luggage: 2, badge: "Couple / Solo" },
+  { id: "van", name: "Luxury KDH Van", seats: 9, luggage: 8, badge: "Family / Group" },
 ];
 
-// Default Phone Code
 const DEFAULT_PHONE_CODE = "+94";
 
 export default function TransportForm() {
-  
-  // Memoize country list
   const countryList = useMemo(() => {
-    return Object.entries(countries).map(([code, data]) => ({
-      code,
-      name: data.name,
-      phoneCode: `+${data.phone}`
-    })).sort((a, b) => a.name.localeCompare(b.name));
+    return Object.entries(countries)
+      .map(([code, data]) => ({
+        code,
+        name: data.name,
+        phoneCode: `+${data.phone}`
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, []);
 
   const initialFormState = {
@@ -67,11 +66,10 @@ export default function TransportForm() {
       }
 
       setIsSuccess(true);
-      setFormData(initialFormState); 
-
+      setFormData(initialFormState);
     } catch (error) {
       console.error("Submission Error:", error);
-      setErrorMsg("Failed to send request. Please try again.");
+      setErrorMsg("Failed to send request. Please check your network and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -80,27 +78,38 @@ export default function TransportForm() {
   // --- SUCCESS SCREEN ---
   if (isSuccess) {
     return (
-      <div className="h-full min-h-[550px] flex flex-col items-center justify-center text-center p-8 rounded-[2.5rem] bg-black/80 animate-in fade-in zoom-in duration-500 shadow-2xl">
-        <div className="w-20 h-20 bg-[#00ff00]/10 rounded-full flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(0,255,0,0.2)] animate-pulse">
-          <CheckCircle2 size={40} className="text-[#00ff00]" />
+      <div 
+        className="h-full min-h-[480px] flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-[2.5rem] bg-white text-[#1f1f1f]"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+      >
+        <div className="w-16 h-16 bg-[#e6f4ea] text-[#137333] rounded-full flex items-center justify-center mb-5 shrink-0">
+          <CheckCircle2 size={34} />
         </div>
         
-        <h3 className="text-2xl font-black text-white mb-2 tracking-tighter uppercase">Request <span className="text-[#00ff00]">Received</span></h3>
+        <h3 className="text-2xl font-bold text-[#1f1f1f] mb-2 tracking-tight">
+          Request Received
+        </h3>
         
-        <div className="space-y-4 mb-8 max-w-sm text-neutral-400 text-xs font-medium leading-relaxed tracking-wide">
-          <p>We have successfully received your travel parameters.</p>
-          <div className="bg-[#00ff00]/10 p-4 rounded-2xl border border-[#00ff00]/20 text-neutral-300">
-            Our logistics dispatcher is calculating the <strong className="text-[#00ff00] font-black uppercase">Lowest Market Rate</strong> for your custom route.
+        <div className="space-y-3 mb-6 max-w-sm text-[14px] font-semibold text-[#5f6368] leading-relaxed">
+          <p>We have safely registered your island pickup details.</p>
+          <div className="bg-[#f8f9fa] p-4 rounded-2xl text-[#1f1f1f]">
+            Our transport desk is assigning an executive vehicle at guaranteed standard rates.
           </div>
-          <p>We will contact you via <span className="text-white font-bold">WhatsApp or Email shortly</span> with your vehicle dispatch quote.</p>
+          <p>
+            You will receive instant confirmation via <span className="text-[#1f1f1f] font-bold">WhatsApp & Email</span>.
+          </p>
         </div>
 
         <button 
+          type="button"
           onClick={() => setIsSuccess(false)}
-          className="group flex items-center gap-2 bg-neutral-900 hover:bg-[#00ff00] hover:text-black border border-neutral-800 text-[#00ff00] px-6 py-3.5 rounded-full transition-all duration-300 font-black uppercase tracking-widest text-[10px]"
+          className="inline-flex items-center gap-2 bg-[#f8f9fa] hover:bg-[#00ff00] hover:text-black text-[#1f1f1f] px-6 py-3 rounded-full transition-colors duration-150 font-bold text-[13px] active:scale-95 cursor-pointer"
         >
-          <span>Book Return Trip</span>
-          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          <span>Book Another Transfer</span>
+          <ArrowRight size={15} />
         </button>
       </div>
     );
@@ -108,169 +117,252 @@ export default function TransportForm() {
 
   // --- MAIN FORM ---
   return (
-    <div className="relative rounded-[2.5rem] bg-black/80 p-6 md:p-8 shadow-2xl select-none">
-      
+    <div 
+      className="relative rounded-[2.5rem] bg-white p-5 sm:p-7 text-[#1f1f1f]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 border-b border-neutral-800/80 pb-4">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_12px_#00ff00]"></span>
-          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#00ff00]">Transport Logistics</span>
+      <div className="flex items-center justify-between mb-6 pb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f8f9fa] text-[12px] font-semibold text-[#1f1f1f]">
+          <span className="w-2 h-2 rounded-full bg-[#00ff00]" />
+          <span>Island Route Planner</span>
         </div>
-        <ShieldCheck size={14} className="text-neutral-500" />
+        <ShieldCheck size={18} className="text-[#137333]" />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-5">
         
-        {/* --- LOCATION --- */}
-        <div className="space-y-4 relative">
-          {/* Connector Line */}
-          <div className="absolute left-[19px] top-[45px] bottom-[45px] w-px bg-gradient-to-b from-[#00ff00]/30 to-neutral-800/30 border-l border-dashed border-[#00ff00]/20 z-0"></div>
+        {/* --- 01. ROUTE --- */}
+        <div className="space-y-3">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#5f6368] block ml-1">
+            01. Route Details
+          </span>
 
-          <InputGroup icon={<MapPin size={16} className="text-[#00ff00]" />} label="Pick-up Location">
-            <input 
-              required type="text" placeholder="Airport, Hotel, or City..." 
-              className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-600 font-bold"
-              value={formData.pickupLocation}
-              onChange={(e) => setFormData({...formData, pickupLocation: e.target.value})}
-            />
-          </InputGroup>
-
-          <InputGroup icon={<Navigation size={16} className="text-rose-500" />} label="Drop-off Location">
-            <input 
-              required type="text" placeholder="Yala National Park, Villa..." 
-              className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-600 font-bold"
-              value={formData.dropoffLocation}
-              onChange={(e) => setFormData({...formData, dropoffLocation: e.target.value})}
-            />
-          </InputGroup>
-        </div>
-
-        {/* --- DATE & TIME --- */}
-        <div className="grid grid-cols-2 gap-4">
-          <InputGroup icon={<Calendar size={16} className="text-[#00ff00]" />} label="Date">
-            <input 
-              required type="date" min={new Date().toISOString().split("T")[0]}
-              className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none [color-scheme:dark] font-bold"
-              value={formData.date}
-              onChange={(e) => setFormData({...formData, date: e.target.value})}
-            />
-          </InputGroup>
-          <InputGroup icon={<Clock size={16} className="text-[#00ff00]" />} label="Time">
-            <input 
-              required type="time"
-              className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none [color-scheme:dark] font-bold"
-              value={formData.time}
-              onChange={(e) => setFormData({...formData, time: e.target.value})}
-            />
-          </InputGroup>
-        </div>
-
-        {/* --- VEHICLE SELECTION --- */}
-        <div>
-          <label className="text-[9px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-2.5 block ml-1">Select Fleet Class</label>
-          <div className="grid grid-cols-2 gap-3">
-            {VEHICLES.map((v) => (
-              <div 
-                key={v.id}
-                onClick={() => setFormData({...formData, vehicle: v.id})}
-                className={cn(
-                  "cursor-pointer relative p-4 rounded-2xl border transition-all duration-300",
-                  formData.vehicle === v.id 
-                    ? "bg-[#00ff00]/10 border-[#00ff00] shadow-[0_0_20px_rgba(0,255,0,0.1)]" 
-                    : "bg-neutral-900/40 border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/60"
-                )}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  {v.id === 'car' ? <Car size={20} className={formData.vehicle === v.id ? "text-[#00ff00]" : "text-neutral-400"} /> : <Bus size={20} className={formData.vehicle === v.id ? "text-[#00ff00]" : "text-neutral-400"} />}
-                  {formData.vehicle === v.id && <CheckCircle2 size={14} className="text-[#00ff00]" />}
+          <div className="space-y-2.5">
+            <div>
+              <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                Pickup Location
+              </label>
+              <div className="relative flex items-center bg-[#f8f9fa] rounded-2xl focus-within:bg-[#f1f3f4] transition-colors">
+                <div className="pl-4 text-[#137333] shrink-0">
+                  <MapPin size={16} />
                 </div>
-                <div className="text-sm font-bold text-white tracking-tight">{v.name}</div>
-                <div className="text-[10px] text-neutral-400 mt-1 flex gap-2 font-mono">
-                  <span>👤 {v.seats} Seats</span>
-                  <span className="text-neutral-700">|</span>
-                  <span>🧳 {v.luggage} Lugg</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-neutral-800 to-transparent my-6"></div>
-
-        {/* --- CUSTOMER DETAILS --- */}
-        <div className="space-y-4">
-          <InputGroup icon={<User size={16} className="text-[#00ff00]" />} label="Your Name">
-            <input 
-              required type="text" placeholder="Full Name"
-              className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-600 font-bold"
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-            />
-          </InputGroup>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* PHONE NUMBER WITH COUNTRY CODE */}
-            <div className="group relative z-10">
-              <label className="text-[9px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-1.5 block ml-1 transition-colors group-focus-within:text-[#00ff00]">WhatsApp / Mobile</label>
-              <div className="flex gap-2">
-                  {/* Country Code Select */}
-                  <div className="relative w-[95px] flex items-center bg-neutral-900/40 rounded-xl overflow-hidden border border-neutral-800 group-focus-within:border-[#00ff00] group-focus-within:shadow-[0_0_15px_rgba(0,255,0,0.1)] transition-all duration-300">
-                     <select 
-                        className="w-full h-full bg-transparent text-white text-base sm:text-sm text-center px-1 py-3.5 outline-none appearance-none cursor-pointer [&>option]:bg-neutral-900 font-bold"
-                        value={formData.phoneCode}
-                        onChange={(e) => setFormData({...formData, phoneCode: e.target.value})}
-                     >
-                        {countryList.map((c) => (
-                            <option key={`${c.code}-${c.phoneCode}`} value={c.phoneCode}>
-                                {c.code} {c.phoneCode}
-                            </option>
-                        ))}
-                     </select>
-                  </div>
-                  {/* Number Input */}
-                  <div className="relative flex-1 flex items-center bg-neutral-900/40 rounded-xl overflow-hidden border border-neutral-800 group-focus-within:border-[#00ff00] group-focus-within:shadow-[0_0_15px_rgba(0,255,0,0.1)] transition-all duration-300">
-                      <div className="pl-4 text-neutral-500 group-focus-within:text-white transition-colors"><Phone size={16} /></div>
-                      <input 
-                          required type="tel" placeholder="Mobile Num"
-                          className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-600 font-bold"
-                          value={formData.phoneNumber}
-                          onChange={(e) => setFormData({...formData, phoneNumber: e.target.value.replace(/\D/g, "")})}
-                      />
-                  </div>
+                <input 
+                  required 
+                  type="text" 
+                  placeholder="Airport (BIA), Hotel, or City..." 
+                  className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                  value={formData.pickupLocation}
+                  onChange={(e) => setFormData({...formData, pickupLocation: e.target.value})}
+                />
               </div>
             </div>
 
-            <InputGroup icon={<Mail size={16} className="text-[#00ff00]" />} label="Email">
-              <input 
-                required type="email" placeholder="Email Address"
-                className="w-full bg-transparent text-white text-base sm:text-sm px-4 py-3.5 outline-none placeholder:text-neutral-600 font-bold"
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-              />
-            </InputGroup>
+            <div>
+              <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                Drop-off Destination
+              </label>
+              <div className="relative flex items-center bg-[#f8f9fa] rounded-2xl focus-within:bg-[#f1f3f4] transition-colors">
+                <div className="pl-4 text-[#d93025] shrink-0">
+                  <Navigation size={16} />
+                </div>
+                <input 
+                  required 
+                  type="text" 
+                  placeholder="Yala Hotel, Villa, Camp, or Safari Gate..." 
+                  className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                  value={formData.dropoffLocation}
+                  onChange={(e) => setFormData({...formData, dropoffLocation: e.target.value})}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- 02. SCHEDULE --- */}
+        <div className="space-y-3">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#5f6368] block ml-1">
+            02. Schedule
+          </span>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                Pickup Date
+              </label>
+              <div className="relative flex items-center bg-[#f8f9fa] rounded-2xl px-3 py-2.5">
+                <Calendar size={16} className="text-[#5f6368] mr-2 shrink-0" />
+                <input 
+                  required 
+                  type="date" 
+                  min={new Date().toISOString().split("T")[0]}
+                  className="w-full bg-transparent text-[#1f1f1f] text-[13px] font-semibold outline-none"
+                  value={formData.date}
+                  onChange={(e) => setFormData({...formData, date: e.target.value})}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                Pickup Time
+              </label>
+              <div className="relative flex items-center bg-[#f8f9fa] rounded-2xl px-3 py-2.5">
+                <Clock size={16} className="text-[#5f6368] mr-2 shrink-0" />
+                <input 
+                  required 
+                  type="time"
+                  className="w-full bg-transparent text-[#1f1f1f] text-[13px] font-semibold outline-none"
+                  value={formData.time}
+                  onChange={(e) => setFormData({...formData, time: e.target.value})}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- 03. FLEET CLASS --- */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-bold uppercase tracking-wider text-[#5f6368] block ml-1">
+            03. Vehicle Class
+          </label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {VEHICLES.map((v) => {
+              const isSelected = formData.vehicle === v.id;
+              return (
+                <div 
+                  key={v.id}
+                  onClick={() => setFormData({...formData, vehicle: v.id})}
+                  className={cn(
+                    "cursor-pointer p-4 rounded-2xl transition-all duration-150 select-none",
+                    isSelected
+                      ? "bg-[#e6f4ea] text-[#137333]" 
+                      : "bg-[#f8f9fa] text-[#1f1f1f] hover:bg-[#f1f3f4]"
+                  )}
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <div className={cn("p-2 rounded-xl bg-white", isSelected ? "text-[#137333]" : "text-[#5f6368]")}>
+                      {v.id === "car" ? <Car size={18} /> : <Bus size={18} />}
+                    </div>
+                    {isSelected && <CheckCircle2 size={16} className="text-[#137333]" />}
+                  </div>
+                  <div className="text-[14px] font-bold text-[#1f1f1f]">{v.name}</div>
+                  <div className="text-[12px] font-semibold text-[#5f6368] mt-1 flex items-center gap-2">
+                    <span>{v.seats} Seats</span>
+                    <span>•</span>
+                    <span>{v.luggage} Bags</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* --- 04. CONTACT DETAILS --- */}
+        <div className="space-y-3">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#5f6368] block ml-1">
+            04. Contact Details
+          </span>
+
+          <div className="space-y-2.5">
+            <div>
+              <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                Full Name
+              </label>
+              <div className="relative flex items-center bg-[#f8f9fa] rounded-2xl focus-within:bg-[#f1f3f4] transition-colors">
+                <div className="pl-4 text-[#5f6368] shrink-0">
+                  <User size={16} />
+                </div>
+                <input 
+                  required 
+                  type="text" 
+                  placeholder="Primary Passenger Name"
+                  className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div>
+                <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                  WhatsApp / Phone
+                </label>
+                <div className="flex gap-1.5">
+                  <select 
+                    className="w-[84px] bg-[#f8f9fa] text-[#1f1f1f] text-[13px] font-bold px-2 py-3 rounded-2xl outline-none cursor-pointer shrink-0"
+                    value={formData.phoneCode}
+                    onChange={(e) => setFormData({...formData, phoneCode: e.target.value})}
+                  >
+                    {countryList.map((c) => (
+                      <option key={`${c.code}-${c.phoneCode}`} value={c.phoneCode}>
+                        {c.code} {c.phoneCode}
+                      </option>
+                    ))}
+                  </select>
+                  <input 
+                    required 
+                    type="tel" 
+                    placeholder="Mobile number"
+                    className="w-full bg-[#f8f9fa] focus:bg-[#f1f3f4] text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 rounded-2xl outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                    value={formData.phoneNumber}
+                    onChange={(e) => setFormData({...formData, phoneNumber: e.target.value.replace(/\D/g, "")})}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[12px] font-semibold text-[#5f6368] mb-1 ml-1 text-left">
+                  Email Address
+                </label>
+                <div className="relative flex items-center bg-[#f8f9fa] rounded-2xl focus-within:bg-[#f1f3f4] transition-colors">
+                  <div className="pl-4 text-[#5f6368] shrink-0">
+                    <Mail size={16} />
+                  </div>
+                  <input 
+                    required 
+                    type="email" 
+                    placeholder="email@example.com"
+                    className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ERROR MESSAGE */}
         {errorMsg && (
-           <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs text-center p-3 rounded-xl font-bold font-mono">
-              {errorMsg}
-           </div>
+          <div className="bg-[#fce8e6] text-[#d93025] text-[12px] text-center p-3 rounded-2xl font-semibold">
+            {errorMsg}
+          </div>
         )}
 
-        {/* SUBMIT */}
-        <div className="space-y-3 pt-2">
+        {/* SUBMIT BUTTON */}
+        <div className="space-y-2 pt-2 text-center">
           <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-[#00ff00] hover:bg-[#00ff00]/90 text-black hover:scale-[1.01] active:scale-[0.99] font-black py-4 rounded-full transition-all duration-300 flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] shadow-[0_0_30px_rgba(0,255,0,0.25)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-[#00ff00] hover:brightness-105 active:scale-[0.99] text-black font-bold py-3.5 rounded-full transition-all flex items-center justify-center gap-2 text-[14px] cursor-pointer disabled:opacity-50"
           >
-              {isSubmitting ? <Loader2 className="animate-spin text-black" size={16} /> : <>Get Quote & Book <Send size={14} /></>}
+            {isSubmitting ? (
+              <Loader2 className="animate-spin text-black" size={18} />
+            ) : (
+              <>
+                <span>Get Instant Quote & Confirm</span> 
+                <Send size={15} className="stroke-[2.5]" />
+              </>
+            )}
           </button>
           
-          {/* Pricing Note */}
-          <p className="text-[9px] text-neutral-500 text-center font-mono tracking-wide">
-             * We guarantee the lowest market rates. Final price dispatched via WhatsApp.
+          <p className="text-[11px] font-semibold text-[#5f6368]">
+            Direct driver dispatch • Fixed quotes delivered to your WhatsApp
           </p>
         </div>
 
@@ -278,14 +370,3 @@ export default function TransportForm() {
     </div>
   );
 }
-
-// --- Sub Component ---
-const InputGroup = ({ icon, label, children }: { icon: React.ReactNode, label: string, children: React.ReactNode }) => (
-  <div className="group relative z-10">
-    <label className="text-[9px] font-black uppercase tracking-[0.25em] text-neutral-400 mb-1.5 block ml-1 transition-colors group-focus-within:text-[#00ff00]">{label}</label>
-    <div className="relative flex items-center bg-neutral-900/40 rounded-xl overflow-hidden border border-neutral-800 group-focus-within:border-[#00ff00] group-focus-within:shadow-[0_0_15px_rgba(0,255,0,0.1)] transition-all duration-300">
-      <div className="pl-4 text-neutral-500 group-focus-within:text-white transition-colors">{icon}</div>
-      {children}
-    </div>
-  </div>
-);

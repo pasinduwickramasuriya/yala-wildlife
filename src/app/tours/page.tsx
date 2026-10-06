@@ -189,84 +189,68 @@ export default async function ToursPage() {
         }))
     };
 
-    return (
-        <main className="relative w-full min-h-screen overflow-hidden bg-black selection:bg-[#00ff00]">
-            {/* Add JSON-LD to Head */}
-            <script
-                type="application/ld+json"
-                suppressHydrationWarning
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+ return (
+    <main
+      className="relative w-full min-h-screen bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased pt-20 sm:pt-28 pb-20"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      {/* Structural Schema Data */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Editorial Header */}
+        <header className="flex flex-col items-center text-center mb-12 sm:mb-16 space-y-4 max-w-3xl mx-auto">
+
+          {/* H1 Title */}
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1f1f1f] leading-[1.15]">
+            Sri Lanka Tour Packages <br />
+            {/* <span className="text-[#1f1f1f]">Island Expeditions</span> */}
+          </h1>
+
+          {/* Editorial Subtitle */}
+          <p className="text-[18px] text-[#3c4043] font-semibold leading-[1.8]">
+            Explore the emerald island with private safari adventures, ancient UNESCO heritage
+            circuits, and scenic highlands tailored for comfort and unhurried discovery.
+          </p>
+
+          {/* Action Button */}
+          <div className="pt-2">
+            <Link
+              href="/safari-packages"
+              className="inline-flex items-center gap-2 bg-[#00ff00] hover:brightness-105 text-black px-6 py-3 rounded-full text-[15px] font-bold transition-all duration-150 active:scale-95"
+            >
+              <span>Explore Safari Packages</span>
+              <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+            </Link>
+          </div>
+
+          {/* Hidden Semantic SEO Copy */}
+          <div className="sr-only">
+            Experience the best travel points in Sri Lanka including Sigiriya Rock Fortress,
+            Temple of the Sacred Tooth Relic in Kandy, Nine Arches Bridge in Ella, and Yala
+            National Park Safaris. We provide premium transportation and licensed private drivers.
+          </div>
+        </header>
+
+        {/* Tour Packages List */}
+        <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+          {tourPackages.map((tour: Tour, index: number) => (
+            <TourPackageCard
+              key={tour.id}
+              tour={tour}
+              horizontal={true}
+              reverse={index % 2 === 0}
             />
-
-            {/* =========================================
-                BACKGROUND IMAGE SECTION
-            ========================================= */}
-            <div className="fixed inset-0 z-0">
-                <Image
-                    src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-                    alt="Yala Leopard Emerging from Darkness"
-                    fill
-                    priority
-                    className="object-cover opacity-100 md:opacity-100 scale-105"
-                    quality={75}
-                />
-                {/* Cinematic Gradients */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/5 to-black/90" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
-                {/* Noise Texture */}
-                <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
-            </div>
-
-            <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
-                {/* Header Banner - Snippet Styled Tiny & Mini Pills Layout */}
-                <header className="relative z-10 flex flex-col items-center gap-3 text-center mb-16 px-4 animate-in slide-in-from-bottom duration-1000 ease-out">
-                    {/* MAIN TITLE PILL */}
-                    <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
-                        <h1 className="text-[15px] font-black text-white tracking-[0.2em]">
-                            Sri Lanka Tour Packages
-                        </h1>
-                    </div>
-
-                    {/* DESCRIPTION PILL */}
-                    <div className="inline-block bg-black/80 px-6 py-3 rounded-2xl max-w-[660px] text-center shadow-2xl">
-                        <h2 className="text-[15px] text-white/80 font-medium leading-relaxed italic">
-                            "Explore the beautiful Emerald Isle with our premium private safari and cultural expeditions in Sri Lanka."
-                        </h2>
-                    </div>
-
-                    {/* 3. SMALLEST ACTION BUTTON */}
-                    <div className="inline-block">
-                        <Link
-                            href="/safari-packages"
-                            className="group flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full shadow-lg hover:bg-[#00ff00] transition-all active:scale-95"
-                        >
-                            <span className="text-[10px] font-black tracking-widest">
-                                Book Packages
-                            </span>
-                            <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </Link>
-                    </div>
-
-                    {/* Hidden Semantic Text: Helps ranking without changing UI look */}
-                    <div className="sr-only">
-                        Experience the best travel points in Sri Lanka including Sigiriya Rock Fortress,
-                        Temple of the Sacred Tooth Relic in Kandy, Nine Arches Bridge in Ella, and
-                        Yala National Park Safaris. We provide premium transportation and licensed private drivers.
-                    </div>
-                </header>
-
-                {/* TOUR PACKAGES LIST (Alternating Horizontal Cards) */}
-                <div className="flex flex-col gap-8 max-w-5xl mx-auto">
-                    {tourPackages.map((tour: Tour, index: number) => (
-                        <TourPackageCard 
-                            key={tour.id} 
-                            tour={tour} 
-                            horizontal={true}
-                            reverse={index % 2 === 0}
-                        />
-                    ))}
-                </div>
-            </div>
-        </main>
-    );
+          ))}
+        </div>
+      </div>
+    </main>
+  );
 }

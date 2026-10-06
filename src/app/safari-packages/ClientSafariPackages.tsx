@@ -1,18 +1,200 @@
+// "use client";
+
+// import { useState, useEffect } from "react";
+// import PackageCard from "@/components/PackageCard";
+// import { OrganizationJsonLd, LocalBusinessJsonLd } from "@/components/JsonLd";
+// import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
+// import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+// import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
+// import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
+// import { Compass, Map, Shield, ArrowRight, CheckCircle2 } from "lucide-react";
+// import AdvancePaymentButton from "@/components/AdvancePaymentButton";
+
+// interface SafariPackage {
+//   id: string;
+//   name: string;
+//   slug: string;
+//   description?: string;
+//   price?: number;
+//   imageUrl?: string;
+//   mealPrice: number;
+//   ticketPrice: number;
+// }
+
+// export default function ClientSafariPackages() {
+//   const [packages, setPackages] = useState<SafariPackage[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   useEffect(() => {
+//     const fetchPackages = async () => {
+//       try {
+//         const response = await fetch("/api/package", { cache: "no-store" });
+//         if (!response.ok) throw new Error("Failed to fetch packages");
+//         const data = await response.json();
+//         setPackages(data);
+//       } catch (err) {
+//         setError(err instanceof Error ? err.message : "An error occurred");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchPackages();
+//   }, []);
+
+//   const breadcrumbItems = [
+//     { name: "Home", item: "/" },
+//     { name: "Safari Packages", item: "/safari-packages" },
+//   ];
+
+//   return (
+//     <>
+//       {/* Structured Schema Markup */}
+//       <OrganizationJsonLd />
+//       <LocalBusinessJsonLd />
+//       <FAQJsonLd faqs={defaultFAQs} />
+//       <BreadcrumbJsonLd items={breadcrumbItems} />
+//       {packages.map((pkg) => (
+//         <SafariPackageJsonLd key={pkg.id} package={pkg} />
+//       ))}
+
+//       <main
+//         className="w-full bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden min-h-screen"
+//         style={{
+//           fontFamily:
+//             '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+//         }}
+//         role="main"
+//       >
+//         <div className="pt-24 sm:pt-28 md:pt-32 pb-20 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto flex flex-col gap-12 sm:gap-16 bg-white">
+
+//           {/* =========================================
+//               1. HERO HEADER SECTION (GOOGLE EDITORIAL STYLE)
+//           ========================================= */}
+//           <section className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto bg-white [contain:paint]">
+//             <h1 className="text-4xl sm:text-4xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-tight mb-4 text-center">
+//               Yala Safari Packages
+//             </h1>
+
+//             <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+//               Explore curated private safari packages led by Department of Wildlife certified naturalists with elevated 4×4 photography vehicles.
+//             </p>
+
+//             <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+//               Already finalized a custom multi-day itinerary or special private vehicle with our operations desk? Secure your permit advance here.
+//             </p>
+
+//             <div className="inline-block mb-0.5">
+//               <AdvancePaymentButton />
+//             </div>
+//           </section>
+
+//           {/* =========================================
+//               2. PACKAGES GRID
+//           ========================================= */}
+//           {/* Increased left & right padding across all screen sizes (px-6 sm:px-10 md:px-14 lg:px-20) */}
+//           <section className="w-full bg-white px-6 sm:px-10 md:px-14 lg:px-20 [contain:paint]">
+//             {loading ? (
+//               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center max-w-6xl mx-auto">
+//                 {Array(3).fill(null).map((_, i) => (
+//                   <div
+//                     key={i}
+//                     className="w-full aspect-[4/5] max-w-[380px] bg-[#f8f9fa] rounded-[2.25rem] animate-pulse"
+//                   />
+//                 ))}
+//               </div>
+//             ) : error ? (
+//               <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-20 bg-[#f8f9fa] rounded-[2.25rem] text-center [contain:paint]">
+//                 <h3 className="text-xl font-bold text-red-600 tracking-tight mb-2">
+//                   System Connection Notice
+//                 </h3>
+//                 <p className="text-[15px] text-[#5f6368] font-medium">
+//                   {error}
+//                 </p>
+//               </div>
+//             ) : packages.length > 0 ? (
+//               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center w-full max-w-6xl mx-auto">
+//                 {packages.map((pkg) => (
+//                   <div
+//                     key={pkg.id}
+//                     className="w-full max-w-[380px] flex flex-col transition-transform duration-200 active:scale-[0.99]"
+//                   >
+//                     <PackageCard slug={pkg.slug} />
+//                   </div>
+//                 ))}
+//               </div>
+//             ) : (
+//               <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-24 bg-[#f8f9fa] rounded-[2.25rem] text-center [contain:paint]">
+//                 <h3 className="text-2xl font-bold text-[#1f1f1f] tracking-tight mb-2">
+//                   No Tours Listed
+//                 </h3>
+//                 <p className="text-[16px] text-[#5f6368] font-medium">
+//                   Expeditions for the current season are being updated. Check back shortly.
+//                 </p>
+//               </div>
+//             )}
+//           </section>
+
+
+//           {/* =========================================
+//               4. EXPEDITION INTELLIGENCE & POLICY NOTES (EDITORIAL PROSE - CENTERED)
+//           ========================================= */}
+//           <section className="w-full max-w-[720px] mx-auto pt-12 border-t border-[#f1f3f4] text-center [contain:paint]">
+//             <div className="mb-8 flex flex-col items-center">
+
+//               <h2 className="text-4xl sm:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-snug text-center">
+//                 Park Logistics
+//               </h2>
+//             </div>
+
+//             <div className="space-y-6 text-[17px] sm:text-[18px] text-[#3c4043] font-normal leading-[1.85] text-center">
+//               <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+//                 Our half-day game drives are timed precisely around peak wildlife movement windows. Morning excursions depart at first light to intercept nocturnal hunters specifically Sri Lankan leopards and sloth bears before temperatures climb, while afternoon drives concentrate on coastal salt lagoons and water basins where elephant herds gather before dusk.
+//               </p>
+
+//               <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+//                 Full-day expeditions provide uninterrupted 10-hour access into the deeper trail networks of Blocks 1 and 5. By staying inside the reserve during midday gate closures, guests explore remote boundary zones and riverine forests while avoiding peak entrance traffic, pausing for a quiet rest along designated riverside stopping points.
+//               </p>
+
+//               <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+//                 Every safari is operated exclusively in custom-built 4×4 jeeps fitted with raised spectator seating, open-sided canopy frames for unobstructed lens panning, and high-clearance off-road suspension designed to navigate rugged terrain safely and quietly.
+//               </p>
+//             </div>
+
+//           </section>
+
+//           {/* Hidden Structured SEO Block */}
+//           <div className="sr-only">
+//             <AutoSEOWrapper
+//               pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
+//               pageDescription="Choose from half-day, full-day, and private Yala safari packages. All-inclusive tours with expert guides and luxury jeeps."
+//               pageType="package"
+//             >
+//               <p>Explore our carefully curated Yala National Park safari packages designed to suit every traveler's needs and budget. From budget-friendly half-day excursions to luxury full-day expeditions, we offer the best safari experiences in Sri Lanka.</p>
+//               <p>Our half-day safari package is perfect for travelers with limited time. Departing at dawn or afternoon, this 4-hour adventure takes you deep into Block 1 of Yala National Park. Witness leopards, elephants, crocodiles, and exotic birds in their natural habitat with our expert naturalist guides.</p>
+//             </AutoSEOWrapper>
+//           </div>
+
+//         </div>
+//       </main>
+//     </>
+//   );
+// }
+
+
+
+
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import PackageCard from "@/components/PackageCard";
 import { OrganizationJsonLd, LocalBusinessJsonLd } from "@/components/JsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
-import { Compass, Map, Shield, Star, Sparkles } from "lucide-react";
 import AdvancePaymentButton from "@/components/AdvancePaymentButton";
-// import AdUnit from "@/components/AdUnit";
 
-// Define the Package interface
 interface SafariPackage {
   id: string;
   name: string;
@@ -24,287 +206,172 @@ interface SafariPackage {
   ticketPrice: number;
 }
 
+const BREADCRUMB_ITEMS = [
+  { name: "Home", item: "/" },
+  { name: "Safari Packages", item: "/safari-packages" },
+];
+
 export default function ClientSafariPackages() {
   const [packages, setPackages] = useState<SafariPackage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
     const fetchPackages = async () => {
       try {
-        const response = await fetch("/api/package", { cache: "no-store" });
+        const response = await fetch("/api/package", { 
+          cache: "no-store",
+          signal: controller.signal 
+        });
         if (!response.ok) throw new Error("Failed to fetch packages");
         const data = await response.json();
-        setPackages(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
+        if (isMounted) setPackages(data);
+      } catch (err: any) {
+        if (err.name !== "AbortError" && isMounted) {
+          setError(err instanceof Error ? err.message : "An error occurred");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
-    fetchPackages();
-  }, []);
 
-  const breadcrumbItems = [
-    { name: "Home", item: "/" },
-    { name: "Safari Packages", item: "/safari-packages" },
-  ];
+    fetchPackages();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
 
   return (
     <>
-      {/* JSON-LD Data */}
+      {/* Structured Schema Markup */}
       <OrganizationJsonLd />
       <LocalBusinessJsonLd />
       <FAQJsonLd faqs={defaultFAQs} />
-      <BreadcrumbJsonLd items={breadcrumbItems} />
+      <BreadcrumbJsonLd items={BREADCRUMB_ITEMS} />
       {packages.map((pkg) => (
-        <SafariPackageJsonLd
-          key={pkg.id}
-          package={pkg}
-        />
+        <SafariPackageJsonLd key={pkg.id} package={pkg} />
       ))}
 
-      <div className="min-h-screen bg-[#050505] relative text-white overflow-hidden selection:bg-green-500/30">
+      <main
+        className="w-full bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden min-h-screen"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+        role="main"
+      >
+        <div className="pt-24 sm:pt-28 md:pt-32 pb-20 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto flex flex-col gap-12 sm:gap-16 bg-white">
 
-        {/* =========================================
-            BACKGROUND IMAGE SECTION - UPDATED FOR VISIBILITY
-        ========================================= */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Leopard Background"
-            fill
-            priority
-            // ✅ Increased opacity from 60 to 90 so the image is clearly visible
-            className="object-cover opacity-90"
-            quality={90}
-          />
-          {/* ✅ Softer Gradients: Transparent middle to let the image show through */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
-          {/* ✅ Lighter Vignette: Reduced intensity on the corners */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_20%,_rgba(0,0,0,0.6)_100%)]" />
-        </div>
-
-        {/* =========================================
-            MAIN CONTENT
-        ========================================= */}
-        <section className="relative z-10 w-full py-24 px-4 md:px-6">
-
-          {/* HERO HEADER */}
-          <div className="container max-w-7xl mx-auto mb-16 text-center">
-            {/* Badge
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00ff00]/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(0,255,0,0.15)]">
-              <span className="w-2 h-2 rounded-full bg-[#00ff00] animate-pulse"></span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#00ff00]">Premium Expeditions</span>
-            </div> */}
-
-
-            <h1 className="flex justify-center items-center mb-10 selection:bg-[#00ff00] selection:text-black">
-              <div className="inline-block bg-black/80 px-6 py-2.5 rounded-full backdrop-blur-md shadow-2xl">
-                <span className="text-[15px] sm:text-base font-bold text-white tracking-wider leading-snug">
-                  Yala Safari Packages
-                </span>
-              </div>
+          {/* =========================================
+              1. HERO HEADER SECTION (GOOGLE EDITORIAL STYLE)
+          ========================================= */}
+          <section className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto bg-white [contain:paint]">
+            <h1 className="text-4xl sm:text-4xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-tight mb-4 text-center">
+              Yala Safari Packages
             </h1>
 
+            <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+              Explore curated private safari packages led by Department of Wildlife certified naturalists with elevated 4×4 photography vehicles.
+            </p>
 
+            <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+              Already finalized a custom multi-day itinerary or special private vehicle with our operations desk? Secure your permit advance here.
+            </p>
 
-            <div className="flex flex-col items-center gap-1.5 max-w-5xl mx-auto px-4 mb-16">
-
-              {/* BLOCK_01: PRIMARY_DATA */}
-              <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
-                <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
-                  Explore the breathtaking beauty of Yala National Park with our expert-guided safari packages.
-                </p>
-              </div>
-
-              {/* BLOCK_02: SECONDARY_DATA */}
-              <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
-                <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
-                  Witness the park&apos;s rich biodiversity, including elusive leopards and majestic elephants.
-                </p>
-              </div>
-
-              {/* DATA_BLOCK_04: TECHNICAL_INSIGHT */}
-              <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
-                <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
-                  Apex predator surveillance and habitat monitoring protocols managed by senior field guides.
-                </p>
-              </div>
-
-              {/* FEATURE_PILLS */}
-              <div className="flex flex-wrap justify-center gap-3 pt-4 mb-10">
-
-                {/* PILL_01 */}
-                <div className="group flex items-center gap-2 bg-black/80 px-4 py-2 rounded-full backdrop-blur-md shadow-lg">
-                  <Shield className="text-[#00ff00] w-4 h-4 drop-shadow-[0_0_6px_#00ff00]" />
-                  <span className="text-[12px] font-bold uppercase tracking-wider text-white">
-                    SECURE PROTOCOL
-                  </span>
-                </div>
-
-                {/* PILL_02 */}
-                <div className="group flex items-center gap-2 bg-black/80 px-4 py-2 rounded-full backdrop-blur-md shadow-lg">
-                  <Compass className="text-[#00ff00] w-4 h-4 drop-shadow-[0_0_6px_#00ff00]" />
-                  <span className="text-[12px] font-bold uppercase tracking-wider text-white">
-                    EXPERT GUIDE
-                  </span>
-                </div>
-
-                {/* PILL_03 */}
-                <div className="group flex items-center gap-2 bg-black/80 px-4 py-2 rounded-full backdrop-blur-md shadow-lg">
-                  <Map className="text-[#00ff00] w-4 h-4 drop-shadow-[0_0_6px_#00ff00]" />
-                  <span className="text-[12px] font-bold uppercase tracking-wider text-white">
-                    PRIME ZONES
-                  </span>
-                </div>
-
-              </div>
-
-              {/* ADVANCE PAYMENT STRIP */}
-              <div className="flex flex-col items-center justify-center gap-4 animate-in slide-in-from-bottom duration-700">
-
-                {/* 1. Heading Pill */}
-                <div className="inline-block bg-black/80 px-6 py-2 rounded-full backdrop-blur-md shadow-md">
-                  <h3 className="text-[#00ff00] font-bold tracking-wider text-[10px] sm:text-xs">
-                    Custom Expeditions Only
-                  </h3>
-                </div>
-
-                {/* 2. Description Pill */}
-                <div className="inline-block bg-black/80 px-8 py-3.5 rounded-full max-w-sm shadow-xl">
-                  <p className="text-white text-[11px] sm:text-xs font-normal leading-relaxed text-center">
-                    Have a pre-arranged custom expedition with our team? <br />
-                    Secure your booking directly right here.
-                  </p>
-                </div>
-
-                {/* 3. Button */}
-                <div className="inline-block animate-pulse-slow">
-                  <AdvancePaymentButton />
-                </div>
-
-              </div>
+            <div className="inline-block mb-0.5">
+              <AdvancePaymentButton />
             </div>
-          </div>
+          </section>
 
-          {/* --- INTELLIGENCE TRACK: PACKAGES GRID --- */}
-          <div className="max-w-[1440px] mx-auto px-6 md:px-24 lg:px-48 pb-20 relative z-10">
-
+          {/* =========================================
+              2. PACKAGES GRID
+          ========================================= */}
+          <section className="w-full bg-white px-6 sm:px-10 md:px-14 lg:px-20 [contain:paint]">
             {loading ? (
-              /* --- SKELETON GRID --- */
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center max-w-6xl mx-auto">
                 {Array(3).fill(null).map((_, i) => (
                   <div
                     key={i}
-                    className="w-[280px] md:w-full aspect-[3/4] bg-black/80 rounded-[2.5rem] animate-pulse"
+                    className="w-full aspect-[4/5] max-w-[380px] bg-[#f8f9fa] rounded-[2.25rem] opacity-75 [contain:strict]"
                   />
                 ))}
               </div>
             ) : error ? (
-              /* --- ERROR PILL --- */
-              <div className="flex justify-center">
-                <div className="bg-black/80 px-6 py-3 rounded-2xl shadow-2xl">
-                  <p className="text-red-400 text-[10px] font-bold uppercase tracking-widest leading-none flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-red-500 animate-ping"></span>
-                    System Error: {error}
-                  </p>
-                </div>
+              <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-20 bg-[#f8f9fa] rounded-[2.25rem] text-center [contain:paint]">
+                <h3 className="text-xl font-bold text-red-600 tracking-tight mb-2">
+                  System Connection Notice
+                </h3>
+                <p className="text-[15px] text-[#5f6368] font-medium">
+                  {error}
+                </p>
               </div>
             ) : packages.length > 0 ? (
-              /* --- THE GRID: 3-Col Desktop | Petite Mobile --- */
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 lg:gap-x-10 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center w-full max-w-6xl mx-auto">
                 {packages.map((pkg) => (
                   <div
                     key={pkg.id}
-                    /* ✅ THE CUTTER FIX: Fixed 280px width on mobile, fills grid cell on desktop */
-                    className="w-[280px] md:w-full max-w-[340px] transition-all duration-700 hover:scale-[1.02] active:scale-[0.98]"
+                    className="w-full max-w-[380px] flex flex-col [contain:paint]"
                   >
-                    <div className="h-full">
-                      <PackageCard slug={pkg.slug} />
-                    </div>
+                    <PackageCard slug={pkg.slug} />
                   </div>
                 ))}
               </div>
             ) : (
-              /* --- EMPTY DATA PILL --- */
-              <div className="flex justify-center">
-                <div className="bg-black/80 px-10 py-5 rounded-full shadow-2xl">
-                  <p className="text-neutral-400 text-[9px] font-bold uppercase tracking-widest text-center italic">
-                    No expeditions currently available.
-                  </p>
-                </div>
+              <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-24 bg-[#f8f9fa] rounded-[2.25rem] text-center [contain:paint]">
+                <h3 className="text-2xl font-bold text-[#1f1f1f] tracking-tight mb-2">
+                  No Tours Listed
+                </h3>
+                <p className="text-[16px] text-[#5f6368] font-medium">
+                  Expeditions for the current season are being updated. Check back shortly.
+                </p>
               </div>
             )}
+          </section>
 
-          </div>
-
-          {/* Ad unit after packages grid */}
-          {/* <div className="max-w-5xl mx-auto px-4 pb-8">
-            <AdUnit />
-          </div> */}
-
-          <div className="flex flex-col items-center gap-1.5 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">
-
-            {/* PROTOCOL_HEADER */}
-            <div className="inline-block bg-black/80 px-5 py-1.5 rounded-full backdrop-blur-md mb-1 shadow-md">
-              <h2 className="text-[13px] md:text-[13px] font-bold text-[#00ff00] tracking-wider flex items-center gap-2">
-                 Expedition Intelligence Notes
+          {/* =========================================
+              4. EXPEDITION INTELLIGENCE & POLICY NOTES (EDITORIAL PROSE - CENTERED)
+          ========================================= */}
+          <section className="w-full max-w-[720px] mx-auto pt-12 border-t border-[#f1f3f4] text-center [content-visibility:auto] [contain-intrinsic-size:1px_450px]">
+            <div className="mb-8 flex flex-col items-center">
+              <h2 className="text-4xl sm:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-snug text-center">
+                Park Logistics
               </h2>
             </div>
 
-            {/* MISSION_OVERVIEW_STRIP */}
-            <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
-              <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
-                Explore curated Yala National Park safari packages designed for mission-specific traveler requirements and budgets.
+            <div className="space-y-6 text-[17px] sm:text-[18px] text-[#3c4043] font-normal leading-[1.85] text-center">
+              <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+                Our half-day game drives are timed precisely around peak wildlife movement windows. Morning excursions depart at first light to intercept nocturnal hunters specifically Sri Lankan leopards and sloth bears before temperatures climb, while afternoon drives concentrate on coastal salt lagoons and water basins where elephant herds gather before dusk.
+              </p>
+
+              <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+                Full-day expeditions provide uninterrupted 10-hour access into the deeper trail networks of Blocks 1 and 5. By staying inside the reserve during midday gate closures, guests explore remote boundary zones and riverine forests while avoiding peak entrance traffic, pausing for a quiet rest along designated riverside stopping points.
+              </p>
+
+              <p className="text-[17px] sm:text-[18px] text-[#5f6368] font-semibold leading-relaxed mb-6 text-center max-w-2xl">
+                Every safari is operated exclusively in custom-built 4×4 jeeps fitted with raised spectator seating, open-sided canopy frames for unobstructed lens panning, and high-clearance off-road suspension designed to navigate rugged terrain safely and quietly.
               </p>
             </div>
+          </section>
 
-            {/* SECTOR_01: HALF_DAY_LOG */}
-            <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
-              <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
-                Half-day excursions: 4-hour deep-penetration missions into Block 1. Witness leopards and elephants with expert naturalist guides.
-              </p>
-            </div>
-
-            {/* SECTOR_02: FULL_DAY_LOG */}
-            <div className="inline-block bg-black/80 px-6 py-1.5 rounded-full backdrop-blur-md shadow-xl">
-              <p className="text-[13px] md:text-[13px] text-white font-medium tracking-wide leading-snug text-center">
-                Full-day expeditions: 10-hour comprehensive multi-zone coverage. Includes premium photography support and tactical logistics.
-              </p>
-            </div>
-
-            {/* OPERATIONAL_TRUST_STRIPS */}
-            <div className="flex flex-wrap justify-center gap-2 pt-4">
-              {[
-                "SLTDA LICENSED OPERATOR",
-                "CERTIFIED NATURALIST INTELLIGENCE",
-                "ALL INCLUSIVE EXPEDITION LOGISTICS",
-                "PREMIUM WILDLIFE PHOTOGRAPHY SUPPORT"
-              ].map((status, i) => (
-                <div key={i} className="bg-black/80 px-4 py-1.5 rounded-full shadow-md">
-                  <span className="text-[7px] md:text-[9px] font-semibold uppercase tracking-wider text-neutral-300">
-                    {status}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* STEALTH_SEO_LAYER (Preserves your original Wrapper for Google) */}
-            <div className="sr-only">
-              <AutoSEOWrapper
-                pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
-                pageDescription="Choose from half-day, full-day, and private Yala safari packages. All-inclusive tours with expert guides and luxury jeeps."
-                pageType="package"
-              >
-                <p>Explore our carefully curated Yala National Park safari packages designed to suit every travelers needs and budget. From budget-friendly half-day excursions to luxury full-day expeditions, we offer the best safari experiences in Sri Lanka.</p>
-                <p>Our half-day safari package is perfect for travelers with limited time. Departing at dawn or afternoon, this 4-hour adventure takes you deep into Block 1 of Yala National Park. Witness leopards, elephants, crocodiles, and exotic birds in their natural habitat with our expert naturalist guides.</p>
-              </AutoSEOWrapper>
-            </div>
+          {/* Hidden Structured SEO Block */}
+          <div className="sr-only">
+            <AutoSEOWrapper
+              pageTitle="Yala Safari Packages | Half Day, Full Day & Private Tours"
+              pageDescription="Choose from half-day, full-day, and private Yala safari packages. All-inclusive tours with expert guides and luxury jeeps."
+              pageType="package"
+            >
+              <p>Explore our carefully curated Yala National Park safari packages designed to suit every traveler's needs and budget. From budget-friendly half-day excursions to luxury full-day expeditions, we offer the best safari experiences in Sri Lanka.</p>
+              <p>Our half-day safari package is perfect for travelers with limited time. Departing at dawn or afternoon, this 4-hour adventure takes you deep into Block 1 of Yala National Park. Witness leopards, elephants, crocodiles, and exotic birds in their natural habitat with our expert naturalist guides.</p>
+            </AutoSEOWrapper>
           </div>
 
-        </section>
-      </div>
+        </div>
+      </main>
     </>
   );
 }

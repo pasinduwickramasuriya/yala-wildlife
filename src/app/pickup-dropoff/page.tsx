@@ -94,142 +94,134 @@ const transportSchema = {
 export default function PickupDropoffPage() {
     return (
         <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(transportSchema) }} />
+            <script
+                type="application/ld+json"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(transportSchema) }}
+            />
 
-            <main className="min-h-screen bg-[#050505] text-white relative overflow-hidden selection:bg-green-500/30 font-sans pt-24 sm:pt-32">
-
-                {/* =========================================
-            BACKGROUND (Fixed & Visible)
-        ========================================= */}
-                <div className="fixed inset-0 z-0">
-                    <Image
-                        src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-                        alt="Sri Lanka Transport Background"
-                        fill
-                        priority
-                        className="object-cover opacity-70"
-                        quality={90}
-                    />
-                    {/* Gradient to darken text areas only */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/10 to-transparent" />
-                    {/* Subtle Vignette for focus */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_10%,_rgba(5,5,5,0.8)_100%)]" />
-                </div>
-
-                {/* =========================================
-            CONTENT CONTAINER
-        ========================================= */}
+            <main
+                className="min-h-screen bg-white text-[#1f1f1f] relative overflow-hidden selection:bg-[#00ff00] selection:text-black antialiased pt-20 sm:pt-28 pb-20"
+                style={{
+                    fontFamily:
+                        '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+                }}
+            >
                 <TourNavigator />
-                <div className="relative z-10 container mx-auto px-4 pt-6 sm:pt-10 pb-20">
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-
+                <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
                         {/* --- LEFT COLUMN: Information --- */}
-                        <div className="lg:col-span-7 space-y-10 pt-4">
-
+                        <div className="lg:col-span-7 space-y-10">
                             {/* 1. HERO HEADER */}
-                            <div className="flex flex-col items-center lg:items-start gap-4 relative overflow-hidden text-center lg:text-left select-none animate-in slide-in-from-bottom duration-1000 ease-out">
-                                
-                                {/* 1. TINY TITLE ISLAND */}
-                                <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl">
-                                    <div className="flex items-center gap-3">
-                                        <div className="px-2 py-0.5 rounded-full bg-green-500/20 flex items-center gap-1.5">
-                                            <span className="relative flex h-1.5 w-1.5">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-                                            </span>
-                                            <span className="text-[9px] font-mono uppercase tracking-widest text-[#00ff00] font-bold">Fleet Online</span>
-                                        </div>
-                                        <span className="text-[9px] font-mono text-neutral-300 uppercase tracking-wider">Island-Wide Coverage</span>
-                                    </div>
-                                </div>
+                            <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
+           
+                                <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1f1f1f] leading-[1.15]">
+                                    Premium Logistics & <br />
+                                    <span className="text-[#1f1f1f]">Island Transfer</span>
+                                </h1>
 
-                                {/* 2. SPLIT TITLE WITH INLINE bg-black/80 BLOCKS */}
-                                <div className="space-y-2">
-                                    <div className="inline-block bg-black/80 px-6 py-2.5 rounded-2xl shadow-2xl">
-                                        <h1 className="text-2xl sm:text-2xl md:text-2xl font-light italic text-white tracking-tighter leading-none uppercase">
-                                            Premium
-                                        </h1>
-                                    </div>
-                                    <br />
-                                    <div className="inline-block bg-black/80 px-6 py-2.5 rounded-2xl shadow-2xl">
-                                        <h1 className="text-2xl sm:text-2xl md:text-2xl font-semibold italic text-[#00ff00] tracking-tighter leading-none uppercase">
-                                            Logistics
-                                        </h1>
-                                    </div>
-                                </div>
-
-                                {/* 3. MINI DESCRIPTION PILL */}
-                                <div className="inline-block bg-black/80 px-6 py-3 rounded-2xl max-w-xl text-center lg:text-left shadow-2xl border-l-2 border-[#00ff00]">
-                                    <p className="text-[14px] text-white/80 font-medium leading-relaxed italic">
-                                        "Experience the gold standard in Sri Lankan travel. We offer seamless Pickup & Drop-off services from any location on the island directly to Yala National Park. Secure, punctual, and priced for value."
-                                    </p>
-                                </div>
-
+                                <p className="text-[18px] text-[#3c4043] font-semibold leading-[1.8] max-w-xl">
+                                    Seamless pickup and drop-off transfers connecting any location
+                                    in Sri Lanka directly to Yala National Park. Punctual, private,
+                                    and fully air-conditioned.
+                                </p>
                             </div>
 
                             {/* 2. METRICS GRID */}
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <StatCard label="Reliability" value="100%" icon={<ShieldCheck size={14} className="text-[#00ff00] " />} />
-                                <StatCard label="Availability" value="24/7" icon={<Clock size={14} className="text-[#00ff00] " />} />
-                                <StatCard label="Pricing" value="Best Rate" icon={<Zap size={14} className="text-[#00ff00] " />} />
-                                <StatCard label="Feedback" value="5.0/5" icon={<Star size={14} className="text-[#00ff00] " />} />
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <StatCard
+                                    label="Reliability"
+                                    value="100%"
+                                    icon={<ShieldCheck size={16} className="text-[#00ff00]" />}
+                                />
+                                <StatCard
+                                    label="Availability"
+                                    value="24/7"
+                                    icon={<Clock size={16} className="text-[#00ff00]" />}
+                                />
+                                <StatCard
+                                    label="Pricing"
+                                    value="Best Rate"
+                                    icon={<Zap size={16} className="text-[#00ff00]" />}
+                                />
+                                <StatCard
+                                    label="Feedback"
+                                    value="5.0/5"
+                                    icon={<Star size={16} className="text-[#00ff00]" />}
+                                />
                             </div>
 
                             {/* 3. FLEET SPECS */}
                             <div className="space-y-4">
-                                <div className="flex items-center gap-2 text-xs font-mono text-neutral-300 uppercase tracking-widest mb-2">
-                                    <Car size={14} className="text-green-400" /> Fleet Categories
+                                <div className="flex items-center gap-2 text-[14px] font-bold text-[#5f6368] uppercase tracking-wider">
+                                    <Car size={16} className="text-[#00ff00]" />
+                                    <span>Fleet Categories</span>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {/* Car Card */}
-                                    <div className="group relative backdrop-blur-xl bg-black/40 rounded-2xl p-5 transition-all duration-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-                                        <div className="absolute top-3 right-3 opacity-50 group-hover:opacity-100 transition-opacity">
-                                            <Navigation size={16} className="text-green-400" />
+                                    <div className="bg-white rounded-3xl p-6">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <h3 className="text-[#1f1f1f] font-bold text-[18px]">
+                                                Private Sedan
+                                            </h3>
+                                            <Navigation size={16} className="text-[#00ff00]" />
                                         </div>
-                                        <h3 className="text-white font-bold text-sm mb-1">Private Sedan</h3>
-                                        <p className="text-[10px] text-neutral-400 mb-3">Ideal for couples & solo travelers.</p>
-                                        <div className="flex gap-2">
-                                            <Badge text="A/C" />
-                                            <Badge text="3 Pax" />
+                                        <p className="text-[14px] font-semibold text-[#5f6368] mb-4">
+                                            Ideal for couples, solo travelers, and compact luggage
+                                            routes.
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            <Badge text="Full A/C" />
+                                            <Badge text="Up to 3 Pax" />
                                             <Badge text="2 Bags" />
                                         </div>
                                     </div>
 
                                     {/* Van Card */}
-                                    <div className="group relative backdrop-blur-xl bg-black/40 rounded-2xl p-5 transition-all duration-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-                                        <div className="absolute top-3 right-3 opacity-50 group-hover:opacity-100 transition-opacity">
-                                            <Navigation size={16} className="text-[#00ff00] " />
+                                    <div className="bg-white rounded-3xl p-6">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <h3 className="text-[#1f1f1f] font-bold text-[18px]">
+                                                Luxury KDH Van
+                                            </h3>
+                                            <Navigation size={16} className="text-[#00ff00]" />
                                         </div>
-                                        <h3 className="text-white font-bold text-sm mb-1">Luxury KDH Van</h3>
-                                        <p className="text-[10px] text-neutral-400 mb-3">Perfect for families & groups.</p>
-                                        <div className="flex gap-2">
+                                        <p className="text-[14px] font-semibold text-[#5f6368] mb-4">
+                                            Spacious comfort with extra legroom for families and
+                                            groups.
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
                                             <Badge text="Dual A/C" />
-                                            <Badge text="9 Pax" />
-                                            <Badge text="High Roof" />
+                                            <Badge text="Up to 9 Pax" />
+                                            <Badge text="High Roof Luxury" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* 4. CHAUFFEUR INFO */}
-                            <div className="backdrop-blur-xl bg-black/50 rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6">
-                                <div className="w-12 h-12 rounded-full bg-green-900/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
-                                    <UserCheck size={24} className="text-[#00ff00] " />
+                            <div className="bg-white rounded-3xl p-6 sm:p-7 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
+                                    <UserCheck size={22} className="text-[#00ff00]" />
                                 </div>
-                                <div>
-                                    <h3 className="text-sm font-bold text-white mb-1">Verified Professional Chauffeurs</h3>
-                                    <p className="text-xs text-neutral-300 leading-relaxed">
-                                        Our drivers are not just drivers; they are experienced travel guides. Licensed, background-checked, and trained in defensive driving. We guarantee punctuality and on-road safety for your peace of mind.
+                                <div className="text-center sm:text-left">
+                                    <h3 className="text-[18px] font-bold text-[#1f1f1f] mb-1.5">
+                                        Verified Professional Chauffeurs
+                                    </h3>
+                                    <p className="text-[15px] font-semibold text-[#5f6368] leading-relaxed">
+                                        Licensed, background-checked travel drivers trained in
+                                        defensive highway navigation. We guarantee punctuality,
+                                        transparent routes, and roadside assistance.
                                     </p>
                                 </div>
                             </div>
 
                             {/* 5. POPULAR ROUTES */}
-                            <div>
-                                <div className="flex items-center gap-2 text-xs font-mono text-neutral-300 uppercase tracking-widest mb-4">
-                                    <MapPin size={14} className="text-[#00ff00] " /> High-Frequency Connections
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-2 text-[14px] font-bold text-[#5f6368] uppercase tracking-wider">
+                                    <MapPin size={16} className="text-[#00ff00]" />
+                                    <span>High-Frequency Routes</span>
                                 </div>
                                 <div className="flex flex-wrap gap-2">
                                     <RoutePill from="Colombo Airport (BIA)" />
@@ -240,22 +232,33 @@ export default function PickupDropoffPage() {
                                     <RoutePill from="Udawalawe" />
                                 </div>
                             </div>
-
                         </div>
 
-                        {/* --- RIGHT COLUMN: FORM (Sticky) --- */}
-                        <div className="lg:col-span-5">
-                            <div className="sticky top-24">
-                                {/* Transport Form Component */}
-                                <TransportForm />
+                        {/* --- RIGHT COLUMN: FORM (Sticky & Unclipped) --- */}
+                        <div className="lg:col-span-5 w-full">
+                            <div className="lg:sticky lg:top-28 space-y-4">
+                                <div className="bg-white p-6 sm:p-8 rounded-[2.5rem]">
+                                    <div className="text-center mb-6">
+                                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-white text-[12px] font-semibold text-[#1f1f1f] mb-2 uppercase tracking-wider">
+                                            Transfer Desk
+                                        </span>
+                                        <h2 className="text-2xl font-bold tracking-tight text-[#1f1f1f]">
+                                            Book Island Transfer
+                                        </h2>
+                                        <p className="text-[14px] font-semibold text-[#5f6368] mt-1">
+                                            Direct highway transit with no surprise surcharges.
+                                        </p>
+                                    </div>
 
-                                <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-neutral-400 font-mono">
-                                    <ShieldCheck size={12} className="text-green-500" />
-                                    <span>NO HIDDEN FEES • FREE CANCELLATION</span>
+                                    <TransportForm />
+                                </div>
+
+                                <div className="flex items-center justify-center gap-2 text-[12px] font-semibold text-[#5f6368]">
+                                    <ShieldCheck size={14} className="text-[#00ff00]" />
+                                    <span>NO HIDDEN FEES • 100% PRIVATE VEHICLE</span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -263,32 +266,41 @@ export default function PickupDropoffPage() {
     );
 }
 
-// --- MICRO COMPONENTS ---
+// --- GOOGLE-STYLE MICRO COMPONENTS (PURE WHITE) ---
 
-const StatCard = ({ label, value, icon }: { label: string, value: string, icon: React.ReactNode }) => (
-    <div className="bg-black/40 hover:bg-black/60 rounded-xl p-3 text-center transition-all duration-300 group backdrop-blur-md">
-        <div className="flex justify-center mb-1 opacity-80 group-hover:opacity-100 transition-opacity scale-90 group-hover:scale-100 duration-300">{icon}</div>
-        <div className="text-sm font-black text-white">{value}</div>
-        <div className="text-[9px] uppercase tracking-wider text-neutral-400">{label}</div>
-    </div>
-);
+function StatCard({
+    label,
+    value,
+    icon,
+}: {
+    label: string;
+    value: string;
+    icon: React.ReactNode;
+}) {
+    return (
+        <div className="bg-white p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+            <div className="mb-1.5">{icon}</div>
+            <span className="text-[18px] font-bold text-[#1f1f1f]">{value}</span>
+            <span className="text-[11px] font-semibold text-[#5f6368] uppercase tracking-wider">
+                {label}
+            </span>
+        </div>
+    );
+}
 
-const Badge = ({ text }: { text: string }) => (
-    <span className="text-[9px] font-bold bg-green-900/20 text-green-400 px-2 py-1 rounded-md">
-        {text}
-    </span>
-);
+function Badge({ text }: { text: string }) {
+    return (
+        <span className="bg-white px-3 py-1 rounded-full text-[12px] font-semibold text-[#1f1f1f]">
+            {text}
+        </span>
+    );
+}
 
-const RoutePill = ({ from }: { from: string }) => (
-    <div className="flex items-center gap-2 bg-black/40 hover:bg-green-900/20 px-3 py-1.5 rounded-lg transition-all cursor-default group backdrop-blur-sm shadow-sm">
-        <div className="w-1.5 h-1.5 rounded-full bg-neutral-500 group-hover:bg-green-400 transition-colors"></div>
-        <span className="text-xs text-neutral-300 group-hover:text-white font-medium">{from}</span>
-    </div>
-);
-
-
-
-
-
-
-
+function RoutePill({ from }: { from: string }) {
+    return (
+        <span className="inline-flex items-center gap-1.5 bg-white hover:bg-[#00ff00] hover:text-black text-[#1f1f1f] px-4 py-2 rounded-full text-[13px] font-semibold transition-colors duration-150 cursor-default">
+            <span>⇄</span>
+            <span>{from}</span>
+        </span>
+    );
+}

@@ -11,7 +11,7 @@ export default async function TourNavigator() {
 
     // Static fallback utility helper
     const getStaticTours = (): Tour[] => {
-        return staticTourPackages.map(st => {
+        return staticTourPackages.map((st) => {
             const durationDays = st.itinerary.length;
             return {
                 id: st.id,
@@ -20,7 +20,8 @@ export default async function TourNavigator() {
                 route: st.route,
                 price: Number(st.price),
                 duration: `${durationDays} Days / ${durationDays - 1} Nights`,
-                imageUrl: "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1771401761/hero_sections/dcjjvovjfbgidkiydjgw.jpg",
+                imageUrl:
+                    "https://res.cloudinary.com/dkfnpmzpv/image/upload/v1771401761/hero_sections/dcjjvovjfbgidkiydjgw.jpg",
                 isFeatured: st.id.includes("8-day") || st.id.includes("14-day"),
                 description: st.description,
             } as Tour;
@@ -54,5 +55,33 @@ export default async function TourNavigator() {
         tourPackages = getStaticTours();
     }
 
-    return <TourHeroSlider tourPackages={tourPackages} />;
+    return (
+        <section
+            className="w-full bg-white text-[#1f1f1f] pt-4 sm:pt-6 pb-8"
+            style={{
+                fontFamily:
+                    '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+            }}
+            aria-label="Expedition Navigator"
+        >
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                {/* Google Editorial Header Navigation Island */}
+                <div className="flex flex-col items-center justify-center text-center space-y-3 mb-6 sm:mb-8">
+                   
+                    <h2 className="text-4xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1f1f1f]">
+                         Island Expeditions
+                    </h2>
+
+                    <p className="text-[16px] sm:text-[18px] font-semibold text-[#5f6368] max-w-2xl">
+                        Seamlessly transition from Yala National Park safaris to UNESCO heritage circuits, tea country treks, and south coast beaches.
+                    </p>
+                </div>
+
+                {/* Slider Render Container */}
+                <div className="w-full bg-white">
+                    <TourHeroSlider tourPackages={tourPackages} />
+                </div>
+            </div>
+        </section>
+    );
 }

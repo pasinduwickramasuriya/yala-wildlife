@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { X, CreditCard, Loader2 } from "lucide-react";
+import { X, CreditCard, Loader2, ArrowRight } from "lucide-react";
 
-// On-demand loader for PayHere SDK to keep homepage and non-payment pages free of third-party JS
 function loadPayHereScript(): Promise<void> {
   if (typeof window !== "undefined" && (window as any).payhere) return Promise.resolve();
   return new Promise((resolve, reject) => {
@@ -27,6 +26,7 @@ function loadPayHereScript(): Promise<void> {
 export default function AdvancePaymentButton() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [agreedToPolicy, setAgreedToPolicy] = useState(false);
   const [formData, setFormData] = useState({
     price: "",
     firstName: "",
@@ -40,7 +40,6 @@ export default function AdvancePaymentButton() {
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
     if (isOpen) {
-      // Preload PayHere script asynchronously when dialog opens
       loadPayHereScript().catch((err) => console.warn("PayHere lazy load notice:", err));
     }
   };
@@ -56,7 +55,8 @@ export default function AdvancePaymentButton() {
 
   const initiatePayment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.price || !isValidPrice) return alert("Please enter a valid price");
+    if (!formData.price || !isValidPrice) return alert("Please enter a valid amount");
+    if (!agreedToPolicy) return alert("Please accept the privacy policy to proceed");
 
     setLoading(true);
     const orderId = `ADV-${Date.now()}`;
@@ -103,7 +103,7 @@ export default function AdvancePaymentButton() {
         window.payhere.startPayment(payment);
         setOpen(false);
       } else {
-        alert("PayHere script failed to initialize. Please try again or contact us directly.");
+        alert("Payment gateway failed to initialize. Please try again.");
       }
     } catch (error) {
       console.error(error);
@@ -113,33 +113,46 @@ export default function AdvancePaymentButton() {
     }
   };
 
-  // Common input class to prevent iOS zoom and keep it neat
-  const inputClasses = "w-full bg-[#1a1a1a] border border-white/5 rounded-xl px-3 py-2 text-base md:text-sm focus:outline-none focus:ring-1 focus:ring-[#00ff00] transition-all placeholder:text-neutral-600";
-  const labelClasses = "block text-[10px] uppercase text-neutral-500 mb-1 ml-1 font-bold tracking-widest";
+  const inputClasses =
+    "w-full bg-[#f8f9fa] rounded-xl px-3 py-1.5 text-[12px] font-semibold text-[#1f1f1f] focus:outline-none focus:bg-[#f1f3f4] transition-colors placeholder:text-[#9aa0a6] placeholder:font-normal";
+  const labelClasses = "block text-[14px] font-semibold text-[#5f6368] mb-1 tracking-wider";
 
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger asChild>
-        <button className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full font-bold uppercase text-[11px] tracking-widest hover:bg-[#00ff00] transition-all active:scale-95 shadow-lg">
-          <CreditCard className="w-4 h-4" />
-          Advance Payment
+        <button
+          type="button"
+          className="inline-flex items-center gap-1.5 bg-[#f8f9fa] hover:bg-[#00ff00] text-[#1f1f1f] hover:text-black px-4 py-2 rounded-full text-[18px] font-semibold tracking-wide transition-colors duration-150 active:scale-95 cursor-pointer"
+        >
+          <CreditCard className="w-3.5 h-3.5 shrink-0" />
+          <span>Pay Advance</span>
         </button>
       </Dialog.Trigger>
-      
+
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 animate-in fade-in duration-300" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0a] p-6 rounded-[2rem] w-[92%] max-w-[360px] z-50 text-white focus:outline-none animate-in zoom-in-95 duration-200">
-          
-          <div className="text-center mb-5">
-            <Dialog.Title className="text-lg font-black uppercase tracking-tighter text-[#00ff00]">Secure Advance</Dialog.Title>
-            <Dialog.Description className="text-neutral-500 text-[11px] leading-tight mt-1">
-              Custom safari expedition deposit. Enter the custom advance amount instructed by our team and fill out your details to securely pay via PayHere.
+        <Dialog.Overlay className="fixed inset-0 bg-black/20 backdrop-blur-xs z-50 animate-in fade-in duration-200" />
+
+        <Dialog.Content
+          className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-5 sm:p-6 rounded-[1.75rem] w-[90%] max-w-[370px] max-h-[90vh] overflow-y-auto z-50 text-[#1f1f1f] focus:outline-none animate-in zoom-in-95 duration-200"
+          style={{
+            fontFamily:
+              '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+          }}
+        >
+          {/* Header */}
+          <div className="text-center mb-4">
+            <Dialog.Title className="text-base sm:text-lg font-bold tracking-tight text-[#1f1f1f] leading-snug">
+              Secure Advance
+            </Dialog.Title>
+            <Dialog.Description className="text-[11px] font-semibold text-[#5f6368] leading-tight mt-1 max-w-[280px] mx-auto">
+              Enter the customized amount agreed with our team to proceed via PayHere.
             </Dialog.Description>
           </div>
 
-          <form onSubmit={initiatePayment} className="space-y-3">
+          <form onSubmit={initiatePayment} className="space-y-2.5">
+            {/* Amount Input */}
             <div>
-              <label className={labelClasses}>Amount (LKR)</label>
+              <label className={labelClasses}>Advance Amount (LKR)</label>
               <input
                 type="number"
                 name="price"
@@ -149,64 +162,151 @@ export default function AdvancePaymentButton() {
                 placeholder="0.00"
                 value={formData.price}
                 onChange={handleChange}
-                className={`${inputClasses} text-[#00ff00] font-mono font-bold text-lg`}
+                className={`${inputClasses} text-[14px] font-bold text-[#1f1f1f]`}
               />
             </div>
 
+            {/* Breakdown Mini Pill */}
             {isValidPrice && (
-              <div className="bg-[#141414] border border-black/10 rounded-lg p-2.5 text-[10px] space-y-1">
-                <div className="flex justify-between text-neutral-400">
-                  <span>Advance Amount:</span>
-                  <span className="font-mono">LKR {numPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <div className="bg-[#f8f9fa] rounded-xl p-2.5 text-[11px] font-semibold space-y-1">
+                <div className="flex justify-between text-[#5f6368]">
+                  <span>Deposit:</span>
+                  <span className="text-[#1f1f1f]">
+                    LKR {numPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
                 </div>
-                <div className="flex justify-between text-neutral-400">
-                  <span>Processing Fee (3.3%):</span>
-                  <span className="font-mono">LKR {processingFee.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                <div className="flex justify-between text-[#5f6368]">
+                  <span>Fee (3.3%):</span>
+                  <span className="text-[#1f1f1f]">
+                    LKR {processingFee.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
                 </div>
-                <div className="flex justify-between font-bold text-[#00ff00] pt-1 border-t border-white/10 text-xs">
-                  <span>Total Payable:</span>
-                  <span className="font-mono">LKR {totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                <div className="flex justify-between pt-1 border-t border-[#e8eaed] text-[#1f1f1f] font-bold text-[11px]">
+                  <span>Total:</span>
+                  <span>
+                    LKR {totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
                 </div>
               </div>
             )}
-            
-            <div className="grid grid-cols-2 gap-3">
+
+            {/* Names */}
+            <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className={labelClasses}>First Name</label>
-                <input type="text" name="firstName" required value={formData.firstName} onChange={handleChange} className={inputClasses} />
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="John"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className={inputClasses}
+                />
               </div>
               <div>
                 <label className={labelClasses}>Last Name</label>
-                <input type="text" name="lastName" required value={formData.lastName} onChange={handleChange} className={inputClasses} />
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="Doe"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className={inputClasses}
+                />
               </div>
             </div>
 
+            {/* Email */}
             <div>
-              <label className={labelClasses}>Email Address</label>
-              <input type="email" name="email" required value={formData.email} onChange={handleChange} className={inputClasses} />
+              <label className={labelClasses}>Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="name@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                className={inputClasses}
+              />
             </div>
 
+            {/* WhatsApp / Phone */}
             <div>
               <label className={labelClasses}>WhatsApp / Phone</label>
-              <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className={inputClasses} />
+              <input
+                type="tel"
+                name="phone"
+                required
+                placeholder="+94 7X XXX XXXX"
+                value={formData.phone}
+                onChange={handleChange}
+                className={inputClasses}
+              />
             </div>
 
+            {/* Privacy Policy Checkbox */}
+            <div className="flex items-start gap-2 pt-1 pb-0.5">
+              <input
+                type="checkbox"
+                id="privacy-policy"
+                required
+                checked={agreedToPolicy}
+                onChange={(e) => setAgreedToPolicy(e.target.checked)}
+                className="mt-0.5 w-3.5 h-3.5 rounded border-none bg-[#f8f9fa] accent-[#00ff00] cursor-pointer"
+              />
+              <label
+                htmlFor="privacy-policy"
+                className="text-[11px] font-semibold text-[#5f6368] leading-tight cursor-pointer select-none"
+              >
+                I agree to the{" "}
+                <a
+                  href="/legal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1f1f1f] underline hover:text-[#00c800]"
+                >
+                  Privacy Policy
+                </a>
+              </label>
+            </div>
+
+            {/* Submit Action */}
             <button
               type="submit"
-              disabled={loading}
-              className="w-full mt-2 flex items-center justify-center gap-2 bg-[#00ff00] text-black py-3 rounded-xl font-black uppercase text-xs tracking-widest hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 cursor-pointer"
+              disabled={loading || !agreedToPolicy}
+              className="w-full mt-2 flex items-center justify-center gap-1.5 bg-[#00ff00] hover:brightness-105 active:scale-[0.99] text-black py-2.5 rounded-full text-[12px] font-bold transition-all cursor-pointer disabled:opacity-50"
             >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : isValidPrice ? `Pay LKR ${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "Pay Now"}
+              {loading ? (
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              ) : isValidPrice ? (
+                <>
+                  <span>Pay LKR {totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                </>
+              ) : (
+                "Proceed to Payment"
+              )}
             </button>
 
-            <div className="flex justify-center opacity-100 transition-all mt-2">
-              <img src="https://www.payhere.lk/downloads/images/payhere_long_banner.png" alt="PayHere" className="h-6 object-contain" />
+            {/* Gateway Logo */}
+            <div className="flex justify-center pt-1">
+              <img
+                src="https://www.payhere.lk/downloads/images/payhere_long_banner.png"
+                alt="PayHere Secure Gateway"
+                className="h-4 object-contain opacity-80"
+              />
             </div>
           </form>
 
+          {/* Close Icon Button */}
           <Dialog.Close asChild>
-            <button className="absolute top-5 right-5 text-neutral-600 hover:text-white transition-colors cursor-pointer" aria-label="Close">
-              <X className="w-4 h-4" />
+            <button
+              className="absolute top-4 right-4 w-6 h-6 rounded-full bg-[#f8f9fa] hover:bg-[#e8eaed] text-[#5f6368] hover:text-[#1f1f1f] flex items-center justify-center transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="w-3.5 h-3.5" />
             </button>
           </Dialog.Close>
         </Dialog.Content>

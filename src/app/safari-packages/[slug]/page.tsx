@@ -11,6 +11,7 @@ import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import { ArrowLeft } from "lucide-react";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -223,144 +224,181 @@ export default async function PackageDetailPage(props: Props) {
       <BreadcrumbJsonLd items={breadcrumbItems} />
       <FAQJsonLd faqs={defaultFAQs} />
 
-      <main className="relative w-full min-h-screen bg-black selection:bg-[#00ff00]">
-        {/* STRUCTURAL SCHEMA DATA */}
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(packageProductSchema) }}
-        />
+      {/* STRUCTURAL SCHEMA DATA */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(packageProductSchema) }}
+      />
 
-        {/* =========================================
-            BACKGROUND IMAGE SECTION
-        ========================================= */}
-        <div className="fixed inset-0 z-0 h-screen">
-          <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
-            alt="Yala Leopard Emerging from Darkness"
-            fill
-            priority
-            className="object-cover opacity-100 scale-105"
-            quality={75}
-          />
-          {/* Fast High-Contrast Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-black/95" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-transparent to-black/85" />
-        </div>
+      <main
+        className="relative w-full min-h-screen bg-white text-[#1f1f1f] selection:bg-[#00ff00] selection:text-black antialiased overflow-x-hidden"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
+        role="main"
+      >
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20">
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-20">
+          {/* =========================================================================
+              1. DUAL HERO SHOWCASE (WIDE RECTANGLE + VERTICAL ARCH CAPSULE)
+          ========================================================================= */}
+          <section className="w-full flex items-stretch gap-3 sm:gap-6 mb-12 sm:mb-16">
 
-          {/* BREADCRUMB SCHEMA */}
-          <div className="mb-4 opacity-75 hover:opacity-100 transition-opacity">
-            <BreadcrumbSchema items={breadcrumbItems} />
-          </div>
+            {/* WIDE ROUNDED RECTANGLE (LEFT)[cite: 2] */}
+            <div className="relative w-full max-w-5xl mx-auto h-[260px] sm:h-[380px] md:h-[460px] lg:h-[530px] rounded-[2rem] sm:rounded-[3rem] md:rounded-[3.5rem] overflow-hidden bg-[#f8f9fa]">
+              <Image
+                src={pkg.imageUrl || "/placeholder-image.jpg"}
+                alt={pkg.name}
+                fill
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 768px) 70vw, 800px"
+                quality={75}
+                className="object-cover object-center"
+              />
 
-          {/* SPLIT HERO SECTION: Cover image first on mobile, Left details on desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
-            {/* RIGHT COL (First on Mobile): Sticky split-screen cover image (5/12) */}
-            <div className="order-1 lg:order-2 lg:col-span-5 lg:sticky lg:top-28">
-              <div className="relative w-full h-[300px] sm:h-[380px] lg:h-[480px] rounded-3xl overflow-hidden shadow-2xl group">
-                <Image
-                  src={pkg.imageUrl}
-                  alt={pkg.name}
-                  fill
-                  priority
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] brightness-[0.88] group-hover:brightness-[0.98]"
-                />
-                {/* Seamless gradients */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-
-                {/* Floating Badges */}
-                <div className="absolute top-4 left-4 flex flex-wrap gap-2.5 z-10">
-
-                  {pkg.price && (
-                    <div className="bg-black/90 text-white px-3.5 py-1.5 rounded-full shadow-lg font-black text-[10px] md:text-[11px] tracking-wide">
-                       ${pkg.price.toFixed(0)} USD
-                    </div>
-                  )}
+              {/* Bottom Price Floating Badge */}
+              {pkg.price && (
+                <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10">
+                  <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-white text-[18px] font-semibold text-[#1f1f1f]">
+                    ${pkg.price.toFixed(0)} USD
+                  </span>
                 </div>
-              </div>
+              )}
+            </div>
+          </section>
+
+          {/* =========================================================================
+              2. EDITORIAL TITLE & OVERVIEW
+          ========================================================================= */}
+          <section className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
+            <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-[1.15] mb-4">
+              {pkg.name.split(":")[0]}
+              {pkg.name.split(":")[1] && (
+                <span className="block text-[#5f6368] text-2xl sm:text-3xl lg:text-4xl font-semibold mt-2">
+                  {pkg.name.split(":")[1]}
+                </span>
+              )}
+            </h1>
+
+            {/* <p className="text-[18px] sm:text-[20px] text-[#3c4043] font-semibold leading-[1.8] max-w-6xl mx-auto">
+              {pkg.description}
+            </p> */}
+            <div className="space-y-6 text-[18px] sm:text-[20px] text-[#3c4043] font-semibold leading-[1.8] max-w-6xl mx-auto">
+              {(() => {
+                const rawParagraphs = (pkg.description || "")
+                  .split(/\n\s*\n/)
+                  .map((p) => p.trim())
+                  .filter(Boolean);
+
+                if (rawParagraphs.length >= 3) {
+                  return rawParagraphs.map((para, idx) => (
+                    <p key={idx} className="text-center text-[18px]">
+                      {para}
+                    </p>
+                  ));
+                }
+
+                const sentences =
+                  (pkg.description || "")
+                    .match(/[^.!?]+[.!?]+/g)
+                    ?.map((s) => s.trim()) || [pkg.description || ""];
+
+                if (sentences.length >= 3) {
+                  const partSize = Math.ceil(sentences.length / 3);
+                  return [
+                    sentences.slice(0, partSize).join(" "),
+                    sentences.slice(partSize, partSize * 2).join(" "),
+                    sentences.slice(partSize * 2).join(" "),
+                  ]
+                    .filter(Boolean)
+                    .map((para, idx) => (
+                      <p key={idx} className="text-center">
+                        {para}
+                      </p>
+                    ));
+                }
+
+                return (
+                  <p className="text-center">
+                    {pkg.description}
+                  </p>
+                );
+              })()}
             </div>
 
-            {/* LEFT COL (Second on Mobile): Overview & Text Details (7/12) */}
-            <div className="order-2 lg:order-1 lg:col-span-7 space-y-4">
-              {/* H1 TITLE */}
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-snug inline-block bg-black/90 px-4 py-2.5 rounded-xl shadow-xl">
-                {pkg.name.split(":")[0]}
-                {pkg.name.split(":")[1] && (
-                  <>
-                    <br />
-                    <span className="text-[#00ff00] font-semibold text-sm md:text-base tracking-wide">
-                      {pkg.name.split(":")[1]}
-                    </span>
-                  </>
-                )}
-              </h1>
+          </section>
 
-              {/* MINI DESCRIPTION CARD - Clear, Cute & Smaller */}
-              <div className="bg-black/90 px-4 py-3 rounded-xl shadow-xl w-full">
-                <h2 className="sr-only">Safari Package Overview for {pkg.name}</h2>
-                <p className="text-xs sm:text-[13px] text-neutral-300 font-normal leading-relaxed">
-                  {pkg.description}
-                </p>
-              </div>
-
-              {/* DYNAMIC INCLUSIONS & EXCLUSIONS VIEWS */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
-                {/* Inclusions */}
-                <div className="bg-black/90 p-5 rounded-2xl shadow-xl">
-                  <h3 className="text-xs md:text-sm font-bold text-[#00ff00] tracking-wider mb-3 flex items-center gap-2">
-                    <span className="flex items-center justify-center w-4 h-4 rounded-full bg-[#00ff00]/15 text-[#00ff00] text-[10px] font-black">✓</span>
-                    Inclusions
-                  </h3>
-                  <ul className="space-y-2 text-[12px] md:text-[13px] font-medium text-neutral-200 tracking-wide">
-                    {inclusionsList.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                        <span className="text-[#00ff00] font-bold select-none text-xs">✓</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Exclusions */}
-                <div className="bg-black/90 p-5 rounded-2xl shadow-xl">
-                  <h3 className="text-xs md:text-sm font-bold text-rose-400 tracking-wider mb-3 flex items-center gap-2">
-                    <span className="flex items-center justify-center w-4 h-4 rounded-full bg-rose-500/15 text-rose-400 text-[10px] font-black">✗</span>
-                    Exclusions
-                  </h3>
-                  <ul className="space-y-2 text-[12px] md:text-[13px] font-medium text-neutral-300 tracking-wide">
-                    {exclusionsList.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                        <span className="text-rose-400 font-bold select-none text-xs">✗</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+          {/* =========================================================================
+              3. INCLUSIONS & EXCLUSIONS GRIDS
+          ========================================================================= */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full mb-14 sm:mb-16">
+            {/* Inclusions */}
+            <div className="bg-[#fff] p-6 sm:p-8 rounded-[2.5rem]">
+              <h3 className="text-[18px] font-bold text-[#137333] tracking-wider mb-4 flex items-center gap-2.5">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#e6f4ea] text-[#137333] text-[14px] font-black shrink-0">
+                  ✓
+                </span>
+                <span>Inclusions</span>
+              </h3>
+              <ul className="space-y-3.5 text-[18px] font-semibold text-[#3c4043]">
+                {inclusionsList.map((item: string, idx: number) => (
+                  <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
+                    <span className="text-[#137333] font-bold select-none text-[18px] shrink-0">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
 
-          {/* DYNAMIC ITINERARY / HIGHLIGHTS & BOOKING GRID */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12 mt-10">
-            <div className="order-2 lg:order-1 lg:col-span-2 space-y-5 md:space-y-6">
-              {/* OPERATIONAL ITINERARY ISLAND */}
-              <div className="inline-block bg-black/90 px-4 py-1.5 rounded-full shadow-xl mb-2">
-                <h2 className="text-[12px] md:text-[13px] font-extrabold text-white tracking-[0.2em]">
+            {/* Exclusions */}
+            <div className="bg-[#fff] p-6 sm:p-8 rounded-[2.5rem]">
+              <h3 className="text-[18px] font-bold text-[#d93025] tracking-wider mb-4 flex items-center gap-2.5">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#fce8e6] text-[#d93025] text-[14px] font-black shrink-0">
+                  ✕
+                </span>
+                <span>Exclusions</span>
+              </h3>
+              <ul className="space-y-3.5 text-[18px] font-semibold text-[#5f6368]">
+                {exclusionsList.map((item: string, idx: number) => (
+                  <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
+                    <span className="text-[#d93025] font-bold select-none text-[18px] shrink-0">✗</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {/* =========================================================================
+              4. ITINERARY HIGHLIGHTS & BOOKING GRID
+          ========================================================================= */}
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
+
+            {/* ITINERARY LIST (7-COL) */}
+            <div className="order-2 lg:order-1 lg:col-span-7 space-y-5 md:space-y-6">
+              <div className="inline-block bg-white py-1 mb-2">
+                <h2 className="text-[18px] font-bold text-[#1f1f1f] tracking-wide">
                   Expedition Highlights & Features
                 </h2>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {highlightsList.map((point: string, idx: number) => (
-                  <div key={idx} className="flex gap-3.5 items-start bg-black/90 p-4 md:p-5 rounded-2xl shadow-xl transition-colors duration-200 hover:bg-zinc-900">
-                    <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[11px] font-black text-black bg-[#00ff00] shadow-[0_0_12px_rgba(0,255,0,0.3)]">
+                  <div
+                    key={idx}
+                    className="flex gap-4 items-start bg-[#fff] p-5 md:p-6 rounded-[2rem]"
+                  >
+                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-[18px] font-bold text-black bg-[#00ff00]">
                       {idx + 1}
                     </div>
-                    <div>
-                      <h3 className="text-xs md:text-sm font-bold text-white mb-0.5">Highlight {idx + 1}</h3>
-                      <p className="text-[12px] md:text-[13px] text-neutral-300 font-normal leading-relaxed">
+                    <div className="flex flex-col text-left">
+                      <h3 className="text-[18px] font-bold text-[#1f1f1f] mb-1">
+                        Highlight {idx + 1}
+                      </h3>
+                      <p className="text-[18px] text-[#3c4043] font-semibold leading-relaxed break-words">
                         {point}{point.endsWith('.') ? '' : '.'}
                       </p>
                     </div>
@@ -369,19 +407,32 @@ export default async function PackageDetailPage(props: Props) {
               </div>
             </div>
 
-            <aside className="order-1 lg:order-2 space-y-8">
-              {/* BOOKING INTERFACE */}
-              <div className="bg-[#00ff00] p-6 md:p-8 rounded-2xl md:rounded-3xl text-black shadow-[0_0_50px_rgba(0,255,0,0.15)] lg:sticky lg:top-32 transition-all">
-                <h2 className="text-base md:text-lg font-extrabold tracking-tight mb-1.5 leading-snug">
-                  Initialize Booking
+            {/* BOOKING INTERFACE ASIDE (5-COL) */}
+            <aside
+              id="booking"
+              className="order-1 lg:order-2 lg:col-span-5 w-full scroll-mt-28 sm:scroll-mt-32"
+            >
+              <div
+                id="booking-form"
+                className="bg-[#fff] p-6 sm:p-8 rounded-[2.25rem] text-[#1f1f1f] lg:sticky lg:top-28"
+              >
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white text-[18px] font-semibold text-[#1f1f1f] mb-3">
+                  Direct Reservation
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#1f1f1f] tracking-tight mb-2">
+                  Configure Expedition
                 </h2>
-                <p className="text-[11px] font-bold text-black/80 mb-4">
+                <p className="text-[18px] font-semibold text-[#5f6368] mb-6 leading-normal">
                   Select your date, guest count, permits and meal add-ons.
                 </p>
-                <BookingForm tourPackageSlug={pkg.slug} />
+
+                <div className="w-full">
+                  <BookingForm tourPackageSlug={pkg.slug} />
+                </div>
               </div>
             </aside>
-          </div>
+          </section>
+
         </div>
       </main>
     </>
