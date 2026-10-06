@@ -210,13 +210,12 @@ export default function GoogleTranslate() {
         #goog-gt-tt, .goog-tooltip, .goog-te-balloon-frame { display:none!important; }
         #gt-hidden-element { display:none!important; }
 
-        /* Mobile Zoom Fix: Use 16px font to fool iOS, then scale it down visually */
         @media screen and (max-width: 768px) {
           .no-zoom-search {
             font-size: 16px !important;
-            transform: scale(0.75);
+            transform: scale(0.8);
             transform-origin: left center;
-            width: 133.33% !important; /* Compels the scaled input to fill container */
+            width: 125% !important;
           }
         }
       `}</style>
@@ -225,82 +224,102 @@ export default function GoogleTranslate() {
 
       <div
         ref={dropdownRef}
-        className="fixed"
+        className="fixed select-none"
         style={{ 
           bottom: "180px", 
           right: "20px",
           zIndex: 2147483647,
-          isolation: 'isolate'
+          isolation: "isolate",
+          fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif'
         }}
       >
-        {/* DROPDOWN PANEL - Smaller & Smoother */}
+        {/* DROPDOWN PANEL - Clean Translucent Frosted Glass & Borderless Shadows */}
         <div
-          className="absolute bottom-full right-0 mb-3 w-44 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/5"
+          className="absolute bottom-full right-0 mb-3 w-48 rounded-[1.75rem] shadow-[0_16px_40px_rgba(0,0,0,0.14)] overflow-hidden"
           style={{
-            background: "rgba(20,20,20,0.95)",
-            backdropFilter: "blur(15px)",
-            WebkitBackdropFilter: "blur(15px)",
+            background: "rgba(255, 255, 255, 0.88)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
             visibility: isOpen ? "visible" : "hidden",
             opacity: isOpen ? 1 : 0,
-            transform: isOpen ? "translateY(0) scale(1)" : "translateY(15px) scale(0.95)",
+            transform: isOpen ? "translateY(0) scale(1)" : "translateY(12px) scale(0.96)",
             transition: "all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)",
-            maxHeight: "260px",
+            maxHeight: "270px",
             overflowY: "auto",
           }}
         >
-          <div className="p-2 sticky top-0 bg-[#141414] z-10">
+          {/* Search Header */}
+          <div className="p-2.5 sticky top-0 bg-white/70 backdrop-blur-md z-10">
             <input
               ref={searchInputRef}
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search..."
-              className="no-zoom-search w-full bg-white/5 rounded-xl px-3 py-1.5 text-[11px] text-white placeholder-white/20 outline-none border border-transparent focus:border-green-500/30 transition-all"
+              placeholder="Search language..."
+              className="no-zoom-search w-full bg-[#f1f3f4]/80 rounded-full px-3.5 py-1.5 text-[12px] font-semibold text-[#1f1f1f] placeholder:text-[#5f6368] outline-none transition-colors focus:bg-[#f1f3f4]"
             />
           </div>
           
-          <div className="px-1 pb-1">
+          {/* Languages List */}
+          <div className="px-1.5 pb-2">
             {filteredLanguages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang)}
-                className="w-full flex items-center gap-2.5 px-3 py-2 text-left rounded-xl transition-colors hover:bg-white/5 active:bg-white/10"
+                className={`w-full flex items-center gap-2.5 px-3 py-2 text-left rounded-xl transition-colors cursor-pointer ${
+                  selected.code === lang.code 
+                    ? "bg-[#e6f4ea] text-[#137333]" 
+                    : "hover:bg-black/[0.04] active:bg-black/[0.08] text-[#1f1f1f]"
+                }`}
               >
-                <span className="text-sm">{lang.flag}</span>
-                <span className={`text-[11px] font-medium ${selected.code === lang.code ? "text-green-400" : "text-white/80"}`}>
+                <span className="text-base leading-none shrink-0 drop-shadow-xs">{lang.flag}</span>
+                <span className="text-[12px] font-semibold truncate">
                   {lang.label}
                 </span>
               </button>
             ))}
             {filteredLanguages.length === 0 && (
-              <div className="text-[10px] text-white/30 text-center py-4">No results</div>
+              <div className="text-[11px] font-semibold text-[#5f6368] text-center py-4">No results found</div>
             )}
           </div>
         </div>
 
-        {/* TRIGGER BUTTON - Smaller & Cutter */}
+        {/* TRIGGER BUTTON - Pure White Frosted Pill, Solid Black Arrow, Crisp Large Flag */}
         <button
+          type="button"
           onClick={() => {
             setIsOpen(!isOpen);
             if (!isOpen) setTimeout(() => searchInputRef.current?.focus(), 150);
           }}
-          className="flex items-center gap-2 rounded-full px-4 py-2.5 shadow-xl transition-all active:scale-95"
+          className="flex items-center gap-2 rounded-full px-3.5 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all cursor-pointer active:scale-95"
           style={{
-            background: isOpen ? "rgba(34, 197, 94, 0.15)" : "rgba(25, 25, 25, 0.9)",
-            backdropFilter: "blur(1px)",
-            WebkitBackdropFilter: "blur(1px)",
+            background: "rgba(255, 255, 255, 0.92)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
           }}
+          aria-label="Select website language"
         >
-          <span className="text-base leading-none">{selected.flag}</span>
-          {/* <span className="text-[11px] font-bold text-white/90">
-            {selected.code === "" ? "Translate" : selected.label}
-          </span> */}
+          {/* Clear large flag */}
+          <span className="text-xl leading-none drop-shadow-xs select-none">
+            {selected.flag}
+          </span>
+
+          {/* Solid black arrow */}
           <svg
-            width="10" height="6" viewBox="0 0 12 8" fill="none"
-            className="transition-transform duration-300 opacity-90"
+            width="10"
+            height="6"
+            viewBox="0 0 12 8"
+            fill="none"
+            className="transition-transform duration-300"
             style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
           >
-            <path d="M1 1.5L6 6.5L11 1.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M1.5 1.75L6 6.25L10.5 1.75"
+              stroke="#000000"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       </div>

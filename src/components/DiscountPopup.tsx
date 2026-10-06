@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, MessageCircle, ShieldCheck, Ticket, Car } from "lucide-react";
+import { X, MessageCircle, ShieldCheck } from "lucide-react";
 
 const WHATSAPP_NUMBER = "94778158004";
 const WHATSAPP_MESSAGE = "Hi! I'm interested in the Official Yala Safari Discount Offer.";
@@ -10,7 +10,7 @@ export default function PetiteDiscountPopup() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const isDev = process.env.NODE_ENV === 'development';
+    const isDev = process.env.NODE_ENV === "development";
     const dismissed = localStorage.getItem("yala_discount_dismissed");
     const now = Date.now();
 
@@ -31,85 +31,102 @@ export default function PetiteDiscountPopup() {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   return (
-    <div className="fixed bottom-6 left-6 z-[99999] pointer-events-none">
+    <div className="fixed bottom-5 left-5 z-[99999] pointer-events-none select-none">
       <div
-        className="relative w-full max-w-[250px] bg-[#050a05] rounded-[2.5rem] p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto animate-in fade-in slide-in-from-left-4 duration-300"
+        className="relative w-[240px] max-w-[calc(100vw-32px)] bg-white text-[#1f1f1f] rounded-[1.75rem] p-3.5 shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#e8eaed] overflow-hidden pointer-events-auto animate-in fade-in slide-in-from-bottom-3 duration-250 text-left"
+        style={{
+          fontFamily:
+            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        }}
       >
-        {/* 1. TOP STATUS PILL */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00ff00]/10">
-            <ShieldCheck size={10} className="text-[#00ff00]" />
-            <span className="text-[8px] font-black text-[#00ff00] uppercase tracking-widest">Verified</span>
+        {/* 1. TOP HEADER & CLOSE BUTTON */}
+        <div className="flex justify-between items-center mb-2">
+          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#f8f9fa] text-[9.5px] font-semibold text-[#1f1f1f]">
+            <ShieldCheck size={11} className="text-[#1f1f1f]" />
+            <span>Verified Operator</span>
           </div>
-          <button onClick={handleClose} aria-label="Close Discount Popup" className="text-[#00ff00] hover:text-white transition-colors cursor-pointer">
-            <X size={16} />
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label="Close Discount Popup"
+            className="w-5 h-5 flex items-center justify-center rounded-full bg-[#f8f9fa] hover:bg-[#f1f3f4] text-[#5f6368] hover:text-[#1f1f1f] transition-colors cursor-pointer"
+          >
+            <X size={12} />
           </button>
         </div>
 
-        {/* 2. PETITE HEADER */}
-        <div className="mb-4">
-          <h2 className="text-md font-black text-[#00ff00] italic uppercase tracking-tighter leading-none text-center">
-            {monthName}&nbsp;&nbsp;<span className="text-white">Discounts</span>
+        {/* 2. PETITE TITLE & INCLUSIONS (LEFT-ALIGNED) */}
+        <div className="mb-2.5 text-left">
+          <h2 className="text-[13px] font-bold text-[#1f1f1f] tracking-tight leading-tight">
+            {monthName} Safari Offer
           </h2>
-          <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Per Person • All Included</p>
-          <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Breakfast,lunch,fruits</p>
-          {/* <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">yala entrance tickets</p> */}
-          <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">soft drinks ,water</p>
-           <p className="text-[8px] text-white/70 font-bold uppercase tracking-[0.2em] mt-1">Jeep ,Driver Guide</p>
+          <p className="text-[9.5px] font-semibold text-[#1f1f1f] mt-0.5">
+            Per Person • All Included
+          </p>
+          <div className="mt-1.5 bg-[#f8f9fa] rounded-lg p-2 text-left space-y-0.5">
+            <p className="text-[11px] font-medium text-[#1f1f1f] leading-tight">Breakfast, lunch, fruits</p>
+            <p className="text-[11px] font-medium text-[#1f1f1f] leading-tight">Soft drinks, water</p>
+            <p className="text-[11px] font-medium text-[#1f1f1f] leading-tight">Jeep, Driver Guide</p>
+          </div>
         </div>
 
-        {/* 3. COMPACT RATES */}
-        <div className="space-y-3 mb-5">
+        {/* 3. COMPACT RATES (LEFT-ALIGNED) */}
+        <div className="space-y-1.5 mb-3 text-left">
           {/* Morning */}
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-[10px] font-black text-white/80 uppercase tracking-tight">Morning Extended</span>
-              <span className="text-[8px] text-white/80 uppercase font-bold tracking-tighter">05:00 — 12:00</span>
+          <div className="flex items-center justify-between px-2.5 py-1.5 bg-[#f8f9fa] rounded-xl">
+            <div className="flex flex-col text-left">
+              <span className="text-[10.5px] font-bold text-[#1f1f1f] leading-tight">
+                Morning Safari
+              </span>
+              <span className="text-[8.5px] font-semibold text-[#5f6368]">
+                05:00 — 12:00
+              </span>
             </div>
-            <div className="flex items-center gap-2 bg-white/5 px-2 py-1 rounded-lg">
-              {/* <span className="text-[20px] text-white line-through font-mono">$75</span>
-              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$49</span> */}
-               <span className="text-[20px] text-white line-through font-mono">$49</span>
-              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$14</span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-[10px] font-semibold text-[#1f1f1f] line-through">
+                $49
+              </span>
+              <span className="text-[13px] font-bold text-[#1f1f1f]">
+                $14
+              </span>
             </div>
           </div>
 
           {/* Full Day */}
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-[10px] font-black text-white/80 uppercase tracking-tight">Full Day Shared</span>
-              <span className="text-[8px] text-white uppercase font-bold tracking-tighter">05:00 — 18:00</span>
+          <div className="flex items-center justify-between px-2.5 py-1.5 bg-[#f8f9fa] rounded-xl">
+            <div className="flex flex-col text-left">
+              <span className="text-[10.5px] font-bold text-[#1f1f1f] leading-tight">
+                Full Day Safari
+              </span>
+              <span className="text-[8.5px] font-semibold text-[#5f6368]">
+                05:00 — 18:00
+              </span>
             </div>
-            <div className="flex items-center gap-2 bg-[#00ff00]/5 px-2 py-1 rounded-lg">
-              {/* <span className="text-[20px] text-white/80 line-through font-mono">$95</span>
-              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$69</span> */}
-                    <span className="text-[20px] text-white/80 line-through font-mono">$69</span>
-              <span className="text-sm font-black text-[#00ff00] font-mono leading-none">$40</span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-[10px] font-semibold text-[#1f1f1f] line-through">
+                $69
+              </span>
+              <span className="text-[13px] font-bold text-[#1f1f1f]">
+                $40
+              </span>
             </div>
           </div>
         </div>
 
         {/* 4. ACTIONS */}
-        <div className="space-y-2">
+        <div className="flex justify-center">
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Claim Discount via WhatsApp"
-            className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#00ff00] transition-all active:scale-95 shadow-xl"
+            className="flex items-center justify-center gap-1.5 w-full max-w-[150px] py-2.5 bg-[#00ff00] hover:brightness-105 active:scale-[0.98] text-black text-[10.5px] font-bold rounded-full transition-all cursor-pointer shadow-sm"
           >
-            <MessageCircle size={12} /> WhatsApp
+            <MessageCircle size={12} className="stroke-[2.5]" />
+            <span>Claim via WhatsApp</span>
           </a>
-        </div>
-
-        {/* 5. MINIMAL TRUST DOCK */}
-        <div className="mt-4 pt-3 flex justify-around items-center opacity-70 grayscale">
-          <Car size={10} className="text-white" />
-          <Ticket size={10} className="text-white" />
-          <span className="text-[7px] text-white font-black uppercase tracking-[0.3em]">Official Operator</span>
         </div>
       </div>
     </div>
   );
 }
-
