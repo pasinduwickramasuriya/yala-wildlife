@@ -2,8 +2,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { FaCheckCircle, FaChevronDown, FaSpinner } from 'react-icons/fa';
-import { Sparkles, Star } from 'lucide-react';
+import { Sparkles, Star, CheckCircle2, ChevronDown, Loader2 } from 'lucide-react';
 
 // --- Types ---
 interface Review {
@@ -160,6 +159,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
             <img
               src={review.profile_photo_url}
               alt={review.author_name}
+              loading="lazy"
+              decoding="async"
               className="w-14 h-14 rounded-full object-cover"
             />
           ) : (
@@ -167,7 +168,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
               {review.author_name.charAt(0)}
             </div>
           )}
-          <FaCheckCircle className="absolute -bottom-0.5 -right-0.5 text-[#1a73e8] w-4 h-4 bg-white rounded-full" />
+          <CheckCircle2 className="absolute -bottom-0.5 -right-0.5 text-[#1a73e8] w-4 h-4 bg-white rounded-full" />
         </div>
 
         <div className="flex flex-col items-center overflow-hidden">
@@ -268,28 +269,20 @@ export default function ModernGoogleReviews({
   );
 
   return (
-    <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap"
-        rel="stylesheet"
-      />
+    <section
+      className="relative py-16 sm:py-24 text-[#000000] overflow-hidden bg-white selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 bg-white flex flex-col items-center">
+        <ModernHeader reviewCount={totalCount} />
 
-      <section
-        className="relative py-16 sm:py-24 text-[#000000] overflow-hidden bg-white selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
-        style={{
-          fontFamily:
-            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
-        }}
-      >
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 bg-white flex flex-col items-center">
-          <ModernHeader reviewCount={totalCount} />
-
-          {loading ? (
-            <div className="flex items-center justify-center py-24 bg-white">
-              <FaSpinner className="text-[#000000] animate-spin w-8 h-8" />
-            </div>
+        {loading ? (
+          <div className="flex items-center justify-center py-24 bg-white">
+            <Loader2 className="text-[#000000] animate-spin w-8 h-8" />
+          </div>
           ) : (
             <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 bg-white w-full">
               {/* Summary Card */}
@@ -317,12 +310,11 @@ export default function ModernGoogleReviews({
                 <span>
                   Load More Reviews ({allReviews.length - visibleCount} remaining)
                 </span>
-                <FaChevronDown className="text-sm" />
+                <ChevronDown className="w-4 h-4" />
               </button>
             </div>
           )}
         </div>
       </section>
-    </>
   );
 }

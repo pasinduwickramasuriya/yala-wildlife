@@ -160,9 +160,11 @@ export default function HeroSlider({
                 alt={currentSlide.title}
                 fill
                 priority={currentIndex === 0}
+                fetchPriority={currentIndex === 0 ? "high" : "auto"}
+                unoptimized={Boolean(currentSlide.imageUrl?.includes("res.cloudinary.com"))}
                 className="object-cover object-center transition-transform duration-500 ease-out sm:group-hover:scale-105 will-change-transform"
-                sizes="(max-width: 640px) 48vw, (max-width: 1024px) 52vw, 680px"
-                quality={68}
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 52vw, 680px"
+                quality={65}
               />
             ) : (
               <div className="w-full h-full bg-[#f1f3f4] flex items-center justify-center text-[#5f6368] text-[18px] font-medium">
@@ -232,11 +234,11 @@ export default function HeroSlider({
                     src={previewSlide.imageUrl}
                     alt={previewSlide.title}
                     fill
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover object-center"
-                    // Increased size allocation to account for tall aspect ratios on 2x/3x Retina screens
-                    sizes="(max-width: 640px) 35vw, (max-width: 1024px) 25vw, 320px"
-                    // Boosted quality from 55 to 85 to remove compression blur
-                    quality={85}
+                    sizes="(max-width: 640px) 25vw, (max-width: 1024px) 20vw, 160px"
+                    quality={50}
                   />
                 ) : (
                   <div className="w-full h-full bg-[#f1f3f4]" />

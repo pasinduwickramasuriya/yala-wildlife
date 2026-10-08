@@ -117,7 +117,7 @@ export default function AppleCuteGallery({ initialPhotos }: { initialPhotos?: Ph
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-5 h-auto md:h-[760px]">
           {/* Card 1: Main Hero */}
           <div className="h-[340px] sm:h-[420px] md:h-auto md:col-span-8 md:row-span-2 relative overflow-hidden rounded-[2.5rem] bg-white p-3 [contain:strict] transform-gpu">
-            <ImageCard photo={displayPhotos[0]} priority={true} onClick={handleSelectPhoto} />
+            <ImageCard photo={displayPhotos[0]} onClick={handleSelectPhoto} />
           </div>
 
           {/* Card 2 */}
@@ -232,9 +232,9 @@ const ImageCard = memo(function ImageCard({
         alt={photo.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority={priority}
-        loading={priority ? "eager" : "lazy"}
-        quality={75}
+        loading="lazy"
+        decoding="async"
+        quality={65}
         className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
       />
 

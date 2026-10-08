@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,6 +23,13 @@ const inter = Inter({
   display: "swap",
 });
 
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
@@ -33,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <script
@@ -47,7 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
+        className={`${inter.variable} ${openSans.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

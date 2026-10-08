@@ -135,53 +135,50 @@ export async function getHomePageData() {
   let reviewPhotos: ReviewPhotoData[] = [];
   let reviews: ReviewData[] = [];
 
-  try {
-    const dbPackages = await prisma.package.findMany({
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        description: true,
-        price: true,
-        imageUrl: true,
-      },
-    });
+  const packagesPromise = prisma.package.findMany({
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      description: true,
+      price: true,
+      imageUrl: true,
+    },
+  }).then((dbPackages) => {
     packages = dbPackages.map((p) => ({
       ...p,
       description: p.description && p.description.length > 200 ? p.description.slice(0, 200) + "..." : p.description,
       imageUrl: optimizeCloudinaryUrl(p.imageUrl, 800),
     })) as PackageData[];
-  } catch (error) {
+  }).catch((error) => {
     console.error("Error loading packages from DB:", error);
-  }
+  });
 
-  try {
-    const dbHero = await prisma.heroSection.findMany();
+  const heroPromise = prisma.heroSection.findMany().then((dbHero) => {
     if (Array.isArray(dbHero) && dbHero.length > 0) {
       heroSections = dbHero.map((h: any) => ({
         ...h,
-        imageUrl: optimizeCloudinaryUrl(h.imageUrl, 1200),
+        imageUrl: optimizeCloudinaryUrl(h.imageUrl, 800),
       })) as HeroSectionData[];
     } else {
       heroSections = DEFAULT_HERO_SECTIONS;
     }
-  } catch (error) {
+  }).catch(() => {
     heroSections = DEFAULT_HERO_SECTIONS;
-  }
+  });
 
-  try {
-    const dbBlogs = await prisma.blog.findMany({
-      take: 10,
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        imageUrl: true,
-        slug: true,
-        createdAt: true,
-      },
-    });
+  const blogsPromise = prisma.blog.findMany({
+    take: 10,
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      imageUrl: true,
+      slug: true,
+      createdAt: true,
+    },
+  }).then((dbBlogs) => {
     if (Array.isArray(dbBlogs) && dbBlogs.length > 0) {
       blogs = dbBlogs.map((b) => ({
         ...b,
@@ -192,20 +189,17 @@ export async function getHomePageData() {
     } else {
       blogs = DEFAULT_BLOGS;
     }
-  } catch (error) {
+  }).catch(() => {
     blogs = DEFAULT_BLOGS;
-  }
+  });
 
-  // Load Review Photos from JSON (randomized pool for diverse display)
-  try {
-    const filePath = path.join(process.cwd(), "data", "review-photos.json");
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, "utf8");
+  const reviewPhotosPromise = (async () => {
+    try {
+      const filePath = path.join(process.cwd(), "data", "review-photos.json");
+      const raw = await fs.promises.readFile(filePath, "utf8");
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
-        // Filter valid reviews with URL, 4+ rating, and real text
         const valid = parsed.filter((p: any) => p.url && p.rating >= 4 && p.reviewText?.trim().length > 0);
-        // Deduplicate by author / reviewId so each guest only appears once
         const seen = new Set<string>();
         const unique: any[] = [];
         for (const item of valid) {
@@ -215,7 +209,6 @@ export async function getHomePageData() {
             unique.push(item);
           }
         }
-        // Fisher-Yates shuffle to pick a truly random pool of 24 unique guest reviews
         for (let i = unique.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [unique[i], unique[j]] = [unique[j], unique[i]];
@@ -225,27 +218,33 @@ export async function getHomePageData() {
           url: optimizeReviewImageUrl(p.url, 600),
         }));
       }
+    } catch (error) {
+      console.error("Error reading review-photos.json:", error);
     }
-  } catch (error) {
-    console.error("Error reading review-photos.json:", error);
-  }
+  })();
 
-  // Load Reviews from JSON (curated slice for initial display, leaving full dataset for /api/greviews)
-  try {
-    const filePath = path.join(process.cwd(), "data", "reviews.json");
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, "utf8");
-      
+  const reviewsPromise = (async () => {
+    try {
+      const filePath = path.join(process.cwd(), "data", "reviews.json");
+      const raw = await fs.promises.readFile(filePath, "utf8");
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) {
         reviews = parsed
           .filter((r: any) => r.rating >= 4 && r.text?.trim().length > 0)
           .slice(0, 12);
       }
+    } catch (error) {
+      console.error("Error reading reviews.json:", error);
     }
-  } catch (error) {
-    console.error("Error reading reviews.json:", error);
-  }
+  })();
+
+  await Promise.allSettled([
+    packagesPromise,
+    heroPromise,
+    blogsPromise,
+    reviewPhotosPromise,
+    reviewsPromise,
+  ]);
 
   return {
     packages,

@@ -76,9 +76,8 @@ const SlideCard = memo(function SlideCard({ current }: { current: Memory }) {
             alt={current.title}
             fill
             sizes="(max-width: 1024px) 100vw, 520px"
-            quality={65}
-            priority={current.id === 1}
-            loading={current.id === 1 ? "eager" : "lazy"}
+            quality={60}
+            loading="lazy"
             decoding="async"
             className="object-cover"
           />

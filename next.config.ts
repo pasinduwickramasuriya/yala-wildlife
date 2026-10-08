@@ -4,7 +4,7 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ['lucide-react', '@tabler/icons-react', 'react-icons', 'date-fns'],
+    optimizePackageImports: ['lucide-react', 'clsx', 'tailwind-merge'],
     staleTimes: {
       dynamic: 30,
       static: 1800,

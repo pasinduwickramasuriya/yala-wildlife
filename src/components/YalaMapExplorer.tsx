@@ -98,21 +98,13 @@ export default function YalaGoogleShowcase() {
   );
 
   return (
-    <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap"
-        rel="stylesheet"
-      />
-
-      <section
-        className="w-full bg-white text-[#000000] py-14 sm:py-20 lg:py-24 selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
-        style={{
-          fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+    <section
+      className="w-full bg-white text-[#000000] py-14 sm:py-20 lg:py-24 selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+      style={{
+        fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
           
           {/* Top Sector Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-14">
@@ -173,8 +165,9 @@ export default function YalaGoogleShowcase() {
                     alt={activeBlock.name}
                     fill
                     sizes="(max-width: 1024px) 90vw, 45vw"
-                    quality={75}
-                    priority
+                    quality={65}
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover object-center transition-transform duration-700 hover:scale-105"
                   />
                 </div>
@@ -315,6 +308,5 @@ export default function YalaGoogleShowcase() {
 
         </div>
       </section>
-    </>
   );
 }

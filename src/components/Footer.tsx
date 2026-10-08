@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
@@ -42,22 +40,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap"
-        rel="stylesheet"
-      />
-
-      <footer
-        className="w-full bg-white text-[#000000] border-t border-[#f1f3f4] selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
-        style={{
-          fontFamily:
-            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
-        }}
-      >
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-12 pb-14 bg-white">
+    <footer
+      className="w-full bg-white text-[#000000] border-t border-[#f1f3f4] selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-12 pb-14 bg-white">
 
           {/* ========================================================= */}
           {/* 1. TOP ROW: SOCIAL SIGNALS & SECURE COMMS                 */}
@@ -247,6 +237,5 @@ export default function Footer() {
 
         </div>
       </footer>
-    </>
   );
 }

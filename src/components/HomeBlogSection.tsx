@@ -413,7 +413,8 @@ const CardItem = memo(function CardItem({
           src={blog.imageUrl || "/uploads/yala1.webp"}
           alt={blog.title}
           fill
-          priority
+          loading="lazy"
+          decoding="async"
           sizes="(max-width: 768px) 90vw, (max-width: 1200px) 60vw, 50vw"
           className="object-cover object-center will-change-transform group-hover:scale-105 transition-transform duration-700 ease-out"
           quality={55}
@@ -538,23 +539,14 @@ export default function BlogCaseStudyCarousel({
   const next2 = blogs[(activeIndex + 2) % blogs.length];
 
   return (
-    <>
-      {/* High-visibility system font fallback preventing layout shift and network stalls */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-
-      <section
-        ref={containerRef}
-        className="w-full bg-white text-[#1f1f1f] py-14 sm:py-20 overflow-hidden selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
-        style={{
-          fontFamily:
-            '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
-        }}
-      >
+    <section
+      ref={containerRef}
+      className="w-full bg-white text-[#1f1f1f] py-14 sm:py-20 overflow-hidden selection:bg-[#00ff00] selection:text-black [content-visibility:auto]"
+      style={{
+        fontFamily:
+          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+      }}
+    >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 bg-white">
           
           {/* 1. CAROUSEL STAGE: MAIN HERO + TWO ROUNDED OVERFLOW PILLS */}
@@ -634,6 +626,5 @@ export default function BlogCaseStudyCarousel({
 
         </div>
       </section>
-    </>
   );
 }

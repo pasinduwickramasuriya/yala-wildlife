@@ -1,6 +1,4 @@
-"use client";
-
-import React, { memo } from "react";
+import React from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
@@ -48,7 +46,7 @@ const GALLERY_IMAGES: GalleryImage[] = [
   },
 ];
 
-const GalleryCard = memo(function GalleryCard({
+function GalleryCard({
   image,
   index,
 }: {
@@ -98,8 +96,7 @@ const GalleryCard = memo(function GalleryCard({
       </div>
     </div>
   );
-});
-GalleryCard.displayName = "GalleryCard";
+}
 
 export default function GallerySection() {
   return (

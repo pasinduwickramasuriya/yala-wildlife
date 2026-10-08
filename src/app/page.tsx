@@ -13,13 +13,13 @@ import ReviewFeed from "@/components/ReviewFeed";
 import SafariPackagesCarousel from "@/components/SafariPackagesCarousel";
 import MemoryGallery from "@/components/MemoryGallery";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import GallerySection from "@/components/GallerySection";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
 const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
 const ModernReviews = dynamic(() => import("@/components/ModernReviews"));
 const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
-const GallerySection = dynamic(() => import("@/components/GallerySection"));
 const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"));
 const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"));
 
