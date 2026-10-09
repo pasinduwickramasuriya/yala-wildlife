@@ -154,7 +154,7 @@ export default function TransportForm() {
                   required 
                   type="text" 
                   placeholder="Airport (BIA), Hotel, or City..." 
-                  className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                  className="w-full bg-transparent text-[#1f1f1f] text-base md:text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
                   value={formData.pickupLocation}
                   onChange={(e) => setFormData({...formData, pickupLocation: e.target.value})}
                 />
@@ -173,7 +173,7 @@ export default function TransportForm() {
                   required 
                   type="text" 
                   placeholder="Yala Hotel, Villa, Camp, or Safari Gate..." 
-                  className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                  className="w-full bg-transparent text-[#1f1f1f] text-base md:text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
                   value={formData.dropoffLocation}
                   onChange={(e) => setFormData({...formData, dropoffLocation: e.target.value})}
                 />
@@ -199,7 +199,7 @@ export default function TransportForm() {
                   required 
                   type="date" 
                   min={new Date().toISOString().split("T")[0]}
-                  className="w-full bg-transparent text-[#1f1f1f] text-[13px] font-semibold outline-none"
+                  className="w-full bg-transparent text-[#1f1f1f] text-base md:text-[13px] font-semibold outline-none"
                   value={formData.date}
                   onChange={(e) => setFormData({...formData, date: e.target.value})}
                 />
@@ -214,8 +214,8 @@ export default function TransportForm() {
                 <Clock size={16} className="text-[#5f6368] mr-2 shrink-0" />
                 <input 
                   required 
-                  type="time"
-                  className="w-full bg-transparent text-[#1f1f1f] text-[13px] font-semibold outline-none"
+                  type="time" 
+                  className="w-full bg-transparent text-[#1f1f1f] text-base md:text-[13px] font-semibold outline-none"
                   value={formData.time}
                   onChange={(e) => setFormData({...formData, time: e.target.value})}
                 />
@@ -280,7 +280,7 @@ export default function TransportForm() {
                   required 
                   type="text" 
                   placeholder="Primary Passenger Name"
-                  className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                  className="w-full bg-transparent text-[#1f1f1f] text-base md:text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                 />
@@ -294,7 +294,7 @@ export default function TransportForm() {
                 </label>
                 <div className="flex gap-1.5">
                   <select 
-                    className="w-[84px] bg-[#f8f9fa] text-[#1f1f1f] text-[13px] font-bold px-2 py-3 rounded-2xl outline-none cursor-pointer shrink-0"
+                    className="w-[84px] bg-[#f8f9fa] text-[#1f1f1f] text-base md:text-[13px] font-bold px-2 py-3 rounded-2xl outline-none cursor-pointer shrink-0"
                     value={formData.phoneCode}
                     onChange={(e) => setFormData({...formData, phoneCode: e.target.value})}
                   >
@@ -308,7 +308,7 @@ export default function TransportForm() {
                     required 
                     type="tel" 
                     placeholder="Mobile number"
-                    className="w-full bg-[#f8f9fa] focus:bg-[#f1f3f4] text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 rounded-2xl outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                    className="w-full bg-[#f8f9fa] focus:bg-[#f1f3f4] text-[#1f1f1f] text-base md:text-[14px] font-semibold px-3 py-3 rounded-2xl outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
                     value={formData.phoneNumber}
                     onChange={(e) => setFormData({...formData, phoneNumber: e.target.value.replace(/\D/g, "")})}
                   />
@@ -327,7 +327,7 @@ export default function TransportForm() {
                     required 
                     type="email" 
                     placeholder="email@example.com"
-                    className="w-full bg-transparent text-[#1f1f1f] text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
+                    className="w-full bg-transparent text-[#1f1f1f] text-base md:text-[14px] font-semibold px-3 py-3 outline-none placeholder:text-[#9aa0a6] placeholder:font-normal"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                   />

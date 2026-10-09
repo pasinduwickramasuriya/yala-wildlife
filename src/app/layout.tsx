@@ -1,5 +1,5 @@
 /* eslint-disable react/no-children-prop */
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -31,6 +31,11 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = defaultMetadata;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default function RootLayout({
   children,

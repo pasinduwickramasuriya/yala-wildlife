@@ -293,25 +293,28 @@
   }
 }
 
+/* 5. Mobile Input Auto-Zoom Prevention
+   iOS Safari and mobile WebKit automatically zoom the viewport on touch/focus
+   when an input/textarea/select has a computed font-size smaller than 16px.
+   Enforcing a minimum of 16px font-size on mobile viewports completely prevents
+   this unwanted zoom without breaking page layout or accessibility. */
+@media screen and (max-width: 1024px), (hover: none) and (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]),
+  textarea,
+  select,
+  .google-input,
+  .form-input {
+    font-size: 16px !important;
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Fast tap response on touch devices without double-tap zoom delay */
+input,
+textarea,
+select,
+button {
+  touch-action: manipulation;
+}
 
 
 

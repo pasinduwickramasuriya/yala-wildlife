@@ -364,7 +364,7 @@ export default function ChatAssistant() {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder={isListening ? "Listening..." : "Ask Emma about safaris, wildlife..."}
-                            className={`w-full bg-transparent py-2 pl-3.5 pr-20 text-[14px] font-medium text-[#1f1f1f] placeholder:text-[#9aa0a6] focus:outline-none ${
+                            className={`w-full bg-transparent py-2 pl-3.5 pr-20 text-base md:text-[14px] font-medium text-[#1f1f1f] placeholder:text-[#9aa0a6] focus:outline-none ${
                                 isListening ? 'text-[#137333] font-bold' : ''
                             }`}
                             disabled={isLoading}

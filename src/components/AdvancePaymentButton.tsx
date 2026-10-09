@@ -114,7 +114,7 @@ export default function AdvancePaymentButton() {
   };
 
   const inputClasses =
-    "w-full bg-[#f8f9fa] rounded-xl px-3 py-1.5 text-[12px] font-semibold text-[#1f1f1f] focus:outline-none focus:bg-[#f1f3f4] transition-colors placeholder:text-[#9aa0a6] placeholder:font-normal";
+    "w-full bg-[#f8f9fa] rounded-xl px-3 py-2 text-base md:text-[13px] font-semibold text-[#1f1f1f] focus:outline-none focus:bg-[#f1f3f4] transition-colors placeholder:text-[#9aa0a6] placeholder:font-normal";
   const labelClasses = "block text-[14px] font-semibold text-[#5f6368] mb-1 tracking-wider";
 
   return (
@@ -162,7 +162,7 @@ export default function AdvancePaymentButton() {
                 placeholder="0.00"
                 value={formData.price}
                 onChange={handleChange}
-                className={`${inputClasses} text-[14px] font-bold text-[#1f1f1f]`}
+                className={`${inputClasses} text-base md:text-[14px] font-bold text-[#1f1f1f]`}
               />
             </div>
 

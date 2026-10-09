@@ -406,7 +406,7 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
         .google-input {
           background-color: #f8f9fa;
           width: 100%;
-          font-size: 15px;
+          font-size: 16px;
           font-weight: 600;
           color: #1f1f1f;
           padding: 12px 16px;
@@ -414,6 +414,11 @@ export default function BookingForm({ tourPackageSlug }: { tourPackageSlug: stri
           outline: none;
           text-align: left;
           transition: background-color 0.15s ease;
+        }
+        @media (min-width: 768px) {
+          .google-input {
+            font-size: 15px;
+          }
         }
         .google-input:focus {
           background-color: #f1f3f4;

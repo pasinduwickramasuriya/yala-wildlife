@@ -159,7 +159,7 @@ export default function WhatsAppButton() {
               <input 
                 type="text" 
                 placeholder="Type your message..." 
-                className="flex-1 bg-transparent px-3 py-2 text-[14px] font-medium text-[#1f1f1f] placeholder:text-[#9aa0a6] focus:outline-none"
+                className="flex-1 bg-transparent px-3 py-2 text-base md:text-[14px] font-medium text-[#1f1f1f] placeholder:text-[#9aa0a6] focus:outline-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />

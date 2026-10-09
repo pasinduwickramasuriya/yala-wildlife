@@ -18,7 +18,7 @@ export default function LoginForm({ onSubmit, loading }: { onSubmit: (email: str
           type="email"
           id="email"
           name="email"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded text-base md:text-sm"
           required
           disabled={loading}
         />
@@ -29,7 +29,7 @@ export default function LoginForm({ onSubmit, loading }: { onSubmit: (email: str
           type="password"
           id="password"
           name="password"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded text-base md:text-sm"
           required
           disabled={loading}
         />

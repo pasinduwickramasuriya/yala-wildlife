@@ -121,7 +121,7 @@ export function BookingForm({ tourTitle }: { tourTitle: string }) {
   };
 
   const inputStyles =
-    "w-full bg-[#f8f9fa] focus:bg-[#f1f3f4] rounded-2xl px-4 py-3 text-[15px] font-semibold text-[#1f1f1f] outline-none placeholder:text-[#9aa0a6] placeholder:font-normal transition-colors";
+    "w-full bg-[#f8f9fa] focus:bg-[#f1f3f4] rounded-2xl px-4 py-3 text-base md:text-[15px] font-semibold text-[#1f1f1f] outline-none placeholder:text-[#9aa0a6] placeholder:font-normal transition-colors";
   const labelStyles = "block text-[12px] font-semibold text-[#5f6368] mb-1.5 ml-1 text-left";
 
   return (
