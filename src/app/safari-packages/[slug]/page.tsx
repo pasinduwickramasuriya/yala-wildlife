@@ -262,7 +262,7 @@ export default async function PackageDetailPage(props: Props) {
               {/* Bottom Price Floating Badge */}
               {pkg.price && (
                 <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10">
-                  <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-white text-[18px] font-semibold text-[#1f1f1f]">
+                  <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-white text-[18px] font-medium text-[#1f1f1f]">
                     ${pkg.price.toFixed(0)} USD
                   </span>
                 </div>
@@ -277,7 +277,7 @@ export default async function PackageDetailPage(props: Props) {
             <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-[1.15] mb-4">
               {pkg.name.split(":")[0]}
               {pkg.name.split(":")[1] && (
-                <span className="block text-[#5f6368] text-2xl sm:text-3xl lg:text-4xl font-semibold mt-2">
+                <span className="block text-[#5f6368] text-2xl sm:text-3xl lg:text-4xl font-medium mt-2">
                   {pkg.name.split(":")[1]}
                 </span>
               )}
@@ -286,7 +286,7 @@ export default async function PackageDetailPage(props: Props) {
             {/* <p className="text-[18px] sm:text-[20px] text-[#3c4043] font-semibold leading-[1.8] max-w-6xl mx-auto">
               {pkg.description}
             </p> */}
-            <div className="space-y-6 text-[18px] sm:text-[20px] text-[#3c4043] font-semibold leading-[1.8] max-w-6xl mx-auto">
+            <div className="space-y-6 text-[18px] sm:text-[18px] text-[#5f6368] font-medium leading-[1.8] max-w-6xl mx-auto">
               {(() => {
                 const rawParagraphs = (pkg.description || "")
                   .split(/\n\s*\n/)
@@ -343,7 +343,7 @@ export default async function PackageDetailPage(props: Props) {
                 </span>
                 <span>Inclusions</span>
               </h3>
-              <ul className="space-y-3.5 text-[18px] font-semibold text-[#3c4043]">
+              <ul className="space-y-3.5 text-[18px] font-medium text-[#3c4043]">
                 {inclusionsList.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
                     <span className="text-[#137333] font-bold select-none text-[18px] shrink-0">✓</span>
@@ -361,7 +361,7 @@ export default async function PackageDetailPage(props: Props) {
                 </span>
                 <span>Exclusions</span>
               </h3>
-              <ul className="space-y-3.5 text-[18px] font-semibold text-[#5f6368]">
+              <ul className="space-y-3.5 text-[18px] font-medium text-[#5f6368]">
                 {exclusionsList.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
                     <span className="text-[#d93025] font-bold select-none text-[18px] shrink-0">✗</span>
@@ -398,7 +398,7 @@ export default async function PackageDetailPage(props: Props) {
                       <h3 className="text-[18px] font-bold text-[#1f1f1f] mb-1">
                         Highlight {idx + 1}
                       </h3>
-                      <p className="text-[18px] text-[#3c4043] font-semibold leading-relaxed break-words">
+                      <p className="text-[18px] text-[#3c4043] font-medium leading-relaxed break-words">
                         {point}{point.endsWith('.') ? '' : '.'}
                       </p>
                     </div>
@@ -416,13 +416,13 @@ export default async function PackageDetailPage(props: Props) {
                 id="booking-form"
                 className="bg-[#fff] p-6 sm:p-8 rounded-[2.25rem] text-[#1f1f1f] lg:sticky lg:top-28"
               >
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white text-[18px] font-semibold text-[#1f1f1f] mb-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white text-[18px] font-medium text-[#1f1f1f] mb-3">
                   Direct Reservation
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#1f1f1f] tracking-tight mb-2">
                   Configure Expedition
                 </h2>
-                <p className="text-[18px] font-semibold text-[#5f6368] mb-6 leading-normal">
+                <p className="text-[18px] font-medium text-[#5f6368] mb-6 leading-normal">
                   Select your date, guest count, permits and meal add-ons.
                 </p>
 

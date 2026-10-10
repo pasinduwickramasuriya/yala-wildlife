@@ -249,7 +249,7 @@ export default async function TourDetailPage({ params }: PageProps) {
 
             {/* Top Duration Floating Badge */}
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-[16px] sm:text-[18px] font-semibold text-[#1f1f1f]">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-white text-[16px] sm:text-[18px] font-medium text-[#1f1f1f]">
                 🕒 {durationText}
               </span>
             </div>
@@ -257,7 +257,7 @@ export default async function TourDetailPage({ params }: PageProps) {
             {/* Bottom Price Floating Badge */}
             {tour.price && (
               <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10">
-                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-white text-[18px] font-semibold text-[#1f1f1f]">
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-white text-[18px] font-medium text-[#1f1f1f]">
                   From ${tour.price} USD
                 </span>
               </div>
@@ -272,13 +272,13 @@ export default async function TourDetailPage({ params }: PageProps) {
           <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1f1f1f] tracking-tight leading-[1.15] mb-4">
             {tour.title.split(":")[0]}
             {tour.title.split(":")[1] && (
-              <span className="block text-[#5f6368] text-2xl sm:text-3xl lg:text-4xl font-semibold mt-2">
+              <span className="block text-[#5f6368] text-2xl sm:text-3xl lg:text-4xl font-medium mt-2">
                 {tour.title.split(":")[1]}
               </span>
             )}
           </h1>
 
-          <div className="space-y-6 text-[18px] sm:text-[20px] text-[#3c4043] font-semibold leading-[1.8] max-w-6xl mx-auto">
+          <div className="space-y-6 text-[18px] sm:text-[20px] text-[#3c4043] font-medium leading-[1.8] max-w-6xl mx-auto">
             {(() => {
               const fullDescription = tour.longDescription || tour.description || "";
               const rawParagraphs = fullDescription
@@ -331,7 +331,7 @@ export default async function TourDetailPage({ params }: PageProps) {
               </span>
               <span>Inclusions</span>
             </h3>
-            <ul className="space-y-3.5 text-[18px] font-semibold text-[#3c4043]">
+            <ul className="space-y-3.5 text-[18px] font-medium text-[#3c4043]">
               {tour.inclusions?.map((item: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
                   <span className="text-[#137333] font-bold select-none text-[18px] shrink-0">✓</span>
@@ -349,7 +349,7 @@ export default async function TourDetailPage({ params }: PageProps) {
               </span>
               <span>Exclusions</span>
             </h3>
-            <ul className="space-y-3.5 text-[18px] font-semibold text-[#5f6368]">
+            <ul className="space-y-3.5 text-[18px] font-medium text-[#5f6368]">
               {tour.exclusions?.map((item: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
                   <span className="text-[#d93025] font-bold select-none text-[18px] shrink-0">✗</span>
@@ -386,7 +386,7 @@ export default async function TourDetailPage({ params }: PageProps) {
                     <h3 className="text-[18px] font-bold text-[#1f1f1f] mb-1">
                       {item.title || `Day ${item.day || idx + 1}`}
                     </h3>
-                    <p className="text-[18px] text-[#3c4043] font-semibold leading-relaxed break-words">
+                    <p className="text-[18px] text-[#3c4043] font-medium leading-relaxed break-words">
                       {item.description}
                     </p>
                   </div>
@@ -404,13 +404,13 @@ export default async function TourDetailPage({ params }: PageProps) {
               id="booking-form"
               className="bg-[#fff] p-6 sm:p-8 rounded-[2.25rem] text-[#1f1f1f] lg:sticky lg:top-28"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white text-[18px] font-semibold text-[#1f1f1f] mb-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white text-[18px] font-medium text-[#1f1f1f] mb-3">
                 Direct Reservation
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#1f1f1f] tracking-tight mb-2">
                 Initialize Booking
               </h2>
-              <p className="text-[18px] font-semibold text-[#5f6368] mb-6 leading-normal">
+              <p className="text-[18px] font-medium text-[#5f6368] mb-6 leading-normal">
                 Reserve your dates, chauffeur logistics, and custom preferences.
               </p>
 

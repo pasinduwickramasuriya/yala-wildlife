@@ -116,7 +116,7 @@ export default function Header() {
             '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
         }}
       >
-        <div className="flex items-center gap-2 pointer-events-auto bg-white px-2.5 py-1.5 rounded-full border border-[#dadce0] [contain:paint_layout]">
+        <div className="flex items-center gap-2 pointer-events-auto bg-white px-2.5 py-1.5 rounded-full [contain:paint_layout]">
           {/* Logo */}
           <Link
             href="/"
