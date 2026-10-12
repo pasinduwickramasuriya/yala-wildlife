@@ -178,7 +178,7 @@ export default function Footer() {
           {/* 3. NATURE FIRST POLICY & COMPLIANCE LINE                  */}
           {/* ========================================================= */}
           <div className="py-8 bg-white space-y-3 text-center sm:text-left flex flex-col items-center sm:items-start">
-            <p className="text-[18px] text-[#2d3135] font-semibold leading-relaxed max-w-5xl">
+            <p className="text-[18px] text-[#2d3135] font-medium leading-relaxed max-w-5xl">
               As Sri Lanka&apos;s premier eco-expedition partner, Yala Wildlife operates with a strict &quot;Nature First&quot; policy. We bridge luxury and raw wilderness, ensuring every journey supports local conservation efforts and ethical wildlife tracking.
             </p>
             <p className="text-[16px] text-[#5f6368] font-medium leading-relaxed">

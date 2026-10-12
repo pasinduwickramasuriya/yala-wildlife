@@ -11,11 +11,11 @@ import {
 import HeroSlider from "@/components/HeroSlider";
 import ReviewFeed from "@/components/ReviewFeed";
 import SafariPackagesCarousel from "@/components/SafariPackagesCarousel";
-import MemoryGallery from "@/components/MemoryGallery";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import GallerySection from "@/components/GallerySection";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 
+const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const GallerySection = dynamic(() => import("@/components/GallerySection"));
 const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
 const ModernReviews = dynamic(() => import("@/components/ModernReviews"));
@@ -435,7 +435,7 @@ export default async function Home() {
       <PhotoGallery initialPhotos={blogs} />
       <WhyChooseUs />
       <GallerySection />
-      <ReviewSlider />
+      <ReviewSlider initialReviews={reviews} />
       <DiscountPopup />
 
 

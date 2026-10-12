@@ -95,11 +95,11 @@ export default function PackageCard({
               src={pkg.imageUrl || "/uploads/yala1.webp"}
               alt={pkg.name}
               fill
-              sizes="(max-width: 768px) 100vw, 360px"
+              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 360px"
               priority={isPriority}
               loading={isPriority ? undefined : "lazy"}
-              quality={75}
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 transform-gpu"
+              quality={65}
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           </div>
 

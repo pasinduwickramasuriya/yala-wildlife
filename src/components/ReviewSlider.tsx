@@ -84,9 +84,9 @@ const SliderCard = memo(function SliderCard({ review }: { review: Review }) {
         )}
 
         <div className="flex flex-col items-center">
-          <h4 className="text-[#000000] font-medium text-[18px] tracking-tight leading-snug">
+          <p className="text-[#000000] font-medium text-[18px] tracking-tight leading-snug">
             {review.author_name}
-          </h4>
+          </p>
           <div className="flex text-[#f4b400] gap-1 mt-1 justify-center">
             {[...Array(5)].map((_, i) => (
               <Star
@@ -116,13 +116,21 @@ const SliderCard = memo(function SliderCard({ review }: { review: Review }) {
   );
 });
 
-export default function ReviewSlider() {
+interface ReviewSliderProps {
+  initialReviews?: Review[];
+}
+
+export default function ReviewSlider({ initialReviews = [] }: ReviewSliderProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const { shouldAnimate } = useThermalOptimization(sectionRef);
-  const [reviews, setReviews] = useState<Review[]>(() => [
-    ...FALLBACK_REVIEWS,
-    ...FALLBACK_REVIEWS,
-  ]);
+  const [reviews, setReviews] = useState<Review[]>(() => {
+    const source =
+      initialReviews && initialReviews.length > 0
+        ? initialReviews
+        : FALLBACK_REVIEWS;
+    const curated = source.slice(0, 8);
+    return [...curated, ...curated];
+  });
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -145,14 +153,16 @@ export default function ReviewSlider() {
     return () => observer.disconnect();
   }, []);
 
-  // 2. Non-blocking async fetch with controller cleanup to avoid thread memory leaks
+  // 2. Non-blocking async fetch with controller cleanup (only if initialReviews not provided)
   useEffect(() => {
+    if (initialReviews && initialReviews.length > 0) return;
+
     let isMounted = true;
     const controller = new AbortController();
 
     async function fetchReviews() {
       try {
-        const response = await fetch('/api/greviews', {
+        const response = await fetch('/api/greviews?limit=8', {
           signal: controller.signal,
         });
         if (response.ok) {
@@ -191,7 +201,7 @@ export default function ReviewSlider() {
         controller.abort();
       };
     }
-  }, []);
+  }, [initialReviews]);
 
   const runAnimation = isVisible && shouldAnimate;
 

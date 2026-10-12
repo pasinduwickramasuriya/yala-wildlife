@@ -120,7 +120,7 @@ export default function HeroSlider({
       ref={containerRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="w-full bg-white text-[#1f1f1f] pt-20 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden antialiased selection:bg-[#00ff00] selection:text-black [content-visibility:auto] [contain:style_layout]"
+      className="w-full bg-white text-[#1f1f1f] pt-20 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden antialiased selection:bg-[#00ff00] selection:text-black"
       style={{
         fontFamily: '"Google Sans", Roboto, Arial, sans-serif',
       }}
@@ -153,7 +153,7 @@ export default function HeroSlider({
         <div className="flex items-stretch gap-2.5 sm:gap-4 md:gap-6 w-full h-[260px] xs:h-[300px] sm:h-[380px] md:h-[430px] lg:h-[480px]">
 
           {/* Main Card: Isolated compositor layer prevents re-rendering parent layout tree */}
-          <div className="relative w-[48%] xs:w-[50%] sm:w-[52%] md:w-[54%] h-full rounded-[22px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden bg-[#f1f3f4] shrink-0 transform-gpu [backface-visibility:hidden] [contain:paint_layout]">
+          <div className="relative w-[48%] xs:w-[50%] sm:w-[52%] md:w-[54%] h-full rounded-[22px] sm:rounded-[36px] md:rounded-[44px] overflow-hidden bg-[#f1f3f4] shrink-0">
             {currentSlide.imageUrl ? (
               <Image
                 src={currentSlide.imageUrl}
@@ -161,8 +161,7 @@ export default function HeroSlider({
                 fill
                 priority={currentIndex === 0}
                 fetchPriority={currentIndex === 0 ? "high" : "auto"}
-                unoptimized={Boolean(currentSlide.imageUrl?.includes("res.cloudinary.com"))}
-                className="object-cover object-center transition-transform duration-500 ease-out sm:group-hover:scale-105 will-change-transform"
+                className="object-cover object-center transition-transform duration-500 ease-out sm:group-hover:scale-105"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 52vw, 680px"
                 quality={65}
               />

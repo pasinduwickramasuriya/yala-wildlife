@@ -119,7 +119,7 @@ export default function PetiteDiscountPopup() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Claim Discount via WhatsApp"
+            aria-label="Claim via WhatsApp"
             className="flex items-center justify-center gap-1.5 w-full max-w-[150px] py-2.5 bg-[#00ff00] hover:brightness-105 active:scale-[0.98] text-black text-[10.5px] font-bold rounded-full transition-all cursor-pointer shadow-sm"
           >
             <MessageCircle size={12} className="stroke-[2.5]" />

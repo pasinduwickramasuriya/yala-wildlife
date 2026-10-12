@@ -435,18 +435,22 @@ export default function SafariPackagesCarousel({ packages = [] }: SafariPackages
       {/* --- GOOGLE STYLE PILL PAGINATION --- */}
       {packages.length > visibleCount && (
         <div className="flex justify-center items-center mt-4">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full shadow-[0_2px_12px_rgba(32,33,36,0.08)]">
+          <div className="flex items-center gap-1 px-3 py-1 bg-white rounded-full shadow-[0_2px_12px_rgba(32,33,36,0.08)]">
             {Array.from({ length: totalDots }).map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  currentIndex === idx
-                    ? "w-6 h-2 bg-[#00ff00] shadow-[0_0_8px_rgba(0,255,0,0.5)]"
-                    : "w-2 h-2 bg-[#dadce0] hover:bg-[#9aa0a6]"
-                }`}
-              />
+                className="p-2 cursor-pointer flex items-center justify-center min-w-[24px] min-h-[32px]"
+              >
+                <span
+                  className={`transition-all duration-300 rounded-full block ${
+                    currentIndex === idx
+                      ? "w-6 h-2 bg-[#00ff00] shadow-[0_0_8px_rgba(0,255,0,0.5)]"
+                      : "w-2 h-2 bg-[#dadce0] hover:bg-[#9aa0a6]"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

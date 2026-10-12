@@ -29,8 +29,6 @@ const YalaLogo = memo(() => (
       alt="Yala Wildlife Logo"
       width={28}
       height={28}
-      priority
-      loading="eager"
       className="w-7 h-7 object-contain"
     />
     <div className="flex flex-col leading-tight">
