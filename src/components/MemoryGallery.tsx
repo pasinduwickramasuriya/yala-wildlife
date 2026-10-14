@@ -50,7 +50,7 @@ const SlideCard = memo(function SlideCard({ current }: { current: Memory }) {
     <div className="relative w-full bg-white rounded-[3.25rem] p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14 overflow-hidden [contain:paint] transform-gpu">
       {/* Left Column: Editorial Content */}
       <div className="flex-1 flex flex-col items-center text-center lg:items-start lg:text-left max-w-lg z-10 bg-white">
-        <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-bold text-[#1f1f1f] tracking-tight leading-[1.12] mb-5">
+        <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-bold text-[#1f1f1f] tracking-tight leading-[1.12] mb-5 text-center">
           {current.title}
         </h2>
 
@@ -61,7 +61,7 @@ const SlideCard = memo(function SlideCard({ current }: { current: Memory }) {
         <Link
           href={current.href}
           prefetch={false}
-          className="inline-flex items-center justify-center bg-[#000000] hover:bg-[#00ff00] text-white hover:text-black rounded-full px-8 py-3.5 text-[18px] font-bold tracking-wide transition-colors duration-150 active:scale-95 cursor-pointer shadow-none"
+          className="inline-flex items-center justify-center bg-[#fff] hover:bg-[#00ff00] text-black hover:text-black rounded-full px-8 py-3.5 text-[18px] font-bold tracking-wide transition-colors duration-150 active:scale-95 cursor-pointer shadow-none "
         >
           {current.linkText}
         </Link>
