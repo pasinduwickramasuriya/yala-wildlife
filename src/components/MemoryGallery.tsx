@@ -54,18 +54,18 @@ export default function AppleCuteGallery() {
                 />
 
                 {/* INLINE TAG */}
-                <div className="absolute top-4 left-4">
+                {/* <div className="absolute top-4 left-4">
                   <span className="px-2.5 py-0.5 bg-black/60 backdrop-blur-md border border-white/10 text-[9px] font-black text-[#00ff00] uppercase tracking-widest rounded-full">
                     {item.tag}
                   </span>
-                </div>
+                </div> */}
               </div>
 
               {/* INLINE CONTENT BLOCK */}
-              <div className="mt-[-50px] relative z-10 mx-3 mb-3 p-5 bg-neutral-900/80 backdrop-blur-3xl border border-white/10 rounded-[1.5rem] shadow-2xl">
+              <div className="mt-[-50px] relative z-10 mx-3 mb-3 p-5 bg-black  border border-black/10 rounded-[1.5rem] shadow-2xl">
                 <div className="flex items-center gap-1.5 mb-2">
-                  <MapPin size={10} className="text-[#00ff00]" />
-                  <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
+                  <MapPin size={10} className="text-neutral-400 " />
+                  <span className="text-[12px] font-bold text-neutral-400  tracking-widest">
                     {item.location}
                   </span>
                 </div>

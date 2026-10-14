@@ -11,10 +11,7 @@ export const siteConfig = {
 
 export const defaultMetadata = {
   metadataBase: new URL("https://yalawildlife.com"),
-  title: {
-    default: "Yala National Park | Official Site | Yala Sri Lanka",
-    template: "%s | Yala Wildlife Safari"
-  },
+  title: "Yala National Park | Official Site | Yala Sri Lanka",
   description: "Premier Yala National Park safari tours and jeep service. Expert guides, guaranteed leopard sightings, and unforgettable wildlife experiences. Book your adventure today!",
   keywords: [
     "yala",

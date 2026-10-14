@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
       url: blog.imageUrl || "https://yalawildlife.com/default-og.jpg",
       width: 1200,
       height: 630,
-      alt: `${blog.title} - Yala Wildlife Safari Sri Lanka`,
+      alt: `${blog.title}`,
       type: "image/jpeg",
     },
   ];
@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 
   return {
     // title: `${blog.title} | Top Rated Yala Safari Guide`,
-    title: `Yala National Park | ${blog.title}`,
+    title: `${blog.title}`,
     description: description,
     applicationName: "Yala Wildlife",
     authors: [{ name: "Yala Wildlife Team", url: "https://yalawildlife.com" }],
@@ -346,8 +346,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
                       <p
                         key={index}
                         className={`text-white font-light text-[1.05rem] leading-7 ${isBullet
-                            ? "pl-6 mb-3"
-                            : "mb-5 first-letter:text-3xl first-letter:font-bold first-letter:text-[#00ff00] first-letter:mr-1.5 first-letter:float-left"
+                          ? "pl-6 mb-3"
+                          : "mb-5 first-letter:text-3xl first-letter:font-bold first-letter:text-[#00ff00] first-letter:mr-1.5 first-letter:float-left"
                           }`}
                       >
                         {paragraph}
