@@ -14,6 +14,7 @@ import SafariPackagesCarousel from "@/components/SafariPackagesCarousel";
 import MemoryGallery from "@/components/MemoryGallery";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
+import FAQSection from "@/components/FAQSection";
 
 const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
@@ -435,6 +436,10 @@ export default async function Home() {
       <WhyChooseUs />
       <GallerySection />
       <ReviewSlider />
+
+      {/* Google-Style FAQ Section for SEO, AEO & AI Search */}
+      <FAQSection />
+
       <DiscountPopup />
 
       <AutoSEOWrapper
