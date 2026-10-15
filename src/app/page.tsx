@@ -561,37 +561,37 @@ export default async function Home() {
                   description: "Large herds of wild elephants"
                 }
               ]
-            },
+              // },
 
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: [
-                {
-                  "@type": "Question",
-                  name: "What is the best time to visit Yala National Park?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "The best time for Yala safari is February to June during dry season when water levels are low and animals gather around waterholes, increasing wildlife sighting opportunities."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  name: "How much does a Yala safari cost?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Yala safari tours range from $50-350 per person. Half-day safaris start at $75, full-day experiences at $150, private luxury safaris at $350. Prices include jeep, guide, and park fees."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  name: "What animals can I see in Yala?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Yala is famous for leopards (world's highest density), Asian elephants, sloth bears, spotted deer, crocodiles, and over 200 bird species including peacocks and eagles."
-                  }
-                }
-              ]
+              // {
+              //   "@context": "https://schema.org",
+              //   "@type": "FAQPage",
+              //   mainEntity: [
+              //     {
+              //       "@type": "Question",
+              //       name: "What is the best time to visit Yala National Park?",
+              //       acceptedAnswer: {
+              //         "@type": "Answer",
+              //         text: "The best time for Yala safari is February to June during dry season when water levels are low and animals gather around waterholes, increasing wildlife sighting opportunities."
+              //       }
+              //     },
+              //     {
+              //       "@type": "Question",
+              //       name: "How much does a Yala safari cost?",
+              //       acceptedAnswer: {
+              //         "@type": "Answer",
+              //         text: "Yala safari tours range from $50-350 per person. Half-day safaris start at $75, full-day experiences at $150, private luxury safaris at $350. Prices include jeep, guide, and park fees."
+              //       }
+              //     },
+              //     {
+              //       "@type": "Question",
+              //       name: "What animals can I see in Yala?",
+              //       acceptedAnswer: {
+              //         "@type": "Answer",
+              //         text: "Yala is famous for leopards (world's highest density), Asian elephants, sloth bears, spotted deer, crocodiles, and over 200 bird species including peacocks and eagles."
+              //       }
+              //     }
+              //   ]
             }
           ]),
         }}

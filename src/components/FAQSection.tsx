@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useId } from "react";
+import React, { useState, useMemo, useId, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
 import { FAQS } from "@/data/faqs";
@@ -20,6 +20,24 @@ export default function FAQSection() {
   const [openIds, setOpenIds] = useState<string[]>([FAQS[0]?.id || ""]);
   const baseId = useId();
 
+  // Auto-expand and scroll to question if URL contains a deep-link hash (e.g. #safari-pricing-breakdown)
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash.replace("#", "");
+      const matchingFaq = FAQS.find((item) => item.id === hash);
+      if (matchingFaq) {
+        setSelectedCategory("all");
+        setOpenIds((prev) => (prev.includes(hash) ? prev : [...prev, hash]));
+        const element = document.getElementById(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 150);
+        }
+      }
+    }
+  }, []);
+
   const toggleItem = (id: string) => {
     setOpenIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -31,16 +49,44 @@ export default function FAQSection() {
     return FAQS.filter((item) => item.category === selectedCategory);
   }, [selectedCategory]);
 
-  // Synchronized JSON-LD FAQPage Schema (100% matched to visible content)
+  // Synchronized Comprehensive JSON-LD FAQPage Schema (Always contains ALL FAQs for complete indexing)
   const schemaData = useMemo(() => {
     return {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://www.yalawildlife.com/#faq",
       name: "Frequently Asked Questions About Yala National Park Safari",
-      url: "https://www.yalawildlife.com",
-      mainEntity: filteredFaqs.map((faq) => ({
+      description:
+        "Official 2026 answers to essential questions regarding Yala safari packages, pricing in LKR/USD, leopard sighting odds, DWC gate access, and booking policies.",
+      url: "https://www.yalawildlife.com/#faq",
+      inLanguage: "en-US",
+      publisher: {
+        "@type": "Organization",
+        name: "Yala Wildlife Safari",
+        url: "https://www.yalawildlife.com",
+        logo: "https://www.yalawildlife.com/logo.png",
+      },
+      about: [
+        {
+          "@type": "Place",
+          name: "Yala National Park",
+          sameAs: "https://en.wikipedia.org/wiki/Yala_National_Park",
+        },
+        {
+          "@type": "Taxon",
+          name: "Sri Lankan Leopard",
+          sameAs: "https://en.wikipedia.org/wiki/Sri_Lankan_leopard",
+        },
+        {
+          "@type": "GovernmentOrganization",
+          name: "Department of Wildlife Conservation Sri Lanka",
+          sameAs: "https://en.wikipedia.org/wiki/Department_of_Wildlife_Conservation_(Sri_Lanka)",
+        },
+      ],
+      mainEntity: FAQS.map((faq) => ({
         "@type": "Question",
         name: faq.question,
+        url: `https://www.yalawildlife.com/#${faq.id}`,
         acceptedAnswer: {
           "@type": "Answer",
           text: faq.detailedContent
@@ -49,12 +95,12 @@ export default function FAQSection() {
         },
       })),
     };
-  }, [filteredFaqs]);
+  }, []);
 
   return (
     <section
       id="faq"
-      className="relative w-full py-16 md:py-24 overflow-hidden z-10 cv-auto select-none"
+      className="relative w-full py-16 md:py-24 overflow-hidden z-10 cv-auto"
       aria-label="Frequently Asked Questions"
       style={{
         fontFamily:
@@ -62,7 +108,7 @@ export default function FAQSection() {
       }}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        
+
         {/* --- 1. SECTION HEADER (INLINE-BLOCK ISLANDS) --- */}
         <div className="flex flex-col items-center justify-center w-full mb-10 text-center space-y-3">
           {/* Eyebrow Island */}
@@ -98,11 +144,10 @@ export default function FAQSection() {
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-[12px] font-bold tracking-wide transition-all shadow-xl cursor-pointer transform-gpu ${
-                  isSelected
+                className={`px-4 py-2 rounded-full text-[12px] font-bold tracking-wide transition-all shadow-xl cursor-pointer transform-gpu ${isSelected
                     ? "bg-[#00ff00] text-black font-extrabold shadow-[0_0_15px_rgba(0,255,0,0.3)]"
                     : "bg-black/80 text-white/70 hover:text-white hover:bg-black/95"
-                }`}
+                  }`}
               >
                 {cat.label}
               </button>
@@ -125,7 +170,8 @@ export default function FAQSection() {
               return (
                 <div
                   key={faq.id}
-                  className="w-full inline-block bg-black/80 hover:bg-black/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl transition-all duration-300 transform-gpu"
+                  id={faq.id}
+                  className="w-full inline-block bg-black/80 hover:bg-black/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl transition-all duration-300 transform-gpu scroll-mt-24"
                 >
                   <h3>
                     <button
@@ -140,11 +186,10 @@ export default function FAQSection() {
                         {faq.question}
                       </span>
                       <span
-                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                          isOpen
+                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen
                             ? "bg-[#00ff00] text-black rotate-180"
                             : "bg-white/10 text-white/60 group-hover:bg-[#00ff00] group-hover:text-black"
-                        }`}
+                          }`}
                         aria-hidden="true"
                       >
                         <ChevronDown className="w-4 h-4 stroke-[2.5]" />
@@ -157,20 +202,20 @@ export default function FAQSection() {
                     id={panelId}
                     role="region"
                     aria-labelledby={headerId}
-                    className={`transition-all duration-300 ease-in-out ${
-                      isOpen
-                        ? "max-h-[600px] opacity-100 pt-3.5"
+                    aria-hidden={!isOpen}
+                    className={`transition-all duration-300 ease-in-out ${isOpen
+                        ? "max-h-[800px] opacity-100 pt-3.5"
                         : "max-h-0 opacity-0 overflow-hidden pointer-events-none"
-                    }`}
+                      }`}
                   >
-                    {/* Direct Factual Response */}
-                    <p className="text-[14px] sm:text-[15px] text-white/90 leading-relaxed font-normal mb-2">
+                    {/* Direct Factual Response (Answer Engine Optimization Target) */}
+                    <p className="text-[14px] sm:text-[15px] text-white/95 leading-relaxed font-normal mb-2.5">
                       {faq.answer}
                     </p>
 
-                    {/* Detailed Context */}
+                    {/* Detailed Context & Source Verification (Generative Engine Optimization Target) */}
                     {faq.detailedContent && (
-                      <p className="text-[13px] sm:text-[14px] text-white/60 leading-relaxed mb-3 font-normal">
+                      <p className="text-[13px] sm:text-[14px] text-white/70 leading-relaxed mb-3 font-normal border-l-2 border-[#00ff00]/40 pl-3">
                         {faq.detailedContent}
                       </p>
                     )}
