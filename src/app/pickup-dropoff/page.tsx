@@ -3,6 +3,7 @@ import Image from "next/image";
 import TransportForm from "@/components/TransportForm";
 import { MapPin, ShieldCheck, Zap, Clock, Car, Star, UserCheck, Navigation } from "lucide-react";
 import TourNavigator from "@/components/TourNavigator";
+import TransportFAQSection from "@/components/TransportFAQSection";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -245,7 +246,7 @@ export default function PickupDropoffPage() {
 
                         {/* --- RIGHT COLUMN: FORM (Sticky) --- */}
                         <div className="lg:col-span-5">
-                            <div className="sticky top-24">
+                            <div id="booking-form" className="sticky top-24 scroll-mt-28">
                                 {/* Transport Form Component */}
                                 <TransportForm />
 
@@ -256,6 +257,13 @@ export default function PickupDropoffPage() {
                             </div>
                         </div>
 
+                    </div>
+
+                    {/* =========================================
+                        UNIQUE TRANSPORT & TAXI FAQ SECTION
+                    ========================================= */}
+                    <div className="mt-16 md:mt-24">
+                        <TransportFAQSection />
                     </div>
                 </div>
             </main>
