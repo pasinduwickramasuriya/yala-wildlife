@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
 import { Phone, Clock, ShieldCheck, UserCheck, MessageCircle, Mail, Landmark, Globe, Printer } from "lucide-react";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
+import ContactFAQSection from "@/components/ContactFAQSection";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -178,15 +179,6 @@ export default function ContactPage() {
 
           {/* Header */}
           <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff00] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ff00]"></span>
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#00ff00]">
-                24/7 Live Support
-              </span>
-            </div>
 
             <h1 className="text-2xl md:text-2xl font-extrabold tracking-tight text-[#00ff00] leading-tight drop-shadow-xl">
               Let's Plan Your{" "}
@@ -316,7 +308,7 @@ export default function ContactPage() {
 
             {/* ================= RIGHT COLUMN (FORM) ================= */}
             <div className="lg:col-span-7">
-              <div className="backdrop-blur-3xl bg-black/50 rounded-[2rem] p-6 md:p-8 shadow-2xl relative">
+              <div id="inquiry-form" className="scroll-mt-32 backdrop-blur-3xl bg-black/50 rounded-[2rem] p-6 md:p-8 shadow-2xl relative">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold text-white">Secure Your Safari</h2>
                   <p className="text-xs text-neutral-400 mt-1">Response time: <span className="text-[#00ff00] font-bold">~15 mins</span> during business hours.</p>
@@ -330,7 +322,7 @@ export default function ContactPage() {
           </div>
 
           {/* ================= BIG CUTTER MAP SECTION ================= */}
-          <div className="mt-12 w-full h-[450px] md:h-[550px] rounded-[2.5rem] overflow-hidden relative shadow-2xl group bg-black/20 backdrop-blur-sm">
+          <div id="location-map" className="scroll-mt-32 mt-12 w-full h-[450px] md:h-[550px] rounded-[2.5rem] overflow-hidden relative shadow-2xl group bg-black/20 backdrop-blur-sm">
             {/* Tech Overlay */}
             {/* <div className="absolute top-6 left-6 z-20 bg-black/90 backdrop-blur-xl px-5 py-2.5 rounded-full border border-[#00ff00]/30 shadow-[0_0_20px_rgba(0,255,0,0.2)] flex items-center gap-3 pointer-events-none">
               <div className="w-2.5 h-2.5 rounded-full bg-[#00ff00] animate-pulse"></div>
@@ -345,7 +337,6 @@ export default function ContactPage() {
             {/* Cutter Corners Overlay (Visual Effect) */}
             <div className="absolute inset-0 pointer-events-none rounded-[2.5rem] ring-1 ring-white/5"></div>
           </div>
-
         </div>
       </main>
 
@@ -357,7 +348,7 @@ export default function ContactPage() {
       >
         <div className="container mx-auto px-4 py-16  bg-transparent relative">
           {/* Frosted Glass Container for Text Readability */}
-          <div className="max-w-5xl mx-auto backdrop-blur-xl bg-white/[0.03]  rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="max-w-5xl mx-auto backdrop-blur bg-white/[0.03]  rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
 
             {/* Glow Accent */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-[#00ff00] shadow-[0_0_30px_#00ff00]"></div>
@@ -366,14 +357,14 @@ export default function ContactPage() {
               Contact <span className="text-[#00ff00]">Yala Wildlife Safari</span>
             </h1>
 
-            <div className="space-y-6 text-neutral-300 text-lg leading-relaxed font-light text-center">
-              <p>
+            <div className="space-y-6 text-white text-lg leading-relaxed font-light text-center">
+              <p className="text-white">
                 Ready to experience the thrill of Yala National Park? Contact our friendly
                 team to book your safari, ask questions, or request custom tour packages.
                 We are available <span className="text-[#00ff00] font-bold">24/7</span> to assist with all your safari needs.
               </p>
 
-              <p>
+              <p className="text-white">
                 Our office is conveniently located in Tissamaharama, just minutes from Yala
                 National Park entrance. Reach us via <span className="text-white font-bold border-b border-[#00ff00]">Phone, WhatsApp, or Email</span> for instant
                 booking confirmations and personalized travel advice from our experienced team.
@@ -382,6 +373,9 @@ export default function ContactPage() {
           </div>
         </div>
       </AutoSEOWrapper>
+      <div className="mt-0 md:mt-0">
+        <ContactFAQSection />
+      </div>
     </>
   );
 }
