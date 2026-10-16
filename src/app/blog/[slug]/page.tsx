@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { Metadata } from "next";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
 import DiscountPopup from "@/components/DiscountPopup";
+import BlogDetailFAQSection from "@/components/BlogDetailFAQSection";
 // import AdUnit from "@/components/AdUnit";
 
 // --- Types ---
@@ -376,6 +377,14 @@ export default async function BlogPost({ params }: BlogPostProps) {
               </div>
             </article>
             <ReviewPhotoGallery />
+
+            {/* =========================================
+                UNIQUE BLOG ARTICLE & FIELD GUIDE FAQ
+            ========================================= */}
+            <div className="mt-8 md:mt-12">
+              <BlogDetailFAQSection blog={blog} />
+            </div>
+
             {/* Ad unit between blog grid and newsletter */}
             {/* <div className="mt-12">
               <AdUnit />

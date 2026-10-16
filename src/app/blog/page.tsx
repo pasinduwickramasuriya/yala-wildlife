@@ -551,13 +551,6 @@ export default async function BlogPage() {
             </div>
           </section>
 
-          {/* =========================================
-              UNIQUE BLOG & WILDLIFE FIELD FAQ SECTION
-          ========================================= */}
-          {/* <div className="mt-16 md:mt-24">
-            <BlogFAQSection />
-          </div> */}
-
           {/* SEO CONTENT WRAPPER (Hidden Visual Style, Visible for SEO) */}
           <div className="mt-16 flex flex-col items-center gap-3 opacity-90 text-center animate-in slide-in-from-bottom duration-1000 ease-out">
             <AutoSEOWrapper
