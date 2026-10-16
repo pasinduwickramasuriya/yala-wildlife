@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import PackageCard from "@/components/PackageCard";
 import { OrganizationJsonLd, LocalBusinessJsonLd } from "@/components/JsonLd";
-import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
+import PackagesFAQSection from "@/components/PackagesFAQSection";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { SafariPackageJsonLd } from "@/components/SafariPackageJsonLd";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
@@ -55,7 +55,6 @@ export default function ClientSafariPackages() {
       {/* JSON-LD Data */}
       <OrganizationJsonLd />
       <LocalBusinessJsonLd />
-      <FAQJsonLd faqs={defaultFAQs} />
       <BreadcrumbJsonLd items={breadcrumbItems} />
       {packages.map((pkg) => (
         <SafariPackageJsonLd
@@ -189,7 +188,7 @@ export default function ClientSafariPackages() {
           </div>
 
           {/* --- INTELLIGENCE TRACK: PACKAGES GRID --- */}
-          <div className="max-w-[1440px] mx-auto px-6 md:px-24 lg:px-48 pb-20 relative z-10">
+          <div id="packages-grid" className="max-w-[1440px] mx-auto px-6 md:px-24 lg:px-48 pb-20 relative z-10 scroll-mt-24">
 
             {loading ? (
               /* --- SKELETON GRID --- */
@@ -239,10 +238,10 @@ export default function ClientSafariPackages() {
 
           </div>
 
-          {/* Ad unit after packages grid */}
-          {/* <div className="max-w-5xl mx-auto px-4 pb-8">
-            <AdUnit />
-          </div> */}
+          {/* =========================================
+              UNIQUE PACKAGES FAQ SECTION
+          ========================================= */}
+          {/* <PackagesFAQSection /> */}
 
           <div className="flex flex-col items-center gap-1.5 max-w-6xl mx-auto px-4 mt-20 mb-24 selection:bg-[#00ff00] selection:text-black">
 
@@ -302,6 +301,11 @@ export default function ClientSafariPackages() {
               </AutoSEOWrapper>
             </div>
           </div>
+
+           {/* =========================================
+              UNIQUE PACKAGES FAQ SECTION
+          ========================================= */}
+          <PackagesFAQSection />
 
         </section>
       </div>
