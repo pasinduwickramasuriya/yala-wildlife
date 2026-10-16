@@ -6,6 +6,7 @@ import { tourPackages as staticTourPackages } from "@/data/tours";
 import { TourPackageCard, Tour } from "@/components/TourPackageCard";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import ToursFAQSection from "@/components/ToursFAQSection";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -265,6 +266,13 @@ export default async function ToursPage() {
                             reverse={index % 2 === 0}
                         />
                     ))}
+                </div>
+
+                {/* =========================================
+                    UNIQUE MULTI-DAY TOURS FAQ SECTION
+                ========================================= */}
+                <div className="mt-20 md:mt-28">
+                    <ToursFAQSection />
                 </div>
             </div>
         </main>
