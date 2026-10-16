@@ -438,7 +438,7 @@ export default async function Home() {
       <ReviewSlider />
 
       {/* Google-Style FAQ Section for SEO, AEO & AI Search */}
-      <FAQSection />
+      {/* <FAQSection /> */}
 
       <DiscountPopup />
 
@@ -473,6 +473,8 @@ export default async function Home() {
           </div>
         </section>
       </AutoSEOWrapper>
+
+       <FAQSection />
 
       {/* Schema markup with consistent BASE_URL */}
       <script

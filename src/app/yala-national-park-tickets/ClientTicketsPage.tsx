@@ -29,6 +29,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import TicketsFAQSection from "@/components/TicketsFAQSection";
 
 // Pricing Constants in LKR (Locals & Vehicles only)
 const RATES = {
@@ -45,7 +46,6 @@ const RATES = {
 };
 
 export default function ClientTicketsPage() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
   // Exchange Rate State (Real-time live fetch with standard fallback)
   const [exchangeRate, setExchangeRate] = useState(330);
   const [isLiveRate, setIsLiveRate] = useState(false);
@@ -340,7 +340,7 @@ export default function ClientTicketsPage() {
           </div>
 
           {/* Grid Layout: Left Inputs, Right Invoice Receipt */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div id="ticket-calculator" className="scroll-mt-32 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
             {/* ================= LEFT COLUMN: CALCULATOR & DETAILS ================= */}
             {/* ================= LEFT COLUMN ================= */}
@@ -818,83 +818,11 @@ export default function ClientTicketsPage() {
                 </button>
               </div>
 
-              {/* ================= COMPACT OFFICIAL KEYWORD FAQ SECTION ================= */}
-              <div className="mt-14 max-w-3xl w-full mx-auto space-y-6 animate-in fade-in slide-in-from-bottom duration-1000">
-                <div className="text-center space-y-1">
-                  <div className="inline-block bg-black/80 backdrop-blur-sm border border-white/5 px-3 py-1 rounded-full">
-                    <span className="text-[10px] font-black text-[#00ff00] tracking-[0.25em]">
-                      Official FAQ Desk
-                    </span>
-                  </div>
-                  <h3 className="text-[15px] md:text-[15px] font-black text-white tracking-wide">
-                    Frequently Asked Questions
-                  </h3>
-                </div>
-
-                <div className="space-y-3">
-                  {[
-                    {
-                      q: "How do I buy Yala National Park tickets online?",
-                      a: "You can calculate and request your official Yala National Park entry permits online directly using our dynamic DWC calculator. Input your visitor details, submit the booking inquiry, and our agents will secure the government permits in advance. This ensures a seamless entrance, letting you skip the long ticket counter lines entirely!"
-                    },
-                    {
-                      q: "What is the Yala National Park entrance ticket price for foreigners?",
-                      a: "For foreign visitors (Non-SAARC), the official day entrance permit fee is $25 USD for adults and $15 USD for children (6-12 years). Infants under 6 enter free of charge. Our portal dynamically converts these USD prices to LKR at the live daily exchange rate for transparent side-by-side calculation."
-                    },
-                    {
-                      q: "Is the private safari jeep rental cost included in the ticket calculator?",
-                      a: "No. The calculator computes only the official DWC government park permit charges (passenger entry tickets, vehicle trail fees, and mandatory government service charges plus 18% VAT). Private 4x4 safari jeep hire, driver services, and independent tracker tips must be booked separately."
-                    },
-                    {
-                      q: "Do I need to book my Yala safari entry permits in advance?",
-                      a: "Yes. Booking in advance is highly recommended for all visitors—especially international tourists—to ensure smooth clearance. Having your official permits prepared beforehand guarantees a stress-free experience, allowing you to bypass the gate counter queues at Palatupana or Katagamuwa and spend more time searching for leopards."
-                    },
-                    {
-                      q: "What are the official ticket counter opening hours at Yala?",
-                      a: "The Department of Wildlife Conservation (DWC) ticket offices at Palatupana Gate (Block 1 & 2) and Katagamuwa Gate (Block 2) operate daily from 6:00 AM to 6:00 PM. We strongly recommend securing your digital permits online before arrival to ensure seamless early-morning entry when wildlife tracking is optimal."
-                    },
-                    {
-                      q: "Is there a discounted entrance fee for SAARC nationals?",
-                      a: "Yes. SAARC adults pay a discounted government rate of $20 USD, while SAARC children aged 6 to 12 are charged $10 USD. Valid passport verification matching the registered booking details is required at the entry check-point to utilize these discounted tickets."
-                    },
-                    {
-                      q: "Are there additional costs for half-day vs full-day safari permits?",
-                      a: "Yes. Full-day safari permits include a slightly higher fixed vehicle admission and unified service fee, since the vehicle stays on trails for up to 12 hours. The DWC calculates this automatically based on hours of trail usage."
-                    },
-                    {
-                      q: "What is the VAT rate and government service fee breakdown?",
-                      a: "All official Yala permits are subject to a mandatory 18% Value Added Tax (VAT). Additionally, a unified government service charge is added per permit group ($10 USD equivalent for foreign visitor groups or LKR 400 for local groups), which our calculator handles dynamically."
-                    }
-                  ].map((faq, idx) => {
-                    const isOpen = activeFaq === idx;
-                    return (
-                      <div
-                        key={idx}
-                        className="bg-black/60 backdrop-blur-md border border-white/5 rounded-[1.2rem] overflow-hidden transition-all duration-300 transform-gpu"
-                      >
-                        <button
-                          type="button"
-                          onClick={() => setActiveFaq(isOpen ? null : idx)}
-                          className="w-full flex items-center justify-between px-5 py-4 text-left text-white hover:text-[#00ff00] transition-colors"
-                        >
-                          <span className="text-[13px] font-bold tracking-wide italic">
-                            {faq.q}
-                          </span>
-                          <span className={`text-[15px] font-black leading-none ml-4 transition-transform duration-300 ${isOpen ? 'rotate-45 text-[#00ff00]' : 'text-white/40'}`}>
-                            +
-                          </span>
-                        </button>
-                        <div
-                          className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[250px] opacity-100 border-t border-white/5' : 'max-h-0 opacity-0 pointer-events-none'}`}
-                        >
-                          <p className="px-5 py-4 text-[12.5px] text-white/70 font-medium leading-relaxed italic">
-                            {faq.a}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+              {/* =========================================
+                  UNIQUE YALA TICKETS & PERMITS FAQ SECTION
+              ========================================= */}
+              <div className="w-full">
+                <TicketsFAQSection />
               </div>
 
             </section>

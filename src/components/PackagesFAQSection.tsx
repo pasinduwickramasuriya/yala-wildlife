@@ -104,7 +104,7 @@ export default function PackagesFAQSection() {
           {/* Main Heading Island */}
           <div>
             <h2 className="inline-block bg-black/80 px-6 sm:px-8 py-3.5 rounded-2xl shadow-2xl text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight transform-gpu">
-              Frequently Asked Questions About Safari Packages
+              FAQs About Safari Packages
             </h2>
           </div>
 
