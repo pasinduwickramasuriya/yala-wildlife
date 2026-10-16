@@ -6,6 +6,7 @@ import ModernReviews from "@/components/ModernReviews";
 import ReviewSlider from "@/components/ReviewSlider";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
 import Image from "next/image";
+import ReviewsFAQSection from "@/components/ReviewsFAQSection";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -200,6 +201,11 @@ export default function ReviewsPage() {
             </div>
           </section>
         </AutoSEOWrapper>
+
+        {/* =========================================
+            UNIQUE REVIEWS & SIGHTINGS FAQ SECTION
+        ========================================= */}
+        <ReviewsFAQSection />
       </main>
     </>
   );
