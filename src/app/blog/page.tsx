@@ -11,6 +11,7 @@ import {
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
 // import AdUnit from "@/components/AdUnit";
+import BlogFAQSection from "@/components/BlogFAQSection";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -387,7 +388,7 @@ export default async function BlogPage() {
 
               {/* MAIN TITLE PILL */}
               <div className="inline-block bg-black/80 px-8 py-3 rounded-full shadow-2xl border border-white/5">
-                <h1 className="text-[18px] md:text-[24px] font-black text-white uppercase tracking-[0.25em] leading-none">
+                <h1 className="text-[18px] md:text-[24px] font-black text-white  tracking-[0.1em] leading-none">
                   Wildlife <span className="text-white">Chronicles</span>
                 </h1>
               </div>
@@ -550,6 +551,13 @@ export default async function BlogPage() {
             </div>
           </section>
 
+          {/* =========================================
+              UNIQUE BLOG & WILDLIFE FIELD FAQ SECTION
+          ========================================= */}
+          {/* <div className="mt-16 md:mt-24">
+            <BlogFAQSection />
+          </div> */}
+
           {/* SEO CONTENT WRAPPER (Hidden Visual Style, Visible for SEO) */}
           <div className="mt-16 flex flex-col items-center gap-3 opacity-90 text-center animate-in slide-in-from-bottom duration-1000 ease-out">
             <AutoSEOWrapper
@@ -583,6 +591,10 @@ export default async function BlogPage() {
                 </div>
               </div>
             </AutoSEOWrapper>
+          </div>
+
+          <div className="mt-0 md:mt-0">
+            <BlogFAQSection />
           </div>
 
         </div>
