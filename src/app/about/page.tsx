@@ -7,6 +7,7 @@ import {
   localBusinessSchema,
 } from "@/lib/schema";
 import { ArrowRight, Shield, Camera, Users, Leaf, HeartHandshake } from "lucide-react";
+import AboutFAQSection from "@/components/AboutFAQSection";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -253,7 +254,7 @@ export default function AboutPage() {
           <section className="mb-20">
             <div className="backdrop-blur-sm rounded-3xl p-8 md:p-12 relative overflow-hidden">
               {/* Decorative glow */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-green-500/10 rounded-full blur-xl pointer-events-none"></div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
@@ -264,11 +265,11 @@ export default function AboutPage() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
                       </span>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-green-400">Since 2015</span>
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#00ff00]">Since 2015</span>
                     </div>
                     {/* H1: Smaller */}
                     <h1 id="about-title" className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-                      We Are <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Yala Wildlife Safari</span>
+                      We Are <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff00] to-[#00ff00]">Yala Wildlife Safari</span>
                     </h1>
                     {/* Subtitle: Smaller */}
                     <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
@@ -278,7 +279,7 @@ export default function AboutPage() {
 
                   <div className="space-y-6 text-sm text-neutral-300 leading-relaxed font-light">
                     <p>
-                      <strong className="text-white font-medium">Yala Wildlife Safari</strong> is Sri Lanka&apos;s most trusted safari operator, specializing in premium wildlife tours through Yala National Park. With over <span className="text-green-400 font-semibold">8 years of experience</span> and a <span className="text-green-400 font-semibold">4.9/5 rating</span> from 300+ satisfied guests, we provide unparalleled access to the world&apos;s highest leopard density park.
+                      <strong className="text-white font-medium">Yala Wildlife Safari</strong> is Sri Lanka&apos;s most trusted safari operator, specializing in premium wildlife tours through Yala National Park. With over <span className="text-[#00ff00]font-semibold">8 years of experience</span> and a <span className="text-[#00ff00] font-semibold">4.9/5 rating</span> from 300+ satisfied guests, we provide unparalleled access to the world&apos;s highest leopard density park.
                     </p>
                     <p>
                       Our team of certified naturalist guides brings deep expertise in wildlife behavior, conservation, and Yala&apos;s unique ecosystems. Every safari is conducted in modern, comfortable 4x4 vehicles equipped with safety features and optimal viewing configurations.
@@ -302,7 +303,7 @@ export default function AboutPage() {
                   {/* Image Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                   <div className="absolute bottom-6 left-6 right-6 text-white">
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-green-400 mb-1">Experience The Wild</p>
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-[#00ff00] mb-1">Experience The Wild</p>
                     <h3 className="text-xl font-bold">Expert-Guided Adventures</h3>
                   </div>
                 </div>
@@ -317,9 +318,9 @@ export default function AboutPage() {
             {/* Removed Border */}
             <div className="backdrop-blur-md bg-white/5 rounded-3xl p-8 md:p-12 shadow-xl">
               <div className="max-w-4xl mx-auto text-center mb-12">
-                <Shield className="w-10 h-10 text-green-500 mx-auto mb-4 opacity-80" />
+                <Shield className="w-10 h-10 text-[#00ff00] mx-auto mb-4 opacity-80" />
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
-                  Yala National Park: <span className="text-green-500">A Wildlife Paradise</span>
+                  Yala National Park: <span className="text-[#00ff00]">A Wildlife Paradise</span>
                 </h2>
               </div>
 
@@ -330,7 +331,7 @@ export default function AboutPage() {
                     Nestled in Sri Lanka&apos;s southeastern region, <strong className="text-white font-medium">Yala National Park</strong> spans over 979 square kilometers of pristine wilderness. It is globally renowned for hosting the world&apos;s highest concentration of leopards.
                   </p>
                   <p>
-                    The park&apos;s diverse ecosystems include tropical dry forests, grasslands, coastal lagoons, and rocky outcrops, creating ideal habitats for over <span className="text-green-400 font-semibold">44 mammal species</span> and <span className="text-green-400 font-semibold">215 bird species</span>. Beyond leopards, visitors regularly encounter Asian elephants, sloth bears, spotted deer, sambars, and mugger crocodiles.
+                    The park&apos;s diverse ecosystems include tropical dry forests, grasslands, coastal lagoons, and rocky outcrops, creating ideal habitats for over <span className="text-[#00ff00] font-semibold">44 mammal species</span> and <span className="text-[#00ff00] font-semibold">215 bird species</span>. Beyond leopards, visitors regularly encounter Asian elephants, sloth bears, spotted deer, sambars, and mugger crocodiles.
                   </p>
                   <p>
                     <strong className="text-white font-medium">Yala&apos;s conservation significance</strong> extends beyond wildlife diversity. It serves as a crucial wildlife corridor. Our expert guides share in-depth knowledge about these conservation efforts.
@@ -340,15 +341,15 @@ export default function AboutPage() {
                 {/* Right Column: Stats/Visuals (Removed Borders, Smaller Fonts) */}
                 <div className="grid grid-cols-2 gap-4 order-1 md:order-2">
                   <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors duration-300">
-                    <span className="block text-3xl md:text-4xl font-bold text-green-500 mb-2">979</span>
+                    <span className="block text-3xl md:text-4xl font-bold text-[#00ff00]mb-2">979</span>
                     <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Sq. Kilometers</span>
                   </div>
                   <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors duration-300">
-                    <span className="block text-3xl md:text-4xl font-bold text-green-500 mb-2">44+</span>
+                    <span className="block text-3xl md:text-4xl font-bold text-[#00ff00] mb-2">44+</span>
                     <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Mammal Species</span>
                   </div>
                   <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors duration-300 col-span-2">
-                    <span className="block text-3xl md:text-4xl font-bold text-green-500 mb-2">Highest</span>
+                    <span className="block text-3xl md:text-4xl font-bold text-[#00ff00] mb-2">Highest</span>
                     <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Leopard Density Globally</span>
                   </div>
                 </div>
@@ -362,7 +363,7 @@ export default function AboutPage() {
           <section className="mb-20">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
-                Why Choose Our <span className="text-green-500">Premium Safari Services</span>
+                Why Choose Our <span className="text-[#00ff00]">Premium Safari Services</span>
               </h2>
               <p className="text-sm md:text-base text-neutral-300 font-light">
                 We combine expert local knowledge with modern luxury and safety standards for an unforgettable wildlife experience.
@@ -373,7 +374,7 @@ export default function AboutPage() {
               {/* Service Card 1 (Removed Border, Smaller Font) */}
               <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 group relative overflow-hidden">
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
-                <Users className="w-8 h-8 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
+                <Users className="w-8 h-8 text-[#00ff00] mb-6 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold text-white mb-4">Certified Naturalist Guides</h3>
                 <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
                   Passionate experts with 5-15 years of field experience. They provide fascinating insights into animal behavior and conservation.
@@ -383,7 +384,7 @@ export default function AboutPage() {
               {/* Service Card 2 (Removed Border, Smaller Font) */}
               <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 group relative overflow-hidden">
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
-                <Camera className="w-8 h-8 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
+                <Camera className="w-8 h-8 text-[#00ff00] mb-6 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold text-white mb-4">Luxury Safari Vehicles</h3>
                 <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
                   Modern 4x4 jeeps with elevated seating, panoramic windows, and professional-grade photography support for the best views.
@@ -392,8 +393,8 @@ export default function AboutPage() {
 
               {/* Service Card 3 (Removed Border, Smaller Font) */}
               <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 group relative overflow-hidden">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
-                <Leaf className="w-8 h-8 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-xl pointer-events-none group-hover:bg-green-500/20 transition-colors"></div>
+                <Leaf className="w-8 h-8 text-[#00ff00] mb-6 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold text-white mb-4">Customizable Packages</h3>
                 <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
                   From 3-hour drives to multi-day adventures. Small groups ensure personalized attention and minimal environmental impact.
@@ -406,7 +407,7 @@ export default function AboutPage() {
                 href="/safari-packages"
                 className="group relative inline-flex items-center justify-center overflow-hidden rounded-full p-3 px-6 text-sm font-bold text-white transition-all duration-300 hover:scale-105 focus:outline-none"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-500 transition-transform duration-300 group-hover:scale-105"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-[#00ff00] to-[#00ff00] transition-transform duration-300 group-hover:scale-105"></span>
                 <span className="relative flex items-center gap-2">
                   Explore Safari Packages <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -424,9 +425,9 @@ export default function AboutPage() {
               <div className="absolute top-0 left-0 w-full h-full bg-[url('/pattern-leaf.svg')] opacity-[0.03] pointer-events-none"></div>
 
               <div className="max-w-4xl mx-auto text-center">
-                <HeartHandshake className="w-10 h-10 text-green-500 mx-auto mb-6 opacity-80" />
+                <HeartHandshake className="w-10 h-10 text-[#00ff00] mx-auto mb-6 opacity-80" />
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
-                  Conservation Commitment & <span className="text-green-500">Community Impact</span>
+                  Conservation Commitment & <span className="text-[#00ff00]">Community Impact</span>
                 </h2>
 
                 <div className="space-y-6 text-sm text-neutral-300 leading-relaxed font-light">
@@ -443,6 +444,13 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
+
+          {/* =========================================
+              UNIQUE ABOUT US FAQ SECTION
+          ========================================= */}
+          <div className="mb-20">
+            <AboutFAQSection />
+          </div>
 
         </main>
       </div>
