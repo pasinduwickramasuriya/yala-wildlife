@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { TourItineraryItem, BookingForm } from "@/components/TourItineraryItem";
 import { TourPackageCard, Tour } from "@/components/TourPackageCard";
 import { Metadata } from "next";
+import TourDetailFAQSection from "@/components/TourDetailFAQSection";
 
 export const dynamic = "force-dynamic";
 
@@ -346,7 +347,7 @@ export default async function TourDetailPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12 mt-12">
                     <div className="order-2 lg:order-1 lg:col-span-2 space-y-6 md:space-y-8">
                         {/* OPERATIONAL ITINERARY ISLAND */}
-                        <div className="inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl transform-gpu mb-4">
+                        <div id="operational-itinerary" className="scroll-mt-32 inline-block bg-black/80 px-4 py-1.5 rounded-full shadow-2xl transform-gpu mb-4">
                             <h2 className="text-[13px] md:text-[14px] font-black text-white tracking-[0.2em]">
                                 Operational Itinerary: {durationText}
                             </h2>
@@ -368,13 +369,20 @@ export default async function TourDetailPage({ params }: PageProps) {
 
                     <aside className="order-1 lg:order-2 space-y-8">
                         {/* BOOKING INTERFACE */}
-                        <div className="bg-[#00ff00] p-6 md:p-8 rounded-2xl md:rounded-3xl text-black shadow-[0_0_50px_rgba(0,255,0,0.1)] lg:sticky lg:top-32 transition-all">
+                        <div id="booking-form" className="scroll-mt-32 bg-[#00ff00] p-6 md:p-8 rounded-2xl md:rounded-3xl text-black shadow-[0_0_50px_rgba(0,255,0,0.1)] lg:sticky lg:top-32 transition-all">
                             <h2 className="text-lg md:text-xl font-bold tracking-tight mb-4 leading-snug">
                                 Initialize Booking
                             </h2>
                             <BookingForm tourTitle={tour.title} />
                         </div>
                     </aside>
+                </div>
+
+                {/* =========================================
+                    UNIQUE TOUR DETAIL FAQ SECTION
+                ========================================= */}
+                <div className="mt-16 md:mt-24">
+                    <TourDetailFAQSection tour={tour} />
                 </div>
             </div>
 
