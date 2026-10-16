@@ -9,7 +9,7 @@ import BookingForm from "@/components/BookingForm";
 import PackageCard from "@/components/PackageCard";
 import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { FAQJsonLd, defaultFAQs } from "@/components/FAQJsonLd";
+import PackageDetailFAQSection from "@/components/PackageDetailFAQSection";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 // Force dynamic rendering
@@ -221,7 +221,6 @@ export default async function PackageDetailPage(props: Props) {
         slug={pkg.slug}
       />
       <BreadcrumbJsonLd items={breadcrumbItems} />
-      <FAQJsonLd faqs={defaultFAQs} />
 
       <main className="relative w-full min-h-screen bg-black selection:bg-[#00ff00]">
         {/* STRUCTURAL SCHEMA DATA */}
@@ -369,7 +368,7 @@ export default async function PackageDetailPage(props: Props) {
               </div>
             </div>
 
-            <aside className="order-1 lg:order-2 space-y-8">
+            <aside id="booking-section" className="order-1 lg:order-2 space-y-8 scroll-mt-28">
               {/* BOOKING INTERFACE */}
               <div className="bg-[#00ff00] p-6 md:p-8 rounded-2xl md:rounded-3xl text-black shadow-[0_0_50px_rgba(0,255,0,0.15)] lg:sticky lg:top-32 transition-all">
                 <h2 className="text-base md:text-lg font-extrabold tracking-tight mb-1.5 leading-snug">
@@ -381,6 +380,13 @@ export default async function PackageDetailPage(props: Props) {
                 <BookingForm tourPackageSlug={pkg.slug} />
               </div>
             </aside>
+          </div>
+
+          {/* =========================================
+              UNIQUE SINGLE PACKAGE FAQ SECTION
+          ========================================= */}
+          <div className="mt-16 md:mt-24">
+            <PackageDetailFAQSection pkg={pkg} />
           </div>
         </div>
       </main>
