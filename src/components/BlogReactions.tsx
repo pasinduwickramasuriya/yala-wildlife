@@ -44,52 +44,103 @@ interface CompactBlogReactionsProps {
   };
 }
 
-// Client-side helper for anonymous persistent visitor ID
+// Client-side helper for resilient persistent visitor ID (Cookie + localStorage)
 function getVisitorId(): string {
   if (typeof window === "undefined") return "server";
-  let vid = localStorage.getItem("yala_visitor_id");
-  if (!vid) {
-    vid = "v_" + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
-    try {
-      localStorage.setItem("yala_visitor_id", vid);
-    } catch {
-      // Ignore private browsing quota restrictions
+  let vid = "";
+
+  try {
+    vid = localStorage.getItem("yala_visitor_id") || "";
+  } catch {}
+
+  // Fallback to cookie if localStorage is cleared or blocked on mobile
+  if (!vid && typeof document !== "undefined") {
+    const match = document.cookie.match(/(?:^|;\s*)yala_vid=([^;]+)/);
+    if (match) {
+      try {
+        vid = decodeURIComponent(match[1]);
+      } catch {
+        vid = match[1];
+      }
     }
   }
+
+  // Generate new ID if not found anywhere
+  if (!vid) {
+    vid = "v_" + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+  }
+
+  // Ensure both localStorage and document.cookie are synced
+  try {
+    localStorage.setItem("yala_visitor_id", vid);
+  } catch {}
+
+  try {
+    document.cookie = `yala_vid=${encodeURIComponent(vid)}; path=/; max-age=31536000; SameSite=Lax`;
+  } catch {}
+
   return vid;
 }
 
 export default function CompactBlogReactions({ slug, initialCounts }: CompactBlogReactionsProps) {
   const [counts, setCounts] = useState<Record<ReactionType, number>>({
-    love: initialCounts?.love ?? (initialCounts?.like ?? 0),
+    love: (initialCounts?.love ?? 0) + (initialCounts?.like ?? 0),
     dislike: initialCounts?.dislike ?? 0,
   });
 
+  // Start with null on SSR to ensure 100% clean hydration match between server and client
   const [userReaction, setUserReaction] = useState<ReactionType | null>(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeBounce, setActiveBounce] = useState<ReactionType | null>(null);
   const [, startTransition] = useTransition();
 
-  // Sync visitor's active reaction from server
+  // Restore from localStorage and sync with server on mount
   useEffect(() => {
+    // 1. Immediately restore local reaction after hydration (no SSR mismatch)
+    try {
+      const cached = localStorage.getItem(`yala_reaction_${slug}`);
+      if (cached === "love" || cached === "dislike") {
+        setUserReaction(cached);
+      }
+    } catch {}
+
     const vid = getVisitorId();
     if (!vid || vid === "server") return;
 
-    fetch(`/api/blog/reactions?slug=${encodeURIComponent(slug)}&clientId=${encodeURIComponent(vid)}`)
+    fetch(
+      `/api/blog/reactions?slug=${encodeURIComponent(slug)}&clientId=${encodeURIComponent(vid)}&_t=${Date.now()}`,
+      { cache: "no-store" }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data && data.counts) {
           startTransition(() => {
+            const serverLove = (data.counts.love ?? 0) + (data.counts.like ?? 0);
+            const serverDislike = data.counts.dislike ?? 0;
+
             setCounts({
-              love: data.counts.love ?? 0,
-              dislike: data.counts.dislike ?? 0,
+              love: serverLove,
+              dislike: serverDislike,
             });
-            if (data.userReaction === "love" || data.userReaction === "dislike") {
-              setUserReaction(data.userReaction);
-            } else if (data.userReaction === "like") {
-              // Backward compatibility if user had previously liked
-              setUserReaction("love");
-            }
+
+            const verifiedReaction =
+              data.userReaction === "like"
+                ? "love"
+                : data.userReaction === "love" || data.userReaction === "dislike"
+                ? data.userReaction
+                : null;
+
+            setUserReaction(verifiedReaction);
+
+            // Keep localStorage strictly in sync with server truth
+            try {
+              if (verifiedReaction) {
+                localStorage.setItem(`yala_reaction_${slug}`, verifiedReaction);
+              } else {
+                localStorage.removeItem(`yala_reaction_${slug}`);
+              }
+            } catch {}
           });
         }
       })
@@ -98,7 +149,7 @@ export default function CompactBlogReactions({ slug, initialCounts }: CompactBlo
       });
   }, [slug]);
 
-  // Handle reaction click with optimistic update
+  // Handle reaction click with instant optimistic update & instant removal
   const handleReactionClick = useCallback(
     async (type: ReactionType) => {
       if (isSubmitting) return;
@@ -107,20 +158,27 @@ export default function CompactBlogReactions({ slug, initialCounts }: CompactBlo
       const prevReaction = userReaction;
       const prevCounts = { ...counts };
 
-      // Optimistic state
+      // Optimistic state update
       const nextCounts = { ...counts };
       let nextReaction: ReactionType | null = null;
 
       if (prevReaction === type) {
-        // Toggle OFF (un-react)
+        // Toggle OFF (un-react) -> Remove immediately
         nextCounts[type] = Math.max(0, (nextCounts[type] || 0) - 1);
         nextReaction = null;
+        try {
+          localStorage.removeItem(`yala_reaction_${slug}`);
+        } catch {}
       } else {
+        // Switch or new reaction
         if (prevReaction) {
           nextCounts[prevReaction] = Math.max(0, (nextCounts[prevReaction] || 0) - 1);
         }
         nextCounts[type] = (nextCounts[type] || 0) + 1;
         nextReaction = type;
+        try {
+          localStorage.setItem(`yala_reaction_${slug}`, type);
+        } catch {}
       }
 
       setCounts(nextCounts);
@@ -133,7 +191,10 @@ export default function CompactBlogReactions({ slug, initialCounts }: CompactBlo
       try {
         const res = await fetch("/api/blog/reactions", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+          },
           body: JSON.stringify({
             slug,
             type,
@@ -145,17 +206,43 @@ export default function CompactBlogReactions({ slug, initialCounts }: CompactBlo
         if (!res.ok) throw new Error(data.error || "Failed");
 
         if (data.counts) {
+          const verifiedLove = (data.counts.love ?? 0) + (data.counts.like ?? 0);
+          const verifiedDislike = data.counts.dislike ?? 0;
+
           setCounts({
-            love: data.counts.love ?? 0,
-            dislike: data.counts.dislike ?? 0,
+            love: verifiedLove,
+            dislike: verifiedDislike,
           });
-          setUserReaction(data.userReaction);
+
+          const serverVerifiedReaction =
+            data.userReaction === "like"
+              ? "love"
+              : data.userReaction === "love" || data.userReaction === "dislike"
+              ? data.userReaction
+              : null;
+
+          setUserReaction(serverVerifiedReaction);
+
+          try {
+            if (serverVerifiedReaction) {
+              localStorage.setItem(`yala_reaction_${slug}`, serverVerifiedReaction);
+            } else {
+              localStorage.removeItem(`yala_reaction_${slug}`);
+            }
+          } catch {}
         }
       } catch (err) {
         console.error("Reaction request failed:", err);
         // Rollback on network failure
         setCounts(prevCounts);
         setUserReaction(prevReaction);
+        try {
+          if (prevReaction) {
+            localStorage.setItem(`yala_reaction_${slug}`, prevReaction);
+          } else {
+            localStorage.removeItem(`yala_reaction_${slug}`);
+          }
+        } catch {}
       } finally {
         setIsSubmitting(false);
       }
