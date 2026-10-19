@@ -2,11 +2,12 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
-import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { Metadata } from "next";
 import ReviewPhotoGallery from "@/components/ReviewPhotoGallery";
 import DiscountPopup from "@/components/DiscountPopup";
 import BlogDetailFAQSection from "@/components/BlogDetailFAQSection";
+import CompactBlogReactions, { BlogShareButton } from "@/components/BlogReactions";
 // import AdUnit from "@/components/AdUnit";
 
 // --- Types ---
@@ -43,6 +44,40 @@ async function getBlog(slug: string): Promise<Blog | null> {
   } catch (error) {
     console.error("Error fetching blog:", error);
     return null;
+  }
+}
+
+async function getBlogReactions(slug: string) {
+  try {
+    const reactions = await prisma.blogReaction.findMany({
+      where: { blogSlug: slug },
+      select: { type: true },
+    });
+
+    const counts = {
+      like: 0,
+      dislike: 0,
+      love: 0,
+      insightful: 0,
+      wow: 0,
+    };
+
+    for (const r of reactions) {
+      if (r.type in counts) {
+        counts[r.type as keyof typeof counts]++;
+      }
+    }
+
+    return {
+      counts,
+      total: reactions.length,
+    };
+  } catch (error) {
+    console.error("Error fetching reactions:", error);
+    return {
+      counts: { like: 0, dislike: 0, love: 0, insightful: 0, wow: 0 },
+      total: 0,
+    };
   }
 }
 
@@ -173,7 +208,10 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 // --- Main Component ---
 export default async function BlogPost({ params }: BlogPostProps) {
   const slug = (await params).slug;
-  const blog = await getBlog(slug);
+  const [blog, initialReactions] = await Promise.all([
+    getBlog(slug),
+    getBlogReactions(slug),
+  ]);
 
   if (!blog) {
     notFound();
@@ -319,19 +357,22 @@ export default async function BlogPost({ params }: BlogPostProps) {
                     {blog.title}
                   </h1>
 
-                  {/* Author / Stats Row */}
-                  <div className="flex items-center justify-center gap-6 text-xs font-medium text-neutral-300">
+                  {/* Author / Stats / Reactions Row */}
+                  <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs font-medium text-neutral-300">
                     <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full">
                       <div className="w-5 h-5 rounded-full bg-[#00ff00] flex items-center justify-center text-black font-bold text-[10px]">Y</div>
                       <span>Yala Team</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full">
                       <Clock className="w-3.5 h-3.5 text-blue-400" />
                       {getReadingTime(blog.content)}
                     </div>
-                    <button className="flex items-center gap-1.5 hover:text-white transition-colors">
-                      <Share2 className="w-3.5 h-3.5" /> Share
-                    </button>
+                    {/* Compact Top Reactions (Like, Dislike, Love, Insightful) */}
+                    <CompactBlogReactions
+                      slug={blog.slug}
+                      initialCounts={initialReactions.counts}
+                    />
+                    <BlogShareButton title={blog.title} slug={blog.slug} />
                   </div>
                 </header>
 

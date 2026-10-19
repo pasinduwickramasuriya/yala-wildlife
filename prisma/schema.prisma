@@ -60,6 +60,20 @@ model Blog {
   imageUrl  String
   slug      String   @unique
   createdAt DateTime @default(now())
+  likes     Int      @default(0)
+  dislikes  Int      @default(0)
+}
+
+model BlogReaction {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  blogSlug  String
+  type      String   // like, dislike, love, insightful, wow
+  clientId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([blogSlug, clientId])
+  @@index([blogSlug])
 }
 
 type ItineraryDay {

@@ -10,6 +10,8 @@ interface Blog {
   imageUrl: string;
   slug: string;
   createdAt: string;
+  likes?: number;
+  dislikes?: number;
 }
 
 interface User {
@@ -313,6 +315,14 @@ export default function AddBlog() {
                     <p className="text-xs text-muted-foreground truncate max-w-xs">
                       {blog.imageUrl}
                     </p>
+                    <div className="flex items-center gap-2 mt-1.5 text-xs">
+                      <span className="inline-flex items-center gap-1 text-emerald-500 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                        👍 {blog.likes ?? 0} Likes
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-neutral-400 font-semibold bg-neutral-500/10 px-2 py-0.5 rounded-full">
+                        👎 {blog.dislikes ?? 0} Dislikes
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="space-x-2">
