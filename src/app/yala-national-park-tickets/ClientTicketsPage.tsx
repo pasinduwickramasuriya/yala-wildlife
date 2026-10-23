@@ -182,7 +182,7 @@ export default function ClientTicketsPage() {
     const subtotalLKR = entryFeesLKR + vehicleFeesLKR + serviceFeeLKR;
     const vatLKR = subtotalLKR * RATES.VAT_RATE;
 
-    // LankaGate Gateway payment convenience fee (usually ~2% added at checkout)
+    // LankaGate Gateway payment convenience fee (usually ~10% added at checkout)
     const convenienceFeeLKR = (subtotalLKR + vatLKR) * 0.1;
     const totalLKR = subtotalLKR + vatLKR + convenienceFeeLKR;
 
