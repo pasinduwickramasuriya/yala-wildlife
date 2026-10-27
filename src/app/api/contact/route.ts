@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       to: "pasindusadanjana17@gmail.com", // Your email
       subject: `New Contact Message from ${name}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #1f2a44; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div style="font-family: 'Google Sans', Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #1f2a44; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
           <h1 style="font-size: 24px; font-weight: 600; color: #1f2a44; margin-bottom: 16px;">New Contact Message</h1>
           <p style="font-size: 16px; color: #64748b; margin-bottom: 24px;">A new message has been received via the contact form.</p>
           <div style="background-color: #f8fafc; padding: 16px; border: 1px solid #e2e8f0; border-radius: 8px;">
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       to: email,
       subject: "Thank You for Contacting Yala Safari",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #1f2a44; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div style="font-family: 'Google Sans', Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #1f2a44; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
           <h1 style="font-size: 24px; font-weight: 600; color: #1f2a44; margin-bottom: 16px;">Thank You, ${name}!</h1>
           <p style="font-size: 16px; color: #64748b; margin-bottom: 24px;">We’ve received your message and appreciate you reaching out.</p>
           <div style="background-color: #f8fafc; padding: 16px; border: 1px solid #e2e8f0; border-radius: 8px;">

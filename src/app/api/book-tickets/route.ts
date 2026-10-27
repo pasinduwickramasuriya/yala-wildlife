@@ -50,7 +50,7 @@ export async function POST(request: Request) {
 
     // Generate HTML content for email
     const generateEmailHtml = (title: string, subtitle: string, showAdminDetails: boolean = false) => `
-      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f3f4f6; border-radius: 12px;">
+      <div style="font-family: 'Google Sans', Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f3f4f6; border-radius: 12px;">
         <div style="background-color: #15803d; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
           <h2 style="color: #ffffff; margin: 0; font-size: 24px;">${title}</h2>
           <p style="color: #dcfce7; margin: 5px 0 0 0; font-size: 14px;">${subtitle}</p>

@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     // --- EMAIL TEMPLATE GENERATOR ---
     const generateEmailHtml = (title: string, subtitle: string, isAdmin: boolean) => `
-      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
+      <div style="font-family: 'Google Sans', Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
         
         <div style="background-color: #166534; padding: 30px 20px; text-align: center;">
           <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 1px;">YALA WILDLIFE TRANSPORT</h1>

@@ -88,8 +88,7 @@ export default function TicketsFAQSection() {
       className="relative w-full py-16 md:py-24 overflow-hidden z-10 cv-auto"
       aria-label="Frequently Asked Questions About Yala National Park Tickets"
       style={{
-        fontFamily:
-          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        fontFamily: '"Google Sans", Arial, Helvetica, sans-serif',
       }}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">

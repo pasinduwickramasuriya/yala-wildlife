@@ -1,6 +1,5 @@
 /* eslint-disable react/no-children-prop */
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,13 +15,6 @@ import CookieConsent from "@/components/CookieConsent";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
@@ -35,6 +27,8 @@ export default function RootLayout({
       <head>
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/google-sans-2" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -47,7 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
+        className="antialiased min-h-screen flex flex-col bg-background text-foreground"
       >
         <ThemeProvider
           attribute="class"

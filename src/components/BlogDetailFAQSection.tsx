@@ -229,8 +229,7 @@ export default function BlogDetailFAQSection({ blog }: { blog: BlogDetailData })
       className="relative w-full py-12 md:py-16 overflow-hidden z-10 cv-auto"
       aria-label={`Frequently Asked Questions About ${blog.title}`}
       style={{
-        fontFamily:
-          '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+        fontFamily: '"Google Sans", Arial, Helvetica, sans-serif',
       }}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">

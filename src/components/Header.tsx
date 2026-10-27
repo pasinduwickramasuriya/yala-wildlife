@@ -21,7 +21,7 @@ const YalaLogo = () => (
       className="w-9 h-9 object-contain group-hover:rotate-[15deg] transition-transform duration-500"
     />
     <div className="flex flex-col leading-none">
-      <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.4em] mb-1">Yala</span>
+      {/* <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.4em] mb-1">Yala</span> */}
       <span className="text-xs font-bold text-white uppercase tracking-tighter">Wildlife</span>
     </div>
   </div>
@@ -127,8 +127,8 @@ export default function Header() {
           {/* Header Area - Clean & Minimal */}
           <div className="flex justify-between items-center w-full shrink-0">
             <div className="flex items-center gap-4">
-              <Globe className="text-[#00aa00] w-4 h-4" />
-              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-black/30">
+              <Globe className="text-[#000] w-4 h-4" />
+              <span className="text-[15px] font-black tracking-[0.4em] text-black/90">
                 Wilderness Awaits in Yala
               </span>
             </div>
@@ -154,7 +154,7 @@ export default function Header() {
                       <button
                         onClick={() => setExpandedPackages(!expandedPackages)}
                         aria-expanded={expandedPackages}
-                        className="text-4xl md:text-[5vw] font-black uppercase tracking-tighter leading-tight hover:text-[#00aa00] transition-all flex items-center justify-center gap-4 cursor-pointer"
+                        className="text-4xl md:text-[5vw] font-black uppercase tracking-tighter leading-tight hover:text-[#00ff00] transition-all flex items-center justify-center gap-4 cursor-pointer"
                       >
                         <span className="text-[1.2vw] font-bold text-black/10 hidden md:inline">
                           0{i + 1}
@@ -188,9 +188,9 @@ export default function Header() {
                     <Link
                       href={item.link}
                       onClick={closeMenu}
-                      className="text-4xl md:text-[5vw] font-black uppercase tracking-tighter leading-tight hover:text-[#00aa00] hover:scale-105 transition-all block group"
+                      className="text-4xl md:text-[5vw] font-black uppercase tracking-tighter leading-tight hover:text-[#00ff00] hover:scale-105 transition-all block group"
                     >
-                      <span className="text-[1.2vw] mr-4 text-black/10 group-hover:text-[#00aa00] hidden md:inline">
+                      <span className="text-[1.2vw] mr-4 text-black/10 group-hover:text-[#00ff00] hidden md:inline">
                         0{i + 1}
                       </span>
                       {item.name}
@@ -204,7 +204,7 @@ export default function Header() {
           {/* Integrated Footer - Centered Grid */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-black/5 pt-10 shrink-0 text-center md:text-left">
             <div className="space-y-2">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#00aa00]">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#000]">
                 Location
               </p>
               <p className="text-xs font-bold text-black/50 leading-relaxed">
@@ -212,31 +212,31 @@ export default function Header() {
               </p>
             </div>
             <div className="space-y-2">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#00aa00]">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#000]">
                 Inquiries
               </p>
               <Link
                 href="https://wa.me/940778158004?text=Hello,%20I'm%20interested%20in%20your%20safaris"
-                className="text-lg font-black hover:text-[#00aa00] transition-colors flex items-center justify-center md:justify-start gap-2"
+                className="text-lg font-black hover:text-[#000] transition-colors flex items-center justify-center md:justify-start gap-2"
               >
                 <Phone className="w-4 h-4" /> +94 77 815 8004
               </Link>
             </div>
             <div className="space-y-2">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#00aa00]">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#000]">
                 Social
               </p>
               <div className="flex justify-center md:justify-start gap-4">
                 <Link
                   href="/blog"
-                  className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-[#00aa00] transition-colors"
+                  className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-[#00ff00] transition-colors"
                 >
                   Blogs
                 </Link>
                 <Link
                   href="/reviews"
                   onClick={closeMenu}
-                  className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-[#00aa00] transition-colors"
+                  className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-[#00ff00] transition-colors"
                 >
                   Reviews
                 </Link>
@@ -248,7 +248,7 @@ export default function Header() {
               <Link
                 href="/safari-packages"
                 onClick={closeMenu}
-                className="w-full md:w-auto flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-[#00aa00] transition-all shadow-lg"
+                className="w-full md:w-auto flex items-center justify-center gap-3 bg-[#00ff00] text-black px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-[#00ff00] transition-all shadow-lg"
               >
                 <Calendar className="w-4 h-4" />
                 Reserve Now

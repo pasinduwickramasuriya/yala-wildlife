@@ -416,12 +416,26 @@ export default async function Home() {
       <ReviewFeed initialReviews={reviewPhotos} />
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-16 overflow-hidden z-10 relative">
-        <div className="flex flex-col items-center justify-center w-full mb-10">
+        {/* <div className="flex flex-col items-center justify-center w-full mb-10">
           <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-black/80 rounded-full mb-3 shadow-xl">
-            {/* <span className="w-1.5 h-1.5 rounded-full bg-[#00ff00] animate-pulse shadow-[0_0_8px_#00ff00]"></span> */}
             <span className="text-3xl font-black tracking-[0.1em] text-[#fff] leading-none">
               Safari Packages
             </span>
+          </div>
+        </div> */}
+        <div className="flex flex-col items-center justify-center w-full mb-10 box-border">
+          <div
+            className="inline-block bg-black/80 text-white text-center rounded-full px-8 py-3 transform-gpu antialiased"
+            style={{
+              fontFamily: '"Google Sans", Arial, Helvetica, sans-serif',
+              fontSize: "28px",
+              fontWeight: 700,
+              letterSpacing: "-0.6px",
+              lineHeight: "36px",
+              unicodeBidi: "isolate",
+            }}
+          >
+            Yala Safari Packages
           </div>
         </div>
 
@@ -474,7 +488,7 @@ export default async function Home() {
         </section>
       </AutoSEOWrapper>
 
-       <FAQSection />
+      <FAQSection />
 
       {/* Schema markup with consistent BASE_URL */}
       <script

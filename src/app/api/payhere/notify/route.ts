@@ -57,7 +57,7 @@ export async function POST(req: Request) {
           to: customerEmail,
           subject: `Confirmed: Advance Payment #${order_id}`,
           html: `
-    <div style="background-color: #f9f9f9; padding: 40px 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; color: #1a1a1a;">
+    <div style="background-color: #f9f9f9; padding: 40px 20px; font-family: 'Google Sans', Arial, Helvetica, sans-serif; text-align: center; color: #1a1a1a;">
       <div style="max-width: 400px; margin: 0 auto; background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 24px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
         
         <div style="margin-bottom: 20px;">
