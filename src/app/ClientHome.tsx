@@ -9,11 +9,11 @@ import ReviewFeed from "@/components/ReviewFeed";
 // Dynamic code-splitting for below-the-fold components to optimize FCP, LCP, and TBT
 const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
-const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"));
+// const MemoryGallery = dynamic(() => import("@/components/MemoryGallery"));
 const ModernReviews = dynamic(() => import("@/components/ModernReviews"));
 const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
-const GallerySection = dynamic(() => import("@/components/GallerySection"));
+// const GallerySection = dynamic(() => import("@/components/GallerySection"));
 const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"));
 const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"), { ssr: false });
 
@@ -77,11 +77,11 @@ export default function ClientHome({
 
       <YalaMapExplorer />
       <HomeBlogSection initialBlogs={initialBlogs} />
-      <MemoryGallery />
+      {/* <MemoryGallery /> */}
       <ModernReviews initialReviews={initialReviews} />
       <PhotoGallery initialPhotos={initialBlogs} />
       <WhyChooseUs />
-      <GallerySection />
+      {/* <GallerySection /> */}
       <ReviewSlider />
       <DiscountPopup />
 

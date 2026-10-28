@@ -11,7 +11,7 @@ import {
 import HeroSlider from "@/components/HeroSlider";
 import ReviewFeed from "@/components/ReviewFeed";
 import SafariPackagesCarousel from "@/components/SafariPackagesCarousel";
-import MemoryGallery from "@/components/MemoryGallery";
+// import MemoryGallery from "@/components/MemoryGallery";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import FAQSection from "@/components/FAQSection";
@@ -20,7 +20,7 @@ const YalaMapExplorer = dynamic(() => import("@/components/YalaMapExplorer"));
 const HomeBlogSection = dynamic(() => import("@/components/HomeBlogSection"));
 const ModernReviews = dynamic(() => import("@/components/ModernReviews"));
 const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
-const GallerySection = dynamic(() => import("@/components/GallerySection"));
+// const GallerySection = dynamic(() => import("@/components/GallerySection"));
 const ReviewSlider = dynamic(() => import("@/components/ReviewSlider"));
 const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"));
 
@@ -444,11 +444,11 @@ export default async function Home() {
 
       <YalaMapExplorer />
       <HomeBlogSection initialBlogs={blogs} />
-      <MemoryGallery />
+      {/* <MemoryGallery /> */}
       <ModernReviews initialReviews={reviews} />
       <PhotoGallery initialPhotos={blogs} />
       <WhyChooseUs />
-      <GallerySection />
+      {/* <GallerySection /> */}
       <ReviewSlider />
 
       {/* Google-Style FAQ Section for SEO, AEO & AI Search */}

@@ -182,23 +182,6 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
                 </Link>
               </div>
             </div>
-
-            {/* Location Pin */}
-            <div className="pt-4 w-full flex justify-center lg:justify-start">
-              <div className="inline-flex items-center gap-3 px-2 py-1 drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)]">
-                <div className="w-8 h-8 flex items-center justify-center bg-lime-500/20 border border-lime-500 rounded-full shadow-[0_0_15px_#84cc16]">
-                  <MapPin className="w-4 h-4 text-lime-400" />
-                </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-lime-300 font-mono text-[10px] font-bold uppercase tracking-widest leading-none drop-shadow-md">
-                    Yala National Park
-                  </span>
-                  <span className="text-white text-[9px] font-mono uppercase tracking-wider leading-tight mt-0.5 font-bold">
-                    Southern Province • Sri Lanka
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* RIGHT COLUMN (Hidden on Mobile) */}

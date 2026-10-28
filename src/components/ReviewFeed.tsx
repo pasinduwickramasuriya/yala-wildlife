@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Star, MapPin, Quote, ArrowUpRight } from 'lucide-react';
+import { Star, Quote, ArrowUpRight } from 'lucide-react';
 
 interface ReviewPhoto {
     reviewId: string;
@@ -59,8 +59,8 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
             "position": i + 1,
             "author": { "@type": "Person", "name": r.authorName },
             "reviewBody": r.reviewText,
-            "reviewRating": { 
-                "@type": "Rating", 
+            "reviewRating": {
+                "@type": "Rating",
                 "ratingValue": r.rating,
                 "bestRating": "5",
                 "worstRating": "1"
@@ -83,9 +83,12 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
     } : null;
 
     return (
-        <section 
-            className="bg-transparent py-4 overflow-hidden [content-visibility:auto] contain-intrinsic-size-[auto_500px]" 
+        <section
+            className="bg-transparent py-4 overflow-hidden select-none antialiased [content-visibility:auto] [contain-intrinsic-size:auto_640px]"
             aria-label="Guest Reviews"
+            style={{
+                fontFamily: '"Google Sans", "Open Sans", Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+            }}
         >
             {/* SEO: Injection of Structured Data */}
             {structuredData && (
@@ -96,108 +99,151 @@ export default function ReviewFeed({ initialReviews = [] }: { initialReviews?: R
             )}
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 auto-rows-min md:min-h-[700px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 auto-rows-min md:min-h-[640px]">
 
-                    {/* 1. HERO IMAGE CARD */}
+                    {/* 1. GOOGLE EDITORIAL HERO CARD */}
                     {reviews[0] && (
-                        <div
-                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden min-h-[360px] md:min-h-0 shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                        <article
+                            className="col-span-1 sm:col-span-2 md:col-span-2 md:row-span-2 relative group rounded-[2rem] md:rounded-[2.25rem] overflow-hidden min-h-[360px] md:min-h-0 bg-black transform-gpu [contain:paint]"
                         >
                             <Image
                                 src={reviews[0].url}
                                 alt={`Review photo by ${reviews[0].authorName}`}
                                 fill
-                                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 50vw, 40vw"
+                                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 48vw, 38vw"
                                 loading="lazy"
-                                quality={50}
-                                className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                                decoding="async"
+                                quality={55}
+                                className="object-cover transition-transform duration-300 ease-out md:group-hover:scale-[1.03]"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
 
-                            <div className="absolute bottom-0 p-6 md:p-8 w-full">
-                                <div className="flex gap-1 mb-3">
+
+                            <div className="absolute bottom-0 p-6 md:p-8 w-full flex flex-col justify-end">
+                                <div className="inline-flex items-center gap-1 bg-transparent w-fit px-3 py-1 rounded-full mb-3.5">
                                     {[...Array(reviews[0].rating)].map((_, i) => (
-                                        <Star key={i} size={14} className="fill-[#00ff00] text-[#00ff00]" aria-hidden="true" />
+                                        <Star key={i} size={13} className="fill-[#00ff00] text-[#00ff00]" aria-hidden="true" />
                                     ))}
                                 </div>
-                                <blockquote className="text-[14px] md:text-[15px] leading-relaxed text-white/90 mb-6 line-clamp-4 italic font-medium">
-                                    "{reviews[0].reviewText}"
+
+                                <blockquote className="text-[16px] md:text-[18px] leading-snug text-white font-medium tracking-[-0.01em] mb-5 line-clamp-4">
+                                    &ldquo;{reviews[0].reviewText}&rdquo;
                                 </blockquote>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-white uppercase text-xs border border-white/20">
-                                        {reviews[0].authorName.charAt(0)}
+
+                                <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-9 h-9 rounded-full bg-[#00ff00] flex items-center justify-center font-bold text-black text-xs shrink-0">
+                                            {reviews[0].authorName.charAt(0)}
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <cite className="text-white not-italic font-bold text-[14px] leading-tight">
+                                                {reviews[0].authorName}
+                                            </cite>
+                                            {reviews[0].relativeTime && (
+                                                <span className="text-[11px] text-white/50 font-medium">
+                                                    {reviews[0].relativeTime}
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
-                                    <cite className="text-white not-italic font-bold text-[15px]">{reviews[0].authorName}</cite>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     )}
 
-                    {/* 2. TEXT EMPHASIS CARD */}
+                    {/* 2. GOOGLE MATERIAL HIGHLIGHT CARD (#00ff00 Surface) */}
                     {reviews[1] && (
-                        <div
-                            className="col-span-1 sm:col-span-2 md:col-span-2 bg-[#00ff00] rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 md:p-10 flex flex-col justify-between shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                        <article
+                            className="col-span-1 sm:col-span-2 md:col-span-2 bg-[#00ff00] rounded-[2rem] md:rounded-[2.25rem] p-6 sm:p-8 flex flex-col justify-between transform-gpu [contain:layout_paint]"
                         >
-                            <div className="flex justify-between items-start">
-                                <span className="bg-black text-[#00ff00] px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
-                                    Guest Review
-                                </span>
-                                <Quote className="text-black/20 w-8 h-8 md:w-10 md:h-10" />
+                            <div className="flex justify-between items-center">
+                                <div className="inline-flex items-center gap-2 bg-black text-[#00ff00] px-3.5 py-1.5 rounded-full">
+                                    <Star size={11} className="fill-[#00ff00] text-[#00ff00]" />
+                                    <span className="text-[11px] font-bold tracking-tight">
+                                        Top Rated Guest Reviews
+                                    </span>
+                                </div>
+                                <div className="w-9 h-9 rounded-full bg-black/10 flex items-center justify-center">
+                                    <Quote className="text-black w-4 h-4" />
+                                </div>
                             </div>
 
-                            <p className="text-black text-[14px] md:text-[15px] font-bold leading-relaxed my-6 line-clamp-5 md:line-clamp-6">
-                                "{reviews[1].reviewText}"
+                            <p className="text-black text-[16px] md:text-[19px] font-bold leading-snug tracking-[-0.015em] my-5 line-clamp-4">
+                                &ldquo;{reviews[1].reviewText}&rdquo;
                             </p>
 
-                            <div className="flex items-center gap-3">
-                                <div className="h-px w-8 bg-black/20" />
-                                <span className="text-black text-[13px] font-black uppercase tracking-tight">
-                                    {reviews[1].authorName}
+                            <div className="flex items-center justify-between pt-3 border-t border-black/10">
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-8 h-8 rounded-full bg-black text-[#00ff00] flex items-center justify-center text-xs font-bold">
+                                        {reviews[1].authorName.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <span className="text-black text-[13.5px] font-bold block leading-none">
+                                            {reviews[1].authorName}
+                                        </span>
+                                        {reviews[1].relativeTime && (
+                                            <span className="text-black/60 text-[11px] font-medium">
+                                                {reviews[1].relativeTime}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                                <span className="text-[11px] font-bold text-black bg-black/10 px-3 py-1 rounded-full">
+                                    5.0 ★
                                 </span>
                             </div>
-                        </div>
+                        </article>
                     )}
 
-                    {/* 3. PURE IMAGE SNAPSHOT */}
+                    {/* 3. GOOGLE MEDIA CAPSULE CARD */}
                     {reviews[2] && (
                         <div
-                            className="relative group rounded-3xl md:rounded-[2.5rem] overflow-hidden aspect-[4/3] sm:aspect-auto min-h-[220px] shadow-md md:shadow-lg transform-gpu [transform:translateZ(0)]"
+                            className="relative group rounded-[2rem] md:rounded-[2.25rem] overflow-hidden aspect-[4/3] sm:aspect-auto min-h-[220px] bg-black transform-gpu [contain:paint]"
                         >
                             <Image
                                 src={reviews[2].url}
                                 alt={`Safari Snapshot review by ${reviews[2].authorName}`}
                                 fill
-                                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 25vw, 20vw"
+                                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 24vw, 18vw"
                                 loading="lazy"
+                                decoding="async"
                                 quality={50}
-                                className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+                                className="object-cover transition-transform duration-300 ease-out md:group-hover:scale-[1.03]"
                             />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                                <ArrowUpRight className="text-white w-8 h-8" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                            <div className="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-black/80 text-white group-hover:bg-[#00ff00] group-hover:text-black transition-colors duration-150 flex items-center justify-center">
+                                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                             </div>
                         </div>
                     )}
 
-                    {/* 4. HYBRID GLASS CARD */}
+                    {/* 4. GOOGLE DARK ISLAND REVIEW CARD */}
                     {reviews[3] && (
-                        <div
-                            className="bg-black/80 rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 flex flex-col justify-center shadow-md md:shadow-lg border border-white/5 transform-gpu [transform:translateZ(0)]"
+                        <article
+                            className="bg-black/80 rounded-[2rem] md:rounded-[2.25rem] p-6 flex flex-col justify-between transform-gpu [contain:layout_paint]"
                         >
-                            <div className="flex gap-0.5 mb-4">
-                                {[...Array(reviews[3].rating)].map((_, i) => (
-                                    <Star key={i} size={10} className="fill-[#00ff00] text-[#00ff00]" />
-                                ))}
+                            <div className="flex items-center justify-between mb-3">
+                                <div className="inline-flex items-center gap-1 bg-trasnparent px-2.5 py-1 rounded-full">
+                                    {[...Array(reviews[3].rating)].map((_, i) => (
+                                        <Star key={i} size={11} className="fill-[#00ff00] text-[#00ff00]" />
+                                    ))}
+                                </div>
                             </div>
-                            <p className="text-[14px] md:text-[15px] text-white/80 leading-relaxed italic line-clamp-4 md:line-clamp-3 mb-6">
-                                "{reviews[3].reviewText}"
+
+                            <p className="text-[14px] md:text-[14.5px] text-white/90 font-normal leading-relaxed line-clamp-4 my-2">
+                                &ldquo;{reviews[3].reviewText}&rdquo;
                             </p>
-                            <div className="flex items-center gap-2">
-                                <MapPin size={12} className="text-[#00ff00]" />
-                                <span className="text-[11px] font-black text-white/40 uppercase tracking-[0.2em]">
+
+                            <div className="flex items-center gap-2.5 pt-3 border-t border-white/10 mt-2">
+                                <div className="w-7 h-7 rounded-full bg-white/10 text-[#00ff00] flex items-center justify-center text-[11px] font-bold shrink-0">
+                                    {reviews[3].authorName.charAt(0)}
+                                </div>
+                                <span className="text-[13px] font-bold text-white truncate">
                                     {reviews[3].authorName}
                                 </span>
                             </div>
-                        </div>
+                        </article>
                     )}
 
                 </div>
