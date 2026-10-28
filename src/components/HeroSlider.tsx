@@ -134,17 +134,6 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
           {/* LEFT COLUMN: Text Content */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-8 relative flex flex-col items-center lg:items-start w-full text-center lg:text-left transition-all duration-700 fade-in">
 
-            {/* Counter */}
-            <div className="inline-flex items-center gap-3 px-2 py-1 drop-shadow-xl">
-              <span className="text-lime-400 font-mono text-sm md:text-[10px] font-bold drop-shadow-[0_0_10px_rgba(163,230,53,1)]">
-                0{currentSlide + 1}
-              </span>
-              <div className="w-8 h-[2px] bg-lime-400/80 shadow-[0_0_8px_rgba(163,230,53,0.8)]"></div>
-              <span className="text-white font-mono text-sm md:text-[10px] drop-shadow-md">
-                0{heroSections.length}
-              </span>
-            </div>
-
             {/* Main Title */}
             <div className="relative w-full">
               <div className="inline-block">
@@ -204,15 +193,10 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
-                <div className="absolute top-4 right-4">
-                  <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-bold text-lime-400 uppercase tracking-widest shadow-lg">
-                    Next
-                  </div>
-                </div>
 
                 <div className="absolute bottom-0 left-0 w-full p-6">
                   <div className="drop-shadow-lg">
-                    <h3 className="text-white text-lg font-black uppercase tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors drop-shadow-md">
+                    <h3 className="text-white text-lg font-black  tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors drop-shadow-md">
                       {card1Data.title}
                     </h3>
                     <div className="h-1 w-8 bg-lime-500 rounded-full mt-2 shadow-[0_0_10px_#84cc16]" />
@@ -237,13 +221,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
                   sizes="20vw"
                   quality={40}
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
-
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-black/60 backdrop-blur-sm p-3 rounded-lg">
-                    <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">Up Next</span>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
               </div>
             </div>
           </div>

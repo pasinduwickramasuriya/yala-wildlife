@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import { FaCheckCircle, FaChevronDown, FaSpinner } from 'react-icons/fa';
+import { useState, useMemo } from 'react';
+import { CheckCircle2, ChevronDown, Loader2 } from 'lucide-react';
 
 // --- Types ---
 interface Review {
@@ -81,12 +81,7 @@ const SummaryCard = () => (
 
 const ReviewCard = ({ review }: { review: Review }) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const [mounted, setMounted] = useState(false);
     const MAX_LENGTH = 100;
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     return (
         <article className="inline-block w-full break-inside-avoid mb-6 bg-black/80 rounded-3xl p-6 border border-white/5">
@@ -99,13 +94,14 @@ const ReviewCard = ({ review }: { review: Review }) => {
                             src={review.profile_photo_url}
                             alt={review.author_name}
                             className="w-10 h-10 rounded-full object-cover"
+                            loading="lazy"
                         />
                     ) : (
                         <div className="w-10 h-10 bg-neutral-800 text-white rounded-full flex items-center justify-center text-xs font-bold">
                             {review.author_name.charAt(0)}
                         </div>
                     )}
-                    <FaCheckCircle className="absolute -bottom-0.5 -right-0.5 text-blue-500 w-3.5 h-3.5 bg-black rounded-full" />
+                    <CheckCircle2 className="absolute -bottom-0.5 -right-0.5 text-blue-500 w-3.5 h-3.5 bg-black rounded-full" />
                 </div>
                 <div className="flex flex-col overflow-hidden">
                     <h3 className="font-bold text-white text-[15px] tracking-tight truncate leading-tight">{review.author_name}</h3>
@@ -134,50 +130,27 @@ const ReviewCard = ({ review }: { review: Review }) => {
 // --- Main Component ---
 
 export default function ModernReviews({ initialReviews }: { initialReviews?: Review[] }) {
-    const [totalCount, setTotalCount] = useState(initialReviews?.length || 0);
-    const [allReviews, setAllReviews] = useState<Review[]>(() => {
+    const [visibleCount, setVisibleCount] = useState(6);
+
+    // Use only server-provided initial data — no client-side fetch
+    const allReviews = useMemo(() => {
         if (initialReviews && initialReviews.length > 0) {
             return initialReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
         }
         return [];
-    });
-    const [visibleCount, setVisibleCount] = useState(6);
-    const [loading, setLoading] = useState(!initialReviews || initialReviews.length === 0);
-
-    useEffect(() => {
-        if (initialReviews && initialReviews.length > 0) {
-            const filtered = initialReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
-            setAllReviews(filtered);
-            return;
-        }
-        async function fetchReviews() {
-            try {
-                const response = await fetch('/api/greviews');
-                if (response.ok) {
-                    const data = await response.json();
-                    setTotalCount(data.length);
-                    const filtered = data.filter((r: any) => r.rating >= 4 && r.text?.trim());
-                    setAllReviews(filtered);
-                }
-            } catch (error) {
-                console.error("Fetch Error:", error);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchReviews();
     }, [initialReviews]);
 
     const displayedReviews = useMemo(() => allReviews.slice(0, visibleCount), [allReviews, visibleCount]);
+    const loading = !initialReviews || initialReviews.length === 0;
 
     return (
         <section className="relative py-16 sm:py-24 text-white overflow-hidden bg-transparent">
             <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-                <ModernHeader reviewCount={totalCount} />
+                <ModernHeader reviewCount={allReviews.length} />
 
                 {loading ? (
                     <div className="flex items-center justify-center py-32">
-                        <FaSpinner className="text-[#00ff00] animate-spin w-8 h-8" />
+                        <Loader2 className="text-[#00ff00] animate-spin w-8 h-8" />
                     </div>
                 ) : (
                     /* The Masonry Container */
@@ -204,7 +177,7 @@ export default function ModernReviews({ initialReviews }: { initialReviews?: Rev
                             </span>
 
                             <div className="flex items-center justify-center w-5 h-5 rounded-full bg-white/5 group-hover:bg-[#00ff00]/10 transition-colors">
-                                <FaChevronDown className="text-[#00ff00] text-[10px] group-hover:translate-y-0.5 transition-transform duration-300" />
+                                <ChevronDown className="text-[#00ff00] w-3 h-3 group-hover:translate-y-0.5 transition-transform duration-300" />
                             </div>
                         </button>
                     </div>

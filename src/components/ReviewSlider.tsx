@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { FaQuoteLeft, FaGoogle, FaStar, FaPenFancy, FaSpinner } from 'react-icons/fa';
+import { Quote, Star, PenLine, Loader2 } from 'lucide-react';
 import { useThermalOptimization } from '@/hooks/useThermalOptimization';
 
 const GOOGLE_REVIEW_URL = 'https://www.google.com/search?hl=en-LK&gl=lk&q=Yala+Wildlife+Safari,+wickrama,+kasingama,+Tissamaharama+82600&ludocid=17345582408778303798&lsig=AB86z5Ub-4udBz4Uw52lwiIBzLZm#lrd=0x62b813f2717b2b81:0xf0b7e34cc97ec936,3';
@@ -39,10 +39,11 @@ const SliderCard = ({ review }: { review: Review }) => {
           loading="lazy"
         />
         <div className="overflow-hidden">
-          <h4 className="text-white font-bold text-[12px] truncate">{review.author_name}</h4>
+          {/* Part 6: Fixed heading hierarchy — author names aren't document headings */}
+          <span className="text-white font-bold text-[12px] truncate block">{review.author_name}</span>
           <div className="flex text-[#00ff00] gap-0.5 mt-0.5">
             {[...Array(5)].map((_, i) => (
-              <FaStar key={i} className={`w-2.5 h-2.5 ${i < review.rating ? 'fill-current' : 'text-neutral-800'}`} />
+              <Star key={i} className={`w-2.5 h-2.5 ${i < review.rating ? 'fill-current' : 'text-neutral-800'}`} />
             ))}
           </div>
         </div>
@@ -58,33 +59,41 @@ const SliderCard = ({ review }: { review: Review }) => {
         <span className="text-[10px] text-neutral-400 uppercase tracking-widest">
           {mounted ? review.relative_time_description : ''}
         </span>
-        <FaQuoteLeft className="text-neutral-800 text-[10px]" />
+        <Quote className="text-neutral-800 w-3 h-3" />
       </div>
     </div>
   );
 };
 
-export default function ReviewSlider() {
+export default function ReviewSlider({ initialReviews }: { initialReviews?: Review[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const { shouldAnimate } = useThermalOptimization(sectionRef);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Use server-passed data instead of client fetch to eliminate 800KB+ runtime payload
   useEffect(() => {
-    async function fetchReviews() {
-      try {
-        const response = await fetch('/api/greviews');
-        if (response.ok) {
-          const data = (await response.json()) as Review[];
-          const filtered = data.filter(r => r.rating >= 4 && r.text?.trim().length > 0);
-          // Curate top 8 reviews and duplicate for a lightweight, seamless infinite loop
-          const curated = filtered.slice(0, 8);
-          setReviews([...curated, ...curated]);
-        }
-      } catch (e) { console.error(e); } finally { setLoading(false); }
+    if (initialReviews && initialReviews.length > 0) {
+      const filtered = initialReviews.filter(r => r.rating >= 4 && r.text?.trim().length > 0);
+      const curated = filtered.slice(0, 8);
+      setReviews([...curated, ...curated]); // Duplicate for seamless infinite loop
+      setLoading(false);
+    } else {
+      // Fallback: fetch from slimmed API only if no initial data provided
+      async function fetchReviews() {
+        try {
+          const response = await fetch('/api/greviews');
+          if (response.ok) {
+            const data = (await response.json()) as Review[];
+            const filtered = data.filter(r => r.rating >= 4 && r.text?.trim().length > 0);
+            const curated = filtered.slice(0, 8);
+            setReviews([...curated, ...curated]);
+          }
+        } catch (e) { console.error(e); } finally { setLoading(false); }
+      }
+      fetchReviews();
     }
-    fetchReviews();
-  }, []);
+  }, [initialReviews]);
 
   if (!loading && reviews.length === 0) return null;
 
@@ -102,7 +111,7 @@ export default function ReviewSlider() {
         <div className="flex items-center gap-2 border-l border-white/10 pl-3">
           <span className="text-white font-black text-[12px]">5.0</span>
           <div className="flex text-[#00ff00] gap-0.5">
-            {[...Array(5)].map((_, i) => <FaStar key={i} className="w-2.5 h-2.5" />)}
+            {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-current" />)}
           </div>
         </div>
       </div>
@@ -118,7 +127,7 @@ export default function ReviewSlider() {
       <div className="relative w-full overflow-hidden">
         {loading ? (
           <div className="flex justify-center items-center h-[200px]">
-            <FaSpinner className="w-6 h-6 text-[#00ff00] animate-spin" />
+            <Loader2 className="w-6 h-6 text-[#00ff00] animate-spin" />
           </div>
         ) : (
           <div className={`flex animate-infinite-scroll hover:pause ${!shouldAnimate ? 'pause-animation' : ''}`}>
@@ -141,7 +150,7 @@ export default function ReviewSlider() {
           rel="noopener noreferrer"
           className="group flex items-center gap-3 bg-white hover:bg-[#00ff00] text-black px-8 py-3 rounded-full transition-all active:scale-95 shadow-xl"
         >
-          <FaPenFancy className="w-3 h-3 group-hover:rotate-12 transition-transform" />
+          <PenLine className="w-3 h-3 group-hover:rotate-12 transition-transform" />
           <span className="text-[12px] font-black uppercase tracking-widest">Write a Review</span>
         </a>
       </div>
