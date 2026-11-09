@@ -140,14 +140,18 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
             {/* Main Title */}
             <div className="relative w-full">
               <div className="inline-block">
-                <h1 className="text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
+                <h1 className="text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight ">
                   {/* Part 1: White Text */}
                   <div className="block font-fredoka text-white pb-2">
                     {firstWord}
                   </div>
 
                   {/* Part 2: Gradient Text */}
-                  <div className="block font-poppins text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-lime-500 pb-2">
+                  {/* <div className="block font-poppins text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-lime-500 pb-2">
+                    {restTitleWords}
+                  </div> */}
+                  {/* Part 2: Solid Green Text */}
+                  <div className="block font-poppins text-[#00ff00] pb-2">
                     {restTitleWords}
                   </div>
                 </h1>
@@ -156,18 +160,18 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
 
             {/* Subtitle (Hidden on Mobile) & Centered Book Now Button */}
             <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-2 w-full">
-              <div className="hidden md:block max-w-md p-2 border-l-0 lg:border-l-4 border-lime-500 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] text-left">
-                <p className="text-lg md:text-xl text-white font-medium leading-relaxed tracking-wide">
+              <div className="hidden md:block max-w-md p-2 border-l-0 lg:border-l-4 border-[#00ff00] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] text-left">
+                <p className="text-lg md:text-xl text-white font-semibold leading-relaxed tracking-wide">
                   {section.subtitle}
                 </p>
               </div>
 
               <div className="flex-shrink-0 hover:scale-105 active:scale-95 transition-transform duration-300 transform-gpu mx-auto lg:mx-0">
                 <Link href="/safari-packages" className="group block relative">
-                  <div className="absolute inset-0 bg-lime-500 opacity-60 group-hover:opacity-80 transition-opacity duration-500 rounded-full"></div>
-                  <div className="relative bg-lime-500 text-black px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-white hover:text-black transition-all rounded-full flex items-center gap-3">
-                    <span className="text-sm font-bold uppercase tracking-[0.2em]">Book Now</span>
-                    <div className="bg-black text-white rounded-full p-1 group-hover:bg-lime-500 group-hover:text-black transition-colors">
+                  <div className="absolute inset-0 bg-[#00ff00] opacity-60 group-hover:opacity-80 transition-opacity duration-500 rounded-full"></div>
+                  <div className="relative bg-[#00ff00] text-black px-8 py-4 lg:px-8 lg:py-4 shadow-xl hover:bg-white hover:text-black transition-all rounded-full flex items-center gap-3">
+                    <span className="text-sm font-bold  tracking-[0.2em]">Book Now</span>
+                    <div className="bg-black text-white rounded-full p-1 group-hover:bg-[#00ff00] group-hover:text-black transition-colors">
                       <ArrowRight className="w-3 h-3 group-hover:rotate-45 transition-transform duration-300" />
                     </div>
                   </div>
@@ -199,10 +203,10 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
 
                 <div className="absolute bottom-0 left-0 w-full p-6">
                   <div className="drop-shadow-lg">
-                    <h3 className="text-white text-lg font-black tracking-tight leading-none mb-1 group-hover:text-lime-400 transition-colors drop-shadow-md">
+                    <h3 className="text-white text-lg font-black tracking-tight leading-none mb-1 group-hover:text-[#00ff00] transition-colors drop-shadow-md">
                       {card1Data.title}
                     </h3>
-                    <div className="h-1 w-8 bg-lime-500 rounded-full mt-2 shadow-[0_0_10px_#84cc16]" />
+                    <div className="h-1 w-8 bg-[#00ff00] rounded-full mt-2 shadow-[0_0_10px_#84cc16]" />
                   </div>
                 </div>
               </div>
@@ -238,7 +242,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
           <div key={idx} className="flex-1 h-full border-r border-black/20 relative bg-black/20">
             {idx === currentSlide && (
               <div
-                className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16] w-full origin-left transform-gpu will-change-transform"
+                className="h-full bg-[#00ff00] shadow-[0_0_15px_#84cc16] w-full origin-left transform-gpu will-change-transform"
                 style={{ animation: "hero-progress 7s linear" }}
               />
             )}

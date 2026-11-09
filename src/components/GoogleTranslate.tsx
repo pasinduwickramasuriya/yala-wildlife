@@ -226,8 +226,8 @@ export default function GoogleTranslate() {
       <div
         ref={dropdownRef}
         className="fixed"
-        style={{ 
-          bottom: "180px", 
+        style={{
+          bottom: "180px",
           right: "20px",
           zIndex: 2147483647,
           isolation: 'isolate'
@@ -237,7 +237,7 @@ export default function GoogleTranslate() {
         <div
           className="absolute bottom-full right-0 mb-3 w-44 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/5"
           style={{
-            background: "rgba(20,20,20,0.95)",
+              background: "#000000",
             backdropFilter: "blur(15px)",
             WebkitBackdropFilter: "blur(15px)",
             visibility: isOpen ? "visible" : "hidden",
@@ -248,17 +248,17 @@ export default function GoogleTranslate() {
             overflowY: "auto",
           }}
         >
-          <div className="p-2 sticky top-0 bg-[#141414] z-10">
+          <div className="p-2 sticky top-0 bg-[#000000] z-10">
             <input
               ref={searchInputRef}
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search..."
-              className="no-zoom-search w-full bg-white/5 rounded-xl px-3 py-1.5 text-[11px] text-white placeholder-white/20 outline-none border border-transparent focus:border-green-500/30 transition-all"
+              className="no-zoom-search w-full bg-black/5 rounded-xl px-3 py-1.5 text-[11px] text-white placeholder-white/20 outline-none border border-transparent focus:border-[#00ff00] transition-all"
             />
           </div>
-          
+
           <div className="px-1 pb-1">
             {filteredLanguages.map((lang) => (
               <button
@@ -286,7 +286,7 @@ export default function GoogleTranslate() {
           }}
           className="flex items-center gap-2 rounded-full px-4 py-2.5 shadow-xl transition-all active:scale-95"
           style={{
-            background: isOpen ? "rgba(34, 197, 94, 0.15)" : "rgba(25, 25, 25, 0.9)",
+            background: isOpen ? "#000000" : "#000000",
             backdropFilter: "blur(1px)",
             WebkitBackdropFilter: "blur(1px)",
           }}

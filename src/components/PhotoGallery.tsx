@@ -187,7 +187,6 @@ function ImageCard({ photo, onClick, priority = false }: { photo: Photo | null, 
       <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end">
         <div className="flex items-end justify-between">
           <div className="translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
-            <span className="text-[#00ff00] font-mono text-[8px] tracking-[0.3em] uppercase mb-1 block font-bold opacity-80">Live Feed</span>
             <h3 className="text-sm md:text-lg font-bold tracking-tight text-white leading-tight">{photo.title}</h3>
           </div>
           <div className="h-8 w-8 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:bg-[#00ff00] group-hover:text-black transition-all duration-500">
