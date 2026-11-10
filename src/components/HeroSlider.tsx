@@ -140,7 +140,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
             {/* Main Title */}
             <div className="relative w-full">
               <div className="inline-block">
-                <h1 className="text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight ">
+                <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-6xl leading-[0.9] tracking-tight ">
                   {/* Part 1: White Text */}
                   <div className="block font-fredoka text-white pb-2">
                     {firstWord}
@@ -151,7 +151,7 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
                     {restTitleWords}
                   </div> */}
                   {/* Part 2: Solid Green Text */}
-                  <div className="block font-poppins text-[#00ff00] pb-2">
+                  <div className="block font-poppins text-[#fff] pb-2">
                     {restTitleWords}
                   </div>
                 </h1>
