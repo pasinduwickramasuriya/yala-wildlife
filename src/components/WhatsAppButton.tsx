@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { X, Send, ChevronRight } from "lucide-react"; 
+import { X, Send, ChevronRight } from "lucide-react";
 
 // Custom WhatsApp SVG Icon
 const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -28,7 +28,7 @@ export default function WhatsAppButton() {
   const [message, setMessage] = useState("");
   const [showPromo, setShowPromo] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const chatRef = useRef<HTMLDivElement>(null);
 
   const toggleChat = () => {
@@ -44,10 +44,10 @@ export default function WhatsAppButton() {
   };
 
   const triggerWhatsApp = (text: string) => {
-    const phoneNumber = "940778158004"; 
+    const phoneNumber = "940778158004";
     const baseUrl = `https://wa.me/${phoneNumber}`;
-    const textToSend = text.trim().length > 0 
-      ? text 
+    const textToSend = text.trim().length > 0
+      ? text
       : "Hello, I'm interested in booking a Yala safari 🌿";
     const encodedText = encodeURIComponent(textToSend);
     window.open(`${baseUrl}?text=${encodedText}`, "_blank");
@@ -70,12 +70,13 @@ export default function WhatsAppButton() {
   }, []);
 
   return (
-    <div 
+    <div
       className="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans pointer-events-none"
       ref={chatRef}
     >
       {/* Inject custom CSS keyframes and animations directly in component */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes wa-pulse-ring {
           0% {
             transform: scale(0.95);
@@ -109,15 +110,15 @@ export default function WhatsAppButton() {
             transform: scale(1) translateY(0);
           }
         }
-        .wa-pulse-active::before {
-          content: '';
-          position: absolute;
-          inset: -5px;
-          border-radius: 9999px;
-          border: 2px solid #25D366;
-          animation: wa-pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) 3;
-          z-index: -1;
-        }
+        // .wa-pulse-active::before {
+        //   content: '';
+        //   position: absolute;
+        //   inset: -5px;
+        //   border-radius: 9999px;
+        //   border: 2px solid #25D366;
+        //   animation: wa-pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) 3;
+        //   z-index: -1;
+        // }
         @media (prefers-reduced-motion: reduce) {
           .wa-pulse-active::before {
             display: none !important;
@@ -135,7 +136,7 @@ export default function WhatsAppButton() {
       {/* 1. THE CHAT WINDOW                                                 */}
       {/* ================================================================== */}
       {isOpen && (
-        <div 
+        <div
           className="mb-4 w-[350px] max-w-[calc(100vw-32px)] bg-neutral-950/95 backdrop-blur-md rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto wa-animate-pop origin-bottom-right"
         >
           {/* Header */}
@@ -144,8 +145,8 @@ export default function WhatsAppButton() {
               {/* Operator Avatar */}
               <div className="relative">
                 <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 bg-white">
-                  <Image 
-                    src="/emma-64.png" 
+                  <Image
+                    src="/emma-64.png"
                     alt="Guide Avatar"
                     width={40}
                     height={40}
@@ -159,11 +160,10 @@ export default function WhatsAppButton() {
                   Safari Guide
                   <span className="text-[10px] bg-[#25D366]/10 text-[#25D366] px-1.5 py-0.5 rounded-full font-medium">Online</span>
                 </h3>
-                <p className="text-[10px] text-neutral-400">Ready to help 🌿</p>
               </div>
             </div>
-            <button 
-              onClick={toggleChat} 
+            <button
+              onClick={toggleChat}
               className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors cursor-pointer"
               aria-label="Close Chat"
             >
@@ -175,7 +175,7 @@ export default function WhatsAppButton() {
           <div className="h-[280px] bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] p-4 flex flex-col gap-4 overflow-y-auto relative scrollbar-thin">
             {/* Background Gradient Texture */}
             <div className="absolute inset-0 opacity-[0.05] bg-radial from-white/10 to-transparent pointer-events-none" />
-            
+
             {/* Greeting Bubble */}
             <div className="flex gap-2.5 max-w-[90%] z-10">
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 bg-white border border-white/10">
@@ -186,7 +186,7 @@ export default function WhatsAppButton() {
                 <p>Welcome to Yala Safari. I'm your Yala Safari guide. Let me help you book your safari jeep or answer your questions. Chat with us directly on WhatsApp! 🐆</p>
               </div>
             </div>
-            
+
             {/* Quick Action Chips */}
             <div className="flex flex-col gap-1.5 ml-9.5 z-10">
               <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 mb-1">Select a topic:</p>
@@ -206,15 +206,15 @@ export default function WhatsAppButton() {
           {/* Custom Message Form */}
           <div className="bg-neutral-950 p-3.5 border-t border-white/5">
             <form onSubmit={handleSend} className="flex items-center gap-2 bg-neutral-900 border border-white/10 rounded-xl p-1 focus-within:border-[#25D366]/40 transition-all">
-              <input 
-                type="text" 
-                placeholder="Type a custom message..." 
+              <input
+                type="text"
+                placeholder="Type a custom message..."
                 className="flex-1 bg-transparent px-3 py-1.5 text-base md:text-xs text-white placeholder-neutral-500 focus:outline-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="w-8 h-8 flex items-center justify-center bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
                 aria-label="Send to WhatsApp"
               >
@@ -229,16 +229,16 @@ export default function WhatsAppButton() {
       {/* 2. THE TRIGGER BUTTON                                             */}
       {/* ================================================================== */}
       <div className="relative flex items-center pointer-events-auto">
-        
+
         {/* Promo Speech Bubble Badge */}
         {!isOpen && showPromo && (
           <div className="absolute right-16 bg-neutral-950 border border-white/10 text-white text-[11px] font-medium px-3.5 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.4)] flex items-center gap-2.5 whitespace-nowrap wa-animate-fade z-30">
             <span>Chat with us!</span>
-            <button 
-              onClick={(e) => { 
-                e.stopPropagation(); 
-                setShowPromo(false); 
-              }} 
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowPromo(false);
+              }}
               className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
               aria-label="Dismiss message"
             >
@@ -255,8 +255,8 @@ export default function WhatsAppButton() {
           onMouseLeave={() => setIsHovered(false)}
           className={`
             relative w-15 h-15 rounded-full flex items-center justify-center transition-all duration-500 shadow-[0_8px_25px_rgba(0,0,0,0.4)] z-20 overflow-visible cursor-pointer
-            ${isOpen 
-              ? "bg-white text-black hover:scale-105 rotate-180" 
+            ${isOpen
+              ? "bg-white text-black hover:scale-105 rotate-180"
               : "bg-neutral-900 text-white hover:scale-105 wa-pulse-active"
             }
           `}
@@ -266,9 +266,9 @@ export default function WhatsAppButton() {
             <X className="w-5 h-5" />
           ) : (
             <div className="w-full h-full rounded-full overflow-hidden p-0.5 bg-neutral-900">
-              <Image 
-                src="/emma-128.png" 
-                alt="Guide Avatar" 
+              <Image
+                src="/emma-128.png"
+                alt="Guide Avatar"
                 width={60}
                 height={60}
                 className="w-full h-full object-cover rounded-full"
@@ -282,8 +282,8 @@ export default function WhatsAppButton() {
 
           {/* Simple Tooltip on Hover */}
           {!isOpen && isHovered && !showPromo && (
-            <div className="absolute right-16 bg-neutral-950 border border-white/10 text-white text-[11px] font-medium px-3 py-1.5 rounded-xl shadow-lg whitespace-nowrap transition-all duration-200">
-              Chat with us 🌿
+            <div className="absolute right-16 bg-neutral-950 text-white text-[11px] font-medium px-3 py-1.5 rounded-xl shadow-lg whitespace-nowrap transition-all duration-200">
+              Chat with us
               <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-neutral-950 border-r border-t border-white/10 rotate-45"></span>
             </div>
           )}

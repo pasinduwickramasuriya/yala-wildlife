@@ -379,42 +379,59 @@ export default async function BlogPage() {
         {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20"> */}
         <div className="relative z-10">
 
-          {/* HERO SECTION (Removed box container for cleaner look) */}
-          <section className="relative w-full py-20 mt-30 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black">
+          {/* HERO SECTION */}
+          <section className="relative w-full py-20 mt-30 md:py-32 overflow-hidden selection:bg-[#00ff00] selection:text-black" style={{ fontFamily: '"Google Sans", Roboto, sans-serif' }}>
 
-            {/* --- 1. HERO COMPONENT: PETITE PILL REBUILD --- */}
-            <div className="relative z-10 flex flex-col items-center gap-4 text-center mb-16 md:mb-24 px-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
-
+            {/* --- 1. HERO COMPONENT: PILL REBUILD --- */}
+            <div className="relative z-10 flex flex-col items-center gap-5 text-center mb-16 md:mb-24 px-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
 
               {/* MAIN TITLE PILL */}
-              <div className="inline-block bg-black/80 px-8 py-3 rounded-full shadow-2xl border border-white/5">
-                <h1 className="text-[18px] md:text-[24px] font-black text-white  tracking-[0.1em] leading-none">
-                  Wildlife <span className="text-white">Chronicles</span>
+              <div className="inline-block bg-black/80 px-7 py-3 rounded-full backdrop-blur-md shadow-2xl border border-white/10">
+                <h1 className="text-[17px] sm:text-[19px] font-bold text-white tracking-[-0.01em] leading-snug">
+                  Wildlife Chronicles
                 </h1>
               </div>
 
-              {/* DESCRIPTION PILL (The "Cuter" larger block) */}
-              <div className="inline-block bg-black/80 px-8 py-6 rounded-[2rem] max-w-[850px] mx-auto shadow-2xl border border-white/5 backdrop-blur-sm">
-                <p className="text-[14px] md:text-[15px] text-white/80 font-medium leading-relaxed italic">
-                  "Explore fascinating wildlife stories and expert photography tips curated by our expert guides.
-                  We specialize in conservation insights and technical field analysis to preserve the wild heart
-                  of Sri Lanka through transparent reporting and sustainable methodology."
-                </p>
+              {/* DESCRIPTION PILL CONTAINER */}
+              <div className="flex flex-col items-center gap-2 max-w-4xl mx-auto px-4 mb-1">
+
+                {/* BLOCK_01: PRIMARY_DATA */}
+                <div className="inline-block bg-black/80 px-6 py-2 rounded-full backdrop-blur-md shadow-xl border border-white/5">
+                  <p className="text-[14px] md:text-[15px] text-white/90 font-normal tracking-[-0.005em] leading-normal text-center">
+                    Explore fascinating wildlife stories and expert photography tips curated by our expert guides.
+                  </p>
+                </div>
+
+                {/* BLOCK_02: SECONDARY_DATA */}
+                <div className="inline-block bg-black/80 px-6 py-2 rounded-full backdrop-blur-md shadow-xl border border-white/5">
+                  <p className="text-[14px] md:text-[15px] text-white/90 font-normal tracking-[-0.005em] leading-normal text-center">
+                    We specialize in conservation insights and technical field analysis to preserve the wild heart.
+                  </p>
+                </div>
+
+                {/* DATA_BLOCK_03: TECHNICAL_INSIGHT */}
+                <div className="inline-block bg-black/80 px-6 py-2 rounded-full backdrop-blur-md shadow-xl border border-white/5">
+                  <p className="text-[14px] md:text-[15px] text-white/90 font-normal tracking-[-0.005em] leading-normal text-center">
+                    Of Sri Lanka through transparent reporting and sustainable methodology.
+                  </p>
+                </div>
+
               </div>
 
-              {/* MODULAR DATA STRIPS (Refined to match Pill style) */}
-              <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-4xl">
+              {/* MODULAR DATA STRIPS */}
+              <div className="flex flex-wrap justify-center gap-3 pt-3 max-w-4xl">
                 {[
                   "Discover fascinating wildlife stories and expert photography tips,",
                   "and conservation insights from our expert guides."
                 ].map((text, i) => (
-                  <div key={i} className="bg-black/80 px-6 py-2 rounded-full border border-white/10 shadow-lg">
-                    <p className="text-[9px] md:text-[13px] text-neutral-300 font-medium  tracking-[0.2em] leading-relax italic">
+                  <div key={i} className="bg-black/80 px-6 py-2.5 rounded-full border border-white/10 shadow-lg backdrop-blur-md">
+                    <p className="text-[12px] md:text-[13px] text-neutral-300 font-medium tracking-[-0.005em] leading-relaxed italic">
                       {text}
                     </p>
                   </div>
                 ))}
               </div>
+
             </div>
 
             {/* --- 3. SEO SHADOW LAYER --- */}
