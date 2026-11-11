@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import GetCustomerReviews from "@/components/GetCustomerReviews";
-import ShowReviews from "@/components/ShowReviews";
+import { getReviewsData } from "@/lib/server-data";
 import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import ModernReviews from "@/components/ModernReviews";
 import ReviewSlider from "@/components/ReviewSlider";
@@ -65,6 +64,8 @@ export const metadata: Metadata = {
 };
 
 export default function ReviewsPage() {
+  const reviews = getReviewsData(48);
+
   return (
     <>
       {/* 🐆 Hardware-Accelerated Isolated Background Layer */}
@@ -127,10 +128,10 @@ export default function ReviewsPage() {
       {/* Content Layer: Promoted to its own composite layer to prevent repaints during scroll */}
       <main className="relative z-10 transform-gpu">
         {/* 1. GOOGLE/AI SUMMARY SECTION */}
-        <ModernReviews />
+        <ModernReviews initialReviews={reviews} />
 
         {/* 2. SLIDER SECTION */}
-        <ReviewSlider />
+        <ReviewSlider initialReviews={reviews} />
 
         {/* 3. VISITOR PHOTO GALLERY */}
         <ReviewPhotoGallery />

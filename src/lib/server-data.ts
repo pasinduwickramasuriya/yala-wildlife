@@ -128,6 +128,32 @@ export function optimizeReviewImageUrl(url?: string, width = 600): string {
   return url;
 }
 
+export function getReviewsData(limit = 12): ReviewData[] {
+  try {
+    const filePath = path.join(process.cwd(), "data", "reviews.json");
+    if (fs.existsSync(filePath)) {
+      const raw = fs.readFileSync(filePath, "utf8");
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        return parsed
+          .filter((r: any) => r.rating >= 4 && r.text?.trim().length > 0)
+          .slice(0, limit)
+          .map((r: any) => ({
+            id: String(r.id || Math.random()),
+            author_name: r.author_name || 'Guest',
+            profile_photo_url: r.profile_photo_url || '',
+            rating: Number(r.rating) || 5,
+            relative_time_description: r.relative_time_description || '',
+            text: r.text || '',
+          }));
+      }
+    }
+  } catch (error) {
+    console.error("Error reading reviews.json:", error);
+  }
+  return [];
+}
+
 export async function getHomePageData() {
   let packages: PackageData[] = [];
   let heroSections: HeroSectionData[] = [];
@@ -228,21 +254,7 @@ export async function getHomePageData() {
   }
 
   // Load Reviews from JSON (curated slice for initial display, leaving full dataset for /api/greviews)
-  try {
-    const filePath = path.join(process.cwd(), "data", "reviews.json");
-    if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, "utf8");
-      
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) {
-        reviews = parsed
-          .filter((r: any) => r.rating >= 4 && r.text?.trim().length > 0)
-          .slice(0, 12);
-      }
-    }
-  } catch (error) {
-    console.error("Error reading reviews.json:", error);
-  }
+  reviews = getReviewsData(12);
 
   return {
     packages,

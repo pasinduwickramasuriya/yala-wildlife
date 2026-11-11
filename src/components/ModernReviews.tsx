@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { CheckCircle2, ChevronDown, Loader2 } from 'lucide-react';
 
 // --- Types ---
@@ -130,18 +130,48 @@ const ReviewCard = ({ review }: { review: Review }) => {
 // --- Main Component ---
 
 export default function ModernReviews({ initialReviews }: { initialReviews?: Review[] }) {
+    const [clientReviews, setClientReviews] = useState<Review[]>(initialReviews || []);
+    const [loading, setLoading] = useState<boolean>(!initialReviews);
     const [visibleCount, setVisibleCount] = useState(6);
 
-    // Use only server-provided initial data — no client-side fetch
-    const allReviews = useMemo(() => {
-        if (initialReviews && initialReviews.length > 0) {
-            return initialReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
+    useEffect(() => {
+        if (initialReviews) {
+            setClientReviews(initialReviews);
+            setLoading(false);
+            return;
         }
-        return [];
+
+        let isMounted = true;
+        async function fetchReviews() {
+            try {
+                const response = await fetch('/api/greviews');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (isMounted && Array.isArray(data)) {
+                        setClientReviews(data);
+                    }
+                }
+            } catch (error) {
+                console.error("Fetch Error:", error);
+            } finally {
+                if (isMounted) setLoading(false);
+            }
+        }
+        fetchReviews();
+
+        return () => {
+            isMounted = false;
+        };
     }, [initialReviews]);
 
+    const allReviews = useMemo(() => {
+        if (clientReviews && clientReviews.length > 0) {
+            return clientReviews.filter((r: any) => r.rating >= 4 && r.text?.trim());
+        }
+        return [];
+    }, [clientReviews]);
+
     const displayedReviews = useMemo(() => allReviews.slice(0, visibleCount), [allReviews, visibleCount]);
-    const loading = !initialReviews || initialReviews.length === 0;
 
     return (
         <section className="relative py-16 sm:py-24 text-white overflow-hidden bg-transparent">
