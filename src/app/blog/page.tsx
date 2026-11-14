@@ -12,6 +12,7 @@ import { AutoSEOWrapper } from "@/components/AutoSEOWrapper";
 import { Calendar, ArrowUpRight, BookOpen, Tag, Globe } from "lucide-react";
 // import AdUnit from "@/components/AdUnit";
 import BlogFAQSection from "@/components/BlogFAQSection";
+import { optimizeCloudinaryUrl } from "@/lib/utils";
 
 export const revalidate = 3600; // Enable ISR cache for 1 hour for instant TTFB
 
@@ -359,10 +360,11 @@ export default async function BlogPage() {
         ========================================= */}
         <div className="fixed inset-0 z-0">
           <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
+            src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
             alt="Yala Leopard Emerging from Darkness"
             fill
             priority
+            unoptimized
             className="object-cover opacity-100 md:opacity-100"
             quality={90}
           />
@@ -475,12 +477,13 @@ export default async function BlogPage() {
                       <div className="absolute inset-0 z-0">
                         {post.imageUrl ? (
                           <Image
-                            src={post.imageUrl}
+                            src={optimizeCloudinaryUrl(post.imageUrl, 800)}
                             alt={post.title}
                             fill
-                            sizes="100vw"
+                            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                             className="object-cover transition-transform duration-[2.5s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105"
                             priority={index < 4}
+                            unoptimized
                           />
                         ) : (
                           <div className="w-full h-full bg-neutral-900" />

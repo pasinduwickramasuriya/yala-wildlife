@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
+import { optimizeCloudinaryUrl } from "@/lib/utils";
 
 // --- Types ---
 type Blog = {
@@ -107,12 +108,13 @@ export default function HomeBlogSection({ initialBlogs }: { initialBlogs?: Blog[
                     >
                         {/* IMAGE: Fill + Object-Cover forces the image into the square shape */}
                         <Image
-                            src={post.imageUrl}
+                            src={optimizeCloudinaryUrl(post.imageUrl, 600)}
                             alt={post.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                             className="object-cover transition-transform duration-[2s] cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
                             loading="lazy"
+                            unoptimized
                         />
 
                         {/* Cinematic Overlay */}

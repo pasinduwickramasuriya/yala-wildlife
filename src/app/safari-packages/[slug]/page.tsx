@@ -11,6 +11,7 @@ import { SafariPackageJsonLd } from "@/components/JsonLd";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import PackageDetailFAQSection from "@/components/PackageDetailFAQSection";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import { optimizeCloudinaryUrl } from "@/lib/utils";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -235,7 +236,7 @@ export default async function PackageDetailPage(props: Props) {
         ========================================= */}
         <div className="fixed inset-0 z-0 h-screen">
           <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
+            src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
             alt="Yala Leopard Emerging from Darkness"
             fill
             priority
@@ -260,7 +261,7 @@ export default async function PackageDetailPage(props: Props) {
             <div className="order-1 lg:order-2 lg:col-span-5 lg:sticky lg:top-28">
               <div className="relative w-full h-[300px] sm:h-[380px] lg:h-[480px] rounded-3xl overflow-hidden shadow-2xl group">
                 <Image
-                  src={pkg.imageUrl}
+                  src={optimizeCloudinaryUrl(pkg.imageUrl, 1000) || "/placeholder-image.jpg"}
                   alt={pkg.name}
                   fill
                   priority

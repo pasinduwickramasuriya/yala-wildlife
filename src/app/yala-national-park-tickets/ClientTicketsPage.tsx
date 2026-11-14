@@ -292,7 +292,7 @@ export default function ClientTicketsPage() {
         {/* ================= BACKGROUND INTERCEPT ================= */}
         <div className="fixed inset-0 z-0">
           <Image
-            src="/uploads/1748935199061-20250603_1239_Leopard Emerges from Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
+            src="/uploads/1748935199061-20250603_1239_Leopard%20Emerges%20from%20Darkness_simple_compose_01jwt9yv7qect8krxy794bcr23.webp"
             alt="Yala Leopard Emerging from Darkness"
             fill
             priority

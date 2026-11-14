@@ -9,6 +9,7 @@ import DiscountPopup from "@/components/DiscountPopup";
 import BlogDetailFAQSection from "@/components/BlogDetailFAQSection";
 import CompactBlogReactions, { BlogShareButton } from "@/components/BlogReactions";
 // import AdUnit from "@/components/AdUnit";
+import { optimizeCloudinaryUrl } from "@/lib/utils";
 
 // --- Types ---
 interface Blog {
@@ -304,6 +305,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
             alt="Yala Wilderness Background - Sri Lankan Leopard"
             fill
             priority
+            unoptimized
             quality={100}
             className="object-cover object-center"
           />
@@ -331,9 +333,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
               {/* Hero Image inside Card */}
               <div className="relative w-full aspect-[16/9] md:h-[450px] m-2 rounded-[2.5rem] overflow-hidden shadow-inner">
                 <Image
-                  src={blog.imageUrl || "/placeholder-image.jpg"}
+                  src={optimizeCloudinaryUrl(blog.imageUrl, 1200) || "/placeholder-image.jpg"}
                   alt={`${blog.title} - Yala National Park Blog`}
                   fill
+                  unoptimized
                   className="object-cover hover:scale-105 transition-transform duration-1000"
                 />
 

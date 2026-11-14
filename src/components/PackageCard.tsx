@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, ShieldCheck } from "lucide-react";
+import { optimizeCloudinaryUrl } from "@/lib/utils";
 
 interface Package {
   id: string;
@@ -71,7 +72,7 @@ export default function PackageCard({
           {/* --- 1. PETITE INNER CAPSULE IMAGE --- */}
           <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-neutral-900 [contain:strict]">
             <Image
-              src={pkg.imageUrl || "/placeholder-image.jpg"}
+              src={optimizeCloudinaryUrl(pkg.imageUrl, 600) || "/placeholder-image.jpg"}
               alt={pkg.name}
               fill
               className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
