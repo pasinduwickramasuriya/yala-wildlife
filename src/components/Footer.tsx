@@ -1,6 +1,6 @@
-
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import {
   Facebook,
@@ -12,6 +12,7 @@ import {
   Mail,
   ChevronRight,
 } from "lucide-react";
+import { FaTripadvisor } from "react-icons/fa";
 
 // --- Data Arrays ---
 const navigation = {
@@ -34,9 +35,9 @@ const navigation = {
 };
 
 const socialLinks = [
-  { name: "Facebook", icon: Facebook, href: "https://web.facebook.com/ceylonnaturesafari" },
-  { name: "Instagram", icon: Instagram, href: "https://web.facebook.com/ceylonnaturesafari" },
-  { name: "Twitter", icon: Twitter, href: "https://web.facebook.com/ceylonnaturesafari" },
+  { name: "Facebook", icon: Facebook, href: "https://web.facebook.com/profile.php?id=61594390134946" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/yala_wildlife/" },
+  { name: "Twitter", icon: Twitter, href: "https://www.instagram.com/yala_wildlife/" },
 ];
 
 const YalaLogo = () => (
@@ -49,7 +50,7 @@ const YalaLogo = () => (
       className="w-9 h-9 object-contain group-hover:rotate-[15deg] transition-transform duration-500"
     />
     <div className="flex flex-col leading-none">
-      <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.4em] mb-1">Yala</span>
+      {/* <span className="text-[9px] font-black text-[#00ff00] uppercase tracking-[0.4em] mb-1">Yala</span> */}
       <span className="text-xs font-bold text-white uppercase tracking-tighter">Wildlife</span>
     </div>
   </div>
@@ -80,15 +81,15 @@ export default function Footer() {
               <span className="text-[10px] uppercase tracking-[0.2em] text-white/90 font-bold ml-1">
                 Secure Card Payments
               </span>
-              <a href="/safari-packages" aria-label="Secure Card Payments by PayHere" className="flex items-center sm:hidden md:flex">
+              <Link href="/safari-packages" aria-label="Secure Card Payments by PayHere" className="flex items-center sm:hidden md:flex">
                 <Image src="/payhere_short_banner.png" alt="Secure Payments by PayHere" width={150} height={31} loading="lazy" className="opacity-100 hover:opacity-100 transition-opacity duration-300 pointer-events-auto" />
-              </a>
+              </Link>
 
             </div>
           </div>
 
           <div className="flex flex-col gap-6">
-            <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#00ff00]">Secure Comms</span>
+            <span className="text-[11px] font-black  tracking-[0.3em] text-[#00ff00]">Secure Comms</span>
             <div className="flex flex-col gap-3">
               <a href="tel:+94778158004" aria-label="Call Yala Wildlife (+94 77 815 8004)" className="group flex items-center gap-3">
                 <div className="p-2 rounded-full bg-white/5 border border-white/10 group-hover:border-[#00ff00]/50 transition-colors duration-300">
@@ -103,6 +104,26 @@ export default function Footer() {
                 <span className="text-white text-sm font-bold tracking-tight">pasindusadanjana17@gmail.com</span>
               </a>
             </div>
+
+            {/* TripAdvisor Recommended Badge: Black background card with #00ff00 green icon circle */}
+            <div className="pt-1">
+              <a
+                href="https://www.tripadvisor.com/Attraction_Review-g1102395-d34115681-Reviews-Yala_Wildlife-Tissamaharama_Southern_Province.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-black hover:bg-black px-4 py-2.5 rounded-full shadow-lg transition-all duration-300 group"
+              >
+                {/* #00ff00 Green Circle Around TripAdvisor Icon */}
+                <div className="w-8 h-8 rounded-full bg-[#00ff00] flex items-center justify-center shrink-0">
+                  <FaTripadvisor size={18} className="text-black" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[12px] font-black tracking-widest text-[#fff] uppercase leading-none mb-0.5">Recommended on</span>
+                  <span className="text-[14px] font-extrabold text-white group-hover:text-[#00ff00] transition-colors tracking-tight leading-none">TripAdvisor • Yala Wildlife</span>
+                </div>
+              </a>
+            </div>
+
           </div>
         </div>
 
@@ -181,6 +202,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* TripAdvisor Widget Script fallback */}
+        <Script
+          src="https://www.jscache.com/wejs?wtype=rated&uniq=954&locationId=34115681&lang=en_US&display_version=2"
+          strategy="afterInteractive"
+          data-loadtrk
+        />
 
       </div>
     </footer>

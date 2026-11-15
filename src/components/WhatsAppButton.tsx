@@ -232,7 +232,7 @@ export default function WhatsAppButton() {
 
         {/* Promo Speech Bubble Badge */}
         {!isOpen && showPromo && (
-          <div className="absolute right-16 bg-neutral-950 border border-white/10 text-white text-[11px] font-medium px-3.5 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.4)] flex items-center gap-2.5 whitespace-nowrap wa-animate-fade z-30">
+          <div className="absolute right-16 bg-neutral-950 text-white text-[11px] font-medium px-3.5 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.4)] flex items-center gap-2.5 whitespace-nowrap wa-animate-fade z-30">
             <span>Chat with us!</span>
             <button
               onClick={(e) => {
