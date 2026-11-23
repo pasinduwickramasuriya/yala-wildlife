@@ -130,12 +130,12 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
         })}
       </div>
 
-      {/* 2. MAIN CONTENT - FULL SCREEN MOBILE LAYOUT, CENTERED CONTENT & NO MOBILE SUBTITLE */}
+      {/* 2. MAIN CONTENT - FULL SCREEN MOBILE LAYOUT, CENTERED CONTENT */}
       <div className="relative z-20 container mx-auto px-4 sm:px-6 md:px-12 h-full flex flex-col justify-center items-center text-center lg:items-start lg:text-left min-h-[100svh] py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
 
           {/* LEFT COLUMN: Text Content (Centered on Mobile, Left-aligned on Desktop) */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8 relative flex flex-col items-center lg:items-start w-full transition-all duration-700 fade-in transform-gpu">
+          <div className="lg:col-span-7 gap-1.5 sm:space-y-8 relative flex flex-col items-center lg:items-start w-full transition-all duration-700 fade-in transform-gpu">
 
             {/* Main Title */}
             <div className="relative w-full">
@@ -158,10 +158,10 @@ export default function HeroSlider({ initialHeroSections = [] }: { initialHeroSe
               </div>
             </div>
 
-            {/* Subtitle (Hidden on Mobile) & Centered Book Now Button */}
-            <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-2 w-full">
-              <div className="hidden md:block max-w-md p-2 border-l-0 lg:border-l-4 border-[#00ff00] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] text-left">
-                <p className="text-lg md:text-xl text-white font-semibold leading-relaxed tracking-wide">
+            {/* Subtitle (Shortened on Mobile) & Centered Book Now Button */}
+            <div className="flex flex-col gap-6 items-center lg:flex-row lg:items-center pt-0 sm:pt-2 w-full">
+              <div className="max-w-xs sm:max-w-md p-1.5 sm:p-2 border-l-0 lg:border-l-4 border-[#00ff00] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] text-center lg:text-left">
+                <p className="text-lg sm:text-lg md:text-xl text-white font-bold leading-relaxed tracking-wide line-clamp-3 md:line-clamp-none">
                   {section.subtitle}
                 </p>
               </div>
