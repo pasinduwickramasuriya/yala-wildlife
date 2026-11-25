@@ -428,7 +428,7 @@ export default async function Home() {
             className="inline-block bg-black/80 text-white text-center rounded-full px-8 py-3 transform-gpu antialiased"
             style={{
               fontFamily: '"Google Sans", Arial, Helvetica, sans-serif',
-              fontSize: "28px",
+              fontSize: "24px",
               fontWeight: 700,
               letterSpacing: "-0.6px",
               lineHeight: "36px",

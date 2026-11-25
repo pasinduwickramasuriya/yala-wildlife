@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X, CreditCard, Loader2 } from "lucide-react";
 
@@ -27,6 +28,7 @@ function loadPayHereScript(): Promise<void> {
 export default function AdvancePaymentButton() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [formData, setFormData] = useState({
     price: "",
     firstName: "",
@@ -57,6 +59,7 @@ export default function AdvancePaymentButton() {
   const initiatePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.price || !isValidPrice) return alert("Please enter a valid price");
+    if (!agreed) return alert("Please agree to the privacy and policy");
 
     setLoading(true);
     const orderId = `ADV-${Date.now()}`;
@@ -114,8 +117,8 @@ export default function AdvancePaymentButton() {
   };
 
   // Common input class to prevent iOS zoom and keep it neat
-  const inputClasses = "w-full bg-[#1a1a1a] border border-white/5 rounded-xl px-3 py-2 text-base md:text-sm focus:outline-none focus:ring-1 focus:ring-[#00ff00] transition-all placeholder:text-neutral-600";
-  const labelClasses = "block text-[10px] uppercase text-neutral-500 mb-1 ml-1 font-bold tracking-widest";
+  const inputClasses = "w-full bg-[#1a1a1a] border border-white/5 rounded-xl px-3 py-2 text-base md:text-sm focus:outline-none focus:ring-1 focus:ring-[#00ff00] transition-all placeholder:text-white";
+  const labelClasses = "block text-[10px] uppercase text-white mb-1 ml-1 font-bold tracking-widest";
 
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
@@ -131,8 +134,8 @@ export default function AdvancePaymentButton() {
         <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0a] p-6 rounded-[2rem] w-[92%] max-w-[360px] z-50 text-white focus:outline-none animate-in zoom-in-95 duration-200">
           
           <div className="text-center mb-5">
-            <Dialog.Title className="text-lg font-black uppercase tracking-tighter text-[#00ff00]">Secure Advance</Dialog.Title>
-            <Dialog.Description className="text-neutral-500 text-[11px] leading-tight mt-1">
+            <Dialog.Title className="text-lg font-black tracking-tighter text-[#00ff00]">Secure Advance</Dialog.Title>
+            <Dialog.Description className="text-white text-[11px] leading-tight mt-1">
               Custom safari expedition deposit. Enter the custom advance amount instructed by our team and fill out your details to securely pay via PayHere.
             </Dialog.Description>
           </div>
@@ -155,11 +158,11 @@ export default function AdvancePaymentButton() {
 
             {isValidPrice && (
               <div className="bg-[#141414] border border-black/10 rounded-lg p-2.5 text-[10px] space-y-1">
-                <div className="flex justify-between text-neutral-400">
+                <div className="flex justify-between text-white">
                   <span>Advance Amount:</span>
                   <span className="font-mono">LKR {numPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
-                <div className="flex justify-between text-neutral-400">
+                <div className="flex justify-between text-white">
                   <span>Processing Fee (3.3%):</span>
                   <span className="font-mono">LKR {processingFee.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
@@ -191,6 +194,22 @@ export default function AdvancePaymentButton() {
               <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className={inputClasses} />
             </div>
 
+            <label className="flex items-center gap-2 text-[11px] text-white cursor-pointer pt-1">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                required
+                className="accent-[#00ff00] rounded"
+              />
+              <span>
+                I agree to{" "}
+                <Link href="/legal" className="underline text-white">
+                  Privacy and Policy
+                </Link>
+              </span>
+            </label>
+
             <button
               type="submit"
               disabled={loading}
@@ -205,7 +224,7 @@ export default function AdvancePaymentButton() {
           </form>
 
           <Dialog.Close asChild>
-            <button className="absolute top-5 right-5 text-neutral-600 hover:text-white transition-colors cursor-pointer" aria-label="Close">
+            <button className="absolute top-5 right-5 text-white hover:text-white transition-colors cursor-pointer" aria-label="Close">
               <X className="w-4 h-4" />
             </button>
           </Dialog.Close>
